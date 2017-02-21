@@ -1,0 +1,52 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+{include file="mycenter/nav" /}
+
+<div class="rightcon sizing"><!-- 右边内容 -->
+       
+    <div class="publicdiv bf">
+    
+        <h3 class="pt10 pb10 pl20 pr20 fs16 sizing iconfont">
+            &#xe759; 我的任务
+        </h3>
+
+        <div class="publicdiv pl20 pr20 pt8 pb8 bf sizing">
+            <ul class="nav nav-pills">
+                
+                <li {if condition="empty($status)"}class="active"{/if}><a href="{:url('/index/Mycenter/task_list/')}">所有</a></li>
+                <li {if condition="$status == 'unclose'"} class="active" {/if}><a href="{:url('/index/Mycenter/task_list?status=unclose')}">未关闭</a></li>
+                <li {if condition="$status eq 'wait'"}class="active"{/if}><a href="{:url('/index/Mycenter/task_list/?status=wait')}">等待</a></li>
+                <li {if condition="$status eq 'doing'"}class="active"{/if}><a href="{:url('/index/Mycenter/task_list/?status=doing')}">进行中</a></li>
+                <li {if condition="$status eq 'done'"}class="active"{/if}><a href="{:url('/index/Mycenter/task_list/?status=done')}">完成</a></li>
+                <li {if condition="$status eq 'closed'"}class="active"{/if}><a href="{:url('/index/Mycenter/task_list/?status=closed')}">关闭</a></li>
+                <li {if condition="$status eq 'ontdone'"}class="active"{/if}><a href="{:url('/index/Mycenter/task_list/?status=ontdone')}">未完成</a></li>
+                {if condition="!empty($project_detail)"}
+                <span class="lh40 ml20">开始：{$project_detail['begin']}</span>
+                <span class="lh40 ml10">结束：{$project_detail['end']}</span>
+                <span class="lh40 ml10">预计：{$project_detail['all_time']}</span>
+                <span class="lh40 ml10">消耗：{$project_detail['consumed_count']}</span>
+                {/if}
+
+                {if condition="$project_id gt 0"}
+                <span class="pull-right">
+                    <a href="{:url('/index/task/add/?project_id='.$project_id)}" class="btn btn-info">添加任务</a>
+                </span>
+                {/if}
+            </ul>
+        </div>
+        
+        <div class="publicdiv pl20 pr20 pt8 pb8 bf sizing">
+        {include file="base/task_list" /}
+        </div>
+        
+        </div>
+
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
+</div>
+{/block}

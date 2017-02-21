@@ -1,0 +1,78 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="side"}
+    <!-- 左侧 nav
+    ================================================== -->
+    <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
+            {:widget('Category/lists', array(1, true))}
+        </ul>
+    </div>
+{/block}
+
+{block name="body"}
+{include file="base/left_nav" /}
+
+<div class="rightcon sizing"><!-- 右边内容 -->
+    <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
+        <table class="table">
+          <h3 class="ac">任务管理</h3>
+          
+          <ul class="nav mb10 mt20 nav-pills">
+                <li {if condition="empty($status) && empty($username)"}class="active"{/if}><a href="{:url('/index/Project/detail/?id='.$project_id)}">所有</a></li>
+                <li {if condition="$status eq 'noclosed'"}class="active"{/if}><a href="{:url('/index/Project/detail/?status=noclosed&id='.$project_id)}">未关闭</a></li>
+                <li {if condition="$status eq 'delayed'"}class="active"{/if}><a href="{:url('/index/Project/detail/?status=delayed&id='.$project_id)}">已延期</a></li>
+                <li {if condition="!empty($username)"}class="active"{/if}><a href="{:url('/index/Project/detail/?username='.$_G['username'].'&id='.$project_id)}">指派给我的</a></li>
+
+                {if condition="!empty($project_detail)"}
+                <span class="lh40 ml20">开始：{$project_detail['begin']}</span>
+                <span class="lh40 ml10">预计：{$project_detail['all_time']}</span>
+                <span class="lh40 ml10">消耗：{$project_detail['consumed_count']}</span>
+                {/if}
+                
+                <label class="y">
+                <form action="{:url('/index/project/detail/?id='.$project_id)}" method="post">
+                <input type="text" name="keyword" class="bor pt5 pb5 pl5 pr5" placeholder="请输入搜索的内容~" value="{$keyword}" />
+                <input type="submit" class="pt5 pb5 pl10 pr10 cf" style="background:#428bca; border:1px #428bca solid;" value="搜索" />
+                </form>
+                </label>
+            </ul>
+            
+          <thead>
+              <tr>
+                <th>ID</th>
+                <th>任务名称</th>
+                <th>添加人</th>
+                <th>指派给</th>
+                <th>完成者</th>
+                <th>创建时间</th>
+                <th>完成时间</th>
+                <th>操作</th>
+              </tr>
+          </thead>
+          <tbody>
+          {foreach $task_list as $task}
+              <tr>
+                <td>{$task['id']}</td>
+                <td><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk">{$task['name']}</a></td>
+                <td>{$task['openedBy']}</td>
+                <td>{$task['finishedBy']}</td>
+                <td>{$task['closedBy']}</td>
+                <td>{$task['openedDate']}</td>
+                <td>{$task['assignedDate']}</td>
+                <td class="iconfont">
+                    <a href="{:url('/index/task/add/?id='.$task['id'])}" class="btn-link">&#xe71d;</a>
+                    <a href="{:url('/admin/task/lists/?deleted=1&id='.$task['id'])}" class="cred fs16" onclick="return confirm('您确定要删除该任务吗？');" title="删除">&#xe601;</a>
+                </td>
+              </tr>
+          {/foreach}
+          </tbody>
+          
+        </table>
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
+</div>
+{/block}

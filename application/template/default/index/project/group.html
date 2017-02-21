@@ -1,0 +1,52 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv  pt10 pb10 ptn sizing">
+    
+    {include file="base/project_title" /}
+    
+    <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
+        <div class="publicdiv borb mb20 ptlrb10 bf sizing">
+            <h3>团队列表</h3>
+        </div>
+
+            <!-- Contents -->
+            <section id="contents" class="mtn">
+                <table class="table table-striped borl bort borr borb">
+                    <thead style="background:#f1f1f1;">
+                        <tr>
+                            <th class="ac">用户名称</th>
+                            <th class="ac">项目职务</th>
+                            <th class="ac">加入时间</th>
+                            <th class="ac">预计工时</th>
+                            <th class="ac">消耗工时</th>
+                            <th class="ac">编辑</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach $team_list as $team}
+                        <tr>
+                            <td class="ac">{$team['realname']}</td>
+                            <td class="ac">{$team['role']}</td>
+                            <td class="ac">{$team['join']}</td>
+                            <td class="ac">{$team['count_estimate']}</td>
+                            <td class="ac">{$team['count_consumed']}
+                            </td>
+                            <td class="ac"><a href="" class="btn-link">修改</a></td>
+                        </tr>
+                        {/foreach}
+
+                </tbody>
+
+            </table>
+
+
+        </section>
+    <div class="publicdiv ac pagingw">{$page}</div>
+</div>
+</div>
+{/block}

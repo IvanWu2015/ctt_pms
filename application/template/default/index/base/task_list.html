@@ -1,0 +1,55 @@
+<table class="table table-striped borl bort borr borb">
+    <thead style="background:#f1f1f1;">
+        <tr>
+            <th><a href="{:url('/index/project/detail/?id='.$project_id)}">任务名称</a></th>
+            <th class="ac">任务类型</th>
+            <th class="ac">指派给</th>
+            <th class="ac">创建者</th>
+            <th class="ac">完成者</th>
+            <th class="ac">状态</th>
+            <th class="ac"><a href="{:url('/index/project/detail/?orderby=pri&id='.$project_id)}">优先级</a></th>
+            <th class="ac"><a href="{:url('/index/project/detail/?orderby=estimate&id='.$project_id)}">预计</a></th>
+            <th class="ac"><a href="{:url('/index/project/detail/?orderby=consumed&id='.$project_id)}">消耗</a></th>
+            <th class="ac">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach $task_list as $task}
+        <tr>
+            <td><a href="{:url('/index/task/detail/?id='.$task['id'])}">{$task['name']}</a></td>
+            <td class="ac">{$_G['type_list'][$task['type']]}</td>
+            <td class="ac"><a href="{:url('/index/project/detail?id='.$project_id.'&username='.$task['assignedTo'].'&status='.$status)}"  class="ac {if condition='$task["assignedTo"] == $_G["username"]'}cred{else}text-primary{/if}">{$user_list[$task['assignedTo']]['realname']}</a></td>
+            <td class="ac">{$user_list[$task['openedBy']]['realname']}</td>
+            <td class="ac">{$user_list[$task['finishedBy']]['realname']}</td>
+            {if condition="$task['status'] == 'wait'"}<td class="ac" style="color:#f8b004;">等待</td>{/if}
+            {if condition="$task['status'] == 'done'"}<td class="ac text-muted">完成</td>{/if}
+            {if condition="$task['status'] == 'closed'"}<td class="ac text-danger">关闭</td>{/if}
+            {if condition="$task['status'] == 'doing'"}<td class="ac text-primary">进行中</td>{/if}
+            <td class="ac">{$task['pri']}</td>
+            <td class="ac">{$task['estimate']}</td>
+            <td class="ac">{$task['consumed']}</td>
+            <td class="ac fs15 iconfont">
+                <a href="javascript:void(0);" class="btn-link" title="指派" onClick="loadWindow('{:url('/index/task/action?ac=assignTo&id='.$task['id'])}');">&#xe752;</a>
+                {if condition="($task['status'] == 'done') or ($task['status'] == 'doing')"}
+                    <a href="javascript:void(0);" class="cc" title="开始">&#xe621;</a>
+                {else}
+                    <a href="javascript:void(0);" class="btn-link" title="开始" onClick="loadWindow('{:url('/index/task/action?ac=start&id='.$task['id'])}');">&#xe621;</a>
+                {/if}
+                <a href="javascript:void(0);" class="btn-link fs16" title="工时" onClick="loadWindow('{:url('/index/task/action?ac=worktime&id='.$task['id'])}');">&#xe61e;</a>
+                {if condition="$task['status'] == 'done'"}
+                    <a href="javascript:void(0);" class="cc fs16" title="完成">&#xe619;</a>
+                {else}
+                    <a href="javascript:void(0);" class="btn-link fs16" title="完成" onClick="loadWindow('{:url('/index/task/action?ac=done&id='.$task['id'])}');">&#xe619;</a>
+                {/if}
+                {if condition="($task['status'] == 'wait') or ($task['status'] == 'doing')"}
+                    <a href="javascript:void(0);" class="cc" title="关闭">&#xe61c;</a>
+                {else}
+                    <a href="javascript:void(0);" class="btn-link cred" title="关闭" onClick="loadWindow('{:url('/index/task/action?ac=close&id='.$task['id'])}');">&#xe61c;</a>
+                {/if}
+                <a href="{:url('/Index/task/add?task_id='.$task['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
+            </td>
+        </tr>
+        {/foreach}
+
+        </tbody>
+    </table>

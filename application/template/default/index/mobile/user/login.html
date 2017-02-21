@@ -1,0 +1,75 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+
+{/block}
+
+{block name="body"}
+<div class="publicdiv pl20 pr20 pb15 sizing">
+    <div class="publicdiv bf pt20 pr20 pl20 pb20 sizing" style="border-radius:3px; margin:0px auto;">
+        <h3 class="mtn mb20 ac">用户登录</h3>
+        <form class="form-horizontal" role="form" class="login-form" action="" method="post">
+            <input type="text" class="form-control hp40 mt15" id="firstname" placeholder="用户名" ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username" />
+            <input type="password" class="form-control hp40 mt15" id="lastname" placeholder="密码" errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password" />
+            <div class="publicdiv mt15 pr">
+                <input type="text" class="form-control hp40" id="lastname" placeholder="验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify" />
+                <img id="verify_img" class="verifyimg reloadverify pa p-right p-top" alt="点击切换" src="{:captcha_src()}" style="width:120px; height:38px; margin:1px;" onclick="this.src='{:captcha_src()}'">
+            </div>
+            
+            <div class="controls Validform_checktip text-warning"></div>
+            <div class="publicdiv mt10">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> 自动登陆
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="publicdiv mt15">
+                <button type="submit" class="publicdiv btn hp40 btn-default btn-primary">登 陆</button>
+                <a href="{:url('User/register')}" class="publicdiv ac mt15">立即注册</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+{/block}
+
+{block name="side"}{/block}
+{block name="script"}
+<script type="text/javascript">
+    function refreshVerify() {
+        var ts = Date.parse(new Date()) / 1000;
+        $('#verify_img').attr("src", "/captcha?id=" + ts);
+        return;
+        }
+    $(document)
+            .ajaxStart(function () {
+                $("button:submit").addClass("log-in").attr("disabled", true);
+            })
+            .ajaxStop(function () {
+                $("button:submit").removeClass("log-in").attr("disabled", false);
+            });
+
+
+    $("form").submit(function () {
+        var self = $(this);
+        $.post(self.attr("action"), self.serialize(), success, "json");
+        return false;
+
+        function success(data) {
+            if (data..data.status) {
+                window.location.href = data.url;
+            } else {
+                self.find(".Validform_checktip").text(data.info);
+                //刷新验证码
+                $(".reloadverify").click();
+            }
+        }
+    });
+</script>
+{/block}
+
+{block name="footer"}
+{/block}

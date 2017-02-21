@@ -1,0 +1,51 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv ptlrb10 ptn sizing">
+    
+    <div class="publicdiv pl20 pr20 pt8 bf sizing">
+        <h3><a href="{:url('/index/Project/detail/?id='.$project_id)}">{$project_detail['name']}</a></h3>
+        <section id="contents" class="mtn">
+
+            <div class="publicdiv bf pb20 sizing">
+
+                <div class="publicdiv bf pt20 pb20 sizing" id="action_wrap">
+
+                    <div class="publicdiv mln z mt20">
+                        <div class="publicdiv pr bor pt20 pb20 pl20 mb20 pr20 sizing">
+                            <span class="pa bf pl8 pr8 lh34 fs16 fwb" style="left:10px; top:-18px;">任务描述</span>
+                            <div class="c6">
+                            {$project_detail['desc']}
+                            工时统计 可用工时{$project_detail['all_time']}工时，总共预计{$project_detail['all_time']}工时，已经消耗{$project_detail['estimate_count']}工时，预计剩余{$project_detail['left_time']}工时
+                            </div>
+                        </div>
+                    </div>
+                    <div class="publicdiv z mln mt20">
+                        <div class="publicdiv pr bor pt20 pb20 pl20 mln pr20 y sizing">
+                            <span class="pa bf pl8 pr8 lh34 fs16 fwb" style="left:10px; top:-18px;">基本信息</span>
+                            <p class="c6">项目名称	<span class="text-primary mr20">{$project_detail['name']}</span></p>
+                            <p class="c6">项目代号 {$project_detail['code']}</p>
+                            <p class="c6">起止时间	{$project_detail['begin']} ~ {$project_detail['end']}</p>
+                            <p class="c6">可用工作日	{$project_detail['days']}</p>
+                            <p class="c6">项目状态	
+                                {eq name="project_detail['status']" value="done"}完成{/eq}
+                                {eq name="project_detail['status']" value="doing"}进行中{/eq}
+                                {eq name="project_detail['status']" value="wait"}等待{/eq}
+                            </p>
+                            <p>项目负责人   {$project_detail['admin_username']}</p>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </div>
+    
+</div>
+{/block}
+
+{block name="footer"}
+{include file="mobile/base/project_title" /}
+{/block}

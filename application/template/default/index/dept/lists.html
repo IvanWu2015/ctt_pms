@@ -1,0 +1,38 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<include file="Index/add_task_point" />
+
+<div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
+    <div class="publicdiv borb mb20 ptlrb10 bf sizing">
+        <!-- Contents================================================== -->
+                
+                
+                <table class="table table-striped borl bort borr borb">
+                    <thead style="background:#f1f1f1;">
+                        <tr>
+                            <th>组别名称</th>
+                            <th>组别说明</th>
+                            <th>经理</th>
+                            <th>成员</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach $dept_list as $dept}
+                        <tr>
+                            <td>{$dept['name']}</td>
+                            <td>{$dept['function']}</td>
+                            <td>{$dept['manager']}</td>
+                        {/foreach}
+                    
+                    </tbody>
+                </table>
+        </div>
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
+</div>
+{/block}

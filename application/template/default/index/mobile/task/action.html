@@ -1,0 +1,152 @@
+{extend name="mobile/base/common"/}
+
+{block name="body"}
+    <!-- Contents ================================================== -->
+    <section id="contents">
+
+        <div class="publicdiv bf pl20 mt20 pr20 pt20 pb20 sizing">
+            <h3 class="ac borb pb10 fwb">{ _details['name']}</h3>
+
+        </div>
+
+        <div class="publicdiv bf pl20 pr20 pt20 pb20 sizing" id=" _wrap">
+
+            <div class="span8">
+                <div class="publicdiv pr bor pt20 pb20 pl20 mb20 pr20 sizing">
+                    <span class="pa bf pl8 pr8 lh34 fs18 fwb" style="left:10px; top:-20px;">任务描述</span>
+                    { _details['desc']}
+                </div>
+
+
+
+                <div class="publicdiv pr bor pt20 pb20 mt20 pl20 pr20 sizing">
+                    <span class="pa bf pl8 pr8 lh34 fs18 fwb" style="left:10px; top:-20px;">验收标准</span>
+                    验收标准内容
+                </div>
+
+                <div class="publicdiv pr bor pt20 pb20 mt20 pl20 pr20 sizing">
+                    <span class="pa bf pl8 pr8 lh34 fs18 fwb" style="left:10px; top:-20px;">相关用例</span>
+                    相关用例
+                </div>
+
+                <div class="publicdiv pr bor pt20 pb20 mt20 pl20 pr20 sizing">
+                    <span class="pa bf pl8 pr8 lh34 fs18 fwb" style="left:10px; top:-20px;">任务进展</span>
+                    
+                        
+                            <div class="publicdiv mt20 pt20 pr pl20 pr20 bf6f6f6 sizing" id=" _list">
+                                <span class=" _id pa p-left p-top btn-primary pl8 pr8">1</span>
+                                {$ ['comment']}
+                                <br/>
+                                <p class="mt20 ar">{$ ['actor']}<span class="ml20">时间：{$ ['time']}</span><span class="ml20">工时：{$ ['consumed']}</span></p>
+                            </div>
+                        
+                    
+                </div>
+
+            </div>
+            <div class="span3 pr bor pt20 pb20 pl20 pr20 sizing">
+                <span class="pa bf pl8 pr8 lh34 fs18 fwb" style="left:10px; top:-20px;">基本信息</span>
+                <p>项目名称：<span class="text-primary mr20">{ _details['project_name']}</span></p>
+                <p>创建者：<span class="text-primary mr20">{ _details['openedBy']}</span></p>
+                <p>指派给：<span class="text-primary mr20">{ _details['assignedTo']}</span></p>
+                <p>预计耗时：<span class="text-primary mr20">{ _details['estimate']}</span></p>
+                <p>开始时间：{ _details['openedDate']}</p>
+                <p>结束时间：{ _details['deadline']}</p>
+            </div>
+
+            <div class="span3 pr bor pt20 pb20 pl20 mt20 mb10 pr20 sizing">
+                <span class="pa bf pl8 pr8 lh34 fs18 fwb" style="left:10px; top:-20px;">工时信息</span>
+                <p>1</p>
+                <p>2</p>
+            </div>
+
+            <div class="span3 pr bor pt20 pb20 pl20 mt20 pr20 sizing">
+                <span class="pa bf pl8 pr8 lh34 fs18 fwb" style="left:10px; top:-20px;">任务的一生</span>
+                <p>任务的一生</p>
+            </div>
+
+        </div>
+
+        <div class="publicdiv bort bf pl20 pr20 pt20 pb20 lh34 sizing">该任务所用的总时间为 <span class="text-primary fs25">{ _details['consumed']}</span> 小时</div>
+
+        <div class="publicdiv bf pl20 pr20 mt20 pt20 pb20 sizing">本次提交的内容，消耗的时间
+            <form  ="" method="post">
+
+                <script type="text/javascript" charset="utf-8" src="__ROOT__/Addons/ueditor/ueditor.config.js"></script>
+                <script type="text/javascript" charset="utf-8" src="__ROOT__/Addons/ueditor/ueditor.all.min.js"></script>
+                <script type="text/javascript" charset="utf-8" src="__ROOT__/Addons/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label pln pt8 pb8">任务说明</label>
+                    <script id="editor" type="text/plain" class="z" name="comment" style="width:100% !important; height:250px;"></script>
+                </div>
+
+                <script type="text/javascript">
+jQuery(function () {
+    jQuery('# _wrap # _list').each(function (index) {
+        jQuery('# _wrap # _list').eq(index).find('. _id').text(index + 1);
+    });
+});
+
+//实例化编辑器
+//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+var ue = UE.getEditor('editor');
+
+function disableBtn(str) {
+    var div = document.getElementById('btns');
+    var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+    for (var i = 0, btn; btn = btns[i++]; ) {
+        if (btn.id == str) {
+            UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+        } else {
+            btn.setAttribute("disabled", "true");
+        }
+    }
+}
+function enableBtn() {
+    var div = document.getElementById('btns');
+    var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+    for (var i = 0, btn; btn = btns[i++]; ) {
+        UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+    }
+}
+                </script>
+
+                <div class="form-group span4 mln mt20">
+                    <label for="firstname" class="z mr15 lh34 pln ar control-label">消耗</label>
+                    <div class="col-sm-5 pln">
+                        <input type="text" name="consumed" class="form-control" id="consumed" placeholder="输入任务预计时间" value="" />
+                    </div>
+                    <label for="firstname" class="z mr15 lh34 pln ar control-label">小时</label>
+                </div>
+                <div class="form-group span5 mln mt20">
+                    <label for="firstname" class="col-sm-3 lh34 pln ar control-label">任务状态</label>
+                    <select name="status" class="form-control span3 mln mr20" style="height:34px;" >
+                        <option value="doing">进行中</option>
+                        <option value="done">完成</option>
+                        <option value="closed">关闭</option>
+                    </select>
+                </div>
+                <script>
+                    /*$(document).ready(function() {
+                     var consumed = $("#consumed").val();
+                     var myDate = new Date();    
+                     if(!consumed) {
+                     consumed = myDate.toLocaleDateString();
+                     }
+                     $('#consumed').daterangepicker({ singleDatePicker: true,format: 'YYYY-MM-DD',startDate: consumed}, function(start, end, label) {
+                     console.log(start.toISOString(), end.toISOString(), label);
+                     });
+                     });*/
+
+                </script>
+                <div class="publicdiv mt10 ac">
+                    <input type="submit" class="btn btn-primary pl20 pr20" value="完成" />
+                </div>
+
+            </form>
+        </div>
+
+    </section>
+</div>
+{/block}

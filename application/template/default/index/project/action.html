@@ -1,0 +1,89 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv  pt10 pb10 ptn sizing">
+    
+    {include file="base/project_title" /}
+    
+    <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
+
+        <div class="publicdiv borb mb20 ptlrb10 bf sizing">
+            <h3>项目动态</h3>
+        </div>
+
+            <!-- Contents -->
+            <section id="contents" class="mtn">
+                <table class="table table-striped borl bort borr borb">
+                    <thead style="background:#f1f1f1;">
+                        <tr>
+                            <th class="ac">id</th>
+                            <th class="">动态</th>
+                            <th class="ac">类型</th>
+                            <th class="ac">操作者</th>
+                            <th class="ac">动作</th>
+                            <th class="ac">时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach $project_list as $project}
+                        <tr>
+                            <td class="ac">{$project['id']}</td>
+                            <td class="">
+                                {if condition="$project['action'] eq 'opened'"}创建了
+                                {if condition="$project['objectType'] eq 'project'"}{$project['project_name']}项目{elseif condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
+                                {/if}
+                                {if condition="$project['action'] eq 'closed'"}关闭{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
+                                {elseif condition="$project['action'] eq 'started'"}开始{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}{if condition="$project['objectType'] eq 'project'"}{$project['project_name']}{/if}
+                                {elseif condition="$project['action'] eq 'finished'"}完成{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}{if condition="$project['objectType'] eq 'project'"}{$project['project_name']}{/if}
+                                {elseif condition="$project['action'] eq 'edited'"}编辑{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}{if condition="$project['objectType'] eq 'project'"}{$project['project_name']}{/if}
+                                {elseif condition="$project['action'] eq 'activated'"}激活{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
+                                {elseif condition="$project['action'] eq 'assigned'"}分配{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
+                                {elseif condition="$project['action'] eq 'paused'"}暂停{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
+                                {elseif condition="$project['action'] eq 'deleted'"}删除{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
+                                {elseif condition="$project['action'] eq 'canceled'"}取消{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
+                                {/if}
+                                <br/>
+                                {$project['comment']}
+                            </td>
+                            <td class="ac">
+                                {if condition="$project['objectType'] eq 'project'"}项目
+                                {elseif condition="$project['objectType'] eq 'task'"}任务
+                                {elseif condition="$project['objectType'] eq 'user'"}用户
+                                {elseif condition="$project['objectType'] eq 'build'"}建造
+                                {elseif condition="$project['objectType'] eq 'product'"}产品
+                                {elseif condition="$project['objectType'] eq 'bug'"}BUG
+                                {/if}
+                            </td>
+                            <td class="ac">{$project['actor']}</td>
+                            <td class="ac">
+                                {if condition="$project['action'] eq 'edited'"}编辑
+                                {elseif condition="$project['action'] eq 'opened'"}创建
+                                {elseif condition="$project['action'] eq 'changed'"}改变
+                                {elseif condition="$project['action'] eq 'closed'"}关闭
+                                {elseif condition="$project['action'] eq 'started'"}开始
+                                {elseif condition="$project['action'] eq 'finished'"}完成
+                                {elseif condition="$project['action'] eq 'canceled'"}取消
+                                {elseif condition="$project['action'] eq 'deleted'"}删除
+                                {elseif condition="$project['action'] eq 'restarted'"}重启
+                                {elseif condition="$project['action'] eq 'paused'"}暂停
+                                {elseif condition="$project['action'] eq 'assigned'"}分配
+                                {elseif condition="$project['action'] eq 'commented'"}评论
+                                {elseif condition="$project['action'] eq 'recordestimate'"}记录工时
+                                {elseif condition="$project['action'] eq 'activated'"}激活
+                                {/if}
+                            </td>
+                            <td class="ac">{$project['date']}</td>
+                        </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+                <div class="publicdiv ac pagingw">{$page}</div>
+            </section>
+        <div class="publicdiv ac pagingw"></div>
+    </div>
+</div>
+{/block}

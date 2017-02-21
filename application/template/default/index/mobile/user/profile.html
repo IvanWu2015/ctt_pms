@@ -1,0 +1,74 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv ptlrb10 ptn sizing">
+    <form class="form-horizontal" role="form" action="{:url('index/user/profile')}" method="post">
+    <div class="publicdiv pl20 pr20 pt8 bf sizing">
+        <h3 class="ac">修改密码</h3>
+
+        <div class="publicdiv bf sizing">
+            <div class="publicdiv pr pln z">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top c6">原密码</label>
+                <input type="password" id="inputPassword"  class="form-control hp40 bor" style="padding-left:70px;" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="old">
+            </div>
+            
+            <div class="publicdiv mt15 pr pln z">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top c6">新密码</label>
+                <input type="password" id="inputPassword"  class="form-control hp40 bor" style="padding-left:70px;" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password">
+            </div>
+            
+            <div class="publicdiv mt15 pr pln z">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top c6">确认密码</label>
+                <input type="password" id="inputPassword" class="form-control hp40 bor" style="padding-left:70px;" placeholder="请再次输入密码" recheck="password" errormsg="您两次输入的密码不一致" nullmsg="请填确认密码" datatype="*" name="repassword">
+            </div>
+            
+            <div class="publicdiv mt15 pr pln z">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top c6">项目状态</label>
+                <select class="form-control hp40 bor" name="status" style="padding-left:60px;">
+                    <option class="form-control"  {if condition="$project_details['status'] eq 'wait'"}selected="selected"{/if} value="wait" >等待</option>
+                    <option class="form-control"  {if condition="$project_details['status'] eq 'doing'"}selected="selected"{/if} value="doing" >进行中</option>
+                    <option class="form-control"  {if condition="$project_details['status'] eq 'done'"}selected="selected"{/if} value="done" >完成</option>
+                    <option class="form-control" {if condition="$project_details['status'] eq 'closed'"}selected="selected"{/if} value="closed" >关闭</option>
+                </select>
+            </div>
+            
+            <div class="publicdiv mt15 pr pln z">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top c6">版本号</label>
+                <input type="text" name="code" class="form-control hp40 bor" id="focusedInput" style="padding-left:70px;" placeholder="请输入版本号" value="{$project_details['code']}" />
+            </div>
+            <button type="submit" class="publicdiv mt15 mb15 hp40 btn btn-primary">提 交</button>
+        </div>
+    </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    $(document)
+        .ajaxStart(function(){
+            $("button:submit").addClass("log-in").attr("disabled", true);
+        })
+        .ajaxStop(function(){
+            $("button:submit").removeClass("log-in").attr("disabled", false);
+        });
+
+    $("form").submit(function(){
+        var self = $(this);
+        $.post(self.attr("action"), self.serialize(), success, "json");
+        return false;
+
+        function success(data){
+            if(data.code){
+                        alert('修改成功');
+                window.location.href = data.url;
+            } else {
+                self.find(".Validform_checktip").text(data.msg);
+            }
+        }
+    });
+</script>
+{/block}

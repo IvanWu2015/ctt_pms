@@ -1,0 +1,124 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv ptlrb10 ptn sizing">
+    
+    <div class="publicdiv pl10 pr10 pb10 bf sizing">
+        <h3 class="fs20"><a href="{:url('/index/Project/detail/?id='.$project_id)}">{$project_detail['name']}</a></h3>
+    </div>
+    
+    <div class="publicdiv pl10 pr10 pt8 bf mt10 sizing">
+        <h3 class="fs18">{$task_detail['name']}</h3>
+
+            <div class="publicdiv bf sizing">
+
+                <div class="publicdiv bf pt20 sizing" id="action_wrap">
+
+                    <div class="publicdiv mln z mt20">
+                        <div class="publicdiv pr bor pt20 pb20 pl20 mb20 pr20 sizing">
+                            <span class="pa bf pl8 pr8 lh34 fs16 fwb" style="left:10px; top:-18px;">任务描述</span>
+                            <div class="c6">{$task_detail['desc']}</div>
+                        </div>
+                    </div>
+                    <div class="publicdiv mln z mt20">
+                        <div class="publicdiv pr bor pt20 pb20 pl20 mb20 pr20 sizing">
+                            <span class="pa bf pl8 pr8 lh34 fs16 fwb" style="left:10px; top:-18px;">验收标准</span>
+                            <div class="c6">验收标准内容</div>
+                        </div>
+                    </div>
+                    <div class="publicdiv mln z mt20">
+                        <div class="publicdiv pr bor pt20 pb20 pl20 mb20 pr20 sizing">
+                            <span class="pa bf pl8 pr8 lh34 fs16 fwb" style="left:10px; top:-18px;">相关用例</span>
+                            <div class="c6">相关用例</div>
+                        </div>
+                    </div>
+                    <div class="publicdiv mln z mt20">
+                        <div class="publicdiv pr bor pt20 pb20 pl20 mb20 pr20 sizing">
+                            <span class="pa bf pl8 pr8 lh34 fs16 fwb" style="left:10px; top:-18px;">任务进展</span>
+                            {foreach $work_list as $work}
+                            {if condition="$work['work'] neq null"}
+                            <div class="publicdiv mt10 pt20 pr pl20 pr20 bf6f6f6 sizing" id="action_list">
+                                <span class="action_id pa p-left p-top btn-primary pl8 pr8">1</span>
+                                {$work['work']}
+                                <br/>
+                                <p class="mt20 ar">{$work['username']}<span class="ml20">剩余工时：{$work['left']}</span><span class="ml20">消耗工时：{$work['consumed']}</span></p>
+                            </div>
+                            {/if}
+                            {/foreach}
+                        </div>
+                    </div>
+                    
+                    <div class="publicdiv bf pt10 ac pb10 lh34 sizing">该任务所用的总时间为 <span class="text-primary fs25">{$task_detail['consumed']}</span> 小时</div>
+                    
+                    <div class="publicdiv pr bor pt20 pb20 pl20 mt20 mb20 mln pr20 sizing">
+                        <span class="pa bf pl8 pr8 lh34 fs16 fwb" style="left:10px; top:-18px;">基本信息</span>
+                        <p class="c6">项目名称：<span class="text-primary mr20">{$task_detail['name']}</span></p>
+                        <p class="c6">创建者：<span class="text-primary mr20">{$task_detail['openedBy']}</span></p>
+                        <p class="c6">指派给：<span class="text-primary mr20">{$task_detail['assignedTo']}</span></p>
+                        <p class="c6">优先级：{$task_detail['pri']}</p>
+                        <p class="c6">预计耗时：<span class="text-primary mr20">{$task_detail['estimate']}</span></p>
+                        <p class="c6">开始时间：{$task_detail['openedDate']}</p>
+                        <p class="c6">结束时间：{$task_detail['deadline']}</p>
+                    </div>
+
+                    <div class="publicdiv pr bor pt20 pb20 pl20 mln mt20 mb20 pr20 sizing">
+                        <span class="pa bf pl8 pr8 lh34 fs16 fwb" style="left:10px; top:-18px;">工时信息</span>
+                        <p class="c6">预计开始时间{$task_detail['estStarted']}</p>
+                        <p class="c6">真正开始时间
+                            {if condition="$task_detail['realStarted'] gt 2001-01-01"}{$task_detail['realStarted']}{else}{/if}</p>
+                    </div>
+
+                    <div class="publicdiv pr bor pt20 pl20 mln mt20 mb10 pr20 sizing">
+                        <span class="pa bf pl8 pr8 lh34 fs16 fwb" style="left:10px; top:-18px;">任务的一生</span>
+                        <p class="c6">由谁创建	{$task_detail['openedBy']} 于 {$task_detail['openedDate']} </p>
+                        <p class="c6">由谁完成	{if condition="!empty($task_detail['finishedBy'])"}{$task_detail['finishedBy']} 于 {$task_detail['finishedDate']} {/if}</p>
+                        <p class="c6">由谁取消	{if condition="!empty($task_detail['canceledBy'])"}{$task_detail['canceledBy']}于 {$task_detail['canceledDate']} {/if}</p>
+                        <p class="c6">由谁关闭	{if condition="!empty($task_detail['closedBy'])"}{$task_detail['closedBy']} 于 {$task_detail['closedDate']} {/if}</p>
+                        <p class="c6">最后编辑	{if condition="!empty($task_detail['lastEditedBy'])"}{$task_detail['lastEditedBy']} 于 {$task_detail['lastEditedDate']} {/if}</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="publicdiv pl10 pr10 mb20 pb20 bf pt15 mt20 sizing">
+            <form action="{:url('/index/task/detail?id='.$task_id)}" method="post">
+            <p>本次提交的内容，消耗的时间</p>
+            <h4>任务说明</h4>
+            
+            <textarea name="work" class="publicdiv pt8 pb8 pl8 pr8 sizing bor bf mb15" placeholder="请输入任务说明~"></textarea>
+            <div class="publicdiv pr pln z">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top c6">消耗</label>
+                <input type="text" name="consumed" class="form-control hp40 bor" id="consumed" style="padding-left:60px;" placeholder="输入实际用时时间" value="" />
+                <label for="firstname" class="lh35 lh40 fwn mr8 pa p-right p-top c6">小时</label>
+            </div>
+            
+            <div class="publicdiv mt15 pr z pln">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top c6">剩余</label>
+                <input type="text" name="left" class="form-control hp40 bor" id="consumed" style="padding-left:60px;" placeholder="输入剩余工时" value="" />
+                <label for="firstname" class="lh35 lh40 fwn mr8 pa p-right p-top c6">小时</label>
+            </div>
+            
+            <div class="publicdiv mt15 pr z pln sizing">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top c6">状态</label>
+                <select name="status" class="form-control hp40 bor" style="padding-left:60px;">
+                    <option value="doing">进行中</option>
+                    <option value="wait">等待</option>
+                    <option value="done">完成</option>
+                    <option value="closed">关闭</option>
+                </select>
+            </div>
+            
+            <input type="submit" class="publicdiv mt15 mb15 hp40 btn btn-primary" value="完成" />
+            </form>
+        </div>
+</div>
+{/block}
+
+{block name="footer"}
+{include file="mobile/base/project_title" /}
+{/block}

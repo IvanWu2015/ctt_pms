@@ -1,0 +1,25 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pl10 pr10 pb15 sizing">
+    <h3>团队列表</h3>
+    
+    {foreach $team_list as $team}
+    <a href="{:url('/index/project/detail/?id='.$team['project'])}">
+        <div class="project_list publicdiv pr">
+            <h3 class="ellipsis">{$team['project_name']} <span class="text-warning">[{$team['role']}]</span></h3>
+            <p>{$team['realname']}、预计：{$team['count_estimate']}、消耗：{$team['count_consumed']}</p>
+        </div>
+    </a>
+    {/foreach}
+    <div class="publicdiv ac pagingw">{$page}</div>
+</div>
+{/block}
+
+{block name="footer"}
+{include file="mobile/base/project_title" /}
+{/block}

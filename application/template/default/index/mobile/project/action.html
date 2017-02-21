@@ -1,0 +1,68 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pl10 pr10 pb15 sizing">
+    <h3>项目动态</h3>
+    
+    {foreach $project_list as $project}
+    <div class="project_list publicdiv pr">
+        <h3 class="ellipsis">
+            <span class="text-warning">
+                [
+                {if condition="$project['objectType'] eq 'project'"}项目
+                {elseif condition="$project['objectType'] eq 'task'"}任务
+                {elseif condition="$project['objectType'] eq 'user'"}用户
+                {elseif condition="$project['objectType'] eq 'build'"}建造
+                {elseif condition="$project['objectType'] eq 'product'"}产品
+                {elseif condition="$project['objectType'] eq 'bug'"}BUG
+                {/if}
+                ]
+            </span>
+            {if condition="$project['action'] eq 'opened'"}创建了
+            {if condition="$project['objectType'] eq 'project'"}{$project['project_name']}项目{elseif condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
+            {/if}
+            {if condition="$project['action'] eq 'closed'"}关闭{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
+            {elseif condition="$project['action'] eq 'started'"}开始{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}{if condition="$project['objectType'] eq 'project'"}{$project['project_name']}{/if}
+            {elseif condition="$project['action'] eq 'finished'"}完成{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}{if condition="$project['objectType'] eq 'project'"}{$project['project_name']}{/if}
+            {elseif condition="$project['action'] eq 'edited'"}编辑{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}{if condition="$project['objectType'] eq 'project'"}{$project['project_name']}{/if}
+            {elseif condition="$project['action'] eq 'activated'"}激活{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
+            {elseif condition="$project['action'] eq 'assigned'"}分配{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
+            {elseif condition="$project['action'] eq 'paused'"}暂停{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
+            {elseif condition="$project['action'] eq 'deleted'"}删除{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
+            {elseif condition="$project['action'] eq 'canceled'"}取消{if condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
+            {/if}
+            {$project['comment']}
+        </h3>
+        <p>
+            操作者：{$project['actor']}、
+            动作：
+            {if condition="$project['action'] eq 'edited'"}编辑
+            {elseif condition="$project['action'] eq 'opened'"}创建
+            {elseif condition="$project['action'] eq 'changed'"}改变
+            {elseif condition="$project['action'] eq 'closed'"}关闭
+            {elseif condition="$project['action'] eq 'started'"}开始
+            {elseif condition="$project['action'] eq 'finished'"}完成
+            {elseif condition="$project['action'] eq 'canceled'"}取消
+            {elseif condition="$project['action'] eq 'deleted'"}删除
+            {elseif condition="$project['action'] eq 'restarted'"}重启
+            {elseif condition="$project['action'] eq 'paused'"}暂停
+            {elseif condition="$project['action'] eq 'assigned'"}分配
+            {elseif condition="$project['action'] eq 'commented'"}评论
+            {elseif condition="$project['action'] eq 'recordestimate'"}记录工时
+            {elseif condition="$project['action'] eq 'activated'"}激活
+            {/if}
+            <span class="y">{$project['date']}</span>
+            </p>
+    </div>
+    {/foreach}
+    <div class="publicdiv ac pagingw">{$page}</div>
+</div>
+{/block}
+
+{block name="footer"}
+{include file="mobile/base/project_title" /}
+{/block}

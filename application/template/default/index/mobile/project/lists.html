@@ -1,0 +1,49 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pl10 pr10 pb15 sizing">
+    <h3>项目列表</h3>
+    <ul class="list_nav mt10">
+        <li {if condition="$status == 'all'"} class="lnattr" {/if}><a href="{:url('index/project/lists?status=all')}">所有</a></li>
+        <li {if condition="$status == 'unclose'"} class="lnattr" {/if}><a href="{:url('/index/project/lists?status=unclose')}">未关闭</a></li>
+        <li {if condition="$status == 'delayed'"} class="lnattr" {/if}><a href="{:url('/index/project/lists?status=delayed')}">已延期</a></li>
+        <li class="dropdown">
+            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">更多 <span class="caret"></span></a>
+            <ul class="dropdown-menu" style="min-width:100px;">
+                <li><a href="{:url('index/project/lists?status=not')}">未开始</a></li>
+                <li><a href="{:url('index/project/lists?status=ing')}">进行中</a></li>
+                <li><a href="{:url('index/project/lists?status=done')}">已完成</a></li>
+                <li><a href="{:url('index/project/lists?status=closed')}">已关闭</a></li>
+            </ul>
+        </li>
+    </ul>
+    {foreach $project_list as $project}
+    <a href="{:url('/index/project/detail/?id='.$project['id'])}">
+        <div class="project_list publicdiv pr">
+            <h3 class="ellipsis">
+                {if condition="$project['status'] == 'wait'"}<span class="text-warning">[等待]</span>{/if}
+                {if condition="$project['status'] == 'done'"}<span class="text-muted">[完成]</span>{/if}
+                {if condition="$project['status'] == 'doing'"}<span class="text-danger">[进行中]</span>{/if}
+                {if condition="$project['status'] == 'closed'"}<span class="text-primary">[关闭]</span>{/if}
+                {$project['name']}
+            </h3>
+            <p>结束日期：{$project['end']}、总预计：{$project['all_time']}、总消耗：{$project['estimate_count']}</p>
+            <div class="list_percent"><span style="width:{$project['percent']}%;"></span></div>
+        </div>
+    </a>
+    {/foreach}
+    <div class="publicdiv ac pagingw">{$page}</div>
+</div>
+
+{/block}
+
+
+{block name="footer"}
+<div class="footer_wp">
+    <a href="{:url('add')}" class="p_inster"></a>
+</div>
+{/block}

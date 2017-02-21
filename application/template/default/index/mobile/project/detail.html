@@ -1,0 +1,43 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pl10 pr10 pb15 sizing">
+    <h3>{$project_detail['name']}</h3>
+    <ul class="list_nav mt10">
+        <li {if condition="empty($status) && empty($username)"} class="lnattr"{/if}><a href="{:url('/index/Project/detail/?id='.$project_id)}">所有</a></li>
+        <li {if condition="$status eq 'noclosed'"} class="lnattr"{/if}><a href="{:url('/index/Project/detail/?status=noclosed&id='.$project_id)}">未关闭</a></li>
+        <li {if condition="$status eq 'delayed'"} class="lnattr"{/if}><a href="{:url('/index/Project/detail/?status=delayed&id='.$project_id)}">已延期</a></li>
+        <li {if condition="!empty($username)"} class="lnattr"{/if}><a href="{:url('/index/Project/detail/?username='.$_G['username'].'&id='.$project_id)}">指派给我</a></li>
+    </ul>
+    
+                    
+    {foreach $task_list as $task}
+    <a href="{:url('/index/task/detail/?id='.$task['id'])}">
+        <div class="project_list publicdiv pr">
+            <h3 class="ellipsis">
+                {if condition="$task['status'] == 'wait'"}<span class="text-warning">[等待]</span>{/if}
+                {if condition="$task['status'] == 'done'"}<span class="text-muted">[完成]</span>{/if}
+                {if condition="$task['status'] == 'closed'"}<span class="text-danger">[关闭]</span>{/if}
+                {if condition="$task['status'] == 'doing'"}<span class="text-primary">[进行中]</span>{/if}
+                {$task['name']}
+            </h3>
+            <p>
+                指派给：<span class="{if condition='$task["assignedTo"] == $_G["username"]'}cred{else}text-primary{/if}">{$user_list[$task['assignedTo']]['realname']}</span>
+                <span class="y">{$task['openedDate']}</span>
+            </p>
+        </div>
+    </a>
+    {/foreach}
+    <div class="publicdiv ac pagingw">{$page}</div>
+</div>
+{/block}
+
+{block name="footer"}
+<a href="{:url('/index/task/add/?project_id='.$project_id)}" class="p_scradd"></a>
+
+{include file="mobile/base/project_title" /}
+{/block}

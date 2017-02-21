@@ -1,0 +1,51 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="side"}
+    <!-- 左侧 nav
+    ================================================== -->
+    <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
+            {:widget('Category/lists', array(1, true))}
+        </ul>
+    </div>
+{/block}
+
+{block name="body"}
+<div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
+    <form action="" method="post">
+        <table class="table">
+          <h3 class="ac">项目管理</h3>
+          <thead>
+              <tr>
+                <th>ID</th>
+                <th>项目名称</th>
+                <th>版本号</th>
+                <th>创建时间</th>
+                <th>完成时间</th>
+                <th>状态</th>
+                <th>添加人</th>
+                <th>删除</th>
+              </tr>
+          </thead>
+          <tbody>
+          {foreach $project_list as $project}
+              <tr>
+                <td>{$project['id']}</td>
+                <td>{$project['name']}</td>
+                <td>{$project['code']}</td>
+                <td>{$project['begin']}</td>
+                <td>{$project['end']}</td>
+                <td>{$project['status']}</td>
+                <td>{$project['project_admin']}</td>
+                <td><input type="checkbox" class="bselect" id="delete" name="delete[{$project['id']}]" value="1" />删除</td>
+              </tr>
+          {/foreach}
+          </tbody>
+        </table>
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </form>
+</div>
+{/block}

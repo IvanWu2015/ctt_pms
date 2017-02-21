@@ -1,0 +1,20 @@
+<div class="m_footer"><!-- 底部 -->
+    <ul>
+        <a href="{:url('/index/Project/detail?id='.$project_id)}"><li {if condition="$_G['action'] == 'detail'"}class="footer_attr"{/if}>
+            <div class="iconfont">&#xe605;</div>
+            <p>任务</p>
+        </li></a>
+        <a href="{:url('/index/Project/group?project_id='.$project_id)}"><li {if condition="$_G['action'] == 'group'"}class="footer_attr"{/if}>
+            <div class="iconfont">&#xe614;</div>
+            <p>团队</p>
+        </li></a>
+        <a href="{:url('/index/Project/action?project_id='.$project_id)}"><li {if condition="$_G['action'] == 'action'"}class="footer_attr"{/if}>
+            <div class="iconfont" style="font-size:22px;">&#xe65d;</div>
+            <p>动态</p>
+        </li></a>
+        <a href="{:url('/index/Project/info?project_id='.$project_id)}"><li {if condition="$_G['action'] == 'info'"}class="footer_attr"{/if}>
+            <div class="iconfont">&#xe6e0;</div>
+            <p>概况</p>
+        </li></a>
+    </ul>
+</div><!-- 底部 -->

@@ -1,0 +1,14 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+    <div class="publicdiv pl20 pr20 pt20 pb20 bf sizing">
+        <ul class="nav nav-pills nav-justified">
+          <li class="active"> <a href="{:url('Project/index')}">项目管理</a></li>
+          <li><a href="{:url('Task/index')}">任务管理</a></li>
+          <li><a href="{:url('User/index')}">用户管理</a></li>
+        </ul>
+    </div>
+{/block}

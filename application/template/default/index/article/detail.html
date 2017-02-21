@@ -1,0 +1,39 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pb20 sizing" id="action_wrap">
+        <h3 class="mtn mb10 pb15 pt15 pl20 pr20 sizing" style="background:#f8fafe; border-bottom:1px solid #e5e5e5;">
+            {$article_detail['title']}
+            <span class="y derkwt fs13 iconfont">
+                <a href="{:url('/index/article/add?id='.$article_id)}" class="btn-link" title="编辑">&#xe71d; 编辑</a>
+            </span>
+        </h3>
+        
+        <div class="publicdiv pl20 pr20 sizing">
+            <div class="span7 mt20 mln z" style="width:72%;">
+                <div class="publicdiv pr bor pt20 pb20 pl20 mb20 pr20 sizing">
+                    <span class="pa bf pl8 pr8 lh34 fs18 fwb" style="left:10px; top:-20px;">文档内容</span>
+                    {$article_detail['contents']}
+                </div>
+                
+            </div>
+            <div class="span4 mt20 y" style="width:25%;">
+                <div class="publicdiv pr bor pt20 pb20 pl20 mln pr20 sizing">
+                    <span class="pa bf pl8 pr8 lh34 fs18 fwb" style="left:10px; top:-20px;">基本信息</span>
+                    <p>分类：<span class="text-primary mr20 ml10">{$article_detail['class_name']}</span></p>
+                    <p>产品：<span class="text-primary mr20 ml10">{$article_detail['']}</span></p>
+                    <p>项目：<span class="text-primary mr20 ml10">{$article_detail['project_name']}</span></p>
+                    <p>时间：<span class="text-primary mr20 ml10">{$article_detail['time']}</span></p>
+                    <p>性质：<span class="text-primary mr20 ml10">{if condition="$article_detail['acl'] == 'private'"}私有{else/}开放{/if}</span></p>
+                    <p>发布者：<span class="text-primary mr20 ml10">{$article_detail['username']}</span></p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+{/block}

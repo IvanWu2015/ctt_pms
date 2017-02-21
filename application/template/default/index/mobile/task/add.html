@@ -1,0 +1,85 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv ptlrb10 ptn sizing">
+    {if condition="$task_id eq 0"}<form action="{:url('/index/task/add/?project_id='.$project_id)}" method="post" class="form-horizontal" role="form">{/if}
+    {if condition="$task_id neq 0"}<form action="{:url('/index/task/add?task_id='.$task_id)}" method="post" class="form-horizontal" role="form">{/if}
+    <div class="publicdiv pl20 pr20 pt8 bf sizing">
+        <h3 class="ac">{if condition="$task_id eq 0"}添加任务{/if}{if condition="$task_id neq 0"}修改任务{/if}</h3>
+
+        <div class="publicdiv bf sizing">
+            <div class="publicdiv pr pln z">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top c6">任务名称</label>
+                <input type="text" name="name" class="form-control hp40 bor" id="focusedInput" style="padding-left:70px;" placeholder="请输入任务名称" value="{$task_details['name']}">
+            </div>
+            
+            <div class="publicdiv mt15 pr pln z">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top ar c6">指派给</label>
+                <select class="form-control hp40 bor" name="assignedTo" style="padding-left:60px;">
+                    {foreach $user_list as $user}
+                    <option {if condition="$user['username'] == $task_details['assignedTo']"}selected='selected'{/if}value="{$user['username']}" >{$user['realname']}</option>
+                    {/foreach}
+                </select>
+            </div>
+            
+            <div class="publicdiv mt15 pr z sizing">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top c6">任务预计</label>
+                <input type="text" name="estimate" class="form-control hp40 bor" style="padding-left:70px;" placeholder="输入任务预计时间" value="{$task_details['estimate']}" /> 
+            </div>
+            
+            <div class="publicdiv mt15 pr pln z">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top ar c6">优先级</label>
+                <select class="form-control hp40 bor" name="pri" style="padding-left:60px;">
+                    <option value="1" {eq name="task_details.pri" value="1"}selected="selected"{/eq} >1</option>
+                    <option value="2" {eq name="task_details.pri" value="2"}selected="selected"{/eq} >2</option>
+                    <option value="3" {eq name="task_details.pri" value="3"}selected="selected"{/eq} >3</option>
+                    <option value="4" {eq name="task_details.pri" value="4"}selected="selected"{/eq} >4</option>
+                </select>
+            </div>
+            
+            <div class="publicdiv mt15 pr pln z">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top c6">开始时间</label>
+                <input type="date" name="realStarted" class="form-control hp40 bor" id="begin_time" style="padding-left:70px;" placeholder="请输入开始时间" value="{$task_details['realStarted']}" />
+            </div>
+            
+            <div class="publicdiv mt15 pr pln z">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top c6">最后期限</label>
+                <input type="date" name="deadline" class="form-control hp40 bor" id="end_time" style="padding-left:70px;" placeholder="请输入结束时间" value="{$task_details['deadline']}" />
+            </div>
+            
+            <div class="publicdiv mt15 pr pln z">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top c6">任务类型</label>
+                <select class="form-control hp40 bor" name="type" style="padding-left:60px;">
+                    <option value="design" data-keys="sheji sj">设计</option>
+                    <option value="devel" data-keys="kaifa kf">开发</option>
+                    <option value="test" data-keys="ceshi cs">测试</option>
+                    <option value="study" data-keys="yanjiu yj">研究</option>
+                    <option value="discuss" data-keys="taolun tl">讨论</option>
+                    <option value="ui" data-keys="jiemian jm">界面</option>
+                    <option value="affair" data-keys="shiwu sw">事务</option>
+                    <option value="misc" data-keys="qita qt">其他</option>
+                </select>
+            </div>
+            
+            <div class="publicdiv mt15 pr pln z">
+                <label for="firstname" class="hp40 lh40 fwn ml8 pa p-left p-top c6">任务状态</label>
+                <select class="form-control hp40 bor" name="status" style="padding-left:60px;">
+                    <option class="form-control"  {if condition="$task_details['status'] eq 'wait'"}selected="selected"{/if} value="wait" >等待</option>
+                    <option class="form-control"  {if condition="$task_details['status'] eq 'doing'"}selected="selected"{/if} value="doing" >进行中</option>
+                    <option class="form-control"  {if condition="$task_details['status'] eq 'done'"}selected="selected"{/if} value="done" >完成</option>
+                    <option class="form-control" {if condition="$task_details['status'] eq 'closed'"}selected="selected"{/if} value="closed" >关闭</option>
+                </select>
+            </div>
+            
+            <textarea name="desc" class="publicdiv mt15 pt8 pb8 pl8 pr8 sizing bor bf mb15" style="height:100px;" placeholder="请输入项目说明~">{$task_details['desc']}</textarea>
+            
+            <input type="submit" class="publicdiv mt15 mb15 hp40 btn btn-primary" value="完成" />
+        </div>
+    </div>
+    </form>
+</div>
+{/block}

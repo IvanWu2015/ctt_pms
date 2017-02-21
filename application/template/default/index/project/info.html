@@ -1,0 +1,50 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv pt10 pb10 ptn sizing">
+
+    {include file="base/project_title" /}
+    
+    <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
+
+        <section id="contents" class="mtn">
+
+            <div class="publicdiv bf pb20 sizing">
+
+                <div class="publicdiv bf pt20 pb20 sizing" id="action_wrap">
+
+                    <div class="mln z" style="width:74%;">
+                        <div class="publicdiv pr bor pt20 pb20 pl20 mb20 pr20 sizing">
+                            <span class="pa bf pl8 pr8 lh34 fs18 fwb" style="left:10px; top:-20px;">项目描述</span>
+                            {$project_detail['desc']}
+                            工时统计 可用工时{$project_detail['all_time']}工时，总共预计{$project_detail['all_time']}工时，已经消耗{$project_detail['estimate_count']}工时，预计剩余{$project_detail['left_time']}工时
+                        </div>
+                    </div>
+                    <div class="y mln" style="width:22%;">
+                        <div class="publicdiv pr bor pt20 pb20 pl20 mln pr20 sizing">
+                            <span class="pa bf pl8 pr8 lh34 fs18 fwb" style="left:10px; top:-20px;">基本信息</span>
+                            <p>项目名称	<span class="text-primary mr20">{$project_detail['name']}</span></p>
+                            <p>项目代号 {$project_detail['code']}</p>
+                            <p>起止时间	{$project_detail['begin']} ~ {$project_detail['end']}</p>
+                            <p>可用工作日	{$project_detail['days']}</p>
+                            <p>项目状态	
+                                {eq name="project_detail['status']" value="done"}完成{/eq}
+                                {eq name="project_detail['status']" value="doing"}进行中{/eq}
+                                {eq name="project_detail['status']" value="wait"}等待{/eq}
+                            </p>
+                            <p>项目负责人   {$project_detail['admin_username']}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+        </section>
+
+
+    </div>
+</div>
+{/block}

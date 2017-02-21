@@ -1,0 +1,44 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv pt10 pb10 ptn sizing">
+
+    {include file="base/project_title" /}
+    
+    <div class="publicdiv pl20 pr20 pt20 pb20 bf sizing">
+
+        <table class="table table-striped borl bort borr borb">
+            <thead style="background:#f1f1f1;">
+                <tr>
+                    <th class="">标题</th>
+                    <th class="">链接</th>
+                    <th class="ac">所属项目</th>
+                    <th class="ac">备注</th>
+                    <th class="ac">状态</th>
+                    <th class="ac">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {foreach $weburl_list as $weburl}
+                <tr id="projectlist">
+                    <td><a href="{:url('/index/project/detail/?id='.$project['id'])}">{$weburl['title']}</a></td>
+                    <td class=""><a href="{$weburl['url']}" target="_bacnk">{$weburl['url']}</a></td>
+                    <td class="ac">{$weburl['name']}</td>
+                    <td class="ac">{$weburl['explain']}</td>
+                    <td class="ac">{if condition="$weburl['acl'] eq open"}公开{else/}私有{/if}</td>
+                    <td class="ac iconfont">
+                        <a href="{:url('/index/weburl/add/?id='.$weburl['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
+                    </td>
+                </tr>
+                {/foreach}
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+{/block}

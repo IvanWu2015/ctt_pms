@@ -1,0 +1,146 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+{include file="base/left_nav" /}
+
+<div class="rightcon sizing"><!-- 右边内容 -->
+    
+    <div class="publicdiv bf">
+        <h3 class="pt10 pb10 pl20 pr20 fs16 sizing iconfont" style="display:none;">&#xe605; 个人中心</h3>
+        
+        <div class="userincon pt20 pb20 pr20 borb sizing"><!-- 基本信息 -->
+            
+            <div class="userawp sizing">
+                <div class="useravatar"><img src="tpl_img/match_img.png" class="publicimg" /></div>
+            </div>
+            <div class="mt20 z pr" style="width:270px;">
+                <p class="fs16 fwb">
+                    {$user['realname']}
+                </p>
+                <p>职位：{$user['group_name']}</p>
+                <p>部门：{$user['depe_name']}</p>
+            </div>
+            
+            <ul class="uscsul"><!-- 数据统计 -->
+                <li class="borr sizing">
+                    <span class="iconfont">&#xe759;</span>
+                    <p class="fwb">我的任务</p>
+                    <h3>已完成：<b>{$my_task_count}</b></h3>
+                    <h3>未完成：<b>{$not_status_count}</b></h3>
+                </li>
+                <li class="borr sizing">
+                    <span class="iconfont">&#xe623;</span>
+                    <p class="fwb">总工时</p>
+                    <h3>预计：<b>{if condition="empty($estimate_count)"}0{else/}{$estimate_count}{/if}</b></h3>
+                    <h3>完成：<b>{if condition="empty($consumed_count)"}0{else/}{$consumed_count}{/if}</b></h3>
+                </li>
+                <li class="sizing">
+                    <span class="iconfont">&#xe61e;</span>
+                    <p class="fwb">当月工时</p>
+                    <h3>预计：<b>{if condition="empty($same_month_estimate_count)"}0{else/}{$estimate_count}{/if}</b></h3>
+                    <h3>完成：<b>{if condition="empty($same_month_consumed_count)"}0{else/}{$estimate_count}{/if}</b></h3>
+                </li>
+            </ul><!-- 数据统计 -->
+            
+        </div><!-- 基本信息 -->
+        
+        <div class="publicdiv pl20 pr20 mt20 mb20 sizing">
+            <div class="publicdiv">
+                <div class="w50 z pr10 sizing"><!--待完成任务-->
+                    <div class="panel" style="border:1px #f8f2d1 solid;">
+                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing" style="background:#f8f2d1;">
+                            待完成任务
+                            <a href="{:url('/index/Mycenter/task_list/?status=ontdone')}" class="y fs12 mr10">更多>></a>
+                        </h3>
+                        <div class="panel-body">
+                            
+                            <p class="publicdiv mbn fwb">
+                                <span>ID</span>
+                                <span class="ml20">任务名称</span>
+                                <span class="y">类型</span>
+                            </p>
+                        
+                            {foreach $task_list as $task}
+                            <li class="publicdiv pr tlist pr70 h25 lh25 ellipsis">
+                                <span class="w40p db z">{$task['id']}</span>
+                                <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$task['name']}</a>
+                                <span class="tlisty">{$task['type']}</span>
+                            </li>
+                            {/foreach}
+                        </div>
+                    </div>
+                </div><!--待完成任务-->
+                
+                <div class="w50 z pl10 sizing"><!--我的动态-->
+                    <div class="panel" style="border:1px #f2dede solid;">
+                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-danger">我的动态</h3>
+                        <div class="panel-body">
+                            {foreach $action_list as $action}
+                            <li class="publicdiv h25 lh25 ellipsis"><a href="{:url('/index/task/detail/?id='.$task['id'])}">
+                                    {if condition="($action['tname'] == null) and ($name == null)"}
+                                    您于&nbsp;{$action['date']} &nbsp;&nbsp;{$action['actionname']} &nbsp;{$action['typename']} {$action['tname']}{$action['pname']}
+                                    {else/}
+                                您于&nbsp;{$action['date']} &nbsp;&nbsp;对 {$action['tname']}{$action['pname']} &nbsp;进行&nbsp;{$action['actionname']}&nbsp;的操作
+                                    {/if}
+                                </a></li>
+                            {/foreach}
+                        </div>
+                    </div>
+                </div><!--我的动态-->
+            </div>
+            
+            <div class="publicdiv">
+                <div class="w50 z pr10 sizing"><!--我的收藏-->
+                    <div class="panel" style="border:1px #d9edf7 solid;">
+                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-info">我的收藏</h3>
+                        <div class="panel-body">
+                            <p class="publicdiv mbn fwb">
+                                <span>ID</span>
+                                <span class="ml20">收藏名称</span>
+                                <span class="y">时间</span>
+                            </p>
+                        
+                            {foreach $weburl_list as $weburl}
+                            <li class="publicdiv pr tlist pr100 h25 lh25 ellipsis">
+                                <span class="w40p db z">{$weburl['id']}</span>
+                                <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$weburl['title']}</a>
+                                <span class="tlisty">{$weburl['time']}</span>
+                            </li>
+                            {/foreach}
+                            
+                        </div>
+                    </div>
+                </div><!--我的收藏-->
+                
+                <div class="w50 z pl10 sizing"><!--我的文档-->
+                    <div class="panel" style="border:1px #dff0d8 solid;">
+                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-success">我的文档</h3>
+                        <div class="panel-body">
+                            <p class="publicdiv mbn fwb">
+                                <span>ID</span>
+                                <span class="ml20">文档名称</span>
+                                <span class="y">时间</span>
+                            </p>
+                        
+                            {foreach $article_list as $article}
+                            <li class="publicdiv pr tlist pr100 h25 lh25 ellipsis">
+                                <span class="w40p db z">{$article['id']}</span>
+                                <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$article['title']}</a>
+                                <span class="tlisty">{$article['time']}</span>
+                            </li>
+                            {/foreach}
+                            
+                        </div>
+                    </div>
+                </div><!--我的文档-->
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</div>
+{/block}

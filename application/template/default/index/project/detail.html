@@ -1,0 +1,43 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv  pt10 pb10 ptn sizing">
+    
+    {include file="base/project_title" /}
+    
+    <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
+
+        <div class="publicdiv  pt8 pb8 bf sizing">
+            <ul class="nav nav-pills">
+                <li {if condition="empty($status) && empty($username)"}class="active"{/if}><a href="{:url('/index/Project/detail/?id='.$project_id)}">所有</a></li>
+                <li {if condition="$status eq 'noclosed'"}class="active"{/if}><a href="{:url('/index/Project/detail/?status=noclosed&id='.$project_id)}">未关闭</a></li>
+                <li {if condition="$status eq 'delayed'"}class="active"{/if}><a href="{:url('/index/Project/detail/?status=delayed&id='.$project_id)}">已延期</a></li>
+                <li {if condition="!empty($username)"}class="active"{/if}><a href="{:url('/index/Project/detail/?username='.$_G['username'].'&id='.$project_id)}">指派给我的</a></li>
+
+                {if condition="!empty($project_detail)"}
+                <span class="lh40 ml20">开始：{$project_detail['begin']}</span>
+                <span class="lh40 ml10">预计：{$project_detail['all_time']}</span>
+                <span class="lh40 ml10">消耗：{$project_detail['consumed_count']}</span>
+                {/if}
+                
+                <label class="y">
+                    <form action="{:url('/index/project/detail/?id='.$project_id)}" method="post">
+                        <input type="text" name="keyword" class="bor pt5 pb5 pl5 pr5" placeholder="请输入搜索的内容~" value="{$keyword}" />
+                    <input type="submit" class="pt5 pb5 pl10 pr10 cf" style="background:#428bca; border:1px #428bca solid;" value="搜索" />
+                    </form>
+                </label>
+            </ul>
+        </div>
+        
+        {include file="base/task_list" /}
+        
+        </div>
+
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
+</div>
+{/block}

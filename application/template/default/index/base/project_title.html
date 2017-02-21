@@ -1,0 +1,18 @@
+<div class="publicdiv mb10 sizing">
+    <h3 class="mt5">
+        <a href="{:url('/index/Project/detail/?id='.$project_id)}">{$project_detail['name']}</a>
+        <span class="fs14">
+            <a {if condition="$_G['action'] == 'detail'"}class="ml10 btn-link"{else}class="ml10"{/if} href="{:url('/index/Project/detail?id='.$project_id)}">任务</a>
+            <a {if condition="$_G['action'] == 'group'"}class="ml10 btn-link"{else}class="ml10"{/if} href="{:url('/index/Project/group?project_id='.$project_id)}">团队</a>
+            <a {if condition="$_G['action'] == 'action'"}class="ml10 btn-link"{else}class="ml10"{/if} href="{:url('/index/Project/action?project_id='.$project_id)}">动态</a>
+            <a {if condition="$_G['action'] == 'info'"}class="ml10 btn-link"{else}class="ml10"{/if} href="{:url('/index/Project/info?project_id='.$project_id)}">概况</a>
+            <a {if condition="$_G['action'] == 'weburl'"}class="ml10 btn-link"{else}class="ml10"{/if} href="{:url('/index/Project/weburl?project_id='.$project_id)}">收藏</a>
+            <a {if condition="$_G['action'] == 'article'"}class="ml10 btn-link"{else}class="ml10"{/if} href="{:url('/index/Project/article?project_id='.$project_id)}">文档</a>
+        </span>
+        {if condition="$project_id gt 0"}
+        <span class="pull-right">
+            <a href="{:url('/index/task/add/?project_id='.$project_id)}" class="btn btn-info">添加任务</a>
+        </span>
+        {/if}
+    </h3>
+</div>
