@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:55:"../application/template/default/index\weburl\lists.html";i:1487580507;s:54:"../application/template/default/index\base\common.html";i:1487565884;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:55:"../application/template/default/index\weburl\lists.html";i:1487585336;s:54:"../application/template/default/index\base\common.html";i:1487668775;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -23,7 +23,8 @@
 <script type="text/javascript" src="tpl_static/jquery-1.10.2.min.js"></script>
 <![endif]-->
 <!--[if gte IE 9]><!-->
-<script type="text/javascript" src="tpl_static/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="tpl_js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="tpl_js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="tpl_js/public.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/moment.js"></script>
@@ -54,10 +55,6 @@
                     <ul class="dropdown-menu">
                       <li><a href="<?php echo url('/admin/project/lists'); ?>">项目管理</a></li>
                       <li><a href="<?php echo url('/admin/task/lists'); ?>">任务管理</a></li>
-                      <li><a href="<?php echo url('/admin/weburl/lists'); ?>">收藏管理</a></li>
-                      <li><a href="<?php echo url('/admin/article/lists'); ?>">文章管理</a></li>
-                      <li><a href="<?php echo url('/admin/user/lists'); ?>">用户管理</a></li>
-					  <li><a href="<?php echo url('/admin/sort/lists'); ?>">分类管理</a></li>
                     </ul>
                 </li>
                 <?php endif; if($_G['uid'] > 0): ?>
@@ -116,9 +113,9 @@
             <tbody>
                 <?php foreach($weburl_list as $weburl): ?>
                 <tr id="projectlist">
-                    <td><a href="<?php echo url('/index/project/detail/?id='.$project['id']); ?>"><?php echo $weburl['title']; ?></a></td>
+                    <td><?php echo $weburl['title']; ?></td>
                     <td class=""><a href="<?php echo $weburl['url']; ?>" target="_bacnk"><?php echo $weburl['url']; ?></a></td>
-                    <td class="ac"><?php echo $weburl['name']; ?></td>
+                    <td class="ac"><a href="<?php echo url('/index/project/detail/?id='.$weburl['project']); ?>"><?php echo $weburl['name']; ?></a></td>
                     <td class="ac"><?php echo $weburl['explain']; ?></td>
                     <td class="ac"><?php if($weburl['acl'] == open): ?>公开<?php else: ?>私有<?php endif; ?></td>
                     <td class="ac iconfont">
