@@ -22,9 +22,9 @@
                     <th class="">标题</th>
                     <th class="">链接</th>
                     <th class="ac">所属项目</th>
-                    <th class="ac">添加人</th>
-                    <th class="ac">添加时间</th>
+                    <th class="ac">发布者</th>
                     <th class="ac">状态</th>
+                    <th class="ac">时间</th>
                     <th class="ac">操作</th>
                 </tr>
             </thead>
@@ -34,9 +34,9 @@
                     <td>{$weburl['title']}</td>
                     <td class=""><a href="{$weburl['url']}" target="_bacnk">{$weburl['url']}</a></td>
                     <td class="ac"><a href="{:url('/index/project/detail/?id='.$weburl['project'])}">{$weburl['name']}</a></td>
-                    <td class="ac">{$weburl['realname']}</td>
-                    <td class="ac">{$weburl['time']}</td>
+                    <td class="ac">未读取</td>
                     <td class="ac">{if condition="$weburl['acl'] eq open"}公开{else/}私有{/if}</td>
+                    <td class="ac">{$weburl['time']}</td>
                     <td class="ac iconfont">
                         <a href="{:url('/index/weburl/add/?id='.$weburl['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
                         <a href="{:url('/index/weburl/lists/?deleted=1&id='.$weburl['id'])}" class="cred fs16" title="删除">&#xe601;</a>
