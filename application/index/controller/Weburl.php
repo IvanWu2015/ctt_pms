@@ -25,7 +25,7 @@ class weburl extends Common {
                 ->alias('w')
                 ->join('chinatt_pms_project p', 'w.project = p.id', 'left')
                 ->field('w.*,p.name')
-                ->where(['w.status' => 0])
+                ->where(['uid' => $this->_G['uid'],'w.status' => 0])
                 ->paginate(10);
         $page = $weburl_list->render(); // 分页显示输出
         $deleted = input('param.deleted', 0, 'intval');
