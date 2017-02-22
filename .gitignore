@@ -1,5 +1,4 @@
 .idea
-.svn
 composer.lock
 *.log
-nbproject
+thinkphp

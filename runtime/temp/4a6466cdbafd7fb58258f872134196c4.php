@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:55:"../application/template/default/index\weburl\lists.html";i:1487585336;s:54:"../application/template/default/index\base\common.html";i:1487668775;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:55:"../application/template/default/index\weburl\lists.html";i:1487732416;s:54:"../application/template/default/index\base\common.html";i:1487672645;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -105,8 +105,9 @@
                     <th class="">标题</th>
                     <th class="">链接</th>
                     <th class="ac">所属项目</th>
-                    <th class="ac">备注</th>
+                    <th class="ac">发布人</th>
                     <th class="ac">状态</th>
+                    <th class="ac">时间</th>
                     <th class="ac">操作</th>
                 </tr>
             </thead>
@@ -116,8 +117,9 @@
                     <td><?php echo $weburl['title']; ?></td>
                     <td class=""><a href="<?php echo $weburl['url']; ?>" target="_bacnk"><?php echo $weburl['url']; ?></a></td>
                     <td class="ac"><a href="<?php echo url('/index/project/detail/?id='.$weburl['project']); ?>"><?php echo $weburl['name']; ?></a></td>
-                    <td class="ac"><?php echo $weburl['explain']; ?></td>
+                    <td class="ac">未读取</td>
                     <td class="ac"><?php if($weburl['acl'] == open): ?>公开<?php else: ?>私有<?php endif; ?></td>
+                    <td class="ac"><?php echo $weburl['time']; ?></td>
                     <td class="ac iconfont">
                         <a href="<?php echo url('/index/weburl/add/?id='.$weburl['id']); ?>" class="btn-link" title="编辑">&#xe71d;</a>
                         <a href="<?php echo url('/index/weburl/lists/?deleted=1&id='.$weburl['id']); ?>" class="cred fs16" title="删除">&#xe601;</a>
