@@ -24,9 +24,11 @@ class weburl extends Common {
         $weburl_list = DB::name('weburl')
                 ->alias('w')
                 ->join('chinatt_pms_project p', 'w.project = p.id', 'left')
-                ->field('w.*,p.name')
+                ->join('chinatt_pms_user u', 'u.uid = w.uid', 'left')
+                ->field('w.*,p.name,u.username,u.realname')
                 ->where(['w.acl' => 'open','w.status' => 0])
                 ->paginate(10);
+
         $page = $weburl_list->render(); // 分页显示输出
         $deleted = input('param.deleted', 0, 'intval');
         $weburl_id = input('param.id', 0, 'intval');
@@ -34,7 +36,7 @@ class weburl extends Common {
             $weburl_detail = $weburl->where(['uid' => $this->_G['uid'],'status' => 0])->find();
             if($this->_G['uid'] == $weburl_detail['uid']){
                 $weburl->where(['id' => $weburl_id])->update(['status' => -1]);
-                $this->success('删除公共','index/weburl/lists');
+                $this->success('删除成功','index/weburl/lists');
             }else {
                 $this->error('权限不足');
             }
