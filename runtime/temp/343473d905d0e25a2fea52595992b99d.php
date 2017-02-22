@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:53:"../application/template/default/index\user\login.html";i:1487127533;s:54:"../application/template/default/index\base\common.html";i:1487132647;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:53:"../application/template/default/index\user\login.html";i:1487672645;s:54:"../application/template/default/index\base\common.html";i:1487672645;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -23,7 +23,8 @@
 <script type="text/javascript" src="tpl_static/jquery-1.10.2.min.js"></script>
 <![endif]-->
 <!--[if gte IE 9]><!-->
-<script type="text/javascript" src="tpl_static/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="tpl_js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="tpl_js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="tpl_js/public.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/moment.js"></script>

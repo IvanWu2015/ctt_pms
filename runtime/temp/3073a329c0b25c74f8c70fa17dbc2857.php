@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:56:"../application/template/default/admin\project\lists.html";i:1487582596;s:54:"../application/template/default/admin\base\common.html";i:1487645348;s:56:"../application/template/default/admin\base\left_nav.html";i:1487645348;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:56:"../application/template/default/admin\project\lists.html";i:1487672645;s:54:"../application/template/default/admin\base\common.html";i:1487672645;s:56:"../application/template/default/admin\base\left_nav.html";i:1487672645;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -27,6 +27,7 @@
 <script type="text/javascript" src="tpl_static/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/moment.js"></script>
+<script type="text/javascript" src="tpl_js/admin/public.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/daterangepicker.js"></script>
 
 <!--<![endif]-->

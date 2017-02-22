@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:54:"../application/template/default/admin\index\index.html";i:1487646908;s:54:"../application/template/default/admin\base\common.html";i:1487645348;s:56:"../application/template/default/admin\base\left_nav.html";i:1487645348;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:54:"../application/template/default/admin\index\index.html";i:1487672645;s:54:"../application/template/default/admin\base\common.html";i:1487672645;s:56:"../application/template/default/admin\base\left_nav.html";i:1487672645;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -27,6 +27,7 @@
 <script type="text/javascript" src="tpl_static/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/moment.js"></script>
+<script type="text/javascript" src="tpl_js/admin/public.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/daterangepicker.js"></script>
 
 <!--<![endif]-->
@@ -91,9 +92,209 @@
 </ul><!-- 左边导航 -->
 
 <div class="rightcon sizing"><!-- 右边内容 -->
-    <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
+    <div class="publicdiv pl10 pr10 bf sizing">
+        <h3 class="ac">后台首页</h3>
+        <ul class="data_statistics iconfont"><!--盘局 -->
+            <a href="javascript:void(0);"><li class="w20 z pl10 pr10 sizing">
+                <div class="datasta dcs01">
+                    <div class="aict ac">&#xe6c9;</div>
+                    <h3>未读取</h3>
+                    <p>项目管理</p>
+                </div>
+            </li></a>
+
+            <a href="javascript:void(0);"><li class="w20 z pl10 pr10 sizing">
+                <div class="datasta dcs02 sizing">
+                    <div class="aict ac">&#xe613;</div>
+                    <h3>未读取</h3>
+                    <p>任务管理</p>
+                </div>
+            </li></a>
+
+            <a href="javascript:void(0);"><li class="w20 z pl10 pr10 sizing">
+                <div class="datasta dcs03 sizing">
+                    <div class="aict ac">&#xe60d;</div>
+                    <h3>未读取</h3>
+                    <p>收藏管理</p>
+                </div>
+            </li></a>
+
+            <a href="javascript:void(0);"><li class="w20 z pl10 pr10 sizing">
+                <div class="datasta dcs04 sizing">
+                    <div class="aict ac">&#xe704;</div>
+                    <h3>未读取</h3>
+                    <p>文档管理</p>
+                </div>
+            </li></a>
+
+            <a href="javascript:void(0);"><li class="w20 z pl10 pr10 sizing">
+                <div class="datasta dcs05 sizing">
+                    <div class="aict ac">&#xe647;</div>
+                    <h3>未读取</h3>
+                    <p>用户管理</p>
+                </div>
+            </li></a>
+
+        </ul><!--盘局 -->
         
     </div>
+    
+    <div class="publicdiv mt20 bf pl20 pr20 pt20 pb20 sizing">
+        
+        <div class="w33 z pr20 sizing"><!--各项目进度-->
+            <div class="panel" style="border:1px #F37B53 solid;">
+                <h3 class="mbn mtn fs15 cf pl15 pt15 pb15 sizing" style="background:#F37B53;">
+                    各项目进度
+                    <a href="<?php echo url('/admin/project/lists'); ?>" class="y cf fs12 mr10">更多>></a>
+                </h3>
+                <div class="panel-body" id="sofpul">
+                    
+                    <li class="sofpli">
+                        <span class="slid iconfont">&#xe621;</span>
+                        <h3 class="mtn mb8 fwn fs13 ellipsis">视频站1.0版本开发</h3>
+                        <p><span style="width:50%;" id="sofplisp"></span></p>
+                        <span class="slri">50%</span>
+                    </li>
+                    <li class="sofpli">
+                        <span class="slid iconfont">&#xe621;</span>
+                        <h3 class="mtn mb8 fwn fs13 ellipsis">视频站1.0版本开发</h3>
+                        <p><span style="width:24%;" id="sofplisp"></span></p>
+                        <span class="slri">24%</span>
+                    </li>
+                    <li class="sofpli">
+                        <span class="slid iconfont">&#xe621;</span>
+                        <h3 class="mtn mb8 fwn fs13 ellipsis">视频站1.0版本开发</h3>
+                        <p><span style="width:79%;" id="sofplisp"></span></p>
+                        <span class="slri">79%</span>
+                    </li>
+                    <li class="sofpli">
+                        <span class="slid iconfont">&#xe621;</span>
+                        <h3 class="mtn mb8 fwn fs13 ellipsis">视频站1.0版本开发</h3>
+                        <p><span style="width:90%;" id="sofplisp"></span></p>
+                        <span class="slri">90%</span>
+                    </li>
+                    <li class="sofpli">
+                        <span class="slid iconfont">&#xe621;</span>
+                        <h3 class="mtn mb8 fwn fs13 ellipsis">视频站1.0版本开发</h3>
+                        <p><span style="width:100%;" id="sofplisp"></span></p>
+                        <span class="slri">100%</span>
+                    </li>
+                    
+                </div>
+            </div>
+        </div><!--各项目进度-->
+        
+        <div class="w33 z pr20 sizing"><!--待完成任务-->
+            <div class="panel" style="border:1px #FFB400 solid;">
+                <h3 class="mbn mtn fs15 pl15 cf pt15 pb15 sizing" style="background:#FFB400;">
+                    待完成任务
+                    <a href="<?php echo url('/index/Mycenter/task_list/?status=ontdone'); ?>" class="y cf fs12 mr10">更多>></a>
+                </h3>
+                <div class="panel-body">
+                    
+                    <p class="publicdiv mbn fwb">
+                        <span>ID</span>
+                        <span class="ml20">任务名称</span>
+                        <span class="y">类型</span>
+                    </p>
+                
+                    <li class="publicdiv pr tlist pr70 lh35 ellipsis">
+                        <span class="w40p db z">未读取</span>
+                        <a href="<?php echo url('/index/task/detail/?id='.$task['id']); ?>" class="cf1">未读取</a>
+                        <span class="tlisty">未读取</span>
+                    </li>
+                    <li class="publicdiv pr tlist pr70 lh35 ellipsis">
+                        <span class="w40p db z">未读取</span>
+                        <a href="<?php echo url('/index/task/detail/?id='.$task['id']); ?>" class="cf1">未读取</a>
+                        <span class="tlisty">未读取</span>
+                    </li>
+                    <li class="publicdiv pr tlist pr70 lh35 ellipsis">
+                        <span class="w40p db z">未读取</span>
+                        <a href="<?php echo url('/index/task/detail/?id='.$task['id']); ?>" class="cf1">未读取</a>
+                        <span class="tlisty">未读取</span>
+                    </li>
+                    <li class="publicdiv pr tlist pr70 lh35 ellipsis">
+                        <span class="w40p db z">未读取</span>
+                        <a href="<?php echo url('/index/task/detail/?id='.$task['id']); ?>" class="cf1">未读取</a>
+                        <span class="tlisty">未读取</span>
+                    </li>
+                    <li class="publicdiv pr tlist pr70 lh35 ellipsis">
+                        <span class="w40p db z">未读取</span>
+                        <a href="<?php echo url('/index/task/detail/?id='.$task['id']); ?>" class="cf1">未读取</a>
+                        <span class="tlisty">未读取</span>
+                    </li>
+                    <li class="publicdiv pr tlist pr70 lh35 ellipsis">
+                        <span class="w40p db z">未读取</span>
+                        <a href="<?php echo url('/index/task/detail/?id='.$task['id']); ?>" class="cf1">未读取</a>
+                        <span class="tlisty">未读取</span>
+                    </li>
+                    <li class="publicdiv pr tlist pr70 lh35 ellipsis">
+                        <span class="w40p db z">未读取</span>
+                        <a href="<?php echo url('/index/task/detail/?id='.$task['id']); ?>" class="cf1">未读取</a>
+                        <span class="tlisty">未读取</span>
+                    </li>
+                    
+                </div>
+            </div>
+        </div><!--待完成任务-->
+        
+        <div class="w33 z sizing"><!--最新文档-->
+            <div class="panel" style="border:1px #9D4A9C solid;">
+                <h3 class="mbn mtn fs15 pl15 cf bf5 pt15 pb15 sizing" style="background:#9D4A9C;">
+                    最新文档
+                    <a href="<?php echo url('/admin/article/lists'); ?>" class="y cf fs12 mr10">更多>></a>
+                </h3>
+                <div class="panel-body">
+                    
+                    <p class="publicdiv mbn fwb">
+                        <span>ID</span>
+                        <span class="ml20">文档名称</span>
+                        <span class="y">时间</span>
+                    </p>
+                
+                    <li class="publicdiv pr tlist pr100 lh35 ellipsis">
+                        <span class="w40p db z">未读取</span>
+                        <a href="<?php echo url('/index/task/detail/?id='.$task['id']); ?>" class="cf1">未读取</a>
+                        <span class="tlisty">未读取</span>
+                    </li>
+                    <li class="publicdiv pr tlist pr100 lh35 ellipsis">
+                        <span class="w40p db z">未读取</span>
+                        <a href="<?php echo url('/index/task/detail/?id='.$task['id']); ?>" class="cf1">未读取</a>
+                        <span class="tlisty">未读取</span>
+                    </li>
+                    <li class="publicdiv pr tlist pr100 lh35 ellipsis">
+                        <span class="w40p db z">未读取</span>
+                        <a href="<?php echo url('/index/task/detail/?id='.$task['id']); ?>" class="cf1">未读取</a>
+                        <span class="tlisty">未读取</span>
+                    </li>
+                    <li class="publicdiv pr tlist pr100 lh35 ellipsis">
+                        <span class="w40p db z">未读取</span>
+                        <a href="<?php echo url('/index/task/detail/?id='.$task['id']); ?>" class="cf1">未读取</a>
+                        <span class="tlisty">未读取</span>
+                    </li><li class="publicdiv pr tlist pr100 lh35 ellipsis">
+                        <span class="w40p db z">未读取</span>
+                        <a href="<?php echo url('/index/task/detail/?id='.$task['id']); ?>" class="cf1">未读取</a>
+                        <span class="tlisty">未读取</span>
+                    </li>
+                    <li class="publicdiv pr tlist pr100 lh35 ellipsis">
+                        <span class="w40p db z">未读取</span>
+                        <a href="<?php echo url('/index/task/detail/?id='.$task['id']); ?>" class="cf1">未读取</a>
+                        <span class="tlisty">未读取</span>
+                    </li>
+                    <li class="publicdiv pr tlist pr100 lh35 ellipsis">
+                        <span class="w40p db z">未读取</span>
+                        <a href="<?php echo url('/index/task/detail/?id='.$task['id']); ?>" class="cf1">未读取</a>
+                        <span class="tlisty">未读取</span>
+                    </li>
+                    
+                </div>
+            </div>
+        </div><!--最新文档-->
+        
+        
+    </div>
+    
+    
 </div>
 
 </div>
