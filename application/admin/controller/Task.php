@@ -15,6 +15,7 @@ class Task extends Common {
     }
     
     public function lists() {
+        $project_id =  input('get.id', 0, 'intval');
         $task = db('Task');
         $data['deleted'] = array('EQ','0');
         //$task_list = $task->where($data)->order('id DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
@@ -28,6 +29,7 @@ class Task extends Common {
             $task_data['id']  = array('in',$delete_ids);
             $task->where($task_data)->save(array('deleted' => '1'));//删除之前的记录
         }
+        $this->assign('project_id',$project_id);
         $this->assign('page',$page);
         $this->assign('task_list', $task_list);
         return $this->fetch($this->templatePath);
