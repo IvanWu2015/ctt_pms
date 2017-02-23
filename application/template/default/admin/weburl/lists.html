@@ -29,8 +29,8 @@
                 <td class="ac">{$weburl['explain']}</td>
                 <td class="ac">{if condition="$weburl['acl'] eq open"}公开{else/}私有{/if}</td>
                 <td class="ac iconfont">
-                    <a href="{:url('/index/weburl/add/?id='.$weburl['id'])}" class="btn-link">&#xe71d;</a>
-                    <a href="{:url('/admin/weburl/lists/?deleted=1&id='.$weburl['id'])}" class="cred fs16" onclick="return confirm('您确定要删除该收藏吗？');" title="删除">&#xe601;</a>
+                    <a href="{:url('/index/weburl/add/?id='.$weburl['id'])}" class="btn-link rkwt">&#xe71d;</a>
+                    <a href="{:url('/admin/weburl/lists/?deleted=1&id='.$weburl['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该收藏吗？');" title="删除">&#xe601;</a>
                 </td>
             </tr>
             {/foreach}

@@ -12,3 +12,15 @@ jQuery(function () {
     jQuery('#sofpul li:eq(7)').find('#sofplisp').css({background:'#5bc0de'});
     
 });
+
+function shownav(){
+    if(jQuery('#left_nav').css('left') == '0px'){
+        jQuery('#left_nav').animate({left:'-260px'},500);
+        jQuery('.rightcon').animate({paddingLeft:'0px'},500);
+        jQuery('#showa').html('&#xe624;');
+    }else{
+        jQuery('#left_nav').animate({left:'0px'},500);
+        jQuery('.rightcon').animate({paddingLeft:'271px'},500);
+        jQuery('#showa').html('&#xe606;');
+    }
+}

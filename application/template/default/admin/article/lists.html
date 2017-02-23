@@ -13,7 +13,7 @@
           <thead>
               <tr>
                 <th class="">标题</th>
-                <th class="">添加人</th>
+                <th class="ac">添加人</th>
                 <th class="ac">分类</th>
                 <th class="ac">项目</th>
                 <th class="ac">时间</th>
@@ -29,8 +29,8 @@
               <td class="ac">{$article['project_name']}</td>
               <td class="ac">{$article['time']}</td>
               <td class="ac iconfont">
-                <a href="{:url('/index/article/add?id='.$article['id'])}" class="btn-link">&#xe71d;</a>
-                <a href="{:url('/admin/article/lists/?deleted=1&id='.$article['id'])}" class="cred fs16" onclick="return confirm('您确定要删除该文档吗？');" title="删除">&#xe601;</a>
+                <a href="{:url('/index/article/add?id='.$article['id'])}" class="btn-link rkwt">&#xe71d;</a>
+                <a href="{:url('/admin/article/lists/?deleted=1&id='.$article['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该文档吗？');" title="删除">&#xe601;</a>
               </td>
           </tr>
           {/foreach}
