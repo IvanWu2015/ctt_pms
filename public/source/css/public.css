@@ -555,7 +555,7 @@ a.cc:hover{ color:#ccc !important;}
 .pagingw .end{ color:#428bca; padding:7px 15px; border:1px #dedede solid; margin-left:10px; float:left; border-radius:5px;}
 .pagingw .end:hover{ color:#fff; background:#428bca; border:1px #428bca solid;}
 
-.nav a{ color:#fff;}
+.navtop a{ color:#fff;}
 
 .commentbutton{ padding:0px !important;}
 input.commentsub{width:113px !important; height:35px !important; border:none !important; cursor:pointer; background:#73b9ed; color:#fff;float:right;}
