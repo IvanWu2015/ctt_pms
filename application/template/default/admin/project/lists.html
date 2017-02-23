@@ -38,11 +38,12 @@
                     <th>ID</th>
                     <th>项目名称</th>
                     <th>版本号</th>
-                    <th>创建时间</th>
-                    <th>完成时间</th>
-                    <th>状态</th>
-                    <th>添加人</th>
-                    <th>操作</th>
+                    <th class="ac">创建时间</th>
+                    <th class="ac">完成时间</th>
+                    <th class="ac">状态</th>
+                    <th class="ac">添加人</th>
+                    <th class="ac">进度</th>
+                    <th class="ac">操作</th>
                   </tr>
               </thead>
               <tbody>
@@ -51,13 +52,20 @@
                     <td>{$project['id']}</td>
                     <td><a href="{:url('/index/project/detail/?id='.$project['id'])}" target="_bacnk">{$project['name']}</a></td>
                     <td>{$project['code']}</td>
-                    <td>{$project['begin']}</td>
-                    <td>{$project['end']}</td>
-                    <td>{$project['status']}</td>
-                    <td>{$project['project_admin']}</td>
-                    <td class="iconfont">
-                        <a href="{:url('/index/project/add/?id='.$project['id'])}" class="btn-link">&#xe71d;</a>
-                        <a href="{:url('/admin/project/lists/?deleted=1&id='.$project['id'])}" class="cred fs16" onclick="return confirm('您确定要删除该项目吗？');" title="删除">&#xe601;</a>
+                    <td class="ac">{$project['begin']}</td>
+                    <td class="ac">{$project['end']}</td>
+                    <td class="ac">{$project['status']}</td>
+                    <td class="ac">{$project['project_admin']}</td>
+                    <td class="ac" title="当前进度：{$project['percent']}%">
+                        <div class="progress hp10 mt5">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{$project['percent']}%; background:{if condition='$project["percent"] == 100'}#28dd2c{elseif condition='$project["percent"] > 50'}#5bc0de{/if};">
+                                <span class="sr-only">{$project['percent']}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="ac iconfont">
+                        <a href="{:url('/index/project/add/?id='.$project['id'])}" class="btn-link rkwt">&#xe71d;</a>
+                        <a href="{:url('/admin/project/lists/?deleted=1&id='.$project['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该项目吗？');" title="删除">&#xe601;</a>
                     </td>
                   </tr>
               {/foreach}

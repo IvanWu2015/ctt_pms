@@ -64,8 +64,8 @@
                 <td>{$task['openedDate']}</td>
                 <td>{$task['assignedDate']}</td>
                 <td class="iconfont">
-                    <a href="{:url('/index/task/add/?id='.$task['id'])}" class="btn-link">&#xe71d;</a>
-                    <a href="{:url('/admin/task/lists/?deleted=1&id='.$task['id'])}" class="cred fs16" onclick="return confirm('您确定要删除该任务吗？');" title="删除">&#xe601;</a>
+                    <a href="{:url('/index/task/add/?id='.$task['id'])}" class="btn-link rkwt">&#xe71d;</a>
+                    <a href="{:url('/admin/task/lists/?deleted=1&id='.$task['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该任务吗？');" title="删除">&#xe601;</a>
                 </td>
               </tr>
           {/foreach}
