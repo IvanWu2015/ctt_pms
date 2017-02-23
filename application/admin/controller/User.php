@@ -13,8 +13,7 @@ class User extends Common {
         return $this->fetch($this->templatePath);
     }
     public function lists() {   //用户列表
-        $user = db('User');
-        $user_list = $user->select();
+       
         $this->assign('user_list',$user_list); 
         return $this->fetch($this->templatePath);
     }
