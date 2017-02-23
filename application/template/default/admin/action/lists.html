@@ -1,77 +1,74 @@
 {extend name="base/common"/}
 
-{block name="header"}
-{/block}
+{block name="header"}{/block}
+
+{block name="side"}{/block}
 
 {block name="body"}
-<div class="publicdiv pt20 pb20 ptn sizing">
-    
-    <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
-        
-        <div class="publicdiv borb mb20 pt10 pb10 bf sizing">
-            <ul class="nav nav-pills">
-                <span class="pull-left">
-                    <label class="col-sm-2 control-label" style="width:130px;">项目：</label>
-                    <div class="col-sm-10 pln prn" style="width:910px;">
-                        <select name="project_id" class="form-control" onChange="window.location.href='{:url('/admin/action/lists?username='.$username.'&project_id=')}' + this.options[this.selectedIndex].value;">
-                            <option value='0'>无</option>
-                            {foreach $project_list as $temp_project}
-                            <option {if condition="$temp_project['id'] == $project_id"}selected='selected'{/if} value="{$temp_project['id']}" >{$temp_project['name']}</option>
-                            {/foreach}
-                        </select>
-                    </div>
-                    <label class="col-sm-2 control-label" style="width:130px;">项目：</label>
-                    <div class="col-sm-10 pln prn" style="width:910px;">
-                        <select name="project_id" class="form-control" onChange="window.location.href='{:url('/admin/action/lists?project_id='.$project_id.'&username=')}' + this.options[this.selectedIndex].value;">
-                            <option value='0'>无</option>
-                            {foreach $user_list as $temp_user}
-                            <option {if condition="$temp_user['username'] == $username"}selected='selected'{/if} value="{$temp_user['username']}" >{$temp_user['realname']}</option>
-                            {/foreach}
-                        </select>
-                    </div>
-                    <a href="{:url('/admin/sort/add')}" class="btn btn-info">添加分类</a> 
-                </span>
-            </ul>
-            
-            <label class="y">
-                    <form action="{:url('/admin/action/lists?keyword='.$keyword)}" method="post">
-                        <input type="text" name="keyword" class="bor pt5 pb5 pl5 pr5" placeholder="请输入搜索的内容~" value="{$keyword}" />
-                    <input type="submit" class="pt5 pb5 pl10 pr10 cf" style="background:#428bca; border:1px #428bca solid;" value="搜索" />
-                    </form>
-                </label>
-            
-        </div>
-        <form action="{:url('/admin/sort/lists')}" method="post" class="form-horizontal" role="form">
-        <table class="table table-striped borl bort borr borb">
-            <thead style="background:#f1f1f1;">
-                <tr>
-                    <th class=""><a href="{:url('/index/project/lists')}">操作对象</a></th>
-                    <th class="ac">所属项目</th>
-                    <th class="ac">操作人</th>
-                    <th class="ac">操作类型</th>
-                    <th class="ac">日期</th>
-                    <th class="ac">说明</th>
-                </tr>
-            </thead>
-            <tbody>
-                {foreach $action_list as $action}
-                <tr id="projectlist">
-                    <td>{$action['objectType']}</td>
-                    <td class="ac">{$action['parent_name']}</td>
-                    <td>{$action['actor']}</td>
-                    <td class="ac">{$action['action']}</td>
-                    <td>{$action['date']}</td>
-                    <td>{$action['comment']}</td>
-                </tr>
-                {/foreach}
-            <div class="publicdiv">{$page}</div>
-        </tbody>
 
-        </table>
-        
-        <input type="submit" class="btn btn-info y" valu="提交" />
+{include file="base/left_nav" /}
+
+<div class="rightcon sizing"><!-- 右边内容 -->
+    <div class="publicdiv pb20 bf">
+        <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
+            
+            <label class="z">
+            <span class="z c9 lh30">项目：</span>
+            <select name="project_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/admin/action/lists?username='.$username.'&project_id=')}' + this.options[this.selectedIndex].value;">
+                <option value='0'>无</option>
+                {foreach $project_list as $temp_project}
+                <option {if condition="$temp_project['id'] == $project_id"}selected='selected'{/if} value="{$temp_project['id']}" >{$temp_project['name']}</option>
+                {/foreach}
+            </select>
+            </label>
+            
+            <label class="z ml20">
+            <span class="z c9 lh30">用户：</span>
+            <select name="project_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/admin/action/lists?project_id='.$project_id.'&username=')}' + this.options[this.selectedIndex].value;">
+                <option value='0'>无</option>
+                {foreach $user_list as $temp_user}
+                <option {if condition="$temp_user['username'] == $username"}selected='selected'{/if} value="{$temp_user['username']}" >{$temp_user['realname']}</option>
+                {/foreach}
+            </select>
+            </label>
+            
+            <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/sort/add')}');" class="btnp ml20">添加分类</a>
+            <label class="y">
+                <form action="{:url('/admin/action/lists?keyword='.$keyword)}" method="post">
+                    <input type="text" name="keyword" class="bor pt5 pb5 pl5 pr5 fwn" placeholder="请输入搜索的内容~" value="{$keyword}" />
+                <input type="submit" class="pt5 pb5 pl10 pr10 cf" style="background:#428bca; border:1px #428bca solid;" value="搜索" />
+                </form>
+            </label>
+        </div>
+        <form action="" method="post">
+            <table class="table">
+              <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                  <tr>
+                    <th class="ac bbno pt15 pb15">ID</th>
+                    <th class="bbno pt15 pb15">操作对象</th>
+                    <th class="bbno pt15 pb15">所属项目</th>
+                    <th class="ac bbno pt15 pb15">操作人</th>
+                    <th class="ac bbno pt15 pb15">操作类型</th>
+                    <th class="ac bbno pt15 pb15">日期</th>
+                    <th class="bbno pt15 pb15">说明</th>
+                  </tr>
+              </thead>
+              <tbody>
+              {foreach $action_list as $action}
+                  <tr>
+                    <td class="ac">{$action['id']}</td>
+                    <td>{$action['objectType']}</td>
+                    <td>{$action['parent_name']}</td>
+                    <td class="ac">{$action['actor']}</td>
+                    <td class="ac">{$action['action']}</td>
+                    <td class="ac">{$action['date']}</td>
+                    <td>{$action['comment']}</td>
+                  </tr>
+              {/foreach}
+              </tbody>
+            </table>
+            <div class="publicdiv ac pagingw">{$page}</div>
         </form>
     </div>
-        
 </div>
 {/block}

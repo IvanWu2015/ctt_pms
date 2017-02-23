@@ -26,6 +26,7 @@
 <script type="text/javascript" src="tpl_static/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/moment.js"></script>
+<script type="text/javascript" src="tpl_js/public.js"></script>
 <script type="text/javascript" src="tpl_js/admin/public.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/daterangepicker.js"></script>
 
@@ -41,7 +42,10 @@
 <!-- 主体 -->
 {block name="header"}{/block}
 <div id="wrap">
-        {block name="body"}{/block}
+    <div class="prompt" id="prompt"><b class="cred mr5">*</b>项必填</div>
+    <div id="addpr"></div>
+    <div class="applica" id="applica"></div><!-- 调用页面 -->
+    {block name="body"}{/block}
 </div>
 
 <script type="text/javascript">

@@ -10,15 +10,15 @@
 
 <div class="rightcon sizing"><!-- 右边内容 -->
     <div class="publicdiv pb20 bf">
-        <h3 class="pl20 mb20 sizing">项目管理</h3>
-        <div class="publicdiv pt10 mb10 pl20 pr20 sizing">
-            <a href="{:url('admin/project/lists?status=all')}" class="btnp">所有</a>
-            <a href="{:url('/admin/project/lists?status=unclose')}" class="btnp">未关闭</a>
-            <a href="{:url('/admin/project/lists?status=delayed')}" class="btnp">已延期</a>
-            <a href="{:url('index/project/lists?status=not')}" class="btnp">未开始</a>
-            <a href="{:url('index/project/lists?status=ing')}" class="btnp">进行中</a>
-            <a href="{:url('index/project/lists?status=done')}" class="btnp">已完成</a>
-            <a href="{:url('index/project/lists?status=closed')}" class="btnp">已关闭</a>
+        <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
+            <a href="{:url('admin/project/lists?status=all')}" {if condition="$status == 'all'"}class="btnpattr"{/if}class="btnp"{/if}>所有</a>
+            <a href="{:url('/admin/project/lists?status=unclose')}" {if condition="$status == 'unclose'"}class="btnpattr"{/if}class="btnp"{/if}>未关闭</a>
+            <a href="{:url('/admin/project/lists?status=delayed')}" {if condition="$status == 'delayed'"}class="btnpattr"{/if}class="btnp"{/if}>已延期</a>
+            <a href="{:url('/admin/project/lists?status=not')}" {if condition="$status == 'not'"}class="btnpattr"{/if}class="btnp"{/if}>未开始</a>
+            <a href="{:url('/admin/project/lists?status=ing')}" {if condition="$status == 'ing'"}class="btnpattr"{/if}class="btnp"{/if}>进行中</a>
+            <a href="{:url('/admin/project/lists?status=done')}" {if condition="$status == 'done'"}class="btnpattr"{/if}class="btnp"{/if}>已完成</a>
+            <a href="{:url('/admin/project/lists?status=closed')}" {if condition="$status == 'closed'"}class="btnpattr"{/if}class="btnp"{/if}>已关闭</a>
+            <a href="{:url('index/project/add')}" target="_bacnk" class="btnp ml20">添加项目</a>
             <label class="y">
                 <form action="{:url('/index/project/detail/?id='.$project_id)}" method="post">
                     <input type="text" name="keyword" class="bor pt5 pb5 pl5 pr5 fwn" placeholder="请输入搜索的内容~" value="{$keyword}" />
