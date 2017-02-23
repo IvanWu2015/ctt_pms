@@ -9,47 +9,42 @@
 {include file="base/left_nav" /}
 
 <div class="rightcon sizing"><!-- 右边内容 -->
-    <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
+    <div class="publicdiv pb20 bf">
+        <h3 class="pl20 mb20 sizing">项目管理</h3>
+        <div class="publicdiv pt10 mb10 pl20 pr20 sizing">
+            <a href="{:url('admin/project/lists?status=all')}" class="btnp">所有</a>
+            <a href="{:url('/admin/project/lists?status=unclose')}" class="btnp">未关闭</a>
+            <a href="{:url('/admin/project/lists?status=delayed')}" class="btnp">已延期</a>
+            <a href="{:url('index/project/lists?status=not')}" class="btnp">未开始</a>
+            <a href="{:url('index/project/lists?status=ing')}" class="btnp">进行中</a>
+            <a href="{:url('index/project/lists?status=done')}" class="btnp">已完成</a>
+            <a href="{:url('index/project/lists?status=closed')}" class="btnp">已关闭</a>
+            <label class="y">
+                <form action="{:url('/index/project/detail/?id='.$project_id)}" method="post">
+                    <input type="text" name="keyword" class="bor pt5 pb5 pl5 pr5 fwn" placeholder="请输入搜索的内容~" value="{$keyword}" />
+                <input type="submit" class="pt5 pb5 pl10 pr10 cf" style="background:#428bca; border:1px #428bca solid;" value="搜索" />
+                </form>
+            </label>
+        </div>
         <form action="" method="post">
             <table class="table">
-              <h3 class="ac">项目管理</h3>
-              <ul class="nav mb10 mt20 nav-pills">
-                    <li {if condition="$status == 'all'"} class="active" {/if}><a href="{:url('index/project/lists?status=all')}">所有</a></li>
-                    <li {if condition="$status == 'unclose'"} class="active" {/if}><a href="{:url('/index/project/lists?status=unclose')}">未关闭</a></li>
-                    <li {if condition="$status == 'delayed'"} class="active" {/if}><a href="{:url('/index/project/lists?status=delayed')}">已延期</a></li>
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">更多 <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{:url('index/project/lists?status=not')}">未开始</a></li>
-                            <li><a href="{:url('index/project/lists?status=ing')}">进行中</a></li>
-                            <li><a href="{:url('index/project/lists?status=done')}">已完成</a></li>
-                            <li><a href="{:url('index/project/lists?status=closed')}">已关闭</a></li>
-                        </ul>
-                    </li>
-                    <label class="y">
-                        <form action="{:url('/index/project/detail/?id='.$project_id)}" method="post">
-                            <input type="text" name="keyword" class="bor pt5 pb5 pl5 pr5" placeholder="请输入搜索的内容~" value="{$keyword}" />
-                        <input type="submit" class="pt5 pb5 pl10 pr10 cf" style="background:#428bca; border:1px #428bca solid;" value="搜索" />
-                        </form>
-                    </label>
-                </ul>
-              <thead>
+              <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
                   <tr>
-                    <th>ID</th>
-                    <th>项目名称</th>
-                    <th>版本号</th>
-                    <th class="ac">创建时间</th>
-                    <th class="ac">完成时间</th>
-                    <th class="ac">状态</th>
-                    <th class="ac">添加人</th>
-                    <th class="ac">进度</th>
-                    <th class="ac">操作</th>
+                    <th class="ac bbno pt15 pb15">ID</th>
+                    <th class="bbno pt15 pb15">项目名称</th>
+                    <th class="bbno pt15 pb15">版本号</th>
+                    <th class="ac bbno pt15 pb15">创建时间</th>
+                    <th class="ac bbno pt15 pb15">完成时间</th>
+                    <th class="ac bbno pt15 pb15">状态</th>
+                    <th class="ac bbno pt15 pb15">添加人</th>
+                    <th class="ac bbno pt15 pb15">进度</th>
+                    <th class="ac bbno pt15 pb15">操作</th>
                   </tr>
               </thead>
               <tbody>
               {foreach $project_list as $project}
                   <tr>
-                    <td>{$project['id']}</td>
+                    <td class="ac">{$project['id']}</td>
                     <td><a href="{:url('/index/project/detail/?id='.$project['id'])}" target="_bacnk">{$project['name']}</a></td>
                     <td>{$project['code']}</td>
                     <td class="ac">{$project['begin']}</td>

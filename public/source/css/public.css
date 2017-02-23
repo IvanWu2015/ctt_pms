@@ -71,19 +71,19 @@ img{ border:none;}
 .plr8{ padding-left:8px; padding-right:8px;}
 .ptlrb8{ padding:8px 8px;}
 
-.pl10{ padding-left:10px;}
-.pr10{ padding-right:10px;}
-.pb10{ padding-bottom:10px;}
-.pt10{ padding-top:10px;}
-.plr10{ padding-left:10px; padding-right:10px;}
-.ptlrb10{ padding:10px 10px;}
+.pl10{ padding-left:10px !important;}
+.pr10{ padding-right:10px !important;}
+.pb10{ padding-bottom:10px !important;}
+.pt10{ padding-top:10px !important;}
+.plr10{ padding-left:10px !important; padding-right:10px !important;}
+.ptlrb10{ padding:10px 10px !important;}
 
-.pl15{ padding-left:15px;}
-.pr15{ padding-right:15px;}
-.pb15{ padding-bottom:15px;}
-.pt15{ padding-top:15px;}
-.plr15{ padding-left:15px; padding-right:15px;}
-.ptlrb15{ padding:15px 15px;}
+.pl15{ padding-left:15px !important;}
+.pr15{ padding-right:15px !important;}
+.pb15{ padding-bottom:15px !important;}
+.pt15{ padding-top:15px !important;}
+.plr15{ padding-left:15px !important; padding-right:15px !important;}
+.ptlrb15{ padding:15px 15px !important;}
 
 .pl20{ padding-left:20px;}
 .pr20{ padding-right:20px;}
@@ -413,7 +413,6 @@ img{ border:none;}
 .w90{ width:90%;}
 .w100{ width:100%;}
 
-
 .pf{ position:fixed;}
 .pr{ position:relative; margin:0px !important;}
 .pa{ position:absolute;}
@@ -463,6 +462,8 @@ img{ border:none;}
 
 .db{ display:block;}
 .dn{ display:none;}
+
+.btnp{ padding:5px 12px; border-radius:3px; color:#fff; background:#1ab394; float:left; margin-right:10px;}
 
 /*弹窗页*/
 .modalwrap{ width:800px; background:#fff; padding:60px 0px 60px 0px; box-shadow:0px 0px 15px #999; border-radius:5px; z-index:99; position:fixed; top:0; left:0; right:0; bottom:0; margin:auto;}
@@ -554,6 +555,7 @@ a.cc:hover{ color:#ccc !important;}
 .pagingw .end{ color:#428bca; padding:7px 15px; border:1px #dedede solid; margin-left:10px; float:left; border-radius:5px;}
 .pagingw .end:hover{ color:#fff; background:#428bca; border:1px #428bca solid;}
 
+.nav a{ color:#fff;}
 
 .commentbutton{ padding:0px !important;}
 input.commentsub{width:113px !important; height:35px !important; border:none !important; cursor:pointer; background:#73b9ed; color:#fff;float:right;}
