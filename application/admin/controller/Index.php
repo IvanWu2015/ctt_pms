@@ -9,6 +9,7 @@ use Page;
 class Index extends Common {
 
     public function index() {
+        
         $project_count = DB::name('Project')->where(['deleted' => 0])->count();//项目总数
         $task_count = DB::name('Task')->where(['deleted' => 0])->count();//任务总数
         $user_count = DB::name('User')->where(['deleted' => 0])->count();//用户总数
@@ -32,7 +33,6 @@ class Index extends Common {
         $today_task = DB::name('Task')->where($today_data)->order('finishedBy DESC')->paginate(7);
         
         $article_list = DB::name('Article')->where(['status' => 0])->order('time DESC')->paginate(7);
-        
         $this->assign('article_list',$article_list);
         $this->assign('task_list',$task_list);
         $this->assign('project_list', $project_list);
