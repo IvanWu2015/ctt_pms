@@ -1,5 +1,5 @@
 <div class="publicdiv mb10 pl20 pr20 sizing htpst">
-    <h3 class="mt20 lh60">
+    <h3 class="mtn fs20 lh50">
         {if condition="$_G['controller'] == 'Index'"}后台首页
         {elseif condition="$_G['controller'] == 'Project'"}项目管理
         {elseif condition="$_G['controller'] == 'Task'"}任务管理
@@ -8,8 +8,8 @@
         {elseif condition="$_G['controller'] == 'Article'"}文档管理
         {elseif condition="$_G['controller'] == 'Action'"}动态管理
         {elseif condition="$_G['controller'] == 'User'"}用户管理{/if}
-        <ul class="nav nav-pills navtop y lh20 fs12">
-            <li class="mt10 y">
+        <ul class="nav mt5 nav-pills navtop y lh20 fs12">
+            <li class="y">
                 <a class="active" data-toggle="dropdown" href="{:url('index/index')}">{:get_username()} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="{:url('User/profile')}">修改密码</a></li>
