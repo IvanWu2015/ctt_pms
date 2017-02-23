@@ -30,7 +30,8 @@ class Action extends Common {
             $map['action'] = array('like',"%$keyword%");
         }
         $user_list = db('User')->where(['deleted' => 0])->select();
-        $action_list = DB::name('Action')->alias('a')->join('chinatt_pms_project p', 'a.project = p.id', 'left')->field('a.*,p.name as parent_name,p.status')->where($map)->paginate(10);
+        $action_list = DB::name('Action')->alias('a')->join('chinatt_pms_project p', 'a.project = p.id', 'left')->join('chinatt_pms_user u','a.actor = u.username','left')->field('a.*,p.name as parent_name,p.status,u.realname')->where($map)->paginate(10);
+        $action_list = analysis_all($action_list);
         $page = $action_list->render(); // 分页显示输出
         $project_list = db('Project')->where(['deleted' => 0])->select();
         
