@@ -8,6 +8,7 @@
 
 {include file="base/left_nav" /}
 <div class="rightcon sizing"><!-- 右边内容 -->
+    {include file="base/head_title" /}
     <div class="publicdiv pb20 bf">
         <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
             <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/sort/add')}');" class="btnp">添加分类</a>
@@ -37,7 +38,7 @@
               </tbody>
             </table>
             <div class="publicdiv ac pagingw">{$page}</div>
-            <input type="submit" class="btn btn-info y" value="提交" />
+            <input type="submit" class="btn btn-info y mr20" value="提交" />
         </form>
     </div>
 </div>

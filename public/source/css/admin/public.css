@@ -75,6 +75,8 @@ ul.left_nav li.navattr{ color:#fff !important; background:#8ea9be url(../../imag
 ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:block; border-radius:2px; padding:0px 10px; background:#d9534f; position:absolute; top:15px; right:30px;}
 ul.left_nav .showa{ width:12px; height:60px; line-height:60px; font-size:10px; text-align:center; display:block; background:#bfbfbf; z-index:99; position:absolute; top:0; left:0; right:0; bottom:0; margin:auto -12px auto auto;}
 
+.htpst{ height:100px; color:#fff; background:#0e1e2a;}
+
 .rkwt{ padding:3px 12px; border-radius:3px;}
 .rkwt:hover{ background:#ccc;}
 

@@ -9,6 +9,7 @@
 {include file="base/left_nav" /}
 
 <div class="rightcon sizing"><!-- 右边内容 -->
+    {include file="base/head_title" /}
     <div class="publicdiv pl10 pr10 bf sizing">
         <ul class="data_statistics iconfont"><!--盘局 -->
             <a href="javascript:void(0);"><li class="w20 z pl10 pr10 sizing">
@@ -66,7 +67,7 @@
                     <div class="panel-body" id="sofpul">
                         {foreach $project_list as $project}
                         <li class="sofpli">
-                            <span class="slid iconfont">&#xe621;</span>
+                            <span class="slid iconfont">&#xe624;</span>
                             <h3 class="mtn mb8 fwn fs13 ellipsis">{$project['name']}</h3>
                             <p><span style="width:{$project['percent']}%;" id="sofplisp"></span></p>
                             <span class="slri">{$project['percent']}%</span>
@@ -104,7 +105,7 @@
         
         <div class="publicdiv">
             <div class="w55 z pr10 sizing"><!--今日完成的任务-->
-                <div class="panel mb10" style="border:1px #4A8BC2 solid;">
+                <div class="panel mb10" style="border:1px #4A8BC2 solid; min-height:350px;">
                     <h3 class="mbn mtn fs15 pl15 cf pt15 pb15 sizing" style="background:#4A8BC2;">今日完成的任务</h3>
                     <div class="panel-body">
                         
@@ -125,7 +126,7 @@
             </div><!--今日完成的任务-->
             
             <div class="w45 z sizing"><!--最新文档-->
-                <div class="panel mb10" style="border:1px #9D4A9C solid;">
+                <div class="panel mb10" style="border:1px #9D4A9C solid; min-height:350px;">
                     <h3 class="mbn mtn fs15 pl15 cf bf5 pt15 pb15 sizing" style="background:#9D4A9C;">
                         最新文档
                         <a href="{:url('/admin/article/lists')}" class="y cf fs12 mr10">更多>></a>
