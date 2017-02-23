@@ -65,38 +65,14 @@
                         <a href="{:url('/admin/project/lists')}" class="y cf fs12 mr10">更多>></a>
                     </h3>
                     <div class="panel-body" id="sofpul">
-                        
+                        {foreach $project_list as $project}
                         <li class="sofpli">
                             <span class="slid iconfont">&#xe621;</span>
-                            <h3 class="mtn mb8 fwn fs13 ellipsis">视频站1.0版本开发</h3>
-                            <p><span style="width:50%;" id="sofplisp"></span></p>
-                            <span class="slri">50%</span>
+                            <h3 class="mtn mb8 fwn fs13 ellipsis">{$project['name']}</h3>
+                            <p><span style="width:{$project['percent']}%;" id="sofplisp"></span></p>
+                            <span class="slri">{$project['percent']}%</span>
                         </li>
-                        <li class="sofpli">
-                            <span class="slid iconfont">&#xe621;</span>
-                            <h3 class="mtn mb8 fwn fs13 ellipsis">视频站1.0版本开发</h3>
-                            <p><span style="width:24%;" id="sofplisp"></span></p>
-                            <span class="slri">24%</span>
-                        </li>
-                        <li class="sofpli">
-                            <span class="slid iconfont">&#xe621;</span>
-                            <h3 class="mtn mb8 fwn fs13 ellipsis">视频站1.0版本开发</h3>
-                            <p><span style="width:79%;" id="sofplisp"></span></p>
-                            <span class="slri">79%</span>
-                        </li>
-                        <li class="sofpli">
-                            <span class="slid iconfont">&#xe621;</span>
-                            <h3 class="mtn mb8 fwn fs13 ellipsis">视频站1.0版本开发</h3>
-                            <p><span style="width:90%;" id="sofplisp"></span></p>
-                            <span class="slri">90%</span>
-                        </li>
-                        <li class="sofpli">
-                            <span class="slid iconfont">&#xe621;</span>
-                            <h3 class="mtn mb8 fwn fs13 ellipsis">视频站1.0版本开发</h3>
-                            <p><span style="width:100%;" id="sofplisp"></span></p>
-                            <span class="slri">100%</span>
-                        </li>
-                        
+                        {/foreach}
                     </div>
                 </div>
             </div><!--各项目进度-->
@@ -114,43 +90,13 @@
                             <span class="ml20">任务名称</span>
                             <span class="y">类型</span>
                         </p>
-                    
+                    {foreach $task_list as $task}
                         <li class="publicdiv pr tlist pr70 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
+                            <span class="w40p db z">{$task['id']}</span>
+                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">{$task['name']}</a>
+                            <span class="tlisty">{$task['typename']}</span>
                         </li>
-                        <li class="publicdiv pr tlist pr70 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
-                        </li>
-                        <li class="publicdiv pr tlist pr70 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
-                        </li>
-                        <li class="publicdiv pr tlist pr70 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
-                        </li>
-                        <li class="publicdiv pr tlist pr70 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
-                        </li>
-                        <li class="publicdiv pr tlist pr70 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
-                        </li>
-                        <li class="publicdiv pr tlist pr70 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
-                        </li>
-                        
+                        {/foreach}
                     </div>
                 </div>
             </div><!--待完成任务-->
@@ -168,13 +114,13 @@
                             <span class="ml20">任务名称</span>
                             <span class="y">类型</span>
                         </p>
-                    
+                    {foreach $today_task as $task}
                         <li class="publicdiv pr tlist pr70 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
+                            <span class="w40p db z">{$task['id']}</span>
+                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">{$task['name']}</a>
+                            <span class="tlisty">{$task['typename']}</span>
                         </li>
-                        
+                        {/foreach}
                     </div>
                 </div>
             </div><!--今日完成的任务-->
@@ -192,42 +138,13 @@
                             <span class="ml20">文档名称</span>
                             <span class="y">时间</span>
                         </p>
-                    
+                    {foreach $article_list as $article}
                         <li class="publicdiv pr tlist pr100 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
+                            <span class="w40p db z">{$article['id']}</span>
+                            <a href="{:url('/index/article/detail/?id='.$article['id'])}" class="cf1">{$article['title']}</a>
+                            <span class="tlisty">{$article['time']}</span>
                         </li>
-                        <li class="publicdiv pr tlist pr100 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
-                        </li>
-                        <li class="publicdiv pr tlist pr100 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
-                        </li>
-                        <li class="publicdiv pr tlist pr100 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
-                        </li><li class="publicdiv pr tlist pr100 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
-                        </li>
-                        <li class="publicdiv pr tlist pr100 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
-                        </li>
-                        <li class="publicdiv pr tlist pr100 lh35 ellipsis">
-                            <span class="w40p db z">未读取</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">未读取</a>
-                            <span class="tlisty">未读取</span>
-                        </li>
-                        
+                        {/foreach}
                     </div>
                 </div>
             </div><!--最新文档-->
