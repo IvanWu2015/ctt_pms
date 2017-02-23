@@ -833,3 +833,16 @@ function format_task($task_list){
     }return $task_list;
 }
 
+/**
+ * 格式化任务
+ * @param int $action_list 任务列表
+ */
+//function user_count($user_lists){
+//    if($user_lists['']){
+//        
+//    }
+//    
+//    
+//    
+//    
+//}

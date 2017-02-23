@@ -13,7 +13,19 @@ class User extends Common {
         return $this->fetch($this->templatePath);
     }
     public function lists() {   //用户列表
+       $user_list = db('User')
+                ->alias('u')
+                ->join('chinatt_pms_dept d', 'u.dept = d.id', 'left')
+                ->join('chinatt_pms_group g', 'u.groupid = g.id')
+                ->field('u.*,d.name as depe_name,g.name as group_name')
+                ->where(['deleted' => 0])
+                ->order('uid DESC')
+               ->paginate(10);
        
+       
+       
+       $navtitle = '用户列表' . $this->navtitle;
+       $this->assign('navtitle', $navtitle);
         $this->assign('user_list',$user_list); 
         return $this->fetch($this->templatePath);
     }
