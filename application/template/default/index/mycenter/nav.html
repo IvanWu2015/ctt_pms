@@ -1,8 +1,7 @@
-<ul class="left_nav"><!-- 左边导航 -->
-    <a href="{:url('mycenter/index')}"><li class="iconfont sizing"><span>&#xe605;</span>个人中心</li></a>
-    <a href="{:url('mycenter/task_list')}"><li class="iconfont sizing"><span>&#xe759;</span>我的任务</li></a>
-    <a href="{:url('mycenter/action_list')}"><li class="iconfont sizing"><span>&#xe622;</span>我的动态</li></a>
-    <a href="{:url('mycenter/weburl_list')}"><li class="iconfont sizing"><span>&#xe60e;</span>我的收藏</li></a>
-    <a href="{:url('mycenter/article_list')}"><li class="iconfont sizing"><span>&#xe704;</span>我的文档</li></a>
-        <a href="{:url('mycenter/project')}"><li class="iconfont sizing"><span>&#xe704;</span>我的项目</li></a>
+<ul class="left_nav iconfont"><!-- 左边导航 -->
+    <a href="{:url('mycenter/index')}"><li {if condition="$_G['controller'] == 'Index'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe605;</span>个人中心</li></a>
+    <a href="{:url('mycenter/task_list')}"><li {if condition="$_G['controller'] == 'Task_list'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe759;</span>我的任务</li></a>
+    <a href="{:url('mycenter/action_list')}"><li {if condition="$_G['controller'] == 'Action_list'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe622;</span>我的动态</li></a>
+    <a href="{:url('mycenter/weburl_list')}"><li {if condition="$_G['controller'] == 'Weburl_list'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe60e;</span>我的收藏</li></a>
+    <a href="{:url('mycenter/article_list')}"><li {if condition="$_G['controller'] == 'Article_list'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe704;</span>我的文档</li></a>
 </ul><!-- 左边导航 -->
