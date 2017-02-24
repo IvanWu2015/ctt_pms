@@ -125,6 +125,7 @@ class Mycenter extends Common {
                 ->join('chinatt_pms_user u ', 'a.uid = u.uid', 'left')
                 ->field('a.*,c.name as class_name,p.name as project_name,u.username')
                 ->where(['a.status' => 0, 'a.uid' => $this->_G['uid']])
+                ->order('id desc')
                 ->paginate(10);
         $page = $article_list->render(); // 分页显示输出
 
@@ -156,6 +157,28 @@ class Mycenter extends Common {
         $this->assign('navtitle', $navtitle);
         return $this->fetch($this->templatePath);
     }
+    
+    
+    
+    public function project(){
+        $project_list = DB::name('Team')
+                ->alias('t')
+                ->join('chinatt_pms_project p', 't.project = p.id', 'left')
+                ->field('t.*,p.name,p.id as project_id,p.deleted')
+                ->where([ 't.username' => $this->_G['username']])
+                ->order('id desc')
+                ->paginate(10);
+        
+        
+        
+        
+        
+        
+        $this->assign('project_list',$project_list);
+        return $this->fetch($this->templatePath);
+    }
+
+    
 
     public function info() {
         $type = input('param.type');

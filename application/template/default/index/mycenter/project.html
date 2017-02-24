@@ -1,0 +1,42 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+{include file="mycenter/nav" /}
+
+<div class="rightcon sizing"><!-- 右边内容 -->
+       
+    <div class="publicdiv bf">
+    
+        <h3 class="pt10 pb10 pl20 pr20 sizing iconfont">&#xe704; 我参与的项目</h3>
+        
+        <div class="publicdiv pl20 pr20 pt8 pb8 bf sizing">
+            <table class="table table-striped borl bort borr borb">
+                <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                    <tr>
+                        <th class="bbno pt15 pb15">标题</th>
+                        <th class="bbno pt15 pb15">职位</th>
+                        <th class="ac bbno pt15 pb15">时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $project_list as $project}
+                    <tr id="projectlist">
+                        <td><a href="{:url('/index/project/detail?id='.$project['project'])}">{$project['name']}</a></td>
+                        <td class="ac">{$project['role']}</td>
+                        <td class="ac">{$project['join']}</td>
+                    </tr>
+                    {/foreach}
+                    {$page}
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+    <div class="publicdiv ac pagingw">{$page}</div>
+</div>
+{/block}
