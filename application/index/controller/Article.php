@@ -27,6 +27,7 @@ class article extends Common {
                 ->join('chinatt_pms_user u ', 'a.uid = u.uid', 'left')
                 ->field('a.*,c.name as class_name,p.name as project_name,u.username')
                 ->where(['a.status' => 0,'a.uid' => $this->_G['uid']])
+                ->order('id desc')
                 ->paginate(10);
         $page = $article_list->render(); // 分页显示输出
         
@@ -64,7 +65,8 @@ class article extends Common {
                 $this->error('不存在该文章');
             }
         }
-        $navtitle = '文章详情';
+        $navtitle = $article_detail['title'];
+        $this->assign('navtitle', $navtitle);
         $this->assign('article_id',$article_id);
         $this->assign('article_detail',$article_detail);
         return $this->fetch($this->templatePath);
@@ -98,10 +100,10 @@ class article extends Common {
             ];
             if ($article_id > 0) {
                 DB('Article')->where(['id' => $article_id])->update($data);
-                $this->success('修改成功');
+                $this->success('修改成功','index/article/lists');
             } else {
                 DB('Article')->insert($data);
-                $this->success('添加成功');
+                $this->success('添加成功','index/article/lists');
             }
         }
         if(empty($article_detail)){
