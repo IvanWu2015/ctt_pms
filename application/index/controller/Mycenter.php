@@ -173,7 +173,6 @@ class Mycenter extends Common {
         
         
         
-        
         $this->assign('project_list',$project_list);
         return $this->fetch($this->templatePath);
     }
