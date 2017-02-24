@@ -9,7 +9,7 @@
                 <select name="parentid" class="form-control">
                     <option value='0'>无</option>
                     {foreach $sort_list as $temp_sort}
-                    <option {if condition="$temp_sort['id'] == $class_detail['parentid']"}selected='selected'{/if} value="{$temp_sort['parentid']}" >{$temp_sort['name']}</option>
+                    <option {if condition="$temp_sort['id'] == $class_detail['parentid']"}selected='selected'{/if} value="{$temp_sort['id']}" >{$temp_sort['name']}</option>
                     {/foreach}
                 </select>
             </div>
