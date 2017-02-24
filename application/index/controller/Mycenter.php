@@ -170,9 +170,6 @@ class Mycenter extends Common {
                 ->paginate(10);
         
         
-        
-        
-        
         $this->assign('project_list',$project_list);
         return $this->fetch($this->templatePath);
     }

@@ -28,7 +28,8 @@ class Task extends Common {
             }
             $task_data['id']  = array('in',$delete_ids);
             $task->where($task_data)->save(array('deleted' => '1'));//删除之前的记录
-        }
+        }$navtitle = '任务管理';
+        $this->assign('navtitle', $navtitle);
         $this->assign('project_id',$project_id);
         $this->assign('page',$page);
         $this->assign('task_list', $task_list);

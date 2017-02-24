@@ -32,7 +32,8 @@ class Project extends Common {
             $project_data['id']  = array('in',$delete_ids);
             $project->where($project_data)->save(array('deleted' => '1'));//删除之前的记录
         }
-    
+    $navtitle = '项目管理';
+        $this->assign('navtitle', $navtitle);
     $this->assign('page',$page);
     $this->assign('project_list',$project_list);
     return $this->fetch($this->templatePath);

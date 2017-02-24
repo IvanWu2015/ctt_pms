@@ -31,7 +31,8 @@ class Article extends Common {
                 $this->success('删除成功','admin/article/lists');
             }
         }   
-        
+        $navtitle = '文档管理';
+        $this->assign('navtitle', $navtitle);
         $this->assign('page', $page);
         $this->assign('article_list', $article_list);
         

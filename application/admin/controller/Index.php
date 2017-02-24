@@ -33,6 +33,8 @@ class Index extends Common {
         $today_task = DB::name('Task')->where($today_data)->order('finishedBy DESC')->paginate(7);
         
         $article_list = DB::name('Article')->where(['status' => 0])->order('time DESC')->paginate(7);
+        $navtitle = '后台首页';
+        $this->assign('navtitle', $navtitle);
         $this->assign('article_list',$article_list);
         $this->assign('task_list',$task_list);
         $this->assign('project_list', $project_list);

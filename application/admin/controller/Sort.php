@@ -50,7 +50,8 @@ class Sort extends Common {
                 exit();
             }
         }
-
+        $navtitle = '分类列表' . $class_detail['name'];
+        $this->assign('navtitle', $navtitle);
         $this->assign('class_id', $class_id);
         $this->assign('class_detail', $class_detail);
         $this->assign('sort_list', $sort_list);
@@ -66,15 +67,6 @@ class Sort extends Common {
                 ->where(['c.status' => 1])
                 ->paginate(10);
         $page = $class_list->render(); // 分页显示输出
-//        if (request()->isPost()) {
-//            $delete_ids = array();
-//            foreach ($_POST['delete'] as $key => $value) {
-//                $delete_ids[] = $key;
-//            }
-//            $class_data['id']  = array('in',$delete_ids);
-//            $class->where($class_data)->update(['status' => 0]);//删除之前的记录
-//            $this->success('成功删除');
-//        }
         $deleted = input('get.deleted', '0', 'intval');
         $class_id = input('get.id', '0', 'intval');
         if ($deleted > 0) {
@@ -85,7 +77,10 @@ class Sort extends Common {
                 DB::name('Class')->where(['id' => $class_id, 'status' => 1])->update(['status' => 0]);
                 $this->success('删除成功');
             }
-        }$this->assign('page', $page);
+        }
+        $navtitle = '分类列表';
+        $this->assign('navtitle', $navtitle);
+        $this->assign('page', $page);
         $this->assign('class_list', $class_list);
         return $this->fetch($this->templatePath);
     }

@@ -34,7 +34,8 @@ class Action extends Common {
         $action_list = analysis_all($action_list);
         $page = $action_list->render(); // 分页显示输出
         $project_list = db('Project')->where(['deleted' => 0])->select();
-        
+        $navtitle = '动态管理';
+        $this->assign('navtitle', $navtitle);
         $this->assign('keyword',$keyword);
         $this->assign('user_list',$user_list);
         $this->assign('username',$username);

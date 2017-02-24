@@ -64,7 +64,7 @@ class article extends Common {
                 $this->error('不存在该文章');
             }
         }
-
+        $navtitle = '文章详情';
         $this->assign('article_id',$article_id);
         $this->assign('article_detail',$article_detail);
         return $this->fetch($this->templatePath);
@@ -104,6 +104,13 @@ class article extends Common {
                 $this->success('添加成功');
             }
         }
+        if(empty($article_detail)){
+            $navtitle = '添加文档';
+        }  else {
+            $navtitle = '修改文档';
+        }
+        
+        $this->assign('navtitle', $navtitle);
         $this->assign('article_detail', $article_detail);
         $this->assign('project_list', $project_list);
         $this->assign('sort_list', $sort_list);

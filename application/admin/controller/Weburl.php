@@ -31,7 +31,8 @@ class Weburl extends Common {
                 $this->success('删除成功', 'admin/weburl/lists');
             }  
         }
-
+$navtitle = '收藏管理';
+        $this->assign('navtitle', $navtitle);
         $this->assign('weburl_list', $weburl_list);
 
 

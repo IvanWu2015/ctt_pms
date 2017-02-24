@@ -41,7 +41,7 @@ class weburl extends Common {
                 $this->error('权限不足');
             }
         }
-        $navtitle = '网址列表' . $project_detail['name'];
+        $navtitle = '收藏列表' . $project_detail['name'];
         $this->assign('navtitle', $navtitle);
         $this->assign('weburl_list', $weburl_list);
         $this->assign('page',$page);
@@ -87,6 +87,13 @@ class weburl extends Common {
                 $this->success('添加成功', url('index/weburl/lists'));
             }
         }
+        if(empty($weburl_detail)){
+            $navtitle = '添加收藏';
+        }  else {
+            $navtitle = '修改收藏';
+        }
+        
+        $this->assign('navtitle', $navtitle);
         $this->assign('weburl_detail', $weburl_detail);
         $this->assign('project_list', $project_list);
         return $this->fetch($this->templatePath);
