@@ -21,7 +21,7 @@ class User extends Common {
                 ->where(['deleted' => 0])
                 ->order('uid DESC')
                ->paginate(10);
-       
+       $user_list = user_count($user_list);
        
        
        $navtitle = '用户列表' . $this->navtitle;
