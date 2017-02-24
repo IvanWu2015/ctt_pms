@@ -21,7 +21,6 @@
                 <th class="ac bbno pt15 pb15">发布任务</th>
                 <th class="ac bbno pt15 pb15">已完成任务</th>
                 <th class="ac bbno pt15 pb15">未完成任务</th>
-                <th class="ac bbno pt15 pb15">进行中任务</th>
                 <th class="ac bbno pt15 pb15">邮箱</th>
                 <th class="ac bbno pt15 pb15">QQ</th>
               </tr>
@@ -34,11 +33,10 @@
                 <td class="ac">{$user['username']}</td>
                 <td class="ac">{$user['depe_name']}</td>
                 <td class="ac">{$user['group_name']}</td>
-                <td class="ac ="><a href="javascript:void(0);" class="text-info" target="_bacnk">未读取</a></td>
-                <td class="ac "><a href="javascript:void(0);" class="text-info" target="_bacnk">未读取</a></td>
-                <td class="ac"><a href="javascript:void(0);" class="text-muted" target="_bacnk">未读取</a></td>
-                <td class="ac"><a href="javascript:void(0);" class="text-danger" target="_bacnk">未读取</a></td>
-                <td class="ac"><a href="javascript:void(0);" class="text-primary" target="_bacnk">未读取</a></td>
+                <td class="ac ="><a href="javascript:void(0);" class="text-info" target="_bacnk">{$user['project_count']}</a></td>
+                <td class="ac "><a href="javascript:void(0);" class="text-info" target="_bacnk">{$user['task_count']}</a></td>
+                <td class="ac"><a href="javascript:void(0);" class="text-muted" target="_bacnk">{$user['done_task_count']}</a></td>
+                <td class="ac"><a href="javascript:void(0);" class="text-danger" target="_bacnk">{$user['not_task_count']}</a></td>
                 <td class="ac">{$user['email']}</td>
                 <td class="ac">{$user['qq']}</td>
               </tr>

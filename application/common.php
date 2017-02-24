@@ -837,12 +837,49 @@ function format_task($task_list){
  * 格式化任务
  * @param int $action_list 任务列表
  */
-//function user_count($user_lists){
-//    if($user_lists['']){
-//        
-//    }
-//    
-//    
-//    
-//    
-//}
+function user_count($user_lists){
+    if($user_lists['uid'] > 0){
+        //发布任务总数
+        $task_count = DB('User')
+                ->alias('u')
+                ->join('chinatt_pms_task t', 'u.username = t.openedBy', 'left')
+                ->field('u.username,t.*')
+                ->where(['t.openedBy' => $user_lists['username']])
+                ->count();
+        $project_count = DB('User')
+                ->alias('u')
+                ->join('chinatt_pms_project p', 'u.username = p.openedBy', 'left')
+                ->field('u.username,t.*')
+                ->where(['p.openedBy' => $user_lists['username']])
+                ->count();
+        $task_data['t.status'] = array('in','close,done');
+        $task_data['t.assignedTo'] = array('eq',$user_lists['username']);
+        $done_task_count = DB('User')
+                ->alias('u')
+                ->join('chinatt_pms_task t', 'u.username = t.assignedTo', 'left')
+                ->field('u.username,t.*')
+                ->where($task_data)
+                ->count();
+        $not_task['t.status'] = array('in','wait,doing');
+        $not_task['t.assignedTo'] = array('eq',$user_lists['username']);
+        $not_task_count = DB('User')
+                ->alias('u')
+                ->join('chinatt_pms_task t', 'u.username = t.assignedTo', 'left')
+                ->field('u.username,t.*')
+                ->where($not_task)
+                ->count();
+        $user_lists['task_count'] = $task_count;
+        $user_lists['project_count'] = $project_count;
+        $user_lists['done_task_count'] = $done_task_count;
+        $user_lists['not_task_count'] = $not_task_count;
+        return $user_lists;
+    }  else {
+        foreach ($user_lists as $key => $value){
+            $user_lists[$key] = user_count($value);
+        }
+    }
+    
+    return $user_lists;
+    
+    
+}
