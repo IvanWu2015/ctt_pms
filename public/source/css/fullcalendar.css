@@ -47,13 +47,9 @@ html .fc,
     margin-top:13px;
 	}
 	
-.fc-header-center {
-	text-align: center;
-	}
-	
 .fc-header-right {
 	width: 25%;
-    padding-top:13px;
+    padding-top:4px !important;
     vertical-align:middle !important;
 	text-align: right;
 	}
