@@ -35,7 +35,7 @@ class api extends Common {
                 ->select();
         $calendar = array($calendar_list);
         $data = json_encode($calendar);
-        return ;
+        return $data;
     }
 
 }
