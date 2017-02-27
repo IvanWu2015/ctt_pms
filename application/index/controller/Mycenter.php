@@ -142,7 +142,9 @@ class Mycenter extends Common {
         $map['assignedTo'] = $username;
         if ($status == 'unclose') {
             $map['status'] = array('in', 'wait,doing');
-        } elseif (!empty($status)) {
+        } elseif($status == 'all'){
+            
+        }elseif (!empty($status)) {
             $map['status'] = $status;
         }
         $task_count = DB::table('chinatt_pms_task')->where($map)->count();
