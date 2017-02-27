@@ -740,7 +740,7 @@ function analysis($task_id){
              ->alias('a')
              ->join('chinatt_pms_taskestimate b', 'a.extra =b.id','left')
              ->field('a.*,b.left,b.consumed,b.username')
-             ->where("a.objectID = $task_id")
+             ->where("a.objectID = $task_id AND a.objectType = 'task'")
             ->order('a.date')
              ->select();
    $action_list = analysis_all($action_list);
@@ -790,9 +790,9 @@ function analysis_all($action_list){
         }elseif($value['action'] == 'started'){
            $value['actionname'] = "开始";
         }elseif($value['action'] == 'done'){
-           $value['actionname'] = "完成";
+           $value['actionname'] = "完成{$value['consumed']}";
         }elseif($value['action'] == 'recordestimate'){
-           $value['actionname'] = "记录工时";
+           $value['actionname'] = "记录工时,消耗{$value['consumed']}小时,剩余{$value['left']}小时";
         }elseif($value['action'] == 'commented'){
             $value['actionname'] = "添加了备注";
         }
@@ -834,7 +834,7 @@ function format_task($task_list){
 }
 
 /**
- * 格式化任务
+ * 获取用户各类总数
  * @param int $action_list 任务列表
  */
 function user_count($user_lists){
