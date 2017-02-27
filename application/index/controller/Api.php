@@ -18,8 +18,14 @@ class api extends Common {
         $day = input('day', 0, 'intval');
         /**
          * todo:此处需要根据年月日数据返回对应的任务信息或是工时信息
+         * 
          * 如果没有指定日则默认返回当月数据
          */
+        //当月
+        $firstday = date('Y-m-01', strtotime($date));
+        $lastday = date('Y-m-t', strtotime($date));
+        
+        
         return ;
     }
 

@@ -13,7 +13,7 @@
 
         <div class="publicdiv  pt8 pb8 bf sizing">
             <ul class="nav nav-pills">
-                <li {if condition="empty($status) && empty($username)"}class="active"{/if}><a href="{:url('/index/Project/detail/?id='.$project_id)}">所有</a></li>
+                <li {if condition="$status eq 'all'"}class="active"{/if}><a href="{:url('/index/Project/detail/?status=all&id='.$project_id)}">所有</a></li>
                 <li {if condition="$status eq 'noclosed'"}class="active"{/if}><a href="{:url('/index/Project/detail/?status=noclosed&id='.$project_id)}">未关闭</a></li>
                 <li {if condition="$status eq 'delayed'"}class="active"{/if}><a href="{:url('/index/Project/detail/?status=delayed&id='.$project_id)}">已延期</a></li>
                 <li {if condition="!empty($username)"}class="active"{/if}><a href="{:url('/index/Project/detail/?username='.$_G['username'].'&id='.$project_id)}">指派给我的</a></li>
