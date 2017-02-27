@@ -11,7 +11,13 @@
         </span>
         {if condition="$project_id gt 0"}
         <span class="pull-right">
-            <a href="{:url('/index/task/add/?project_id='.$project_id)}" class="btn btn-info">添加任务</a>
+            {if condition="$_G['action'] == 'detail'"}
+                <a href="{:url('/index/task/add/?project_id='.$project_id)}" class="btn btn-info">添加任务</a>
+            {elseif condition="$_G['action'] == 'weburl'"}
+                <a href="{:url('/index/weburl/add/?project_id='.$project_id)}" class="btn btn-info">添加收藏</a>
+            {elseif condition="$_G['action'] == 'article'"}
+                <a href="{:url('/index/article/add/?project_id='.$project_id)}" class="btn btn-info">添加文档</a>
+            {/if}
         </span>
         {/if}
     </h3>
