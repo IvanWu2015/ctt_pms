@@ -61,6 +61,7 @@ class weburl extends Common {
         $weburl = db('weburl');
         $project_list = Db::name('Project')->where($map)->column('id,name,code', 'id');
         $weburl_id = input('param.id', 0, 'intval');
+        $project_id = input('param.project_id', 0, 'intval');
         $weburl_detail = $weburl->where(['id' => $weburl_id, 'status' => 0])->find();
         if ($weburl_id > 0) {
             if (empty($weburl_detail)) {
@@ -92,7 +93,7 @@ class weburl extends Common {
         }  else {
             $navtitle = '修改收藏';
         }
-        
+        $this->assign('project_id',$project_id);
         $this->assign('navtitle', $navtitle);
         $this->assign('weburl_detail', $weburl_detail);
         $this->assign('project_list', $project_list);
