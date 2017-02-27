@@ -21,21 +21,35 @@ class api extends Common {
          * 
          * 如果没有指定日则默认返回当月数据
          */
-        //当月
-        $firstday = date('Y-m-01', strtotime($date));
+        //当日
+        if($day > 1){
+            $firstday = date($day);
+        }  else {
+            $firstday = date('d');
+        }
+        if($month > 1){
+            $month = date($month);
+        }  else {
+            $month = date('m');
+        }
+        if($year > 0){
+            $year = date($year);
+        }  else {
+            $year = date('Y');
+        }
         
-        
-        
-        
+        $date = $year . '-' . $month . '-' . $firstday;
+        $date = "2017-02";
+        $data['t.assignedTo'] = array('eq',$this->_G['username']);
+        $data['e.date'] = array('like',$date);
         $calendar_list = DB('Taskestimate')
                 ->alias('e')
                 ->join('chinatt_pms_task t', 'e.task = t.id', 'left')
                 ->field('e.date as start,t.name as title')
-                ->where(['t.assignedTo' => $this->_G['username']])
+                ->where($data)
                 ->select();
         $calendar = array($calendar_list);
-        $data = json_encode($calendar);
-        return $data;
+        return $calendar;
     }
 
 }
