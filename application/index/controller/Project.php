@@ -274,7 +274,7 @@ class Project extends Common {
         $project_detail = get_project_consume($project_detail);
         $navtitle = $project_detail['name'];
         $this->assign('project_detail', $project_detail);
-        
+        $this->assign('navtitle',$navtitle);
         $this->assign('project_id',$project_id);
         $this->assign('article_list',$article_list);
         return $this->fetch($this->templatePath);
@@ -294,6 +294,7 @@ class Project extends Common {
         $project_detail = DB::name('Project')->where(['id' => $project_id])->find();
         $project_detail = get_project_consume($project_detail);
         $navtitle = $project_detail['name'];
+        $this->assign('navtitle',$navtitle);
         $this->assign('project_detail', $project_detail);
         $this->assign('project_id',$project_id);
         $this->assign('weburl_list',$weburl_list);

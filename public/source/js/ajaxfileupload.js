@@ -1,6 +1,40 @@
 // JavaScript Document
 jQuery.extend({
+handleError: function (s, xhr, status, e) {
+                    if (s.error) {
+                        s.error.call(s.context || s, xhr, status, e);
+                    }
+                    if (s.global) {
+                        (s.context ? jQuery(s.context) : jQuery.event).trigger("ajaxError", [xhr, s, e]);
+                    }
+                },
+    createUploadIframe: function(id, uri)
+ {
+   //create frame
+            var frameId = 'jUploadFrame' + id;
+            
+            if(window.ActiveXObject) {
+                var io = document.createElement('<iframe id="' + frameId + '" name="' + frameId + '" />');
+                if(typeof uri== 'boolean'){
+                    io.src = 'javascript:false';
+                }
+                else if(typeof uri== 'string'){
+                    io.src = uri;
+                }
+            }
+            else {
+                var io = document.createElement('iframe');
+                io.id = frameId;
+                io.name = frameId;
+            }
+            io.style.position = 'absolute';
+            io.style.top = '-1000px';
+            io.style.left = '-1000px';
 
+            document.body.appendChild(io);
+
+            return io;   
+    },
     createUploadIframe: function(id, uri)
  {
    //create frame

@@ -138,9 +138,8 @@ class Mycenter extends Common {
     //任务详情页
     public function task_list() {
         $username = get_username();
-        $status = input('param.status');
+        $status =  input('get.status', 'unclose', 'addslashes');
         $map['assignedTo'] = $username;
-
         if ($status == 'unclose') {
             $map['status'] = array('in', 'wait,doing');
         } elseif (!empty($status)) {
