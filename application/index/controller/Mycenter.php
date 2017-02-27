@@ -18,11 +18,10 @@ class Mycenter extends Common {
 
     //首页
     public function index() {
+        
         $estimate_count = DB::name('Task')->where(['assignedTo' => $this->_G['username'], 'deleted' => 0])->sum('estimate');
-        
-        
         $consumed_count = DB::name('taskestimate')->where(['username' => $this->_G['username']])->sum('consumed');
-        
+
         $my_task_count = DB::name('Task')->where(['assignedTo' => $this->_G['username'], 'deleted' => 0])->count();
         $my_action_count = DB::name('Action')->where(['actor' => $this->_G['username']])->count();
         $my_weburl_count = DB::name('Weburl')->where(['uid' => $this->_G['uid'], 'status' => 0])->count();
@@ -37,12 +36,12 @@ class Mycenter extends Common {
         $estimate_map['finishedBy'] = array('eq', $this->_G['username']);
         $estimate_map['finishedDate'] = array('GT', $headDate);
         $same_month_estimate_count = DB::name('Task')->where($estimate_map)->sum('estimate'); //当月预计工时
-        
-        
+
+
         $consumed_map['username'] = array('eq', $this->_G['username']);
         $consumed_map['date'] = array('GT', $headDate);
         $same_month_consumed_count = DB::name('Taskestimate')->where($consumed_map)->sum('consumed'); //当月完成工时
-        
+
         $user = db('User')->alias('u')->join('chinatt_pms_dept d', 'u.dept = d.id', 'left')->join('chinatt_pms_group g', 'u.groupid = g.id')->field('u.*,d.name as depe_name,g.name as group_name')->where(['uid' => $this->_G['uid']])->find();
         //未完成任务
         $task_list = db('Task')->where(['assignedTo' => $this->_G['username'], 'status' => 'wait'])->order('id DESC')->select();
@@ -68,7 +67,6 @@ class Mycenter extends Common {
                 ->field('a.*,c.name as class_name,p.name as project_name,u.username')
                 ->where(['a.status' => 0, 'a.uid' => $this->_G['uid']])
                 ->paginate(10);
-
         $navtitle = '个人中心' . $this->navtitle;
         $this->assign('same_month_consumed_count', $same_month_consumed_count);
         $this->assign('same_month_estimate_count', $same_month_estimate_count);
@@ -138,13 +136,13 @@ class Mycenter extends Common {
     //任务详情页
     public function task_list() {
         $username = get_username();
-        $status =  input('get.status', 'unclose', 'addslashes');
+        $status = input('get.status', 'unclose', 'addslashes');
         $map['assignedTo'] = $username;
         if ($status == 'unclose') {
             $map['status'] = array('in', 'wait,doing');
-        } elseif($status == 'all'){
+        } elseif ($status == 'all') {
             
-        }elseif (!empty($status)) {
+        } elseif (!empty($status)) {
             $map['status'] = $status;
         }
         $task_count = DB::table('chinatt_pms_task')->where($map)->count();
@@ -158,10 +156,8 @@ class Mycenter extends Common {
         $this->assign('navtitle', $navtitle);
         return $this->fetch($this->templatePath);
     }
-    
-    
-    
-    public function project(){
+
+    public function project() {
         $project_list = DB::name('Team')
                 ->alias('t')
                 ->join('chinatt_pms_project p', 't.project = p.id', 'left')
@@ -169,13 +165,11 @@ class Mycenter extends Common {
                 ->where([ 't.username' => $this->_G['username']])
                 ->order('id desc')
                 ->paginate(10);
-        
-        
-        $this->assign('project_list',$project_list);
+
+
+        $this->assign('project_list', $project_list);
         return $this->fetch($this->templatePath);
     }
-
-    
 
     public function info() {
         $type = input('param.type');
@@ -208,12 +202,13 @@ class Mycenter extends Common {
 
     public function upload() {
         // 获取表单上传文件
-        var_dump($_FILES);exit;
+        var_dump($_FILES);
+        exit;
         $files = request()->file('avatar');
         foreach ($files as $file) {
             // 移动到框架应用根目录/public/uploads/ 目录下
             $info = $file->move(ROOT_PATH . 'public' . DS . 'upload');
-            
+
             if ($info) {
                 // 成功上传后 获取上传信息
                 // 输出 jpg
