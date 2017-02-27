@@ -8,6 +8,9 @@
 {block name="body"}
 
 {include file="mycenter/nav" /}
+<link href="tpl_css/fullcalendar.css" rel="stylesheet">
+<link href="tpl_css/fullcalendar.print.css" rel="stylesheet">
+<link href="tpl_css/style.css" rel="stylesheet">
 
 <div class="rightcon sizing"><!-- 右边内容 -->
     
@@ -50,6 +53,27 @@
             </ul><!-- 数据统计 -->
             
         </div><!-- 基本信息 -->
+        
+        <div class="publicdiv pl20 pr20 mt20 sizing">
+            <div id="content">
+                <div class="main">
+                    <div class="content">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="box">
+                                    <div class="box-content box-nomargin">
+                                        <div class="calendar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>	
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="tpl_js/jquery.min.js"></script>
+        <script type="text/javascript" src="tpl_js/custom.js"></script>
+        <script type="text/javascript" src="tpl_js/fullcalendar.min.js"></script>
         
         <div class="publicdiv pl20 pr20 mt20 mb20 sizing">
             <div class="publicdiv">
