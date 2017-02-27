@@ -86,34 +86,30 @@
                 type:'post',
                 url:url,
                 data:{year:y,month:m,day:d},
-                dataType:'json',
+                dataType:'html',
                 success:function(data){
-                    
+                    /*if (data.result == 'success') {
+                        //jQuery('#addpr').html('操作成功！').show(1).delay(2000).hide(1);
+                        alert(success);
+                    }else{
+                        jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
+                    }*/
+                    $('.calendar').fullCalendar({
+                        header: {
+                            left: 'prev,next,today',
+                            center: 'title',
+                            right: 'month,agendaWeek,agendaDay'
+                        },
+                        buttonText:{
+                            today:'跳到当前天'
+                        },
+                        editable: true,
+                        //start: new Date(年,月,日,时,分),)
+                        events:data
+                    });
                 }
             })
-            $('.calendar').fullCalendar({
-                header: {
-                    left: 'prev,next,today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                buttonText:{
-                    today:'跳到当前天'
-                },
-                editable: true,
-                //start: new Date(年,月,日,时,分),)
-                events: [
-                {
-                    title: 'Long Event',
-                    start: new Date(y, m, d-5),
-                    end: new Date(y, m, d-2)
-                },
-                {
-                    title: 'test',
-                    start: new Date(2017, 1-1, 27)
-                }
-                ]
-            });
+            
         }
         </script>
         

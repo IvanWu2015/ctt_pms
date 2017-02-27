@@ -34,8 +34,7 @@ class api extends Common {
                 ->where(['t.assignedTo' => $this->_G['username']])
                 ->select();
         $calendar = array($calendar_list);
-        $data = json_encode($calendar);
-        return $data;
+        return $calendar;
     }
 
 }
