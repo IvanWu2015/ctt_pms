@@ -35,21 +35,24 @@ class api extends Common {
         }else {
             $firstday = date('d');
         }
-        
+        //月份读取
         if($month >= 1){
             $month = date($month). '-';
         } else {
             $month = date('m'). '-';
         }
-        
+        //年份读取
         if($year > 0){
             $year = date($year). '-';
         }  else {
             $year = date('Y'). '-';
         }
+        //组合日期
         $date = $year . $month  . $firstday;
+        //筛选条件
         $data['t.assignedTo'] = array('eq',$this->_G['username']);
         $data['e.date'] = array('like',"%$date%");
+        //工时表为主
         $calendar_list = DB('Taskestimate')
                 ->alias('e')
                 ->join('chinatt_pms_task t', 'e.task = t.id', 'left')
