@@ -55,7 +55,6 @@ class api extends Common {
                 ->where($data)
                 ->select();
         $calendar = $calendar_list;
-                var_dump($calendar);exit;
 
         return $calendar;
     }
