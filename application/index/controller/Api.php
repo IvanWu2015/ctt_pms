@@ -22,9 +22,11 @@ class api extends Common {
          * 如果没有指定日则默认返回当月数据
          */
         //当日
-        $day = 0;
         if($month < 10){
             $month = '0' . $month;
+        }
+        if($day < 10){
+            $day = '0' . $day;
         }
         if($day > 1){
             $firstday = date($day);
@@ -33,7 +35,7 @@ class api extends Common {
         }else {
             $firstday = date('d');
         }
-
+        
         if($month >= 1){
             $month = date($month). '-';
         } else {
@@ -46,6 +48,8 @@ class api extends Common {
             $year = date('Y'). '-';
         }
         $date = $year . $month  . $firstday;
+                var_dump($date);exit;
+
         $data['t.assignedTo'] = array('eq',$this->_G['username']);
         $data['e.date'] = array('like',"%$date%");
         $calendar_list = DB('Taskestimate')
