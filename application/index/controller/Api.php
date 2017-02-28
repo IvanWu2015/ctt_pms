@@ -59,6 +59,9 @@ class api extends Common {
                 ->field('e.date as start,t.name as title')
                 ->where($data)
                 ->select();
+        foreach ($calendar_list as $key => $value){
+            $calendar_list[$key]['href'] = ROOT_PATH . 'index/api/getworkdata';
+        }
         $calendar = $calendar_list;
 
         return $calendar;
