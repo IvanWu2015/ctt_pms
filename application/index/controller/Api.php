@@ -48,8 +48,6 @@ class api extends Common {
             $year = date('Y'). '-';
         }
         $date = $year . $month  . $firstday;
-                var_dump($date);exit;
-
         $data['t.assignedTo'] = array('eq',$this->_G['username']);
         $data['e.date'] = array('like',"%$date%");
         $calendar_list = DB('Taskestimate')
