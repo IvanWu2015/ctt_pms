@@ -56,11 +56,11 @@ class api extends Common {
         $calendar_list = DB('Taskestimate')
                 ->alias('e')
                 ->join('chinatt_pms_task t', 'e.task = t.id', 'left')
-                ->field('e.date as start,t.name as title')
+                ->field('e.date as start,t.name as title,t.id as tid')
                 ->where($data)
                 ->select();
         foreach ($calendar_list as $key => $value){
-            $calendar_list[$key]['href'] = ROOT_PATH . 'index/api/getworkdata';
+            $calendar_list[$key]['href'] = 'task/detail?id='.$value['tid'];
         }
         $calendar = $calendar_list;
 
