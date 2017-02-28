@@ -88,12 +88,7 @@
                 data:{year:y,month:m,day:d},
                 dataType:'html',
                 success:function(data){
-                    /*if (data.result == 'success') {
-                        //jQuery('#addpr').html('操作成功！').show(1).delay(2000).hide(1);
-                        alert(success);
-                    }else{
-                        jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
-                    }*/
+                    alert(data);
                     $('.calendar').fullCalendar({
                         header: {
                             left: 'prev,next,today',
