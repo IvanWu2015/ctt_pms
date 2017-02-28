@@ -60,7 +60,7 @@ class api extends Common {
                 ->where($data)
                 ->select();
         foreach ($calendar_list as $key => $value){
-            $calendar_list[$key]['href'] = 'task/detail?id='.$value['tid'];
+            $calendar_list[$key]['href'] = url('index/task/detail?id='.$value['tid']);
         }
         $calendar = $calendar_list;
 
