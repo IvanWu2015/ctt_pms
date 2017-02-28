@@ -22,33 +22,41 @@ class api extends Common {
          * 如果没有指定日则默认返回当月数据
          */
         //当日
+        $day = 0;
+        if($month < 10){
+            $month = '0' . $month;
+        }
         if($day > 1){
             $firstday = date($day);
-        }  else {
+        }elseif($day == 0){
+            $firstday = '';
+        }else {
             $firstday = date('d');
         }
-        if($month > 1){
-            $month = date($month);
-        }  else {
-            $month = date('m');
-        }
-        if($year > 0){
-            $year = date($year);
-        }  else {
-            $year = date('Y');
+
+        if($month >= 1){
+            $month = date($month). '-';
+        } else {
+            $month = date('m'). '-';
         }
         
-        $date = $year . '-' . $month . '-' . $firstday;
-        $date = "2017-02";
+        if($year > 0){
+            $year = date($year). '-';
+        }  else {
+            $year = date('Y'). '-';
+        }
+        $date = $year . $month  . $firstday;
         $data['t.assignedTo'] = array('eq',$this->_G['username']);
-        $data['e.date'] = array('like',$date);
+        $data['e.date'] = array('like',"%$date%");
         $calendar_list = DB('Taskestimate')
                 ->alias('e')
                 ->join('chinatt_pms_task t', 'e.task = t.id', 'left')
                 ->field('e.date as start,t.name as title')
                 ->where($data)
                 ->select();
-        $calendar = array($calendar_list);
+        $calendar = $calendar_list;
+                var_dump($calendar);exit;
+
         return $calendar;
     }
 
