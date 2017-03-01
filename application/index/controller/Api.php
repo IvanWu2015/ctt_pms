@@ -22,9 +22,11 @@ class api extends Common {
          * 如果没有指定日则默认返回当月数据
          */
         //当日
-        $day = 0;
         if($month < 10){
             $month = '0' . $month;
+        }
+        if($day < 10){
+            $day = '0' . $day;
         }
         if($day > 1){
             $firstday = date($day);
@@ -33,29 +35,34 @@ class api extends Common {
         }else {
             $firstday = date('d');
         }
-
+        //月份读取
         if($month >= 1){
             $month = date($month). '-';
         } else {
             $month = date('m'). '-';
         }
-        
+        //年份读取
         if($year > 0){
             $year = date($year). '-';
         }  else {
             $year = date('Y'). '-';
         }
+        //组合日期
         $date = $year . $month  . $firstday;
+        //筛选条件
         $data['t.assignedTo'] = array('eq',$this->_G['username']);
         $data['e.date'] = array('like',"%$date%");
+        //工时表为主
         $calendar_list = DB('Taskestimate')
                 ->alias('e')
                 ->join('chinatt_pms_task t', 'e.task = t.id', 'left')
-                ->field('e.date as start,t.name as title')
+                ->field('e.date as start,t.name as title,t.id as tid')
                 ->where($data)
                 ->select();
+        foreach ($calendar_list as $key => $value){
+            $calendar_list[$key]['href'] = url('index/task/detail?id='.$value['tid']);
+        }
         $calendar = $calendar_list;
-                var_dump($calendar);exit;
 
         return $calendar;
     }

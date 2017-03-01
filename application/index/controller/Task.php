@@ -1,4 +1,3 @@
-        var_dump($data);exit;
 <?php
 
 namespace app\index\controller;
@@ -245,3 +244,6 @@ class Task extends Common {
     }
 
 }
+
+
+
