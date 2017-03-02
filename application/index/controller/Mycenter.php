@@ -93,6 +93,7 @@ class Mycenter extends Common {
                 ->join('chinatt_pms_project p', 'a.project = p.id', 'left')
                 ->field('a.*,p.name as parent_name,p.status')
                 ->where($map)
+                ->order('id DESC')
                 ->paginate(10);
         $page = $action_list->render(); // 分页显示输出
 
