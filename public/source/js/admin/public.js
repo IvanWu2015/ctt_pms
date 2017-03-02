@@ -20,7 +20,7 @@ function shownav(){
         jQuery('#showa').html('&#xe624;'); 
     }else{ 
         jQuery('#left_nav').animate({left:'0px'},500); 
-        jQuery('.rightcon').animate({paddingLeft:'271px'},500); 
+        jQuery('.rightcon').animate({paddingLeft:'260px'},500); 
         jQuery('#showa').html('&#xe606;'); 
     } 
 } 

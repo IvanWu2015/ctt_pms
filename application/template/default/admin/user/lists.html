@@ -8,42 +8,44 @@
 
 <div class="rightcon sizing"><!-- 右边内容 -->
     {include file="base/head_title" /}
-    <div class="publicdiv pb20 bf">
-        <table class="table mt15">
-          <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
-              <tr>
-                <th class="ac bbno pt15 pb15">ID</th>
-                <th class="ac bbno pt15 pb15">姓名</th>
-                <th class="ac bbno pt15 pb15">帐号</th>
-                <th class="ac bbno pt15 pb15">所属部门</th>
-                <th class="ac bbno pt15 pb15">职位</th>
-                <th class="ac bbno pt15 pb15">发布项目</th>
-                <th class="ac bbno pt15 pb15">发布任务</th>
-                <th class="ac bbno pt15 pb15">已完成任务</th>
-                <th class="ac bbno pt15 pb15">未完成任务</th>
-                <th class="ac bbno pt15 pb15">邮箱</th>
-                <th class="ac bbno pt15 pb15">QQ</th>
-              </tr>
-          </thead>
-          <tbody>
-          {foreach $user_list as $user}
-              <tr>
-                <td>{$user['uid']}</td>
-                <td class="ac"><a href="{:url('/admin/user/detail?uid='.$user['uid'].'&username='.$user['username'])}" class="text-primary" target="_bacnk">{$user['realname']}</a></td>
-                <td class="ac">{$user['username']}</td>
-                <td class="ac">{$user['depe_name']}</td>
-                <td class="ac">{$user['group_name']}</td>
-                <td class="ac ="><a href="javascript:void(0);" class="text-info" target="_bacnk">{$user['project_count']}</a></td>
-                <td class="ac "><a href="javascript:void(0);" class="text-info" target="_bacnk">{$user['task_count']}</a></td>
-                <td class="ac"><a href="javascript:void(0);" class="text-muted" target="_bacnk">{$user['done_task_count']}</a></td>
-                <td class="ac"><a href="javascript:void(0);" class="text-danger" target="_bacnk">{$user['not_task_count']}</a></td>
-                <td class="ac">{$user['email']}</td>
-                <td class="ac">{$user['qq']}</td>
-              </tr>
-          {/foreach}
-          </tbody>
-        </table>
-        {$page}
+    <div class="publicdiv pl15 sizing">
+        <div class="publicdiv pb20 bf">
+            <table class="table mt15">
+              <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                  <tr>
+                    <th class="ac bbno pt15 pb15">ID</th>
+                    <th class="ac bbno pt15 pb15">姓名</th>
+                    <th class="ac bbno pt15 pb15">帐号</th>
+                    <th class="ac bbno pt15 pb15">所属部门</th>
+                    <th class="ac bbno pt15 pb15">职位</th>
+                    <th class="ac bbno pt15 pb15">发布项目</th>
+                    <th class="ac bbno pt15 pb15">发布任务</th>
+                    <th class="ac bbno pt15 pb15">已完成任务</th>
+                    <th class="ac bbno pt15 pb15">未完成任务</th>
+                    <th class="ac bbno pt15 pb15">邮箱</th>
+                    <th class="ac bbno pt15 pb15">QQ</th>
+                  </tr>
+              </thead>
+              <tbody>
+              {foreach $user_list as $user}
+                  <tr>
+                    <td>{$user['uid']}</td>
+                    <td class="ac"><a href="{:url('/admin/user/detail?uid='.$user['uid'].'&username='.$user['username'])}" class="text-primary" target="_bacnk">{$user['realname']}</a></td>
+                    <td class="ac">{$user['username']}</td>
+                    <td class="ac">{$user['depe_name']}</td>
+                    <td class="ac">{$user['group_name']}</td>
+                    <td class="ac ="><a href="javascript:void(0);" class="text-info" target="_bacnk">{$user['project_count']}</a></td>
+                    <td class="ac "><a href="javascript:void(0);" class="text-info" target="_bacnk">{$user['task_count']}</a></td>
+                    <td class="ac"><a href="javascript:void(0);" class="text-muted" target="_bacnk">{$user['done_task_count']}</a></td>
+                    <td class="ac"><a href="javascript:void(0);" class="text-danger" target="_bacnk">{$user['not_task_count']}</a></td>
+                    <td class="ac">{$user['email']}</td>
+                    <td class="ac">{$user['qq']}</td>
+                  </tr>
+              {/foreach}
+              </tbody>
+            </table>
+            {$page}
+        </div>
     </div>
 </div>
 {/block}
