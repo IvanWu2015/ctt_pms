@@ -7,6 +7,7 @@
             <th class="ac bbno pt15 pb15">创建者</th>
             <th class="ac bbno pt15 pb15">完成者</th>
             <th class="ac bbno pt15 pb15">状态</th>
+            <th class="ac bbno pt15 pb15">创建时间</th>
             <th class="ac bbno pt15 pb15"><a href="{:url('/index/project/detail/?orderby=pri&id='.$project_id)}">优先级</a></th>
             <th class="ac bbno pt15 pb15"><a href="{:url('/index/project/detail/?orderby=estimate&id='.$project_id)}">预计</a></th>
             <th class="ac bbno pt15 pb15"><a href="{:url('/index/project/detail/?orderby=consumed&id='.$project_id)}">消耗</a></th>
@@ -28,6 +29,7 @@
             {else}
             <td class="ac text-primary">&nbsp;</td>
             {/if}
+            <td class="ac">{$project['begin']}</td>
             <td class="ac">{$task['pri']}&nbsp;</td>
             <td class="ac">{$task['estimate']}&nbsp;</td>
             <td class="ac">{$task['consumed']}&nbsp;</td>
