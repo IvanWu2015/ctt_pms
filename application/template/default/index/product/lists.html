@@ -1,0 +1,48 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<include file="Index/add_task_point" />
+
+<div class="publicdiv mt20 pl20 pr20 pt8 pb20 bf sizing">
+    <div class="publicdiv borb mb20 ptlrb10 bf sizing">
+        <!-- Contents================================================== -->
+                <div class="publicdiv borb mb20 pt10 pb10 bf sizing">
+            <h3>
+                产品列表
+                <span class="pull-right">
+                    <a href="{:url('/index/product/add')}" class="btn btn-info">添加文档</a> 
+                </span>
+            </h3>
+        </div>
+                
+                <table class="table table-striped borl bort borr borb">
+                    <thead style="background:#f1f1f1;">
+                        <tr>
+                            <th>产品名称</th>
+                            <th>产品代号</th>
+                            <th>项目负责人</th>
+                            <th>版本号</th>
+                            <th>说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach $product_list as $product}
+                        <tr>
+                            <td>{$product['name']}</td>
+                            <td>{$product['code']}</td>
+                            <td>{$product['realname']}</td>
+                            <td>{$product['createdVersion']}</td>
+                            <td>{$product['desc']}</td>
+                        {/foreach}
+                    
+                    </tbody>
+                </table>
+        </div>
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
+</div>
+{/block}
