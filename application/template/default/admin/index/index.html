@@ -13,7 +13,7 @@
     <div class="publicdiv pl15 sizing">
     <div class="publicdiv sizing">
         <ul class="data_statistics mbn iconfont"><!--盘局 -->
-            <a href="javascript:void(0);"><li class="w20 z pr20 sizing">
+            <a href="javascript:void(0);"><li class="w20 z pr15 sizing">
                 <div class="datasta dcs01">
                     <div class="aict ac">&#xe6c9;</div>
                     <h3>{$project_count}</h3>
@@ -21,7 +21,7 @@
                 </div>
             </li></a>
 
-            <a href="javascript:void(0);"><li class="w20 z pr20 sizing">
+            <a href="javascript:void(0);"><li class="w20 z pr15 sizing">
                 <div class="datasta dcs02 sizing">
                     <div class="aict ac">&#xe613;</div>
                     <h3>{$task_count}</h3>
@@ -29,7 +29,7 @@
                 </div>
             </li></a>
 
-            <a href="javascript:void(0);"><li class="w20 z pr20 sizing">
+            <a href="javascript:void(0);"><li class="w20 z pr15 sizing">
                 <div class="datasta dcs03 sizing">
                     <div class="aict ac">&#xe60d;</div>
                     <h3>{$weburl_count}</h3>
@@ -37,7 +37,7 @@
                 </div>
             </li></a>
 
-            <a href="javascript:void(0);"><li class="w20 z sizing">
+            <a href="javascript:void(0);"><li class="w20 z pr15 sizing">
                 <div class="datasta dcs04 sizing">
                     <div class="aict ac">&#xe704;</div>
                     <h3>{$article_count}</h3>
@@ -45,7 +45,7 @@
                 </div>
             </li></a>
 
-            <a href="javascript:void(0);"><li class="w20 z pl10 pr10 sizing">
+            <a href="javascript:void(0);"><li class="w20 z pr10 sizing">
                 <div class="datasta dcs05 sizing">
                     <div class="aict ac">&#xe647;</div>
                     <h3>{$user_count}</h3>
@@ -79,8 +79,8 @@
             </div><!--各项目进度-->
             
             <div class="w60 z sizing"><!--待完成任务-->
-                <div class="panel mb10" style="border:1px #FFB400 solid;">
-                    <h3 class="mbn mtn fs15 pl15 cf pt15 pb15 sizing" style="background:#FFB400;">
+                <div class="panel mb10" style="border:1px #c37ad6 solid;">
+                    <h3 class="mbn mtn fs15 pl15 cf pt15 pb15 sizing" style="background:#c37ad6;">
                         待完成任务
                         <a href="{:url('/index/Mycenter/task_list/?status=ontdone')}" class="y cf fs12 mr10">更多>></a>
                     </h3>
@@ -127,8 +127,8 @@
             </div><!--今日完成的任务-->
             
             <div class="w45 z sizing"><!--最新文档-->
-                <div class="panel mb10" style="border:1px #9D4A9C solid; min-height:350px;">
-                    <h3 class="mbn mtn fs15 pl15 cf bf5 pt15 pb15 sizing" style="background:#9D4A9C;">
+                <div class="panel mb10" style="border:1px #1dbaa5 solid; min-height:350px;">
+                    <h3 class="mbn mtn fs15 pl15 cf bf5 pt15 pb15 sizing" style="background:#1dbaa5;">
                         最新文档
                         <a href="{:url('/admin/article/lists')}" class="y cf fs12 mr10">更多>></a>
                     </h3>
@@ -142,7 +142,7 @@
                     {foreach $article_list as $article}
                         <li class="publicdiv pr tlist pr100 lh35 ellipsis">
                             <span class="w40p db z">{$article['id']}</span>
-                            <a href="{:url('/index/article/detail/?id='.$article['id'])}" class="cf1">{$article['title']}</a>
+                            <a href="{:url('/index/article/detail/?id='.$article['id'])}">{$article['title']}</a>
                             <span class="tlisty">{$article['time']}</span>
                         </li>
                         {/foreach}
