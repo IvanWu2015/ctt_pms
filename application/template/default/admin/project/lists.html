@@ -12,13 +12,13 @@
     {include file="base/head_title" /}
     <div class="publicdiv pb20 bf">
         <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
-            <a href="{:url('admin/project/lists?status=all')}" {if condition="$status == 'all'"}class="btnpattr"{/if}class="btnp"{/if}>所有</a>
-            <a href="{:url('/admin/project/lists?status=unclose')}" {if condition="$status == 'unclose'"}class="btnpattr"{/if}class="btnp"{/if}>未关闭</a>
-            <a href="{:url('/admin/project/lists?status=delayed')}" {if condition="$status == 'delayed'"}class="btnpattr"{/if}class="btnp"{/if}>已延期</a>
-            <a href="{:url('/admin/project/lists?status=not')}" {if condition="$status == 'not'"}class="btnpattr"{/if}class="btnp"{/if}>未开始</a>
-            <a href="{:url('/admin/project/lists?status=ing')}" {if condition="$status == 'ing'"}class="btnpattr"{/if}class="btnp"{/if}>进行中</a>
-            <a href="{:url('/admin/project/lists?status=done')}" {if condition="$status == 'done'"}class="btnpattr"{/if}class="btnp"{/if}>已完成</a>
-            <a href="{:url('/admin/project/lists?status=closed')}" {if condition="$status == 'closed'"}class="btnpattr"{/if}class="btnp"{/if}>已关闭</a>
+            <a href="{:url('admin/project/lists?status=all')}" {if condition="$status == 'all'"}class="btnpattr"{else}class="btnp"{/if}>所有</a>
+            <a href="{:url('/admin/project/lists?status=unclose')}" {if condition="$status == 'unclose'"}class="btnpattr"{else}class="btnp"{/if}>未关闭</a>
+            <a href="{:url('/admin/project/lists?status=delayed')}" {if condition="$status == 'delayed'"}class="btnpattr"{else}class="btnp"{/if}>已延期</a>
+            <a href="{:url('/admin/project/lists?status=not')}" {if condition="$status == 'not'"}class="btnpattr"{else}class="btnp"{/if}>未开始</a>
+            <a href="{:url('/admin/project/lists?status=ing')}" {if condition="$status == 'ing'"}class="btnpattr"{else}class="btnp"{/if}>进行中</a>
+            <a href="{:url('/admin/project/lists?status=done')}" {if condition="$status == 'done'"}class="btnpattr"{else}class="btnp"{/if}>已完成</a>
+            <a href="{:url('/admin/project/lists?status=closed')}" {if condition="$status == 'closed'"}class="btnpattr"{else}class="btnp"{/if}>已关闭</a>
             <a href="{:url('index/project/add')}" target="_bacnk" class="btnp ml20">添加项目</a>
             <label class="y">
                 <form action="{:url('/index/project/detail/?id='.$project_id)}" method="post">
