@@ -91,10 +91,10 @@
                             <span class="ml20">任务名称</span>
                             <span class="y">类型</span>
                         </p>
-                    {foreach $task_list as $task}
+                        {foreach $task_list as $task}
                         <li class="publicdiv pr tlist pr70 lh35 ellipsis">
                             <span class="w40p db z">{$task['id']}</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}" class="cf1">{$task['name']}</a>
+                            <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$task['name']}</a>
                             <span class="tlisty">{$task['typename']}</span>
                         </li>
                         {/foreach}
