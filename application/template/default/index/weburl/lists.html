@@ -34,7 +34,7 @@
                     <td>{$weburl['title']}</td>
                     <td class=""><a href="{$weburl['url']}" target="_bacnk">{$weburl['url']}</a></td>
                     <td class="ac"><a href="{:url('/index/project/detail/?id='.$weburl['project'])}">{$weburl['name']}</a></td>
-                    <td class="ac">{$weburl['explain']}</td>
+                    <td class="ac">{$weburl['realname']}</td>
                     <td class="ac">{if condition="$weburl['acl'] eq open"}公开{else/}私有{/if}</td>
                     <td class="ac">{$weburl['time']}</td>
                     <td class="ac iconfont">

@@ -31,7 +31,7 @@
                             <select name="po" class="form-control">
                                 <option value='0'>无</option>
                                 {foreach $user_list as $user}
-                                <option {if condition="$user['uid'] == $project_id"}selected='selected'{/if} value="{$user['username']}" >{$user['realname']}</option>
+                                <option {if condition="$user['username'] == $product_detail['PO']"}selected='selected'{/if} value="{$user['username']}" >{$user['realname']}</option>
                                 {/foreach}
                             </select>
                         </div>

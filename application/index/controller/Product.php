@@ -18,13 +18,13 @@ class Product extends Common {
 
     //列表
     public function lists() {
-        $product_list = DB::name('Product')->where(['deleted' => 0])->paginate(10);
+        $product_list = DB::name('Product')
+                ->alias('p')
+                ->join('chinatt_pms_user u', 'p.PO = u.username', 'left')
+                ->field('p.*,u.realname')
+                ->where(['p.deleted' => '0'])
+                ->paginate(10);
         $page = $product_list->render(); // 分页显示输出
-        
-        
-        
-        
-        
         
         
         $navtitle = '产品列表' . $this->navtitle;
@@ -37,7 +37,7 @@ class Product extends Common {
 
     //添加
     public function add() {
-        $product_id = input('get.name', '0', 'intval');
+        $product_id = input('get.id', '0', 'intval');
         $user_list = DB::table('chinatt_pms_user')->select();
         if ($product_id > 0) {
             $product_detail = DB::name('Product')->where(['id' => $product_id, 'deleted' => 0])->find();
@@ -51,8 +51,8 @@ class Product extends Common {
                 'PO' => input('post.po', '', 'addslashes'),
                 'createdVersion' => input('post.createdVersion', '', 'addslashes'),
                 'deleted' => 0,
+                'desc' => input('post.desc', '', 'addslashes'),
             ];
-
             if ($product_id > 0) {
                 DB::name('Product')->where(['id' => $product_id])->update($data);
                 $this->success("修改成功", 'Product/lists');

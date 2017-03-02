@@ -28,7 +28,6 @@ class weburl extends Common {
                 ->field('w.*,p.name,u.username,u.realname')
                 ->where(['w.acl' => 'open','w.status' => 0])
                 ->paginate(10);
-
         $page = $weburl_list->render(); // 分页显示输出
         $deleted = input('param.deleted', 0, 'intval');
         $weburl_id = input('param.id', 0, 'intval');
