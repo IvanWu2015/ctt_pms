@@ -1,0 +1,49 @@
+{extend name="base/common"/}
+
+{block name="header"}{/block}
+
+{block name="side"}{/block}
+
+{block name="body"}
+
+{include file="base/left_nav" /}
+<div class="rightcon sizing"><!-- 右边内容 -->
+    {include file="base/head_title" /}
+    <div class="publicdiv pb20 bf">
+        <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
+            <a href="" onClick="loadWindow('{:url('/index/product/add')}');" class="btnp">添加产品</a>
+        </div>
+        <form action="{:url('/admin/product/add')}" method="post" class="form-horizontal" role="form">
+            <table class="table table-striped borl bort borr borb">
+                <thead style="background:#f1f1f1;">
+                    <tr>
+                        <th>产品名称</th>
+                        <th>产品代号</th>
+                        <th>项目负责人</th>
+                        <th>版本号</th>
+                        <th>说明</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $product_list as $product}
+                    <tr>
+                        <td>{$product['name']}</td>
+                        <td>{$product['code']}</td>
+                        <td>{$product['realname']}</td>
+                        <td>{$product['createdVersion']}</td>
+                        <td>{$product['desc']}</td>
+                        <td class="ac iconfont">
+                            <a href="{:url('/index/product/add?id='.$product['id'])}" class="btn-link rkwt">&#xe71d;</a>
+                            <a href="{:url('/admin/product/lists/?deleted=1&id='.$product['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该产品吗？');" title="删除">&#xe601;</a>
+                        </td>
+                        {/foreach}
+
+                </tbody>
+            </table>
+            <div class="publicdiv ac pagingw">{$page}</div>
+            <input type="submit" class="btn btn-info y mr20" value="提交" />
+        </form>
+    </div>
+</div>
+{/block}

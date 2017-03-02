@@ -1,0 +1,49 @@
+<div class="modalwrap h350 sizing">
+    <form action="" method="post" id="add_tag">
+    <h3 class="modaltitle pl15 pr15 sizing">添加分类<a href="javascript:void(0);" onClick="modalclose();" class="y fs13 iconfont">&#xe61c;</a></h3>
+    <div class="publocdiv pl20 pr20 sizing modalcontnet h230">
+    
+        <div class="form-group w100 mrn mln z">
+            <label class="col-sm-2 pt5 control-label ar fwn"><b class='cred'>*</b>上层分类</label>
+            <div class="col-sm-9 pln prn">
+                <select name="parentid" class="form-control">
+                    <option value='0'>无</option>
+                    {foreach $sort_list as $temp_sort}
+                    <option {if condition="$temp_sort['id'] == $class_detail['parentid']"}selected='selected'{/if} value="{$temp_sort['id']}" >{$temp_sort['name']}</option>
+                    {/foreach}
+                </select>
+            </div>
+        </div>
+        <div class="form-group w100 mrn mln z">
+            <label class="col-sm-2 pt5 control-label ar fwn"><b class='cred'>*</b>分类名称</label>
+            <div class="col-sm-9 pln prn">
+                <input type="text" name="name" id="estimate" class="form-control" placeholder="请输入分类名称" value="{$class_detail['name']}" /> 
+            </div>
+        </div>
+        
+    </div>
+    <div class="modalbottom pt8 pb8 pl15 pr15 sizing">
+        <a href="javascript:void(0);" class="modalsearch bor pl20 pr20 y" onClick="modalsearch();">提交</a>
+    </div>
+    </form>
+</div>
+<script>
+function modalsearch(){     //ajax提交
+    var url="{:url('/admin/sort/add?id='.$class_detail['id'])}";
+    jQuery.ajax({
+        type: 'post',
+        url: url,
+        data: jQuery('#add_tag').serialize(),
+        dataType: 'json',
+        success: function (data) {
+            if (data.result == 'success') {
+                jQuery('#addpr').html('操作成功！').show(1).delay(2000).hide(1);
+                modalclose();
+                setTimeout("location.reload()",2500);
+            }else{
+                jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
+            }
+        }
+    });
+}
+</script>
