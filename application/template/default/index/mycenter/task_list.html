@@ -16,6 +16,15 @@
         </h3>
 
         <div class="publicdiv pl20 pr20 pt8 pb8 bf sizing">
+            <label class="z">
+            <span class="z c9 lh30">项目：</span>
+            <select name="project_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/mycenter/task_list?username='.$username.'&project_id=')}' + this.options[this.selectedIndex].value;">
+                <option value='0'>无</option>
+                {foreach $project_list as $temp_project}
+                <option {if condition="$temp_project['project'] == $project_id"}selected='selected'{/if} value="{$temp_project['project']}" >{$temp_project['name']}</option>
+                {/foreach}
+            </select>
+            </label>
             <ul class="nav nav-pills">
                 
                 <li {if condition="$status eq 'all'"}class="active"{/if}><a href="{:url('/index/Mycenter/task_list?status=all')}">所有</a></li>

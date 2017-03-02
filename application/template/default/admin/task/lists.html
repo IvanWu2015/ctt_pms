@@ -19,7 +19,15 @@
 <div class="rightcon sizing"><!-- 右边内容 -->
     {include file="base/head_title" /}
     <div class="publicdiv pb20 bf">
-        <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
+        <div class="publicdiv pt20 pb20 pl20 pr20 sizing"><label class="z">
+            <span class="z c9 lh30">项目：</span>
+            <select name="project_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/admin/task/lists?project_id=')}' + this.options[this.selectedIndex].value;">
+                <option value='0'>无</option>
+                {foreach $project_list as $temp_project}
+                <option {if condition="$temp_project['id'] == $project_id"}selected='selected'{/if} value="{$temp_project['id']}" >{$temp_project['name']}</option>
+                {/foreach}
+            </select>
+            </label>
             <a href="{:url('/index/Project/detail/?id='.$project_id)}" class="btnp">所有</a>
             <a href="{:url('/index/Project/detail/?status=noclosed&id='.$project_id)}" class="btnp">未关闭</a>
             <a href="{:url('/index/Project/detail/?status=delayed&id='.$project_id)}" class="btnp">已延期</a>
@@ -55,7 +63,7 @@
                 <td class="ac">{$task['openedDate']}</td>
                 <td class="ac">{$task['assignedDate']}</td>
                 <td class="ac iconfont">
-                    <a href="{:url('/index/task/add/?id='.$task['id'])}" class="btn-link rkwt">&#xe71d;</a>
+                    <a href="{:url('/index/task/add/?task_id='.$task['id'])}" class="btn-link rkwt">&#xe71d;</a>
                     <a href="{:url('/admin/task/lists/?deleted=1&id='.$task['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该任务吗？');" title="删除">&#xe601;</a>
                 </td>
               </tr>

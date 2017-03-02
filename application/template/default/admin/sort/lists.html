@@ -11,7 +11,7 @@
     {include file="base/head_title" /}
     <div class="publicdiv pb20 bf">
         <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
-            <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/sort/add')}');" class="btnp">添加分类</a>
+            <a href="" onClick="loadWindow('{:url('/admin/sort/add')}');" class="btnp">添加分类</a>
         </div>
         <form action="{:url('/admin/sort/lists')}" method="post" class="form-horizontal" role="form">
             <table class="table">
@@ -30,7 +30,7 @@
                     <td>{$class['name']}</td>
                     <td class="ac">{if condition="!empty($class['parent_name'])"}{$class['parent_name']}{else/}无{/if}</td>
                     <td class="ac iconfont">
-                        <a href="{:url('/admin/sort/add/?id='.$class['id'])}" title="编辑" class="btn-link rkwt">&#xe71d;</a>
+                        <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/sort/add/?id='.$class['id'])}');" title="编辑" class="btn-link rkwt">&#xe71d;</a>
                         <a href="{:url('/admin/sort/lists/?deleted=1&id='.$class['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该项目吗？');" title="删除">&#xe601;</a>
                     </td>
                   </tr>
