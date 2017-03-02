@@ -17,8 +17,16 @@ class Task extends Common {
 
     public function lists() {
         $project_id = input('get.project_id', 0, 'intval');
+        $status = input('get.status', 'all', 'addslashes');
+        if ($status == 'all') {
+            
+        } elseif ($status == 'noclosed') {
+            $data['status'] = array('neq', 'closed');
+        } else {
+            $data['status'] = array('eq', $status);
+        }
         $task = db('Task');
-        $data['deleted'] = array('EQ', '0');
+        $data['deleted'] = array('EQ', '0');        
         if ($project_id > 0) {
             $data['project'] = array('eq', $project_id);
         }
