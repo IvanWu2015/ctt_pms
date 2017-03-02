@@ -52,12 +52,15 @@ class api extends Common {
         //筛选条件
         $data['t.assignedTo'] = array('eq',$this->_G['username']);
         $data['e.date'] = array('like',"%$date%");
+        $or_data['t.assignedTo'] = array('eq',$this->_G['username']);
+        $or_data['e.date'] = array('gt',$date);
         //工时表为主
         $calendar_list = DB('Taskestimate')
                 ->alias('e')
                 ->join('chinatt_pms_task t', 'e.task = t.id', 'left')
                 ->field('e.date as start,t.name as title,t.id as tid')
                 ->where($data)
+                ->whereOr($or_data)
                 ->select();
         foreach ($calendar_list as $key => $value){
             $calendar_list[$key]['href'] = url('index/task/detail?id='.$value['tid']);
