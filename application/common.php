@@ -824,6 +824,8 @@ function format_task($task_list){
             $task_list['typename'] = "事务";
         }elseif($task_list['type'] == 'misc'){
             $task_list['typename'] = "其他";
+        }elseif($task_list['type'] == 'BUG'){
+            $task_list['typename'] = "BUG";
         }
         return $task_list;
     }  else {

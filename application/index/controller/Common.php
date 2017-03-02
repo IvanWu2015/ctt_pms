@@ -62,6 +62,7 @@ class Common extends \think\Controller {
             'ui' => '界面',
             'affair' => '事务',
             'misc' => '其他',
+            'BUG' => '修复BUG',
         ];
 
         //用户列表

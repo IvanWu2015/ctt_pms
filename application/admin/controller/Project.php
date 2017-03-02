@@ -18,7 +18,6 @@ class Project extends Common {
     $project = db('Project');
     $data['deleted'] = array('EQ','0');
     $project_list = Db::name('Project')->where($data)->order("id DESC")->paginate(15);
-    
     $page = $project_list->render(); // 分页显示输出
     //将对象转为数组
         $project_list = $project_list->toArray();

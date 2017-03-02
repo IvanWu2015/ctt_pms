@@ -55,7 +55,7 @@
                 <td class="ac">{$task['openedDate']}</td>
                 <td class="ac">{$task['assignedDate']}</td>
                 <td class="ac iconfont">
-                    <a href="{:url('/index/task/add/?id='.$task['id'])}" class="btn-link rkwt">&#xe71d;</a>
+                    <a href="{:url('/index/task/add/?task_id='.$task['id'])}" class="btn-link rkwt">&#xe71d;</a>
                     <a href="{:url('/admin/task/lists/?deleted=1&id='.$task['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该任务吗？');" title="删除">&#xe601;</a>
                 </td>
               </tr>

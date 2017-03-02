@@ -18,7 +18,6 @@ class Mycenter extends Common {
 
     //首页
     public function index() {
-        
         $estimate_count = DB::name('Task')->where(['assignedTo' => $this->_G['username'], 'deleted' => 0])->sum('estimate');
         $consumed_count = DB::name('taskestimate')->where(['username' => $this->_G['username']])->sum('consumed');
 
@@ -137,6 +136,7 @@ class Mycenter extends Common {
     public function task_list() {
         $username = get_username();
         $status = input('get.status', 'unclose', 'addslashes');
+        $project_id = input('get.project_id', '0', 'intval');
         $map['assignedTo'] = $username;
         if ($status == 'unclose') {
             $map['status'] = array('in', 'wait,doing');
@@ -145,11 +145,23 @@ class Mycenter extends Common {
         } elseif (!empty($status)) {
             $map['status'] = $status;
         }
+        if($project_id > 0){
+            $map['project'] = array('eq',$project_id);
+        }
+        $project_list = DB::name('Team')
+                ->alias('t')
+                ->join('chinatt_pms_project p', 't.project = p.id', 'left')
+                ->field('t.*,p.name,p.id as project_id,p.deleted')
+                ->where([ 't.username' => $this->_G['username']])
+                ->order('id desc')
+                ->paginate(10);
         $task_count = DB::table('chinatt_pms_task')->where($map)->count();
         $task_list = DB::table('chinatt_pms_task')->where($map)->order("id DESC")->paginate(20, $task_count, ['path' => url('/index/mycenter/task_list/'), 'query' => ['username' => $username]]);
         $navtitle = '个人中心';
         $show = $task_list->render(); // 分页显示输出
-
+        
+        $this->assign('project_id',$project_id);
+        $this->assign('project_list',$project_list);
         $this->assign('page', $show);
         $this->assign('task_list', $task_list);
         $this->assign('status', $status);

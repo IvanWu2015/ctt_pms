@@ -9,27 +9,30 @@ use Page;
 load_trait('controller/Jump');  // 引入traits\controller\Jump
 
 class User extends Common {
+
     public function index() {
         return $this->fetch($this->templatePath);
     }
+
     public function lists() {   //用户列表
-       $user_list = db('User')
+        $user_list = db('User')
                 ->alias('u')
                 ->join('chinatt_pms_dept d', 'u.dept = d.id', 'left')
                 ->join('chinatt_pms_group g', 'u.groupid = g.id')
                 ->field('u.*,d.name as depe_name,g.name as group_name')
                 ->where(['deleted' => 0])
                 ->order('uid DESC')
-               ->paginate(10);
-       $user_list = user_count($user_list);
-       
-       
-       $navtitle = '用户列表' . $this->navtitle;
-       $this->assign('navtitle', $navtitle);
-        $this->assign('user_list',$user_list); 
+                ->paginate(10);
+        $show = $user_list->render(); // 分页显示输出
+        $user_list = user_count($user_list);
+
+        $navtitle = '用户列表' . $this->navtitle;
+        $this->assign('navtitle', $navtitle);
+        $this->assign('page', $show);
+        $this->assign('user_list', $user_list);
         return $this->fetch($this->templatePath);
     }
-    
+
     public function detail() {   //用户详情
         $uid = input('get.uid', 0, 'intval');
         $username = input('get.username', '', 'addslashes');
@@ -92,7 +95,7 @@ class User extends Common {
         $navtitle = '个人中心' . $this->navtitle;
         $this->assign('same_month_consumed_count', $same_month_consumed_count);
         $this->assign('same_month_estimate_count', $same_month_estimate_count);
-        $this->assign('not_status_count',$not_status_count);
+        $this->assign('not_status_count', $not_status_count);
         $this->assign('my_article_count', $my_article_count);
         $this->assign('my_weburl_count', $my_weburl_count);
         $this->assign('my_action_count', $my_action_count);
@@ -105,11 +108,8 @@ class User extends Common {
         $this->assign('task_list', $task_list);
         $this->assign('user', $user);
         $this->assign('navtitle', $navtitle);
-        
+
         return $this->fetch($this->templatePath);
     }
-    
+
 }
-
-
-
