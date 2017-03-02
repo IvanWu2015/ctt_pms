@@ -70,7 +70,7 @@ ul.left_nav{ width:260px; height:100%; overflow-y:auto; background:#1b2b38; bord
 ul.left_nav li{ width:100%; height:55px; line-height:55px; text-align:left; font-size:14px; float:left; padding-left:10px; background:#1b2b38; color:#91a4b3; border-bottom:none; position:relative;}
 ul.left_nav li:hover{ color:#fff; background:#1579C7 url(../../images/navattr.png) no-repeat right center; background-size:7px 20px; border-right:1px #0e90d2 solid;}
 ul.left_nav li span{ font-size:18px; width:30px; height:55px; display:block; float:left;}
-ul.left_nav li.navattr{ color:#fff; background:#1579C7 url(../../images/navattr.png) no-repeat right center; background-size:7px 20px; border-right:1px #0e90d2 solid;}
+ul.left_nav li.navattr{ color:#fff; background:#1579C7 url(../../images/navattr.png) no-repeat right center; background-size:7px 20px; border-right:none;}
 ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:block; border-radius:2px; padding:0px 10px; background:#d9534f; position:absolute; top:15px; right:30px;}
 
 .guesstid{ width:100%; height:35px; float:left; position:relative; margin-top:3px;}

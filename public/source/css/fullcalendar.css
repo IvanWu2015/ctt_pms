@@ -255,8 +255,8 @@ a.fc-event {
 	}
 	
 .fc-event-skin {
-	border-color: #36c;     /* default BORDER color */
-	background: #36c !important; /* default BACKGROUND color */
+	border-color: #339BCC;     /* default BORDER color */
+	background: #339BCC !important; /* default BACKGROUND color */
 	color: #fff;            /* default TEXT color */
 	}
 	
@@ -264,8 +264,6 @@ a.fc-event {
 	position: relative;
 	width: 100%;
 	height: 100%;
-	border-style: solid;
-	border-width: 0;
 	overflow: hidden;
 	}
 	
@@ -273,7 +271,7 @@ a.fc-event {
 .fc-event-title {
 	padding: 0 1px;
 	}
-	
+.fc-event-title a{ color:#fff;}
 .fc .ui-resizable-handle { /*** TODO: don't use ui-resizable anymore, change class ***/
 	display: block;
 	position: absolute;
@@ -291,6 +289,7 @@ a.fc-event {
 .fc-event-hori {
 	border-width: 1px 0;
 	margin-bottom: 1px;
+    border-radius:3px;
 	}
 	
 /* resizable */
