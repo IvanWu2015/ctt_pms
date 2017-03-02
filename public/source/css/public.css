@@ -394,7 +394,7 @@ img{ border:none;}
 
 
 /*个人中心*/
-ul.left_nav{ width:260px; height:100%; overflow-y:auto; background:#f7f7f7; border-right:1px #e8e8e8 solid; position:fixed; top:80px; left:0px;}
+ul.left_nav{ width:260px; height:100%; background:#f7f7f7; border-right:1px #e8e8e8 solid; position:fixed; top:80px; left:0px;}
 ul.left_nav li{ width:100%; height:55px; line-height:55px; text-align:left; font-size:14px; float:left; padding-left:10px; background:#fff; color:#000; border-bottom:1px #e8e8e8 solid; position:relative;}
 ul.left_nav li:hover{ color:#0e90d2; background:#fff url(../images/navattr02.png) no-repeat right center; background-size:7px 20px; border-right:1px #0e90d2 solid;}
 ul.left_nav li span{ font-size:18px; width:30px; height:55px; display:block; float:left;}
