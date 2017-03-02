@@ -18,7 +18,7 @@ class User extends Common {
         $user_list = db('User')
                 ->alias('u')
                 ->join('chinatt_pms_dept d', 'u.dept = d.id', 'left')
-                ->join('chinatt_pms_group g', 'u.groupid = g.id')
+                ->join('chinatt_pms_group g', 'u.groupid = g.id', 'left')
                 ->field('u.*,d.name as depe_name,g.name as group_name')
                 ->where(['deleted' => 0])
                 ->order('uid DESC')
