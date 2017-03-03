@@ -45,7 +45,7 @@ class Task extends Common {
                 write_action($this->_G['username'], $task['project'], 'task', $task_id, 'commented', trim(input('param.work')));
                 $this->success("成功添加", url("/Index/Task/detail/?id=$task_id"));
             }
-            //工时
+            //记录工时
             if ($type == 'taskestimate') {
                 $work_data = [
                     'username' => $this->_G['username'],
@@ -58,17 +58,16 @@ class Task extends Common {
                     $work_data['consumed'] = $consumed;
                 }
                 DB::name('Task')->where(['id' => $task_id])->setInc('consumed', $consumed);
-                $action_id = DB::table('chinatt_pms_taskestimate')->insertGetId($work_data);
-                write_action($this->_G['username'], $task['project'], 'task', $task_id, 'recordestimate', '', $action_id);
+                $taskestimate_id = DB::table('chinatt_pms_taskestimate')->insertGetId($work_data);
+                write_action($this->_G['username'], $task['project'], 'task', $task_id, 'recordestimate', '', $taskestimate_id);
                 $message = array('result' => 'success', 'error' => '');
                 $data = json_encode($message);
                 echo $data;
                 exit();
-            }
-            if ($type == 'task') {
-                //关闭
+            //任务状态更新
+            } elseif ($type == 'task') {
+                //关闭任务
                 if ($ac == 'closed') {
-
                     $task_data = [
                         'status' => 'closed',
                         'closedBy' => $this->_G['username'],
@@ -79,20 +78,29 @@ class Task extends Common {
                     }
                     DB::table('chinatt_pms_taask')->where(['id' => $task_id])->update($task_data);
                     write_action($this->_G['username'], $task['project'], 'task', $task_id, 'closed');
-                }
-
-                //完成
-                if ($ac == 'done') {
+                    //完成任务
+                } elseif ($ac == 'done') {
                     $task_data = [
                         'status' => 'done',
                         'finishedBy' => $this->_G['username'],
                         'finishedDate' => date('Y-m-d H:i:s'),
                     ];
-                    
+                    //如果已输入工时
                     if ($consumed > 0) {
                         DB::name('Task')->where(['id' => $task_id])->setInc('consumed', $consumed);
+                        //工时信息写入
+                        $work_data = [
+                            'username' => $this->_G['username'],
+                            'task' => $task_id,
+                            'work' => trim(input('param.work')),
+                            'date' => date('Y-m-d'),
+                            'left' => input('left', 0, 'input'), //剩余
+                        ];
+                        $taskestimate_id = DB::table('chinatt_pms_taskestimate')->insertGetId($work_data);
+                        //如果未输入工时
                     } else {
                         $estimate_list = DB::name('taskestimate')->where(['task' => $task_id])->select();
+                        //总工时为0 不允许提交
                         if (empty($estimate_list)) {
                             $message = array('error' => '参数错误');
                             $data = json_encode($message);
@@ -100,11 +108,11 @@ class Task extends Common {
                             exit();
                         }
                     }
-                    //$estimate_id = DB::table('chinatt_pms_taskestimate')->insertGetId($task_data);
+
                     DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
-                    write_action($this->_G['username'],$task['project'], 'task', $task_id, 'done');
-                }
-                if ($action == 'assign') {
+                    write_action($this->_G['username'], $task['project'], 'task', $task_id, 'done');
+                    //指派任务
+                } elseif ($action == 'assign') {
                     $task_data = [
                         'finishedBy' => $this->_G['username'],
                         'finishedDate' => date('Y-m-d H:i:s'),
@@ -152,7 +160,7 @@ class Task extends Common {
                 'work' => trim(input('param.work')),
                 'consumed' => input('post.consumed', '0', 'intval'), //消耗
                 'date' => date('Y-m-d'),
-                'left' => input('param.left'), //剩余
+                'left' => input('param.left', 0, 'intval')//剩余
             ];
 
             $task_data = [
@@ -221,11 +229,10 @@ class Task extends Common {
             if ($task_id > 0) {
                 DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
                 //操作记录
-                write_action($this->_G['username'], $project_id, 'task', $task_id, 'updata', trim(input('param.desc')));
+                write_action($this->_G['username'], $project_id, 'task', $task_id, 'updata');
                 $this->success("修改成功", url("/Index/Project/detail/?id=$project_id"));
                 exit;
             } else {
-
                 $task_id = DB::table('chinatt_pms_task')->insertGetId($task_data);
                 //操作记录
                 write_action($this->_G['username'], $project_id, 'task', $task_id, 'opened');
@@ -244,6 +251,3 @@ class Task extends Common {
     }
 
 }
-
-
-
