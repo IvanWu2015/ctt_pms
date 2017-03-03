@@ -8,9 +8,10 @@
 {block name="body"}
 
 {include file="mycenter/nav" /}
-<link href="tpl_css/fullcalendar.css" rel="stylesheet">
-<link href="tpl_css/fullcalendar.print.css" rel="stylesheet">
+
 <link href="tpl_css/style.css" rel="stylesheet">
+
+
 
 <div class="rightcon sizing"><!-- 右边内容 -->
     
@@ -56,21 +57,7 @@
         
         <div class="publicdiv pl20 pr20 mt20 sizing">
             <div class="w60 z pr10 sizing"><!--日程安排-->
-                <div id="content">
-                    <div class="main">
-                        <div class="content">
-                            <div class="row-fluid">
-                                <div class="span12">
-                                    <div class="box">
-                                        <div class="box-content box-nomargin">
-                                            <div class="calendar"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>	
-                    </div>
-                </div>
+                <div id='calendar'></div>
             </div><!--日程安排-->
             <div class="w40 z pl10 sizing">
             <div class="w100"><!--待完成任务-->
@@ -120,9 +107,10 @@
             </div><!--我的文档-->
             </div>
         </div>
-        <script type="text/javascript" src="tpl_js/jquery.min.js"></script>
-        <script type="text/javascript" src="tpl_js/custom.js"></script>
-        <script type="text/javascript" src="tpl_js/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="tpl_js/jquery.min.js"></script>
+    <script type="text/javascript" src="tpl_js/moment.min.js"></script>
+    <script type="text/javascript" src="tpl_js/fullcalendar.js"></script>
+    <link href="tpl_css/fullcalendar.css" rel="stylesheet">
         <script>
         var date = new Date();
         var d = date.getDate();
@@ -130,14 +118,13 @@
         var y = date.getFullYear();
         var url='{:url('index/api/getworkdata')}';
         
-        if($('.calendar').length > 0){
             $.ajax({
                 type:'post',
                 url:url,
                 data:{year:y,month:m,day:0},
                 dataType:'json',
                 success:function(data){
-                    $('.calendar').fullCalendar({
+                    /*$('.calendar').fullCalendar({
                         header: {
                             left: 'prev,next,today',
                             center: 'title',
@@ -149,11 +136,22 @@
                         editable: true,
                         //start: new Date(年,月,日,时,分),)
                         events:data
+                    });*/
+                    $('#calendar').fullCalendar({
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'month,basicWeek,basicDay'
+                        },
+                        defaultDate: '2017-02-12',
+                        navLinks: true, // can click day/week names to navigate views
+                        editable: true,
+                        eventLimit: true, // allow "more" link when too many events
+                        events: data
                     });
                 }
             })
             
-        }
         </script>
         
         <div class="publicdiv pl20 pr20 mt20 mb20 sizing">
