@@ -12,7 +12,11 @@
     <div class="publicdiv pl15 sizing">
         <div class="publicdiv pb20 bf">
             <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
-                <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/sort/add')}');" class="btnp">添加分类</a>
+                <a href="{:url('/admin/sort/lists?type=article')}"  class="btnp">文章类型</a>
+                <a href="{:url('/admin/sort/lists?type=weburl')}"  class="btnp">网址类型</a>
+            </div>
+            <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
+                <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/sort/add?type='.$type)}');" class="btnp">添加分类</a>
             </div>
             <form action="{:url('/admin/sort/lists')}" method="post" class="form-horizontal" role="form">
                 <table class="table">

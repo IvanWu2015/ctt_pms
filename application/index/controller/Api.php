@@ -50,10 +50,12 @@ class api extends Common {
         //组合日期
         $date = $year . $month  . $firstday;
         //筛选条件
-        $data['t.assignedTo'] = array('eq',$this->_G['username']);
+//        $data['t.assignedTo'] = array('eq',$this->_G['username']);
+        $data['e.username'] = array('eq',  $this->_G['username']);
         $data['e.date'] = array('like',"%$date%");
-        $or_data['t.assignedTo'] = array('eq',$this->_G['username']);
+//        $or_data['t.assignedTo'] = array('eq',$this->_G['username']);
         $or_data['e.date'] = array('gt',$date);
+        $or_data['e.username'] = array('eq',  $this->_G['username']);
         //工时表为主
         $calendar_list = DB('Taskestimate')
                 ->alias('e')
