@@ -16,6 +16,7 @@ class Sort extends Common {
 
     public function add() {
         $class_id = input('get.id', '0', 'intval');
+        $type = input('get.type', '', 'addslashes');
         $sort_list = DB('Class')->where(['status' => 1])->select();
         if ($class_id > 0) {
             $class_detail = DB('Class')->where(['status' => 1, 'id' => $class_id])->find();
@@ -29,9 +30,8 @@ class Sort extends Common {
                 'name' => input('param.name'),
                 'parentid' => input('param.parentid'),
                 'status' => 1,
-                'type' => 'weburl',
+                'type' => $type,
             ];
-
             if ($class_id > 0) {
                 DB('Class')->where(['id' => $class_id])->update($class_data);
                 //操作记录
@@ -51,6 +51,7 @@ class Sort extends Common {
             }
         }
         $navtitle = '分类列表' . $class_detail['name'];
+        $this->assign('type',$type);
         $this->assign('navtitle', $navtitle);
         $this->assign('class_id', $class_id);
         $this->assign('class_detail', $class_detail);
@@ -69,6 +70,7 @@ class Sort extends Common {
         $page = $class_list->render(); // 分页显示输出
         $deleted = input('get.deleted', '0', 'intval');
         $class_id = input('get.id', '0', 'intval');
+        $type = input('get.type','article','addslashes');
         if ($deleted > 0) {
             $class = DB::name('Class')->where(['id' => $class_id, 'status' => 1])->find();
             if (empty($class)) {
@@ -79,6 +81,7 @@ class Sort extends Common {
             }
         }
         $navtitle = '分类列表';
+        $this->assign('type',$type);
         $this->assign('navtitle', $navtitle);
         $this->assign('page', $page);
         $this->assign('class_list', $class_list);

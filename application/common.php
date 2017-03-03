@@ -17,6 +17,7 @@
  * 系统公共库文件
  * 主要定义系统公共函数库
  */
+
 /**
  * 检测用户是否登录
  * @return integer 0-未登录，大于0-当前登录用户ID
@@ -654,7 +655,7 @@ function get_project_consume($pros) {
         $pros['all_time'] = $count_data['estimate_count'];  //总预计时间
         $pros['consumed_count'] = $count_data['consumed_count'];  //总消耗时间
         $pros['left_time'] = $pros['all_time'] - $pros['consumed_count'];  //总消耗时间
-        
+
         if ($pros['estimate_count'] > 0) {
             $pros['percent'] = round($pros['estimate_count'] / $pros['all_time'] * 100, 2); //以预计时间计算的进度
         } else {
@@ -701,8 +702,6 @@ function get_userlist_by_projectid($project_id) {
     return $user_list;
 }
 
-
-
 /**
  * 写入动态
  * @param $username - 用户名
@@ -714,7 +713,7 @@ function get_userlist_by_projectid($project_id) {
  * @param $extra - 对象名称
  * @return 返回字符串
  */
-function write_action($username, $project_id, $objectType, $objectid, $action, $comment = '',$extra='') {
+function write_action($username, $project_id, $objectType, $objectid, $action, $comment = '', $extra = '') {
     $action_data = array(
         'actor' => $username,
         'project' => $project_id,
@@ -729,21 +728,20 @@ function write_action($username, $project_id, $objectType, $objectid, $action, $
     return;
 }
 
-
 /**
  * 获取项目动态列表
  * @param int $task_id 任务ID
  */
-function analysis($task_id){
+function analysis($task_id) {
 //  $action_list = DB('Action')->where(['objectID' => $task_id])->order('id')->select();
     $action_list = DB('Action')
-             ->alias('a')
-             ->join('chinatt_pms_taskestimate b', 'a.extra =b.id','left')
-             ->field('a.*,b.left,b.consumed,b.username')
-             ->where("a.objectID = $task_id AND a.objectType = 'task'")
+            ->alias('a')
+            ->join('chinatt_pms_taskestimate b', 'a.extra =b.id', 'left')
+            ->field('a.*,b.left,b.consumed,b.username')
+            ->where("a.objectID = $task_id AND a.objectType = 'task'")
             ->order('a.date')
-             ->select();
-   $action_list = analysis_all($action_list);
+            ->select();
+    $action_list = analysis_all($action_list);
     return $action_list;
 }
 
@@ -751,53 +749,52 @@ function analysis($task_id){
  * 获取项目动态列表
  * @param int $action_list 对象列表
  */
-function analysis_all($action_list){
+function analysis_all($action_list) {
 //    $action_list = DB('Action')->where(['objectID' => $task_id])->order('id')->select();
-    foreach ($action_list as $key => $value){
-        if($value['objectType'] == 'product'){
+    foreach ($action_list as $key => $value) {
+        if ($value['objectType'] == 'product') {
             $value['typename'] = "产品";
-        }elseif($value['objectType'] == 'project'){
+        } elseif ($value['objectType'] == 'project') {
             $value['typename'] = "项目";
-        }elseif($value['objectType'] == 'task'){
+        } elseif ($value['objectType'] == 'task') {
             $value['typename'] = "任务";
-        }elseif($value['objectType'] == 'user'){
+        } elseif ($value['objectType'] == 'user') {
             $value['typename'] = "用户";
-        }elseif($value['objectType'] == 'bug'){
+        } elseif ($value['objectType'] == 'bug') {
             $value['typename'] = "BUG";
-        }elseif($value['objectType'] == 'build'){
-           $value['typename'] = "创建";
+        } elseif ($value['objectType'] == 'build') {
+            $value['typename'] = "创建";
         }
-        
-        if($value['action'] == 'assignedTo'){
+
+        if ($value['action'] == 'assignedTo') {
             $username = $action_list[$key]['extra'];
-           $value['actionname'] = "指派给 <b>$username</b>";
-        }elseif($value['action'] == 'closed'){
-           $value['actionname'] = "关闭";
-        }elseif($value['action'] == 'finished'){
-          $value['actionname'] = "完成";
-        }elseif($value['action'] == 'opened'){
-          $value['actionname'] = "创建";
-        }elseif($value['action'] == 'login'){
-           $value['actionname'] = "登陆";
-        }elseif($value['action'] == 'edited'){
+            $value['actionname'] = "指派给 <b>$username</b>";
+        } elseif ($value['action'] == 'closed') {
+            $value['actionname'] = "关闭";
+        } elseif ($value['action'] == 'finished') {
+            $value['actionname'] = "完成";
+        } elseif ($value['action'] == 'opened') {
+            $value['actionname'] = "创建";
+        } elseif ($value['action'] == 'login') {
+            $value['actionname'] = "登陆";
+        } elseif ($value['action'] == 'edited') {
             $value['actionname'] = "登出";
-        }elseif($value['action'] == 'changed'){
+        } elseif ($value['action'] == 'changed') {
             $value['actionname'] = "修改";
-        }elseif($value['action'] == 'resolved'){
-           $value['actionname'] = "暂停";
-        }elseif($value['action'] == 'update'){
+        } elseif ($value['action'] == 'resolved') {
+            $value['actionname'] = "暂停";
+        } elseif ($value['action'] == 'update') {
             $value['actionname'] = "修改";
-        }elseif($value['action'] == 'started'){
-           $value['actionname'] = "开始";
-        }elseif($value['action'] == 'done'){
-           $value['actionname'] = "完成{$value['consumed']}";
-        }elseif($value['action'] == 'recordestimate'){
-           $value['actionname'] = "记录工时,消耗{$value['consumed']}小时,剩余{$value['left']}小时";
-        }elseif($value['action'] == 'commented'){
+        } elseif ($value['action'] == 'started') {
+            $value['actionname'] = "开始";
+        } elseif ($value['action'] == 'done') {
+            $value['actionname'] = "完成{$value['consumed']}";
+        } elseif ($value['action'] == 'recordestimate') {
+            $value['actionname'] = "记录工时,消耗{$value['consumed']}小时,剩余{$value['left']}小时";
+        } elseif ($value['action'] == 'commented') {
             $value['actionname'] = "添加了备注";
         }
         $action_list[$key] = $value;
-        
     }
     return $action_list;
 }
@@ -806,32 +803,32 @@ function analysis_all($action_list){
  * 格式化任务
  * @param int $action_list 任务列表
  */
-function format_task($task_list){
-    if($task_list['id'] > 0){
-        if($task_list['type'] == 'devel'){
+function format_task($task_list) {
+    if ($task_list['id'] > 0) {
+        if ($task_list['type'] == 'devel') {
             $task_list['typename'] = "开发";
-        }elseif($task_list['type'] == 'design'){
+        } elseif ($task_list['type'] == 'design') {
             $task_list['typename'] = "设计";
-        }elseif($task_list['type'] == 'test'){
+        } elseif ($task_list['type'] == 'test') {
             $task_list['typename'] = "测试";
-        }elseif($task_list['type'] == 'study'){
+        } elseif ($task_list['type'] == 'study') {
             $task_list['typename'] = "研究";
-        }elseif($task_list['type'] == 'discuss'){
+        } elseif ($task_list['type'] == 'discuss') {
             $task_list['typename'] = "讨论";
-        }elseif($task_list['type'] == 'ui'){
+        } elseif ($task_list['type'] == 'ui') {
             $task_list['typename'] = "界面";
-        }elseif($task_list['type'] == 'affair'){
+        } elseif ($task_list['type'] == 'affair') {
             $task_list['typename'] = "事务";
-        }elseif($task_list['type'] == 'misc'){
+        } elseif ($task_list['type'] == 'misc') {
             $task_list['typename'] = "其他";
-        }elseif($task_list['type'] == 'BUG'){
+        } elseif ($task_list['type'] == 'BUG') {
             $task_list['typename'] = "BUG";
         }
         return $task_list;
-    }  else {
-    foreach ($task_list as $key => $value){
-        $task_list[$key] = format_task($value);
-    }
+    } else {
+        foreach ($task_list as $key => $value) {
+            $task_list[$key] = format_task($value);
+        }
     }return $task_list;
 }
 
@@ -839,8 +836,8 @@ function format_task($task_list){
  * 获取用户各类总数
  * @param int $action_list 任务列表
  */
-function user_count($user_lists){
-    if($user_lists['uid'] > 0){
+function user_count($user_lists) {
+    if ($user_lists['uid'] > 0) {
         //发布任务总数
         $task_count = DB('User')
                 ->alias('u')
@@ -854,16 +851,16 @@ function user_count($user_lists){
                 ->field('u.username,t.*')
                 ->where(['p.openedBy' => $user_lists['username']])
                 ->count();
-        $task_data['t.status'] = array('in','close,done');
-        $task_data['t.assignedTo'] = array('eq',$user_lists['username']);
+        $task_data['t.status'] = array('in', 'close,done');
+        $task_data['t.assignedTo'] = array('eq', $user_lists['username']);
         $done_task_count = DB('User')
                 ->alias('u')
                 ->join('chinatt_pms_task t', 'u.username = t.assignedTo', 'left')
                 ->field('u.username,t.*')
                 ->where($task_data)
                 ->count();
-        $not_task['t.status'] = array('in','wait,doing');
-        $not_task['t.assignedTo'] = array('eq',$user_lists['username']);
+        $not_task['t.status'] = array('in', 'wait,doing');
+        $not_task['t.assignedTo'] = array('eq', $user_lists['username']);
         $not_task_count = DB('User')
                 ->alias('u')
                 ->join('chinatt_pms_task t', 'u.username = t.assignedTo', 'left')
@@ -875,13 +872,10 @@ function user_count($user_lists){
         $user_lists['done_task_count'] = $done_task_count;
         $user_lists['not_task_count'] = $not_task_count;
         return $user_lists;
-    }  else {
-        foreach ($user_lists as $key => $value){
+    } else {
+        foreach ($user_lists as $key => $value) {
             $user_lists[$key] = user_count($value);
         }
     }
-    
     return $user_lists;
-    
-    
 }
