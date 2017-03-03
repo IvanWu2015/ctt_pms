@@ -8559,7 +8559,6 @@ var View = FC.View = Class.extend(EmitterMixin, ListenerMixin, {
 
 
 	// Computes the new date when the user hits the prev button, given the current date
-	//点击上一月处理
     computePrevDate: function(date) {
 		return this.massageCurrentDate(
 			date.clone().startOf(this.intervalUnit).subtract(this.intervalDuration), -1
@@ -8568,9 +8567,7 @@ var View = FC.View = Class.extend(EmitterMixin, ListenerMixin, {
 
 
 	// Computes the new date when the user hits the next button, given the current date
-    //点击下一月处理
 	computeNextDate: function(date) {
-        alert(date);
 		return this.massageCurrentDate(
 			date.clone().startOf(this.intervalUnit).add(this.intervalDuration)
             
