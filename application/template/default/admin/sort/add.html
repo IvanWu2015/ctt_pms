@@ -29,7 +29,7 @@
 </div>
 <script>
 function modalsearch(){     //ajax提交
-    var url="{:url('/admin/sort/add?id='.$class_detail['id'])}";
+    var url="{:url('/admin/sort/add?type='.$type.'&id='.$class_detail['id'])}";
     jQuery.ajax({
         type: 'post',
         url: url,

@@ -36,7 +36,8 @@ class Action extends Common {
                 ->join('chinatt_pms_user u','a.actor = u.username','left')
                 ->field('a.*,p.name as parent_name,p.status,u.realname')
                 ->where($map)
-                ->paginate(10, $action_count, ['path' => url('/admin/action/lists/'), 'query' => ['project_id' => $project_id]]);
+                ->order('id DESC')
+                ->paginate(50, $action_count, ['path' => url('/admin/action/lists/'), 'query' => ['project_id' => $project_id]]);
         $action_list = analysis_all($action_list);
         $page = $action_list->render(); // 分页显示输出
         $project_list = db('Project')->where(['deleted' => 0])->select();
