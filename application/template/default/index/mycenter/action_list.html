@@ -18,8 +18,8 @@
                 <table class="table table-striped borl bort borr borb">
                     <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
                         <tr>
-                            <th class="ac bbno pt15 pb15">项目名称</th>
-                            <th class="bbno pt15 pb15">动态</th>
+                            <th class="bbno pt15 pb15">项目名称</th>
+                            <th class="ac bbno pt15 pb15">动态</th>
                             <th class="ac bbno pt15 pb15">类型</th>
                             <th class="ac bbno pt15 pb15">操作者</th>
                             <th class="ac bbno pt15 pb15">动作</th>
@@ -29,8 +29,8 @@
                     <tbody>
                         {foreach $action_list as $project}
                         <tr>
-                            <td class="ac">{$project['parent_name']}</td>
-                            <td class="">
+                            <td class="">{$project['parent_name']}</td>
+                            <td class="ac">
                                 {if condition="$project['action'] eq 'opened'"}创建了
                                 {if condition="$project['objectType'] eq 'project'"}{$project['project_name']}项目{elseif condition="$project['objectType'] eq 'task'"}{$project['task_name']}{/if}
                                 {/if}
