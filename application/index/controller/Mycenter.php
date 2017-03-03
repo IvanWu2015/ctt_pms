@@ -20,7 +20,6 @@ class Mycenter extends Common {
     public function index() {
         $estimate_count = DB::name('Task')->where(['assignedTo' => $this->_G['username'], 'deleted' => 0])->sum('estimate');
         $consumed_count = DB::name('taskestimate')->where(['username' => $this->_G['username']])->sum('consumed');
-
         $my_task_count = DB::name('Task')->where(['assignedTo' => $this->_G['username'], 'deleted' => 0])->count();
         $my_action_count = DB::name('Action')->where(['actor' => $this->_G['username']])->count();
         $my_weburl_count = DB::name('Weburl')->where(['uid' => $this->_G['uid'], 'status' => 0])->count();
