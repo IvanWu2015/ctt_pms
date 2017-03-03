@@ -22,8 +22,8 @@ ul.data_statistics li:hover .aict{ transform:rotate(90deg); font-size:125px; lef
 ul.data_statistics li h3{ font-size:25px; position:absolute; top:20px; right:10px;transition-duration:.5s; -webkit-transition-duration:.5s;}
 ul.data_statistics li:hover h3{ transform:rotate(360deg);}
 ul.data_statistics li p{ margin:0px; font-size:13px; position:absolute; bottom:10px; left:10px;}
-.dcs01{ background:#f1b84d;}
-.dcs01:hover{ color:#ffdd9c;}
+.dcs01{ background:#F37B53;}
+.dcs01:hover{ color:#ffac91;}
 .dcs02{ background:#c37ad6;}
 .dcs02:hover{ color:#e998ff;}
 .dcs03{ background:#65a9da;}
