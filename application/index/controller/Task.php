@@ -94,6 +94,7 @@ class Task extends Common {
                             'task' => $task_id,
                             'work' => trim(input('param.work')),
                             'date' => date('Y-m-d'),
+                            'consumed' => $consumed,
                             'left' => input('left', 0, 'input'), //剩余
                         ];
                         $taskestimate_id = DB::table('chinatt_pms_taskestimate')->insertGetId($work_data);
