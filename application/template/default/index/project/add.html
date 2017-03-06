@@ -28,13 +28,23 @@
                         </div>
                     </div>
                     
-                    <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label" style="width:130px;">项目负责人：</label>
-                        <div class="col-sm-10 pln prn" style="width:910px;">
+                    <div class="form-group w50 mrn mln z">
+                        <label class="col-sm-3 control-label">项目负责人：</label>
+                        <div class="col-sm-9 pln prn">
                             <select class="form-control" name='project_admin'>
                                 {foreach $user_list as $user}
                                 <option value="{$user['username']}"  {eq name="user.username" value="$project_details['project_admin']"}selected="selected"{/eq}    >{$user['realname']}</option>
                                 {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group w50 mrn mln z">
+                        <label class="col-sm-3 control-label" >访问控制：</label>
+                        <div class="col-sm-9 pln prn">
+                            <select class="form-control" name='acl'>
+                                <option value="open"  {eq name="$project_details['acl']" value="open"}selected="selected"{/eq} >公开</option>
+                                <option value="private"  {eq name="$project_details['acl']" value="private"}selected="selected"{/eq} >私有</option>
+                                <option value="custom"  {eq name="$project_details['acl']" value="custom"}selected="selected"{/eq} >自定义</option>
                             </select>
                         </div>
                     </div>

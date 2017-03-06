@@ -48,6 +48,10 @@ class Project extends Common {
         $user_list = get_userlist_by_projectid($project_id);
         $project_detail = $project->where(['id' => $project_id])->find();
         $project_detail = get_project_consume($project_detail);
+        //访问权限判断
+        if($project_detail['acl'] == 'private' && !in_array($this->_G['username'], $user_list)) {
+            $this->error('您无该项目访问权限。');
+        }
         $navtitle = $project_detail['name'];
         $this->assign('keyword', $keyword);
         $this->assign('project_detail', $project_detail);
@@ -136,8 +140,10 @@ class Project extends Common {
                 'code' => input('param.code'),
                 'desc' => input('param.desc'),
                 'project_admin' => input('param.project_admin'),
+                'acl' => input('acl', 'open', 'addslashes'),
                 'status' => input('param.status'),
             ];
+            //编辑
             if ($project_id > 0) {
                 if ($_POST['ids']) {
                     if (empty($_POST['username'])) {
@@ -164,7 +170,7 @@ class Project extends Common {
                 write_action($this->_G['username'], $project_id, 'project', $project_id, 'updata',input('param.desc'));
                 //$project->where(['id' => $project_id])->save($pro_data);
                 $this->success("修改成功", url('index/Project/lists'));
-                
+            //新添加
             } else {
                 $add_pro_id = Db::table('chinatt_pms_project')->insertGetId($pro_data);
                 //操作记录

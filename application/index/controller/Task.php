@@ -76,7 +76,7 @@ class Task extends Common {
                     if ($consumed > 0) {
                         $task_data['consumed'] = $consumed;
                     }
-                    DB::table('chinatt_pms_taask')->where(['id' => $task_id])->update($task_data);
+                    DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
                     write_action($this->_G['username'], $task['project'], 'task', $task_id, 'closed');
                     //完成任务
                 } elseif ($ac == 'done') {
@@ -153,6 +153,10 @@ class Task extends Common {
         $project_id = $task_detail['project'];
         $project_detail = DB::name('project')->where(['id' => $project_id])->find();
         $user_list = get_userlist_by_projectid($project_id);
+        //访问权限判断
+        if($project_detail['acl'] == 'private' && !in_array($this->_G['username'], $user_list)) {
+            $this->error('您无该任务访问权限。');
+        }
         if (request()->isPost()) {
             $work_data = [
                 'username' => $this->_G['username'],

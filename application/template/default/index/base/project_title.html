@@ -17,6 +17,8 @@
                 <a href="{:url('/index/weburl/add/?project_id='.$project_id)}" class="btn btn-info">添加收藏</a>
             {elseif condition="$_G['action'] == 'article'"}
                 <a href="{:url('/index/article/add/?project_id='.$project_id)}" class="btn btn-info">添加文档</a>
+            {elseif condition="$_G['action'] == 'info'"}
+                <a href="{:url('/index/project/add/?project_id='.$project_id)}" class="btn btn-info">编辑项目</a>
             {/if}
         </span>
         {/if}
