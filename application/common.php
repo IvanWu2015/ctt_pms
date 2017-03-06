@@ -879,3 +879,21 @@ function user_count($user_lists) {
     }
     return $user_lists;
 }
+
+/**
+ * 判断是否项目成员
+ * @param str $username 用户名
+ * @param array $userlist 项目成员列表
+ * @return boolean 是否项目成员
+ */
+function isProjectUser($username, $userlist) {
+    $username_arr = [];
+    foreach($userlist as $tempuser) {
+        $username_arr[] = $tempuser['username'];
+    }
+    if(in_array($username, $username_arr)) {
+        return true;
+    } else {
+        return false;
+    }
+}

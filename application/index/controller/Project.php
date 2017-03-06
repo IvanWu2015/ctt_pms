@@ -49,7 +49,7 @@ class Project extends Common {
         $project_detail = $project->where(['id' => $project_id])->find();
         $project_detail = get_project_consume($project_detail);
         //访问权限判断
-        if($project_detail['acl'] == 'private' && !in_array($this->_G['username'], $user_list)) {
+        if($project_detail['acl'] == 'private' && !isProjectUser($this->_G['username'], $user_list)) {
             $this->error('您无该项目访问权限。');
         }
         $navtitle = $project_detail['name'];

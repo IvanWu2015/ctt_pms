@@ -154,8 +154,8 @@ class Task extends Common {
         $project_detail = DB::name('project')->where(['id' => $project_id])->find();
         $user_list = get_userlist_by_projectid($project_id);
         //访问权限判断
-        if($project_detail['acl'] == 'private' && !in_array($this->_G['username'], $user_list)) {
-            $this->error('您无该任务访问权限。');
+        if($project_detail['acl'] == 'private' && !isProjectUser($this->_G['username'], $user_list)) {
+            $this->error('您无该项目访问权限。');
         }
         if (request()->isPost()) {
             $work_data = [

@@ -22,11 +22,12 @@ class api extends Common {
         $calendar_list = DB('Taskestimate')
                 ->alias('e')
                 ->join('chinatt_pms_task t', 'e.task = t.id', 'left')
-                ->field('e.date as start,t.name as title,t.id as tid')
+                ->field('e.date as start,t.name as title,t.id as tid, e.consumed')
                 ->where($data)
                 ->select();
         foreach ($calendar_list as $key => $value) {
-            $calendar_list[$key]['href'] = url('index/task/detail?id=' . $value['tid']);
+            $calendar_list[$key]['title'] = $calendar_list[$key]['consumed'].' '.$calendar_list[$key]['title'];
+            $calendar_list[$key]['url'] = url('index/task/detail?id=' . $value['tid']);
         }
         return $calendar_list;
     }
