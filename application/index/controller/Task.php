@@ -59,7 +59,7 @@ class Task extends Common {
                 }
                 DB::name('Task')->where(['id' => $task_id])->setInc('consumed', $consumed);
                 $taskestimate_id = DB::table('chinatt_pms_taskestimate')->insertGetId($work_data);
-                write_action($this->_G['username'], $task['project'], 'task', $task_id, 'recordestimate', '', $taskestimate_id);
+                write_action($this->_G['username'], $task['project'], 'task', $task_id, 'recordestimate', $work_data['work'], $taskestimate_id);
                 $message = array('result' => 'success', 'error' => '');
                 $data = json_encode($message);
                 echo $data;
@@ -111,7 +111,7 @@ class Task extends Common {
                     }
 
                     DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
-                    write_action($this->_G['username'], $task['project'], 'task', $task_id, 'done');
+                    write_action($this->_G['username'], $task['project'], 'task', $task_id, 'done', input('work'));
                     //指派任务
                 } elseif ($action == 'assign') {
                     $task_data = [

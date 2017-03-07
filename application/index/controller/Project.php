@@ -114,6 +114,7 @@ class Project extends Common {
         //已经在该项目的人员
         if ($project_id > 0) {
             $project_detail = $project->where(['id' => $project_id])->find();
+            if($this->_G['username'] !== $project_detail)
             //该项目所有成员
             $old_team_list = $team->where(['project' => $project_id])->select();
             foreach ($old_team_list as $key => $value) {

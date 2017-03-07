@@ -65,7 +65,6 @@ class User extends Common {
             $autologin = input('autologin', 0, 'intval');
             $uid = $User->login($username, $password, $autologin);
             if ($uid > 0) { //登录成功
-                write_action($this->_G['username'], $this->_G['uid'], 'user', 0, 'login');//操作记录
                 $this->success('登录成功！', url('/index/index'), ['status' => 1]);
             } else { //登录失败
                 switch ($uid) {
