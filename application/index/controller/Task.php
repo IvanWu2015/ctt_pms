@@ -47,6 +47,7 @@ class Task extends Common {
             }
             //记录工时
             if ($type == 'taskestimate') {
+                
                 $work_data = [
                     'username' => $this->_G['username'],
                     'task' => $task_id,
@@ -57,6 +58,7 @@ class Task extends Common {
                 if ($consumed > 0) {
                     $work_data['consumed'] = $consumed;
                 }
+                DB::name('Task')->where(['id' => $task_id])->update(['status' => 'doing']);
                 DB::name('Task')->where(['id' => $task_id])->setInc('consumed', $consumed);
                 $taskestimate_id = DB::table('chinatt_pms_taskestimate')->insertGetId($work_data);
                 write_action($this->_G['username'], $task['project'], 'task', $task_id, 'recordestimate', $work_data['work'], $taskestimate_id);

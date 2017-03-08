@@ -34,8 +34,19 @@ class Mycenter extends Common {
         $estimate_map['finishedBy'] = array('eq', $this->_G['username']);
         $estimate_map['finishedDate'] = array('GT', $headDate);
         $same_month_estimate_count = DB::name('Task')->where($estimate_map)->sum('estimate'); //当月预计工时
+        //当前日期 
 
-
+//        $sdefaultDate = date("Y-m-d");
+////$first =1 表示每周星期一为开始日期 0表示每周日为开始日期 
+//        $first = 1;
+////获取当前周的第几天 周日是 0 周一到周六是 1 - 6 
+//        $w = date('w', strtotime($sdefaultDate));
+////获取本周开始日期，如果$w是0，则表示周日，减去 6 天 
+//        $week_start = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
+////本周结束日期 
+//        $week_end = date('Y-m-d', strtotime("$week_start +6 days"));
+        
+        
         $consumed_map['username'] = array('eq', $this->_G['username']);
         $consumed_map['date'] = array('GT', $headDate);
         $same_month_consumed_count = DB::name('Taskestimate')->where($consumed_map)->sum('consumed'); //当月完成工时
@@ -145,8 +156,8 @@ class Mycenter extends Common {
         } elseif (!empty($status)) {
             $map['status'] = $status;
         }
-        if($project_id > 0){
-            $map['project'] = array('eq',$project_id);
+        if ($project_id > 0) {
+            $map['project'] = array('eq', $project_id);
         }
         $project_list = DB::name('Team')
                 ->alias('t')
@@ -159,9 +170,9 @@ class Mycenter extends Common {
         $task_list = DB::table('chinatt_pms_task')->where($map)->order("id DESC")->paginate(20, $task_count, ['path' => url('/index/mycenter/task_list/'), 'query' => ['username' => $username]]);
         $navtitle = '个人中心';
         $show = $task_list->render(); // 分页显示输出
-        
-        $this->assign('project_id',$project_id);
-        $this->assign('project_list',$project_list);
+
+        $this->assign('project_id', $project_id);
+        $this->assign('project_list', $project_list);
         $this->assign('page', $show);
         $this->assign('task_list', $task_list);
         $this->assign('status', $status);
