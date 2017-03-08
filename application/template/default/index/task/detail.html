@@ -21,22 +21,22 @@
         <h3 class="mtn mb10 fwb pb15 fs16 pt15 pl20 pr20 sizing" style="background:#f8fafe; border-bottom:1px solid #e5e5e5;">
             {$task_detail['name']}
             <span class="y derkwt fs13 iconfont">
-                <a href="javascript:void(0);" class="btn-link" title="指派" onClick="loadWindow('{:url(' / index / task / action?ac = assignTo & id = '.$task_id.' & type = assign')}');">&#xe752; 指派</a>
+                <a href="javascript:void(0);" class="btn-link" title="指派" onClick="loadWindow('{:url('/index/task/action?ac=assignTo&id='.$task_id.'&type=assign')}');">&#xe752; 指派</a>
                 {if condition="($task_detail['status'] == 'done') or ($task_detail['status'] == 'doing')"}
                 <a href="javascript:void(0);" class="btn-link cc" title="开始">&#xe621; 开始</a>
                 {else}
-                <a href="javascript:void(0);" class="btn-link" title="开始" onClick="loadWindow('{:url(' / index / task / action?ac = start & id = '.$task_id.' & type = task')}');">&#xe621; 开始</a>
+                <a href="javascript:void(0);" class="btn-link" title="开始" onClick="loadWindow('{:url('/index/task/action?ac=start&id='.$task_id.'&type=task')}');">&#xe621; 开始</a>
                 {/if}
-                <a href="javascript:void(0);" class="btn-link" title="工时" onClick="loadWindow('{:url(' / index / task / action?ac = worktime & id = '.$task_id.' & type = taskestimate')}');">&#xe61e; 工时</a>
+                <a href="javascript:void(0);" class="btn-link" title="工时" onClick="loadWindow('{:url('/index/task/action?ac=worktime&id='.$task_id.'&type=taskestimate')}');">&#xe61e; 工时</a>
                 {if condition="$task_detail['status'] == 'done'"}
                 <a href="javascript:void(0);" class="btn-link cc" title="完成">&#xe619; 完成</a>
                 {else}
-                <a href="javascript:void(0);" class="btn-link" title="完成" onClick="loadWindow('{:url(' / index / task / action?ac = done & id = '.$task_id.' & type = task')}');">&#xe619; 完成</a>
+                <a href="javascript:void(0);" class="btn-link" title="完成" onClick="loadWindow('{:url('/index/task/action?ac=done&id='.$task_id.'&type=task')}');">&#xe619; 完成</a>
                 {/if}
                 {if condition="($task_detail['status'] == 'wait') or ($task_detail['status'] == 'doing')"}
                 <a href="javascript:void(0);" class="btn-link cc" title="关闭">&#xe61c; 关闭</a>
                 {else}
-                <a href="javascript:void(0);" class="btn-link" title="关闭" onClick="loadWindow('{:url(' / index / task / action?ac = close & id = '.$task_id.' & type = task')}');">&#xe61c; 关闭</a>
+                <a href="javascript:void(0);" class="btn-link" title="关闭" onClick="loadWindow('{:url('/index/task/action?ac=close&id='.$task_id.'&type=task')}');">&#xe61c; 关闭</a>
                 {/if}
                 <a href="{:url('/index/task/add/?task_id='.$task_id)}" class="btn-link" title="编辑">&#xe71d; 编辑</a>
             </span>
