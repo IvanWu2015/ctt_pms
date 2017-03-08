@@ -55,6 +55,72 @@
             
         </div><!-- 基本信息 -->
         
+        <div class="publicdiv pl20 pr20 mt20 sizing"><!--饼图-->
+            <div class="w50 z pr10 sizing"><!--我的任务进度-->
+                <div class="panel" style="border:1px #d9edf7 solid; min-height:330px;">
+                    <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-info">我的任务进度</h3>
+                    <div class="panel-body">
+                        <script type="text/javascript" src="tpl_js/highcharts.js"></script>
+                        <div id="container" style="width:100%; height:300px;"></div>
+                    </div>
+                </div>
+            </div><!--我的任务进度-->
+            <script>
+            jQuery(function(){
+                var a=parseInt('{$my_task_count}');
+                var b=parseInt('{$not_status_count}');
+                var w=a+b;
+            });
+            </script>
+            <script language="JavaScript">
+            $(document).ready(function() {  
+               var chart = {
+                   plotBackgroundColor:null,
+                   plotBorderWidth: null,
+                   plotShadow: false
+               };
+               var title = {
+                  text: ''   
+               };      
+               var tooltip = {
+                  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'  //鼠标经过显示提醒信息
+               };
+               var plotOptions = {
+                  pie: {
+                     allowPointSelect: true,
+                     cursor: 'pointer',
+                     dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}%</b>: {point.percentage:.1f} %',   //  
+                        style: {
+                           color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'red'
+                        }
+                     }
+                  }
+               };
+               var series= [{
+                  type: 'pie',
+                  name: 'Browser share',
+                  data: [
+                     ['未完成', 45.0],
+                     ['已完成', 6.2]
+                  ]
+               }];     
+               var setOptions = [{
+                colors:['#0ff', '#50B432']
+               }];
+               var json = {};   
+               json.chart = chart; 
+               json.title = title;     
+               json.tooltip = tooltip;  
+               json.series = series;
+               json.plotOptions = plotOptions;
+               json.setOptions = setOptions;
+               $('#container').highcharts(json);  
+            });
+            </script>
+        </div><!--饼图-->
+        
         <div class="publicdiv pl20 pr20 mt20 sizing">
             <div class="w60 z pr10 sizing"><!--日程安排-->
                 <div id='calendar'></div>
@@ -107,11 +173,10 @@
             </div><!--我的文档-->
             </div>
         </div>
-    <script type="text/javascript" src="tpl_js/jquery.min.js"></script>
-    <script type="text/javascript" src="tpl_js/moment.min.js"></script>
-    <script type="text/javascript" src="tpl_js/fullcalendar.js"></script>
-    <link href="tpl_css/fullcalendar.css" rel="stylesheet">
-        <script>
+        <script type="text/javascript" src="tpl_js/moment.min.js"></script>
+        <script type="text/javascript" src="tpl_js/fullcalendar.js"></script>
+        <link href="tpl_css/fullcalendar.css" rel="stylesheet">
+            <script>
             //输出对象
             function writeObj(obj){ 
              var description = ""; 
@@ -121,61 +186,61 @@
              } 
              alert(description); 
             } 
+                
+            //获取工时数据
+            function getWorkData(y, m) {
+                var url='{:url('index/api/getworkdata')}';
+                m = date.getMonth()+1;
+                $.ajax({
+                    type:'post',
+                    url:url,
+                    data:{year:y,month:m,day:0},
+                    dataType:'json',
+                    async:false,
+                    success:function(data){
+                       workData = data;
+                    }
+                });
+            }
             
-        //获取工时数据
-        function getWorkData(y, m) {
-            var url='{:url('index/api/getworkdata')}';
-            m = date.getMonth()+1;
-            $.ajax({
-                type:'post',
-                url:url,
-                data:{year:y,month:m,day:0},
-                dataType:'json',
-                async:false,
-                success:function(data){
-                   workData = data;
-                }
+            var workData = {};
+            var date = new Date();
+            var d = '';
+            var m = date.getMonth() + 1;
+            var y = date.getFullYear();
+            //getWorkData(y, m);//更新工时
+            //日历初始化
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
+                },
+                defaultDate: date.toLocaleDateString(),
+                navLinks: true, // can click day/week names to navigate views
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                events: workData,
+                eventSources: [
+                    // your event source
+                    {
+                        url: '{:url('index/api/getworkdata')}',
+                        type: 'POST',
+                        data: {
+                            custom_param1: 'something',
+                            custom_param2: 'somethingelse'
+                        },
+                        error: function() {
+                            alert('there was an error while fetching events!');
+                        },
+                        //color: 'yellow',   // a non-ajax option
+                        //textColor: 'black' // a non-ajax option
+                    }
+                ]
             });
-        }
-        
-        var workData = {};
-        var date = new Date();
-        var d = '';
-        var m = date.getMonth() + 1;
-        var y = date.getFullYear();
-        //getWorkData(y, m);//更新工时
-        //日历初始化
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,basicWeek,basicDay'
-            },
-            defaultDate: date.toLocaleDateString(),
-            navLinks: true, // can click day/week names to navigate views
-            editable: true,
-            eventLimit: true, // allow "more" link when too many events
-            events: workData,
-            eventSources: [
-                // your event source
-                {
-                    url: '{:url('index/api/getworkdata')}',
-                    type: 'POST',
-                    data: {
-                        custom_param1: 'something',
-                        custom_param2: 'somethingelse'
-                    },
-                    error: function() {
-                        alert('there was an error while fetching events!');
-                    },
-                    //color: 'yellow',   // a non-ajax option
-                    //textColor: 'black' // a non-ajax option
-                }
-            ]
-        });
 
-            
-    </script>
+                
+        </script>
         
         <div class="publicdiv pl20 pr20 mt20 mb20 sizing">
             <div class="publicdiv">
