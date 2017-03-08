@@ -769,6 +769,8 @@ function analysis_all($action_list) {
         if ($value['action'] == 'assignedTo') {
             $username = $action_list[$key]['extra'];
             $value['actionname'] = "指派给 <b>$username</b>";
+        } elseif ($value['action'] == 'started') {
+            $value['actionname'] = "开始 (消耗{$value['consumed']}小时,剩余{$value['left']}小时)";
         } elseif ($value['action'] == 'closed') {
             $value['actionname'] = "关闭";
         } elseif ($value['action'] == 'finished') {
@@ -778,7 +780,7 @@ function analysis_all($action_list) {
         } elseif ($value['action'] == 'login') {
             $value['actionname'] = "登陆";
         } elseif ($value['action'] == 'edited') {
-            $value['actionname'] = "登出";
+            $value['actionname'] = "编辑";
         } elseif ($value['action'] == 'changed') {
             $value['actionname'] = "修改";
         } elseif ($value['action'] == 'resolved') {
@@ -790,7 +792,7 @@ function analysis_all($action_list) {
         } elseif ($value['action'] == 'done') {
             $value['actionname'] = "完成{$value['consumed']}";
         } elseif ($value['action'] == 'recordestimate') {
-            $value['actionname'] = "记录工时,消耗{$value['consumed']}小时,剩余{$value['left']}小时";
+            $value['actionname'] = "记录工时(消耗{$value['consumed']}小时,剩余{$value['left']}小时)";
         } elseif ($value['action'] == 'commented') {
             $value['actionname'] = "添加了备注";
         }

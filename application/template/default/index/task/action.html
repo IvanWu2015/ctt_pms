@@ -147,7 +147,7 @@ function startsub(){ //表单判断
 }
 
 function modalsearch(){     //ajax提交
-    var url="{:url('/index/task/action?id='.$task_id.'&type=task')}";
+    var url="{:url('/index/task/action?id='.$task_id.'&type=task&ac=start')}";
     jQuery.ajax({
         type: 'post',
         url: url,

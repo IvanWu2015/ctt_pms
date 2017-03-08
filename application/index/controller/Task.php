@@ -78,7 +78,28 @@ class Task extends Common {
                     }
                     DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
                     write_action($this->_G['username'], $task['project'], 'task', $task_id, 'closed');
-                    //完成任务
+                    
+                //开始任务
+                } elseif ($ac == 'start') {
+                    $task_data = [
+                        'status' => 'doing',
+                    ];
+                    DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
+                    //工时信息写入
+                    if($consumed > 0) {
+                        $work_data = [
+                            'username' => $this->_G['username'],
+                            'task' => $task_id,
+                            'work' => trim(input('param.work')),
+                            'date' => date('Y-m-d'),
+                            'consumed' => $consumed,
+                            'left' => input('left', 0, 'intval'), //剩余
+                        ];
+                        $taskestimate_id = DB::table('chinatt_pms_taskestimate')->insertGetId($work_data);
+                    }
+                    write_action($this->_G['username'], $task['project'], 'task', $task_id, 'started', input('work'), $taskestimate_id);
+                    
+                //完成任务
                 } elseif ($ac == 'done') {
                     $task_data = [
                         'status' => 'done',
@@ -95,7 +116,7 @@ class Task extends Common {
                             'work' => trim(input('param.work')),
                             'date' => date('Y-m-d'),
                             'consumed' => $consumed,
-                            'left' => input('left', 0, 'input'), //剩余
+                            'left' => input('left', 0, 'intval'), //剩余
                         ];
                         $taskestimate_id = DB::table('chinatt_pms_taskestimate')->insertGetId($work_data);
                         //如果未输入工时
