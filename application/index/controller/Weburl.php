@@ -21,12 +21,20 @@ class weburl extends Common {
     //列表页
     public function lists() {
         $weburl = DB::name('weburl');
+        $acl = input('param.acl', 'all', 'addslashes');
+        if($acl == 'all'){
+            
+        }  else {
+            $data['w.acl'] = array('eq',$acl);
+        }
+        $data['w.status'] = array('eq',0);
+        
         $weburl_list = DB::name('weburl')
                 ->alias('w')
                 ->join('chinatt_pms_project p', 'w.project = p.id', 'left')
                 ->join('chinatt_pms_user u', 'u.uid = w.uid', 'left')
                 ->field('w.*,p.name,u.username,u.realname')
-                ->where(['w.acl' => 'open', 'w.status' => 0])
+                ->where($data)
                 ->paginate(10);
         $page = $weburl_list->render(); // 分页显示输出
         $deleted = input('param.deleted', 0, 'intval');
