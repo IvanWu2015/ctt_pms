@@ -28,7 +28,7 @@ class Project extends Common {
             $this->error('项目ID错误');
         }
         
-        $status = input('get.status', 'noclosed', 'addslashes');
+        $status = input('get.status', 'all', 'addslashes');
         $username = input('param.username');
         if ($status == 'noclosed') {
             $map['status'] = array('not in', 'closed,done');
