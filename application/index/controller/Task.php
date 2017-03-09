@@ -53,7 +53,7 @@ class Task extends Common {
                     'task' => $task_id,
                     'work' => trim(input('param.work')),
                     'date' => date('Y-m-d'),
-                    'left' => input('param.left'), //剩余
+                    'left' => input('param.left', 0, 'intval'), //剩余
                 ];
                 if ($consumed > 0) {
                     $work_data['consumed'] = $consumed;
