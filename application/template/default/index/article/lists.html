@@ -8,6 +8,11 @@
     <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
         
         <div class="publicdiv borb mb20 pt10 pb10 bf sizing">
+            <span class="left">
+                <a href="{:url('/index/article/lists?acl=all')}" class="btn btn-info">所有{if condition="$acl eq 'all'"}1{/if}</a> 
+                <a href="{:url('/index/article/lists?acl=private')}" class="btn btn-info">私有{if condition="$acl eq 'private'"}1{/if}</a> 
+                <a href="{:url('/index/article/lists?acl=open')}" class="btn btn-info">公开{if condition="$acl eq 'open'"}1{/if}</a> 
+            </span>
             <h3>
                 文档列表
                 <span class="pull-right">

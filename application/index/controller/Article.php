@@ -20,13 +20,21 @@ class article extends Common {
 
     //列表页
     public function lists() {
+        $acl = input('param.acl', 'all', 'addslashes');
+        if($acl == 'all'){
+            
+        }  else {
+            $data['a.acl'] = array('eq',$acl);
+        }
+        $data['a.uid'] = array('eq',$this->_G['uid']);
+        
         $article_list = DB::name('Article')
                 ->alias('a')
                 ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
                 ->join('chinatt_pms_project p ', 'a.project = p.id', 'left')
                 ->join('chinatt_pms_user u ', 'a.uid = u.uid', 'left')
                 ->field('a.*,c.name as class_name,p.name as project_name,u.username')
-                ->where(['a.status' => 0,'a.uid' => $this->_G['uid']])
+                ->where($data)
                 ->order('id desc')
                 ->paginate(10);
         $page = $article_list->render(); // 分页显示输出

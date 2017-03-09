@@ -28,7 +28,7 @@ class Project extends Common {
             $this->error('项目ID错误');
         }
         
-        $status = input('get.status', 'noclosed', 'addslashes');
+        $status = input('get.status', 'all', 'addslashes');
         $username = input('param.username');
         if ($status == 'noclosed') {
             $map['status'] = array('not in', 'closed,done');
@@ -68,6 +68,7 @@ class Project extends Common {
     //列表
     public function lists() {
         $map['deleted'] = array('eq', '0');
+        $username = $this->_G['username'];
         $status = input('status/s', 'unclose');
         $status = str_replace('.html', '', $status);
         $orderby_array = array('pri');
@@ -91,7 +92,19 @@ class Project extends Common {
         if (!$this->_G['is_admin']) {
             $map['acl'] = array('eq', 'open');
         }
-        $project_list = Db::name('Project')->where($map)->order("$orderby DESC")->paginate(15);
+        //$map['t.username'] = array('eq',$username);
+        
+        $project_list = DB::name('Project')
+                ->alias('p')
+                ->join('chinatt_pms_team t', "p.acl = 'private' AND t.project = p.id AND t.username = '$username'", 'left')
+                ->field('p.*,t.username')
+                ->where($map)
+                ->whereor(['p.acl' => 'private'])
+                ->order('id desc')
+                ->paginate(20);
+        
+        //$project_list = Db::name('Project')->where($map)->order("$orderby DESC")->paginate(15);
+
         $page = $project_list->render(); // 分页显示输出
         //将对象转为数组
         $project_list = $project_list->toArray();

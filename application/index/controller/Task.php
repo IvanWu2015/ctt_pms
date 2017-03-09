@@ -181,6 +181,7 @@ class Task extends Common {
         if($project_detail['acl'] == 'private' && !isProjectUser($this->_G['username'], $user_list)) {
             $this->error('您无该项目访问权限。');
         }
+        
         if (request()->isPost()) {
             $work_data = [
                 'username' => $this->_G['username'],
