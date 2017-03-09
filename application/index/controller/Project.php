@@ -42,7 +42,7 @@ class Project extends Common {
         if (!empty($keyword)) {
             $map['name'] = array('LIKE', '%'.$keyword.'%');
         }
-        $task_list = $task->where($map)->order("$orderby DESC")->paginate(20, $task_count, ['path' => url('/index/project/detail/'), 'query' => ['id' => $project_id]]);
+        $task_list = $task->where($map)->order("$orderby DESC")->paginate(20, $task_count, ['path' => url('/index/project/detail/'), 'query' => ['id' => $project_id,'status' => $status]]);
 
         $show = $task_list->render(); // 分页显示输出
         $user_list = get_userlist_by_projectid($project_id);

@@ -23,104 +23,108 @@
             <span class="y derkwt fs13 iconfont">
                 <a href="javascript:void(0);" class="btn-link" title="指派" onClick="loadWindow('{:url('/index/task/action?ac=assignTo&id='.$task_id.'&type=assign')}');">&#xe752; 指派</a>
                 {if condition="($task_detail['status'] == 'done') or ($task_detail['status'] == 'doing')"}
-                    <a href="javascript:void(0);" class="btn-link cc" title="开始">&#xe621; 开始</a>
+                <a href="javascript:void(0);" class="btn-link cc" title="开始">&#xe621; 开始</a>
                 {else}
-                    <a href="javascript:void(0);" class="btn-link" title="开始" onClick="loadWindow('{:url('/index/task/action?ac=start&id='.$task_id.'&type=task')}');">&#xe621; 开始</a>
+                <a href="javascript:void(0);" class="btn-link" title="开始" onClick="loadWindow('{:url('/index/task/action?ac=start&id='.$task_id.'&type=task')}');">&#xe621; 开始</a>
                 {/if}
                 <a href="javascript:void(0);" class="btn-link" title="工时" onClick="loadWindow('{:url('/index/task/action?ac=worktime&id='.$task_id.'&type=taskestimate')}');">&#xe61e; 工时</a>
                 {if condition="$task_detail['status'] == 'done'"}
-                    <a href="javascript:void(0);" class="btn-link cc" title="完成">&#xe619; 完成</a>
+                <a href="javascript:void(0);" class="btn-link cc" title="完成">&#xe619; 完成</a>
                 {else}
-                    <a href="javascript:void(0);" class="btn-link" title="完成" onClick="loadWindow('{:url('/index/task/action?ac=done&id='.$task_id.'&type=task')}');">&#xe619; 完成</a>
+                <a href="javascript:void(0);" class="btn-link" title="完成" onClick="loadWindow('{:url('/index/task/action?ac=done&id='.$task_id.'&type=task')}');">&#xe619; 完成</a>
                 {/if}
                 {if condition="($task_detail['status'] == 'wait') or ($task_detail['status'] == 'doing')"}
-                    <a href="javascript:void(0);" class="btn-link cc" title="关闭">&#xe61c; 关闭</a>
+                <a href="javascript:void(0);" class="btn-link cc" title="关闭">&#xe61c; 关闭</a>
                 {else}
-                    <a href="javascript:void(0);" class="btn-link" title="关闭" onClick="loadWindow('{:url('/index/task/action?ac=close&id='.$task_id.'&type=task')}');">&#xe61c; 关闭</a>
+                <a href="javascript:void(0);" class="btn-link" title="关闭" onClick="loadWindow('{:url('/index/task/action?ac=close&id='.$task_id.'&type=task')}');">&#xe61c; 关闭</a>
                 {/if}
                 <a href="{:url('/index/task/add/?task_id='.$task_id)}" class="btn-link" title="编辑">&#xe71d; 编辑</a>
             </span>
         </h3>
-        
+
         <div class="publicdiv pl20 pr20 sizing">
             <div class="span7 mt20 mln z" style="width:72%;">
                 <div class="publicdiv pr bor pt20 pb20 pl20 mb20 pr20 sizing">
                     <span class="pa bf pl8 pr8 lh34 fs16" style="left:10px; top:-20px;">任务描述</span>
                     {$task_detail['desc']}
                 </div>
-                
+
                 <div class="publicdiv pr bor pt20 pb20 mt20 pl20 pr20 sizing">
                     <span class="pa bf pl8 pr8 lh34 fs18" style="left:10px; top:-20px;">任务动态</span>
-                    
+
                     <div class="publicdiv mt20 pt20 pb20 pl20 pr pr20 bf6f6f6 sizing">
                         {foreach $action_list as $action}
-                            {$action['date']}
-                            由<b class="ml5 mr5">{$action['actor']}</b>{$action['actionname']}
-                            {if condition="$action['comment'] neq null"}
-                            <div class="publicdiv mb10" style="margin-left:140px;">
-                                <div class="z br3 mt10 pl10 pr10 pt5 pb5 pr ncnt" style="background:#D3DAE0;">{:trim($action['comment'])}</div>
-                            </div>
-                            {/if}
-                            <br/>
+                        {$action['date']}
+                        由<b class="ml5 mr5">{$action['actor']}</b>{$action['actionname']}
+                        {if condition="$action['comment'] neq null"}
+                        <div class="publicdiv mb10" style="margin-left:140px;">
+                            <div class="z br3 mt10 pl10 pr10 pt5 pb5 pr ncnt" style="background:#D3DAE0;">{:trim($action['comment'])}</div>
+                        </div>
+                        {/if}
+                        <br/>
                         {/foreach}
                     </div>  
-                    
+
                     <form action="{:url('/index/task/action?id='.$task_id.'&type=commented')}" method="post">
-                    <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/ueditor.config.js"></script>
-                    <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/ueditor.all.min.js"></script>
-                    <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/lang/zh-cn/zh-cn.js"></script>
+                        <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/ueditor.config.js"></script>
+                        <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/ueditor.all.min.js"></script>
+                        <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/lang/zh-cn/zh-cn.js"></script>
 
-                    <div class="publicdiv mt20">
-                        <script id="editor" type="text/plain" class="z" name="work" style="width:100% !important; height:100px;">备注</script>
-                    </div>
+                        <div class="publicdiv mt20">
+                            <script id="editor" type="text/plain" class="z" name="work" style="width:100% !important; height:100px;">备注</script>
+                        </div>
 
-                    <script type="text/javascript">
-                        jQuery(function () {
-                            jQuery('#action_wrap #action_list').each(function (index) {
-                                jQuery('#action_wrap #action_list').eq(index).find('.action_id').text(index + 1);
-                            });
-                        });
+                        <script type="text/javascript">
+                    jQuery(function () {
+                    jQuery('#action_wrap #action_list').each(function (index) {
+                    jQuery('#action_wrap #action_list').eq(index).find('.action_id').text(index + 1);
+                    });
+                    });
+                    //实例化编辑器
+                    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+                    var ue = UE.getEditor('editor', {toolbars: [['fullscreen', 'source', 'undo', 'redo', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', 'attachment']]});
+                    function disableBtn(str) {
+                    var div = document.getElementById('btns');
+                    var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+                    for (var i = 0, btn; btn = btns[i++]; ) {
+                    if (btn.id == str) {
+                    UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+                    } else {
+                    btn.setAttribute("disabled", "true");
+                    }
+                    }
+                    }
+                    function enableBtn() {
+                    var div = document.getElementById('btns');
+                    var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+                    for (var i = 0, btn; btn = btns[i++]; ) {
+                    UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+                    }
+                    }
+                        </script>
 
-                        //实例化编辑器
-                        //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-                        var ue = UE.getEditor('editor', {toolbars: [['fullscreen', 'source', 'undo', 'redo', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', 'attachment']]});
+                        <div class="publicdiv mt10 ac">
+                            <input type="submit" class="btn btn-primary pl20 pr20" value="添加备注" />
+                        </div>
 
-                        function disableBtn(str) {
-                            var div = document.getElementById('btns');
-                            var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
-                            for (var i = 0, btn; btn = btns[i++]; ) {
-                                if (btn.id == str) {
-                                    UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
-                                } else {
-                                    btn.setAttribute("disabled", "true");
-                                }
-                            }
-                        }
-                        function enableBtn() {
-                            var div = document.getElementById('btns');
-                            var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
-                            for (var i = 0, btn; btn = btns[i++]; ) {
-                                UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
-                            }
-                        }
-                    </script>
-                    
-                    <div class="publicdiv mt10 ac">
-                        <input type="submit" class="btn btn-primary pl20 pr20" value="添加备注" />
-                    </div>
-                    
                     </form>
-                    
+
                 </div>
-                
-                
-                
-                
+
+
+
+
             </div>
             <div class="span4 mt20 y" style="width:25%;">
                 <div class="publicdiv pr bor pt20 pb20 pl20 mln pr20 sizing">
                     <span class="pa bf pl8 pr8 lh34 fs16" style="left:10px; top:-20px;">基本信息</span>
                     <p>项目名称：<span class="text-primary mr20 ml10">{$task_detail['name']}</span></p>
+                    <p>任务状态：<span class="text-primary mr20 ml10">
+                            {if condition="$task_detail['status'] == 'wait'"}<span style="color:#f8b004;">等待</span>{/if}
+                            {if condition="$task_detail['status'] == 'done'"}<span style="color:green;">完成</span>{/if}
+                            {if condition="$task_detail['status'] == 'doing'"}<span style="color:blue;">进行中</span>{/if}
+                            {if condition="$task_detail['status'] == 'closed'"}<span style="color:grey;">关闭</span>{/if}
+                        </span></p>
                     <p>创&nbsp;建&nbsp;&nbsp;者：<span class="text-primary mr20 ml10">{$user_list[$task_detail['openedBy']]['realname']}</span></p>
                     <p>指&nbsp;派&nbsp;&nbsp;给：<span class="text-primary mr20 ml10">{$user_list[$task_detail['assignedTo']]['realname']}</span></p>
                     <p>优&nbsp;先&nbsp;&nbsp;级：<span class=" ml10">{$task_detail['pri']}</span></p>
@@ -131,8 +135,8 @@
 
                 <div class="publicdiv pr bor pt20 pb20 pl20 mln mt20 mb10 pr20 sizing">
                     <span class="pa bf pl8 pr8 lh34 fs16" style="left:10px; top:-20px;">工时信息</span>
-                    <p>预计时间：<span class=" ml10">{$task_detail['estStarted']}</span></p>
-                    <p>真正时间：<span class=" ml10">{if condition="$task_detail['realStarted'] gt 2001-01-01"}{$task_detail['realStarted']}{else}{/if}</span></p>
+                    <p>预计用时：<span class=" ml10">{$task_detail['estimate']}</span></p>
+                    <p>真正用时：<span class=" ml10">{$task_detail['consumed']}</span></p>
                 </div>
 
                 <div class="publicdiv pr bor pt20 pb20 pl20 mln mt20 pr20 sizing">
@@ -144,11 +148,10 @@
                     <p>最后编辑：<span class=" ml10">{if condition="!empty($task_detail['lastEditedBy'])"}{$user_list[$task_detail['lastEditedBy']]['realname']} 于 {$task_detail['lastEditedDate']} {/if}</span></p>
                 </div>
             </div>
-            
+
         </div>
     </div>
 
-    <div class="publicdiv bort bf mb10 pl20 pr20 pt20 pb20 lh34 sizing">该任务所用的总时间为 <span class="text-primary fs25">{$task_detail['consumed']}</span> 小时</div>
 
 </section>
 </div>
