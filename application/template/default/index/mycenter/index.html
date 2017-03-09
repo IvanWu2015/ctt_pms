@@ -65,15 +65,13 @@
                     </div>
                 </div>
             </div><!--我的任务进度-->
-            <script>
-            jQuery(function(){
-                var a=parseInt('{$my_task_count}');
-                var b=parseInt('{$not_status_count}');
-                var w=a+b;
-            });
-            </script>
             <script language="JavaScript">
             $(document).ready(function() {  
+                var my=parseInt('{$my_task_count}');    //已完成
+                var not=parseInt('{$not_status_count}');    //未完成
+                var mys=my+my/(my+not);
+                var nots=not-not/(my+not);
+                
                var chart = {
                    plotBackgroundColor:null,
                    plotBorderWidth: null,
@@ -102,8 +100,8 @@
                   type: 'pie',
                   name: 'Browser share',
                   data: [
-                     ['未完成', 45.0],
-                     ['已完成', 6.2]
+                     ['未完成', nots],
+                     ['已完成', mys]
                   ]
                }];     
                var setOptions = [{
