@@ -26,24 +26,24 @@ class weburl extends Common {
                 ->join('chinatt_pms_project p', 'w.project = p.id', 'left')
                 ->join('chinatt_pms_user u', 'u.uid = w.uid', 'left')
                 ->field('w.*,p.name,u.username,u.realname')
-                ->where(['w.acl' => 'open','w.status' => 0])
+                ->where(['w.acl' => 'open', 'w.status' => 0])
                 ->paginate(10);
         $page = $weburl_list->render(); // 分页显示输出
         $deleted = input('param.deleted', 0, 'intval');
         $weburl_id = input('param.id', 0, 'intval');
-        if($deleted > 0){
-            $weburl_detail = $weburl->where(['uid' => $this->_G['uid'],'status' => 0])->find();
-            if($this->_G['uid'] == $weburl_detail['uid']){
+        if ($deleted > 0) {
+            $weburl_detail = $weburl->where(['uid' => $this->_G['uid'], 'status' => 0])->find();
+            if ($this->_G['uid'] == $weburl_detail['uid']) {
                 $weburl->where(['id' => $weburl_id])->update(['status' => -1]);
-                $this->success('删除成功','index/weburl/lists');
-            }else {
+                $this->success('删除成功', 'index/weburl/lists');
+            } else {
                 $this->error('权限不足');
             }
         }
         $navtitle = '收藏列表' . $project_detail['name'];
         $this->assign('navtitle', $navtitle);
         $this->assign('weburl_list', $weburl_list);
-        $this->assign('page',$page);
+        $this->assign('page', $page);
         return $this->fetch($this->templatePath);
     }
 
@@ -87,12 +87,12 @@ class weburl extends Common {
                 $this->success('添加成功', url('index/weburl/lists'));
             }
         }
-        if(empty($weburl_detail)){
+        if (empty($weburl_detail)) {
             $navtitle = '添加收藏';
-        }  else {
+        } else {
             $navtitle = '修改收藏';
         }
-        $this->assign('project_id',$project_id);
+        $this->assign('project_id', $project_id);
         $this->assign('navtitle', $navtitle);
         $this->assign('weburl_detail', $weburl_detail);
         $this->assign('project_list', $project_list);
