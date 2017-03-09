@@ -38,6 +38,18 @@
                             </select>
                         </div>
                     </div>
+                
+                <div class="form-group w50 mrn mln z">
+                        <label class="col-sm-3 control-label">产品：</label>
+                        <div class="col-sm-9 pln prn">
+                            <select class="form-control" name='product'>
+                                {foreach $product_list as $product}
+                                <option value="{$product['id']}"  {eq name="product.id" value="$project_details['product']"}selected="selected"{/eq}>{$product['name']}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                
                     <div class="form-group w50 mrn mln z">
                         <label class="col-sm-3 control-label" >访问控制：</label>
                         <div class="col-sm-9 pln prn">

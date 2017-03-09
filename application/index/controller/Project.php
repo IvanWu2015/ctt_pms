@@ -12,14 +12,14 @@ class Project extends Common {
 
     //项目详情页
     public function detail() {
-        
+
         $user = DB::name('User');
         $task = DB::name('Task');
         $project = db('Project');
         $project_id = input('get.id', '0', 'intval');
         $keyword = input('keyword', '', 'addslashes');
         $orderby_array = array('pri', 'estimate', 'consumed', 'status');
-        
+
         $orderby = in_array(input('param.orderby'), $orderby_array) ? input('param.orderby') : 'id';
         $map['deleted'] = array('EQ', '0');
         if ($project_id > 0) {
@@ -27,7 +27,7 @@ class Project extends Common {
         } else {
             $this->error('项目ID错误');
         }
-        
+
         $status = input('get.status', 'all', 'addslashes');
         $username = input('param.username');
         if ($status == 'noclosed') {
@@ -40,16 +40,16 @@ class Project extends Common {
             $map['assignedTo'] = array('eq', $username);
         }
         if (!empty($keyword)) {
-            $map['name'] = array('LIKE', '%'.$keyword.'%');
+            $map['name'] = array('LIKE', '%' . $keyword . '%');
         }
-        $task_list = $task->where($map)->order("$orderby DESC")->paginate(20, $task_count, ['path' => url('/index/project/detail/'), 'query' => ['id' => $project_id,'status' => $status]]);
+        $task_list = $task->where($map)->order("$orderby DESC")->paginate(20, $task_count, ['path' => url('/index/project/detail/'), 'query' => ['id' => $project_id, 'status' => $status]]);
 
         $show = $task_list->render(); // 分页显示输出
         $user_list = get_userlist_by_projectid($project_id);
         $project_detail = $project->where(['id' => $project_id])->find();
         $project_detail = get_project_consume($project_detail);
         //访问权限判断
-        if($project_detail['acl'] == 'private' && !isProjectUser($this->_G['username'], $user_list)) {
+        if ($project_detail['acl'] == 'private' && !isProjectUser($this->_G['username'], $user_list) && $this->_G['is_admin'] != 1) {
             $this->error('您无该项目访问权限。');
         }
         $navtitle = $project_detail['name'];
@@ -89,20 +89,18 @@ class Project extends Common {
         } else {
             $map['status'] = array('eq', $status);
         }
-        if (!$this->_G['is_admin']) {
+        if ($this->_G['is_admin'] != 1) {
             $map['acl'] = array('eq', 'open');
         }
         //$map['t.username'] = array('eq',$username);
-        
         $project_list = DB::name('Project')
                 ->alias('p')
                 ->join('chinatt_pms_team t', "p.acl = 'private' AND t.project = p.id AND t.username = '$username'", 'left')
                 ->field('p.*,t.username')
                 ->where($map)
-                ->whereor(['p.acl' => 'private'])
+                ->whereor(['t.username' => $username])
                 ->order('id desc')
                 ->paginate(20);
-        
         //$project_list = Db::name('Project')->where($map)->order("$orderby DESC")->paginate(15);
 
         $page = $project_list->render(); // 分页显示输出
@@ -123,13 +121,14 @@ class Project extends Common {
         //$project_id = intval($_GET['project_id']);
         $project_id = input('get.project_id', '0', 'intval');
         $user_list = Db::name('user')->column('uid,username,realname', 'username');
+        $product_list = DB::name('Product')->where(['deleted' => 0])->select();
         $team = db('Team');
         //已经在该项目的人员
         if ($project_id > 0) {
             $project_detail = $project->where(['id' => $project_id])->find();
-            if($this->_G['username'] !== $project_detail)
+            if ($this->_G['username'] !== $project_detail)
             //该项目所有成员
-            $old_team_list = $team->where(['project' => $project_id])->select();
+                $old_team_list = $team->where(['project' => $project_id])->select();
             foreach ($old_team_list as $key => $value) {
                 $team_list[$key] = $value['username'];
             }
@@ -138,6 +137,7 @@ class Project extends Common {
                 'name' => input('param.name'),
                 'desc' => input('param.desc'),
                 'begin' => input('param.begin'),
+                'product' => input('param.product'),
                 'end' => input('param.end'),
                 'code' => input('param.code'),
                 'project_admin' => input('param.project_admin'),
@@ -152,11 +152,13 @@ class Project extends Common {
                 'begin' => input('param.begin'),
                 'end' => input('param.end'),
                 'code' => input('param.code'),
+                'product' => input('param.product'),
                 'desc' => input('param.desc'),
                 'project_admin' => input('param.project_admin'),
                 'acl' => input('acl', 'open', 'addslashes'),
                 'status' => input('param.status'),
-            ];
+            ]; 
+            
             //编辑
             if ($project_id > 0) {
                 if ($_POST['ids']) {
@@ -181,14 +183,14 @@ class Project extends Common {
                 }
                 Db::table('chinatt_pms_project')->where(['id' => $project_id])->update($pro_data);
                 //操作记录
-                write_action($this->_G['username'], $project_id, 'project', $project_id, 'updata',input('param.desc'));
+                write_action($this->_G['username'], $project_id, 'project', $project_id, 'updata', input('param.desc'));
                 //$project->where(['id' => $project_id])->save($pro_data);
                 $this->success("修改成功", url('index/Project/lists'));
-            //新添加
+                //新添加
             } else {
                 $add_pro_id = Db::table('chinatt_pms_project')->insertGetId($pro_data);
                 //操作记录
-                write_action($this->_G['username'], $add_pro_id, 'project', $add_pro_id, 'opened',input('param.desc'));
+                write_action($this->_G['username'], $add_pro_id, 'project', $add_pro_id, 'opened', input('param.desc'));
                 if ($_POST['ids']) {
                     foreach ($_POST['username'] as $key => $value) {
                         //精品
@@ -207,6 +209,7 @@ class Project extends Common {
         }
         
         $navtitle = '添加/修改项目' . $this->navtitle;
+        $this->assign('product_list',$product_list);
         $this->assign('project_id', $project_id);
         $this->assign('project_details', $project_detail);
         $this->assign('team_list', $team_list);
@@ -265,7 +268,7 @@ class Project extends Common {
         $project_detail = DB::table('chinatt_pms_project')->where(['id' => $project_id])->find();
 
         $project_list = Db::table('chinatt_pms_action action, chinatt_pms_task task, chinatt_pms_project project')
-                    ->where("action.objectID = task.id AND action.project = $project_id AND action.project = project.id")
+                ->where("action.objectID = task.id AND action.project = $project_id AND action.project = project.id")
                 ->field('action.*,task.name as task_name,project.name as project_name')
                 ->order('action.date ')
                 ->paginate(10, '', ['path' => url('/index/project/action/'), 'query' => ['project_id' => $project_id]]);
@@ -278,7 +281,7 @@ class Project extends Common {
         $this->assign('navtitle', $navtitle);
         return $this->fetch($this->templatePath);
     }
-    
+
     //文档
     public function article() {
         $project_id = input('param.project_id', 0, 'intval');
@@ -288,19 +291,19 @@ class Project extends Common {
                 ->join('chinatt_pms_project p ', 'a.project = p.id', 'left')
                 ->join('chinatt_pms_user u ', 'a.uid = u.uid', 'left')
                 ->field('a.*,c.name as class_name,p.name as project_name,u.username')
-                ->where(['a.status' => 0,'a.project' => $project_id])
+                ->where(['a.status' => 0, 'a.project' => $project_id])
                 ->paginate(10);
         $page = $article_list->render(); // 分页显示输出
         $project_detail = DB::name('Project')->where(['id' => $project_id])->find();
         $project_detail = get_project_consume($project_detail);
         $navtitle = $project_detail['name'];
         $this->assign('project_detail', $project_detail);
-        $this->assign('navtitle',$navtitle);
-        $this->assign('project_id',$project_id);
-        $this->assign('article_list',$article_list);
+        $this->assign('navtitle', $navtitle);
+        $this->assign('project_id', $project_id);
+        $this->assign('article_list', $article_list);
         return $this->fetch($this->templatePath);
     }
-    
+
     //收藏
     public function weburl() {
         $project_id = input('param.project_id', 0, 'intval');
@@ -309,16 +312,16 @@ class Project extends Common {
                 ->alias('w')
                 ->join('chinatt_pms_project p', 'w.project = p.id', 'left')
                 ->field('w.*,p.name')
-                ->where(['project' => $project_id,'w.status' => 0])
+                ->where(['project' => $project_id, 'w.status' => 0])
                 ->paginate(10);
         $page = $weburl_list->render(); // 分页显示输出
         $project_detail = DB::name('Project')->where(['id' => $project_id])->find();
         $project_detail = get_project_consume($project_detail);
         $navtitle = $project_detail['name'];
-        $this->assign('navtitle',$navtitle);
+        $this->assign('navtitle', $navtitle);
         $this->assign('project_detail', $project_detail);
-        $this->assign('project_id',$project_id);
-        $this->assign('weburl_list',$weburl_list);
+        $this->assign('project_id', $project_id);
+        $this->assign('weburl_list', $weburl_list);
         return $this->fetch($this->templatePath);
     }
 
