@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : localhost_3306
 Source Server Version : 50617
 Source Host           : localhost:3306
 Source Database       : chinatt_pms
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-03-02 10:56:56
+Date: 2017-03-09 10:25:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,7 +33,7 @@ CREATE TABLE `chinatt_pms_action` (
   `read` enum('0','1') NOT NULL DEFAULT '0' COMMENT '是否已读',
   PRIMARY KEY (`id`),
   KEY `action` (`objectID`,`product`,`project`,`action`,`date`)
-) ENGINE=MyISAM AUTO_INCREMENT=1330 DEFAULT CHARSET=utf8 COMMENT='操作记录';
+) ENGINE=MyISAM AUTO_INCREMENT=1340 DEFAULT CHARSET=utf8 COMMENT='操作记录';
 
 -- ----------------------------
 -- Records of chinatt_pms_action
@@ -1361,6 +1361,16 @@ INSERT INTO `chinatt_pms_action` VALUES ('1326', 'task', '296', '', '19', 'ivan'
 INSERT INTO `chinatt_pms_action` VALUES ('1327', 'task', '296', '', '0', 'ivan', 'done', '2017-02-27 11:59:00', '', '', '0');
 INSERT INTO `chinatt_pms_action` VALUES ('1328', 'task', '296', '', '19', 'ivan', 'updata', '2017-02-27 12:06:24', '<p>建立日志数据表，对管理插件增加日志记录功能，所有的管理操作全部记录到日志文件中。<br/></p>', '', '0');
 INSERT INTO `chinatt_pms_action` VALUES ('1329', 'task', '296', '', '0', 'ivan', 'done', '2017-02-27 12:06:39', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1330', 'task', '283', '', '5', 'ivan', 'recordestimate', '2017-03-03 11:50:16', '', '371', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1331', 'task', '104', '', '8', 'ivan', 'done', '2017-03-03 12:45:55', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1332', 'user', '0', '', '0', '', 'login', '2017-03-06 18:44:23', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1333', 'project', '20', '', '20', 'ivan', 'opened', '2017-03-06 18:47:34', '<p>asdfasdfasdfasd</p>', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1334', 'project', '20', '', '20', 'ivan', 'updata', '2017-03-06 18:54:30', '<p>asdfasdfasdfasd</p>', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1335', 'task', '297', '', '20', 'ivan', 'opened', '2017-03-06 18:54:51', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1336', 'task', '283', '', '5', 'ivan', 'doing', '2017-03-08 11:00:51', '任务开始', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1337', 'task', '28', '', '5', 'ivan', 'started', '2017-03-08 11:03:36', '开始任务', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1338', 'task', '94', '', '2', 'ivan', 'started', '2017-03-08 11:07:36', '开始', '375', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1339', 'task', '40', '', '8', 'ivan', 'started', '2017-03-08 11:08:33', '开始', '376', '0');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_article
@@ -6647,7 +6657,7 @@ CREATE TABLE `chinatt_pms_project` (
   `project_admin` varchar(30) NOT NULL DEFAULT '' COMMENT '项目负责人',
   PRIMARY KEY (`id`),
   KEY `project` (`parent`,`begin`,`end`,`status`,`order`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='项目';
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='项目';
 
 -- ----------------------------
 -- Records of chinatt_pms_project
@@ -6671,6 +6681,7 @@ INSERT INTO `chinatt_pms_project` VALUES ('16', '0', '0', '0', 'sprint', '0', '�
 INSERT INTO `chinatt_pms_project` VALUES ('17', '0', '0', '0', 'ops', '0', '2016年临时任务', 'temp_task', '2016-10-27', '2016-12-31', '47', 'doing', '1', '1', '临时性、杂项的任务，无明确所属项目的全部放至此处处理', '', '0', '', '0', '', '0', '2016年临时任务', 'open', '', '85', '0', '');
 INSERT INTO `chinatt_pms_project` VALUES ('18', '0', '0', '0', 'sprint', '0', '视频站1.0版本开发', 'vedio 1.0', '2016-11-01', '2016-12-20', '36', 'wait', '1', '1', '按原有视频站功能，制作全新的视频站', '', '0', '', '0', '', '0', 'vedio_team', 'open', '', '90', '0', '');
 INSERT INTO `chinatt_pms_project` VALUES ('19', '0', '0', '0', 'sprint', '0', '博乒论坛功能完善2017', '', '2017-02-27', '0000-00-00', '0', 'doing', '1', '1', '<p>2017年对论坛功能进行完善。</p>', '', '0', '', '0', '', '0', '', 'open', '', '0', '0', 'ivan');
+INSERT INTO `chinatt_pms_project` VALUES ('20', '0', '0', '0', 'sprint', '0', 'asdfa', '', '0000-00-00', '0000-00-00', '0', 'wait', '1', '1', '<p>asdfasdfasdfasd</p>', '', '0', '', '0', '', '0', '', 'private', '', '0', '0', 'wuxin');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_task
@@ -6707,7 +6718,7 @@ CREATE TABLE `chinatt_pms_task` (
   `deleted` enum('0','1') NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`),
   KEY `task` (`project`,`module`,`assignedTo`)
-) ENGINE=MyISAM AUTO_INCREMENT=297 DEFAULT CHARSET=utf8 COMMENT='任务';
+) ENGINE=MyISAM AUTO_INCREMENT=298 DEFAULT CHARSET=utf8 COMMENT='任务';
 
 -- ----------------------------
 -- Records of chinatt_pms_task
@@ -6739,7 +6750,7 @@ INSERT INTO `chinatt_pms_task` VALUES ('24', '8', '0', '重新股票更新模块
 INSERT INTO `chinatt_pms_task` VALUES ('25', '10', '0', '竞猜中心的数据模型建立', 'design', '0', '50.0', '70.0', '0', '0000-00-00', 'closed', '竞猜中心的数据模型建立', 'ivan', '2016-04-13 15:20:16', 'closed', '2016-05-23 12:24:24', '0000-00-00', '2016-04-13', 'wuxin', '2016-05-13 00:00:00', '', '0000-00-00 00:00:00', 'ivan', '2016-05-23 12:24:24', 'done', 'ivan', '2016-05-23 12:24:24', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('26', '1', '0', '增加机器人的回复编辑功能', 'devel', '2', '3.0', '0.0', '3', '0000-00-00', 'wait', '站长可自定义机器人的回复内容。', 'ivan', '2016-04-22 21:50:14', 'ivan', '2016-04-22 21:50:14', '2016-04-29', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('27', '3', '0', '所有的有关评论、报名信息，全部同步至帖子信息中', 'devel', '0', '5.0', '5.0', '0', '0000-00-00', 'closed', '评论信息需要读取帖子内容。', 'ivan', '2016-04-24 21:36:45', 'closed', '2016-05-18 22:19:39', '0000-00-00', '0000-00-00', 'wuxin', '2016-05-18 22:19:34', '', '0000-00-00 00:00:00', 'wuxin', '2016-05-18 22:19:39', 'done', 'wuxin', '2016-05-18 22:19:39', '0');
-INSERT INTO `chinatt_pms_task` VALUES ('28', '5', '0', '增加菜单的事件类型', 'devel', '0', '0.0', '0.0', '0', '0000-00-00', 'wait', '<p>&nbsp;如拍照、 发送位置等</p>\n<p>参考&nbsp;</p>\n<p>http://www.5icool.org/a/201410/a8658.html</p>', 'ivan', '2016-04-25 11:44:01', 'ivan', '2016-04-25 11:44:01', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_task` VALUES ('28', '5', '0', '增加菜单的事件类型', 'devel', '0', '0.0', '0.0', '0', '0000-00-00', 'doing', '<p>&nbsp;如拍照、 发送位置等</p>\n<p>参考&nbsp;</p>\n<p>http://www.5icool.org/a/201410/a8658.html</p>', 'ivan', '2016-04-25 11:44:01', 'ivan', '2016-04-25 11:44:01', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('29', '8', '0', '积分不足时提示准确的查看需要消耗积分', 'devel', '0', '1.0', '0.0', '1', '0000-00-00', 'wait', '查看高手股票或其它需要积分操作，不足时提示准确的查看需要消耗积分', 'ivan', '2016-04-25 15:24:07', 'ivan', '2016-04-25 15:24:07', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('30', '8', '0', '增加自选股功能', 'devel', '0', '5.0', '0.0', '5', '0000-00-00', 'wait', '增加用户自选股功能', 'ivan', '2016-04-25 15:24:38', 'ivan', '2016-04-25 15:24:38', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('31', '8', '0', '用户股票价格及价值自动更新', 'devel', '0', '0.0', '0.0', '0', '0000-00-00', 'wait', '在获取股票价格数据时，对用户持有股票数据进行更新。', 'ivan', '2016-04-26 12:35:54', 'ivan', '2016-04-26 12:35:54', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
@@ -6751,7 +6762,7 @@ INSERT INTO `chinatt_pms_task` VALUES ('36', '3', '0', '后台的申请列表增
 INSERT INTO `chinatt_pms_task` VALUES ('37', '10', '0', '完成下注程序部分处理', 'devel', '0', '6.0', '6.0', '0', '0000-00-00', 'closed', '让用户可以正常下注。包括胜负、出线下注功能', 'ivan', '2016-05-18 22:43:24', 'closed', '2016-05-26 18:05:46', '2016-05-19', '2016-05-23', 'ivan', '2016-05-26 18:05:40', '', '0000-00-00 00:00:00', 'ivan', '2016-05-26 18:05:46', 'done', 'ivan', '2016-05-26 18:05:46', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('38', '10', '0', '学习竞猜的数据结构、程序模块、基础的封装方法', 'misc', '0', '24.0', '16.0', '0', '2016-05-22', 'closed', '<p>整个插件的目录结构、common.func.php中的所有方法，必须熟悉了解其作用</p>\n<p>同时熟悉discuz的基本数据库增删查改的处理。</p>', 'ivan', '2016-05-18 22:47:01', 'closed', '2016-05-23 12:24:49', '2016-05-19', '2016-05-20', 'chen', '2016-05-23 12:04:31', '', '0000-00-00 00:00:00', 'ivan', '2016-05-23 12:24:49', 'done', 'ivan', '2016-05-23 12:24:49', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('39', '10', '0', '后台管理功能中，界面部分的处理', 'devel', '0', '20.0', '10.0', '0', '2016-05-24', 'closed', '<p>后台增加对人员、团队、赛事、对阵、盘局、用户这些模块的管理。</p>\n<p>具体管理内容以数据表中的内容为准。</p>\n<p>参考试用中心的处理。</p>', 'ivan', '2016-05-18 23:01:21', 'closed', '2016-05-23 12:25:02', '2016-05-20', '0000-00-00', 'ming', '2016-05-20 17:06:35', '', '0000-00-00 00:00:00', 'ivan', '2016-05-23 12:25:02', 'done', 'ivan', '2016-05-23 12:25:02', '0');
-INSERT INTO `chinatt_pms_task` VALUES ('40', '8', '0', '增加资金流水记录显示功能', 'devel', '0', '4.0', '0.0', '4', '0000-00-00', 'wait', '', 'ivan', '2016-05-21 14:04:14', 'ivan', '2016-05-21 14:04:15', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_task` VALUES ('40', '8', '0', '增加资金流水记录显示功能', 'devel', '0', '4.0', '0.0', '4', '0000-00-00', 'doing', '', 'ivan', '2016-05-21 14:04:14', 'ivan', '2016-05-21 14:04:15', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('41', '3', '0', '界面修改，以更显示的方式引导用户在试用中心提交试用报告', 'devel', '0', '2.0', '1.0', '0', '2016-05-23', 'closed', '', 'wuxin', '2016-05-23 10:22:22', 'closed', '2016-05-25 15:35:49', '2016-05-23', '0000-00-00', 'ivan', '2016-05-25 15:35:44', '', '0000-00-00 00:00:00', 'ivan', '2016-05-25 15:35:49', 'done', 'ivan', '2016-05-25 15:35:49', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('42', '3', '0', '增加发布试用报告的通知功能', 'devel', '0', '5.0', '4.0', '0', '2016-05-25', 'closed', '每天给已申请成功未发布试用报告的用户发站内短消息，提醒发布试用报告。', 'ivan', '2016-05-23 12:01:25', 'closed', '2016-05-25 15:22:34', '2016-05-23', '0000-00-00', 'ivan', '2016-05-25 15:22:29', '', '0000-00-00 00:00:00', 'ivan', '2016-05-25 15:22:34', 'done', 'ivan', '2016-05-25 15:22:34', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('43', '10', '0', '后台管理模块的完善处理', 'devel', '0', '16.0', '11.0', '0', '2016-05-24', 'closed', '将现有的后台管理模块完善，如基本的删除、推荐、编辑等状态更新及相应的分页处理。', 'ivan', '2016-05-23 12:03:30', 'closed', '2016-06-11 12:16:15', '2016-05-23', '0000-00-00', 'chen', '2016-05-24 17:57:20', '', '0000-00-00 00:00:00', 'ivan', '2016-06-11 12:16:15', 'done', 'ivan', '2016-06-11 12:16:15', '0');
@@ -6805,7 +6816,7 @@ INSERT INTO `chinatt_pms_task` VALUES ('90', '10', '0', '编写帮助中心的�
 INSERT INTO `chinatt_pms_task` VALUES ('91', '10', '0', '制作品牌中心插件的手机版', 'ui', '0', '8.0', '5.0', '0', '0000-00-00', 'closed', '', 'ivan', '2016-06-23 16:31:30', 'closed', '2016-10-27 15:03:08', '0000-00-00', '0000-00-00', 'ming', '2016-06-29 10:30:21', '', '0000-00-00 00:00:00', 'ivan', '2016-10-27 15:03:08', 'done', 'ivan', '2016-10-27 15:03:08', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('92', '10', '0', '手机上增加评论处理。', 'ui', '0', '5.0', '1.0', '0', '0000-00-00', 'closed', '手机上所有显示评论的地方都需要能进行评论处理', 'ivan', '2016-06-24 09:56:50', 'closed', '2016-10-27 15:03:08', '0000-00-00', '0000-00-00', 'ming', '2016-06-28 12:15:56', '', '0000-00-00 00:00:00', 'ivan', '2016-10-27 15:03:08', 'done', 'ivan', '2016-10-27 15:03:08', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('93', '10', '0', '界面的几个小细节或bug调整', 'ui', '0', '1.0', '2.0', '0', '0000-00-00', 'closed', '<p>1、竞猜提示框，宽度改为现大小的1/3,色系使用红色（标题、按钮），可换其余颜色，但要比较显眼。 链接需要单独样式，突然显示，让用户知道该文字是链接。</p>\n<p>2、竞猜添加如果有出错信息，不要刷新当前页，一直显示出错信息让用户确认。现在是自动刷新当前页，导致用户没看清就关闭了。</p>\n<p>3、添加盘局时自定义选项输入后，在换成否时，未清除内容，导致仍然提交有自定义选项。</p>', 'ivan', '2016-06-27 15:29:06', 'closed', '2016-10-27 15:03:08', '0000-00-00', '0000-00-00', 'ming', '2016-06-29 10:30:05', '', '0000-00-00 00:00:00', 'ivan', '2016-10-27 15:03:08', 'done', 'ivan', '2016-10-27 15:03:08', '0');
-INSERT INTO `chinatt_pms_task` VALUES ('94', '2', '0', '需要对同步帖子的版块与TID进行判断，防止出错', 'devel', '0', '0.0', '0.0', '0', '0000-00-00', 'wait', '如果用户不填写则不同步，否则同步帖子会出错。', 'ivan', '2016-06-27 16:17:20', 'ivan', '2016-06-27 16:17:20', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_task` VALUES ('94', '2', '0', '需要对同步帖子的版块与TID进行判断，防止出错', 'devel', '0', '0.0', '0.0', '0', '0000-00-00', 'doing', '如果用户不填写则不同步，否则同步帖子会出错。', 'ivan', '2016-06-27 16:17:20', 'ivan', '2016-06-27 16:17:20', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('95', '10', '0', '对品牌中心进行bug消除，需要让品牌中心正常运转', 'devel', '0', '6.0', '4.0', '0', '0000-00-00', 'closed', '', 'ivan', '2016-06-29 11:26:13', 'closed', '2016-10-27 15:03:08', '0000-00-00', '2016-06-29', 'chen', '2016-07-04 11:27:14', '', '0000-00-00 00:00:00', 'ivan', '2016-10-27 15:03:08', 'done', 'ivan', '2016-10-27 15:03:08', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('96', '10', '0', '对品牌中心插件进行修改', 'ui', '0', '2.0', '2.0', '0', '0000-00-00', 'closed', '引用的图片、JS等全部引用品牌中心本身。', 'ivan', '2016-06-30 10:37:38', 'closed', '2016-10-27 15:03:08', '0000-00-00', '0000-00-00', 'ming', '2016-07-14 09:40:30', '', '0000-00-00 00:00:00', 'ivan', '2016-10-27 15:03:08', 'done', 'ivan', '2016-10-27 15:03:08', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('97', '10', '0', '界面细节修改', 'ui', '0', '8.0', '2.0', '0', '2016-07-01', 'closed', '对目前发现的界面细节进行优化调整。', 'ivan', '2016-07-01 12:08:11', 'closed', '2016-10-27 15:03:09', '0000-00-00', '0000-00-00', 'ming', '2016-07-04 11:27:44', '', '0000-00-00 00:00:00', 'ivan', '2016-10-27 15:03:09', 'done', 'ivan', '2016-10-27 15:03:09', '0');
@@ -6815,7 +6826,7 @@ INSERT INTO `chinatt_pms_task` VALUES ('100', '13', '0', '设计双鱼杯手机�
 INSERT INTO `chinatt_pms_task` VALUES ('101', '13', '0', '制作双鱼杯手机版页面', 'ui', '0', '6.0', '3.0', '0', '0000-00-00', 'closed', '', 'ivan', '2016-07-06 10:24:36', 'closed', '2016-10-27 15:06:36', '0000-00-00', '0000-00-00', 'ming', '2016-08-10 10:26:09', '', '0000-00-00 00:00:00', 'ivan', '2016-10-27 15:06:36', 'done', 'ivan', '2016-10-27 15:06:36', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('102', '13', '0', '对电脑版的界面进行调整', 'ui', '0', '4.0', '2.0', '0', '0000-00-00', 'closed', '', 'ivan', '2016-07-06 10:25:38', 'closed', '2016-10-27 15:06:36', '0000-00-00', '0000-00-00', 'ming', '2016-08-10 10:26:22', '', '0000-00-00 00:00:00', 'ivan', '2016-10-27 15:06:36', 'done', 'ivan', '2016-10-27 15:06:36', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('103', '13', '0', '对双鱼杯的代码处理部分进行熟悉，并配合前端需求做程序修改', 'devel', '0', '8.0', '1.0', '0', '0000-00-00', 'closed', '', 'ivan', '2016-07-06 10:26:16', 'closed', '2016-10-27 15:06:36', '0000-00-00', '0000-00-00', 'chen', '2016-07-11 14:21:53', '', '0000-00-00 00:00:00', 'ivan', '2016-10-27 15:06:36', 'done', 'ivan', '2016-10-27 15:06:36', '0');
-INSERT INTO `chinatt_pms_task` VALUES ('104', '8', '0', '增加手机版', 'devel', '0', '24.0', '0.0', '24', '0000-00-00', 'wait', '', 'ivan', '2016-07-06 10:34:30', 'ivan', '2016-07-06 10:34:30', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_task` VALUES ('104', '8', '0', '增加手机版', 'devel', '0', '24.0', '4.0', '24', '0000-00-00', 'done', '', 'ivan', '2016-07-06 10:34:30', 'ivan', '2016-07-06 10:34:30', '0000-00-00', '0000-00-00', 'ivan', '2017-03-03 12:45:55', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('105', '1', '0', '增加多频道的支持功能', 'devel', '0', '1.0', '1.0', '0', '0000-00-00', 'done', '', 'ivan', '2016-07-09 12:50:16', 'ivan', '2016-11-29 11:11:46', '0000-00-00', '2016-11-29', 'chen', '2016-11-29 11:11:46', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'chen', '2016-11-29 11:11:46', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('106', '1', '0', '解决文字的颜色设置无效的问题', 'devel', '0', '1.0', '0.5', '0', '0000-00-00', 'done', '', 'ivan', '2016-07-10 10:19:22', 'ivan', '2016-07-10 10:19:47', '0000-00-00', '0000-00-00', 'ivan', '2016-07-10 10:19:47', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'ivan', '2016-07-10 10:19:47', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('107', '13', '0', '将竞猜的后台设置部分，移植至双鱼杯后台', 'devel', '0', '6.0', '4.0', '0', '0000-00-00', 'closed', '查找设置中的可设置变量，如authorid fid &nbsp;uid一类的指定用户UID，或版块的变量，统一改为后台设置<span></span>', 'ivan', '2016-07-12 11:47:49', 'closed', '2016-10-27 15:06:36', '0000-00-00', '0000-00-00', 'chen', '2016-07-13 18:14:09', '', '0000-00-00 00:00:00', 'ivan', '2016-10-27 15:06:36', 'done', 'ivan', '2016-10-27 15:06:36', '0');
@@ -6994,7 +7005,7 @@ INSERT INTO `chinatt_pms_task` VALUES ('279', '17', '0', '读取列表页的时�
 INSERT INTO `chinatt_pms_task` VALUES ('280', '15', '0', '时间轴界面调整', 'ui', '0', '2.0', '2.0', '0', '0000-00-00', 'done', '<p>内容部分与背景的对比需要明显，图片大小 ，位置等重排</p>', 'ivan', '2016-11-21 11:47:40', 'ivan', '2016-11-22 15:56:05', '0000-00-00', '0000-00-00', 'ming', '2016-11-22 15:56:05', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'ming', '2016-11-22 15:56:05', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('281', '1', '0', '将后台管理的用户管理及记录管理功能移植到前台', 'devel', '0', '4.0', '4.0', '0', '0000-00-00', 'done', '按此前商城的后台处理方式处理', 'ivan', '2016-11-21 12:55:50', 'ivan', '2016-11-24 16:41:03', '0000-00-00', '2016-11-23', 'chen', '2016-11-24 16:41:03', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'chen', '2016-11-24 16:41:03', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('282', '1', '0', '对聊天室的数据表、结构、聊天消息的处理机制进行学习', 'misc', '0', '4.0', '5.0', '0', '0000-00-00', 'done', '', 'ivan', '2016-11-21 13:02:31', 'ivan', '2016-11-23 16:26:04', '0000-00-00', '0000-00-00', 'chen', '2016-11-23 16:26:04', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'chen', '2016-11-23 16:26:04', '0');
-INSERT INTO `chinatt_pms_task` VALUES ('283', '5', '0', '后台增加目录权限检测功能', 'devel', '0', '2.0', '0.0', '2', '0000-00-00', 'wait', '', 'ivan', '2016-11-22 20:19:23', 'ivan', '2016-11-22 20:19:23', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'ivan', '2016-11-25 10:02:38', '0');
+INSERT INTO `chinatt_pms_task` VALUES ('283', '5', '0', '后台增加目录权限检测功能', 'devel', '0', '2.0', '1.0', '2', '0000-00-00', 'doing', '', 'ivan', '2016-11-22 20:19:23', 'ivan', '2016-11-22 20:19:23', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'ivan', '2016-11-25 10:02:38', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('284', '12', '0', '时间轴的年份显示或隐藏，屏幕滑动将显示筛选年份', 'test', '0', '0.0', '2.0', '0', '2016-11-23', 'done', '', 'ming', '2016-11-23 10:54:28', 'ming', '2016-11-23 15:05:01', '2016-11-23', '2016-11-23', 'ming', '2016-11-23 15:05:01', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'ming', '2016-11-23 15:05:01', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('285', '17', '0', '建立在线用户的模型', 'devel', '0', '8.0', '0.0', '8', '0000-00-00', 'doing', '', 'ivan', '2016-11-23 15:27:44', 'ivan', '2016-11-23 15:27:45', '0000-00-00', '2016-11-23', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'ivan', '2016-11-23 15:27:51', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('286', '1', '0', '优化聊天室界面', 'ui', '0', '8.0', '3.0', '0', '0000-00-00', 'done', '<p>对界面进行优化调整</p>\n<p>增加频道列表的输出</p>\n<p>用户名上增加弹层的支持，可查看用户基本资料，进行禁言操作</p>', 'ivan', '2016-11-23 16:40:39', 'ivan', '2016-11-29 10:05:22', '0000-00-00', '0000-00-00', 'ming', '2016-11-29 10:05:22', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'ming', '2016-11-29 10:05:22', '0');
@@ -7008,6 +7019,7 @@ INSERT INTO `chinatt_pms_task` VALUES ('293', '1', '0', '聊天页', 'test', '0'
 INSERT INTO `chinatt_pms_task` VALUES ('294', '18', '0', '将原视频站转为插件模式', 'devel', '0', '1.0', '5.0', '6', '0000-00-00', 'done', '说明内容', 'ivan', '2017-01-12 17:20:04', 'ming', '2017-01-12 17:20:04', '0000-00-00', '0000-00-00', 'ivan', '2017-02-15 12:40:41', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('295', '19', '0', '分站俱乐部的版面修改设计', 'design', '0', '4.0', '0.0', '0', '0000-00-00', 'wait', '<p>需要对现有的分站版面进行改版，让分站显示更为合理、使用方便。<br/></p>', 'ivan', '2017-02-27 11:41:54', 'ming', '2017-02-27 11:41:54', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('296', '19', '0', '管理插件的增加日志记录功能', 'devel', '0', '2.0', '10.0', '0', '0000-00-00', 'done', '<p>建立日志数据表，对管理插件增加日志记录功能，所有的管理操作全部记录到日志文件中。<br/></p>', 'ivan', '2017-02-27 12:06:24', 'ivan', '2017-02-27 12:06:24', '0000-00-00', '0000-00-00', 'ivan', '2017-02-27 12:06:39', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_task` VALUES ('297', '20', '0', '增加新年活动的发布页、列表页', 'design', '0', '1.0', '0.0', '0', '0000-00-00', 'wait', '<p>asdfasdfasdf</p>', 'ivan', '2017-03-06 18:54:51', 'chen', '2017-03-06 18:54:51', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_taskestimate
@@ -7023,7 +7035,7 @@ CREATE TABLE `chinatt_pms_taskestimate` (
   `work` text NOT NULL COMMENT '工作内容',
   PRIMARY KEY (`id`),
   KEY `task` (`task`)
-) ENGINE=MyISAM AUTO_INCREMENT=371 DEFAULT CHARSET=utf8 COMMENT='工时';
+) ENGINE=MyISAM AUTO_INCREMENT=377 DEFAULT CHARSET=utf8 COMMENT='工时';
 
 -- ----------------------------
 -- Records of chinatt_pms_taskestimate
@@ -7398,6 +7410,12 @@ INSERT INTO `chinatt_pms_taskestimate` VALUES ('367', '294', '2017-02-14', '0.0'
 INSERT INTO `chinatt_pms_taskestimate` VALUES ('368', '294', '2017-02-14', '0.0', '5.0', 'ivan', '<p>任务更新说明</p>');
 INSERT INTO `chinatt_pms_taskestimate` VALUES ('369', '294', '2017-02-15', '5.0', '2.0', 'ivan', '做了一半了');
 INSERT INTO `chinatt_pms_taskestimate` VALUES ('370', '294', '2017-02-20', '2.0', '10.0', 'ivan', '');
+INSERT INTO `chinatt_pms_taskestimate` VALUES ('371', '283', '2017-03-03', '0.0', '1.0', 'ivan', '3月工时');
+INSERT INTO `chinatt_pms_taskestimate` VALUES ('372', '104', '2017-03-03', '0.0', '0.0', 'ivan', '完成任务');
+INSERT INTO `chinatt_pms_taskestimate` VALUES ('373', '283', '2017-03-08', '0.0', '1.0', 'ivan', '任务开始');
+INSERT INTO `chinatt_pms_taskestimate` VALUES ('374', '28', '2017-03-08', '0.0', '1.0', 'ivan', '开始任务');
+INSERT INTO `chinatt_pms_taskestimate` VALUES ('375', '94', '2017-03-08', '1.0', '2.0', 'ivan', '开始');
+INSERT INTO `chinatt_pms_taskestimate` VALUES ('376', '40', '2017-03-08', '2.0', '1.5', 'ivan', '开始');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_team
@@ -7464,6 +7482,9 @@ INSERT INTO `chinatt_pms_team` VALUES ('19', 'ivan', '', '0000-00-00', '0', '0.0
 INSERT INTO `chinatt_pms_team` VALUES ('1', 'chong', '', '0000-00-00', '0', '0.0');
 INSERT INTO `chinatt_pms_team` VALUES ('19', 'chong', '', '0000-00-00', '0', '0.0');
 INSERT INTO `chinatt_pms_team` VALUES ('19', 'chen', '', '0000-00-00', '0', '0.0');
+INSERT INTO `chinatt_pms_team` VALUES ('20', 'ming', '', '2017-03-06', '0', '0.0');
+INSERT INTO `chinatt_pms_team` VALUES ('20', 'chong', '', '2017-03-06', '0', '0.0');
+INSERT INTO `chinatt_pms_team` VALUES ('20', 'chen', '', '2017-03-06', '0', '0.0');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_todo
@@ -7532,7 +7553,7 @@ CREATE TABLE `chinatt_pms_user` (
 -- Records of chinatt_pms_user
 -- ----------------------------
 INSERT INTO `chinatt_pms_user` VALUES ('1', '0', '0', 'wuxin', '46ff408a5233e4a2329e23b8eec47be7', '', '管理员', '', 'wuxin', '', '0000-00-00', 'm', '', '', '', '', '0000-00-00', '15', '58.62.203.238', '1482910107', '0.0.0.0', '0', '0', '0', '1', '9537cd');
-INSERT INTO `chinatt_pms_user` VALUES ('2', '1', '1', 'ivan', '7f2668c76e4fc6662fa7abbf2e28908e', 'pm', '吴鑫', '', '', '', '0000-00-00', 'm', 'wx.1@163.com', '', '', '', '0000-00-00', '84', '58.62.205.78', '1488418892', '0.0.0.0', '0', '0', '0', '1', '96067e');
+INSERT INTO `chinatt_pms_user` VALUES ('2', '1', '1', 'ivan', '7f2668c76e4fc6662fa7abbf2e28908e', 'pm', '吴鑫', '', '', '', '0000-00-00', 'm', 'wx.1@163.com', '', '', '', '0000-00-00', '85', '58.62.205.78', '1488797063', '0.0.0.0', '0', '0', '0', '1', '96067e');
 INSERT INTO `chinatt_pms_user` VALUES ('3', '1', '2', 'ming', '6d9f42bade5b89279895bbf07c0feb47', 'dev', '关武明', '', '', '', '0000-00-00', 'm', '2273659300@QQ.com', '', '', '', '0000-00-00', '77', '58.62.202.115', '1481076687', '', '0', '0', '0', '1', '562dfs');
 INSERT INTO `chinatt_pms_user` VALUES ('4', '0', '5', 'chong', '90761b5a7ba4c8442efeb8bfdeea966a', 'po', '张新盛', '', '', '', '0000-00-00', 'm', 'webmaster@bokett.com', '', '', '', '0000-00-00', '4', '59.56.19.8', '1459440152', '', '0', '0', '0', '1', 'f2a22x');
 INSERT INTO `chinatt_pms_user` VALUES ('5', '1', '2', 'chen', 'b61c092c454b70699aaa3fcb2f9a2020', 'dev', '陈茂发', '', '', '', '0000-00-00', 'm', '', '', '', '', '0000-00-00', '78', '58.62.202.115', '1481095696', '', '0', '0', '0', '1', '5wqz2');
@@ -7566,3 +7587,356 @@ INSERT INTO `chinatt_pms_weburl` VALUES ('3', '2313359', '41', '0', '0', '', '',
 INSERT INTO `chinatt_pms_weburl` VALUES ('4', '2313359', '48', '0', '0', '', '', '', 'open', '1474260751', '-1');
 INSERT INTO `chinatt_pms_weburl` VALUES ('6', '2', '18', '0', '0', 'test', 'http://www.pc2015.com', '', 'open', '1474876766', '0');
 INSERT INTO `chinatt_pms_weburl` VALUES ('13', '2', '1', '0', '0', '发个红包来玩下', 'sdafasd', '', '', '2017', '0');
+
+-- ----------------------------
+-- Table structure for chinatt_pms_workcount
+-- ----------------------------
+DROP TABLE IF EXISTS `chinatt_pms_workcount`;
+CREATE TABLE `chinatt_pms_workcount` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `objectType` varchar(30) NOT NULL DEFAULT '' COMMENT '操作对象类型 product project  task user',
+  `objectID` int(8) NOT NULL DEFAULT '0' COMMENT '操作对象ID ',
+  `username` varchar(30) NOT NULL DEFAULT '' COMMENT '用户Username',
+  `date` date NOT NULL COMMENT '统计日期',
+  `consumed` decimal(5,1) NOT NULL COMMENT '0',
+  `lasttime` int(10) NOT NULL DEFAULT '0' COMMENT '数据更新时间',
+  PRIMARY KEY (`id`),
+  KEY `action` (`date`)
+) ENGINE=MyISAM AUTO_INCREMENT=1340 DEFAULT CHARSET=utf8 COMMENT='工时统计';
+
+-- ----------------------------
+-- Records of chinatt_pms_workcount
+-- ----------------------------
+INSERT INTO `chinatt_pms_workcount` VALUES ('1007', '', '0', 'ivan', '2016-10-30', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1008', '', '0', 'ivan', '2016-10-30', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1009', '', '0', 'wuxin', '2016-10-30', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1010', '', '0', 'ivan', '2016-10-30', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1011', '', '0', 'ivan', '2016-10-30', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1012', '', '0', 'ivan', '2016-10-30', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1013', '', '0', 'ivan', '2016-10-30', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1014', '', '0', 'ming', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1015', '', '0', 'chen', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1016', '', '0', 'chen', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1017', '', '0', 'ming', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1018', '', '0', 'chen', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1019', '', '0', 'chen', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1020', '', '0', 'ivan', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1021', '', '0', 'chen', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1022', '', '0', 'chen', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1023', '', '0', 'chen', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1024', '', '0', 'ivan', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1025', '', '0', 'ivan', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1026', '', '0', 'ivan', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1027', '', '0', 'ivan', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1028', '', '0', 'ming', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1029', '', '0', 'chen', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1030', '', '0', 'chen', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1031', '', '0', 'ming', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1032', '', '0', 'chen', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1033', '', '0', 'ming', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1034', '', '0', 'ivan', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1035', '', '0', 'ivan', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1036', '', '0', 'ivan', '2016-10-31', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1037', '', '0', 'wuxin', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1038', '', '0', 'wuxin', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1039', '', '0', 'ivan', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1040', '', '0', 'ming', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1041', '', '0', 'ivan', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1042', '', '0', 'chen', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1043', '', '0', 'ivan', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1044', '', '0', 'ivan', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1045', '', '0', 'ivan', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1046', '', '0', 'ivan', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1047', '', '0', 'chen', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1048', '', '0', 'chen', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1049', '', '0', 'chen', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1050', '', '0', 'chen', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1051', '', '0', 'ivan', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1052', '', '0', 'ivan', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1053', '', '0', 'ivan', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1054', '', '0', 'ming', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1055', '', '0', 'ming', '2016-11-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1056', '', '0', 'ivan', '2016-11-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1057', '', '0', 'ivan', '2016-11-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1058', '', '0', 'chen', '2016-11-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1059', '', '0', 'chen', '2016-11-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1060', '', '0', 'ivan', '2016-11-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1061', '', '0', 'chen', '2016-11-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1062', '', '0', 'chen', '2016-11-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1063', '', '0', 'chen', '2016-11-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1064', '', '0', 'ivan', '2016-11-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1065', '', '0', 'ivan', '2016-11-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1066', '', '0', 'ivan', '2016-11-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1069', '', '0', 'ivan', '2016-11-03', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1070', '', '0', 'chen', '2016-11-03', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1067', '', '0', 'ivan', '2016-11-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1068', '', '0', 'chen', '2016-11-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1071', '', '0', 'chen', '2016-11-03', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1072', '', '0', 'ivan', '2016-11-03', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1073', '', '0', 'chen', '2016-11-03', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1074', '', '0', 'chen', '2016-11-03', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1075', '', '0', 'chen', '2016-11-03', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1076', '', '0', 'ivan', '2016-11-03', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1077', '', '0', 'ivan', '2016-11-03', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1078', '', '0', 'ivan', '2016-11-03', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1079', '', '0', 'ivan', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1080', '', '0', 'ivan', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1081', '', '0', 'ivan', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1082', '', '0', 'ivan', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1083', '', '0', 'chen', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1084', '', '0', 'chen', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1085', '', '0', 'ivan', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1086', '', '0', 'ivan', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1087', '', '0', 'ivan', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1088', '', '0', 'ivan', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1089', '', '0', 'ivan', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1090', '', '0', 'ivan', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1091', '', '0', 'chen', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1092', '', '0', 'chen', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1093', '', '0', 'chen', '2016-11-04', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1094', '', '0', 'ming', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1095', '', '0', 'ming', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1096', '', '0', 'ming', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1097', '', '0', 'chen', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1098', '', '0', 'chen', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1099', '', '0', 'chen', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1100', '', '0', 'chen', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1101', '', '0', 'ming', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1102', '', '0', 'chen', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1103', '', '0', 'chen', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1104', '', '0', 'chen', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1105', '', '0', 'ming', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1106', '', '0', 'ming', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1107', '', '0', 'ivan', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1108', '', '0', 'ivan', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1109', '', '0', 'ivan', '2016-11-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1110', '', '0', 'ming', '2016-11-08', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1111', '', '0', 'chen', '2016-11-08', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1112', '', '0', 'chen', '2016-11-08', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1113', '', '0', 'chen', '2016-11-08', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1114', '', '0', 'ming', '2016-11-08', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1115', '', '0', 'ming', '2016-11-08', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1116', '', '0', 'chen', '2016-11-08', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1117', '', '0', 'chen', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1118', '', '0', 'chen', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1119', '', '0', 'ivan', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1120', '', '0', 'chen', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1121', '', '0', 'ming', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1122', '', '0', 'ivan', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1123', '', '0', 'chen', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1124', '', '0', 'chen', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1125', '', '0', 'ivan', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1126', '', '0', 'ivan', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1127', '', '0', 'ivan', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1128', '', '0', 'ivan', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1129', '', '0', 'ivan', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1130', '', '0', 'chen', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1131', '', '0', 'chen', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1132', '', '0', 'chen', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1133', '', '0', 'ivan', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1134', '', '0', 'ming', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1135', '', '0', 'chen', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1136', '', '0', 'chen', '2016-11-09', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1137', '', '0', 'ming', '2016-11-10', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1138', '', '0', 'gzzbc', '2016-11-10', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1139', '', '0', 'chen', '2016-11-10', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1140', '', '0', 'chen', '2016-11-10', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1141', '', '0', 'ming', '2016-11-10', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1142', '', '0', 'chen', '2016-11-10', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1143', '', '0', 'ivan', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1144', '', '0', 'ming', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1145', '', '0', 'ming', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1146', '', '0', 'ming', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1147', '', '0', 'ming', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1148', '', '0', 'chen', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1149', '', '0', 'chen', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1150', '', '0', 'chen', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1151', '', '0', 'chen', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1152', '', '0', 'chen', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1153', '', '0', 'chen', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1154', '', '0', 'chen', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1155', '', '0', 'chen', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1156', '', '0', 'chen', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1157', '', '0', 'chen', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1158', '', '0', 'chen', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1159', '', '0', 'chen', '2016-11-11', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1160', '', '0', 'ivan', '2016-11-12', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1161', '', '0', 'ming', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1162', '', '0', 'ming', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1163', '', '0', 'ming', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1164', '', '0', 'ming', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1165', '', '0', 'ivan', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1166', '', '0', 'ivan', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1167', '', '0', 'ming', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1168', '', '0', 'ming', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1169', '', '0', 'ming', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1170', '', '0', 'ivan', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1171', '', '0', 'ivan', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1172', '', '0', 'ming', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1173', '', '0', 'ming', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1174', '', '0', 'chen', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1175', '', '0', 'chen', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1176', '', '0', 'ivan', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1177', '', '0', 'ivan', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1178', '', '0', 'ivan', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1179', '', '0', 'ivan', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1180', '', '0', 'ivan', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1181', '', '0', 'ivan', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1182', '', '0', 'ivan', '2016-11-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1183', '', '0', 'ming', '2016-11-15', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1184', '', '0', 'ming', '2016-11-15', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1185', '', '0', 'ming', '2016-11-15', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1186', '', '0', 'ming', '2016-11-15', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1187', '', '0', 'chen', '2016-11-15', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1188', '', '0', 'wuxin', '2016-11-15', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1189', '', '0', 'wuxin', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1190', '', '0', 'ming', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1191', '', '0', 'ming', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1192', '', '0', 'ming', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1193', '', '0', 'wuxin', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1194', '', '0', 'wuxin', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1195', '', '0', 'wuxin', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1196', '', '0', 'ivan', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1197', '', '0', 'ivan', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1198', '', '0', 'chen', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1199', '', '0', 'chen', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1200', '', '0', 'ivan', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1201', '', '0', 'chen', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1202', '', '0', 'ivan', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1203', '', '0', 'chen', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1204', '', '0', 'chen', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1205', '', '0', 'ming', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1206', '', '0', 'ming', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1207', '', '0', 'ivan', '2016-11-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1208', '', '0', 'ming', '2016-11-17', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1209', '', '0', 'ming', '2016-11-18', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1210', '', '0', 'ming', '2016-11-18', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1211', '', '0', 'ivan', '2016-11-18', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1212', '', '0', 'chen', '2016-11-18', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1213', '', '0', 'chen', '2016-11-18', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1214', '', '0', 'chen', '2016-11-18', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1215', '', '0', 'chen', '2016-11-18', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1216', '', '0', 'chen', '2016-11-18', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1217', '', '0', 'ivan', '2016-11-18', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1218', '', '0', 'ming', '2016-11-18', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1219', '', '0', 'chen', '2016-11-18', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1220', '', '0', 'chen', '2016-11-18', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1221', '', '0', 'chen', '2016-11-18', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1222', '', '0', 'chen', '2016-11-18', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1223', '', '0', 'chen', '2016-11-21', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1224', '', '0', 'ivan', '2016-11-21', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1225', '', '0', 'ivan', '2016-11-21', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1226', '', '0', 'ivan', '2016-11-21', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1227', '', '0', 'ivan', '2016-11-21', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1228', '', '0', 'ivan', '2016-11-21', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1229', '', '0', 'ming', '2016-11-22', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1230', '', '0', 'ming', '2016-11-22', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1231', '', '0', 'ming', '2016-11-22', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1232', '', '0', 'ivan', '2016-11-22', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1233', '', '0', 'chen', '2016-11-23', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1234', '', '0', 'ming', '2016-11-23', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1235', '', '0', 'ming', '2016-11-23', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1236', '', '0', 'ming', '2016-11-23', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1237', '', '0', 'ming', '2016-11-23', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1238', '', '0', 'ivan', '2016-11-23', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1239', '', '0', 'ivan', '2016-11-23', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1240', '', '0', 'chen', '2016-11-23', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1241', '', '0', 'ivan', '2016-11-23', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1242', '', '0', 'ivan', '2016-11-24', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1243', '', '0', 'ming', '2016-11-24', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1244', '', '0', 'ming', '2016-11-24', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1245', '', '0', 'chen', '2016-11-24', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1246', '', '0', 'chen', '2016-11-24', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1247', '', '0', 'chen', '2016-11-24', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1248', '', '0', 'chen', '2016-11-24', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1249', '', '0', 'chen', '2016-11-24', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1250', '', '0', 'chen', '2016-11-24', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1251', '', '0', 'ming', '2016-11-24', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1252', '', '0', 'ivan', '2016-11-24', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1253', '', '0', 'ivan', '2016-11-25', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1254', '', '0', 'ivan', '2016-11-25', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1255', '', '0', 'ivan', '2016-11-25', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1256', '', '0', 'ivan', '2016-11-25', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1257', '', '0', 'ming', '2016-11-25', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1258', '', '0', 'ming', '2016-11-25', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1259', '', '0', 'chen', '2016-11-28', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1260', '', '0', 'ming', '2016-11-29', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1261', '', '0', 'ming', '2016-11-29', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1262', '', '0', 'ming', '2016-11-29', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1263', '', '0', 'wuxin', '2016-11-29', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1264', '', '0', 'wuxin', '2016-11-29', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1265', '', '0', 'ivan', '2016-11-29', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1266', '', '0', 'chen', '2016-11-29', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1267', '', '0', 'chen', '2016-11-29', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1268', '', '0', 'chen', '2016-11-29', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1269', '', '0', 'ming', '2016-11-29', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1270', '', '0', 'ming', '2016-11-29', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1271', '', '0', 'ming', '2016-11-30', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1272', '', '0', 'chen', '2016-11-30', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1273', '', '0', 'chen', '2016-11-30', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1274', '', '0', 'chen', '2016-11-30', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1275', '', '0', 'ming', '2016-11-30', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1276', '', '0', 'ming', '2016-11-30', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1277', '', '0', 'chen', '2016-12-01', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1278', '', '0', 'ming', '2016-12-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1279', '', '0', 'ming', '2016-12-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1280', '', '0', 'ivan', '2016-12-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1281', '', '0', 'ming', '2016-12-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1282', '', '0', 'ming', '2016-12-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1283', '', '0', 'ming', '2016-12-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1284', '', '0', 'ming', '2016-12-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1285', '', '0', 'chen', '2016-12-02', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1286', '', '0', 'ming', '2016-12-05', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1287', '', '0', 'ming', '2016-12-05', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1288', '', '0', 'ming', '2016-12-05', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1289', '', '0', 'ming', '2016-12-05', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1290', '', '0', 'ming', '2016-12-05', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1291', '', '0', 'wuxin', '2016-12-05', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1292', '', '0', 'chen', '2016-12-06', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1293', '', '0', 'chen', '2016-12-06', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1294', '', '0', 'wuxin', '2016-12-06', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1295', '', '0', 'ming', '2016-12-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1296', '', '0', 'ming', '2016-12-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1297', '', '0', 'wuxin', '2016-12-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1298', '', '0', 'wuxin', '2016-12-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1299', '', '0', 'wuxin', '2016-12-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1300', '', '0', 'wuxin', '2016-12-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1301', '', '0', 'wuxin', '2016-12-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1302', '', '0', 'chen', '2016-12-07', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1303', '', '0', 'admin', '2016-12-16', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1304', '', '0', 'ivan', '2016-12-22', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1305', '', '0', 'ivan', '2016-12-22', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1306', '', '0', '', '2017-02-13', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1307', '', '0', 'ivan', '2017-02-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1308', '', '0', 'ivan', '2017-02-14', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1309', '', '0', '', '2017-02-15', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1310', '', '0', 'ivan', '2017-02-15', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1311', '', '0', '', '2017-02-15', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1312', '', '0', 'ivan', '2017-02-15', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1313', '', '0', 'ivan', '2017-02-15', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1314', '', '0', 'ivan', '2017-02-15', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1315', '', '0', 'ivan', '2017-02-17', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1316', '', '0', 'ivan', '2017-02-20', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1317', '', '0', 'ivan', '2017-02-20', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1318', '', '0', 'ivan', '2017-02-20', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1319', '', '0', 'ivan', '2017-02-20', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1320', '', '0', 'ivan', '2017-02-21', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1321', '', '0', 'ivan', '2017-02-21', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1322', '', '0', '', '2017-02-22', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1323', '', '0', '', '2017-02-27', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1324', '', '0', 'ivan', '2017-02-27', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1325', '', '0', 'ivan', '2017-02-27', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1326', '', '0', 'ivan', '2017-02-27', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1327', '', '0', 'ivan', '2017-02-27', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1328', '', '0', 'ivan', '2017-02-27', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1329', '', '0', 'ivan', '2017-02-27', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1330', '', '0', 'ivan', '2017-03-03', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1331', '', '0', 'ivan', '2017-03-03', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1332', '', '0', '', '2017-03-06', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1333', '', '0', 'ivan', '2017-03-06', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1334', '', '0', 'ivan', '2017-03-06', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1335', '', '0', 'ivan', '2017-03-06', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1336', '', '0', 'ivan', '2017-03-08', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1337', '', '0', 'ivan', '2017-03-08', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1338', '', '0', 'ivan', '2017-03-08', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1339', '', '0', 'ivan', '2017-03-08', '0.0', '0');
