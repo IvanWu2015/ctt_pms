@@ -30,14 +30,15 @@ class Action extends Common {
             $map['action'] = array('like',"%$keyword%");
         }
         $user_list = db('User')->where(['deleted' => 0])->select();
-        $action_list = DB::name('Action')
+        //动态
+        $action_list = DB('Action')
                 ->alias('a')
-                ->join('chinatt_pms_project p', 'a.project = p.id', 'left')
-                ->join('chinatt_pms_user u','a.actor = u.username','left')
-                ->field('a.*,p.name as parent_name,p.status,u.realname')
-                ->where($map)
+                ->join('chinatt_pms_taskestimate b', 'a.extra =b.id', 'left')
+                ->join('chinatt_pms_task t', 'a.objectType = \'task\' AND a.objectID =t.id', 'left')
+                ->join('chinatt_pms_task p', 'a.objectType = \'project\' AND a.objectID =p.id', 'left')
+                ->field('a.*,b.left,b.consumed,b.username,t.name as tname, p.name as pname')
                 ->order('id DESC')
-                ->paginate(50, $action_count, ['path' => url('/admin/action/lists/'), 'query' => ['project_id' => $project_id]]);
+                ->paginate(30);
         $action_list = analysis_all($action_list);
         $page = $action_list->render(); // 分页显示输出
         $project_list = db('Project')->where(['deleted' => 0])->select();

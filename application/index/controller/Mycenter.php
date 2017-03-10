@@ -18,13 +18,19 @@ class Mycenter extends Common {
 
     //首页
     public function index() {
+        //总预计工时
         $estimate_count = DB::name('Task')->where(['assignedTo' => $this->_G['username'], 'deleted' => 0])->sum('estimate');
+        //总消耗工时
         $consumed_count = DB::name('taskestimate')->where(['username' => $this->_G['username']])->sum('consumed');
+        //我的任务总数
         $my_task_count = DB::name('Task')->where(['assignedTo' => $this->_G['username'], 'deleted' => 0])->count();
+        //我的动态总数
         $my_action_count = DB::name('Action')->where(['actor' => $this->_G['username']])->count();
+        //我的收藏网址总数
         $my_weburl_count = DB::name('Weburl')->where(['uid' => $this->_G['uid'], 'status' => 0])->count();
+        //我的文章总数
         $my_article_count = DB::name('Article')->where(['uid' => $this->_G['uid'], 'status' => 0])->count();
-
+        
         $not_status_data['status'] = array('in', 'wait,doing');
         $not_status_data['assignedTo'] = array('eq', $this->_G['username']);
         $not_status_data['deleted'] = array('eq', '0');
@@ -34,18 +40,9 @@ class Mycenter extends Common {
         $estimate_map['finishedBy'] = array('eq', $this->_G['username']);
         $estimate_map['finishedDate'] = array('GT', $headDate);
         $same_month_estimate_count = DB::name('Task')->where($estimate_map)->sum('estimate'); //当月预计工时
-        //当前日期 
-
-//        $sdefaultDate = date("Y-m-d");
-////$first =1 表示每周星期一为开始日期 0表示每周日为开始日期 
-//        $first = 1;
-////获取当前周的第几天 周日是 0 周一到周六是 1 - 6 
-//        $w = date('w', strtotime($sdefaultDate));
-////获取本周开始日期，如果$w是0，则表示周日，减去 6 天 
-//        $week_start = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
-////本周结束日期 
-//        $week_end = date('Y-m-d', strtotime("$week_start +6 days"));
         
+        //今天总工时
+        $today_count = DB::name('Workcount')->where(['username' => $this->_G['username'],'date' => date('Y-m-d')])->field('consumed')->find();
         
         $consumed_map['username'] = array('eq', $this->_G['username']);
         $consumed_map['date'] = array('GT', $headDate);
@@ -79,6 +76,7 @@ class Mycenter extends Common {
         $navtitle = '个人中心' . $this->navtitle;
         $this->assign('same_month_consumed_count', $same_month_consumed_count);
         $this->assign('same_month_estimate_count', $same_month_estimate_count);
+        $this->assign('today_count',$today_count);
         $this->assign('not_status_count', $not_status_count);
         $this->assign('my_article_count', $my_article_count);
         $this->assign('my_weburl_count', $my_weburl_count);

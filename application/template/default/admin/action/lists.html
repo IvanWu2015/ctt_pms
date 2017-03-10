@@ -42,32 +42,17 @@
                 </label>
             </div>
             <form action="" method="post">
-                <table class="table">
-                  <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
-                      <tr>
-                        <th class="ac bbno pt15 pb15">ID</th>
-                        <th class="bbno pt15 pb15">操作对象</th>
-                        <th class="bbno pt15 pb15">所属项目</th>
-                        <th class="ac bbno pt15 pb15">操作人</th>
-                        <th class="ac bbno pt15 pb15">操作类型</th>
-                        <th class="ac bbno pt15 pb15">日期</th>
-                        <th class="bbno pt15 pb15">说明</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                  {foreach $action_list as $action}
-                      <tr>
-                        <td class="ac">{$action['id']}</td>
-                        <td>{$action['typename']}</td>
-                        <td>{$action['parent_name']}</td>
-                        <td class="ac">{$action['realname']}</td>
-                        <td class="ac">{$action['actionname']}</td>
-                        <td class="ac">{$action['date']}</td>
-                        <td>{$action['comment']}</td>
-                      </tr>
-                  {/foreach}
-                  </tbody>
-                </table>
+                <div class="panel-body">
+                            {foreach $action_list as $action}
+                            <li class="publicdiv h25 lh25 ellipsis"><a href="{:url('/index/task/detail/?id='.$task['id'])}">
+                                    {if condition="($action['tname'] == null) and ($name == null)"}
+                                    您于&nbsp;{$action['date']} &nbsp;&nbsp;{$action['actionname']} &nbsp;{$action['typename']} {$action['tname']}{$action['pname']}
+                                    {else/}
+                                您于&nbsp;{$action['date']} &nbsp;&nbsp;对 {$action['tname']}{$action['pname']} &nbsp;进行&nbsp;{$action['actionname']}&nbsp;的操作
+                                    {/if}
+                                </a></li>
+                            {/foreach}
+                        </div>
                 <div class="publicdiv ac pagingw">{$page}</div>
             </form>
         </div>
