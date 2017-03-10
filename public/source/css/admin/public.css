@@ -55,7 +55,7 @@ ul.examine li:hover{ background:#f7f8fc;}
 .sofpli p{ width:100%; float:left; height:10px; margin:0px; border-radius:2px; background:#f5f5f5; position:relative; overflow:hidden;}
 .sofpli p span{ height:10px; display:block; position:absolute; top:0;left:0;}
 
-.htpst{ color:#fff; height:50px; background:#1b2b38; margin-bottom:15px;}
+.htpst{ color:#fff; height:72px; background:#1b2b38; margin-bottom:15px;}
 
 /*筛选*/
 .guess_operation{ width:100%; float:left;}
