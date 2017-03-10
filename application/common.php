@@ -890,10 +890,10 @@ function user_count($user_lists) {
  */
 function isProjectUser($username, $userlist) {
     $username_arr = [];
-    foreach($userlist as $tempuser) {
+    foreach ($userlist as $tempuser) {
         $username_arr[] = $tempuser['username'];
     }
-    if(in_array($username, $username_arr)) {
+    if (in_array($username, $username_arr)) {
         return true;
     } else {
         return false;
@@ -908,33 +908,25 @@ function isProjectUser($username, $userlist) {
  * @param array $consumed 消耗时间
  * @return boolean 是否项目成员
  */
-function working_count($subjectTYPE, $objectID,$username,$consumed) {
-//    if($subjectTYPE == 'user'){
-//        $table = DB('User');
-//    }elseif ($subjectTYPE == 'product') {
-//        $table = DB('Product');
-//    }elseif ($subjectTYPE == 'project') {
-//        $table = DB('project');
-//    }
-    $working_data = [
-        'objectType' => $subjectTYPE,
-        'objectID' => $objectID,
-        'username' => $username,
-        'date' => date('Y-m-d'),
-        'consumed' => $consumed,
-        'lasttime' => time(),
-    ];
-    $working_detail = DB('Workcount')->where(['objectType' => $subjectTYPE,'objectID' => $objectID,'username' => $username,'date' => date('Y--m-d')])->find();
-    if(empty($working_detail)){
-        DB('Workcount')->insert($working_data);
-    }  else {
-        $save_data = [
-            'consumed' => $working_detail['consumed'] + $consumed,
+function working_count($subjectTYPE, $objectID, $username, $consumed) {
+    if ($objectID > 0) {
+        $working_data = [
+            'objectType' => $subjectTYPE,
+            'objectID' => $objectID,
+            'username' => $username,
+            'date' => date('Y-m-d'),
+            'consumed' => $consumed,
             'lasttime' => time(),
         ];
-        DB('Workcount')->where(['objectType' => $subjectTYPE,'objectID' => $objectID,'username' => $username,'date' => date('Y--m-d')])->update($save_data);
+        $working_detail = DB('Workcount')->where(['objectType' => $subjectTYPE, 'objectID' => $objectID, 'username' => $username, 'date' => date('Y--m-d')])->find();
+        if (empty($working_detail)) {
+            DB('Workcount')->insert($working_data);
+        } else {
+            $save_data = [
+                'consumed' => $working_detail['consumed'] + $consumed,
+                'lasttime' => time(),
+            ];
+            DB('Workcount')->where(['objectType' => $subjectTYPE, 'objectID' => $objectID, 'username' => $username, 'date' => date('Y--m-d')])->update($save_data);
+        }
     }
-    
-    
-    
 }
