@@ -30,7 +30,7 @@ class Mycenter extends Common {
         $my_weburl_count = DB::name('Weburl')->where(['uid' => $this->_G['uid'], 'status' => 0])->count();
         //我的文章总数
         $my_article_count = DB::name('Article')->where(['uid' => $this->_G['uid'], 'status' => 0])->count();
-        
+
         $not_status_data['status'] = array('in', 'wait,doing');
         $not_status_data['assignedTo'] = array('eq', $this->_G['username']);
         $not_status_data['deleted'] = array('eq', '0');
@@ -40,9 +40,21 @@ class Mycenter extends Common {
         $estimate_map['finishedBy'] = array('eq', $this->_G['username']);
         $estimate_map['finishedDate'] = array('GT', $headDate);
         $same_month_estimate_count = DB::name('Task')->where($estimate_map)->sum('estimate'); //当月预计工时
-        
         //今天总工时
-        $today_count = DB::name('Workcount')->where(['username' => $this->_G['username'],'date' => date('Y-m-d')])->field('consumed')->find();
+        $today_count = DB::name('Workcount')->where(['username' => $this->_G['username'], 'date' => date('Y-m-d'),'objectType' => 'user'])->field('consumed')->find();
+        
+        //获取当周的第一天与最后一天
+        $sdefaultDate = date("Y-m-d");
+        $first = 1;
+        $w = date('w', strtotime($sdefaultDate));
+        $week_start = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
+        $week_end = date('Y-m-d', strtotime("$week_start +6 days"));
+        
+
+        $toweek_data['date'] = array('between time', "$week_start,$week_end");
+        $toweek_data['username'] = array('eq',  $this->_G['username']);
+        $toweek_data['objectType'] = array('eq','user');
+        $toweek_count = DB::name('Workcount')->where($toweek_data)->field('consumed')->sum('consumed');
         
         $consumed_map['username'] = array('eq', $this->_G['username']);
         $consumed_map['date'] = array('GT', $headDate);
@@ -76,7 +88,8 @@ class Mycenter extends Common {
         $navtitle = '个人中心' . $this->navtitle;
         $this->assign('same_month_consumed_count', $same_month_consumed_count);
         $this->assign('same_month_estimate_count', $same_month_estimate_count);
-        $this->assign('today_count',$today_count);
+        $this->assign('today_count', $today_count);
+        $this->assign('toweek_count',$toweek_count);
         $this->assign('not_status_count', $not_status_count);
         $this->assign('my_article_count', $my_article_count);
         $this->assign('my_weburl_count', $my_weburl_count);
