@@ -18,7 +18,12 @@ class Task extends Common {
     public function action() {
         $task_id = input('id', '0', 'intval');
         $ac = input('ac', '', 'addslashes');
-        $task = DB::table('chinatt_pms_task')->where(['id' => $task_id])->find();
+        $task = DB::table('chinatt_pms_task')
+                ->alias('t')
+                ->join('chinatt_pms_project p', 't.project = p.id', 'left')
+                ->where(['t.id' => $task_id])
+                ->field('t.*,p.product')
+                ->find();
         $user_list = get_userlist_by_projectid($task['project']);
         $type = input('param.type');
         $user_info = Db::name('User')->where(['uid' => $this->_G['uid'], 'deleted' => 0])->find();
@@ -47,7 +52,7 @@ class Task extends Common {
             }
             //记录工时
             if ($type == 'taskestimate') {
-                
+
                 $work_data = [
                     'username' => $this->_G['username'],
                     'task' => $task_id,
@@ -61,12 +66,17 @@ class Task extends Common {
                 DB::name('Task')->where(['id' => $task_id])->update(['status' => 'doing']);
                 DB::name('Task')->where(['id' => $task_id])->setInc('consumed', $consumed);
                 $taskestimate_id = DB::table('chinatt_pms_taskestimate')->insertGetId($work_data);
+                //记录产品、用户、项目当天总工时
+                working_count('user', $this->_G['uid'], $this->_G['username'], $consumed);
+                working_count('product', $task['product'], $this->_G['username'], $consumed);
+                working_count('project', $task['project'], $this->_G['username'], $consumed);
+                //动态信息
                 write_action($this->_G['username'], $task['project'], 'task', $task_id, 'recordestimate', $work_data['work'], $taskestimate_id);
                 $message = array('result' => 'success', 'error' => '');
                 $data = json_encode($message);
                 echo $data;
                 exit();
-            //任务状态更新
+                //任务状态更新
             } elseif ($type == 'task') {
                 //关闭任务
                 if ($ac == 'closed') {
@@ -80,15 +90,15 @@ class Task extends Common {
                     }
                     DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
                     write_action($this->_G['username'], $task['project'], 'task', $task_id, 'closed');
-                    
-                //开始任务
+
+                    //开始任务
                 } elseif ($ac == 'start') {
                     $task_data = [
                         'status' => 'doing',
                     ];
                     DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
                     //工时信息写入
-                    if($consumed > 0) {
+                    if ($consumed > 0) {
                         $work_data = [
                             'username' => $this->_G['username'],
                             'task' => $task_id,
@@ -100,8 +110,11 @@ class Task extends Common {
                         $taskestimate_id = DB::table('chinatt_pms_taskestimate')->insertGetId($work_data);
                     }
                     write_action($this->_G['username'], $task['project'], 'task', $task_id, 'started', input('work'), $taskestimate_id);
-                    
-                //完成任务
+                    //记录产品、用户、项目当天总工时
+                    working_count('user', $this->_G['uid'], $this->_G['username'], $consumed);
+                    working_count('product', $task['product'], $this->_G['username'], $consumed);
+                    working_count('project', $task['project'], $this->_G['username'], $consumed);
+                    //完成任务
                 } elseif ($ac == 'done') {
                     $task_data = [
                         'status' => 'done',
@@ -132,7 +145,10 @@ class Task extends Common {
                             exit();
                         }
                     }
-
+                    //记录产品、用户、项目当天总工时
+                    working_count('user', $this->_G['uid'], $this->_G['username'], $consumed);
+                    working_count('product', $task['product'], $this->_G['username'], $consumed);
+                    working_count('project', $task['project'], $this->_G['username'], $consumed);
                     DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
                     write_action($this->_G['username'], $task['project'], 'task', $task_id, 'done', input('work'));
                     //指派任务
@@ -178,10 +194,10 @@ class Task extends Common {
         $project_detail = DB::name('project')->where(['id' => $project_id])->find();
         $user_list = get_userlist_by_projectid($project_id);
         //访问权限判断
-        if($project_detail['acl'] == 'private' && !isProjectUser($this->_G['username'], $user_list)) {
+        if ($project_detail['acl'] == 'private' && !isProjectUser($this->_G['username'], $user_list)) {
             $this->error('您无该项目访问权限。');
         }
-        
+
         if (request()->isPost()) {
             $work_data = [
                 'username' => $this->_G['username'],

@@ -12,7 +12,6 @@ class Project extends Common {
 
     //项目详情页
     public function detail() {
-
         $user = DB::name('User');
         $task = DB::name('Task');
         $project = db('Project');

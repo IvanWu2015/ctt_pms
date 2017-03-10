@@ -899,3 +899,42 @@ function isProjectUser($username, $userlist) {
         return false;
     }
 }
+
+/**
+ * 工时统计
+ * @param str $subjectTYPE 对象类型
+ * @param array $objectID 操作对象ID
+ * @param array $username 用户
+ * @param array $consumed 消耗时间
+ * @return boolean 是否项目成员
+ */
+function working_count($subjectTYPE, $objectID,$username,$consumed) {
+//    if($subjectTYPE == 'user'){
+//        $table = DB('User');
+//    }elseif ($subjectTYPE == 'product') {
+//        $table = DB('Product');
+//    }elseif ($subjectTYPE == 'project') {
+//        $table = DB('project');
+//    }
+    $working_data = [
+        'objectType' => $subjectTYPE,
+        'objectID' => $objectID,
+        'username' => $username,
+        'date' => date('Y-m-d'),
+        'consumed' => $consumed,
+        'lasttime' => time(),
+    ];
+    $working_detail = DB('Workcount')->where(['objectType' => $subjectTYPE,'objectID' => $objectID,'username' => $username,'date' => date('Y--m-d')])->find();
+    if(empty($working_detail)){
+        DB('Workcount')->insert($working_data);
+    }  else {
+        $save_data = [
+            'consumed' => $working_detail['consumed'] + $consumed,
+            'lasttime' => time(),
+        ];
+        DB('Workcount')->where(['objectType' => $subjectTYPE,'objectID' => $objectID,'username' => $username,'date' => date('Y--m-d')])->update($save_data);
+    }
+    
+    
+    
+}
