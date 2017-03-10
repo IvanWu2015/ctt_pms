@@ -408,8 +408,8 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .userincon p{ margin-bottom:5px;}
 .userincon .userdateup{ font-size:20px; color:#0e90d2; position:absolute; top:5px; right:5px;}
 
-.uscsul{ width:550px; float:left; position:absolute; top:50px; right:0px;}
-.uscsul li{ width:33.33%; float:left; margin-bottom:10px; color:#666; padding-left:50px; position:relative;}
+.uscsul{ width:600px; float:left; position:absolute; top:50px; right:0px;}
+.uscsul li{ width:25%; float:left; margin-bottom:10px; color:#666; padding-left:40px; position:relative;}
 .uscsul li span{ font-size:25px; color:#999; position:absolute; top:22px; left:10px;}
 .uscsul li p{ margin-bottom:5px; font-size:12px;}
 .uscsul li h3{ font-size:12px; font-weight:normal; margin:0px;}
@@ -446,10 +446,17 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 
 .cf{ color:#fff;}
 .c0{ color:#000;}
-.cred{ color:red !important;}
+.c1{ color:#111;}
 .c2{ color:#222;}
+.c3{ color:#333;}
+.c4{ color:#444;}
+.c5{ color:#555;}
 .c6{ color:#666;}
+.c7{ color:#777;}
+.c8{ color:#888;}
+.c9{ color:#999;}
 .cc{ color:#ccc !important;}
+.cred{ color:red !important;}
 
 a.cc:hover{ color:#ccc !important;}
 
@@ -471,6 +478,32 @@ a.cc:hover{ color:#ccc !important;}
 .pagingw .next:hover{ color:#fff; background:#428bca; border:1px #428bca solid; border-left:none;}
 .pagingw .end{ color:#428bca; padding:7px 15px; border:1px #dedede solid; margin-left:10px; float:left; border-radius:5px;}
 .pagingw .end:hover{ color:#fff; background:#428bca; border:1px #428bca solid;}
+
+.projectlist{ width:100%; float:left;}
+.projectlist li{ width:20%; float:left; padding-left:20px; margin-bottom:20px; position:relative;}
+.projectlist li .plwp{ width:100%; float:left; border:1px solid #ededed; border-radius:4px; padding:20px;}
+.projectlist li .plwp .pltitle{ width:100%; float:left; font-weight:normal; font-size:15px; margin:0; line-height:22px; color:#2a2a2a;}
+.projectlist li .plwp .plup{ color:#cce4f9; position:absolute; top:10px; right:10px;}
+.projectlist li .plwp .plup:hover{ color:#337ab7;}
+.projectlist li .plwp:hover{ border:1px solid #ededed; background:#f9fafa;}
+
+@media screen and (max-width:1750px){
+    .projectlist li{ width:20%;}
+}
+@media screen and (max-width:1350px){
+    .projectlist li{ width:25%;}
+}
+@media screen and (max-width:1050px){
+    .projectlist li{ width:33.33%;}
+}
+@media screen and (max-width:750px){
+    .projectlist li{ width:50%;}
+}
+
+.plprogress{ width:100%; float:left; height:6px; border-radius:2px; background:#f5f5f5; position:relative; overflow:hidden;}
+.plprogress span{ height:6px; display:block; position:absolute; top:0;left:0;}
+.plprogress span.bf100{ background:#28dd2c;}
+.plprogress span.bf50{ background:#5bc0de;}
 
 
 .commentbutton{ padding:0px !important;}

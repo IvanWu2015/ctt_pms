@@ -1,14 +1,14 @@
 {extend name="base/common"/}
 
-{block name="header"}{/block}
+{block name="header"}
+    {include file="base/head_title" /}
+{/block}
 
 {block name="side"}{/block}
 
 {block name="body"}
 
-{include file="base/left_nav" /}
 <div class="rightcon sizing"><!-- 右边内容 -->
-    {include file="base/head_title" /}
     <div class="publicdiv pl15 pr15 sizing">
         <div class="publicdiv pb20 bf">
             <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
