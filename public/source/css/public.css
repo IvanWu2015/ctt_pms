@@ -408,8 +408,8 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .userincon p{ margin-bottom:5px;}
 .userincon .userdateup{ font-size:20px; color:#0e90d2; position:absolute; top:5px; right:5px;}
 
-.uscsul{ width:550px; float:left; position:absolute; top:50px; right:0px;}
-.uscsul li{ width:33.33%; float:left; margin-bottom:10px; color:#666; padding-left:50px; position:relative;}
+.uscsul{ width:600px; float:left; position:absolute; top:50px; right:0px;}
+.uscsul li{ width:25%; float:left; margin-bottom:10px; color:#666; padding-left:40px; position:relative;}
 .uscsul li span{ font-size:25px; color:#999; position:absolute; top:22px; left:10px;}
 .uscsul li p{ margin-bottom:5px; font-size:12px;}
 .uscsul li h3{ font-size:12px; font-weight:normal; margin:0px;}

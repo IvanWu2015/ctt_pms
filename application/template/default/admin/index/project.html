@@ -1,17 +1,10 @@
 {extend name="base/common"/}
 
 {block name="header"}
+    {include file="base/head_title" /}
 {/block}
 
-{block name="side"}
-    <!-- 左侧 nav
-    ================================================== -->
-    <div class="span3 bs-docs-sidebar">
-        <ul class="nav nav-list bs-docs-sidenav">
-            {:widget('Category/lists', array(1, true))}
-        </ul>
-    </div>
-{/block}
+{block name="side"}{/block}
 
 {block name="body"}
 <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
