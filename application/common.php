@@ -930,3 +930,44 @@ function working_count($subjectTYPE, $objectID, $username, $consumed) {
         }
     }
 }
+
+/**
+ * 用户列表统计工时
+ * @param str $username 用户名
+ * @param array $type 类型
+ * @param array $startdate 开始
+ * @param array $enddate 结束
+ * @return boolean 是否项目成员
+ */
+function get_user_count($username, $type, $startdate, $enddate) {
+    $data['username'] = array('eq', $username);
+    $data['objectType'] = array('eq', 'user');
+    if ($type == 'today') {
+        $data['date'] = array('eq', date('Y-m-d'));
+    } elseif ($type == 'week') {
+        $data = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
+        $data = date('Y-m-d', strtotime("$week_start +6 days"));
+    } elseif ($type == 'month') {
+        
+    } else {
+        
+    }
+$count = DB('Workcount')->where($data)->sum('consumed');
+    if ($type == 'month') {
+        $headDate = date('Y-m-01', strtotime(date("Y-m-d")));
+        $footDate = date('Y-m-t', strtotime(date("Y-m-d")));
+        $month_data['date'] = array('between time', "$headDate,$footDate");
+        $month_data['username'] = array('eq', $username);
+        $month_data['objectType'] = array('eq', 'user');
+        $count = DB('Workcount')->where($month_data)->sum('consumed');
+    } else {
+        $Section_data['date'] = array('between time', "$startdate,$enddate");
+        $Section_data['username'] = array('eq', $username);
+        $Section_data['objectType'] = array('eq', 'user');
+        $count = DB('Workcount')->where($Section_data)->sum('consumed');
+    }
+
+
+    var_dump($count);
+    exit;
+}

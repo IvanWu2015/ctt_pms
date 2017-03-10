@@ -49,11 +49,10 @@ class Mycenter extends Common {
         $w = date('w', strtotime($sdefaultDate));
         $week_start = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
         $week_end = date('Y-m-d', strtotime("$week_start +6 days"));
-        
-
         $toweek_data['date'] = array('between time', "$week_start,$week_end");
         $toweek_data['username'] = array('eq',  $this->_G['username']);
         $toweek_data['objectType'] = array('eq','user');
+        //当周总工时
         $toweek_count = DB::name('Workcount')->where($toweek_data)->field('consumed')->sum('consumed');
         
         $consumed_map['username'] = array('eq', $this->_G['username']);

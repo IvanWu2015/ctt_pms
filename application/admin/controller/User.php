@@ -15,14 +15,35 @@ class User extends Common {
     }
 
     public function lists() {   //用户列表
+        
+        
+        get_user_count($this->_G['username'],'','2017-03-02','2017-03-06');
+        $sdefaultDate = date("Y-m-d");
+        $first = 1;
+        $w = date('w', strtotime($sdefaultDate));
+        $week_start = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
+        $week_end = date('Y-m-d', strtotime("$week_start +6 days"));
+        
         $user_list = db('User')
                 ->alias('u')
                 ->join('chinatt_pms_dept d', 'u.dept = d.id', 'left')
                 ->join('chinatt_pms_group g', 'u.groupid = g.id', 'left')
-                ->field('u.*,d.name as depe_name,g.name as group_name')
+//                ->join('chinatt_pms_workcount w',"u.username = w.username AND w.objectType = 'user' AND date = '$sdefaultDate'",'left')
+                ->field('u.*,d.name as depe_name,g.name as group_name,w.today_consumed,sum(w.consumed) as week_consumed')
                 ->where(['deleted' => 0])
                 ->order('uid DESC')
                 ->paginate(10);
+        
+//        foreach ($user_list as $key => $value) {
+//            //今天总工时
+//            $today_count = DB::name('Workcount')->where(['username' => $value['username'], 'date' => date('Y-m-d'), 'objectType' => 'user'])->field('consumed')->find();
+//            $value['today_count'] = $today_count['consumed'];
+//            $user_list[$key] = $value;
+//        }
+//        var_dump($user_list);
+//        exit;
+
+
         $show = $user_list->render(); // 分页显示输出
         $user_list = user_count($user_list);
 
@@ -57,6 +78,21 @@ class User extends Common {
         $consumed_map['finishedBy'] = array('eq', $username);
         $consumed_map['finishedDate'] = array('GT', $headDate);
         $same_month_consumed_count = DB::name('Task')->where($consumed_map)->sum('consumed'); //当月完成工时
+        //今天总工时
+        $today_count = DB::name('Workcount')->where(['username' => $this->_G['username'], 'date' => date('Y-m-d'), 'objectType' => 'user'])->field('consumed')->find();
+
+        //获取当周的第一天与最后一天
+        $sdefaultDate = date("Y-m-d");
+        $first = 1;
+        $w = date('w', strtotime($sdefaultDate));
+        $week_start = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
+        $week_end = date('Y-m-d', strtotime("$week_start +6 days"));
+        $toweek_data['date'] = array('between time', "$week_start,$week_end");
+        $toweek_data['username'] = array('eq', $this->_G['username']);
+        $toweek_data['objectType'] = array('eq', 'user');
+        //当周总工时
+        $toweek_count = DB::name('Workcount')->where($toweek_data)->field('consumed')->sum('consumed');
+
 
 
         $user = db('User')
@@ -96,6 +132,8 @@ class User extends Common {
         $this->assign('same_month_consumed_count', $same_month_consumed_count);
         $this->assign('same_month_estimate_count', $same_month_estimate_count);
         $this->assign('not_status_count', $not_status_count);
+        $this->assign('today_count', $today_count);
+        $this->assign('toweek_count', $toweek_count);
         $this->assign('my_article_count', $my_article_count);
         $this->assign('my_weburl_count', $my_weburl_count);
         $this->assign('my_action_count', $my_action_count);
