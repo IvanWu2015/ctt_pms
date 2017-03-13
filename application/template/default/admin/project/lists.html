@@ -62,7 +62,8 @@
                             </div>
                         </td>
                         <td class="ac iconfont">
-                            <a href="{:url('/index/project/add/?project_id='.$project['id'])}" class="btn-link rkwt">&#xe71d;</a>
+                            <a href="{:url('/index/project/add/?project_id='.$project['id'])}" class="btn-link rkwt" title="编辑">&#xe71d;</a>
+                            <a href="{:url('/index/task/add/?project_id='.$project['id'])}" class="btn-link fs16 rkwt" target="_bacnk" title="添加任务">&#xe61a;</a>
                             <a href="{:url('/admin/project/lists/?deleted=1&id='.$project['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该项目吗？');" title="删除">&#xe601;</a>
                         </td>
                       </tr>

@@ -481,15 +481,14 @@ a.cc:hover{ color:#ccc !important;}
 
 .projectlist{ width:100%; float:left;}
 .projectlist li{ width:20%; float:left; padding-left:20px; margin-bottom:20px; position:relative;}
-.projectlist li .plwp{ width:100%; float:left; border:1px solid #ededed; border-radius:4px; padding:20px;}
+.projectlist li .plwp{ width:100%; float:left; border-radius:4px; padding:20px;}
 .projectlist li .plwp .pltitle{ width:100%; float:left; font-weight:normal; font-size:15px; margin:0; line-height:22px; color:#2a2a2a;}
 .projectlist li .plwp .plup{ color:#cce4f9; position:absolute; top:10px; right:10px;}
 .projectlist li .plwp .plup:hover{ color:#337ab7;}
-.projectlist li .plwp:hover{ border:1px solid #ededed;}
 
-.bf_wait{ background:#f8f5ed;}
-.bf_done{ background:#F7F3F3;}
-.bf_doing{ background:#F3F3F5;}
+.bf_wait{ background:#FFEEB0;}
+.bf_done{ background:#C9EAC5;}
+.bf_doing{ background:#C4C4F5;}
 .bf_closed{ background:#e0e0e0;}
 
 @media screen and (max-width:1750px){
