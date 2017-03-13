@@ -1,0 +1,289 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="side"}{/block}
+
+{block name="body"}
+
+{include file="mycenter/nav" /}
+
+<link href="tpl_css/style.css" rel="stylesheet">
+
+
+
+<div class="rightcon sizing"><!-- 右边内容 -->
+    
+    <div class="publicdiv bf">
+        <h3 class="pt10 pb10 pl20 pr20 fs16 sizing iconfont" style="display:none;">&#xe605; 个人中心</h3>
+        
+        <div class="userincon pt20 pb20 pr20 borb sizing"><!-- 基本信息 -->
+            
+            <div class="userawp sizing">
+                <div class="useravatar" onClick="loadWindow('{:url('/index/task/action?ac=useravatar')}');"><img src="tpl_img/match_img.png" class="publicimg" /></div>
+            </div>
+            <div class="mt20 z pr" style="width:270px;">
+                <p class="fs16 fwb">
+                    {$user['realname']}
+                    <a href="javascript:void(0);" class="iconfont fs12 cwp" title="编辑信息" onClick="loadWindow('{:url('/index/task/action?ac=userinform')}');">&#xe71d;</a>
+                </p>
+                <p>职位：{$user['group_name']}</p>
+                <p>部门：{$user['depe_name']}</p>
+            </div>
+            
+            <ul class="uscsul"><!-- 数据统计 -->
+                <li class="borr sizing">
+                    <span class="iconfont">&#xe759;</span>
+                    <p class="fwb">我的任务</p>
+                    <h3>已完成：<b>{$my_task_count}</b></h3>
+                    <h3>未完成：<b>{$not_status_count}</b></h3>
+                </li>
+                <li class="borr sizing">
+                    <span class="iconfont">&#xe623;</span>
+                    <p class="fwb">总工时</p>
+                    <h3>预计：<b>{$estimate_count}</b></h3>
+                    <h3>完成：<b>{$consumed_count}</b></h3>
+                </li>
+                <li class="sizing">
+                    <span class="iconfont">&#xe61e;</span>
+                    <p class="fwb">当月工时</p>
+                    <h3>预计：<b>{$same_month_estimate_count}</b></h3>
+                    <h3>完成：<b>{$same_month_consumed_count}</b></h3>
+                </li>
+            </ul><!-- 数据统计 -->
+            
+        </div><!-- 基本信息 -->
+        
+        <div class="publicdiv pl20 pr20 mt20 sizing"><!--饼图-->
+            <div class="w50 z pr10 sizing"><!--我的任务进度-->
+                <div class="panel" style="border:1px #d9edf7 solid; min-height:330px;">
+                    <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-info">我的任务进度</h3>
+                    <div class="panel-body">
+                        <script type="text/javascript" src="tpl_js/highcharts.js"></script>
+                        <div id="container" style="width:100%; height:300px;"></div>
+                    </div>
+                </div>
+            </div><!--我的任务进度-->
+            <script language="JavaScript">
+            $(document).ready(function() {  
+                var my=parseInt('{$my_task_count}');    //已完成
+                var not=parseInt('{$not_status_count}');    //未完成
+                var mys=my+my/(my+not);
+                var nots=not-not/(my+not);
+                
+               var chart = {
+                   plotBackgroundColor:null,
+                   plotBorderWidth: null,
+                   plotShadow: false
+               };
+               var title = {
+                  text: ''   
+               };      
+               var tooltip = {
+                  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'  //鼠标经过显示提醒信息
+               };
+               var plotOptions = {
+                  pie: {
+                     allowPointSelect: true,
+                     cursor: 'pointer',
+                     dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}%</b>: {point.percentage:.1f} %',   //  
+                        style: {
+                           color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'red'
+                        }
+                     }
+                  }
+               };
+               var series= [{
+                  type: 'pie',
+                  name: 'Browser share',
+                  data: [
+                     ['未完成', nots],
+                     ['已完成', mys]
+                  ]
+               }];     
+               var setOptions = [{
+                colors:['#0ff', '#50B432']
+               }];
+               var json = {};   
+               json.chart = chart; 
+               json.title = title;     
+               json.tooltip = tooltip;  
+               json.series = series;
+               json.plotOptions = plotOptions;
+               json.setOptions = setOptions;
+               $('#container').highcharts(json);  
+            });
+            </script>
+        </div><!--饼图-->
+        
+        <div class="publicdiv pl20 pr20 mt20 sizing">
+            <div class="w60 z pr10 sizing"><!--日程安排-->
+                <div id='calendar'></div>
+            </div><!--日程安排-->
+            <div class="w40 z pl10 sizing">
+            <div class="w100"><!--待完成任务-->
+                <div class="panel" style="border:1px #f8f2d1 solid; min-height:300px;">
+                    <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing" style="background:#f8f2d1;">
+                        待完成任务
+                        <a href="{:url('/index/Mycenter/task_list/?status=ontdone')}" class="y fs12 mr10">更多>></a>
+                    </h3>
+                    <div class="panel-body">
+                        
+                        <p class="publicdiv mbn fwb">
+                            <span>ID</span>
+                            <span class="ml20">任务名称</span>
+                            <span class="y">类型</span>
+                        </p>
+                    
+                        {foreach $task_list as $task}
+                        <li class="publicdiv pr tlist pr70 h25 lh25 ellipsis">
+                            <span class="w40p db z">{$task['id']}</span>
+                            <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$task['name']}</a>
+                            <span class="tlisty">{$task['typename']}</span>
+                        </li>
+                        {/foreach}
+                    </div>
+                </div>
+            </div><!--待完成任务-->
+            <div class="w100 mt20"><!--我的文档-->
+                <div class="panel" style="border:1px #dff0d8 solid; min-height:287px;">
+                    <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-success">我的文档</h3>
+                    <div class="panel-body">
+                        <p class="publicdiv mbn fwb">
+                            <span>ID</span>
+                            <span class="ml20">文档名称</span>
+                            <span class="y">时间</span>
+                        </p>
+                    
+                        {foreach $article_list as $article}
+                        <li class="publicdiv pr tlist pr100 h25 lh25 ellipsis">
+                            <span class="w40p db z">{$article['id']}</span>
+                            <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$article['title']}</a>
+                            <span class="tlisty">{$article['time']}</span>
+                        </li>
+                        {/foreach}
+                        
+                    </div>
+                </div>
+            </div><!--我的文档-->
+            </div>
+        </div>
+        <script type="text/javascript" src="tpl_js/moment.min.js"></script>
+        <script type="text/javascript" src="tpl_js/fullcalendar.js"></script>
+        <link href="tpl_css/fullcalendar.css" rel="stylesheet">
+            <script>
+            //输出对象
+            function writeObj(obj){ 
+             var description = ""; 
+             for(var i in obj){ 
+             var property=obj[i]; 
+             description+=i+" = "+property+"\n"; 
+             } 
+             alert(description); 
+            } 
+                
+            //获取工时数据
+            function getWorkData(y, m) {
+                var url='{:url('index/api/getworkdata')}';
+                m = date.getMonth()+1;
+                $.ajax({
+                    type:'post',
+                    url:url,
+                    data:{year:y,month:m,day:0},
+                    dataType:'json',
+                    async:false,
+                    success:function(data){
+                       workData = data;
+                    }
+                });
+            }
+            
+            var workData = {};
+            var date = new Date();
+            var d = '';
+            var m = date.getMonth() + 1;
+            var y = date.getFullYear();
+            //getWorkData(y, m);//更新工时
+            //日历初始化
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
+                },
+                defaultDate: date.toLocaleDateString(),
+                navLinks: true, // can click day/week names to navigate views
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                events: workData,
+                eventSources: [
+                    // your event source
+                    {
+                        url: '{:url('index/api/getworkdata')}',
+                        type: 'POST',
+                        data: {
+                            custom_param1: 'something',
+                            custom_param2: 'somethingelse'
+                        },
+                        error: function() {
+                            alert('there was an error while fetching events!');
+                        },
+                        //color: 'yellow',   // a non-ajax option
+                        //textColor: 'black' // a non-ajax option
+                    }
+                ]
+            });
+
+                
+        </script>
+        
+        <div class="publicdiv pl20 pr20 mt20 mb20 sizing">
+            <div class="publicdiv">
+                <div class="w50 z pr10 sizing"><!--我的收藏-->
+                    <div class="panel" style="border:1px #d9edf7 solid; min-height:330px;">
+                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-info">我的收藏</h3>
+                        <div class="panel-body">
+                            <p class="publicdiv mbn fwb">
+                                <span>ID</span>
+                                <span class="ml20">收藏名称</span>
+                                <span class="y">时间</span>
+                            </p>
+                        
+                            {foreach $weburl_list as $weburl}
+                            <li class="publicdiv pr tlist pr100 h25 lh25 ellipsis">
+                                <span class="w40p db z">{$weburl['id']}</span>
+                                <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$weburl['title']}</a>
+                                <span class="tlisty">{$weburl['time']}</span>
+                            </li>
+                            {/foreach}
+                            
+                        </div>
+                    </div>
+                </div><!--我的收藏-->
+                <div class="w50 z pl10 sizing"><!--我的动态-->
+                    <div class="panel" style="border:1px #f2dede solid; min-height:330px;">
+                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-danger">我的动态</h3>
+                        <div class="panel-body">
+                            {foreach $action_list as $action}
+                            <li class="publicdiv h25 lh25 ellipsis"><a href="{:url('/index/task/detail/?id='.$task['id'])}">
+                                    {if condition="($action['tname'] == null) and ($name == null)"}
+                                    您于&nbsp;{$action['date']} &nbsp;&nbsp;{$action['actionname']} &nbsp;{$action['typename']} {$action['tname']}{$action['pname']}
+                                    {else/}
+                                您于&nbsp;{$action['date']} &nbsp;&nbsp;对 {$action['tname']}{$action['pname']} &nbsp;进行&nbsp;{$action['actionname']}&nbsp;的操作
+                                    {/if}
+                                </a></li>
+                            {/foreach}
+                        </div>
+                    </div>
+                </div><!--我的动态-->
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</div>
+{/block}
