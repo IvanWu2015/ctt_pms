@@ -46,9 +46,11 @@ canvas{ width:90px; height:90px; position:absolute; top:0; left:0; right:0; bott
                     <!--<div class="plprogress mt10">
                         <span style="width:{$project['percent']}%;" {if condition='$project["percent"] == 100'}class="bf100"{elseif condition='$project["percent"] > 50'}class="bf50"{/if}></span>
                     </div>-->
+                    <a href="{:url('/index/project/detail/?id='.$project['id'])}">
                     <div class="publicdiv h120 pr">
                         <div id="indicatorContainer_{$project['id']}"></div>
                     </div>
+                    </a>
                     <a href="{:url('/index/project/detail/?id='.$project['id'])}">
                     <div class="publicdiv mt10">
                         <p class="w33 z db ac mbn">{$project['all_time']}<br/><span class="c9">总预计</span></p>
