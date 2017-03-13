@@ -4,6 +4,10 @@
 {/block}
 
 {block name="body"}
+<script src="tpl_js/radialIndicator.js"></script>
+<style>
+canvas{ width:90px; height:90px; position:absolute; top:0; left:0; right:0; bottom:0; margin:auto auto 5px auto;}
+</style>
 
 <div class="publicdiv mt20 pt20 pb10 ptn sizing">
     <div class="publicdiv pl20 pr20 pt8 bf sizing">
@@ -33,30 +37,43 @@
         <ul class="projectlist">
             {foreach $project_list as $project}
             <li>
-                <div class="plwp">
+                {if condition="$project['status'] == 'wait'"}<div class="plwp bf_wait">{/if}
+                {if condition="$project['status'] == 'done'"}<div class="plwp bf_done">{/if}
+                {if condition="$project['status'] == 'doing'"}<div class="plwp bf_doing">{/if}
+                {if condition="$project['status'] == 'closed'"}<div class="plwp bf_closed">{/if}
                     <a href="{:url('/index/project/add/?project_id='.$project['id'])}" title="编辑" class="plup iconfont">&#xe71d;</a>
                     <h3 class="pltitle"><a href="{:url('/index/project/detail/?id='.$project['id'])}">{$project['name']}</a></h3>
-                    <div class="plprogress mt10">
+                    <!--<div class="plprogress mt10">
                         <span style="width:{$project['percent']}%;" {if condition='$project["percent"] == 100'}class="bf100"{elseif condition='$project["percent"] > 50'}class="bf50"{/if}></span>
+                    </div>-->
+                    <div class="publicdiv h120 pr">
+                        <div id="indicatorContainer_{$project['id']}"></div>
                     </div>
                     <a href="{:url('/index/project/detail/?id='.$project['id'])}">
-                    <div class="publicdiv c9 mt10">
-                        结束-{$project['end']}
-                        <span class="y">
+                    <div class="publicdiv mt10">
+                        <p class="w33 z db ac mbn">{$project['all_time']}<br/><span class="c9">总预计</span></p>
+                        <p class="w33 z db ac mbn">{$project['estimate_count']}<br/><span class="c9">总消耗</span></p>
+                        <p class="w33 z db ac mbn">
                             {if condition="$project['status'] == 'wait'"}<span style="color:#f8b004;">等待</span>{/if}
                             {if condition="$project['status'] == 'done'"}<span style="color:green;">完成</span>{/if}
                             {if condition="$project['status'] == 'doing'"}<span style="color:blue;">进行中</span>{/if}
                             {if condition="$project['status'] == 'closed'"}<span style="color:grey;">关闭</span>{/if}
-                        </span>
-                    </div>
-                    <div class="publicdiv mt10">
-                        <p class="w33 z db ac mbn">{$project['all_time']}<br/><span class="c9">总预计</span></p>
-                        <p class="w33 z db ac mbn">{$project['estimate_count']}<br/><span class="c9">总消耗</span></p>
-                        <p class="w33 z db ac mbn">{$project['percent']}%<br/><span class="c9">进度</span></p>
+                        <br/><span class="c9">状态</span></p>
                     </div>
                     </a>
                 </div>
             </li>
+            <script>
+            jQuery(document).ready(function() {  
+                jQuery('#indicatorContainer_'+{$project['id']}).radialIndicator({
+                    barColor: '#7cb5ec',
+                    barWidth: 5,
+                    initValue: {$project['percent']},
+                    roundCorner : true,
+                    percentage: true
+                });
+            });
+            </script>
             {/foreach}
         </ul>
             
