@@ -29,7 +29,7 @@ class User extends Common {
                 ->join('chinatt_pms_dept d', 'u.dept = d.id', 'left')
                 ->join('chinatt_pms_group g', 'u.groupid = g.id', 'left')
 //                ->join('chinatt_pms_workcount w',"u.username = w.username AND w.objectType = 'user' AND date = '$sdefaultDate'",'left')
-                ->field('u.*,d.name as depe_name,g.name as group_name,w.today_consumed,sum(w.consumed) as week_consumed')
+//                ->field('u.*,d.name as depe_name,g.name as group_name,w.today_consumed,sum(w.consumed) as week_consumed')
                 ->where(['deleted' => 0])
                 ->order('uid DESC')
                 ->paginate(10);
@@ -43,10 +43,8 @@ class User extends Common {
 //        var_dump($user_list);
 //        exit;
 
-
         $show = $user_list->render(); // 分页显示输出
         $user_list = user_count($user_list);
-
         $navtitle = '用户列表' . $this->navtitle;
         $this->assign('navtitle', $navtitle);
         $this->assign('page', $show);
