@@ -26,10 +26,9 @@ class Task extends Common {
                 ->field('t.*,p.product,k.status as predecessor_name')
                 ->find();
         if($task['predecessor_name'] == 'doing' || $task['predecessor_name'] == 'wait'){
-            $message = array('error' => '');
-            $data = json_encode($message);
-            echo $data;
-            exit();
+            $json_data = array('result' => 'failed', 'error' => '请先完成该任务的前置任务。');
+            //$data = json_encode($message);
+            return $json_data;
         }
         
         $user_list = get_userlist_by_projectid($task['project']);
