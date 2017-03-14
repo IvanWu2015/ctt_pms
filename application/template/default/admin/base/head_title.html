@@ -1,16 +1,6 @@
 <div class="publicdiv pl20 pr20 sizing htpst">
     <a href="{:url('/index/mycenter')}"><img src="tpl_img/bg_icon.png" class="z" height="100%" /></a>
-    <h3 class="mtn fs20 lh50 iconfont">
-        <span class="z mt8 pt5" style="margin-left:100px;">{if condition="$_G['controller'] == 'Index'"}&#xe605; 后台首页
-        {elseif condition="$_G['controller'] == 'Project'"}&#xe6c9; 项目管理
-        {elseif condition="$_G['controller'] == 'Task'"}&#xe613; 任务管理
-        {elseif condition="$_G['controller'] == 'Sort'"}&#xe608; 分类管理
-        {elseif condition="$_G['controller'] == 'Weburl'"}&#xe60d; 收藏管理
-        {elseif condition="$_G['controller'] == 'Article'"}&#xe704; 文档管理
-        {elseif condition="$_G['controller'] == 'Action'"}&#xe6c9; 动态管理
-        {elseif condition="$_G['controller'] == 'User'"}&#xe647; 用户管理
-        {elseif condition="$_G['controller'] == 'Product'"}&#xe645; 产品管理{/if}
-        </span>
+    <h3 class="mtn fs20 lh50">
         <ul class="nav nav-pills navtop y lh20 fs12">
             <li class="y">
                 <a class="active" data-toggle="dropdown" href="{:url('index/index')}">{:get_username()} <b class="caret"></b></a>

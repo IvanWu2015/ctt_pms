@@ -73,36 +73,39 @@ class Project extends Common {
         $orderby_array = array('pri');
         $orderby = in_array(input('param.orderby'), $orderby_array) ? input('param.orderby') : 'id';
         if ($status == 'unclose') {
-            $map['status'] = array('NOT in', 'done,closed');
+            $map['p.status'] = array('NOT in', 'done,closed');
         } elseif ($status == 'all') {
             
         } elseif ($status == 'delayed') {
-            $map['status'] = array('in', 'wait,doing');
-            $map['end'] = array('between time', ['2000-1-1', gmdate("Y-m-d")]);
+            $map['p.status'] = array('in', 'wait,doing');
+            $map['p.end'] = array('between time', ['2000-1-1', gmdate("Y-m-d")]);
         } elseif ($status == 'not') {
-            $map['begin'] = array('GT', date('y-m-d h:i:s'));
+            $map['p.begin'] = array('GT', date('y-m-d h:i:s'));
         } elseif ($status == 'ing') {
-            $map['status'] = array('eq', 'doing');
+            $map['p.status'] = array('eq', 'doing');
         } elseif ($status == 'closed') {
-            $map['status'] = array('eq', 'closed');
+            $map['p.status'] = array('eq', 'closed');
         } else {
-            $map['status'] = array('eq', $status);
+            $map['p.status'] = array('eq', $status);
         }
         if ($this->_G['is_admin'] != 1) {
-            $map['acl'] = array('eq', 'open');
+            $map['p.acl'] = array('eq', 'open');
+            $map_or['t.username'] = $username;
         }
+ 
         //$map['t.username'] = array('eq',$username);
         $project_list = DB::name('Project')
                 ->alias('p')
                 ->join('chinatt_pms_team t', "p.acl = 'private' AND t.project = p.id AND t.username = '$username'", 'left')
                 ->field('p.*,t.username')
                 ->where($map)
-                ->whereor(['t.username' => $username])
+                ->whereor($map_or)
                 ->order('id desc')
                 ->paginate(20);
         //$project_list = Db::name('Project')->where($map)->order("$orderby DESC")->paginate(15);
 
         $page = $project_list->render(); // 分页显示输出
+
         //将对象转为数组
         $project_list = $project_list->toArray();
         $project_list = get_project_consume($project_list['data']);
