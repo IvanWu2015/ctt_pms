@@ -21,9 +21,17 @@ class Task extends Common {
         $task = DB::table('chinatt_pms_task')
                 ->alias('t')
                 ->join('chinatt_pms_project p', 't.project = p.id', 'left')
+                ->join('chinatt_pms_task k', 't.predecessor = k.id', 'left')
                 ->where(['t.id' => $task_id])
-                ->field('t.*,p.product')
+                ->field('t.*,p.product,k.status as predecessor_name')
                 ->find();
+        if($task['predecessor_name'] == 'doing' || $task['predecessor_name'] == 'wait'){
+            $message = array('error' => '');
+            $data = json_encode($message);
+            echo $data;
+            exit();
+        }
+        
         $user_list = get_userlist_by_projectid($task['project']);
         $type = input('param.type');
         $user_info = Db::name('User')->where(['uid' => $this->_G['uid'], 'deleted' => 0])->find();
@@ -183,7 +191,12 @@ class Task extends Common {
      */
     public function detail() {
         $task_id = input('id', '0', 'intval');
-        $task_detail = DB::table('chinatt_pms_task')->where(['id' => $task_id])->find();
+        $task_detail = DB::table('chinatt_pms_task')
+                ->alias('t')
+                ->join('chinatt_pms_task p', 't.predecessor = p.id', 'left')
+                ->where(['t.id' => $task_id])
+                 ->field('t.*,p.name as predecessor_name')
+                ->find();
         if (empty($task_detail)) {
             $this->error('任务不存在。');
         }
