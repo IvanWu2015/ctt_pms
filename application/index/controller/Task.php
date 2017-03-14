@@ -269,6 +269,7 @@ class Task extends Common {
         $project_list = Db::name('Project')->where($map)->column('id,name,code', 'id');
        
         $predecessor_data['status'] = array('in',"wait,doing");
+        $predecessor_data['project'] = array('eq',$project_id);
         $predecessor_list = DB('Task')->where($predecessor_data)->select();
         if (request()->isPost()) {
             $task_data = [
