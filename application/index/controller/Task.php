@@ -254,6 +254,10 @@ class Task extends Common {
             $map['acl'] = array('eq', 'open');
         }
         $project_list = Db::name('Project')->where($map)->column('id,name,code', 'id');
+       
+         $predecessor_data['status'] = array('in',"wait,doing");
+         $predecessor_data['predecessor'] = array('gt',"0");
+        $predecessor_list = DB('Task')->where($predecessor_data)->select();
         if (request()->isPost()) {
             $task_data = [
                 'project' => $project_id,
@@ -263,6 +267,7 @@ class Task extends Common {
                 'openedBy' => $this->_G['username'],
                 'type' => input('param.type'),
                 'assignedTo' => input('param.assignedTo'),
+                'predecessor' => input('post.predecessor', '0', 'intval'), //前置任务ID
                 'assignedDate' => date('Y-m-d H:i:s'), //分配时间
                 'openedDate' => date('Y-m-d H:i:s'), //开放时间
 //                'comment' =>input('param.comment'),
@@ -288,6 +293,7 @@ class Task extends Common {
         $navtitle = '任务添加/编辑' . $project_detail['name'];
         $this->assign('navtitle', $navtitle);
         $this->assign('project_id', $project_id);
+        $this->assign('predecessor_list',$predecessor_list);
         $this->assign('project_list', $project_list);
         $this->assign('task_details', $task_details);
         $this->assign('user_list', $user_list);
