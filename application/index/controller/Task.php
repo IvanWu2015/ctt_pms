@@ -286,7 +286,7 @@ class Task extends Common {
                 'pri' => input('param.pri'),
                 'deadline' => input('param.deadline'), //最后期限
                 'realStarted' => input('param.realStarted'), //开始时间
-                'status' => input('param.status'),
+                'status' => input('param.status','wait','addslashes'),  
             ];
             if ($task_id > 0) {
                 DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
