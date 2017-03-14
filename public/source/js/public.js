@@ -28,15 +28,45 @@ jQuery(function(){
     
 });
 
+function loadWindow(url) {
+    if (arguments[1]) {
+        jQuery.ajax({
+            type: 'POST',
+            url: url,
+            data: {jq_ajax: 1},
+            dataType: 'json',
+            success: function (data) {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    jQuery('#applica').show();
+                    jQuery.get(url,
+                      function(data){
+                        $("#applica").html(data);
+                      },"json");
+                    return;
+                }
+            }
+        });
+    } else {
+        jQuery('#applica').show();
+        jQuery.get(url,
+          function(data){
+            $("#applica").html(data);
+          },"json");
+        return;
+    }
+}
 
-function loadWindow(url) {  //弹窗标签
+
+/*function loadWindow(url) {  //弹窗标签
     jQuery('#applica').show();
     jQuery.get(url,
       function(data){
         $("#applica").html(data);
       },"json");
     return;
-}
+}*/
 jQuery(document).keydown(function(e){
     if(e.which == 27) {     //按Esc键关闭弹窗
         modalclose();
