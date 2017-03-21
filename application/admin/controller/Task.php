@@ -35,7 +35,7 @@ class Task extends Common {
                 ->alias('t')
                 ->join('chinatt_pms_task p', 't.predecessor = p.id', 'left')
                 ->where($data)
-                ->field('t.*,p.status as p_status')
+                ->field('t.*,p.status as p_status,p.name as p_name')
                 ->order("id DESC")
                 ->paginate(15, $task_count, ['path' => url('/admin/task/lists/'), 'query' => ['project_id' => $project_id]]);
         $page = $task_list->render(); // 分页显示输出

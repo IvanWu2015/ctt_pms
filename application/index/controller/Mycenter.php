@@ -44,16 +44,17 @@ class Mycenter extends Common {
         $today_count = DB::name('Workcount')->where(['username' => $this->_G['username'], 'date' => date('Y-m-d'),'objectType' => 'user'])->field('consumed')->find();
         
         //获取当周的第一天与最后一天
-        $sdefaultDate = date("Y-m-d");
-        $first = 1;
-        $w = date('w', strtotime($sdefaultDate));
-        $week_start = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
-        $week_end = date('Y-m-d', strtotime("$week_start +6 days"));
-        $toweek_data['date'] = array('between time', "$week_start,$week_end");
-        $toweek_data['username'] = array('eq',  $this->_G['username']);
-        $toweek_data['objectType'] = array('eq','user');
+//        $sdefaultDate = date("Y-m-d");
+//        $first = 1;
+//        $w = date('w', strtotime($sdefaultDate));
+//        $week_start = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
+//        $week_end = date('Y-m-d', strtotime("$week_start +6 days"));
+//        $toweek_data['date'] = array('between time', "$week_start,$week_end");
+//        $toweek_data['username'] = array('eq',  $this->_G['username']);
+//        $toweek_data['objectType'] = array('eq','user');
         //当周总工时
-        $toweek_count = DB::name('Workcount')->where($toweek_data)->field('consumed')->sum('consumed');
+        
+        $toweek_count = get_count($this->_G['username'], 'week');
         
         $consumed_map['username'] = array('eq', $this->_G['username']);
         $consumed_map['date'] = array('GT', $headDate);
