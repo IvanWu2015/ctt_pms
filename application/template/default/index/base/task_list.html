@@ -54,7 +54,7 @@
                 {if condition="($task['status'] == 'done') or ($task['status'] == 'doing')"}
                     <a href="javascript:void(0);" class="cc" title="开始">&#xe621;</a>
                 {else}
-                    <a href="javascript:void(0);" class="btn-link" title="开始" onClick="loadWindow('{:url('/index/task/action?ac=start&id='.$task['id'])}');">&#xe621;</a>
+                    <a href="javascript:void(0);" class="btn-link" title="开始" onClick="loadWindow('{:url('/index/task/action?ac=start&id='.$task['id'])}',1);">&#xe621;</a>
                 {/if}
                 <a href="javascript:void(0);" class="btn-link fs16" title="工时" onClick="loadWindow('{:url('/index/task/action?ac=worktime&id='.$task['id'])}');">&#xe61e;</a>
                 {if condition="$task['status'] == 'done'"}
