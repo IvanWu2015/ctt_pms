@@ -15,6 +15,17 @@ class User extends Common {
     }
 
     public function lists() {   //用户列表
+        if (request()->isPost()) {
+            foreach ($_POST['is_admin'] as $key => $value){
+                if($value == 1){
+                    $ids[] = $key;
+                }
+            }
+            $data['uid'] = array('in',$ids);
+            DB('User')->where($data)->update(['isadmin' => 1]);
+        }
+        
+        
         
         
         $user_list = db('User')
@@ -25,17 +36,7 @@ class User extends Common {
                 ->where(['deleted' => 0])
                 ->order('uid DESC')
                 ->paginate(10);
-        
-
         $user_list =  get_user_count($user_list,'week');
-//        foreach ($user_list as $key => $value) {
-//            //今天总工时
-//            $today_count = DB::name('Workcount')->where(['username' => $value['username'], 'date' => date('Y-m-d'), 'objectType' => 'user'])->field('consumed')->find();
-//            $value['today_count'] = $today_count['consumed'];
-//            $user_list[$key] = $value;
-//        }
-//        var_dump($user_list);
-//        exit;
 
         $show = $user_list->render(); // 分页显示输出
         $user_list = user_count($user_list);
@@ -84,8 +85,6 @@ class User extends Common {
         $toweek_data['objectType'] = array('eq', 'user');
         //当周总工时
         $toweek_count = DB::name('Workcount')->where($toweek_data)->field('consumed')->sum('consumed');
-
-
 
         $user = db('User')
                 ->alias('u')
@@ -141,5 +140,19 @@ class User extends Common {
 
         return $this->fetch($this->templatePath);
     }
-
+    
+    public function add() {
+        $uid = input('get.uid', 0, 'intval');
+        $user_detail = DB('User')->where(['uid' => $uid])->find();
+        if(empty($user_detail)){
+            $this->error("不存在该用户");
+        }
+        if($user_detail['uid'] != $this->_G['uid'] && $this->_G['is_admin'] != 1){
+            $this->error("权限不足");
+        }
+        
+    }
+    
+    
+    
 }
