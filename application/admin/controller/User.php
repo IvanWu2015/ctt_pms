@@ -17,13 +17,6 @@ class User extends Common {
     public function lists() {   //用户列表
         
         
-        get_user_count($this->_G['username'],'','2017-03-02','2017-03-06');
-        $sdefaultDate = date("Y-m-d");
-        $first = 1;
-        $w = date('w', strtotime($sdefaultDate));
-        $week_start = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
-        $week_end = date('Y-m-d', strtotime("$week_start +6 days"));
-        
         $user_list = db('User')
                 ->alias('u')
                 ->join('chinatt_pms_dept d', 'u.dept = d.id', 'left')
@@ -34,6 +27,8 @@ class User extends Common {
                 ->order('uid DESC')
                 ->paginate(10);
         
+        
+        $user_list =  get_user_count($user_list,'week');
 //        foreach ($user_list as $key => $value) {
 //            //今天总工时
 //            $today_count = DB::name('Workcount')->where(['username' => $value['username'], 'date' => date('Y-m-d'), 'objectType' => 'user'])->field('consumed')->find();

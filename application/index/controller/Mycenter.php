@@ -158,16 +158,20 @@ class Mycenter extends Common {
         $username = get_username();
         $status = input('get.status', 'unclose', 'addslashes');
         $project_id = input('get.project_id', '0', 'intval');
-        $map['assignedTo'] = $username;
+        $map_count['assignedTo'] = $username;
+        $map['t.assignedTo'] = $username;
         if ($status == 'unclose') {
-            $map['status'] = array('in', 'wait,doing');
+            $map_count['status'] = array('in', 'wait,doing');
+            $map['t.status'] = array('in', 'wait,doing');
         } elseif ($status == 'all') {
             
         } elseif (!empty($status)) {
-            $map['status'] = $status;
+            $map_count['status'] = $status;
+            $map['t.status'] = $status;
         }
         if ($project_id > 0) {
-            $map['project'] = array('eq', $project_id);
+            $map_count['project'] = array('eq', $project_id);
+            $map['t.project'] = array('eq', $project_id);
         }
         $project_list = DB::name('Team')
                 ->alias('t')
@@ -176,8 +180,14 @@ class Mycenter extends Common {
                 ->where([ 't.username' => $this->_G['username']])
                 ->order('id desc')
                 ->paginate(10);
-        $task_count = DB::table('chinatt_pms_task')->where($map)->count();
-        $task_list = DB::table('chinatt_pms_task')->where($map)->order("id DESC")->paginate(20, $task_count, ['path' => url('/index/mycenter/task_list/'), 'query' => ['username' => $username]]);
+        $task_count = DB::table('chinatt_pms_task')->where($map_count)->count();
+        $task_list = DB::table('chinatt_pms_task')
+                ->alias('t')
+                ->join('chinatt_pms_task p', 't.predecessor = p.id', 'left')
+                ->where($map)
+                ->field('t.*,p.status as p_status,p.name as p_name')
+                ->order("id DESC")
+                ->paginate(20, $task_count, ['path' => url('/index/mycenter/task_list/'), 'query' => ['username' => $username]]);
         $navtitle = '个人中心';
         $show = $task_list->render(); // 分页显示输出
 

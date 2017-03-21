@@ -937,7 +937,6 @@ function working_count($subjectTYPE, $objectID, $username, $consumed) {
  * @param array $type 类型
  * @param array $startdate 开始
  * @param array $enddate 结束
- * @return boolean 是否项目成员
  */
 function get_user_count($user_list, $type, $startdate, $enddate) {
     if (!empty($user_list['username'])) {
@@ -947,23 +946,27 @@ function get_user_count($user_list, $type, $startdate, $enddate) {
             $startdate = $enddate = date('Y-m-d');
             $data['date'] = array('in', "$startdate,$enddate");
         } elseif ($type == 'week') {
+            //获取当周的第一天与最后一天
+            $sdefaultDate = date("Y-m-d");
+            $first = 0;
+            $w = date('w', strtotime($sdefaultDate));
             $startdate = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
-            $enddate = date('Y-m-d', strtotime("$week_start + 6 days"));
-            $data['date'] = array('in', "$startdate,$enddate");
+            $enddate = date('Y-m-d', strtotime("$startdate +6 days"));
+            $data['date'] = array('between time', "$startdate,$enddate");
         } elseif ($type == 'month') {
             $startdate = date('Y-m-01');
             $enddate = date('Y-m-t');
-            $data['date'] = array('in',"$startdate,$enddate");
+            $data['date'] = array('between time', "$startdate,$enddate");
         } else {
-            $data['date'] = array('in', "$startdate,$enddate");
+            $data['date'] = array('between time', "$startdate,$enddate");
         }
         $count = DB('Workcount')->where($data)->sum('consumed');
+        $user_list['user_count_hous'] = $count;
         return $user_list;
-    }  else {
-        foreach ($user_list as $key => $value){
-            $user_list[$key]['user_count_hous'] = get_user_count($value, $type, $startdate, $enddate);
+    } else {
+        foreach ($user_list as $key => $value) {
+            $user_list[$key] = get_user_count($value, $type, $startdate, $enddate);
         }
         return $user_list;
     }
-    
 }
