@@ -21,13 +21,12 @@ class User extends Common {
                 ->alias('u')
                 ->join('chinatt_pms_dept d', 'u.dept = d.id', 'left')
                 ->join('chinatt_pms_group g', 'u.groupid = g.id', 'left')
-//                ->join('chinatt_pms_workcount w',"u.username = w.username AND w.objectType = 'user' AND date = '$sdefaultDate'",'left')
-//                ->field('u.*,d.name as depe_name,g.name as group_name,w.today_consumed,sum(w.consumed) as week_consumed')
+                ->field('u.*,d.name as depe_name,g.name as group_name')
                 ->where(['deleted' => 0])
                 ->order('uid DESC')
                 ->paginate(10);
         
-        
+
         $user_list =  get_user_count($user_list,'week');
 //        foreach ($user_list as $key => $value) {
 //            //今天总工时

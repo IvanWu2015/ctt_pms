@@ -939,10 +939,12 @@ function working_count($subjectTYPE, $objectID, $username, $consumed) {
  * @param array $enddate 结束
  */
 function get_user_count($user_list, $type, $startdate, $enddate) {
-        foreach ($user_list as $key => $value) {
-            $user_list[$key] = get_count($value['username'], $type, $startdate, $enddate);
-        return $user_list;
+    foreach ($user_list as $key => $value) {        
+        $value['workcount'] = get_count($value['username'], $type, $startdate, $enddate);
+        $user_list[$key] = $value;
     }
+    return $user_list;
+
 }
 
 /**
