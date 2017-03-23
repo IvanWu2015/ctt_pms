@@ -16,9 +16,6 @@ class Product extends Common {
 
     public function add() {
        
-        
-        
-        
         $navtitle = '产品列表';
         $this->assign('navtitle', $navtitle);
         $this->assign('class_id', $class_id);
