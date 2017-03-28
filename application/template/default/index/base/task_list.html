@@ -62,11 +62,15 @@
                 {else}
                     <a href="javascript:void(0);" class="btn-link fs16" title="完成" onClick="loadWindow('{:url('/index/task/action?ac=done&id='.$task['id'])}');">&#xe619;</a>
                 {/if}
+                
+                <a href="javascript:void(0);" class="btn-link cred fs16" title="取消" onClick="loadWindow('{:url('/index/task/action?ac=cancel&id='.$task['id'])}');">&#xe6f6;</a>
+                
                 {if condition="($task['status'] == 'wait') or ($task['status'] == 'doing')"}
                     <a href="javascript:void(0);" class="cc" title="关闭">&#xe61c;</a>
                 {else}
                     <a href="javascript:void(0);" class="btn-link cred" title="关闭" onClick="loadWindow('{:url('/index/task/action?ac=close&id='.$task['id'])}');">&#xe61c;</a>
                 {/if}
+                
                 <a href="{:url('/Index/task/add?task_id='.$task['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
             </td>
         </tr>
