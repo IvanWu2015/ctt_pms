@@ -30,7 +30,7 @@ class Project extends Common {
         $status = input('get.status', 'all', 'addslashes');
         $username = input('param.username');
         if ($status == 'noclosed') {
-            $map['status'] = array('not in', 'closed,done');
+            $map['status'] = array('not in', 'closed,done,cancel');
         } elseif ($status == 'delayed') {
             $map['status'] = array('in', 'wait,doing');
             $map['deadline'] = array('between time', ['2000-1-1', gmdate("Y-m-d")]);
