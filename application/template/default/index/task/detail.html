@@ -33,6 +33,7 @@
                 {else}
                 <a href="javascript:void(0);" class="btn-link" title="完成" onClick="loadWindow('{:url('/index/task/action?ac=done&id='.$task_id.'&type=task')}');">&#xe619; 完成</a>
                 {/if}
+                <a href="javascript:void(0);" class="btn-link" title="取消" onClick="loadWindow('{:url('/index/task/action?ac=cancel&id='.$task_id.'&type=task')}');">&#xe619; 取消</a>
                 {if condition="($task_detail['status'] == 'wait') or ($task_detail['status'] == 'doing')"}
                 <a href="javascript:void(0);" class="btn-link cc" title="关闭">&#xe61c; 关闭</a>
                 {else}
