@@ -25,17 +25,21 @@ class Task extends Common {
                 ->where(['t.id' => $task_id])
                 ->field('t.*,p.product,k.status as predecessor_name')
                 ->find();
-        if($task['predecessor_name'] == 'doing' || $task['predecessor_name'] == 'wait'){
+        if ($task['predecessor_name'] == 'doing' || $task['predecessor_name'] == 'wait') {
             $json_data = array('result' => 'failed', 'error' => '请先完成该任务的前置任务。');
             //$data = json_encode($message);
             return $json_data;
         }
-        
+
         $user_list = get_userlist_by_projectid($task['project']);
         $type = input('param.type');
         $user_info = Db::name('User')->where(['uid' => $this->_G['uid'], 'deleted' => 0])->find();
         $consumed = input('param.consumed'); //消耗
+        
+        
         if (request()->isPost()) {
+
+
             //分配
             if ($type == 'assign') {
                 $assigo_data = [
@@ -167,7 +171,7 @@ class Task extends Common {
                     ];
                     DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
                     write_action($this->_G['username'], $task['project'], 'task', $task_id, 'assign');
-                }elseif ($ac == 'cancel') {
+                } elseif ($ac == 'cancel') {
                     if ($consumed > 0) {
                         DB::name('Task')->where(['id' => $task_id])->setInc('consumed', $consumed);
                         //工时信息写入
@@ -217,11 +221,12 @@ class Task extends Common {
                 ->alias('t')
                 ->join('chinatt_pms_task p', 't.predecessor = p.id', 'left')
                 ->where(['t.id' => $task_id])
-                 ->field('t.*,p.name as predecessor_name')
+                ->field('t.*,p.name as predecessor_name')
                 ->find();
         if (empty($task_detail)) {
             $this->error('任务不存在。');
         }
+        $user = $this->_G;
         $user_list = DB::table('chinatt_pms_user')->select();
         $data['task'] = array('EQ', $task_id);
         $work_list = DB::table('chinatt_pms_taskestimate')->where($data)->order('id')->select();
@@ -232,7 +237,7 @@ class Task extends Common {
         if ($project_detail['acl'] == 'private' && !isProjectUser($this->_G['username'], $user_list)) {
             $this->error('您无该项目访问权限。');
         }
-
+        
         if (request()->isPost()) {
             $work_data = [
                 'username' => $this->_G['username'],
@@ -260,6 +265,7 @@ class Task extends Common {
         $navtitle = $task_detail['name'] . ' - ' . $project_detail['name'];
         $this->assign('project_detail', $project_detail);
         $this->assign('task_detail', $task_detail);
+        $this->assign('user',$user);
         $this->assign('action_list', $action_list);
         $this->assign('work_list', $work_list);
         $this->assign('task_id', $task_id);
@@ -279,7 +285,14 @@ class Task extends Common {
         $task_id = input('task_id', '0', 'intval');
         if ($task_id > 0) {
             $task_details = $task->where(['id' => $task_id])->find();
+            $project_detail = DB('Project')->where(['id' => $task_details['project']])->find();
             $project_id = $task_details['project'];
+        }
+        if($this->_G['user'] != $task_details['assignedTo'] && $this->_G['is_admin'] != 1 && $this->_G['username'] != $project_detail['project_admin']){
+            $this->error("权限不足");
+        }
+        if(date('Y-m-d H:i:s',strtotime('+10 minute')) > $task_details['openedDate']){
+            $this->error("超时，无法修改");
         }
         if ($project_id > 0) {
             $user_list = get_userlist_by_projectid($project_id);
@@ -289,9 +302,9 @@ class Task extends Common {
             $map['acl'] = array('eq', 'open');
         }
         $project_list = Db::name('Project')->where($map)->column('id,name,code', 'id');
-       
-        $predecessor_data['status'] = array('in',"wait,doing");
-        $predecessor_data['project'] = array('eq',$project_id);
+
+        $predecessor_data['status'] = array('in', "wait,doing");
+        $predecessor_data['project'] = array('eq', $project_id);
         $predecessor_list = DB('Task')->where($predecessor_data)->select();
         if (request()->isPost()) {
             $task_data = [
@@ -309,7 +322,7 @@ class Task extends Common {
                 'pri' => input('param.pri'),
                 'deadline' => input('param.deadline'), //最后期限
                 'realStarted' => input('param.realStarted'), //开始时间
-                'status' => input('param.status','wait','addslashes'),  
+                'status' => input('param.status', 'wait', 'addslashes'),
             ];
             if ($task_id > 0) {
                 DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
@@ -328,7 +341,7 @@ class Task extends Common {
         $navtitle = '任务添加/编辑' . $project_detail['name'];
         $this->assign('navtitle', $navtitle);
         $this->assign('project_id', $project_id);
-        $this->assign('predecessor_list',$predecessor_list);
+        $this->assign('predecessor_list', $predecessor_list);
         $this->assign('project_list', $project_list);
         $this->assign('task_details', $task_details);
         $this->assign('user_list', $user_list);
