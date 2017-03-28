@@ -167,6 +167,29 @@ class Task extends Common {
                     ];
                     DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
                     write_action($this->_G['username'], $task['project'], 'task', $task_id, 'assign');
+                }elseif ($ac == 'cancel') {
+                    if ($consumed > 0) {
+                        DB::name('Task')->where(['id' => $task_id])->setInc('consumed', $consumed);
+                        //工时信息写入
+                        $work_data = [
+                            'username' => $this->_G['username'],
+                            'task' => $task_id,
+                            'work' => trim(input('param.work')),
+                            'date' => date('Y-m-d'),
+                            'consumed' => $consumed,
+                            'left' => input('left', 0, 'intval'), //剩余
+                        ];
+                        $taskestimate_id = DB::table('chinatt_pms_taskestimate')->insertGetId($work_data);
+                        //如果未输入工时
+                    }
+                    $task_data = [
+                        'canceledBy' => $this->_G['username'],
+                        'canceledDate' => date('Y-m-d H:i:s'),
+                        'desc' => input('param.desc'),
+                        'status' => 'cancel',
+                    ];
+                    DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
+                    write_action($this->_G['username'], $task['project'], 'task', $task_id, 'cancel');
                 }
                 $message = array('result' => 'success', 'error' => '');
                 $data = json_encode($message);
