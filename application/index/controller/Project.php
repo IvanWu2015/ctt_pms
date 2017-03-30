@@ -20,9 +20,9 @@ class Project extends Common {
         $orderby_array = array('pri', 'estimate', 'consumed', 'status');
 
         $orderby = in_array(input('param.orderby'), $orderby_array) ? input('param.orderby') : 'id';
-        $map['deleted'] = array('EQ', '0');
+        $map['t.deleted'] = array('EQ', '0');
         if ($project_id > 0) {
-            $map['project'] = array('EQ', $project_id);
+            $map['t.project'] = array('EQ', $project_id);
         } else {
             $this->error('项目ID错误');
         }
@@ -30,18 +30,24 @@ class Project extends Common {
         $status = input('get.status', 'all', 'addslashes');
         $username = input('param.username');
         if ($status == 'noclosed') {
-            $map['status'] = array('not in', 'closed,done,cancel');
+            $map['t.status'] = array('not in', 'closed,done,cancel');
         } elseif ($status == 'delayed') {
-            $map['status'] = array('in', 'wait,doing');
-            $map['deadline'] = array('between time', ['2000-1-1', gmdate("Y-m-d")]);
+            $map['t.status'] = array('in', 'wait,doing');
+            $map['t.deadline'] = array('between time', ['2000-1-1', gmdate("Y-m-d")]);
         }
         if (!empty($username)) {
-            $map['assignedTo'] = array('eq', $username);
+            $map['t.assignedTo'] = array('eq', $username);
         }
         if (!empty($keyword)) {
-            $map['name'] = array('LIKE', '%' . $keyword . '%');
+            $map['t.name'] = array('LIKE', '%' . $keyword . '%');
         }
-        $task_list = $task->where($map)->order("$orderby DESC")->paginate(20, $task_count, ['path' => url('/index/project/detail/'), 'query' => ['id' => $project_id, 'status' => $status]]);
+        $task_list = $task
+                ->alias('t')
+                ->join('chinatt_pms_task k', "t.predecessor = k.id", 'left')
+                ->where($map)
+                ->field('t.*,k.name as p_name')
+                ->order("$orderby DESC")
+                ->paginate(20, $task_count, ['path' => url('/index/project/detail/'), 'query' => ['id' => $project_id, 'status' => $status]]);
 
         $show = $task_list->render(); // 分页显示输出
         $user_list = get_userlist_by_projectid($project_id);
