@@ -1,84 +1,85 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>{$navtitle} - 盛景网络项目管理后台</title>
-<link href="tpl_static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="tpl_static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-<link href="tpl_static/bootstrap/css/docs.css" rel="stylesheet">
-<link href="tpl_static/bootstrap/css/onethink.css" rel="stylesheet">
-<link href="tpl_css/public.css" rel="stylesheet">
-<link href="tpl_css/admin/public.css" rel="stylesheet">
-<link href="tpl_css/font/iconfont.css" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8">
+        <title>{$navtitle} - 盛景网络项目管理后台</title>
+        <link href="tpl_static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="tpl_static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="tpl_static/bootstrap/css/docs.css" rel="stylesheet">
+        <link href="tpl_static/bootstrap/css/onethink.css" rel="stylesheet">
+        <link href="tpl_css/public.css" rel="stylesheet">
+        <link href="tpl_css/admin/public.css" rel="stylesheet">
+        <link href="tpl_css/font/iconfont.css" rel="stylesheet">
 
-<link href="tpl_static/bootstrap/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" media="all" href="tpl_static/bootstrap/css/daterangepicker-bs3.css" />
+        <link href="tpl_static/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" media="all" href="tpl_static/bootstrap/css/daterangepicker-bs3.css" />
 
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-<script src="tpl_static/bootstrap/js/html5shiv.js"></script>
-<![endif]-->
-{block name="style"}{/block}
-<!--[if lt IE 9]>
-<script type="text/javascript" src="tpl_static/jquery-1.10.2.min.js"></script>
-<![endif]-->
-<!--[if gte IE 9]><!-->
-<script type="text/javascript" src="tpl_static/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="tpl_static/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="tpl_static/bootstrap/js/moment.js"></script>
-<script type="text/javascript" src="tpl_js/public.js"></script>
-<script type="text/javascript" src="tpl_js/admin/public.js"></script>
-<script type="text/javascript" src="tpl_static/bootstrap/js/daterangepicker.js"></script>
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="tpl_static/bootstrap/js/html5shiv.js"></script>
+        <![endif]-->
+        {block name="style"}{/block}
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="tpl_static/jquery-1.10.2.min.js"></script>
+        <![endif]-->
+        <!--[if gte IE 9]><!-->
+        <script type="text/javascript" src="tpl_static/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="tpl_static/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="tpl_static/bootstrap/js/moment.js"></script>
+        <script type="text/javascript" src="tpl_js/public.js"></script>
+        <script type="text/javascript" src="tpl_js/admin/public.js"></script>
+        <script type="text/javascript" src="tpl_static/bootstrap/js/daterangepicker.js"></script>
 
-<!--<![endif]-->
+        <!--<![endif]-->
 
 
-</head>
-<body>
-<!-- 头部 -->
-{block name="nav"}
-    <ul class="left_nav iconfont" id="left_nav"><!-- 左边导航 -->
-        <a href="javascript:void();" class="showa iconfont" id="showa" onClick="shownav();">&#xe606;</a>
-        <a href="{:url('/admin/index/index')}"><li {if condition="$_G['controller'] == 'Index'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe605;</span>后台首页</li></a>
-        <a href="{:url('/admin/project/lists')}"><li {if condition="$_G['controller'] == 'Project'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe6c9;</span>项目管理</li></a>
-        <a href="{:url('/admin/task/lists')}"><li {if condition="$_G['controller'] == 'Task'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe613;</span>任务管理</li></a>
-        <a href="{:url('/admin/sort/lists')}"><li {if condition="$_G['controller'] == 'Sort'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe608;</span>分类管理</li></a>
-        <a href="{:url('/admin/weburl/lists')}"><li {if condition="$_G['controller'] == 'Weburl'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe60d;</span>收藏管理</li></a>
-        <a href="{:url('/admin/article/lists')}"><li {if condition="$_G['controller'] == 'Article'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe704;</span>文档管理</li></a>
-        <a href="{:url('/admin/action/lists')}"><li {if condition="$_G['controller'] == 'Action'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe6c9;</span>动态管理</li></a>
-        <a href="{:url('/admin/user/lists')}"><li {if condition="$_G['controller'] == 'User'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe647;</span>用户管理</li></a>
-        <a href="{:url('/admin/product/lists')}"><li {if condition="$_G['controller'] == 'Product'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe645;</span>产品管理</li></a>
-    </ul><!-- 左边导航 -->
-{/block}
-<!-- /头部 -->
-	
-<!-- 主体 -->
-{block name="header"}{/block}
-<div id="wrap">
-    <div class="prompt" id="prompt"><b class="cred mr5">*</b>项必填</div>
-    <div id="addpr"></div>
-    <div class="applica" id="applica"></div><!-- 调用页面 -->
-    {block name="body"}{/block}
-</div>
+    </head>
+    <body>
+        <!-- 头部 -->
+        {block name="nav"}
+        <ul class="left_nav iconfont" id="left_nav"><!-- 左边导航 -->
+            <a href="javascript:void();" class="showa iconfont" id="showa" onClick="shownav();">&#xe606;</a>
+            <a href="{:url('/admin/index/index')}"><li {if condition="$_G['controller'] == 'Index'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe605;</span>后台首页</li></a>
+            <a href="{:url('/admin/project/lists')}"><li {if condition="$_G['controller'] == 'Project'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe6c9;</span>项目管理</li></a>
+            <a href="{:url('/admin/task/lists')}"><li {if condition="$_G['controller'] == 'Task'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe613;</span>任务管理</li></a>
+            <a href="{:url('/admin/sort/lists')}"><li {if condition="$_G['controller'] == 'Sort'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe608;</span>分类管理</li></a>
+            <a href="{:url('/admin/weburl/lists')}"><li {if condition="$_G['controller'] == 'Weburl'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe60d;</span>收藏管理</li></a>
+            <a href="{:url('/admin/article/lists')}"><li {if condition="$_G['controller'] == 'Article'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe704;</span>文档管理</li></a>
+            <a href="{:url('/admin/action/lists')}"><li {if condition="$_G['controller'] == 'Action'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe6c9;</span>动态管理</li></a>
+            <a href="{:url('/admin/user/lists')}"><li {if condition="$_G['controller'] == 'User'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe647;</span>用户管理</li></a>
+            <a href="{:url('/admin/product/lists')}"><li {if condition="$_G['controller'] == 'Product'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe645;</span>产品管理</li></a>
+            <a href="{:url('/admin/working/lists')}"><li {if condition="$_G['controller'] == 'Working'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe645;</span>工时管理</li></a>
+        </ul><!-- 左边导航 -->
+        {/block}
+        <!-- /头部 -->
 
-<script type="text/javascript">
-    $(function(){
-        $(window).resize(function(){
-            $("#main-container").css("min-height", $(window).height() - 343);
-        }).resize();
-    })
-</script>
+        <!-- 主体 -->
+        {block name="header"}{/block}
+        <div id="wrap">
+            <div class="prompt" id="prompt"><b class="cred mr5">*</b>项必填</div>
+            <div id="addpr"></div>
+            <div class="applica" id="applica"></div><!-- 调用页面 -->
+            {block name="body"}{/block}
+        </div>
 
-	<!-- /主体 -->
-{block name="footer"}{/block}
+        <script type="text/javascript">
+            $(function () {
+                $(window).resize(function () {
+                    $("#main-container").css("min-height", $(window).height() - 343);
+                }).resize();
+            })
+        </script>
 
-{block name="script"}{/block} <!-- 用于加载js代码 --}
+        <!-- /主体 -->
+        {block name="footer"}{/block}
 
-<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
-	{block name="hidden"}{/block}
-</div>
+        {block name="script"}{/block} <!-- 用于加载js代码 --}
+        
+        <div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+        {block name="hidden"}{/block}
+    </div>
 
-	<!-- /底部 -->
+    <!-- /底部 -->
 </body> 
 </html>
 

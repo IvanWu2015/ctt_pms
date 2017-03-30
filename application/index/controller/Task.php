@@ -35,11 +35,9 @@ class Task extends Common {
         $type = input('param.type');
         $user_info = Db::name('User')->where(['uid' => $this->_G['uid'], 'deleted' => 0])->find();
         $consumed = input('param.consumed'); //消耗
-        
-        
+
+
         if (request()->isPost()) {
-
-
             //分配
             if ($type == 'assign') {
                 $assigo_data = [
@@ -71,6 +69,14 @@ class Task extends Common {
                     'date' => date('Y-m-d'),
                     'left' => input('param.left', 0, 'intval'), //剩余
                 ];
+                if (empty(input('param.work'))) {
+                    $message = array('null' => '');
+                    $data = json_encode($message);
+                    echo $data;
+                    exit();
+                }
+
+
                 if ($consumed > 0) {
                     $work_data['consumed'] = $consumed;
                 }
@@ -237,7 +243,7 @@ class Task extends Common {
         if ($project_detail['acl'] == 'private' && !isProjectUser($this->_G['username'], $user_list)) {
             $this->error('您无该项目访问权限。');
         }
-        
+
         if (request()->isPost()) {
             $work_data = [
                 'username' => $this->_G['username'],
@@ -265,7 +271,7 @@ class Task extends Common {
         $navtitle = $task_detail['name'] . ' - ' . $project_detail['name'];
         $this->assign('project_detail', $project_detail);
         $this->assign('task_detail', $task_detail);
-        $this->assign('user',$user);
+        $this->assign('user', $user);
         $this->assign('action_list', $action_list);
         $this->assign('work_list', $work_list);
         $this->assign('task_id', $task_id);
@@ -288,10 +294,10 @@ class Task extends Common {
             $project_detail = DB('Project')->where(['id' => $task_details['project']])->find();
             $project_id = $task_details['project'];
         }
-        if($this->_G['user'] != $task_details['assignedTo'] && $this->_G['is_admin'] != 1 && $this->_G['username'] != $project_detail['project_admin']){
+        if ($this->_G['user'] != $task_details['assignedTo'] && $this->_G['is_admin'] != 1 && $this->_G['username'] != $project_detail['project_admin']) {
             $this->error("权限不足");
         }
-        if(date('Y-m-d H:i:s',strtotime('+10 minute')) > $task_details['openedDate']){
+        if (date('Y-m-d H:i:s', strtotime('+10 minute')) > $task_details['openedDate']) {
             $this->error("超时，无法修改");
         }
         if ($project_id > 0) {

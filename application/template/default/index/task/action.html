@@ -189,9 +189,9 @@ function modalsearch(){     //ajax提交
         </div>
         
         <div class="form-group w100 mrn mln z">
-            <label class="col-sm-2 pt5 control-label ar fwn">任务说明</label>
+            <label class="col-sm-2 pt5 control-label ar fwn"><b class='cred'>* </b>任务说明</label>
             <div class="col-sm-9 pln prn">
-                <textarea id="explainmessage" name="work" class="form-control" style="height:100px;"  placeholder="任务更新说明"></textarea>
+                <textarea name="work" id="work" class="form-control" style="height:100px;"  placeholder="任务更新说明"></textarea>
             </div>
         </div>
         
@@ -210,12 +210,24 @@ jQuery(function(){
             jQuery('#consumed').css({border:'1px #ccc solid'});
         }
     });
+    jQuery('#work').keyup(function(){   //任务说明
+        if(jQuery('#work').val().length < 1){
+            jQuery('#work').css({border:'1px red solid'});
+        }else{
+            jQuery('#work').css({border:'1px #ccc solid'});
+        }
+    });
 });
 function worktimesub(){ //表单判断
     var page=0;
     var consumed=jQuery('#consumed').val(); //获取消耗
+    var work=jQuery('#work').val(); //任务说明
     if(consumed.length < 1){
         jQuery('#consumed').css({border:'1px red solid'});
+        var page=1;
+    }
+    if(work.length < 1){
+        jQuery('#work').css({border:'1px red solid'});
         var page=1;
     }
     if(page == "1"){
