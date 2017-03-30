@@ -293,13 +293,14 @@ class Task extends Common {
             $task_details = $task->where(['id' => $task_id])->find();
             $project_detail = DB('Project')->where(['id' => $task_details['project']])->find();
             $project_id = $task_details['project'];
+            if (date('Y-m-d H:i:s', strtotime('+10 minute')) > $task_details['openedDate']) {
+                $this->error("超时，无法修改");
+            }
         }
         if ($this->_G['user'] != $task_details['assignedTo'] && $this->_G['is_admin'] != 1 && $this->_G['username'] != $project_detail['project_admin']) {
             $this->error("权限不足");
         }
-        if (date('Y-m-d H:i:s', strtotime('+10 minute')) > $task_details['openedDate']) {
-            $this->error("超时，无法修改");
-        }
+
         if ($project_id > 0) {
             $user_list = get_userlist_by_projectid($project_id);
         }
