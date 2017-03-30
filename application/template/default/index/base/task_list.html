@@ -7,7 +7,6 @@
             <th class="ac bbno pt15 pb15">创建者</th>
             <th class="ac bbno pt15 pb15">完成者</th>
             <th class="ac bbno pt15 pb15">状态</th>
-            <th class="ac bbno pt15 pb15">前置任务</th>
             <th class="ac bbno pt15 pb15">创建时间</th>
             <th class="ac bbno pt15 pb15"><a href="{:url('/index/project/detail/?orderby=pri&id='.$project_id)}">优先级</a></th>
             <th class="ac bbno pt15 pb15"><a href="{:url('/index/project/detail/?orderby=estimate&id='.$project_id)}">预计</a></th>
@@ -18,7 +17,28 @@
     <tbody>
         {foreach $task_list as $task}
         <tr>
-            <td><a href="{:url('/index/task/detail/?id='.$task['id'])}">{$task['name']}&nbsp;</a></td>
+            <td class="iconfont">
+                <a href="{:url('/index/task/detail/?id='.$task['id'])}">
+                    {if condition="$task['predecessor'] > 0"}
+                    <span title="{$task['p_name']}">
+                        &#xe759;
+                        <!--{if condition="$task['p_status'] eq doing"}
+                            进行中
+                        {/if}
+                        {if condition="$task['p_status'] eq wait"}
+                            等待
+                        {/if}
+                        {if condition="$task['p_status'] eq done"}
+                            完成
+                        {/if}
+                        {if condition="$task['p_status'] eq closed"}
+                            完成
+                        {/if}-->
+                    </span>
+                    {/if}
+                    {$task['name']}&nbsp;
+                </a>
+            </td>
             <td class="ac">{$_G['type_list'][$task['type']]}&nbsp;</td>
             <td class="ac"><a href="{:url('/index/project/detail?id='.$project_id.'&username='.$task['assignedTo'].'&status='.$status)}"  class="ac {if condition='$task["assignedTo"] == $_G["username"]'}cred{else}text-primary{/if}">{$user_list[$task['assignedTo']]['realname']}</a>&nbsp;</td>
             <td class="ac">{$user_list[$task['openedBy']]['realname']}&nbsp;</td>
@@ -30,21 +50,6 @@
             {else}
             <td class="ac text-primary">&nbsp;</td>
             {/if}
-            <td class="ac">{$task['p_name']}
-                {$task['p_name']}
-                        {if condition="$task['p_status'] eq doing"}
-                        进行中
-                        {/if}
-                        {if condition="$task['p_status'] eq wait"}
-                        等待
-                        {/if}
-                        {if condition="$task['p_status'] eq done"}
-                        完成
-                        {/if}
-                        {if condition="$task['p_status'] eq closed"}
-                        完成
-                        {/if}
-            </td>
             <td class="ac">{$task['openedDate']}</td>
             <td class="ac">{$task['pri']}&nbsp;</td>
             <td class="ac">{$task['estimate']}&nbsp;</td>

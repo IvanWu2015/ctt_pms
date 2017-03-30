@@ -69,7 +69,7 @@ ul.examine li:hover{ background:#f7f8fc;}
 
 .selwi{width:100%; height:35px; background:none; border:1px #dedede solid;}
 
-ul.left_nav{ width:260px; height:100%; background:#1B354A; border-right:none; z-index:999; position:fixed; top:62px; left:0px;}
+ul.left_nav{ width:160px; height:100%; background:#1B354A; border-right:none; z-index:999; position:fixed; top:62px; left:0px;}
 ul.left_nav li{ width:100%; height:55px; line-height:55px; text-align:left; font-size:14px; float:left; padding-left:10px; background:#1B354A; color:#91a4b3; border-bottom:none; position:relative;}
 ul.left_nav li:hover{ color:#fff; background:#1579C7 url(../../images/navattr.png) no-repeat right center; background-size:7px 20px; border-right:none;}
 ul.left_nav li span{ font-size:18px; width:30px; height:55px; display:block; float:left;}
@@ -81,7 +81,7 @@ ul.left_nav .showa{ width:12px; height:60px; line-height:60px; font-size:10px; t
 .guesstid b{ width:40px; height:35px; background:#eee; font-weight:normal; line-height:35px; text-align:center; position:absolute; top:0; left:0;}
 .guesstid input{ width:100%; padding-left:45px; height:35px; line-height:35px; border:1px #dedede solid;}
 
-.rightcon{ width:100%; padding:77px 0px 0px 260px; float:left;}
+.rightcon{ width:100%; padding:77px 0px 0px 160px; float:left;}
 .rightcon h3.btitle{ width:100%; height:50px; color:#0e90d2; font-size:18px; border-bottom:1px #dedede solid; font-weight:bold; line-height:50px; float:left;}
 .rightcon h3.btitle span.btien{ font-size:13px; font-weight:normal; color:#000; margin-left:5px;}
 .rightcon .btiright{ float:right; font-size:13px; font-weight:normal; color:#333;}
