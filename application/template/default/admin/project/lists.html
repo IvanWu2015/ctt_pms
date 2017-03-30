@@ -22,13 +22,13 @@
                 </select>
             </div>
             <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
-                <a href="{:url('/admin/project/lists/?status=all&product_id='.$product_id)}" {if condition="$status == 'all'"}class="btnpattr"{else}class="btnp"{/if}>所有</a>
-                <a href="{:url('/admin/project/lists/?status=noclosed&product_id='.$product_id)}}" {if condition="$status == 'unclose'"}class="btnpattr"{else}class="btnp"{/if}>未关闭</a>
-                <a href="{:url('/admin/project/lists/?status=delayed&product_id='.$product_id)}" {if condition="$status == 'delayed'"}class="btnpattr"{else}class="btnp"{/if}>已延期</a>
-                <a href="{:url('/admin/project/lists/?status=wait&product_id='.$product_id)}" {if condition="$status == 'wait'"}class="btnpattr"{else}class="btnp"{/if}>未开始</a>
-                <a href="{:url('/admin/project/lists/?status=doing&product_id='.$product_id)}" {if condition="$status == 'doing'"}class="btnpattr"{else}class="btnp"{/if}>进行中</a>
-                <a href="{:url('/admin/project/lists/?status=done&product_id='.$product_id)}" {if condition="$status == 'done'"}class="btnpattr"{else}class="btnp"{/if}>已完成</a>
-                <a href="{:url('/admin/project/lists/?status=closed&product_id='.$product_id)}" {if condition="$status == 'closed'"}class="btnpattr"{else}class="btnp"{/if}>已关闭</a>
+                <a href="{:url('/admin/project/lists/?status=all&product_id='.$product_id)}" class="btnp">所有</a>
+                <a href="{:url('/admin/project/lists/?status=noclosed&product_id='.$product_id)}}" class="btnp">未关闭</a>
+                <a href="{:url('/admin/project/lists/?status=delayed&product_id='.$product_id)}" class="btnp">已延期</a>
+                <a href="{:url('/admin/project/lists/?status=wait&product_id='.$product_id)}" class="btnp">未开始</a>
+                <a href="{:url('/admin/project/lists/?status=doing&product_id='.$product_id)}" class="btnp">进行中</a>
+                <a href="{:url('/admin/project/lists/?status=done&product_id='.$product_id)}" class="btnp">已完成</a>
+                <a href="{:url('/admin/project/lists/?status=closed&product_id='.$product_id)}" class="btnp">已关闭</a>
                 <a href="{:url('index/project/add')}" target="_bacnk" class="btnp ml20">添加项目</a>
                 <label class="y">
                     <form action="{:url('/index/project/detail/?id='.$project_id)}" method="post">
