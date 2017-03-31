@@ -69,8 +69,9 @@ class Task extends Common {
                     'date' => date('Y-m-d'),
                     'left' => input('param.left', 0, 'intval'), //剩余
                 ];
-                if (empty(input('param.work'))) {
-                    $message = array('null' => '');
+                $work = input('work', '', 'addslashes');
+                if (empty($work)) {
+                    $message = array('message' => '');
                     $data = json_encode($message);
                     echo $data;
                     exit();
@@ -293,7 +294,7 @@ class Task extends Common {
             $task_details = $task->where(['id' => $task_id])->find();
             $project_detail = DB('Project')->where(['id' => $task_details['project']])->find();
             $project_id = $task_details['project'];
-            if (date('Y-m-d H:i:s', strtotime('+10 minute')) > $task_details['openedDate']) {
+            if (date('Y-m-d H:i:s', strtotime('+10 minute')) > $task_details['openedDate'] && $this->_G['is_admin'] != 1) {
                 $this->error("超时，无法修改");
             }
         }

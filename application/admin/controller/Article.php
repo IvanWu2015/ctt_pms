@@ -25,6 +25,7 @@ class Article extends Common {
         $deleted = input('param.deleted', 0, 'intval');
         $article_id = input('param.id', 0, 'intval');
         if($deleted > 0){
+            save_log($this->_G['uid'],$this->_G['username']);
             $article_detail = DB::name('Article')->where(['status' => 0])->find();
             if($this->_G['is_admin']){
                 DB::name('Article')->where(['id' => $article_id])->update(['status' => -1]);

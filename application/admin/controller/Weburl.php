@@ -27,11 +27,12 @@ class Weburl extends Common {
         if ($deleted > 0) {
             $weburl_detail = $weburl->where([ 'status' => 0])->find();
             if ($this->_G['is_admin']) {
+                save_log($this->_G['uid'],$this->_G['username']);
                 $weburl->where(['id' => $weburl_id])->update(['status' => -1]);
                 $this->success('删除成功', 'admin/weburl/lists');
-            }  
+            }
         }
-$navtitle = '收藏管理';
+        $navtitle = '收藏管理';
         $this->assign('navtitle', $navtitle);
         $this->assign('weburl_list', $weburl_list);
 

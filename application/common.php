@@ -977,3 +977,21 @@ function get_count($user, $type, $startdate, $enddate) {
     $count = DB('Workcount')->where($data)->sum('consumed');
     return $count;
 }
+
+//访问操作日志存储
+function save_log($uid,$username) {
+    global $_G;
+    
+    $log = array(
+        'uid' => $uid,
+        'username' => $username,
+        'url' => $_SERVER['REQUEST_URI'],
+        'get' => $_SERVER['REQUEST_URI'],
+        'post' => empty($_POST) ? '' : serialize($_POST),
+        'time' => date('Y-m-d H:i:s'),
+        'type' => 'common',
+    );
+    db('Log')->insert($log);
+    return true;
+}
+
