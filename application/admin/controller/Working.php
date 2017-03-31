@@ -26,11 +26,9 @@ class Working extends Common {
         }
         if(!empty($username)){
                     $data['e.username'] = array('eq',$username);
-
         }
         if(!empty($name)){
                     $data['d.code'] = array('eq',$name);
-
         }
         $working_list = DB('Taskestimate')
                 ->alias('e')
@@ -61,6 +59,7 @@ class Working extends Common {
     
     public function delete() {
         if (request()->isPost()) {
+            save_log($_POST,$this->_G['uid'],$this->_G['username']);
             foreach ($_POST['deleted'] as $key => $value){
                 if($_POST['deleted'][$key] == 1){
                     $ids[] = $key;
@@ -73,10 +72,6 @@ class Working extends Common {
             }
             $data['id'] = array('in',$ids);
             db('Taskestimate')->where($data)->delete();
-            
-            
-            
-            
             
             
             $this->success("删除成功",'admin/working/lists');

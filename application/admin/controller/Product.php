@@ -35,6 +35,7 @@ class Product extends Common {
          $product_id = input('get.id', '0', 'intval');
         $deleted = input('get.deleted', '0', 'intval');
         if($deleted == 1){
+            save_log($this->_G['uid'],$this->_G['username']);
             DB::name('Product')->where(['id' => $product_id])->update(['deleted' => 1]);
             $this->success("删除成功",'product/lists');
         }

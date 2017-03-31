@@ -76,6 +76,7 @@ class Sort extends Common {
             if (empty($class)) {
                 $this->error('不存在该分类');
             } else {
+                save_log($this->_G['uid'], $this->_G['username']);
                 DB::name('Class')->where(['id' => $class_id, 'status' => 1])->update(['status' => 0]);
                 $this->success('删除成功');
             }

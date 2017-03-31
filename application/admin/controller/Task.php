@@ -39,14 +39,23 @@ class Task extends Common {
                 ->order("id DESC")
                 ->paginate(15, $task_count, ['path' => url('/admin/task/lists/'), 'query' => ['project_id' => $project_id]]);
         $page = $task_list->render(); // 分页显示输出
-        if (request()->isPost()) {
-            $delete_ids = array();
-            foreach ($_POST['delete'] as $key => $value) {
-                $delete_ids[] = $key;
-            }
-            $task_data['id'] = array('in', $delete_ids);
-            $task->where($task_data)->save(array('deleted' => '1')); //删除之前的记录
-        }$navtitle = '任务管理';
+//        if (request()->isPost()) {
+//            $delete_ids = array();
+//            foreach ($_POST['delete'] as $key => $value) {
+//                $delete_ids[] = $key;
+//            }
+//            $task_data['id'] = array('in', $delete_ids);
+//            $task->where($task_data)->save(array('deleted' => '1')); //删除之前的记录
+//        }
+        $deleted = input('get.deleted', '0', 'intval');
+        if($deleted == '1'){
+            save_log($this->_G['uid'],$this->_G['username']);
+            $task_id = input('get.id', '0', 'intval');
+            db('Task')->where(['id' => $task_id])->update(array('deleted' => '1')); //删除之前的记录
+            $this->success("删除成功",'admin/task/lists');
+        }
+        
+        $navtitle = '任务管理';
         $this->assign('navtitle', $navtitle);
         $this->assign('project_list', $project_list);
         $this->assign('project_id', $project_id);

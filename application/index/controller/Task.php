@@ -293,7 +293,7 @@ class Task extends Common {
             $task_details = $task->where(['id' => $task_id])->find();
             $project_detail = DB('Project')->where(['id' => $task_details['project']])->find();
             $project_id = $task_details['project'];
-            if (date('Y-m-d H:i:s', strtotime('+10 minute')) > $task_details['openedDate']) {
+            if (date('Y-m-d H:i:s', strtotime('+10 minute')) > $task_details['openedDate'] && $this->_G['is_admin'] != 1) {
                 $this->error("超时，无法修改");
             }
         }

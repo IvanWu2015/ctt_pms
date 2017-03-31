@@ -15,7 +15,7 @@ class Project extends Common {
     }
 
     public function lists() {
-        
+        $deleted = input('get.deleted', '0', 'intval');
         $product_id = input('get.product_id', '0', 'intval');
         $status = input('get.status', 'all', 'addslashes');
         if ($status == 'all') {
@@ -38,13 +38,20 @@ class Project extends Common {
         $project_list = get_project_consume($project_list['data']);
         $product = DB('Product')->where(['deleted' => 0])->field('id,name')->select();
         $navtitle = '项目列表' . $this->navtitle;
-        if (request()->isPost()) {
-            $delete_ids = array();
-            foreach ($_POST['delete'] as $key => $value) {
-                $delete_ids[] = $key;
-            }
-            $project_data['id'] = array('in', $delete_ids);
-            $project->where($project_data)->save(array('deleted' => '1')); //删除之前的记录
+        //多选的删除
+//        if (request()->isPost()) {
+//            $delete_ids = array();
+//            foreach ($_POST['delete'] as $key => $value) {
+//                $delete_ids[] = $key;
+//            }
+//            $project_data['id'] = array('in', $delete_ids);
+//            $project->where($project_data)->save(array('deleted' => '1')); //删除之前的记录
+//        }
+        if($deleted == '1'){
+            save_log($this->_G['uid'],$this->_G['username']);
+            $project_id = input('get.id', '0', 'intval');
+           db('Project')->where(['id' => $project_id])->update(array('deleted' => '1')); //删除之前的记录
+           $this->success("删除成功",'admin/project/lists');
         }
         $navtitle = '项目管理';
         $this->assign('product_list',$product);
