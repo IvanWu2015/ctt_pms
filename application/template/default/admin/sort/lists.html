@@ -1,7 +1,7 @@
 {extend name="base/common"/}
 
 {block name="header"}
-    {include file="base/head_title" /}
+{include file="base/head_title" /}
 {/block}
 
 {block name="side"}{/block}
@@ -10,7 +10,7 @@
 
 <div class="rightcon sizing"><!-- 右边内容 -->
     <h3 class="mt5 pl15 mb15 iconfont">&#xe608; 分类管理</h3>
-    
+
     <div class="publicdiv pl15 pr15 sizing">
         <div class="publicdiv pb20 bf">
             <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
@@ -20,27 +20,29 @@
             </div>
             <form action="{:url('/admin/sort/lists')}" method="post" class="form-horizontal" role="form">
                 <table class="table">
-                  <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
-                      <tr>
-                        <th class="bbno pt15 pb15">ID</th>
-                        <th class="bbno pt15 pb15">名称</th>
-                        <th class="ac bbno pt15 pb15">上层分类</th>
-                        <th class="ac bbno pt15 pb15">操作</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                  {foreach $class_list as $class}
-                      <tr>
-                        <td class="">{$class['id']}</td>
-                        <td>{$class['name']}</td>
-                        <td class="ac">{if condition="!empty($class['parent_name'])"}{$class['parent_name']}{else/}无{/if}</td>
-                        <td class="ac iconfont">
-                            <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/sort/add/?id='.$class['id'])}');" title="编辑" class="btn-link rkwt">&#xe71d;</a>
-                            <a href="{:url('/admin/sort/lists/?deleted=1&id='.$class['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该项目吗？');" title="删除">&#xe601;</a>
-                        </td>
-                      </tr>
-                  {/foreach}
-                  </tbody>
+                    <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                        <tr>
+                            <th class="bbno pt15 pb15">ID</th>
+                            <th class="bbno pt15 pb15">名称</th>
+                            <th class="ac bbno pt15 pb15">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach $class_list as $class}
+                        <tr>
+                            <td class="">{$class['id']}</td>
+                            <td class="ac"><p class="w30">
+                                    {$class['spacer']}
+                                    <input type="text" size="20" class="selwi pl10 pr10" style="width:190px;" name="name[{$class['id']}]" value="{$class[name]}">
+                                    <a href="javascript:;" class="addclass" onclick="toggle_add({$class['id']})" data-toggle="modal" data-target="#myModal">+</a>
+                                </p></td>
+                            <td class="ac iconfont">
+                                <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/sort/add/?id='.$class['id'])}');" title="编辑" class="btn-link rkwt">&#xe71d;</a>
+                                <a href="{:url('/admin/sort/lists/?deleted=1&id='.$class['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该项目吗？');" title="删除">&#xe601;</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                    </tbody>
                 </table>
                 <div class="publicdiv ac pagingw">{$page}</div>
                 <input type="submit" class="btn btn-info y mr20" value="提交" />

@@ -5,6 +5,7 @@ namespace app\admin\controller;
 use \traits\controller\Jump;
 use \think\Db;
 use Page;
+use tree;
 
 load_trait('controller/Jump');  // 引入traits\controller\Jump
 
@@ -26,6 +27,7 @@ class Sort extends Common {
         }
 
         if (request()->isPost()) {
+            save_log($_POST,$this->_G['uid'],$this->_G['username']);
             $class_data = [
                 'name' => input('param.name'),
                 'parentid' => input('param.parentid'),
@@ -67,7 +69,11 @@ class Sort extends Common {
                 ->field('c.*,p.name as parent_name,p.status')
                 ->where(['c.status' => 1])
                 ->paginate(10);
-        $page = $class_list->render(); // 分页显示输出
+                $page = $class_list->render(); // 分页显示输出
+
+        $tree = new Tree($class_list);
+        $class_list = $tree->getArray();
+        
         $deleted = input('get.deleted', '0', 'intval');
         $class_id = input('get.id', '0', 'intval');
         $type = input('get.type','article','addslashes');
