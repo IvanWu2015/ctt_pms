@@ -14,6 +14,9 @@
 
 .applica{ width:100%; height:100%; background:url(../images/applica_bg.png); z-index:99; position:fixed; top:0px; left:0px; display:none;}
 
+.addclass{ padding:5px 10px; background:#eee; border-radius:5px;}
+.addclass:hover{ background:#ccc; text-decoration:none;}
+
 ul.data_statistics{ width:100%; float:left; padding-bottom:5px;}
 ul.data_statistics li{ color:#fff;}
 ul.data_statistics li .datasta{ width:100%; height:100px; position:relative; border-radius:5px; overflow:hidden;}

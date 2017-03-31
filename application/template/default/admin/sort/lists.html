@@ -31,11 +31,11 @@
                         {foreach $class_list as $class}
                         <tr>
                             <td class="">{$class['id']}</td>
-                            <td class="ac"><p class="w30">
-                                    {$class['spacer']}
-                                    <input type="text" size="20" class="selwi pl10 pr10" style="width:190px;" name="name[{$class['id']}]" value="{$class[name]}">
-                                    <a href="javascript:;" class="addclass" onclick="toggle_add({$class['id']})" data-toggle="modal" data-target="#myModal">+</a>
-                                </p></td>
+                            <td class="">
+                                {$class['spacer']}
+                                <input type="text" size="20" class="selwi pl10 pr10" style="width:190px;" name="name[{$class['id']}]" value="{$class[name]}">
+                                <a href="javascript:;" class="addclass" onClick="loadWindow('{:url('/admin/sort/add?type='.$type)}');">+</a>
+                            </td>
                             <td class="ac iconfont">
                                 <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/sort/add/?id='.$class['id'])}');" title="编辑" class="btn-link rkwt">&#xe71d;</a>
                                 <a href="{:url('/admin/sort/lists/?deleted=1&id='.$class['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该项目吗？');" title="删除">&#xe601;</a>
