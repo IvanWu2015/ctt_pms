@@ -69,8 +69,9 @@ class Task extends Common {
                     'date' => date('Y-m-d'),
                     'left' => input('param.left', 0, 'intval'), //剩余
                 ];
-                if (empty(input('param.work'))) {
-                    $message = array('null' => '');
+                $work = input('work', '', 'addslashes');
+                if (empty($work)) {
+                    $message = array('message' => '');
                     $data = json_encode($message);
                     echo $data;
                     exit();
