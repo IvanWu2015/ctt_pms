@@ -43,6 +43,7 @@
                         <label class="col-sm-3 control-label">产品：</label>
                         <div class="col-sm-9 pln prn">
                             <select class="form-control" name='product'>
+                                <option value="0">无</option>
                                 {foreach $product_list as $product}
                                 <option value="{$product['id']}"  {eq name="product.id" value="$project_details['product']"}selected="selected"{/eq}>{$product['name']}</option>
                                 {/foreach}
