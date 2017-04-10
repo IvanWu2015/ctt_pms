@@ -298,14 +298,17 @@ class Task extends Common {
                 $this->error("超时，无法修改");
             }
         }
-        
-        if ($this->_G['username'] != $task_details['assignedTo'] && $this->_G['is_admin'] != 1 && $this->_G['username'] != $project_detail['project_admin']) {
-            $this->error("权限不足");
-        }
-
         if ($project_id > 0) {
             $user_list = get_userlist_by_projectid($project_id);
         }
+        $project_detail = DB('Project')->where(['id' => $project_id])->find();
+
+        if ($this->_G['username'] != $task_details['assignedTo'] && $this->_G['is_admin'] != 1 && $this->_G['username'] != $project_detail['project_admin'] && in_array($this->_G['username'], $user_list)) {
+            $this->error("权限不足");
+        }
+
+        
+        
         $map['status'] = array('not in', 'closed,done');
         if (!$this->_G['is_admin']) {
             $map['acl'] = array('eq', 'open');
