@@ -25,9 +25,6 @@ class User extends Common {
             DB('User')->where($data)->update(['isadmin' => 1]);
         }
         
-        
-        
-        
         $user_list = db('User')
                 ->alias('u')
                 ->join('chinatt_pms_dept d', 'u.dept = d.id', 'left')
