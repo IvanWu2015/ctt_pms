@@ -34,7 +34,7 @@
                             <td class="">
                                 {$class['spacer']}
                                 <input type="text" size="20" class="selwi pl10 pr10" style="width:190px;" name="name[{$class['id']}]" value="{$class[name]}">
-                                <a href="javascript:;" class="addclass" onClick="loadWindow('{:url('/admin/sort/add?type='.$type)}');">+</a>
+                                <a href="javascript:;" class="addclass" onClick="loadWindow('{:url('/admin/sort/add?parentid='.$class['id'].'&type='.$type)}');">+</a>
                             </td>
                             <td class="ac iconfont">
                                 <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/sort/add/?id='.$class['id'])}');" title="编辑" class="btn-link rkwt">&#xe71d;</a>
