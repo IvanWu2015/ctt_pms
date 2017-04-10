@@ -36,8 +36,6 @@ class Sort extends Common {
             $paren_detail = DB('Class')->where(['status' => 1, 'id' => $parentid])->find();
         }
         
-        
-        
         if (request()->isPost()) {
             save_log($_POST,$this->_G['uid'],$this->_G['username']);
             $class_data = [
