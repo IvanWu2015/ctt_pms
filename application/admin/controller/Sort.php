@@ -90,7 +90,6 @@ class Sort extends Common {
         $navtitle = '分类列表';
         $this->assign('type',$type);
         $this->assign('navtitle', $navtitle);
-        $this->assign('page', $page);
         $this->assign('class_list', $class_list);
         return $this->fetch($this->templatePath);
     }
