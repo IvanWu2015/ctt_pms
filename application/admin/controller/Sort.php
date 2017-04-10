@@ -87,7 +87,6 @@ class Sort extends Common {
 
         $tree = new Tree($class_list);
         $class_list = $tree->getArray();
-        
         $deleted = input('get.deleted', '0', 'intval');
         $class_id = input('get.id', '0', 'intval');
         $type = input('get.type','article','addslashes');

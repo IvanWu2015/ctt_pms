@@ -298,7 +298,8 @@ class Task extends Common {
                 $this->error("超时，无法修改");
             }
         }
-        if ($this->_G['user'] != $task_details['assignedTo'] && $this->_G['is_admin'] != 1 && $this->_G['username'] != $project_detail['project_admin']) {
+        
+        if ($this->_G['username'] != $task_details['assignedTo'] && $this->_G['is_admin'] != 1 && $this->_G['username'] != $project_detail['project_admin']) {
             $this->error("权限不足");
         }
 

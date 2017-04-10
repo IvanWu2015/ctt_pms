@@ -1,0 +1,42 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{include file="base/head_title" /}
+{/block}
+
+{block name="side"}{/block}
+
+{block name="body"}
+
+<div class="rightcon sizing"><!-- 右边内容 -->
+    <h3 class="mt5 pl15 mb15 iconfont">&#xe60d; 导航设置</h3>
+
+    <div class="publicdiv pl15 pr15 sizing">
+        <div class="publicdiv pb20 bf">
+            <table class="table">
+                <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                    <tr>
+                        <th class="ac bbno pt15 pb15">ID</th>
+                        <th class="ac bbno pt15 pb15">用户名</th>
+                        <th class="ac bbno pt15 pb15">URL</th>
+                        <th class="ac bbno pt15 pb15">内容</th>
+                         <th class="ac bbno pt15 pb15">时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {foreach $navigation_list as $navigation}
+                    <tr>
+                        <td class="ac">{$navigation['id']}</td>
+                        <td><a href="{:url('/index/project/detail/?id='.$project['id'])}">{$navigation['title']}</a></td>
+                        <td><a href="{$log['url']}" target="_bacnk">{$navigation['url']}</a></td>
+                        <td class="ac">{$navigation['get']}</td>
+                        <td class="ac">{$navigation['time']}</td>
+                    </tr>
+                    {/foreach}
+                </tbody>
+                <div class="publicdiv">{$page}</div>
+            </table>
+        </div>
+    </div>
+</div>
+{/block}
