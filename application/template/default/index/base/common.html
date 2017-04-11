@@ -43,11 +43,9 @@
             
             <ul class="nav nav-pills navtop">
                 <img src="tpl_img/bg_icon.png" class="z mt10 mb10" height="50" />
-                <li class="mt20 mb10 ml20"><a class="active" href="{:url('/index/mycenter')}">个人中心</a></li>
-                <li class="mt20 mb10"><a href="{:url('project/lists')}">项目</a></li>
-                <li class="mt20 mb10"><a href="{:url('weburl/lists')}">收藏</a></li>
-                <li class="mt20 mb10"><a href="{:url('article/lists')}">文档</a></li>
-                <li class="mt20 mb10"><a href="{:url('product/lists')}">产品</a></li>
+                {foreach $common_navigation_list as $navigation}
+                <li class="mt20 mb10 ml20"><a class="active" href="{$navigation['url']}">{$navigation['title']}</a></li>
+                {/foreach}
                 {if condition="$_G['is_admin']"}
                 <li class="mt20 mb10"><a href="{:url('/admin/index/index')}" target="_bacnk">后台入口</a></li>
                 {/if}

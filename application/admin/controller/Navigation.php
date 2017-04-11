@@ -35,12 +35,13 @@ class Navigation extends Common {
                 'title' => input('post.title', '', 'addslashes'),
                 'create_time' => time(),
                 'status' => 1,
+                'sort' => input('post.sort', '', 'intval'),
                 'url' => input('param.url'),
             ];
-            
+
             if ($navigation_id > 0) {
                 $data['update_time'] = time();
-                
+
                 DB('Navigation')->where(['id' => $navigation_id])->update($data);
                 //操作记录
                 write_action($this->_G['username'], 0, 'navigation', $navigation_id, 'update', input('param.title'));
@@ -58,7 +59,6 @@ class Navigation extends Common {
                 exit();
             }
         }
-
         $this->assign('parentid', $parentid);
         $this->assign('paren_detail', $paren_detail);
         $this->assign('navigation_detail', $navigation_detail);
@@ -67,7 +67,7 @@ class Navigation extends Common {
     }
 
     public function lists() {
-$navigation_id = input('get.id', '0', 'intval');
+        $navigation_id = input('get.id', '0', 'intval');
         $navigation_list = DB('Navigation')->where(['status' => 1])->select();
         $tree = new Tree($navigation_list);
         $navigation_list = $tree->getArray();
@@ -83,7 +83,6 @@ $navigation_id = input('get.id', '0', 'intval');
             }
         }
         $this->assign('navigation_list', $navigation_list);
-
         return $this->fetch($this->templatePath);
     }
 
