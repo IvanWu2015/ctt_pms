@@ -9,36 +9,48 @@
 {block name="body"}
 
 <div class="rightcon sizing"><!-- 右边内容 -->
-    <h3 class="mt5 pl15 mb15 iconfont">&#xe600; 导航设置</h3>
+    <h3 class="mt5 pl15 mb15 iconfont">&#xe608; 分类管理</h3>
+
     <div class="publicdiv pl15 pr15 sizing">
         <div class="publicdiv pb20 bf">
-            
-             <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
-                <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/navigation/add?type='.$type)}');" class="btnp">添加导航</a>
+            <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
+                <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/navigation/add?type='.$type)}');" class="btnp">添加分类</a>
             </div>
-            <table class="table">
-                <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
-                    <tr>
-                        <th class="ac bbno pt15 pb15">ID</th>
-                        <th class="ac bbno pt15 pb15">用户名</th>
-                        <th class="ac bbno pt15 pb15">URL</th>
-                        <th class="ac bbno pt15 pb15">内容</th>
-                         <th class="ac bbno pt15 pb15">时间</th>
-                </tr>
-                </thead>
-                <tbody>
-                    {foreach $navigation_list as $navigation}
-                    <tr>
-                        <td class="ac">{$navigation['id']}</td>
-                        <td><a href="{:url('/index/project/detail/?id='.$project['id'])}">{$navigation['title']}</a></td>
-                        <td><a href="{$log['url']}" target="_bacnk">{$navigation['url']}</a></td>
-                        <td class="ac">{$navigation['get']}</td>
-                        <td class="ac">{$navigation['time']}</td>
-                    </tr>
-                    {/foreach}
-                </tbody>
-                <div class="publicdiv">{$page}</div>
-            </table>
+            <form action="{:url('/admin/navigation/lists')}" method="post" class="form-horizontal" role="form">
+                <table class="table">
+                    <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                        <tr>
+                            <th class="bbno pt15 pb15">ID</th>
+                            <th class="bbno pt15 pb15">名称</th>
+                            <th class="ac bbno pt15 pb15">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach $navigation_list as $navigation}
+                        <tr>
+                            <td class="">{$navigation['id']}</td>
+                            <td class="">
+                                {$navigation['spacer']}
+                                <input type="text" size="20" class="selwi pl10 pr10" style="width:190px;" name="name[{$navigation['id']}]" value="{$navigation[title]}">
+                                <a href="javascript:;" class="addclass" onClick="loadWindow('{:url('/admin/navigation/add?parentid='.$navigation['id'].'&type='.$type)}');">+</a>
+                            </td>
+                            <td class="ac iconfont">
+                                <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/navigation/add/?id='.$navigation['id'])}');" title="编辑" class="btn-link rkwt">&#xe71d;</a>
+                                <a href="{:url('/admin/navigation/lists/?deleted=1&id='.$navigation['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该项目吗？');" title="删除">&#xe601;</a>
+                            </td>
+                            
+                            {if condition="substr($navigation['url'], 0, 4) eq 'http'"}
+                            <td class=""><a href="{$navigation['url']}">{$navigation['title']}</td>
+                            {else}
+                             <td class=""><a href="{:url($navigation[url])}">{$navigation['title']}</td>
+                            {/if}
+                        </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+                <div class="publicdiv ac pagingw">{$page}</div>
+                <input type="submit" class="btn btn-info y mr20" value="提交" />
+            </form>
         </div>
     </div>
 </div>
