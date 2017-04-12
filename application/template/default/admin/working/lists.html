@@ -55,9 +55,8 @@
             <form action="{:url('/admin/working/delete')}" method="post">
                 <div class="panel-body">
                     {foreach $working_list as $working}
-                    <li class="publicdiv h25 lh25 ellipsis"><a href="{:url('/index/task/detail/?id='.$task['id'])}">
+                    <li class="publicdiv h25 lh25 ellipsis">
                             {$working['username']} 于 {$working['date']} 记录 {$working['name']}任务 消耗{$working['consumed']}小时
-                        </a>
                         <input type="checkbox" name="deleted[{$working['id']}]" value="1" />
 
                     </li>
