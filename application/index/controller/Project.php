@@ -98,7 +98,7 @@ class Project extends Common {
             $map['p.acl'] = array('eq', 'open');
             $map_or['t.username'] = $username;
         }
- 
+
         //$map['t.username'] = array('eq',$username);
         $project_list = DB::name('Project')
                 ->alias('p')
@@ -111,7 +111,6 @@ class Project extends Common {
         //$project_list = Db::name('Project')->where($map)->order("$orderby DESC")->paginate(15);
 
         $page = $project_list->render(); // 分页显示输出
-
         //将对象转为数组
         $project_list = $project_list->toArray();
         $project_list = get_project_consume($project_list['data']);
@@ -134,7 +133,9 @@ class Project extends Common {
         //已经在该项目的人员
         if ($project_id > 0) {
             $project_detail = $project->where(['id' => $project_id])->find();
-            if ($this->_G['username'] !== $project_detail)
+            if($project_detail['project_admin'] != $this->_G['username'] && $this->_G['is_admin'] != 1){
+                $this->error("权限不足");
+            }
             //该项目所有成员
                 $old_team_list = $team->where(['project' => $project_id])->select();
             foreach ($old_team_list as $key => $value) {
@@ -154,6 +155,10 @@ class Project extends Common {
             $team_list = [
             ];
         }
+        
+        
+        
+        
         if (request()->isPost()) {
             $pro_data = [
                 'name' => input('param.name'),
@@ -165,8 +170,8 @@ class Project extends Common {
                 'project_admin' => input('param.project_admin'),
                 'acl' => input('acl', 'open', 'addslashes'),
                 'status' => input('param.status'),
-            ]; 
-            
+            ];
+
             //编辑
             if ($project_id > 0) {
                 if ($_POST['ids']) {
@@ -215,9 +220,9 @@ class Project extends Common {
                 $this->success("成功添加", url('index/Project/lists'));
             }
         }
-        
+
         $navtitle = '添加/修改项目' . $this->navtitle;
-        $this->assign('product_list',$product_list);
+        $this->assign('product_list', $product_list);
         $this->assign('project_id', $project_id);
         $this->assign('project_details', $project_detail);
         $this->assign('team_list', $team_list);
