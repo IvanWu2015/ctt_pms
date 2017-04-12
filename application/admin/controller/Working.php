@@ -38,7 +38,7 @@ class Working extends Common {
                 ->field('e.*,t.name,t.project,p.name as project_name,d.name as product_name')
                 ->where($data)
                 ->order('id DESC')
-                ->paginate(20);
+                ->paginate(20, $task_count, ['path' => url('/admin/working/lists/'), 'query' => ['project_id' => $project_id ,'username' => $username,'name' => $name]]);
         $page = $working_list->render(); // 分页显示输出
         $navtitle = '工时管理';
         $this->assign('navtitle', $navtitle);

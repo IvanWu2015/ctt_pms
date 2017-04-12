@@ -751,6 +751,7 @@ function analysis($task_id) {
 function analysis_all($action_list) {
 //    $action_list = DB('Action')->where(['objectID' => $task_id])->order('id')->select();
     foreach ($action_list as $key => $value) {
+        
         if ($value['objectType'] == 'product') {
             $value['typename'] = "产品";
         } elseif ($value['objectType'] == 'project') {
@@ -763,6 +764,10 @@ function analysis_all($action_list) {
             $value['typename'] = "BUG";
         } elseif ($value['objectType'] == 'build') {
             $value['typename'] = "创建";
+        }elseif ($value['objectType'] == 'navigation') {
+            $value['typename'] = $value['comment'] . "的导航";
+        }elseif ($value['objectType'] == 'class') {
+            $value['typename'] = $value['comment'] . "的分类";
         }
 
         if ($value['action'] == 'assignedTo') {
@@ -794,6 +799,8 @@ function analysis_all($action_list) {
             $value['actionname'] = "记录工时(消耗{$value['consumed']}小时,剩余{$value['left']}小时)";
         } elseif ($value['action'] == 'commented') {
             $value['actionname'] = "添加了备注";
+        }elseif ($value['action'] == 'add') {
+            $value['actionname'] = "添加";
         }
         $action_list[$key] = $value;
     }

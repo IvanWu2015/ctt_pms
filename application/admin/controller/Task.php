@@ -18,10 +18,14 @@ class Task extends Common {
     public function lists() {
         $project_id = input('get.project_id', 0, 'intval');
         $status = input('get.status', 'all', 'addslashes');
+        $username = input('get.username', '', 'addslashes');
+        $openedby = input('get.openedby', '', 'addslashes');
         if ($status == 'all') {
             
         } elseif ($status == 'noclosed') {
             $data['t.status'] = array('neq', 'closed');
+        }elseif($status == 'notdone'){
+            $data['t.status'] = array('in', 'doing,wait');
         } else {
             $data['t.status'] = array('eq', $status);
         }
@@ -30,6 +34,13 @@ class Task extends Common {
         if ($project_id > 0) {
             $data['t.project'] = array('eq', $project_id);
         }
+        if(!empty($username)){
+            $data['t.assignedTo'] = array('eq', $username);
+        }
+        if(!empty($openedby)){
+            $data['t.openedBy'] = array('eq', $openedby);
+        }
+        $user_list = DB('User')->where(['deleted' => 0])->select();
         $project_list = db('Project')->where(['deleted' => 0])->select();
         $task_list = $task
                 ->alias('t')
@@ -37,7 +48,7 @@ class Task extends Common {
                 ->where($data)
                 ->field('t.*,p.status as p_status,p.name as p_name')
                 ->order("id DESC")
-                ->paginate(15, $task_count, ['path' => url('/admin/task/lists/'), 'query' => ['project_id' => $project_id]]);
+                ->paginate(20, $task_count, ['path' => url('/admin/task/lists/'), 'query' => ['project_id' => $project_id ,'username' => $username,'openedby' => $openedby,'status' => $status]]);
         $page = $task_list->render(); // 分页显示输出
 //        if (request()->isPost()) {
 //            $delete_ids = array();
@@ -58,6 +69,8 @@ class Task extends Common {
         $navtitle = '任务管理';
         $this->assign('navtitle', $navtitle);
         $this->assign('project_list', $project_list);
+        $this->assign('username',$username);
+        $this->assign('user_list',$user_list);
         $this->assign('project_id', $project_id);
         $this->assign('page', $page);
         $this->assign('task_list', $task_list);

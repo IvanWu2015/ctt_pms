@@ -15,17 +15,25 @@
         <div class="publicdiv pb20 bf">
             <div class="publicdiv pt20 pb20 pl20 pr20 sizing"><label class="z">
                 <span class="z c9 lh30">项目：</span>
-                <select name="project_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/admin/task/lists?project_id=')}' + this.options[this.selectedIndex].value;">
+                <select name="project_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/admin/task/lists?username='.$username.'&project_id=')}' + this.options[this.selectedIndex].value;">
                     <option value='0'>无</option>
                     {foreach $project_list as $temp_project}
                     <option {if condition="$temp_project['id'] == $project_id"}selected='selected'{/if} value="{$temp_project['id']}" >{$temp_project['name']}</option>
                     {/foreach}
                 </select>
+                <span class="z c9 lh30">用户：</span>
+                <select name="username" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/admin/task/lists?project_id='.$project_id.'&username=')}' + this.options[this.selectedIndex].value;">
+                    <option value='0'>无</option>
+                    {foreach $user_list as $user}
+                    <option {if condition="$user['username'] == $username"}selected='selected'{/if} value="{$user['username']}" >{$user['realname']}</option>
+                    {/foreach}
+                </select>
                 </label>
-                <a href="{:url('/admin/Task/lists/?status=all&project_id='.$project_id)}" class="btnp ml10">所有</a>
-                <a href="{:url('/admin/Task/lists/?status=noclosed&project_id='.$project_id)}" class="btnp">未关闭</a>
-                <a href="{:url('/admin/Task/lists/?status=doing&project_id='.$project_id)}" class="btnp">进行中</a>
-                <a href="{:url('/admin/Task/lists/?status=wait&project_id='.$project_id)}" class="btnp">等待</a>
+                <a href="{:url('/admin/Task/lists/?status=all&username='.$username.'&project_id='.$project_id)}" class="btnp ml10">所有</a>
+                <a href="{:url('/admin/Task/lists/?status=noclosed&username='.$username.'&project_id='.$project_id)}" class="btnp">未关闭</a>
+                <a href="{:url('/admin/Task/lists/?status=doing&username='.$username.'&project_id='.$project_id)}" class="btnp">进行中</a>
+                <a href="{:url('/admin/Task/lists/?status=notdone&username='.$username.'&project_id='.$project_id)}" class="btnp">未完成</a>
+                <a href="{:url('/admin/Task/lists/?status=wait&username='.$username.'&project_id='.$project_id)}" class="btnp">等待</a>
                 <label class="y">
                     <form action="{:url('/index/project/detail/?id='.$project_id)}" method="post">
                         <input type="text" name="keyword" class="bor pt5 pb5 pl5 pr5 fwn" placeholder="请输入搜索的内容~" value="{$keyword}" />
