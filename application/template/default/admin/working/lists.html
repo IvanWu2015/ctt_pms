@@ -9,7 +9,7 @@
 {block name="body"}
 
 <div class="rightcon sizing"><!-- 右边内容 -->
-    <h3 class="mt5 pl15 mb15 iconfont">&#xe6c9; 工时管理</h3>
+    <h3 class="mt5 pl15 mb15 iconfont">&#xe61e; 工时管理</h3>
 
     <div class="publicdiv pl15 pr15 sizing">
         <div class="publicdiv pb20 bf">
@@ -17,7 +17,7 @@
 
                 <label class="z">
                     <span class="z c9 lh30">项目：</span>
-                    <select name="project_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href = '{:url('/admin/working/lists?name='.$name.'&username='.$username.'& project_id=')}' + this.options[this.selectedIndex].value;">
+                    <select name="project_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href = '{:url('/admin/working/lists?name='.$name.'&username='.$username.'&project_id=')}' + this.options[this.selectedIndex].value;">
                         <option value='0'>无</option>
                         {foreach $project_list as $temp_project}
                         <option {if condition="$temp_project['id'] == $project_id"}selected='selected'{/if} value="{$temp_project['id']}" >{$temp_project['name']}</option>
@@ -55,9 +55,8 @@
             <form action="{:url('/admin/working/delete')}" method="post">
                 <div class="panel-body">
                     {foreach $working_list as $working}
-                    <li class="publicdiv h25 lh25 ellipsis"><a href="{:url('/index/task/detail/?id='.$task['id'])}">
+                    <li class="publicdiv h25 lh25 ellipsis">
                             {$working['username']} 于 {$working['date']} 记录 {$working['name']}任务 消耗{$working['consumed']}小时
-                        </a>
                         <input type="checkbox" name="deleted[{$working['id']}]" value="1" />
 
                     </li>

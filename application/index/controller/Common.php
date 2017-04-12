@@ -5,6 +5,7 @@ namespace app\index\controller;
 use \traits\controller\Jump;
 use \think\Db;
 use think\Request;
+use tree;
 
 load_trait('controller/Jump');  // 引入traits\controller\Jump
 
@@ -64,12 +65,22 @@ class Common extends \think\Controller {
             'misc' => '其他',
             'BUG' => '修复BUG',
         ];
+        
+        
+        //导航设置的读取
+        $new_common_navigation_list = DB('Navigation')
+                ->where(['status' => 1])
+                ->order('sort ASC')
+                ->select();
+        $tree = new Tree($new_common_navigation_list);
+        $new_common_navigation_list = $tree->getArray();
+
 
         //用户列表
         //$this->_G['userlist'] = DB::name('user')->column('uid,username,realname', 'username');
         //print_r($this->_G);exit;
         $this->assign('_G', $this->_G);
-
+        $this->assign('common_navigation_list', $common_navigation_list);
         //模板控制
         config('template', [
             // 模板引擎类型 支持 php think 支持扩展

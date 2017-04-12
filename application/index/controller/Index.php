@@ -14,5 +14,6 @@ class Index extends Common {
         $this->assign('navtitle', $navtitle);
         return $this->fetch($this->templatePath);
     }
+    
 
 }
