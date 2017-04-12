@@ -65,7 +65,9 @@ class Common extends \think\Controller {
             'misc' => '其他',
             'BUG' => '修复BUG',
         ];
-
+        
+        
+        //导航设置的读取
         $new_common_navigation_list = DB('Navigation')
                 ->where(['status' => 1])
                 ->order('sort ASC')
