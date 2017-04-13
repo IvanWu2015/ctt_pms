@@ -394,14 +394,14 @@ img{ border:none;}
 
 
 /*个人中心*/
-ul.left_nav{ width:260px; height:100%; background:#f7f7f7; border-right:1px #e8e8e8 solid; position:fixed; top:80px; left:0px;}
-ul.left_nav li{ width:100%; height:55px; line-height:55px; text-align:left; font-size:14px; float:left; padding-left:10px; background:#fff; color:#000; border-bottom:1px #e8e8e8 solid; position:relative;}
+ul.left_nav{ width:200px; height:100%; background:#f7f7f7; border-right:1px #e8e8e8 solid; position:fixed; top:80px; left:0px;}
+ul.left_nav li{ width:100%; height:55px; line-height:55px; text-align:left; font-size:14px; float:left; padding-left:30px; background:#fff; color:#000; border-bottom:1px #e8e8e8 solid; position:relative;}
 ul.left_nav li:hover{ color:#0e90d2; background:#fff url(../images/navattr02.png) no-repeat right center; background-size:7px 20px; border-right:1px #0e90d2 solid;}
 ul.left_nav li span{ font-size:18px; width:30px; height:55px; display:block; float:left;}
 ul.left_nav li.navattr{ color:#0e90d2; background:#fff url(../images/navattr02.png) no-repeat right center; background-size:7px 20px; border-right:1px #0e90d2 solid;}
 ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:block; border-radius:2px; padding:0px 10px; background:#d9534f; position:absolute; top:15px; right:30px;}
 
-.rightcon{ width:100%; padding:20px 0px 20px 261px; float:left;}
+.rightcon{ width:100%; padding:20px 0px 20px 200px; float:left;}
 .userincon{ width:100%; float:left; min-height:140px; padding-left:140px; position:relative;}
 .userincon .userawp{ width:100px; position:absolute; top:20px; left:20px;}
 .userincon .useravatar{ width:100px; height:100px; float:left; cursor:pointer; border-radius:100%; position:relative; overflow:hidden;}

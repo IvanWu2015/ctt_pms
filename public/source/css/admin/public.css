@@ -73,7 +73,7 @@ ul.examine li:hover{ background:#f7f8fc;}
 .selwi{width:100%; height:35px; background:none; border:1px #dedede solid;}
 
 ul.left_nav{ width:160px; height:100%; background:#1B354A; border-right:none; z-index:999; position:fixed; top:62px; left:0px;}
-ul.left_nav li{ width:100%; height:55px; line-height:55px; text-align:left; font-size:14px; float:left; padding-left:10px; background:#1B354A; color:#91a4b3; border-bottom:none; position:relative;}
+ul.left_nav li{ width:100%; height:55px; line-height:55px; text-align:left; font-size:14px; float:left; padding-left:30px; background:#1B354A; color:#91a4b3; border-bottom:none; position:relative;}
 ul.left_nav li:hover{ color:#fff; background:#1579C7 url(../../images/navattr.png) no-repeat right center; background-size:7px 20px; border-right:none;}
 ul.left_nav li span{ font-size:18px; width:30px; height:55px; display:block; float:left;}
 ul.left_nav li.navattr{ color:#fff; background:#1579C7 url(../../images/navattr.png) no-repeat right center; background-size:7px 20px; border-right:none;}
