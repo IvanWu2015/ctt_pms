@@ -67,16 +67,23 @@ class Common extends \think\Controller {
         ];
         
         
-        //导航设置的读取
+        //读取并输出全局的导航链接
         $new_common_navigation_list = DB('Navigation')
                 ->where(['status' => 1])
                 ->order('sort ASC')
                 ->select();
         $tree = new Tree($new_common_navigation_list);
-        $navigation_list = $tree->getArray();
-        print_r($navigation_list);exit;
-
-
+        $navigation_list = array();
+        foreach($new_common_navigation_list as $temp_navigation) {
+            $temp_navigation['url'] = strpos($temp_navigation['url'], 'http://') === 0 ? $temp_navigation['url'] : url($temp_navigation['url']);
+            if($temp_navigation['parentid'] == 0) {
+                $navigation_list[$temp_navigation['id']]['main'] = $temp_navigation;
+            } else {
+                $navigation_list[$temp_navigation['parentid']]['sub'][] = $temp_navigation;
+            }
+        }
+        $this->assign('navigation_list', $navigation_list);
+        
         //用户列表
         //$this->_G['userlist'] = DB::name('user')->column('uid,username,realname', 'username');
         //print_r($this->_G);exit;

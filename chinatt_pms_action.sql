@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-03-28 15:44:01
+Date: 2017-04-13 18:04:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,7 +33,7 @@ CREATE TABLE `chinatt_pms_action` (
   `read` enum('0','1') NOT NULL DEFAULT '0' COMMENT '是否已读',
   PRIMARY KEY (`id`),
   KEY `action` (`objectID`,`product`,`project`,`action`,`date`)
-) ENGINE=MyISAM AUTO_INCREMENT=1346 DEFAULT CHARSET=utf8 COMMENT='操作记录';
+) ENGINE=MyISAM AUTO_INCREMENT=1355 DEFAULT CHARSET=utf8 COMMENT='操作记录';
 
 -- ----------------------------
 -- Records of chinatt_pms_action
@@ -1377,6 +1377,15 @@ INSERT INTO `chinatt_pms_action` VALUES ('1342', 'project', '7', '', '7', 'ivan'
 INSERT INTO `chinatt_pms_action` VALUES ('1343', 'task', '55', '', '8', 'ivan', 'updata', '2017-03-14 23:53:25', '', '', '0');
 INSERT INTO `chinatt_pms_action` VALUES ('1344', 'task', '31', '', '8', 'ivan', 'updata', '2017-03-14 23:53:57', '', '', '0');
 INSERT INTO `chinatt_pms_action` VALUES ('1345', 'user', '0', '', '2', 'ivan', 'login', '2017-03-25 17:20:56', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1346', 'task', '3', '', '2', 'ivan', 'recordestimate', '2017-03-31 10:05:34', '增加图片隐藏处理', '379', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1347', 'user', '0', '', '2', 'ivan', 'login', '2017-04-10 11:06:55', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1348', 'class', '67', '', '0', 'ivan', 'add', '2017-04-10 11:09:06', 'Sd', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1349', 'user', '0', '', '2', 'ivan', 'login', '2017-04-13 16:54:20', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1350', 'navigation', '1', '', '0', 'ivan', 'add', '2017-04-13 17:13:11', '一级导航', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1351', 'class', '68', '', '0', 'ivan', 'add', '2017-04-13 17:29:42', '基本原则 ', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1352', 'navigation', '1', '', '0', 'ivan', 'add', '2017-04-13 17:46:05', '测试导航信息', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1353', 'navigation', '1', '', '0', 'ivan', 'add', '2017-04-13 17:46:22', 'untgasd', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1354', 'navigation', '1', '', '0', 'ivan', 'add', '2017-04-13 17:46:31', 'asdf', '', '0');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_article
@@ -1419,7 +1428,7 @@ CREATE TABLE `chinatt_pms_class` (
   `level` int(4) DEFAULT '0' COMMENT '级别',
   `type` varchar(20) NOT NULL DEFAULT '' COMMENT '分类所属类型 weburl为网址收藏分类',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=utf8 COMMENT='公用分类表';
+) ENGINE=MyISAM AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COMMENT='公用分类表';
 
 -- ----------------------------
 -- Records of chinatt_pms_class
@@ -1432,6 +1441,8 @@ INSERT INTO `chinatt_pms_class` VALUES ('63', '球拍', '0', '0', '1', '1', 'goo
 INSERT INTO `chinatt_pms_class` VALUES ('64', '胶皮', '0', '0', '1', '1', 'goods');
 INSERT INTO `chinatt_pms_class` VALUES ('65', '箱包', '0', '0', '1', '1', 'goods');
 INSERT INTO `chinatt_pms_class` VALUES ('66', '球鞋', '0', '0', '1', '1', 'goods');
+INSERT INTO `chinatt_pms_class` VALUES ('67', 'Sd', '0', '59', '1', '0', 'article');
+INSERT INTO `chinatt_pms_class` VALUES ('68', '基本原则 ', '0', '67', '1', '0', 'article');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_dept
@@ -6534,12 +6545,73 @@ INSERT INTO `chinatt_pms_history` VALUES ('2850', '1300', 'status', 'doing', 'do
 INSERT INTO `chinatt_pms_history` VALUES ('2851', '1300', 'finishedBy', '', 'wuxin', '');
 
 -- ----------------------------
+-- Table structure for chinatt_pms_log
+-- ----------------------------
+DROP TABLE IF EXISTS `chinatt_pms_log`;
+CREATE TABLE `chinatt_pms_log` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `uid` int(8) unsigned NOT NULL DEFAULT '0' COMMENT 'uid',
+  `username` varchar(30) NOT NULL DEFAULT '' COMMENT '用户名',
+  `url` varchar(500) NOT NULL DEFAULT '' COMMENT '访问地址',
+  `get` varchar(1000) NOT NULL DEFAULT '' COMMENT 'get数据',
+  `post` varchar(1000) NOT NULL DEFAULT '' COMMENT 'post数据',
+  `time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '时间',
+  `type` varchar(30) NOT NULL DEFAULT '' COMMENT '类型 common为全局自动',
+  `extend` varchar(1000) NOT NULL DEFAULT '' COMMENT '扩展，如执行结果等',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13005 DEFAULT CHARSET=utf8 COMMENT='日志';
+
+-- ----------------------------
+-- Records of chinatt_pms_log
+-- ----------------------------
+INSERT INTO `chinatt_pms_log` VALUES ('8', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_add=1&formhash=ea54368a', '', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('9', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_id=', '', 'a:9:{s:4:\"name\";s:24:\"朝鲜女子乒乓球队\";s:11:\"englishname\";s:0:\"\";s:7:\"country\";s:6:\"朝鲜\";s:5:\"coach\";s:6:\"未知\";s:8:\"features\";s:24:\"社会主义乒乓球队\";s:15:\"cover_image_url\";s:58:\"data/attachment/forum/201607/01/114855l4b0fzukcbb9mpmf.jpg\";s:7:\"explain\";s:582:\"1975年的第33届世乒赛，随着朴英顺夺取女单冠军，朝鲜队从此迈进世界强队的行列。在日本千叶举行的41届世乒赛上，朝鲜和韩国首次组成联队，在决赛击败了中国队，两年后中国队在哥德堡成功复仇。1995年第43届和2001年第46届世乒赛，朝鲜队再度向中国队发起冲击，最终无功而返，但在2002年釜山亚运会上，朝鲜队又一次击败中国队，获得女团冠军。此后，随着新加坡、日本等队伍的崛起，朝鲜队在世界锦标赛的舞台上已经沉寂了十年。\";s:8:\"formhash\";s:8:\"ea54368a\";s:9:\"group_add\";s:1:\"1\";}', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('10', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_add=1&formhash=ea54368a', '', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('11', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_id=', '', 'a:9:{s:4:\"name\";s:25:\"韩国女子乒乓球队 \";s:11:\"englishname\";s:0:\"\";s:7:\"country\";s:6:\"韩国\";s:5:\"coach\";s:6:\"未知\";s:8:\"features\";s:30:\"大宇宙帝国的乒乓球队\";s:15:\"cover_image_url\";s:58:\"data/attachment/forum/201607/01/115232wyhe44vddsd00dse.jpg\";s:7:\"explain\";s:563:\"1973年第32届世乒赛，韩国女队第一次捧起考比伦杯，中韩争锋随之成为世界女子乒坛的主流。第34届世乒赛后，李寿子、梁英子、玄静和接连涌现，使韩国女队始终处在世界强队之列。90年代初，朝韩连队战胜中国队获得第41届世乒赛女团冠军，玄静和又在42届世乒赛中收获了女单金牌。玄静和退役之后，韩国队一度沉寂，直到金暻娥的出现，再加上前中国选手唐娜的加盟和石磊的成长，让韩国队又有了跻身世界强队的本钱。\";s:8:\"formhash\";s:8:\"ea54368a\";s:9:\"group_add\";s:1:\"1\";}', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('12', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_add=1&formhash=ea54368a', '', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_id=16', '', 'a:9:{s:4:\"name\";s:24:\"韩国男子乒乓球队\";s:11:\"englishname\";s:0:\"\";s:7:\"country\";s:6:\"韩国\";s:5:\"coach\";s:6:\"未知\";s:8:\"features\";s:3:\"无\";s:15:\"cover_image_url\";s:58:\"data/attachment/forum/201607/01/115325ua2waswemgqaowmg.jpg\";s:7:\"explain\";s:656:\"韩国男子乒乓球队是一直由韩国人组成的乒乓球队。上个世纪80年代，以金琦泽和金浣为首的韩国队迅速崛起，成为世界乒坛上一股不容忽视的力量。之后，刘南奎的出现将韩国男队带到了第一个高峰。90年代，金择洙接过接力棒，延续并扩大了韩国队的威胁。21世纪初，金择洙退役之后，吴尚垠、朱世赫、柳承敏相继涌现开始肩负起韩国乒乓球的重担，并在48届世乒赛团体赛为韩国队实现了历史性的突破。在和中国队长达二十余年的对抗中，尽管韩国队胜绩寥寥，但始终是中国队的主要对手。\";s:8:\"formhash\";s:8:\"ea54368a\";s:9:\"group_add\";s:1:\"1\";}', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('14', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_add=1&formhash=ea54368a', '', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('15', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_id=1', '', 'a:9:{s:4:\"name\";s:15:\"中国国家队\";s:11:\"englishname\";s:0:\"\";s:7:\"country\";s:6:\"中国\";s:5:\"coach\";s:9:\"刘国梁\";s:8:\"features\";s:0:\"\";s:15:\"cover_image_url\";s:58:\"data/attachment/forum/201607/01/115355wqfiv8uqpuw7j0pf.jpg\";s:7:\"explain\";s:531:\"中国乒乓球队成立于1952年，拼搏不息，攀登不止，经历了由弱到强、持久昌盛的发展历程。中国乒乓球队包括中国女子乒乓球队和中国男子乒乓球队，是中国体育军团的王牌之师，屡次在国际大赛上争金夺银，被体育迷们习惯地称为梦之队。继在2008年北京奥运会上包揽男单、女单、男团、女团四枚金牌之后，在2012年伦敦奥运会上再次包揽男单、女单、男团、女团四枚金牌，成为当之无愧的梦之队。\";s:8:\"formhash\";s:8:\"ea54368a\";s:9:\"group_add\";s:1:\"1\";}', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('16', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_add=1&formhash=ea54368a', '', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('17', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_id=2', '', 'a:9:{s:4:\"name\";s:15:\"德国国家队\";s:11:\"englishname\";s:0:\"\";s:7:\"country\";s:6:\"德国\";s:5:\"coach\";s:6:\"未知\";s:8:\"features\";s:0:\"\";s:15:\"cover_image_url\";s:58:\"data/attachment/forum/201607/01/115538k8onnenn1ovoinq6.jpg\";s:7:\"explain\";s:196:\"2012年作为中国队实力不俗的欧洲劲敌，德国乒乓球队拥有德国乃至整个欧洲的乒乓球界的领军人物波尔，这也使德国队拥有向金牌发起冲击的能力。\";s:8:\"formhash\";s:8:\"ea54368a\";s:9:\"group_add\";s:1:\"1\";}', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('18', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_id=21', '', 'a:9:{s:4:\"name\";s:25:\"韩国女子乒乓球队 \";s:11:\"englishname\";s:0:\"\";s:7:\"country\";s:6:\"韩国\";s:5:\"coach\";s:6:\"未知\";s:8:\"features\";s:0:\"\";s:15:\"cover_image_url\";s:58:\"data/attachment/forum/201607/01/115232wyhe44vddsd00dse.jpg\";s:7:\"explain\";s:563:\"1973年第32届世乒赛，韩国女队第一次捧起考比伦杯，中韩争锋随之成为世界女子乒坛的主流。第34届世乒赛后，李寿子、梁英子、玄静和接连涌现，使韩国女队始终处在世界强队之列。90年代初，朝韩连队战胜中国队获得第41届世乒赛女团冠军，玄静和又在42届世乒赛中收获了女单金牌。玄静和退役之后，韩国队一度沉寂，直到金暻娥的出现，再加上前中国选手唐娜的加盟和石磊的成长，让韩国队又有了跻身世界强队的本钱。\";s:8:\"formhash\";s:8:\"ea54368a\";s:9:\"group_add\";s:1:\"1\";}', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('19', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_id=20', '', 'a:9:{s:4:\"name\";s:24:\"朝鲜女子乒乓球队\";s:11:\"englishname\";s:0:\"\";s:7:\"country\";s:6:\"朝鲜\";s:5:\"coach\";s:6:\"未知\";s:8:\"features\";s:0:\"\";s:15:\"cover_image_url\";s:58:\"data/attachment/forum/201607/01/114855l4b0fzukcbb9mpmf.jpg\";s:7:\"explain\";s:582:\"1975年的第33届世乒赛，随着朴英顺夺取女单冠军，朝鲜队从此迈进世界强队的行列。在日本千叶举行的41届世乒赛上，朝鲜和韩国首次组成联队，在决赛击败了中国队，两年后中国队在哥德堡成功复仇。1995年第43届和2001年第46届世乒赛，朝鲜队再度向中国队发起冲击，最终无功而返，但在2002年釜山亚运会上，朝鲜队又一次击败中国队，获得女团冠军。此后，随着新加坡、日本等队伍的崛起，朝鲜队在世界锦标赛的舞台上已经沉寂了十年。\";s:8:\"formhash\";s:8:\"ea54368a\";s:9:\"group_add\";s:1:\"1\";}', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('20', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_id=14', '', 'a:9:{s:4:\"name\";s:18:\"中国乒乓球队\";s:11:\"englishname\";s:52:\"Table tennis team of the People\\\\\\\'s Republic of Chi\";s:7:\"country\";s:6:\"中国\";s:5:\"coach\";s:9:\"孔令辉\";s:8:\"features\";s:738:\"1988年第24届汉城奥运会 ；\r\n女子单打冠军陈静亚军李惠芳季军焦志敏；\r\n男子双打冠军陈龙灿/韦晴光；\r\n女子双打亚军 焦志敏/陈静；\r\n1992年第25届巴塞罗那奥运会；\r\n男子单打季军马文革；\r\n女子单打冠军邓亚萍亚军乔红；\r\n男子双打冠军吕林/王涛；\r\n女子双打冠军 邓亚萍/乔红 亚军陈子荷/高军；\r\n1996年第26届亚特兰大奥运会；\r\n男子单打冠军 刘国梁 亚军 王涛；\r\n女子单打冠军 邓亚萍 亚军陈静 季军 乔红；\r\n男子双打冠军 孔令辉/刘国梁 亚军 吕林/王涛；\r\n女子双打冠军 邓亚萍/乔红 亚军刘伟/乔云萍；\r\n2000年第27届悉尼奥运会；\r\n男子单打冠军 孔令辉 季军\";s:15:\"cover_image_url\";s:58:\"data/attachment/forum/201606/07/122438jj08yah0j22hjaap.jpg\";s:7:\"explain\";s:1045:\"中国乒乓球队包括中国女子乒乓球队和中国男子乒乓球队,是中国体育军团的王牌之师,屡次在国际大赛上争金夺银,被体育迷们习惯地称为梦之队.\r\n中国乒乓球队\r\n中国乒乓球队\r\n中国乒乓球队成立于1952年，拼搏不息，攀登不止，经历了由弱到强、持久昌盛的发展历程。继在2008年北京奥运会上包揽男单、女单、男团、女团四枚金牌之后，在2012年伦敦奥运会上再次包揽男单、女单、男团、女团四枚金牌，成为当之无愧的梦之队。\r\n2013年2月26日，中国乒乓球队召开新闻发布会，公布了新一届教练组成员。[1] \r\n总教练：刘国梁\r\n男队主教练：刘国梁（兼）\r\n教练员：吴敬平，秦志戬，肖战，马俊峰。\r\n女队主教练： 孔令辉\r\n教练员：李隼，任国强，乔晓卫，陈彬，刘志强。\r\n现役运动员\r\n女：李晓霞、丁宁、刘诗雯、武杨、陈梦、朱雨玲、胡丽梅等\r\n男：许昕、郝帅、马龙、张继科、樊振东等\";s:8:\"formhash\";s:8:\"ea5436', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('21', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_add=1&formhash=ea54368a', '', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('22', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_id=3', '', 'a:9:{s:4:\"name\";s:15:\"日本男子队\";s:11:\"englishname\";s:0:\"\";s:7:\"country\";s:6:\"日本\";s:5:\"coach\";s:6:\"未知\";s:8:\"features\";s:0:\"\";s:15:\"cover_image_url\";s:58:\"data/attachment/forum/201607/01/115814u4ymmo4nxyb4dz8n.jpg\";s:7:\"explain\";s:551:\"上世纪50年代初，日本男队以先进的全攻打法冲出欧洲诸强包围，确立了自己的乒坛霸主地位。60年代，中国队迅速崛起，中日对抗成为乒坛主流。70年代，欧亚对峙再度形成，日本队的处境日益艰难，最终导致了在80年代的全面崩溃。90年代，虽然一度因为“外援”的加入一度充实了实力，但始终无力和世界劲旅抗争。直到2008年广州世乒赛，日本队在外援助力和内部造血计划的双重促进下，重新回到世界强队之列。\";s:8:\"formhash\";s:8:\"ea54368a\";s:9:\"group_add\";s:1:\"1\";}', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('23', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_add=1&formhash=ea54368a', '', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('24', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_id=4', '', 'a:9:{s:4:\"name\";s:27:\"新加坡男子乒乓球队\";s:11:\"englishname\";s:0:\"\";s:7:\"country\";s:12:\"新加坡队\";s:5:\"coach\";s:6:\"未知\";s:8:\"features\";s:0:\"\";s:15:\"cover_image_url\";s:58:\"data/attachment/forum/201607/01/115947xih23h175ia28z41.jpg\";s:7:\"explain\";s:214:\"本次2012年伦敦奥运会上，新加坡男子乒乓球队由3人组成，他们均为华裔运动员。\r\n其中，高宁和杨子将参加男子单打和团体的比赛，詹健仅参加男子团体的比赛。\";s:8:\"formhash\";s:8:\"ea54368a\";s:9:\"group_add\";s:1:\"1\";}', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('25', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_add=1&formhash=ea54368a', '', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('26', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_id=1', '', 'a:9:{s:4:\"name\";s:15:\"中国国家队\";s:11:\"englishname\";s:0:\"\";s:7:\"country\";s:6:\"中国\";s:5:\"coach\";s:9:\"刘国梁\";s:8:\"features\";s:0:\"\";s:15:\"cover_image_url\";s:58:\"data/attachment/forum/201607/01/120202or6ph69egvnvrjve.jpg\";s:7:\"explain\";s:531:\"中国乒乓球队成立于1952年，拼搏不息，攀登不止，经历了由弱到强、持久昌盛的发展历程。中国乒乓球队包括中国女子乒乓球队和中国男子乒乓球队，是中国体育军团的王牌之师，屡次在国际大赛上争金夺银，被体育迷们习惯地称为梦之队。继在2008年北京奥运会上包揽男单、女单、男团、女团四枚金牌之后，在2012年伦敦奥运会上再次包揽男单、女单、男团、女团四枚金牌，成为当之无愧的梦之队。\";s:8:\"formhash\";s:8:\"ea54368a\";s:9:\"group_add\";s:1:\"1\";}', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('27', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_add=1&formhash=ea54368a', '', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('28', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_add=1&formhash=ea54368a', '', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('29', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_id=16', '', 'a:9:{s:4:\"name\";s:24:\"韩国男子乒乓球队\";s:11:\"englishname\";s:0:\"\";s:7:\"country\";s:6:\"韩国\";s:5:\"coach\";s:6:\"未知\";s:8:\"features\";s:3:\"无\";s:15:\"cover_image_url\";s:58:\"data/attachment/forum/201607/01/120517gx0dyo18t43309zy.jpg\";s:7:\"explain\";s:656:\"韩国男子乒乓球队是一直由韩国人组成的乒乓球队。上个世纪80年代，以金琦泽和金浣为首的韩国队迅速崛起，成为世界乒坛上一股不容忽视的力量。之后，刘南奎的出现将韩国男队带到了第一个高峰。90年代，金择洙接过接力棒，延续并扩大了韩国队的威胁。21世纪初，金择洙退役之后，吴尚垠、朱世赫、柳承敏相继涌现开始肩负起韩国乒乓球的重担，并在48届世乒赛团体赛为韩国队实现了历史性的突破。在和中国队长达二十余年的对抗中，尽管韩国队胜绩寥寥，但始终是中国队的主要对手。\";s:8:\"formhash\";s:8:\"ea54368a\";s:9:\"group_add\";s:1:\"1\";}', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('30', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_add=1&formhash=ea54368a', '', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('31', '2494353', 'zz14250d', '/plugin.php?id=chinatt_quiz:chinatt_quiz&mod=group_add&group_add=1&formhash=ea54368a', '', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('12989', '5', 'chen', '/ctt_pms/public/admin/project/lists/?deleted=1&id=4', '/ctt_pms/public/admin/project/lists/?deleted=1&id=4', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('12990', '5', 'chen', '/ctt_pms/public/admin/project/lists/?deleted=1&id=5', '/ctt_pms/public/admin/project/lists/?deleted=1&id=5', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('12991', '5', 'chen', '/ctt_pms/public/admin/project/lists/?deleted=1&id=20', '/ctt_pms/public/admin/project/lists/?deleted=1&id=20', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('12992', '5', 'chen', '/ctt_pms/public/admin/project/lists/?deleted=1&id=19', '/ctt_pms/public/admin/project/lists/?deleted=1&id=19', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('12993', '5', 'chen', '/ctt_pms/public/admin/task/lists/?deleted=1&id=301', '/ctt_pms/public/admin/task/lists/?deleted=1&id=301', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('12994', '5', 'chen', '/ctt_pms/public/admin/sort/lists/?deleted=1&id=67', '/ctt_pms/public/admin/sort/lists/?deleted=1&id=67', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('12995', '5', 'chen', '/ctt_pms/public/admin/task/lists/?deleted=1&id=286', '/ctt_pms/public/admin/task/lists/?deleted=1&id=286', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('12996', '0', '5', '/ctt_pms/public/admin/working/delete', '/ctt_pms/public/admin/working/delete', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('12997', '0', '5', '/ctt_pms/public/admin/working/delete', '/ctt_pms/public/admin/working/delete', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('12998', '0', '5', '/ctt_pms/public/admin/working/delete', '/ctt_pms/public/admin/working/delete', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('12999', '0', '5', '/ctt_pms/public/admin/working/delete', '/ctt_pms/public/admin/working/delete', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13000', '0', '5', '/ctt_pms/public/admin/working/delete', '/ctt_pms/public/admin/working/delete', 'a:1:{s:7:\"deleted\";a:1:{i:394;s:1:\"1\";}}', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13001', '5', 'chen', '/ctt_pms/public/admin/product/lists/?deleted=1&id=11', '/ctt_pms/public/admin/product/lists/?deleted=1&id=11', '', '0000-00-00 00:00:00', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13002', '0', '5', '/ctt_pms/public/admin/working/delete', '/ctt_pms/public/admin/working/delete', 'a:1:{s:7:\"deleted\";a:1:{i:375;s:1:\"1\";}}', '2017-03-31 12:00:22', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13003', '0', '2', '/ctt_pms/public/admin/sort/add?type=article&id=', '/ctt_pms/public/admin/sort/add?type=article&id=', 'a:2:{s:8:\"parentid\";s:2:\"59\";s:4:\"name\";s:2:\"Sd\";}', '2017-04-10 11:09:06', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13004', '0', '2', '/ctt_pms/public/admin/sort/add?type=article&id=', '/ctt_pms/public/admin/sort/add?type=article&id=', 'a:2:{s:8:\"parentid\";s:2:\"67\";s:4:\"name\";s:13:\"基本原则 \";}', '2017-04-13 17:29:42', 'common', '');
+
+-- ----------------------------
 -- Table structure for chinatt_pms_navigation
 -- ----------------------------
 DROP TABLE IF EXISTS `chinatt_pms_navigation`;
 CREATE TABLE `chinatt_pms_navigation` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '频道ID',
-  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级频道ID',
+  `parentid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级频道ID',
   `title` char(30) NOT NULL COMMENT '频道标题',
   `url` char(100) NOT NULL COMMENT '频道链接',
   `sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '导航排序 由小至大读取',
@@ -6548,15 +6620,19 @@ CREATE TABLE `chinatt_pms_navigation` (
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态 -1删除 0正常',
   `target` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '新窗口打开',
   PRIMARY KEY (`id`),
-  KEY `pid` (`pid`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='导航表';
+  KEY `pid` (`parentid`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='导航表';
 
 -- ----------------------------
 -- Records of chinatt_pms_navigation
 -- ----------------------------
-INSERT INTO `chinatt_pms_navigation` VALUES ('1', '0', '首页', 'Index/index', '1', '1379475111', '1379923177', '1', '0');
-INSERT INTO `chinatt_pms_navigation` VALUES ('2', '0', '博客', 'Article/index?category=blog', '2', '1379475131', '1379483713', '1', '0');
+INSERT INTO `chinatt_pms_navigation` VALUES ('1', '0', '项目', 'project/lists', '1', '1379475111', '1379923177', '1', '0');
+INSERT INTO `chinatt_pms_navigation` VALUES ('2', '0', '收藏', 'weburl/lists', '2', '1379475131', '1379483713', '1', '0');
 INSERT INTO `chinatt_pms_navigation` VALUES ('3', '0', '官网', 'http://www.onethink.cn', '3', '1379475154', '1387163458', '1', '0');
+INSERT INTO `chinatt_pms_navigation` VALUES ('4', '1', '一级导航', 'index/product', '1', '1492074791', '0', '1', '0');
+INSERT INTO `chinatt_pms_navigation` VALUES ('5', '1', '测试导航信息', 'test', '0', '1492076765', '0', '1', '0');
+INSERT INTO `chinatt_pms_navigation` VALUES ('6', '2', 'untgasd', 'dfdf', '1', '1492076782', '0', '1', '0');
+INSERT INTO `chinatt_pms_navigation` VALUES ('7', '6', 'asdf', 'asdfasd', '0', '1492076791', '0', '1', '0');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_plan
@@ -6757,7 +6833,7 @@ CREATE TABLE `chinatt_pms_task` (
 -- ----------------------------
 INSERT INTO `chinatt_pms_task` VALUES ('1', '1', '0', '创建手机版', 'devel', '0', '0.0', '15.0', '0', '0000-00-00', 'closed', '增加对手机版的支持，以适用移动端的需求', 'ivan', '2016-03-20 19:28:48', 'closed', '2016-03-22 22:10:41', '0000-00-00', '2016-03-20', 'ivan', '2016-03-21 00:55:28', '', '0000-00-00 00:00:00', 'ivan', '2016-03-22 22:10:41', 'done', '1', '2016-03-22 22:10:41', '1', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('2', '1', '0', '添加论坛首页的聊天室调用', 'devel', '0', '3.0', '1.0', '0', '0000-00-00', 'closed', '在论坛首页增加简易聊天室的调用。', 'ivan', '2016-03-20 19:57:35', 'closed', '2016-03-22 22:11:05', '0000-00-00', '2016-03-20', 'ivan', '2016-03-21 00:55:53', '', '0000-00-00 00:00:00', 'ivan', '2016-03-22 22:11:05', 'done', 'ivan', '2016-03-22 22:11:05', '0', '0');
-INSERT INTO `chinatt_pms_task` VALUES ('3', '2', '0', '希望增加帖子图片、附件隐藏', 'devel', '0', '30.0', '0.0', '30', '0000-00-00', 'wait', '增加对帖子图片、附件隐藏的处理功能', 'admin', '2016-03-22 23:54:36', 'chen', '2016-03-22 23:54:36', '2016-03-26', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0', '0');
+INSERT INTO `chinatt_pms_task` VALUES ('3', '2', '0', '希望增加帖子图片、附件隐藏', 'devel', '0', '30.0', '0.0', '30', '0000-00-00', 'doing', '增加对帖子图片、附件隐藏的处理功能', 'admin', '2016-03-22 23:54:36', 'chen', '2016-03-22 23:54:36', '2016-03-26', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '', '0000-00-00 00:00:00', '0', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('4', '3', '0', '试用中心产品详情页增加评论功能', 'devel', '0', '0.0', '1.0', '0', '0000-00-00', 'closed', '试用中心产品详情页增加评论功能，按试用报告的模式进行处理。', 'ivan', '2016-03-23 22:00:15', 'closed', '2016-03-23 22:24:33', '0000-00-00', '2016-03-23', 'ivan', '2016-03-23 22:00:35', '', '0000-00-00 00:00:00', 'ivan', '2016-03-23 22:24:33', 'done', 'ivan', '2016-03-23 22:24:33', '0', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('5', '3', '0', '在前端给产品详情页增加评论处理界面', 'devel', '0', '0.0', '0.3', '0', '0000-00-00', 'closed', '在前端给产品详情页增加评论处理界面。', 'ivan', '2016-03-23 22:05:10', 'closed', '2016-03-23 22:24:15', '0000-00-00', '0000-00-00', 'ming', '2016-03-23 22:20:33', '', '0000-00-00 00:00:00', 'ivan', '2016-03-23 22:24:15', 'done', 'ivan', '2016-03-23 22:24:15', '0', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('6', '3', '0', '试用中心的个人中心，左侧大头像下方增加一个修改头像链接', 'devel', '0', '0.0', '0.0', '0', '0000-00-00', 'closed', '<p><img src=\"data/upload/1/201603/23222922055063or.jpg\" alt=\"\" /></p>\n<p>修改头像的链接是home.php?mod=spacecp&amp;ac=avatar</p>', 'ivan', '2016-03-23 22:29:45', 'closed', '2016-03-24 18:04:36', '0000-00-00', '2016-03-24', 'ming', '2016-03-24 10:31:33', '', '0000-00-00 00:00:00', 'ivan', '2016-03-24 18:04:36', 'done', 'ivan', '2016-03-24 18:04:36', '0', '0');
@@ -7037,7 +7113,7 @@ INSERT INTO `chinatt_pms_task` VALUES ('279', '17', '0', '读取列表页的时�
 INSERT INTO `chinatt_pms_task` VALUES ('280', '15', '0', '时间轴界面调整', 'ui', '0', '2.0', '2.0', '0', '0000-00-00', 'done', '<p>内容部分与背景的对比需要明显，图片大小 ，位置等重排</p>', 'ivan', '2016-11-21 11:47:40', 'ivan', '2016-11-22 15:56:05', '0000-00-00', '0000-00-00', 'ming', '2016-11-22 15:56:05', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'ming', '2016-11-22 15:56:05', '0', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('281', '1', '0', '将后台管理的用户管理及记录管理功能移植到前台', 'devel', '0', '4.0', '4.0', '0', '0000-00-00', 'done', '按此前商城的后台处理方式处理', 'ivan', '2016-11-21 12:55:50', 'ivan', '2016-11-24 16:41:03', '0000-00-00', '2016-11-23', 'chen', '2016-11-24 16:41:03', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'chen', '2016-11-24 16:41:03', '0', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('282', '1', '0', '对聊天室的数据表、结构、聊天消息的处理机制进行学习', 'misc', '0', '4.0', '5.0', '0', '0000-00-00', 'done', '', 'ivan', '2016-11-21 13:02:31', 'ivan', '2016-11-23 16:26:04', '0000-00-00', '0000-00-00', 'chen', '2016-11-23 16:26:04', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'chen', '2016-11-23 16:26:04', '0', '0');
-INSERT INTO `chinatt_pms_task` VALUES ('283', '5', '0', '后台增加目录权限检测功能', 'devel', '0', '2.0', '1.0', '2', '0000-00-00', 'doing', '', 'ivan', '2016-11-22 20:19:23', 'ivan', '2016-11-22 20:19:23', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'ivan', '2016-11-25 10:02:38', '0', '0');
+INSERT INTO `chinatt_pms_task` VALUES ('283', '5', '0', '后台增加目录权限检测功能', 'devel', '0', '2.0', '0.0', '2', '0000-00-00', 'doing', '', 'ivan', '2016-11-22 20:19:23', 'ivan', '2016-11-22 20:19:23', '0000-00-00', '0000-00-00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'ivan', '2016-11-25 10:02:38', '0', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('284', '12', '0', '时间轴的年份显示或隐藏，屏幕滑动将显示筛选年份', 'test', '0', '0.0', '2.0', '0', '2016-11-23', 'done', '', 'ming', '2016-11-23 10:54:28', 'ming', '2016-11-23 15:05:01', '2016-11-23', '2016-11-23', 'ming', '2016-11-23 15:05:01', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'ming', '2016-11-23 15:05:01', '0', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('285', '17', '0', '建立在线用户的模型', 'devel', '0', '8.0', '0.0', '8', '0000-00-00', 'doing', '', 'ivan', '2016-11-23 15:27:44', 'ivan', '2016-11-23 15:27:45', '0000-00-00', '2016-11-23', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'ivan', '2016-11-23 15:27:51', '0', '0');
 INSERT INTO `chinatt_pms_task` VALUES ('286', '1', '0', '优化聊天室界面', 'ui', '0', '8.0', '3.0', '0', '0000-00-00', 'done', '<p>对界面进行优化调整</p>\n<p>增加频道列表的输出</p>\n<p>用户名上增加弹层的支持，可查看用户基本资料，进行禁言操作</p>', 'ivan', '2016-11-23 16:40:39', 'ivan', '2016-11-29 10:05:22', '0000-00-00', '0000-00-00', 'ming', '2016-11-29 10:05:22', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', 'ming', '2016-11-29 10:05:22', '0', '0');
@@ -7067,7 +7143,7 @@ CREATE TABLE `chinatt_pms_taskestimate` (
   `work` text NOT NULL COMMENT '工作内容',
   PRIMARY KEY (`id`),
   KEY `task` (`task`)
-) ENGINE=MyISAM AUTO_INCREMENT=379 DEFAULT CHARSET=utf8 COMMENT='工时';
+) ENGINE=MyISAM AUTO_INCREMENT=380 DEFAULT CHARSET=utf8 COMMENT='工时';
 
 -- ----------------------------
 -- Records of chinatt_pms_taskestimate
@@ -7442,7 +7518,6 @@ INSERT INTO `chinatt_pms_taskestimate` VALUES ('367', '294', '2017-02-14', '0.0'
 INSERT INTO `chinatt_pms_taskestimate` VALUES ('368', '294', '2017-02-14', '0.0', '5.0', 'ivan', '<p>任务更新说明</p>');
 INSERT INTO `chinatt_pms_taskestimate` VALUES ('369', '294', '2017-02-15', '5.0', '2.0', 'ivan', '做了一半了');
 INSERT INTO `chinatt_pms_taskestimate` VALUES ('370', '294', '2017-02-20', '2.0', '10.0', 'ivan', '');
-INSERT INTO `chinatt_pms_taskestimate` VALUES ('371', '283', '2017-03-03', '0.0', '1.0', 'ivan', '3月工时');
 INSERT INTO `chinatt_pms_taskestimate` VALUES ('372', '104', '2017-03-03', '0.0', '0.0', 'ivan', '完成任务');
 INSERT INTO `chinatt_pms_taskestimate` VALUES ('373', '283', '2017-03-08', '0.0', '1.0', 'ivan', '任务开始');
 INSERT INTO `chinatt_pms_taskestimate` VALUES ('374', '28', '2017-03-08', '0.0', '1.0', 'ivan', '开始任务');
@@ -7587,7 +7662,7 @@ CREATE TABLE `chinatt_pms_user` (
 -- Records of chinatt_pms_user
 -- ----------------------------
 INSERT INTO `chinatt_pms_user` VALUES ('1', '0', '0', 'wuxin', '46ff408a5233e4a2329e23b8eec47be7', '', '管理员', '', 'wuxin', '', '0000-00-00', 'm', '', '', '', '', '0000-00-00', '15', '58.62.203.238', '1482910107', '0.0.0.0', '0', '0', '0', '1', '9537cd');
-INSERT INTO `chinatt_pms_user` VALUES ('2', '1', '1', 'ivan', '7f2668c76e4fc6662fa7abbf2e28908e', 'pm', '吴鑫', '', '', '', '0000-00-00', 'm', 'wx.1@163.com', '', '', '', '0000-00-00', '87', '58.62.205.78', '1490433657', '0.0.0.0', '0', '0', '0', '1', '96067e');
+INSERT INTO `chinatt_pms_user` VALUES ('2', '1', '1', 'ivan', '7f2668c76e4fc6662fa7abbf2e28908e', 'pm', '吴鑫', '', '', '', '0000-00-00', 'm', 'wx.1@163.com', '', '', '', '0000-00-00', '90', '58.62.205.78', '1492073660', '0.0.0.0', '0', '0', '0', '1', '96067e');
 INSERT INTO `chinatt_pms_user` VALUES ('3', '1', '2', 'ming', '6d9f42bade5b89279895bbf07c0feb47', 'dev', '关武明', '', '', '', '0000-00-00', 'm', '2273659300@QQ.com', '', '', '', '0000-00-00', '77', '58.62.202.115', '1481076687', '', '0', '0', '0', '1', '562dfs');
 INSERT INTO `chinatt_pms_user` VALUES ('4', '0', '5', 'chong', '90761b5a7ba4c8442efeb8bfdeea966a', 'po', '张新盛', '', '', '', '0000-00-00', 'm', 'webmaster@bokett.com', '', '', '', '0000-00-00', '4', '59.56.19.8', '1459440152', '', '0', '0', '0', '1', 'f2a22x');
 INSERT INTO `chinatt_pms_user` VALUES ('5', '1', '2', 'chen', 'b61c092c454b70699aaa3fcb2f9a2020', 'dev', '陈茂发', '', '', '', '0000-00-00', 'm', '', '', '', '', '0000-00-00', '78', '58.62.202.115', '1481095696', '', '0', '0', '0', '1', '5wqz2');
@@ -7636,7 +7711,7 @@ CREATE TABLE `chinatt_pms_workcount` (
   `lasttime` int(10) NOT NULL DEFAULT '0' COMMENT '数据更新时间',
   PRIMARY KEY (`id`),
   KEY `action` (`date`)
-) ENGINE=MyISAM AUTO_INCREMENT=1343 DEFAULT CHARSET=utf8 COMMENT='工时统计';
+) ENGINE=MyISAM AUTO_INCREMENT=1345 DEFAULT CHARSET=utf8 COMMENT='工时统计';
 
 -- ----------------------------
 -- Records of chinatt_pms_workcount
@@ -7964,8 +8039,8 @@ INSERT INTO `chinatt_pms_workcount` VALUES ('1326', '', '0', 'ivan', '2017-02-27
 INSERT INTO `chinatt_pms_workcount` VALUES ('1327', '', '0', 'ivan', '2017-02-27', '0.0', '0');
 INSERT INTO `chinatt_pms_workcount` VALUES ('1328', '', '0', 'ivan', '2017-02-27', '0.0', '0');
 INSERT INTO `chinatt_pms_workcount` VALUES ('1329', '', '0', 'ivan', '2017-02-27', '0.0', '0');
-INSERT INTO `chinatt_pms_workcount` VALUES ('1330', '', '0', 'ivan', '2017-03-03', '0.0', '0');
-INSERT INTO `chinatt_pms_workcount` VALUES ('1331', '', '0', 'ivan', '2017-03-03', '0.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1330', '', '0', 'ivan', '2017-03-03', '-1.0', '0');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1331', '', '0', 'ivan', '2017-03-03', '-1.0', '0');
 INSERT INTO `chinatt_pms_workcount` VALUES ('1332', '', '0', '', '2017-03-06', '0.0', '0');
 INSERT INTO `chinatt_pms_workcount` VALUES ('1333', '', '0', 'ivan', '2017-03-06', '0.0', '0');
 INSERT INTO `chinatt_pms_workcount` VALUES ('1334', '', '0', 'ivan', '2017-03-06', '0.0', '0');
@@ -7977,3 +8052,5 @@ INSERT INTO `chinatt_pms_workcount` VALUES ('1339', '', '0', 'ivan', '2017-03-08
 INSERT INTO `chinatt_pms_workcount` VALUES ('1340', 'user', '2', 'ivan', '2017-03-10', '2.0', '1489137787');
 INSERT INTO `chinatt_pms_workcount` VALUES ('1341', 'project', '17', 'ivan', '2017-03-10', '1.0', '1489137725');
 INSERT INTO `chinatt_pms_workcount` VALUES ('1342', 'project', '8', 'ivan', '2017-03-10', '1.0', '1489137787');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1343', 'user', '2', 'ivan', '2017-03-31', '0.0', '1490925934');
+INSERT INTO `chinatt_pms_workcount` VALUES ('1344', 'project', '2', 'ivan', '2017-03-31', '0.0', '1490925934');
