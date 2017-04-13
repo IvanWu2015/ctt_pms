@@ -73,7 +73,8 @@ class Common extends \think\Controller {
                 ->order('sort ASC')
                 ->select();
         $tree = new Tree($new_common_navigation_list);
-        $new_common_navigation_list = $tree->getArray();
+        $navigation_list = $tree->getArray();
+        print_r($navigation_list);exit;
 
 
         //用户列表

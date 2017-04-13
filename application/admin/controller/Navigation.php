@@ -21,7 +21,8 @@ class Navigation extends Common {
         $parentid = input('get.parentid', '0', 'intval');
         $type = input('get.type', '', 'addslashes');
         $navigation_list = DB('Navigation')->where(['status' => 1])->select();
-
+        $tree = new Tree($navigation_list);
+        $navigation_list = $tree->getArray();
         if ($navigation_id > 0) {
             $navigation_detail = db('Navigation')->where(['id' => $navigation_id])->find();
         }

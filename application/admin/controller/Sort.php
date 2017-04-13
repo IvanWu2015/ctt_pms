@@ -21,6 +21,8 @@ class Sort extends Common {
         $type = input('get.type', '', 'addslashes');
         
         $sort_list = DB('Class')->where(['status' => 1])->select();
+        $tree = new Tree($sort_list);
+        $sort_list = $tree->getArray();
         if ($class_id > 0) {
             $class_detail = DB('Class')
                     ->alias('c')

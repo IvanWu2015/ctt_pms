@@ -10,9 +10,9 @@
                     <option value='0'>无</option>
                     {foreach $navigation_list as $temp_navigation}
                     {if condition="$parentid gt 0"}
-                    <option {if condition="$temp_navigation['id'] == $paren_detail['id']"}selected='selected'{/if} value="{$paren_detail['id']}" >{$paren_detail['title']}</option>
+                    <option {if condition="$temp_navigation['id'] == $paren_detail['id']"}selected='selected'{/if} value="{$temp_navigation['id']}" >{$temp_navigation['spacer']} {$temp_navigation['title']}</option>
                     {else}
-                    <option {if condition="$temp_navigation['id'] == $navigation_detail['parentid']"}selected='selected'{/if} value="{$navigation_detail['id']}" >{$temp_navigation['title']}</option>
+                    <option {if condition="$temp_navigation['id'] == $navigation_detail['parentid']"}selected='selected'{/if} value="{$temp_navigation['id']}" >{$temp_navigation['spacer']} {$temp_navigation['title']}</option>
                     {/if}
                     {/foreach}
                 </select>

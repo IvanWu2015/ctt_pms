@@ -10,9 +10,9 @@
                     <option value='0'>无</option>
                     {foreach $sort_list as $temp_sort}
                     {if condition="$parentid gt 0"}
-                    <option {if condition="$temp_sort['id'] == $paren_detail['id']"}selected='selected'{/if} value="{$paren_detail['id']}" >{$paren_detail['name']}</option>
+                    <option {if condition="$temp_sort['id'] == $paren_detail['id']"}selected='selected'{/if} value="{$temp_sort['id']}" >{$temp_sort['spacer']} {$temp_sort['name']}</option>
                     {else}
-                    <option {if condition="$temp_sort['id'] == $class_detail['parentid']"}selected='selected'{/if} value="{$class_detail['parentid']}" >{$class_detail['parent_name']}</option>
+                    <option {if condition="$temp_sort['id'] == $class_detail['parentid']"}selected='selected'{/if} value="{$temp_sort['parentid']}" >{$temp_sort['spacer']} {$temp_sort['name']}</option>
                     {/if}
                     {/foreach}
                 </select>

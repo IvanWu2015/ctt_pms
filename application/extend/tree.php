@@ -87,7 +87,6 @@ class Tree {
      * @param $adds
      * @param $str_group
      */
-
     function get_tree($myid, $str = '', $sid = 0, $adds = '', $str_group = '') {
         $child = $this->get_child($myid);
         if (is_array($child)) {
