@@ -39,18 +39,29 @@
         {block name="nav"}
         <ul class="left_nav iconfont" id="left_nav"><!-- 左边导航 -->
             <a href="javascript:void();" class="showa iconfont" id="showa" onClick="shownav();">&#xe606;</a>
+            
+            {if condition="($_G['controller'] EQ 'Index')"}
             <a href="{:url('/admin/index/index')}"><li {if condition="$_G['controller'] == 'Index'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe605;</span>后台首页</li></a>
-            <a href="{:url('/admin/navigation/lists')}"><li {if condition="$_G['controller'] == 'Navigation'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe600;</span>导航设置</li></a>
+            
+            {elseif condition="($_G['controller'] EQ 'Project') OR ($_G['controller'] EQ 'Task') OR ($_G['controller'] EQ 'Product') OR ($_G['controller'] EQ 'Working')" /}
             <a href="{:url('/admin/project/lists')}"><li {if condition="$_G['controller'] == 'Project'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe6c9;</span>项目管理</li></a>
             <a href="{:url('/admin/task/lists')}"><li {if condition="$_G['controller'] == 'Task'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe613;</span>任务管理</li></a>
-            <a href="{:url('/admin/sort/lists')}"><li {if condition="$_G['controller'] == 'Sort'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe608;</span>分类管理</li></a>
-            <a href="{:url('/admin/weburl/lists')}"><li {if condition="$_G['controller'] == 'Weburl'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe60d;</span>收藏管理</li></a>
-            <a href="{:url('/admin/article/lists')}"><li {if condition="$_G['controller'] == 'Article'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe704;</span>文档管理</li></a>
-            <a href="{:url('/admin/action/lists')}"><li {if condition="$_G['controller'] == 'Action'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe6c9;</span>动态管理</li></a>
-            <a href="{:url('/admin/user/lists')}"><li {if condition="$_G['controller'] == 'User'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe647;</span>用户管理</li></a>
             <a href="{:url('/admin/product/lists')}"><li {if condition="$_G['controller'] == 'Product'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe60b;</span>产品管理</li></a>
             <a href="{:url('/admin/working/lists')}"><li {if condition="$_G['controller'] == 'Working'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe61e;</span>工时管理</li></a>
+            
+            {elseif condition="($_G['controller'] EQ 'Weburl') or ($_G['controller'] EQ 'Article')"/}
+            <a href="{:url('/admin/weburl/lists')}"><li {if condition="$_G['controller'] == 'Weburl'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe60d;</span>收藏管理</li></a>
+            <a href="{:url('/admin/article/lists')}"><li {if condition="$_G['controller'] == 'Article'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe704;</span>文档管理</li></a>
+            
+            {elseif condition="($_G['controller'] EQ 'User')"/}
+            <a href="{:url('/admin/user/lists')}"><li {if condition="$_G['controller'] == 'User'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe647;</span>用户管理</li></a>
+            
+            {elseif condition="($_G['controller'] EQ 'Navigation') or ($_G['controller'] EQ 'Sort') or ($_G['controller'] EQ 'Log') or ($_G['controller'] EQ 'Action')"/}
+            <a href="{:url('/admin/navigation/lists')}"><li {if condition="$_G['controller'] == 'Navigation'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe600;</span>导航设置</li></a>
+            <a href="{:url('/admin/sort/lists')}"><li {if condition="$_G['controller'] == 'Sort'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe608;</span>分类管理</li></a>
             <a href="{:url('/admin/log/lists')}"><li {if condition="$_G['controller'] == 'Log'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe645;</span>操作记录</li></a>
+            <a href="{:url('/admin/action/lists')}"><li {if condition="$_G['controller'] == 'Action'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe6c9;</span>动态管理</li></a>
+            {/if}
         </ul><!-- 左边导航 -->
         {/block}
         <!-- /头部 -->
