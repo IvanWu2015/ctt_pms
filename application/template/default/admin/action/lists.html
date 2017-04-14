@@ -42,20 +42,64 @@
                     </form>
                 </label>
             </div>
-            <form action="" method="post">
-                <div class="panel-body">
-                            {foreach $action_list as $action}
-                            <li class="publicdiv h25 lh25 ellipsis"><a href="{:url('/index/task/detail/?id='.$task['id'])}">
-                                    {if condition="($action['tname'] == null) and ($name == null)"}
-                                    {$action['actor']}于&nbsp;{$action['date']} &nbsp;&nbsp;{$action['actionname']} &nbsp;{$action['typename']} {$action['tname']}{$action['pname']}
-                                    {else/}
-                                {$action['actor']}于&nbsp;{$action['date']} &nbsp;&nbsp;对 {$action['tname']}{$action['pname']} &nbsp;进行&nbsp;{$action['actionname']}&nbsp;的操作
-                                    {/if}
-                                </a></li>
-                            {/foreach}
-                        </div>
-                <div class="publicdiv ac pagingw">{$page}</div>
-            </form>
+        
+            <div class="panel-body dn">
+                {foreach $action_list as $action}
+                <li class="publicdiv h25 lh25 ellipsis"><a href="{:url('/index/task/detail/?id='.$task['id'])}">
+                        {if condition="($action['tname'] == null) and ($name == null)"}
+                        {$action['actor']}于&nbsp;{$action['date']} &nbsp;&nbsp;{$action['actionname']} &nbsp;{$action['typename']} {$action['tname']}{$action['pname']}
+                        {else/}
+                        {$action['actor']}于&nbsp;{$action['date']} &nbsp;&nbsp;对 {$action['tname']}{$action['pname']} &nbsp;进行&nbsp;{$action['actionname']}&nbsp;的操作
+                        {/if}
+                    </a></li>
+                {/foreach}
+            </div>
+            
+            
+            
+            <table class="table">
+              <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                  <tr>
+                    <th class="ac bbno pt15 pb15">ID</th>
+                    <th class="bbno pt15 pb15">操作人</th>
+                    <th class="ac bbno pt15 pb15">时间</th>
+                    <th class="w30 bbno pt15 pb15">任务</th>
+                    <th class="ac bbno pt15 pb15">类别名</th>
+                    <th class="ac bbno pt15 pb15">&nbsp;</th>
+                    <th class="w35 bbno pt15 pb15">记录工时/说明</th>
+                  </tr>
+              </thead>
+              <tbody>
+              {foreach $action_list as $action}
+                    {if condition="($action['tname'] == null) and ($name == null)"}
+                      <tr>
+                        <td class="ac">{$action['id']}</td>
+                        <td>{$action['actor']}</td>
+                        <td class="ac">{$action['date']}</td>
+                        <td class="w30">{$action['actionname']}</td>
+                        <td class="ac">{$action['typename']}</td>
+                        <td class="ac">{$action['tname']}</td>
+                        <td class="w35">{$action['pname']}</td>
+                      </tr>
+                    {else/}
+                      <tr>
+                        <td class="ac">{$action['id']}</td>
+                        <td>{$action['actor']}</td>
+                        <td class="ac">{$action['date']}</td>
+                        <td class="w30"><a href="{:url('/index/task/detail/?id='.$action['id'])}" target="_bacnk">{$action['tname']}</a></td>
+                        <td class="ac">&nbsp;</td>
+                        <td class="ac">{$action['pname']}</td>
+                        <td class="w35">{$action['actionname']}</td>
+                        
+                      </tr>
+                    {/if}
+              {/foreach}
+              </tbody>
+              
+            </table>
+            
+            <div class="publicdiv ac pagingw">{$page}</div>
+            
         </div>
     </div>
 </div>
