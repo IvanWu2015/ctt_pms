@@ -1,14 +1,20 @@
-<div class="publicdiv pl20 pr20 sizing htpst">
-    <a href="{:url('/index/mycenter')}"><img src="tpl_img/bg_icon.png" class="z" height="100%" /></a>
-    <h3 class="mtn fs20 lh50">
-        <ul class="nav nav-pills navtop y lh20 fs12">
-            <li class="y">
-                <a class="active" data-toggle="dropdown" href="{:url('index/index')}">{:get_username()} <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="{:url('User/profile')}">修改密码</a></li>
-                    <li><a href="{:url('User/logout')}">退出</a></li>
-                </ul>
-            </li>
-        </ul>
-    </h3>
+<div class="publicdiv sizing htpst">
+    <a href="{:url('/index/mycenter')}"><img src="tpl_img/bg_icon.png" class="z mt5" height="42" /></a>
+    <ul class="navwp">
+        <li><a href="{:url('/admin/index/index')}" {if condition="($_G['controller'] EQ 'Index')"}class="nwattr"{/if}>首页</a></li>
+        <li><a href="{:url('/admin/project/lists')}" {if condition="($_G['controller'] EQ 'Project') or ($_G['controller'] EQ 'Task') or ($_G['controller'] EQ 'Product') or ($_G['controller'] EQ 'Working')"}class="nwattr"{/if}>业务管理</a></li>
+        <li><a href="{:url('/admin/weburl/lists')}" {if condition="($_G['controller'] EQ 'Weburl') or ($_G['controller'] EQ 'Article')"}class="nwattr"{/if}>文档</a></li>
+        <li><a href="{:url('/admin/user/lists')}" {if condition="($_G['controller'] EQ 'User')"}class="nwattr"{/if}>用户管理</a></li>
+        <li><a href="{:url('/admin/navigation/lists')}" {if condition="($_G['controller'] EQ 'Navigation') or ($_G['controller'] EQ 'Sort') or ($_G['controller'] EQ 'Log') or ($_G['controller'] EQ 'Action')"}class="nwattr"{/if}>系统配置</a></li>
+    </ul>
+    <ul class="nav nav-pills navtop y mt5 lh20 fs12">
+        <li class="y">
+            <a class="active" data-toggle="dropdown" href="{:url('index/index')}">{:get_username()} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="{:url('/index/mycenter')}">前台首页</a></li>
+                <li><a href="{:url('User/profile')}">修改密码</a></li>
+                <li><a href="{:url('User/logout')}">退出</a></li>
+            </ul>
+        </li>
+    </ul>
 </div>
