@@ -74,6 +74,8 @@ class Common extends \think\Controller {
                 ->select();
         $tree = new Tree($new_common_navigation_list);
         $navigation_list = array();
+        $navigation_list = nav_tree($new_common_navigation_list);
+        /*
         foreach($new_common_navigation_list as $temp_navigation) {
             $temp_navigation['url'] = strpos($temp_navigation['url'], 'http://') === 0 ? $temp_navigation['url'] : url($temp_navigation['url']);
             if($temp_navigation['parentid'] == 0) {
@@ -82,6 +84,10 @@ class Common extends \think\Controller {
                 $navigation_list[$temp_navigation['parentid']]['sub'][] = $temp_navigation;
             }
         }
+         * 
+         */
+
+
         $this->assign('navigation_list', $navigation_list);
         
         //用户列表
@@ -124,4 +130,24 @@ class Common extends \think\Controller {
         
     }
 
+}
+
+
+function nav_tree($new_common_navigation_list, $parent_id = 0, $orderType = 'asc', $orderValueType = 'string') {
+    $havesub = 0;
+    foreach($new_common_navigation_list as $temp_nav) {
+        if($temp_nav['parentid'] == $parent_id) {
+            if($parent_id == 0) {
+                $navgation_list[$temp_nav['id']]['main'] = $temp_nav;
+            } else {
+                $navgation_list[$temp_nav['id']] = $temp_nav;
+            }
+            $sub_navlist = nav_tree($new_common_navigation_list, $temp_nav['id']);
+            if(!empty($sub_navlist)) {
+                $navgation_list[$temp_nav['id']]['sub'] = $sub_navlist;
+            }
+            $sub_navlist = array();
+        }
+    }
+    return $navgation_list;
 }
