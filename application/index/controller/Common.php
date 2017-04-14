@@ -144,6 +144,7 @@ function nav_tree($new_common_navigation_list, $parent_id = 0, $orderType = 'asc
             }
             $sub_navlist = nav_tree($new_common_navigation_list, $temp_nav['id']);
             if(!empty($sub_navlist)) {
+                $navgation_list[$temp_nav['id']]['sub_count'] = count($sub_navlist);
                 $navgation_list[$temp_nav['id']]['sub'] = $sub_navlist;
             }
             $sub_navlist = array();

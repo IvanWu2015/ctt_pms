@@ -43,20 +43,20 @@
             
             <ul class="nav nav-pills navtop">
                 <img src="tpl_img/bg_icon.png" class="z mt10 mb10" height="50" />
-                <li class="mt20 mb10 ml20"><a class="active" href="{:url('/index/mycenter')}">个人中心</a></li>
+                <li class="mt20 mb10 ml20"><a  href="{:url('/index/mycenter')}">个人中心</a></li>
                 {foreach $navigation_list as $nav}
                     <li class="mt20 mb10">
                         <a href="{$nav['main']['url']}" data-toggle="dropdown">
                             {$nav['main']['title']}
-                            {if condition="$nav['sub'][0]['id'] > 0"}<b class="caret"></b>{/if}
+                            {if condition="$nav['sub_count'] > 0"}<b class="caret"></b>{/if}
                         </a>
                         
-                        {if condition="$nav['sub'][0]['id'] > 0"}
+                        {if condition="$nav['sub_count'] > 0"}
+                        <ul class="dropdown-menu">
                              {foreach $nav['sub'] as $sub_nav}
-                                <ul class="dropdown-menu">
                                     <li class="mt20 mb10"><a href="{$sub_nav['url']}">{$sub_nav['title']}</a></li>
-                                </ul>
                              {/foreach}
+                             </ul>
                         {/if}
                     </li>
                 {/foreach}
