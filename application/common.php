@@ -1010,6 +1010,7 @@ function save_log($uid,$username) {
  */
 function classifyTree($db_navigation_list, $parent_id = 0) {
     foreach($db_navigation_list as $temp_nav) {
+        $temp_nav['true_url'] = strpos($temp_nav['url'], 'http://') !== false ? $temp_nav['url'] : url($temp_nav['url']);
         if($temp_nav['parentid'] == $parent_id) {
             if($parent_id == 0) {
                 $navgation_list[$temp_nav['id']]['main'] = $temp_nav;
