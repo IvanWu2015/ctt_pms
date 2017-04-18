@@ -68,11 +68,23 @@ class Navigation extends Common {
     }
 
     public function lists() {
+        $navtitle = '导航管理';
         $navigation_id = input('get.id', '0', 'intval');
-        $navigation_list = DB('Navigation')->where(['status' => 1])->select();
+        $navigation_list = DB('Navigation')->where(['status' => 1])->order('sort', 'asc')->select();
         $tree = new Tree($navigation_list);
         $navigation_list = $tree->getArray();
         $deleted = input('get.deleted', '0', 'intval');
+        if(request()->isPost()) {
+            $sort_arr = $_POST['sort'];
+            $name_arr = $_POST['title'];
+            $url_arr = $_POST['url'];
+            foreach($sort_arr as $key => $sort) {
+                $key = intval($key);
+                DB::name('Navigation')->where(['id' => $key, 'status' => 1])->update(['sort' => addslashes($sort_arr[$key]), 'title' => addslashes($name_arr[$key]), 'url' => addslashes($url_arr[$key])]);
+            }
+            $this->success('修改成功');
+        }
+        //单条删除处理
         if ($deleted > 0) {
             $navigation = DB::name('Navigation')->where(['id' => $navigation_id, 'status' => 1])->find();
             if (empty($navigation)) {
@@ -83,6 +95,7 @@ class Navigation extends Common {
                 $this->success('删除成功');
             }
         }
+        $this->assign('navtitle', $navtitle);
         $this->assign('navigation_list', $navigation_list);
         return $this->fetch($this->templatePath);
     }

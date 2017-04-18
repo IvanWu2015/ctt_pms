@@ -1002,3 +1002,27 @@ function save_log($uid,$username) {
     return true;
 }
 
+/**
+ * 对读取出来的多级菜单进行归类为树形多级数组
+ * @param type $db_navigation_list  有层级关系的列表数组
+ * @param type $parent_id
+ * @return array
+ */
+function classifyTree($db_navigation_list, $parent_id = 0) {
+    foreach($db_navigation_list as $temp_nav) {
+        if($temp_nav['parentid'] == $parent_id) {
+            if($parent_id == 0) {
+                $navgation_list[$temp_nav['id']]['main'] = $temp_nav;
+            } else {
+                $navgation_list[$temp_nav['id']] = $temp_nav;
+            }
+            $sub_navlist = classifyTree($db_navigation_list, $temp_nav['id']);
+            if(!empty($sub_navlist)) {
+                $navgation_list[$temp_nav['id']]['sub_count'] = count($sub_navlist);
+                $navgation_list[$temp_nav['id']]['sub'] = $sub_navlist;
+            }
+            $sub_navlist = array();
+        }
+    }
+    return $navgation_list;
+}
