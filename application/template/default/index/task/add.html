@@ -4,6 +4,11 @@
 {/block}
 
 {block name="body"}
+<style>
+@media (min-width: 768px){
+.col-sm-3{ width:23% !important;}
+}
+</style>
 <div class="container" style="width:1170px;">
 <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
     <div class="publicdiv mb20 ptlrb10 bf sizing">
@@ -45,7 +50,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group w50 mrn mln z">
+                    <div class="form-group w50 mrn mln z pl10">
                         <label class="col-sm-3 control-label">指派给：</label>
                         <div class="col-sm-9 pln prn">
                             <select name="assignedTo" class="form-control">
@@ -68,7 +73,7 @@
                         </div>
                     </div>
                     
-                    <div class="form-group w50 mrn mln z">
+                    <div class="form-group w50 mrn mln z pl10">
                         <label class="col-sm-3 control-label"><b class="cred">* </b>预计工时：</label>
                         <div class="col-sm-9 pln prn">
                             <input type="text" name="estimate" id="estimate" class="form-control" placeholder="任务预计工时需要多少小时" value="{$task_details['estimate']}" /> 
@@ -87,7 +92,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group w50 mrn mln z">
+                    <div class="form-group w50 mrn mln z pl10">
                         <label class="col-sm-3 control-label">开始时间：</label>
                         <div class="col-sm-9 pln prn">
                             <input type="text" name="realStarted" class="form-control" id="begin_time" placeholder="请输入开始时间" value="{$task_details['realStarted']}" />
@@ -101,7 +106,7 @@
                         </div>
                     </div>
                     {if condition="!empty($task_id)"}
-                    <div class="form-group w50 mrn mln z">
+                    <div class="form-group w50 mrn mln z pl10">
                         <label class="col-sm-3 control-label">任务状态：</label>
                         <div class="col-sm-9 pln prn">
                             <select class="form-control" name="status">
