@@ -14,7 +14,7 @@
     <div class="publicdiv pl15 pr15 sizing">
         <div class="publicdiv pb20 bf">
             <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
-
+                
                 <label class="z">
                     <span class="z c9 lh30">项目：</span>
                     <select name="project_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href = '{:url('/admin/working/lists?name='.$name.'&username='.$username.'&project_id=')}' + this.options[this.selectedIndex].value;">
@@ -52,8 +52,36 @@
                     </form>
                 </label>
             </div>
+            
             <form action="{:url('/admin/working/delete')}" method="post">
-                <div class="panel-body">
+                <table class="table">
+                  <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                      <tr>
+                        <th class="ac bbno pt15 pb15">ID</th>
+                        <th class="ac bbno pt15 pb15">用户</th>
+                        <th class="ac bbno pt15 pb15">消耗(小时)</th>
+                        <th class="ac bbno pt15 pb15">时间</th>
+                        <th class="w50 bbno pt15 pb15">任务</th>
+                        <th class="ac bbno pt15 pb15">操作</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  {foreach $working_list as $working}
+                      <tr>
+                        <td class="ac">{$working['id']}</td>
+                        <td class="ac">{$working['username']}</td>
+                        <td class="ac"><span class="text-primary">{$working['consumed']}</span></td>
+                        <td class="ac">{$working['date']}</td>
+                        <td class="w50">{$working['name']}</td>
+                        <td class="ac iconfont">
+                            <a href="{:url('/admin/working/lists/?deleted=1&id='.$working['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该项目吗？');" title="删除">&#xe601;</a>
+                        </td>
+                      </tr>
+                  {/foreach}
+                  </tbody>
+                </table>
+                
+                <div class="panel-body dn">
                     {foreach $working_list as $working}
                     <li class="publicdiv h25 lh25 ellipsis">
                             {$working['username']} 于 {$working['date']} 记录 {$working['name']}任务 消耗{$working['consumed']}小时
@@ -62,9 +90,10 @@
                     </li>
 
                     {/foreach}
-                </div><div class="modal-footer z btno w100">
-                <input type="submit" class="btn btn-primary btn-lg" value="完成" />
-            </div>
+                </div>
+                <div class="modal-footer z btno w100">
+                    <input type="submit" class="btn btn-primary btn-lg" value="完成" />
+                </div>
                 <div class="publicdiv ac pagingw">{$page}</div>
                 
             </form>

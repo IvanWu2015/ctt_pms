@@ -458,6 +458,14 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .cc{ color:#ccc !important;}
 .cred{ color:red !important;}
 
+.cwp{ color:#ff5009 !important;}
+.text-muted{ color:#777;}
+.text-danger{ color:#a94442;}
+.text-warning{ color:#8a6d3b;}
+.text-info{ color:#31708f;}
+.text-success{ color:#3c763d;}
+.text-primary{ color:#337ab7;}
+
 a.cc:hover{ color:#ccc !important;}
 
 .maximg{ max-width:100%;}
