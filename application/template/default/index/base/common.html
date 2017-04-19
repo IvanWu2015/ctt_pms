@@ -42,7 +42,7 @@
         <div class="publicdiv pl20 pr20 sizing">
             
             <ul class="nav nav-pills navtop">
-                <img src="tpl_img/bg_icon.png" class="z mt10 mb10" height="50" />
+                <img src="tpl_img/bg_icon.png" class="z mt10 mb10 pr20" height="50" />
                 {if condition="empty($navigation_list)"}
                 <li class="mt20 mb10 ml20"><a  href="{:url('/index/mycenter')}">首页</a></li>
                 {/if}
@@ -71,7 +71,7 @@
                 -->
                 
                 {if condition="$_G['is_admin']"}
-                <li class="mt20 mb10"><a href="{:url('/admin/index/index')}" target="_bacnk">后台入口</a></li>
+                <li class="mt20 mb10"><a href="{:url('/admin/index/index')}" target="_blank">后台入口</a></li>
                 {/if}
                 
                 {if condition="$_G['uid'] > 0"}
