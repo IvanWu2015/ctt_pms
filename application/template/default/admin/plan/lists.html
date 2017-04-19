@@ -1,0 +1,55 @@
+{extend name="base/common"/}
+
+{block name="header"}
+    {include file="base/head_title" /}
+{/block}
+
+{block name="side"}{/block}
+
+{block name="body"}
+
+<div class="rightcon sizing"><!-- 右边内容 -->
+    <h3 class="mt5 pl15 mb15 iconfont">&#xe60b; 产品管理</h3>
+    
+    <div class="publicdiv pl15 pr15 sizing">
+        <div class="publicdiv pb20 bf">
+            <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
+                <a href="{:url('/index/product/add')}" target="_bacnk" class="btnp">添加产品</a>
+            </div>
+            <form action="{:url('/admin/product/add')}" method="post" class="form-horizontal" role="form">
+                <table class="table table-striped borl bort borr borb">
+                    <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                        <tr>
+                            <th class="bbno pt15 pb15">ID</th>
+                            <th class="bbno pt15 pb15">产品名称</th>
+                            <th class="bbno pt15 pb15 ac">产品代号</th>
+                            <th class="bbno pt15 pb15 ac">项目负责人</th>
+                            <th class="bbno pt15 pb15 ac">版本号</th>
+                            <th class="w40 bbno pt15 pb15">说明</th>
+                            <th class="bbno pt15 pb15 ac">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach $product_list as $product}
+                        <tr>
+                            <td>{$product['id']}</td>
+                            <td>{$product['name']}</td>
+                            <td class="ac">{$product['code']}</td>
+                            <td class="ac">{$product['realname']}</td>
+                            <td class="ac">{$product['createdVersion']}</td>
+                            <td class="w40">{$product['desc']}</td>
+                            <td class="ac iconfont">
+                                <a href="{:url('/index/product/add?id='.$product['id'])}" class="btn-link rkwt">&#xe71d;</a>
+                                <a href="{:url('/admin/product/lists/?deleted=1&id='.$product['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该产品吗？');" title="删除">&#xe601;</a>
+                            </td>
+                            {/foreach}
+
+                    </tbody>
+                </table>
+                <div class="publicdiv ac pagingw">{$page}</div>
+                <input type="submit" class="btn btn-info y mr20" value="提交" />
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
