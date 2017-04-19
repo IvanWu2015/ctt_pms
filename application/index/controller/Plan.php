@@ -20,6 +20,10 @@ class Plan extends Common {
     public function lists() {
         
         $username = input('get.username', '', 'addslashes');
+        if(!empty($username)){
+            $data['n.assignedTo'] = array('eq',$username);
+        }
+        $data['n.deleted'] = array('eq','0');
         
         $plan_list = DB::name('Plan')
                 ->alias('n')
@@ -27,7 +31,7 @@ class Plan extends Common {
                 ->join('chinatt_pms_project j', 'n.project = j.id', 'left')
                 ->join('chinatt_pms_task t', 'n.task = t.id', 'left')
                 ->field('n.*,d.name as product_name,j.name as project_name,t.name as task_name')
-                ->where(['n.deleted' => '0'])
+                ->where($data)
                 ->paginate(10);
         
         $user_list = DB::table('chinatt_pms_user')->select();
@@ -39,6 +43,7 @@ class Plan extends Common {
         $this->assign('status', $status);
         $this->assign('user_list',$user_list);
         $this->assign('page', $page);
+        $this->assign('username',$username);
         $this->assign('plan_list', $plan_list);
         $this->assign('navtitle', $navtitle);
         return $this->fetch($this->templatePath);
