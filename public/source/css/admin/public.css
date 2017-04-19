@@ -59,7 +59,7 @@ ul.examine li:hover{ background:#f7f8fc;}
 .sofpli p span{ height:10px; display:block; position:absolute; top:0;left:0;}
 
 .htpst{ color:#fff; height:52px; padding:0px 20px 0px 10px; background:#1B2E3C; z-index:999; position:fixed; top:0px; left:0px;}
-.navwp{ float:left; margin-left:25px;}
+.navwp{ float:left; margin-left:67px;}
 .navwp li{ float:left; height:52px;}
 .navwp li a{ padding:0px 20px; height:52px; line-height:52px; display:block; color:#fff;}
 .navwp li a:hover{ background:#1579C7;}

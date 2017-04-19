@@ -458,7 +458,6 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .cc{ color:#ccc !important;}
 .cred{ color:red !important;}
 
-.cwp{ color:#ff5009 !important;}
 .text-muted{ color:#777;}
 .text-danger{ color:#a94442;}
 .text-warning{ color:#8a6d3b;}
@@ -490,10 +489,12 @@ a.cc:hover{ color:#ccc !important;}
 .projectlist{ width:100%; float:left;}
 .projectlist li{ width:20%; float:left; padding-left:20px; margin-bottom:20px; position:relative;}
 .projectlist li .plwp{ width:100%; float:left; border-radius:4px; padding:20px;}
-.projectlist li .plwp .pltitle{ width:100%; float:left; font-weight:normal; font-size:15px; margin:0; line-height:22px; color:#2a2a2a;}
-.projectlist li .plwp .plup{ color:#7eb9eb; position:absolute; top:10px; right:10px;}
-.projectlist li .plwp .plup:hover{ color:#337ab7;}
-.projectlist li .plwp .plprivate{ color:#7eb9eb; font-size:16px; position:absolute; top:10px; right:30px;}
+
+.pltitle{ width:100%; float:left; line-height:40px; font-weight:normal; font-size:17px; margin:0;}
+.pltitle a{ color:#000;}
+.plup{ color:#7eb9eb; position:absolute; top:10px; right:10px;}
+.plup:hover{ color:#337ab7;}
+.plprivate{ color:#7eb9eb; font-size:16px; position:absolute; top:10px; right:30px;}
 
 .bf_wait{ background:#FFEEB0;}
 .bf_done{ background:#C9EAC5;}
@@ -518,6 +519,24 @@ a.cc:hover{ color:#ccc !important;}
 .plprogress span.bf100{ background:#28dd2c;}
 .plprogress span.bf50{ background:#5bc0de;}
 
+.projectlistnew{ width:100%; float:left;}
+.projectlistnew li{ width:50%; float:left; margin:20px 0px 0px 0px; padding-left:20px;}
+.projectlistnew li .plnwp{ width:100%; float:left; min-height:200px; padding:10px 10px 10px 200px; position:relative; border:1px #dedede solid; border-radius:2px; box-shadow:0px 3px 0px #e2e2e2; background:#fff;}
+.indicatorContainer{ width:190px; min-height:200px; border-right:1px #dedede solid; position:absolute; top:0; left:0;}
+.indicatorContainer canvas{ position:absolute; top:0; left:0; right:0; bottom:0; margin:auto;}
+
+@media screen and (max-width:1070px){
+    .projectlistnew li{ width:100%;}
+}
+
+.status{ width:130px; height:35px; color:#fff; float:left; margin-right:10px; text-align:center; border-radius:2px; line-height:35px; display:block;}
+.status:hover{ color:#fff;}
+.swait{ background:#f8b004; border-bottom:1px #d69700 solid; text-shadow:0px 2px 1px #d69700;}
+.sdone{ background:#008000; border-bottom:1px #005600 solid; text-shadow:0px 2px 1px #005600;}
+.sdoing{ background:#32a2e3; border-bottom:1px #2b8ac1 solid; text-shadow:0px 2px 1px #2b8ac1;}
+.sclosed{ background:#808080; border-bottom:1px #545454 solid; text-shadow:0px 2px 1px #545454;}
+
+.plnp{ width:50%; float:left; padding-left:13px; line-height:23px; color:#737171; background:url(../images/plnp.png) no-repeat 0 center; margin:0;}
 
 .commentbutton{ padding:0px !important;}
 input.commentsub{width:113px !important; height:35px !important; border:none !important; cursor:pointer; background:#73b9ed; color:#fff;float:right;}
