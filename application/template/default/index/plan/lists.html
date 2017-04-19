@@ -1,0 +1,48 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<include file="Index/add_task_point" />
+
+<div class="publicdiv mt20 pl20 pr20 pt8 pb20 bf sizing">
+    <div class="publicdiv borb mb20 bf sizing">
+        <!-- Contents================================================== -->
+        <div class="publicdiv borb mb20 pt10 pb10 bf sizing">
+            <h3>
+                需求列表
+                <span class="pull-right">
+                    <a href="{:url('/index/plan/add')}" class="btn btn-info">添加需求</a> 
+                </span>
+            </h3>
+        </div>
+                
+        <table class="table table-striped borl bort borr borb">
+            <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                <tr>
+                    <th class="bbno pt15 pb15">需求名称</th>
+                    <th class="ac bbno pt15 pb15">分支</th>
+                    <th class="ac bbno pt15 pb15">分配</th>
+                    <th class="ac bbno pt15 pb15">创建者</th>
+                    <th class="w40 bbno pt15 pb15">预计工时</th>
+                </tr>
+            </thead>
+            <tbody>
+                {foreach $plan_list as $plan}
+                <tr>
+                    <td class="w40">{$plan['title']}</td>
+                    <td class="ac">{$plan['branch']}</td>
+                    <td class="ac">{$plan['assignedTo']}</td>
+                    <td class="ac">{$plan['openedBy']}</td>
+                    <td>{$plan['estimate']}</td>
+                {/foreach}
+            
+            </tbody>
+        </table>
+    </div>
+    <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
+</div>
+{/block}

@@ -18,7 +18,7 @@
                 </span>
             </h3>
         </div>
-                
+
         <table class="table table-striped borl bort borr borb">
             <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
                 <tr>
@@ -27,6 +27,7 @@
                     <th class="ac bbno pt15 pb15">项目负责人</th>
                     <th class="ac bbno pt15 pb15">版本号</th>
                     <th class="w40 bbno pt15 pb15">说明</th>
+                    <th class="ac bbno pt15 pb15"></th>
                 </tr>
             </thead>
             <tbody>
@@ -37,12 +38,12 @@
                     <td class="ac">{$product['realname']}</td>
                     <td class="ac">{$product['createdVersion']}</td>
                     <td>{$product['desc']}</td>
-                {/foreach}
-            
+                    <td><a href="{:url('/index/plan/add?product_id='.$product['id'])}">添加需求</a></td>
+                    {/foreach}
             </tbody>
         </table>
     </div>
     <div class="publicdiv ac pagingw">{$page}</div>
-    </div>
+</div>
 </div>
 {/block}
