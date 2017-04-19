@@ -19,6 +19,16 @@
             </h3>
         </div>
                 
+        <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
+                <select name="project_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/plan/lists?username=')}' + this.options[this.selectedIndex].value;">
+                    <option value='0'>无</option>
+                    {foreach $user_list as $user}
+                    <option {if condition="$product['id'] == $product_id"}selected='selected'{/if} value="{$user['id']}" >{$user['realname']}</option>
+                    {/foreach}
+                </select>
+            </div>
+        
+        
         <table class="table table-striped borl bort borr borb">
             <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
                 <tr>
