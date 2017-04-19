@@ -34,34 +34,38 @@ canvas{ width:90px; height:90px; position:absolute; top:20px; left:0;}
     </div>
     
     <div class="publicdiv pr20 pb20 bf sizing">
-        <ul class="projectlistnew">
+        <ul class="projectlist">
             {foreach $project_list as $project}
             <li>
-                <div class="plnwp">
+                {if condition="$project['status'] == 'wait'"}<div class="plwp bf_wait">{/if}
+                {if condition="$project['status'] == 'done'"}<div class="plwp bf_done">{/if}
+                {if condition="$project['status'] == 'doing'"}<div class="plwp bf_doing">{/if}
+                {if condition="$project['status'] == 'closed'"}<div class="plwp bf_closed">{/if}
                     {if condition="$project['acl'] == 'private'"}<span class="plprivate iconfont">&#xe611;</span>{/if}
                     <a href="{:url('/index/project/add/?project_id='.$project['id'])}" title="编辑" class="plup iconfont">&#xe71d;</a>
-                    <div class="indicatorContainer" id="indicatorContainer_{$project['id']}"></div>
                     <h3 class="pltitle"><a href="{:url('/index/project/detail/?id='.$project['id'])}" class="c0">{$project['name']}</a></h3>
-                    <div class="publicdiv pt5 pb10 bordb">
-                        <p class="plnp">预计：{$project['all_time']}</p>
-                        <p class="plnp">负责人：{$project['project_admin']}</p>
-                        <p class="plnp">消耗：{$project['estimate_count']}</p>
-                        <p class="plnp">时间：{$project['end']}</p>
-                        <p class="plnp">
-                            状态：
-                            {if condition="$project['status'] == 'wait'"}等待{/if}
-                            {if condition="$project['status'] == 'done'"}完成{/if}
-                            {if condition="$project['status'] == 'doing'"}进行中{/if}
-                            {if condition="$project['status'] == 'closed'"}关闭{/if}
-                        </p>
+                    <!--<div class="plprogress mt10">
+                        <span style="width:{$project['percent']}%;" {if condition='$project["percent"] == 100'}class="bf100"{elseif condition='$project["percent"] > 50'}class="bf50"{/if}></span>
+                    </div>-->
+                    <a href="{:url('/index/project/detail/?id='.$project['id'])}">
+                    <div class="publicdiv h120 pr c0" style="padding-left:110px;">
+                        <div id="indicatorContainer_{$project['id']}"></div>
+                        <p style="margin-top:35px;">负责人：{$project['project_admin']}</p>
+                        <p>时间：{$project['end']}</p>
                     </div>
-                    <div class="publicdiv mt15 lh35 c9">
-                        {if condition="$project['status'] == 'wait'"}<a href="{:url('/index/project/detail/?id='.$project['id'])}" class="status swait">等待</a>{/if}
-                        {if condition="$project['status'] == 'done'"}<a href="{:url('/index/project/detail/?id='.$project['id'])}" class="status sdone">完成</a>{/if}
-                        {if condition="$project['status'] == 'doing'"}<a href="{:url('/index/project/detail/?id='.$project['id'])}" class="status sdoing">进行中</a>{/if}
-                        {if condition="$project['status'] == 'closed'"}<a href="{:url('/index/project/detail/?id='.$project['id'])}" class="status sclosed">关闭</a>{/if}
-                        当前 <b class="c6">未读取</b> 条任务
+                    </a>
+                    <a href="{:url('/index/project/detail/?id='.$project['id'])}">
+                    <div class="publicdiv mt10 c0">
+                        <p class="w33 z db ac mbn">{$project['all_time']}<br/><span>预计</span></p>
+                        <p class="w33 z db ac mbn">{$project['estimate_count']}<br/><span>消耗</span></p>
+                        <p class="w33 z db ac mbn">
+                            {if condition="$project['status'] == 'wait'"}<span style="color:#f8b004;">等待</span>{/if}
+                            {if condition="$project['status'] == 'done'"}<span style="color:green;">完成</span>{/if}
+                            {if condition="$project['status'] == 'doing'"}<span style="color:blue;">进行中</span>{/if}
+                            {if condition="$project['status'] == 'closed'"}<span style="color:grey;">关闭</span>{/if}
+                        <br/><span>状态</span></p>
                     </div>
+                    </a>
                 </div>
             </li>
             <script>
