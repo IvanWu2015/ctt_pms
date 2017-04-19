@@ -19,6 +19,7 @@ class Plan extends Common {
     //列表
     public function lists() {
         
+        $username = input('get.username', '', 'addslashes');
         
         $plan_list = DB::name('Plan')
                 ->alias('n')
@@ -29,11 +30,14 @@ class Plan extends Common {
                 ->where(['n.deleted' => '0'])
                 ->paginate(10);
         
+        $user_list = DB::table('chinatt_pms_user')->select();
+        
         $page = $plan_list->render(); // 分页显示输出
         
         
         $navtitle = '需求列表' . $this->navtitle;
         $this->assign('status', $status);
+        $this->assign('user_list',$user_list);
         $this->assign('page', $page);
         $this->assign('plan_list', $plan_list);
         $this->assign('navtitle', $navtitle);
