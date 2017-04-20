@@ -23,11 +23,13 @@ class article extends Common {
         $acl = input('param.acl', 'all', 'addslashes');
         if($acl == 'all'){
             
+        }  elseif($acl == 'open') {
+            $data['a.acl'] = array('eq','open');
         }  else {
-            $data['a.acl'] = array('eq',$acl);
+             $data['a.acl'] = array('eq','private');
+              $data['a.uid'] = array('eq',$this->_G['uid']);
         }
-        $data['a.uid'] = array('eq',$this->_G['uid']);
-        
+        $data['a.status'] = array('eq',0);
         $article_list = DB::name('Article')
                 ->alias('a')
                 ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
@@ -38,7 +40,6 @@ class article extends Common {
                 ->order('id desc')
                 ->paginate(10);
         $page = $article_list->render(); // 分页显示输出
-        
         $deleted = input('param.deleted', 0, 'intval');
         $article_id = input('param.id', 0, 'intval');
         if($deleted > 0){
