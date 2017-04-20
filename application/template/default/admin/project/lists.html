@@ -14,6 +14,7 @@
     <div class="publicdiv pl15 pr15 sizing">
         <div class="publicdiv pb20 bf">
             <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
+                <span class="z c9 lh30">项目：</span>
                 <select name="project_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/admin/project/lists?status='.$status.'&product_id=')}' + this.options[this.selectedIndex].value;">
                     <option value='0'>无</option>
                     {foreach $product_list as $product}
@@ -21,21 +22,22 @@
                     {/foreach}
                 </select>
             </div>
-            <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
-                <a href="{:url('/admin/project/lists/?status=all&product_id='.$product_id)}" class="btnp">所有</a>
-                <a href="{:url('/admin/project/lists/?status=noclosed&product_id='.$product_id)}}" class="btnp">未关闭</a>
-                <a href="{:url('/admin/project/lists/?status=delayed&product_id='.$product_id)}" class="btnp">已延期</a>
-                <a href="{:url('/admin/project/lists/?status=wait&product_id='.$product_id)}" class="btnp">未开始</a>
-                <a href="{:url('/admin/project/lists/?status=doing&product_id='.$product_id)}" class="btnp">进行中</a>
-                <a href="{:url('/admin/project/lists/?status=done&product_id='.$product_id)}" class="btnp">已完成</a>
-                <a href="{:url('/admin/project/lists/?status=closed&product_id='.$product_id)}" class="btnp">已关闭</a>
-                <a href="{:url('index/project/add')}" target="_bacnk" class="btnp ml20">添加项目</a>
+            <div class="publicdiv pb20 pl20 pr20 sizing">
+                <a href="{:url('/admin/project/lists/?status=all&product_id='.$product_id)}" class="btnp {if condition='$status == all'}btnpattr{/if}">所有</a>
+                <a href="{:url('/admin/project/lists/?status=noclosed&product_id='.$product_id)}" class="btnp {if condition='$status == noclosed'}btnpattr{/if}">未关闭</a>
+                <a href="{:url('/admin/project/lists/?status=delayed&product_id='.$product_id)}" class="btnp {if condition='$status == delayed'}btnpattr{/if}">已延期</a>
+                <a href="{:url('/admin/project/lists/?status=wait&product_id='.$product_id)}" class="btnp {if condition='$status == wait'}btnpattr{/if}">未开始</a>
+                <a href="{:url('/admin/project/lists/?status=doing&product_id='.$product_id)}" class="btnp {if condition='$status == doing'}btnpattr{/if}">进行中</a>
+                <a href="{:url('/admin/project/lists/?status=done&product_id='.$product_id)}" class="btnp {if condition='$status == done'}btnpattr{/if}">已完成</a>
+                <a href="{:url('/admin/project/lists/?status=closed&product_id='.$product_id)}" class="btnp {if condition='$status == closed'}btnpattr{/if}">已关闭</a>
+                
                 <label class="y">
                     <form action="{:url('/index/project/detail/?id='.$project_id)}" method="post">
                         <input type="text" name="keyword" class="bor pt5 pb5 pl5 pr5 fwn" placeholder="请输入搜索的内容~" value="{$keyword}" />
                     <input type="submit" class="pt5 pb5 pl10 pr10 cf" style="background:#428bca; border:1px #428bca solid;" value="搜索" />
                     </form>
                 </label>
+                <a href="{:url('index/project/add')}" target="_bacnk" class="btnp ml20 y">添加项目</a>
             </div>
             <form action="" method="post">
                 <table class="table">
