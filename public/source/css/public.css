@@ -521,21 +521,28 @@ a.cc:hover{ color:#ccc !important;}
 .plprogress span.bf50{ background:#5bc0de;}
 
 .projectlistnew{ width:100%; float:left;}
-.projectlistnew li{ width:33.33%; float:left; margin:20px 0px 0px 0px; padding-left:20px;}
-.projectlistnew li .plnwp{ width:100%; float:left; min-height:200px; padding:10px 10px 10px 200px; position:relative; border:1px #dedede solid; border-radius:2px; box-shadow:0px 3px 0px #e2e2e2; background:#fff;}
-.indicatorContainer{ width:190px; min-height:200px; border-right:1px #dedede solid; position:absolute; top:0; left:0;}
+.projectlistnew li{ width:25%; float:left; min-height:253px; margin:0px 0px 25px 0px; padding-left:20px;}
+.projectlistnew li .plnwp{ width:100%; float:left; min-height:200px; padding:10px 20px; position:relative; border:1px #dedede solid; border-radius:2px; box-shadow:2px 2px 3px #e2e2e2; background:#fff;}
+.incondesc{ width:100%; float:left; min-height:60px; padding-left:70px; display:table; position:relative;}
+.incondesc span{ display:table-cell; vertical-align:middle;}
+.indicatorContainer{ width:60px; height:60px; position:absolute; top:0; left:0;}
 .indicatorContainer canvas{ position:absolute; top:0; left:0; right:0; bottom:0; margin:auto;}
+.stnewswp{ padding-right:120px; min-height:35px; position:relative;}
+.stnewswp h3{ line-height:23px; color:#000; font-size:13px; margin:0;}
+.stnewswp p{ color:#666; font-size:12px; margin:0;}
 
 @media screen and (max-width:1550px){
-    .projectlistnew li{ width:50%;}
+    .projectlistnew li{ width:33.33%;}
 }
 @media screen and (max-width:1070px){
+    .projectlistnew li{ width:50%;}
+}
+@media screen and (max-width:800px){
     .projectlistnew li{ width:100%;}
 }
 
 
-
-.status{ width:130px; height:35px; color:#fff; float:right; margin-left:10px; text-align:center; border-radius:2px; line-height:35px; display:block;}
+.status{ width:110px; height:35px; color:#fff; float:right; margin-left:10px; text-align:center; border-radius:2px; line-height:35px; display:block; position:absolute; top:0; right:0;}
 .status:hover{ color:#fff;}
 .swait{ background:#f8b004; border-bottom:1px #d69700 solid; text-shadow:0px 2px 1px #d69700;}
 .sdone{ background:#008000; border-bottom:1px #005600 solid; text-shadow:0px 2px 1px #005600;}
