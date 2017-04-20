@@ -21,19 +21,34 @@ class weburl extends Common {
     //列表页
     public function lists() {
         $weburl = DB::name('weburl');
+
+        $username = input('get.username', '', 'addslashes');
+        $product_id = input('get.product_id', '0', 'intval');
+        $class_id = input('get.class_id', '0', 'intval');
         $acl = input('param.acl', 'all', 'addslashes');
-        if($acl == 'all'){
+        if ($acl == 'all') {
             
-        }  else {
-            $data['w.acl'] = array('eq',$acl);
+        } else {
+            $data['w.acl'] = array('eq', $acl);
         }
-        $data['w.status'] = array('eq',0);
-        
+        $data['w.status'] = array('eq', 0);
+
+        if (!empty($username)) {
+            $data['u.username'] = array('eq', $username);
+        }
+        if ($product_id > 0) {
+            $data['d.id'] = array('eq', $product_id);
+        }
+        if ($class_id > 0) {
+            $data['c.id'] = array('eq', $class_id);
+        }
         $weburl_list = DB::name('weburl')
                 ->alias('w')
                 ->join('chinatt_pms_project p', 'w.project = p.id', 'left')
                 ->join('chinatt_pms_user u', 'u.uid = w.uid', 'left')
-                ->field('w.*,p.name,u.username,u.realname')
+                ->join('chinatt_pms_class c', 'c.id = w.class', 'left')
+                ->join('chinatt_pms_product d', 'd.id = w.product', 'left')
+                ->field('w.*,p.name,u.username,u.realname,d.name as product_name,c.name as class_name')
                 ->where($data)
                 ->paginate(10);
         $page = $weburl_list->render(); // 分页显示输出
@@ -48,6 +63,18 @@ class weburl extends Common {
                 $this->error('权限不足');
             }
         }
+        //分类列表产品列表用户列表
+        $sort_list = DB('Class')->where(['status' => 1])->select();
+        $product_list = DB('Product')->where(['deleted' => '0'])->field('name,code,id')->select();
+        $user_list = DB('User')->where(['deleted' => '0'])->select();
+
+
+        $this->assign('sort_list', $sort_list);
+        $this->assign('product_list', $product_list);
+        $this->assign('user_list', $user_list);
+        $this->assign('product_id', $product_id);
+        $this->assign('class_id', $class_id);
+        $this->assign('username', $username);
         $navtitle = '收藏列表' . $project_detail['name'];
         $this->assign('navtitle', $navtitle);
         $this->assign('weburl_list', $weburl_list);
@@ -66,10 +93,15 @@ class weburl extends Common {
      */
     public function add() {
         $weburl = db('weburl');
-        $project_list = Db::name('Project')->where($map)->column('id,name,code', 'id');
+
         $weburl_id = input('param.id', 0, 'intval');
         $project_id = input('param.project_id', 0, 'intval');
         $weburl_detail = $weburl->where(['id' => $weburl_id, 'status' => 0])->find();
+
+        $project_list = Db::name('Project')->where($map)->column('id,name,code', 'id');
+        $product_list = DB('Product')->where(['deleted' => '0'])->field('name,code,id')->select();
+        $sort_list = DB('Class')->where(['status' => 1])->select();
+
         if ($weburl_id > 0) {
             if (empty($weburl_detail)) {
                 $this->error('不存在该收藏', url('index/weburl/lists'));
@@ -85,7 +117,7 @@ class weburl extends Common {
                 'url' => input('param.url', '', 'addslashes'),
                 'explain' => input('param.explain', '', 'addslashes'),
                 'acl' => input('param.acl', 'open', 'addslashes'),
-                'time' => time(),
+                'time' => date('Y-m-d H:i:s'),
             );
             if ($weburl_id > 0) {
                 $weburl->where(['id' => $weburl_id])->update($data);
@@ -102,6 +134,8 @@ class weburl extends Common {
         }
         $this->assign('project_id', $project_id);
         $this->assign('navtitle', $navtitle);
+        $this->assign('sort_list', $sort_list);
+        $this->assign('product_list', $product_list);
         $this->assign('weburl_detail', $weburl_detail);
         $this->assign('project_list', $project_list);
         return $this->fetch($this->templatePath);

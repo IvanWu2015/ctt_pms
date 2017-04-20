@@ -21,6 +21,10 @@ class article extends Common {
     //列表页
     public function lists() {
         $acl = input('param.acl', 'all', 'addslashes');
+        
+        
+        $username = input('get.username', '', 'addslashes');
+        $class_id = input('get.class_id', '0', 'intval');
         if($acl == 'all'){
             
         }  elseif($acl == 'open') {
@@ -30,6 +34,14 @@ class article extends Common {
               $data['a.uid'] = array('eq',$this->_G['uid']);
         }
         $data['a.status'] = array('eq',0);
+        if (!empty($username)) {
+            $data['u.username'] = array('eq', $username);
+        }
+        if ($class_id > 0) {
+            $data['c.id'] = array('eq', $class_id);
+        }
+        
+        
         $article_list = DB::name('Article')
                 ->alias('a')
                 ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
@@ -42,6 +54,9 @@ class article extends Common {
         $page = $article_list->render(); // 分页显示输出
         $deleted = input('param.deleted', 0, 'intval');
         $article_id = input('param.id', 0, 'intval');
+        $sort_list = DB('Class')->where(['status' => 1])->select();
+        $product_list = DB('Product')->where(['deleted' => '0'])->field('name,code')->select();
+        $user_list = DB('User')->where(['deleted' => '0'])->select();
         if($deleted > 0){
             $article_detail = DB::name('Article')->where(['uid' => $this->_G['uid'],'status' => 0])->find();
             if($this->_G['uid'] == $article_detail['uid']){
@@ -51,8 +66,12 @@ class article extends Common {
         }   
         $navtitle = '文档列表' . $project_detail['name'];
         $this->assign('navtitle', $navtitle);
-        
         $this->assign('page', $page);
+        $this->assign('sort_list', $sort_list);
+        $this->assign('class_id', $class_id);
+        $this->assign('username', $username);
+        $this->assign('product_list',$product_list);
+        $this->assign('user_list',$user_list);
         $this->assign('article_list', $article_list);
         return $this->fetch($this->templatePath);
     }

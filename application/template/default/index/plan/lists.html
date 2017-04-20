@@ -45,6 +45,7 @@
                     <th class="ac bbno pt15 pb15">分配</th>
                     <th class="ac bbno pt15 pb15">创建者</th>
                     <th class="w40 bbno pt15 pb15">预计工时</th>
+                    <th class="ac bbno pt15 pb15">创建时间</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,6 +56,7 @@
                     <td class="ac">{$plan['assignedTo']}</td>
                     <td class="ac">{$plan['openedBy']}</td>
                     <td>{$plan['estimate']}</td>
+                    <td>{$plan['openedDate']}</td>
                 {/foreach}
             
             </tbody>
