@@ -14,9 +14,9 @@
     <div class="publicdiv pl15 pr15 sizing">
         <div class="publicdiv pb20 bf">
             <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
-                <a href="{:url('/index/product/add')}" target="_bacnk" class="btnp">添加产品</a>
+                <a href="{:url('/index/plan/add')}" target="_bacnk" class="btnp">添加产品</a>
             </div>
-            <form action="{:url('/admin/product/add')}" method="post" class="form-horizontal" role="form">
+            <form action="{:url('/admin/plan/add')}" method="post" class="form-horizontal" role="form">
                 <table class="table table-striped borl bort borr borb">
                     <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
                         <tr>
@@ -30,17 +30,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {foreach $product_list as $product}
+                        {foreach $plan_list as $plan}
                         <tr>
-                            <td>{$product['id']}</td>
-                            <td>{$product['name']}</td>
-                            <td class="ac">{$product['code']}</td>
-                            <td class="ac">{$product['realname']}</td>
-                            <td class="ac">{$product['createdVersion']}</td>
-                            <td class="w40">{$product['desc']}</td>
+                            <td>{$plan['id']}</td>
+                            <td>{$plan['name']}</td>
+                            <td class="ac">{$plan['code']}</td>
+                            <td class="ac">{$plan['realname']}</td>
+                            <td class="ac">{$plan['createdVersion']}</td>
+                            <td class="w40">{$plan['desc']}</td>
                             <td class="ac iconfont">
-                                <a href="{:url('/index/product/add?id='.$product['id'])}" class="btn-link rkwt">&#xe71d;</a>
-                                <a href="{:url('/admin/product/lists/?deleted=1&id='.$product['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该产品吗？');" title="删除">&#xe601;</a>
+                                <a href="{:url('/index/plan/add?id='.$plan['id'])}" class="btn-link rkwt">&#xe71d;</a>
+                                <a href="{:url('/admin/plan/lists/?deleted=1&id='.$plan['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该产品吗？');" title="删除">&#xe601;</a>
                             </td>
                             {/foreach}
 

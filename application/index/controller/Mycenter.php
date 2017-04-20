@@ -178,7 +178,7 @@ class Mycenter extends Common {
                 ->where($map)
                 ->field('t.*,p.status as p_status,p.name as p_name')
                 ->order("id DESC")
-                ->paginate(20, $task_count, ['path' => url('/index/mycenter/task_list/'), 'query' => ['username' => $username]]);
+                ->paginate(20, $task_count, ['path' => url('/index/mycenter/task_list/'), 'query' => ['username' => $username,'status' =>$status,'project_id' => $project_id]]);
         $navtitle = '个人中心';
         $show = $task_list->render(); // 分页显示输出
 

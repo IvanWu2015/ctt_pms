@@ -20,12 +20,20 @@
         </div>
                 
         <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
-                <select name="project_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/plan/lists?username=')}' + this.options[this.selectedIndex].value;">
-                    <option value='0'>无</option>
+                <select name="username" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/plan/lists?code='.$code.'&username=')}' + this.options[this.selectedIndex].value;">
+                    <option value=''>无</option>
                     {foreach $user_list as $user}
-                    <option {if condition="$product['id'] == $product_id"}selected='selected'{/if} value="{$user['id']}" >{$user['realname']}</option>
+                    <option {if condition="$user['username'] == $username"}selected='selected'{/if} value="{$user['username']}" >{$user['realname']}</option>
                     {/foreach}
                 </select>
+            
+            <select name="code" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/plan/lists?username='.$username.'&code=')}' + this.options[this.selectedIndex].value;">
+                    <option value=''>无</option>
+                    {foreach $product_list as $product}
+                    <option {if condition="$product['code'] == $code"}selected='selected'{/if} value="{$product['code']}" >{$product['name']}</option>
+                    {/foreach}
+                </select>
+            
             </div>
         
         

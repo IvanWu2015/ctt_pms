@@ -35,7 +35,6 @@ class Plan extends Common {
                 ->field('n.*,d.name as product_name,j.name as project_name,t.name as task_name')
                 ->where(['n.deleted' => '0'])
                 ->paginate(10);
-        
         $page = $plan_list->render(); // 分页显示输出
         
         
