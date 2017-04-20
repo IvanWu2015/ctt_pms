@@ -11,16 +11,26 @@
             <h2 class="mt20 pb20 pt20 pl20 pr20 ac sizing">{$plan_detail['title']}</h2>
             <p class="publicdiv mt20 mb10 lh35">
                 创建者：<span class="text-primary mr20">{$plan_detail['openedBy']}</span>
-                分支：<span class="mr20">{$plan_detail['branch']}</span>
+                
+                {if condition="$plan_detail['task_name'] neq ''"}
+                任务名称：<span class="mr20">{$plan_detail['task_name']}</span>
+                
+                {elseif condition="$plan_detail['project_name'] neq ''"}
+                项目名称：<span class="mr20">{$plan_detail['project_name']}</span>
+                
+                {elseif condition="$plan_detail['product_name'] neq ''"}
+                产品名称：<span class="mr20">{$plan_detail['product_name']}</span>
+                
+                {/if}
                 分配：<span class="mr20">{$plan_detail['assignedTo']}</span>
                 
-                <a href="{:url('/index/plan/add?id='.$id)}" class="btn-link iconfont y" title="编辑">&#xe71d; 编辑</a>
+                <a href="{:url('/index/plan/add?id='.$plan_id)}" class="btn-link iconfont y" title="编辑">&#xe71d; 编辑</a>
                 <span class="y mr20">发布时间：{$plan_detail['openedDate']}</span>
                 <span class="y mr20">工时：{$plan_detail['estimate']}</span>
             </p>
         </div>
         
-        <div class="publicdiv pt20 pb20 pl20 pr20 sizing">需要内容读取</div>
+        <div class="publicdiv pt20 pb20 pl20 pr20 sizing">{$plan_detail['content']}</div>
         
     </div>
 </div>

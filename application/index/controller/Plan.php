@@ -12,7 +12,20 @@ class Plan extends Common {
 
     //项目详情页
     public function detail() {
-
+        $plan_id = input('get.id', '0', 'intval');
+        
+        $plan_detail = DB('Plan')
+                ->alias('p')
+                ->join('chinatt_pms_product d', 'p.product = d.id', 'left')
+                ->join('chinatt_pms_project j', 'p.project = j.id', 'left')
+                ->join('chinatt_pms_task t', 'p.task = t.id', 'left')
+                ->where(['p.deleted' => '0','p.id' => $plan_id])
+                ->field('p.*,d.name as product_name,j.name as project_name,t.name as task_name,d.code')
+                ->find();
+        $navtitle = '需求详情' . $this->navtitle;
+        $this->assign('plan_id',$plan_id);
+        $this->assign('plan_detail',$plan_detail);
+        $this->assign('navtitle',$navtitle);
         return $this->fetch($this->templatePath);
     }
 
@@ -95,9 +108,8 @@ class Plan extends Common {
                 $this->success("成功添加", 'Plan/lists');
             }
         }
-
-
         $navtitle = '添加/修改产品' . $this->navtitle;
+        $this->assign('plan_detail',$plan_detail);
         $this->assign('project_id', $project_id);
         $this->assign('product_detail', $product_detail);
         $this->assign('team_list', $team_list);
