@@ -14,7 +14,7 @@
             <h3>
                 产品列表
                 <span class="pull-right">
-                    <a href="{:url('/index/product/add')}" class="btn btn-info">添加文档</a> 
+                    <a href="{:url('/index/product/add')}" class="btn btn-info">添加产品</a> 
                 </span>
             </h3>
         </div>
@@ -27,18 +27,16 @@
                     <th class="ac bbno pt15 pb15">项目负责人</th>
                     <th class="ac bbno pt15 pb15">版本号</th>
                     <th class="w40 bbno pt15 pb15">说明</th>
-                    <th class="ac bbno pt15 pb15"></th>
                 </tr>
             </thead>
             <tbody>
                 {foreach $product_list as $product}
                 <tr>
-                    <td class="w40">{$product['name']}</td>
+                    <td class="">{$product['name']}</td>
                     <td class="ac">{$product['code']}</td>
                     <td class="ac">{$product['realname']}</td>
                     <td class="ac">{$product['createdVersion']}</td>
-                    <td>{$product['desc']}</td>
-                    <td><a href="{:url('/index/plan/add?product_id='.$product['id'])}">添加需求</a></td>
+                    <td class="w40">{$product['desc']}</td>
                     {/foreach}
             </tbody>
         </table>

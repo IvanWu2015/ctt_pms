@@ -19,43 +19,41 @@
             </h3>
         </div>
                 
-        <div class="publicdiv pt20 pb20 pl20 pr20 sizing">
-                <select name="username" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/plan/lists?code='.$code.'&username=')}' + this.options[this.selectedIndex].value;">
-                    <option value=''>无</option>
-                    {foreach $user_list as $user}
-                    <option {if condition="$user['username'] == $username"}selected='selected'{/if} value="{$user['username']}" >{$user['realname']}</option>
-                    {/foreach}
-                </select>
-            
+        <div class="publicdiv pb20 pr20 sizing">
+            <select name="username" class="pt5 mr20 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/plan/lists?code='.$code.'&username=')}' + this.options[this.selectedIndex].value;">
+                <option value=''>无</option>
+                {foreach $user_list as $user}
+                <option {if condition="$user['username'] == $username"}selected='selected'{/if} value="{$user['username']}" >{$user['realname']}</option>
+                {/foreach}
+            </select>
             <select name="code" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/plan/lists?username='.$username.'&code=')}' + this.options[this.selectedIndex].value;">
                     <option value=''>无</option>
                     {foreach $product_list as $product}
                     <option {if condition="$product['code'] == $code"}selected='selected'{/if} value="{$product['code']}" >{$product['name']}</option>
                     {/foreach}
                 </select>
-            
-            </div>
+        </div>
         
         
         <table class="table table-striped borl bort borr borb">
             <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
                 <tr>
-                    <th class="bbno pt15 pb15">需求名称</th>
+                    <th class="w40 bbno pt15 pb15">需求名称</th>
                     <th class="ac bbno pt15 pb15">分支</th>
                     <th class="ac bbno pt15 pb15">分配</th>
                     <th class="ac bbno pt15 pb15">创建者</th>
-                    <th class="w40 bbno pt15 pb15">预计工时</th>
+                    <th class="ac bbno pt15 pb15">预计工时</th>
                     <th class="ac bbno pt15 pb15">创建时间</th>
                 </tr>
             </thead>
             <tbody>
                 {foreach $plan_list as $plan}
                 <tr>
-                    <td class="w40">{$plan['title']}</td>
+                    <td class="w40"><a href="{:url('/index/plan/detail/?id='.$plan['id'])}">{$plan['title']}</a></td>
                     <td class="ac">{$plan['branch']}</td>
                     <td class="ac">{$plan['assignedTo']}</td>
                     <td class="ac">{$plan['openedBy']}</td>
-                    <td>{$plan['estimate']}</td>
+                    <td class="ac">{$plan['estimate']}</td>
                     <td>{$plan['openedDate']}</td>
                 {/foreach}
             

@@ -499,6 +499,7 @@ a.cc:hover{ color:#ccc !important;}
 .bf_wait{ background:#FFEEB0;}
 .bf_done{ background:#C9EAC5;}
 .bf_doing{ background:#C4C4F5;}
+.bf_doing_attr{ background:#0000b1;}
 .bf_closed{ background:#e0e0e0;}
 
 @media screen and (max-width:1750px){
