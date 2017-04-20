@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-04-19 11:33:27
+Date: 2017-04-20 15:42:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1414,7 +1414,7 @@ CREATE TABLE `chinatt_pms_article` (
   `title` varchar(255) NOT NULL DEFAULT '' COMMENT '文章标题',
   `contents` text NOT NULL COMMENT '文章内容',
   `acl` enum('open','private') NOT NULL DEFAULT 'open' COMMENT '是否公开',
-  `time` int(10) NOT NULL DEFAULT '0' COMMENT '添加时间',
+  `time` datetime NOT NULL COMMENT '添加时间',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0正常 -1删除',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='文章列表';
@@ -1422,12 +1422,6 @@ CREATE TABLE `chinatt_pms_article` (
 -- ----------------------------
 -- Records of chinatt_pms_article
 -- ----------------------------
-INSERT INTO `chinatt_pms_article` VALUES ('10', '2313359', '44', '0', '0', '', '', 'open', '1474961277', '0');
-INSERT INTO `chinatt_pms_article` VALUES ('2', '2313359', '47', '0', '0', '', '', 'open', '1473835214', '0');
-INSERT INTO `chinatt_pms_article` VALUES ('3', '2313359', '41', '0', '0', '', '', 'open', '1473835365', '0');
-INSERT INTO `chinatt_pms_article` VALUES ('4', '2313359', '48', '0', '0', '', '', 'open', '1474260751', '0');
-INSERT INTO `chinatt_pms_article` VALUES ('6', '2313359', '18', '0', '0', 'test', '', 'open', '1474876766', '0');
-INSERT INTO `chinatt_pms_article` VALUES ('13', '2', '14', '0', '58', '发个红包来玩下', '<p>afasdfasdf</p>', 'open', '2017', '0');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_class
@@ -1464,7 +1458,7 @@ INSERT INTO `chinatt_pms_class` VALUES ('68', '基本原则 ', '0', '67', '1', '
 DROP TABLE IF EXISTS `chinatt_pms_config`;
 CREATE TABLE `chinatt_pms_config` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
-  `type` varchar(50) NOT NULL DEFAULT '' COMMENT '设置所属类型',
+  `group` varchar(50) NOT NULL DEFAULT '' COMMENT '设置所属级别',
   `c_key` varchar(100) NOT NULL DEFAULT '' COMMENT '设置的键名',
   `c_value` varchar(2000) NOT NULL DEFAULT '' COMMENT '设置的值',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态0删除 1正常',
@@ -7700,7 +7694,7 @@ CREATE TABLE `chinatt_pms_user` (
 -- Records of chinatt_pms_user
 -- ----------------------------
 INSERT INTO `chinatt_pms_user` VALUES ('1', '0', '0', 'wuxin', '46ff408a5233e4a2329e23b8eec47be7', '', '管理员', '', 'wuxin', '', '0000-00-00', 'm', '', '', '', '', '0000-00-00', '15', '58.62.203.238', '1482910107', '0.0.0.0', '0', '0', '0', '1', '9537cd');
-INSERT INTO `chinatt_pms_user` VALUES ('2', '1', '1', 'ivan', '7f2668c76e4fc6662fa7abbf2e28908e', 'pm', '吴鑫', '', '', '', '0000-00-00', 'm', 'wx.1@163.com', '', '', '', '0000-00-00', '92', '58.62.205.78', '1492566452', '0.0.0.0', '0', '0', '0', '1', '96067e');
+INSERT INTO `chinatt_pms_user` VALUES ('2', '1', '1', 'ivan', '7f2668c76e4fc6662fa7abbf2e28908e', 'pm', '吴鑫', '', '', '', '0000-00-00', 'm', 'wx.1@163.com', '', '', '', '0000-00-00', '93', '58.62.205.78', '1492658342', '0.0.0.0', '0', '0', '0', '1', '96067e');
 INSERT INTO `chinatt_pms_user` VALUES ('3', '1', '2', 'ming', '6d9f42bade5b89279895bbf07c0feb47', 'dev', '关武明', '', '', '', '0000-00-00', 'm', '2273659300@QQ.com', '', '', '', '0000-00-00', '77', '58.62.202.115', '1481076687', '', '0', '0', '0', '1', '562dfs');
 INSERT INTO `chinatt_pms_user` VALUES ('4', '0', '5', 'chong', '90761b5a7ba4c8442efeb8bfdeea966a', 'po', '张新盛', '', '', '', '0000-00-00', 'm', 'webmaster@bokett.com', '', '', '', '0000-00-00', '4', '59.56.19.8', '1459440152', '', '0', '0', '0', '1', 'f2a22x');
 INSERT INTO `chinatt_pms_user` VALUES ('5', '1', '2', 'chen', 'b61c092c454b70699aaa3fcb2f9a2020', 'dev', '陈茂发', '', '', '', '0000-00-00', 'm', '', '', '', '', '0000-00-00', '78', '58.62.202.115', '1481095696', '', '0', '0', '0', '1', '5wqz2');
