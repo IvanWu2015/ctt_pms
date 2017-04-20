@@ -18,18 +18,18 @@
                     <tr>
                         <th class="ac bbno pt15 pb15">ID</th>
                         <th class="ac bbno pt15 pb15">用户名</th>
-                        <th class="ac bbno pt15 pb15">URL</th>
-                        <th class="ac bbno pt15 pb15">内容</th>
-                         <th class="ac bbno pt15 pb15">时间</th>
+                        <th class="w30 bbno pt15 pb15">URL</th>
+                        <th class="w30 bbno pt15 pb15">内容</th>
+                        <th class="ac bbno pt15 pb15">时间</th>
                 </tr>
                 </thead>
                 <tbody>
                     {foreach $log_list as $log}
                     <tr>
                         <td class="ac">{$log['id']}</td>
-                        <td><a href="{:url('/index/project/detail/?id='.$project['id'])}">{$log['username']}</a></td>
-                        <td><a href="{$log['url']}" target="_bacnk">{$log['url']}</a></td>
-                        <td class="ac">{$log['get']}</td>
+                        <td class="ac"><a href="{:url('/index/project/detail/?id='.$project['id'])}">{$log['username']}</a></td>
+                        <td class="w30"><a href="{$log['url']}" target="_bacnk">{$log['url']}</a></td>
+                        <td class="w30">{$log['get']}</td>
                         <td class="ac">{$log['time']}</td>
                     </tr>
                     {/foreach}

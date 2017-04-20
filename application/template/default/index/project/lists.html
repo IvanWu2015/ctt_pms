@@ -6,7 +6,7 @@
 {block name="body"}
 <script src="tpl_js/radialIndicator.js"></script>
 <style>
-canvas{ width:90px; height:90px; position:absolute; top:20px; left:0;}
+canvas{ width:60px; height:60px; position:absolute; top:20px; left:0;}
 </style>
 
 <div class="publicdiv mt20 pt20 pb10 ptn sizing">
@@ -40,27 +40,24 @@ canvas{ width:90px; height:90px; position:absolute; top:20px; left:0;}
                 <div class="plnwp">
                     {if condition="$project['acl'] == 'private'"}<span class="plprivate iconfont">&#xe611;</span>{/if}
                     <a href="{:url('/index/project/add/?project_id='.$project['id'])}" title="编辑" class="plup iconfont">&#xe71d;</a>
-                    <div class="indicatorContainer" id="indicatorContainer_{$project['id']}"></div>
                     <h3 class="pltitle"><a href="{:url('/index/project/detail/?id='.$project['id'])}" class="c0">{$project['name']}</a></h3>
-                    <div class="publicdiv pt5 pb10 bordb">
-                        <p class="plnp">预计：{$project['all_time']}</p>
-                        <p class="plnp">负责人：{$project['project_admin']}</p>
-                        <p class="plnp">消耗：{$project['estimate_count']}</p>
-                        <p class="plnp">时间：{$project['end']}</p>
-                        <p class="plnp">
-                            状态：
-                            {if condition="$project['status'] == 'wait'"}等待{/if}
-                            {if condition="$project['status'] == 'done'"}完成{/if}
-                            {if condition="$project['status'] == 'doing'"}进行中{/if}
-                            {if condition="$project['status'] == 'closed'"}关闭{/if}
-                        </p>
+                    <div class="incondesc mt10 mb10 clamp3">
+                        <div class="indicatorContainer" id="indicatorContainer_{$project['id']}"></div>
+                        <span class="c9">{$project['desc']}</span>
                     </div>
-                    <div class="publicdiv mt15 lh35 c9">
+                    <div class="publicdiv pb10">
+                        <p class="plnp">任务：未 / 未</p>
+                        <p class="plnp">负责人：{$project['project_admin']}</p>
+                        <p class="plnp">工时：未 / 未</p>
+                        <p class="plnp">时间：{$project['end']}</p>
+                    </div>
+                    <div class="publicdiv mt15 stnewswp">
                         {if condition="$project['status'] == 'wait'"}<a href="{:url('/index/project/detail/?id='.$project['id'])}" class="status swait">等待</a>{/if}
                         {if condition="$project['status'] == 'done'"}<a href="{:url('/index/project/detail/?id='.$project['id'])}" class="status sdone">完成</a>{/if}
                         {if condition="$project['status'] == 'doing'"}<a href="{:url('/index/project/detail/?id='.$project['id'])}" class="status sdoing">进行中</a>{/if}
                         {if condition="$project['status'] == 'closed'"}<a href="{:url('/index/project/detail/?id='.$project['id'])}" class="status sclosed">关闭</a>{/if}
-                        当前 <b class="c6">未读取</b> 条任务
+                        <h3 class="publicdiv">最新动态</h3>
+                        <p class="publicdiv ellipsis pl10">**于1023完成了****任务</p>
                     </div>
                 </div>
             </li>

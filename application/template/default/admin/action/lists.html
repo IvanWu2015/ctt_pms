@@ -63,10 +63,10 @@
                     <th class="ac bbno pt15 pb15">ID</th>
                     <th class="bbno pt15 pb15">操作人</th>
                     <th class="ac bbno pt15 pb15">时间</th>
-                    <th class="w30 bbno pt15 pb15">任务</th>
-                    <th class="ac bbno pt15 pb15">类别名</th>
-                    <th class="ac bbno pt15 pb15">&nbsp;</th>
-                    <th class="w35 bbno pt15 pb15">记录工时/说明</th>
+                    <th class="bbno pt15 pb15">类别名</th>
+                    <th class="w20 bbno pt15 pb15">任务</th>
+                    <th class="w20 bbno pt15 pb15">&nbsp;</th>
+                    <th class="bbno pt15 pb15">记录工时/说明</th>
                   </tr>
               </thead>
               <tbody>
@@ -76,20 +76,20 @@
                         <td class="ac">{$action['id']}</td>
                         <td>{$action['actor']}</td>
                         <td class="ac">{$action['date']}</td>
-                        <td class="w30">{$action['actionname']}</td>
-                        <td class="ac">{$action['typename']}</td>
-                        <td class="ac">{$action['tname']}</td>
-                        <td class="w35">{$action['pname']}</td>
+                        <td class="">{$action['typename']}</td>
+                        <td class="w20">{$action['actionname']}</td>
+                        <td class="w20">{$action['tname']}</td>
+                        <td class="">{$action['pname']}</td>
                       </tr>
                     {else/}
                       <tr>
                         <td class="ac">{$action['id']}</td>
                         <td>{$action['actor']}</td>
                         <td class="ac">{$action['date']}</td>
-                        <td class="w30"><a href="{:url('/index/task/detail/?id='.$action['id'])}" target="_bacnk">{$action['tname']}</a></td>
                         <td class="ac">&nbsp;</td>
-                        <td class="ac">{$action['pname']}</td>
-                        <td class="w35">{$action['actionname']}</td>
+                        <td class="w20"><a href="{:url('/index/task/detail/?id='.$action['id'])}" target="_bacnk">{$action['tname']}</a></td>
+                        <td class="w20">{$action['pname']}</td>
+                        <td class="">{$action['actionname']}</td>
                         
                       </tr>
                     {/if}

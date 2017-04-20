@@ -14,31 +14,30 @@
                     <a href="{:url('/index/weburl/add')}" class="btn btn-info">添加网址</a> 
                 </span>
             </h3>
-            用户
-            <select name="username" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/weburl/lists?class_id='.$class_id.'&product_id='.$product_id.'&username=')}' + this.options[this.selectedIndex].value;">
-                    <option value=''>无</option>
-                    {foreach $user_list as $user}
-                    <option {if condition="$user['username'] == $username"}selected='selected'{/if} value="{$user['username']}" >{$user['realname']}</option>
-                    {/foreach}
-                </select>
-            产品
-            <select name="product_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/weburl/lists?class_id='.$class_id.'&username='.$username.'&product_id=')}' + this.options[this.selectedIndex].value;">
-                    <option value=''>无</option>
-                    {foreach $product_list as $product}
-                    <option {if condition="$product['id'] == $product_id"}selected='selected'{/if} value="{$product['id']}" >{$product['name']}</option>
-                    {/foreach}
-                </select>
-            分类
-            <select name="class_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/weburl/lists?product_id='.$product_id.'&username='.$username.'&class_id=')}' + this.options[this.selectedIndex].value;">
-                    <option value=''>无</option>
-                    {foreach $sort_list as $sort}
-                    <option {if condition="$sort['id'] == $class_id"}selected='selected'{/if} value="{$sort['id']}" >{$sort['name']}</option>
-                    {/foreach}
-                </select>
-            </div>
         </div>
         
         <div class="publicdiv mb10">
+            <label class="z lh35 mr10">用户</label>
+            <select name="username" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/weburl/lists?class_id='.$class_id.'&product_id='.$product_id.'&username=')}' + this.options[this.selectedIndex].value;">
+                <option value=''>无</option>
+                {foreach $user_list as $user}
+                <option {if condition="$user['username'] == $username"}selected='selected'{/if} value="{$user['username']}" >{$user['realname']}</option>
+                {/foreach}
+            </select>
+            <label class="z lh35 mr10 ml20">产品</label>
+            <select name="product_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/weburl/lists?class_id='.$class_id.'&username='.$username.'&product_id=')}' + this.options[this.selectedIndex].value;">
+                <option value=''>无</option>
+                {foreach $product_list as $product}
+                <option {if condition="$product['id'] == $product_id"}selected='selected'{/if} value="{$product['id']}" >{$product['name']}</option>
+                {/foreach}
+            </select>
+            <label class="z lh35 mr10 ml20">分类</label>
+            <select name="class_id" class="pt5 pb5 br3 pl10 bor z c9 mr20" onChange="window.location.href='{:url('/index/weburl/lists?product_id='.$product_id.'&username='.$username.'&class_id=')}' + this.options[this.selectedIndex].value;">
+                <option value=''>无</option>
+                {foreach $sort_list as $sort}
+                <option {if condition="$sort['id'] == $class_id"}selected='selected'{/if} value="{$sort['id']}" >{$sort['name']}</option>
+                {/foreach}
+            </select>
             <a href="{:url('/index/weburl/lists?acl=all')}" {if condition="$acl eq 'all'"} class="btn btn-info bf_doing_attr"{else} class="btn btn-info"{/if}>所有</a> 
             <a href="{:url('/index/weburl/lists?acl=private')}" {if condition="$acl eq 'private'"} class="btn btn-info bf_doing_attr"{else} class="btn btn-info"{/if}>私有</a> 
             <a href="{:url('/index/weburl/lists?acl=open')}" {if condition="$acl eq 'open'"} class="btn btn-info bf_doing_attr"{else} class="btn btn-info"{/if}>公开</a> 
