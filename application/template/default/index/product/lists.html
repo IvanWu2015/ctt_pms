@@ -27,7 +27,6 @@
                     <th class="ac bbno pt15 pb15">项目负责人</th>
                     <th class="ac bbno pt15 pb15">版本号</th>
                     <th class="w40 bbno pt15 pb15">说明</th>
-                    <th class="ac bbno pt15 pb15">操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,7 +37,6 @@
                     <td class="ac">{$product['realname']}</td>
                     <td class="ac">{$product['createdVersion']}</td>
                     <td class="w40">{$product['desc']}</td>
-                    <td class="ac"><a href="{:url('/index/plan/add?product_id='.$product['id'])}" class="fs15 cred pl10 pr10 pt5 pb5 iconfont" title="添加需求">&#xe61a;</a></td>
                     {/foreach}
             </tbody>
         </table>
