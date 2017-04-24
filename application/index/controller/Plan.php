@@ -72,13 +72,13 @@ class Plan extends Common {
     public function add() {
         $product_id = input('get.product_id', '0', 'intval');
         $plan_id = input('get.id', '0', 'intval');
+
         if ($product_id > 0){
             $product_detail = DB('Product')
                     ->where(['deleted' => 0,'id' => $product_id])
                     ->field('name,code,PO')
                     ->find();
         }
-        
         if ($plan_id > 0){
             $plan_detail = DB('Plan')->where(['deleted' => 0,'id' => $plan_id])->find();
         }
@@ -109,6 +109,7 @@ class Plan extends Common {
             }
         }
         $navtitle = '添加/修改产品' . $this->navtitle;
+        $this->assign('product_id',$product_id);
         $this->assign('plan_detail',$plan_detail);
         $this->assign('project_id', $project_id);
         $this->assign('product_detail', $product_detail);
