@@ -57,8 +57,9 @@
             {elseif condition="($_G['controller'] EQ 'User')"/}
             <a href="{:url('/admin/user/lists')}"><li {if condition="$_G['controller'] == 'User'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe647;</span>用户管理</li></a>
             
-            {elseif condition="($_G['controller'] EQ 'Navigation') or ($_G['controller'] EQ 'Sort') or ($_G['controller'] EQ 'Log') or ($_G['controller'] EQ 'Action')"/}
+            {elseif condition="($_G['controller'] EQ 'Navigation') or ($_G['controller'] EQ 'Sort') or ($_G['controller'] EQ 'Log') or ($_G['controller'] EQ 'Action') or ($_G['controller'] EQ 'Setting')"/}
             <a href="{:url('/admin/navigation/lists')}"><li {if condition="$_G['controller'] == 'Navigation'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe600;</span>导航设置</li></a>
+            <a href="{:url('/admin/setting/lists')}"><li {if condition="$_G['controller'] == 'Setting'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe600;</span>设置管理</li></a>
             <a href="{:url('/admin/sort/lists')}"><li {if condition="$_G['controller'] == 'Sort'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe608;</span>分类管理</li></a>
             <a href="{:url('/admin/log/lists')}"><li {if condition="$_G['controller'] == 'Log'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe645;</span>操作记录</li></a>
             <a href="{:url('/admin/action/lists')}"><li {if condition="$_G['controller'] == 'Action'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe6c9;</span>动态管理</li></a>
