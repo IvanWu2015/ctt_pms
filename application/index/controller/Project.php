@@ -103,17 +103,19 @@ class Project extends Common {
         $project_list = DB::name('Project')
                 ->alias('p')
                 ->join('chinatt_pms_team t', "p.acl = 'private' AND t.project = p.id AND t.username = '$username'", 'left')
-                ->field('p.*,t.username')
+                ->join('chinatt_pms_action a', "a.objectType = 'project' AND a.objectID = p.id ", 'left')
+                ->field('p.*,t.username,a.objectType,a.objectID,a.actor,a.action,a.date')
                 ->where($map)
                 ->whereor($map_or)
                 ->order('id desc')
                 ->paginate(20);
         //$project_list = Db::name('Project')->where($map)->order("$orderby DESC")->paginate(15);
-
+        $project_list = analysis_all($project_list);
         $page = $project_list->render(); // 分页显示输出
         //将对象转为数组
         $project_list = $project_list->toArray();
         $project_list = get_project_consume($project_list['data']);
+        
         $navtitle = '项目列表' . $this->navtitle;
         $this->assign('status', $status);
         $this->assign('page', $page);
@@ -286,6 +288,7 @@ class Project extends Common {
                 ->order('action.date ')
                 ->paginate(10, '', ['path' => url('/index/project/action/'), 'query' => ['project_id' => $project_id]]);
         $page = $project_list->render(); // 分页显示输出
+
         $navtitle = '动态' . ' - ' . $project_detail['name'];
         $this->assign('project_list', $project_list);
         $this->assign('project_detail', $project_detail);

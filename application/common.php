@@ -653,8 +653,12 @@ function get_project_consume($pros) {
         $count_data['consumed_count'] = $count_data['consumed_done_count'] + $count_data['consumed_ing_count'];
         $pros['all_time'] = $count_data['estimate_count'];  //总预计时间
         $pros['consumed_count'] = $count_data['consumed_count'];  //总消耗时间
-        $pros['left_time'] = $pros['all_time'] - $pros['consumed_count'];  //总消耗时间
-
+        $pros['left_time'] = $pros['all_time'] - $pros['consumed_count'];  //总剩余消耗时间
+        $nodone_data['status'] = array('in','wait,doing');
+        $nodone_data['deleted'] = array('eq','0');
+        $nodone_data['project'] = array('eq',$project_id);
+        $pros['nodone'] = $task->where($nodone_data)->count();
+        $pros['count_task'] = $task->where(['deleted' => 0,'project' => $project_id])->count();
         if ($pros['estimate_count'] > 0) {
             $pros['percent'] = round($pros['estimate_count'] / $pros['all_time'] * 100, 2); //以预计时间计算的进度
         } else {
