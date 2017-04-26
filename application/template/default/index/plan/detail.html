@@ -5,11 +5,12 @@
 
 {block name="body"}
 
-<div class="publicdiv mt20 bf pb20 mb10 sizing" id="action_wrap">
-    <div style="width:1100px; margin:0px auto;">
-        <div class="publicdiv borb pl20 pr20 sizing">
-            <h2 class="mt20 pb20 pt20 pl20 pr20 ac sizing">{$plan_detail['title']}</h2>
-            <p class="publicdiv mt20 mb10 lh35">
+<div class="publicdiv mt20 bf mb10 pl20 pr20 pt20 pb20 sizing" id="action_wrap">
+    <div class="publicdiv bor pl20 pr20 pt20 pb20 sizing">
+        <div class="publicdiv pl20 pr20 sizing">
+        <div class="publicdiv bordb sizing">
+            <h2 class="mt20 pb10 pt20 sizing">{$plan_detail['title']}</h2>
+            <p class="publicdiv mb10 lh35 c9">
                 创建者：<span class="text-primary mr20">{$plan_detail['openedBy']}</span>
                 
                 {if condition="$plan_detail['task_name'] neq ''"}
@@ -20,14 +21,16 @@
                 
                 {elseif condition="$plan_detail['product_name'] neq ''"}
                 产品名称：<span class="mr20">{$plan_detail['product_name']}</span>
-                
                 {/if}
+                
                 分配：<span class="mr20">{$plan_detail['assignedTo']}</span>
+                工时：<span class="mr20">{$plan_detail['estimate']}</span>
                 
                 <a href="{:url('/index/plan/add?id='.$plan_id)}" class="btn-link iconfont y" title="编辑">&#xe71d; 编辑</a>
                 <span class="y mr20">发布时间：{$plan_detail['openedDate']}</span>
-                <span class="y mr20">工时：{$plan_detail['estimate']}</span>
+                
             </p>
+        </div>
         </div>
         
         <div class="publicdiv pt20 pb20 pl20 pr20 sizing">{$plan_detail['content']}</div>
