@@ -24,6 +24,10 @@
                 {/if}
                 分配：<span class="mr20">{$plan_detail['assignedTo']}</span>
                 
+                产品名称：{$plan_detail['product_name']}
+                项目名称：{$plan_detail['project_name']}
+                任务名称：{$plan_detail['task_name']}
+                
                 <a href="{:url('/index/plan/add?id='.$plan_id)}" class="btn-link iconfont y" title="编辑">&#xe71d; 编辑</a>
                 <span class="y mr20">发布时间：{$plan_detail['openedDate']}</span>
                 <span class="y mr20">工时：{$plan_detail['estimate']}</span>

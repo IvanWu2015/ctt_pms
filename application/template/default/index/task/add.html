@@ -44,6 +44,18 @@
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
+                        <label class="col-sm-2 control-label" style="width:130px;"><b class="cred">* </b>关联需求：</label>
+                        <div class="col-sm-10 pln prn">
+                            <select name="plan" class="form-control" style="width:910px;">
+                                <option value="0">无</option>
+                                {foreach $plan_list as $plan}
+                                <option {if condition="$plan['id'] == $task_details['plan']"}selected='selected'{/if}value="{$plan['id']}" >{$plan['title']}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label" style="width:130px;"><b class="cred">* </b>任务名称：</label>
                         <div class="col-sm-10 pln prn" style="width:910px;">
                             <input type="text" name="name" class="form-control" id="name" placeholder="请输入任务名称" value="{$task_details['name']}">

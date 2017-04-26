@@ -35,7 +35,6 @@
                                 <input type="text" size="20" class="selwi pl10 pr10" style="width:190px;" name="value[{$setting['id']}]" value="{$setting[c_value]}">
                             </td>
                             <td class="ac iconfont">
-                                <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/setting/add/?id='.$setting['id'])}');" title="编辑" class="btn-link rkwt">&#xe71d;</a>
                                 <a href="{:url('/admin/setting/lists/?deleted=1&id='.$setting['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该项目吗？');" title="删除">&#xe601;</a>
                             </td>
                         </tr>
