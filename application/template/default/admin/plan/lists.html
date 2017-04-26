@@ -9,7 +9,7 @@
 {block name="body"}
 
 <div class="rightcon sizing"><!-- 右边内容 -->
-    <h3 class="mt5 pl15 mb15 iconfont">&#xe60b; 需求管理</h3>
+    <h3 class="mt5 pl15 mb15 iconfont">&#xe616; 需求管理</h3>
     
     <div class="publicdiv pl15 pr15 sizing">
         <div class="publicdiv pb20 bf">
@@ -23,8 +23,8 @@
                             <th class="bbno pt15 pb15">ID</th>
                             <th class="bbno pt15 pb15">产品名称</th>
                             <th class="bbno pt15 pb15 ac">所属产品</th>
-                            <th class="bbno pt15 pb15 ac">产品负责人</th>
-                            <th class="w40 bbno pt15 pb15">说明</th>
+                            <th class="bbno pt15 pb15 ac">创建者</th>
+                            <th class="ac bbno pt15 pb15">创建时间</th>
                             <th class="bbno pt15 pb15 ac">操作</th>
                         </tr>
                     </thead>
@@ -32,16 +32,15 @@
                         {foreach $plan_list as $plan}
                         <tr>
                             <td>{$plan['id']}</td>
-                            <td>{$plan['title']}</td>
+                            <td><a href="{:url('/index/plan/detail/?id='.$plan['id'])}" target="_bacnk">{$plan['title']}</a></td>
                             <td class="ac">{$plan['product_name']}</td>
                             <td class="ac">{$plan['openedBy']}</td>
-                            <td class="w40">{$plan['content']}</td>
+                            <td class="ac">{$plan['openedDate']}</td>
                             <td class="ac iconfont">
                                 <a href="{:url('/index/plan/add?id='.$plan['id'])}" class="btn-link rkwt">&#xe71d;</a>
                                 <a href="{:url('/admin/plan/lists/?deleted=1&id='.$plan['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该产品吗？');" title="删除">&#xe601;</a>
                             </td>
                             {/foreach}
-
                     </tbody>
                 </table>
                 <div class="publicdiv ac pagingw">{$page}</div>

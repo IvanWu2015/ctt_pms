@@ -17,7 +17,7 @@
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label" style="width:130px;"><b class="cred">* </b>产品名称：</label>
                         <div class="col-sm-10 pln prn" style="width:910px;">
-                            <input type="text" name="code" class="form-control" id="name" placeholder="产品名称" value="{$product_detail['name']}" {if condition="$product_id gt 0"}readonly="readonly"{/if} >
+                            <input type="text" name="code" class="form-control" id="name" placeholder="产品名称" value="{$product_detail['name']}" {if condition="($product_id gt 0) or ($plan_id gt 0)"}readonly="readonly"{/if} />
                         </div>
                     </div>
                     
