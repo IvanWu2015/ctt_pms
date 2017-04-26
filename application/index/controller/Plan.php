@@ -104,7 +104,7 @@ class Plan extends Common {
                 'status' => 'wait',
             ];
             if ($plan_id > 0) {
-                DB::name('Plan')->where(['id' => $product_id])->update($data);
+                DB::name('Plan')->where(['id' => $plan_id])->update($data);
                 $this->success("修改成功", 'Plan/lists');
             } else {
                 DB::name('Plan')->insertGetId($data);

@@ -37,7 +37,6 @@ class Setting extends Common {
         if (request()->isPost()) {
             foreach ($_POST['key'] as $key => $value){
                 $value = intval($value);
-                
                 DB('Config')->where(['id' => $key])->update(['c_key' => $value, 'c_value' => $_POST['value'][$key]]);
             }
             
