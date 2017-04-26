@@ -15,7 +15,6 @@ class Plan extends Common {
     }
 
     public function add() {
-       
         $navtitle = '产品列表';
         $this->assign('navtitle', $navtitle);
         $this->assign('class_id', $class_id);
@@ -25,10 +24,8 @@ class Plan extends Common {
     }
 
     public function lists() {
-        
         $deleted = input('get.deleted', '0', 'intval');
         $plan_id = input('get.id', '0', 'intval');
-        
         $plan_list = DB::name('Plan')
                 ->alias('n')
                 ->join('chinatt_pms_product d', 'n.product = d.id', 'left')
@@ -38,17 +35,10 @@ class Plan extends Common {
                 ->where(['n.deleted' => '0'])
                 ->paginate(10);
         $page = $plan_list->render(); // 分页显示输出
-        
-        
-        
-        
             if($deleted == 1){
                  db('Plan')->where(['id' => $plan_id])->update(array('deleted' => '1')); //删除
                  $this->success("删除成功");
             }
-        
-        
-        
         $navtitle = '需求列表' . $this->navtitle;
         $this->assign('status', $status);
         $this->assign('page', $page);

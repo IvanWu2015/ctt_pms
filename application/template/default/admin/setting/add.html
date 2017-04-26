@@ -1,27 +1,18 @@
 <div class="modalwrap h350 sizing">
     <form action="" method="post" id="add_tag">
-    <h3 class="modaltitle pl15 pr15 sizing">添加分类<a href="javascript:void(0);" onClick="modalclose();" class="y fs13 iconfont">&#xe61c;</a></h3>
+    <h3 class="modaltitle pl15 pr15 sizing">添加设置<a href="javascript:void(0);" onClick="modalclose();" class="y fs13 iconfont">&#xe61c;</a></h3>
     <div class="publocdiv pl20 pr20 sizing modalcontnet h230">
     
         <div class="form-group w100 mrn mln z">
-            <label class="col-sm-2 pt5 control-label ar fwn"><b class='cred'>*</b>上层分类</label>
+            <label class="col-sm-2 pt5 control-label ar fwn"><b class='cred'>*</b>设置的键名</label>
             <div class="col-sm-9 pln prn">
-                <select name="parentid" class="form-control">
-                    <option value='0'>无</option>
-                    {foreach $sort_list as $temp_sort}
-                    {if condition="$parentid gt 0"}
-                    <option {if condition="$temp_sort['id'] == $paren_detail['id']"}selected='selected'{/if} value="{$temp_sort['id']}" >{$temp_sort['spacer']} {$temp_sort['name']}</option>
-                    {else}
-                    <option {if condition="$temp_sort['id'] == $class_detail['parentid']"}selected='selected'{/if} value="{$temp_sort['parentid']}" >{$temp_sort['spacer']} {$temp_sort['name']}</option>
-                    {/if}
-                    {/foreach}
-                </select>
+                <input type="text" name="key" id="estimate" class="form-control" placeholder="输入设置的键名" /> 
             </div>
         </div>
         <div class="form-group w100 mrn mln z">
-            <label class="col-sm-2 pt5 control-label ar fwn"><b class='cred'>*</b>分类名称</label>
+            <label class="col-sm-2 pt5 control-label ar fwn"><b class='cred'>*</b>设置的值</label>
             <div class="col-sm-9 pln prn">
-                <input type="text" name="name" id="estimate" class="form-control" placeholder="请输入分类名称" value="{$class_detail['name']}" /> 
+                <input type="text" name="value" id="estimate" class="form-control" placeholder="输入设置的值" /> 
             </div>
         </div>
         
@@ -33,7 +24,7 @@
 </div>
 <script>
 function modalsearch(){     //ajax提交
-    var url="{:url('/admin/sort/add?type='.$type.'&id='.$class_detail['id'])}";
+    var url="{:url('/admin/setting/add?type='.$type.'&id='.$class_detail['id'])}";
     jQuery.ajax({
         type: 'post',
         url: url,
