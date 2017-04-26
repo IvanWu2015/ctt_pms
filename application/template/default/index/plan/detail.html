@@ -13,22 +13,16 @@
             <p class="publicdiv mb10 lh35 c9">
                 创建者：<span class="text-primary mr20">{$plan_detail['openedBy']}</span>
                 
-                {if condition="$plan_detail['task_name'] neq ''"}
-                任务名称：<span class="mr20">{$plan_detail['task_name']}</span>
+                任务名称：<span class="mr20">{if condition="$plan_detail['task_name'] neq ''"}{$plan_detail['task_name']}{else/}未关联{/if}</span>
                 
-                {elseif condition="$plan_detail['project_name'] neq ''"}
-                项目名称：<span class="mr20">{$plan_detail['project_name']}</span>
+                项目名称：<span class="mr20">{if condition="$plan_detail['project_name'] neq ''"}{$plan_detail['project_name']}{else/}未关联{/if}</span>
                 
-                {elseif condition="$plan_detail['product_name'] neq ''"}
-                产品名称：<span class="mr20">{$plan_detail['product_name']}</span>
-                {/if}
+                产品名称：<span class="mr20">{if condition="$plan_detail['product_name'] neq ''"}{$plan_detail['product_name']}{else/}未关联{/if}</span>
                 
                 分配：<span class="mr20">{$plan_detail['assignedTo']}</span>
                 工时：<span class="mr20">{$plan_detail['estimate']}</span>
                 
-                产品名称：{$plan_detail['product_name']}
-                项目名称：{$plan_detail['project_name']}
-                任务名称：{$plan_detail['task_name']}
+                
                 
                 <a href="{:url('/index/plan/add?id='.$plan_id)}" class="btn-link iconfont y" title="编辑">&#xe71d; 编辑</a>
                 <span class="y mr20">发布时间：{$plan_detail['openedDate']}</span>
