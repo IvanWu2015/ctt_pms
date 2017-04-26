@@ -81,8 +81,11 @@ class Plan extends Common {
         }
         if ($plan_id > 0){
             $plan_detail = DB('Plan')->where(['deleted' => 0,'id' => $plan_id])->find();
+            $product_detail = DB('Product')
+                    ->where(['deleted' => 0,'id' => $plan_detail['product']])
+                    ->field('name,code,PO')
+                    ->find();
         }
-        
         
         $user_list = DB::table('chinatt_pms_user')->select();
 
@@ -112,6 +115,7 @@ class Plan extends Common {
         $this->assign('product_id',$product_id);
         $this->assign('plan_detail',$plan_detail);
         $this->assign('project_id', $project_id);
+        $this->assign('plan_id',$plan_id);
         $this->assign('product_detail', $product_detail);
         $this->assign('team_list', $team_list);
         $this->assign('user_list', $user_list);
