@@ -45,7 +45,9 @@ class Setting extends Common {
 
     public function lists() {
         $type = input('get.type', '', 'addslashes');
-        $setting_list = DB('Config')->where(['status' => '1'])->paginate();
+        $setting_list = DB('Config')->where(['status' => '1'])->paginate(20);
+         $page = $setting_list->render(); // 分页显示输出
+        
         if (request()->isPost()) {
             foreach ($_POST['key'] as $key => $value) {
                 $value = addslashes($value);
@@ -61,6 +63,7 @@ class Setting extends Common {
 
         $navtitle = '分类列表';
         $this->assign('type', $type);
+        $this->assign('page',$page);
         $this->assign('navtitle', $navtitle);
         $this->assign('setting_list', $setting_list);
         return $this->fetch($this->templatePath);
