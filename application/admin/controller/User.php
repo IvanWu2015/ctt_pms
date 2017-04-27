@@ -33,8 +33,7 @@ class User extends Common {
                 ->where(['deleted' => 0])
                 ->order('uid DESC')
                 ->paginate(10);
-        $user_list =  get_user_count($user_list,'week');
-
+        $user_list =  get_user_count($user_list);
         $show = $user_list->render(); // 分页显示输出
         $user_list = user_count($user_list);
         $navtitle = '用户列表' . $this->navtitle;
@@ -70,7 +69,7 @@ class User extends Common {
         $same_month_consumed_count = DB::name('Task')->where($consumed_map)->sum('consumed'); //当月完成工时
         //今天总工时
         $today_count = DB::name('Workcount')->where(['username' => $this->_G['username'], 'date' => date('Y-m-d'), 'objectType' => 'user'])->field('consumed')->find();
-
+        
         //获取当周的第一天与最后一天
         $sdefaultDate = date("Y-m-d");
         $first = 1;
@@ -82,7 +81,7 @@ class User extends Common {
         $toweek_data['objectType'] = array('eq', 'user');
         //当周总工时
         $toweek_count = DB::name('Workcount')->where($toweek_data)->field('consumed')->sum('consumed');
-
+        
         $user = db('User')
                 ->alias('u')
                 ->join('chinatt_pms_dept d', 'u.dept = d.id', 'left')
@@ -147,9 +146,5 @@ class User extends Common {
         if($user_detail['uid'] != $this->_G['uid'] && $this->_G['is_admin'] != 1){
             $this->error("权限不足");
         }
-        
     }
-    
-    
-    
 }

@@ -289,6 +289,7 @@ class Task extends Common {
         $task = Db::name('task');
         $project_id = input('project_id', '0', 'intval');
         $task_id = input('task_id', '0', 'intval');
+        $username = $this->_G['username'];
         if ($task_id > 0) {
             $task_details = $task->where(['id' => $task_id])->find();
             $project_detail = DB('Project')->where(['id' => $task_details['project']])->find();
@@ -362,6 +363,7 @@ class Task extends Common {
         $this->assign('predecessor_list', $predecessor_list);
         $this->assign('project_list', $project_list);
         $this->assign('plan_list', $plan_list);
+        $this->assign('username',$username);
         $this->assign('task_details', $task_details);
         $this->assign('user_list', $user_list);
         $this->assign('task_id', $task_id);

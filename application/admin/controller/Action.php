@@ -18,8 +18,8 @@ class Action extends Common {
         $project_id = input('get.project_id', '0', 'intval');
         $username = input('get.username', '', 'addslashes');
         
-        
         $keyword = input('post.keyword', '', 'addslashes');
+        
         if($project_id > 0){
             $map['a.project'] = array('eq',$project_id);
         }
@@ -36,9 +36,11 @@ class Action extends Common {
                 ->join('chinatt_pms_taskestimate b', 'a.extra =b.id', 'left')
                 ->join('chinatt_pms_task t', 'a.objectType = \'task\' AND a.objectID =t.id', 'left')
                 ->join('chinatt_pms_task p', 'a.objectType = \'project\' AND a.objectID =p.id', 'left')
+                ->where($map)
                 ->field('a.*,b.left,b.consumed,b.username,t.name as tname, p.name as pname')
                 ->order('id DESC')
-                ->paginate(30);
+                ->paginate(30, $action_count, ['path' => url('/admin/action/lists/'), 'query' => ['username' => $username,'keyword' => $keyword]]);
+        
         $action_list = analysis_all($action_list);
         $page = $action_list->render(); // 分页显示输出
         $project_list = db('Project')->where(['deleted' => 0])->select();

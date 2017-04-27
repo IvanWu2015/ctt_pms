@@ -1,5 +1,5 @@
 <div class="modalwrap h350 sizing">
-    <form action="" method="post" id="add_tag">
+    <form action="{:url('/admin/setting/add?type='.$type)}" method="post" id="add_tag">
     <h3 class="modaltitle pl15 pr15 sizing">添加设置<a href="javascript:void(0);" onClick="modalclose();" class="y fs13 iconfont">&#xe61c;</a></h3>
     <div class="publocdiv pl20 pr20 sizing modalcontnet h230">
     
@@ -24,7 +24,7 @@
 </div>
 <script>
 function modalsearch(){     //ajax提交
-    var url="{:url('/admin/setting/add?type='.$type.'&id='.$class_detail['id'])}";
+    var url="{:url('/admin/setting/add?type='.$type)}";
     jQuery.ajax({
         type: 'post',
         url: url,
