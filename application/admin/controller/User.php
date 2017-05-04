@@ -33,7 +33,7 @@ class User extends Common {
                 ->where(['deleted' => 0])
                 ->order('uid DESC')
                 ->paginate(10);
-        $user_list =  get_user_count($user_list,'week');
+        $user_list =  get_user_count($user_list,'week');    //获取工时
 
         $show = $user_list->render(); // 分页显示输出
         $user_list = user_count($user_list);

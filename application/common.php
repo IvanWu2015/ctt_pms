@@ -958,7 +958,7 @@ function get_user_count($user_list, $type, $startdate, $enddate) {
 }
 
 /**
- * 用户工时
+ * 获取用户工时
  * @param str $user 用户
  * @param array $type 类型
  * @param array $startdate 开始
