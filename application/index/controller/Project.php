@@ -48,7 +48,6 @@ class Project extends Common {
                 ->field('t.*,k.name as p_name')
                 ->order("$orderby DESC")
                 ->paginate(20, $task_count, ['path' => url('/index/project/detail/'), 'query' => ['id' => $project_id, 'status' => $status]]);
-
         $show = $task_list->render(); // 分页显示输出
         $user_list = get_userlist_by_projectid($project_id);
         $project_detail = $project->where(['id' => $project_id])->find();

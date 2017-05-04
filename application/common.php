@@ -654,11 +654,11 @@ function get_project_consume($pros) {
         $pros['all_time'] = $count_data['estimate_count'];  //总预计时间
         $pros['consumed_count'] = $count_data['consumed_count'];  //总消耗时间
         $pros['left_time'] = $pros['all_time'] - $pros['consumed_count'];  //总剩余消耗时间
-        $nodone_data['status'] = array('in','wait,doing');
-        $nodone_data['deleted'] = array('eq','0');
-        $nodone_data['project'] = array('eq',$project_id);
+        $nodone_data['status'] = array('in', 'wait,doing');
+        $nodone_data['deleted'] = array('eq', '0');
+        $nodone_data['project'] = array('eq', $project_id);
         $pros['nodone'] = $task->where($nodone_data)->count();
-        $pros['count_task'] = $task->where(['deleted' => 0,'project' => $project_id])->count();
+        $pros['count_task'] = $task->where(['deleted' => 0, 'project' => $project_id])->count();
         if ($pros['estimate_count'] > 0) {
             $pros['percent'] = round($pros['estimate_count'] / $pros['all_time'] * 100, 2); //以预计时间计算的进度
         } else {
@@ -755,7 +755,7 @@ function analysis($task_id) {
 function analysis_all($action_list) {
 //    $action_list = DB('Action')->where(['objectID' => $task_id])->order('id')->select();
     foreach ($action_list as $key => $value) {
-        
+
         if ($value['objectType'] == 'product') {
             $value['typename'] = "产品";
         } elseif ($value['objectType'] == 'project') {
@@ -768,9 +768,9 @@ function analysis_all($action_list) {
             $value['typename'] = "BUG";
         } elseif ($value['objectType'] == 'build') {
             $value['typename'] = "创建";
-        }elseif ($value['objectType'] == 'navigation') {
+        } elseif ($value['objectType'] == 'navigation') {
             $value['typename'] = $value['comment'] . "的导航";
-        }elseif ($value['objectType'] == 'class') {
+        } elseif ($value['objectType'] == 'class') {
             $value['typename'] = $value['comment'] . "的分类";
         }
 
@@ -803,7 +803,7 @@ function analysis_all($action_list) {
             $value['actionname'] = "记录工时(消耗{$value['consumed']}小时,剩余{$value['left']}小时)";
         } elseif ($value['action'] == 'commented') {
             $value['actionname'] = "添加了备注";
-        }elseif ($value['action'] == 'add') {
+        } elseif ($value['action'] == 'add') {
             $value['actionname'] = "添加";
         }
         $action_list[$key] = $value;
@@ -948,13 +948,12 @@ function working_count($subjectTYPE, $objectID, $username, $consumed) {
  * @param array $startdate 开始
  * @param array $enddate 结束
  */
-function get_user_count($user_list, $type, $startdate, $enddate) {
-    foreach ($user_list as $key => $value) {        
-        $value['workcount'] = get_count($value['username'], $type, $startdate, $enddate);
+function get_user_count($user_list, $startdate, $enddate) {
+    foreach ($user_list as $key => $value) {
+        $value['workcount'] = get_count($value['username'], $startdate, $enddate);
         $user_list[$key] = $value;
     }
     return $user_list;
-
 }
 
 /**
@@ -964,35 +963,60 @@ function get_user_count($user_list, $type, $startdate, $enddate) {
  * @param array $startdate 开始
  * @param array $enddate 结束
  */
-function get_count($user, $type, $startdate, $enddate) {
-    $data['username'] = array('eq', $user);
-    $data['objectType'] = array('eq', 'user');
-    if ($type == 'today') {
-        $startdate = $enddate = date('Y-m-d');
-        $data['date'] = array('in', "$startdate,$enddate");
-    } elseif ($type == 'week') {
-        //获取当周的第一天与最后一天
-        $sdefaultDate = date("Y-m-d");
-        $first = 0;
-        $w = date('w', strtotime($sdefaultDate));
-        $startdate = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
-        $enddate = date('Y-m-d', strtotime("$startdate +6 days"));
-        $data['date'] = array('between time', "$startdate,$enddate");
-    } elseif ($type == 'month') {
-        $startdate = date('Y-m-01');
-        $enddate = date('Y-m-t');
-        $data['date'] = array('between time', "$startdate,$enddate");
-    } else {
-        $data['date'] = array('between time', "$startdate,$enddate");
-    }
-    $count = DB('Workcount')->where($data)->sum('consumed');
+function get_count($user, $startdate, $enddate) {
+//    $data['username'] = array('eq', $user);
+//    $data['objectType'] = array('eq', 'user');
+//    if ($type == 'today') {
+//        $startdate = $enddate = date('Y-m-d');
+//        $data['date'] = array('in', "$startdate,$enddate");
+//    } elseif ($type == 'week') {
+//        //获取当周的第一天与最后一天
+//        $sdefaultDate = date("Y-m-d");
+//        $first = 0;
+//        $w = date('w', strtotime($sdefaultDate));
+//        $startdate = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
+//        $enddate = date('Y-m-d', strtotime("$startdate +6 days"));
+//        $data['date'] = array('between time', "$startdate,$enddate");
+//    } elseif ($type == 'month') {
+//        $startdate = date('Y-m-01');
+//        $enddate = date('Y-m-t');
+//        $data['date'] = array('between time', "$startdate,$enddate");
+//    } else {
+//        $data['date'] = array('between time', "$startdate,$enddate");
+//    }
+    //获取今天的工时
+    $today_data['username'] = array('eq', $user);
+    $today_data['objectType'] = array('eq', 'user');
+    $startdate = $enddate = date('Y-m-d');
+    $today_data['date'] = array('eq', "$startdate");
+    $count['today_working'] = DB('Workcount')->where($today_data)->sum('consumed');
+
+    //获取当周的工时
+    $sdefaultDate = date("Y-m-d");
+    $first = 0;
+    $w = date('w', strtotime($sdefaultDate));
+    $startdate = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
+    $enddate = date('Y-m-d', strtotime("$startdate +6 days"));
+    $week_data['date'] = array('between time', "$startdate,$enddate");
+    $week_data['username'] = array('eq', $user);
+    $week_data['objectType'] = array('eq', 'user');
+    $count['week_working'] = DB('Workcount')->where($week_data)->sum('consumed');
+    
+    //获取当月工时
+    $startdate = date('Y-m-01');
+    $enddate = date('Y-m-t');
+    $month_data['date'] = array('between time', "$startdate,$enddate");
+    $month_data['username'] = array('eq', $user);
+    $month_data['objectType'] = array('eq', 'user');
+    $count['month_working'] = DB('Workcount')->where($month_data)->sum('consumed');
+    
     return $count;
 }
 
 //访问操作日志存储
-function save_log($uid,$username) {
+function save_log($uid, $username) {
     global $_G;
-    
+
     $log = array(
         'uid' => $uid,
         'username' => $username,
@@ -1013,16 +1037,16 @@ function save_log($uid,$username) {
  * @return array
  */
 function classifyTree($db_navigation_list, $parent_id = 0) {
-    foreach($db_navigation_list as $temp_nav) {
+    foreach ($db_navigation_list as $temp_nav) {
         $temp_nav['true_url'] = strpos($temp_nav['url'], 'http://') !== false ? $temp_nav['url'] : url($temp_nav['url']);
-        if($temp_nav['parentid'] == $parent_id) {
-            if($parent_id == 0) {
+        if ($temp_nav['parentid'] == $parent_id) {
+            if ($parent_id == 0) {
                 $navgation_list[$temp_nav['id']]['main'] = $temp_nav;
             } else {
                 $navgation_list[$temp_nav['id']] = $temp_nav;
             }
             $sub_navlist = classifyTree($db_navigation_list, $temp_nav['id']);
-            if(!empty($sub_navlist)) {
+            if (!empty($sub_navlist)) {
                 $navgation_list[$temp_nav['id']]['sub_count'] = count($sub_navlist);
                 $navgation_list[$temp_nav['id']]['sub'] = $sub_navlist;
             }

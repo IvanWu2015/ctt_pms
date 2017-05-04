@@ -67,7 +67,12 @@
                         <div class="col-sm-9 pln prn">
                             <select name="assignedTo" class="form-control">
                                 {foreach $user_list as $user}
-                                <option {if condition="$user['username'] == $task_details['assignedTo']"}selected='selected'{/if}value="{$user['username']}" >{$user['realname']}</option>
+                                {if condition="$task_id eq 0"}
+                                <option {if condition="$user['username'] == $username"}selected='selected'{/if}value="{$user['username']}" >{$user['realname']}</option>
+                                {else/}
+                                 <option {if condition="$user['username'] == $task_details['assignedTo']"}selected='selected'{/if}value="{$user['username']}" >{$user['realname']}</option>
+                                {/if}
+                                
                                 {/foreach}
                             </select>
                         </div>

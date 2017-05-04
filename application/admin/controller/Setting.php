@@ -45,7 +45,7 @@ class Setting extends Common {
 
     public function lists() {
         $type = input('get.type', '', 'addslashes');
-        $setting_list = DB('Config')->where(['status' => '1'])->paginate(20);
+        $setting_list = DB('Config')->where(['status' => '1','group' => $type])->paginate(20);
          $page = $setting_list->render(); // 分页显示输出
         
         if (request()->isPost()) {

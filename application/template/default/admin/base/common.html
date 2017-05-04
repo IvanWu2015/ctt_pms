@@ -59,7 +59,8 @@
             
             {elseif condition="($_G['controller'] EQ 'Navigation') or ($_G['controller'] EQ 'Sort') or ($_G['controller'] EQ 'Log') or ($_G['controller'] EQ 'Action') or ($_G['controller'] EQ 'Setting')"/}
             <a href="{:url('/admin/navigation/lists')}"><li {if condition="$_G['controller'] == 'Navigation'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe600;</span>导航设置</li></a>
-            <a href="{:url('/admin/setting/lists')}"><li {if condition="$_G['controller'] == 'Setting'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe600;</span>设置管理</li></a>
+            <a href="{:url('/admin/setting/lists?type=task_type')}"><li {if condition="$_GET['type'] == 'task_type'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe600;</span>任务类型</li></a>
+            <a href="{:url('/admin/setting/lists?type=plan_type')}"><li {if condition="$_GET['type'] == 'plan_type'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe600;</span>需求类型</li></a>
             <a href="{:url('/admin/sort/lists')}"><li {if condition="$_G['controller'] == 'Sort'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe608;</span>分类管理</li></a>
             <a href="{:url('/admin/log/lists')}"><li {if condition="$_G['controller'] == 'Log'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe645;</span>操作记录</li></a>
             <a href="{:url('/admin/action/lists')}"><li {if condition="$_G['controller'] == 'Action'"}class="navattr sizing"{else}class="sizing"{/if}><span>&#xe6c9;</span>动态管理</li></a>

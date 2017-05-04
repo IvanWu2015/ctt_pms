@@ -41,10 +41,10 @@ class Mycenter extends Common {
         $estimate_map['finishedDate'] = array('GT', $headDate);
         $same_month_estimate_count = DB::name('Task')->where($estimate_map)->sum('estimate'); //当月预计工时
         //今天总工时
-        $today_count = DB::name('Workcount')->where(['username' => $this->_G['username'], 'date' => date('Y-m-d'),'objectType' => 'user'])->field('consumed')->find();
-
+//        $today_count = DB::name('Workcount')->where(['username' => $this->_G['username'], 'date' => date('Y-m-d'),'objectType' => 'user'])->field('consumed')->find();
+        $user_count = get_count($this->_G['username']);
         
-        $toweek_count = get_count($this->_G['username'], 'week');
+//        $toweek_count = get_count($this->_G['username'], 'week');
         
         $consumed_map['username'] = array('eq', $this->_G['username']);
         $consumed_map['date'] = array('GT', $headDate);
@@ -89,6 +89,7 @@ class Mycenter extends Common {
         $this->assign('consumed_count', $consumed_count);
         $this->assign('article_list', $article_list);
         $this->assign('weburl_list', $weburl_list);
+        $this->assign('user_count',$user_count);
         $this->assign('action_list', $action_list);
         $this->assign('task_list', $task_list);
         $this->assign('user', $user);
@@ -199,8 +200,8 @@ class Mycenter extends Common {
                 ->where([ 't.username' => $this->_G['username']])
                 ->order('id desc')
                 ->paginate(10);
-
-
+        $navtitle = '我的项目' . $navtitle;
+        $this->assign('navtitle', $navtitle);
         $this->assign('project_list', $project_list);
         return $this->fetch($this->templatePath);
     }

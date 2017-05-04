@@ -26,8 +26,8 @@
                             <th class="ac bbno pt15 pb15">已完成任务</th>
                             <th class="ac bbno pt15 pb15">未完成任务</th>
                             <th class="ac bbno pt15 pb15">管理员</th>
-                            <th class="ac bbno pt15 pb15">邮箱</th>
-                            <th class="ac bbno pt15 pb15">QQ</th>
+                            <th class="ac bbno pt15 pb15">当周工时</th>
+                            <th class="ac bbno pt15 pb15">当月工时</th>
                             <th class="ac bbno pt15 pb15">权限</th>
                         </tr>
                     </thead>
@@ -39,7 +39,7 @@
                             <td class="ac">{$user['username']}</td>
                             <td class="ac">{$user['depe_name']}</td>
                             <td class="ac">{$user['group_name']}</td>
-                            <td class="ac ="><a href="javascript:void(0);" class="text-info" target="_bacnk">{$user['workcount']}</a></td>
+                            <td class="ac ="><a href="javascript:void(0);" class="text-info" target="_bacnk">{$user['workcount']['today_working']}</a></td>
                             <td class="ac "><a href="{:url('/admin/task/lists?openedby='.$user['username'])}" class="text-info">{$user['task_count']}</a></td>
                             <td class="ac"><a href="{:url('/admin/task/lists?status=done&username='.$user['username'])}" class="text-muted">{$user['done_task_count']}</a></td>
                             <td class="ac"><a href="{:url('/admin/task/lists?status=notdone&username='.$user['username'])}" class="text-danger">{$user['not_task_count']}</a></td>
@@ -50,8 +50,8 @@
                                 否
                                 {/if}
                             </td>
-                            <td class="ac">{$user['email']}</td>
-                            <td class="ac">{$user['qq']}</td>
+                            <td class="ac">{$user['workcount']['week_working']}</td>
+                            <td class="ac">{$user['workcount']['month_working']}</td>
                             <td class="ac">
                                 <input type="checkbox" name="is_admin[{$user['uid']}]" value="1" />
                             </td>
