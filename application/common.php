@@ -1018,7 +1018,6 @@ function get_count($user, $startdate, $enddate) {
 //访问操作日志存储
 function save_log($uid, $username) {
     global $_G;
-
     $log = array(
         'uid' => $uid,
         'username' => $username,
