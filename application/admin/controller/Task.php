@@ -40,11 +40,11 @@ class Task extends Common {
         if(!empty($openedby)){
             $data['t.openedBy'] = array('eq', $openedby);
         }
+        //搜索
         $keyword = input('post.keyword', '', 'addslashes');
         if(!empty($keyword)){
             $data['t.name'] = array('like',"%$keyword%");
         }
-        
         
         $user_list = DB('User')->where(['deleted' => 0])->select();
         $project_list = db('Project')->where(['deleted' => 0])->select();
