@@ -755,7 +755,6 @@ function analysis($task_id) {
 function analysis_all($action_list) {
 //    $action_list = DB('Action')->where(['objectID' => $task_id])->order('id')->select();
     foreach ($action_list as $key => $value) {
-
         if ($value['objectType'] == 'product') {
             $value['typename'] = "产品";
         } elseif ($value['objectType'] == 'project') {
@@ -773,7 +772,6 @@ function analysis_all($action_list) {
         } elseif ($value['objectType'] == 'class') {
             $value['typename'] = $value['comment'] . "的分类";
         }
-
         if ($value['action'] == 'assignedTo') {
             $username = $action_list[$key]['extra'];
             $value['actionname'] = "指派给 <b>$username</b>";
@@ -805,6 +803,10 @@ function analysis_all($action_list) {
             $value['actionname'] = "添加了备注";
         } elseif ($value['action'] == 'add') {
             $value['actionname'] = "添加";
+        } elseif ($value['action'] == 'deleted') {
+            $value['actionname'] = "删除";
+        }elseif ($value['action'] == 'updata') {
+            $value['actionname'] = "修改";
         }
         $action_list[$key] = $value;
     }

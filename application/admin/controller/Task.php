@@ -40,6 +40,12 @@ class Task extends Common {
         if(!empty($openedby)){
             $data['t.openedBy'] = array('eq', $openedby);
         }
+        $keyword = input('get.keyword', '', 'addslashes');
+        if(!empty($keyword)){
+            $data['t.name'] = array('like',"%$keyword%");
+        }
+        
+        
         $user_list = DB('User')->where(['deleted' => 0])->select();
         $project_list = db('Project')->where(['deleted' => 0])->select();
         $task_list = $task
@@ -67,6 +73,7 @@ class Task extends Common {
         }
         
         $navtitle = '任务管理';
+        $this->assign('keyword',$keyword);
         $this->assign('navtitle', $navtitle);
         $this->assign('project_list', $project_list);
         $this->assign('username',$username);

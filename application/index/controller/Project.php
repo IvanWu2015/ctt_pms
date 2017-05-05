@@ -71,7 +71,7 @@ class Project extends Common {
 
     //列表
     public function lists() {
-        $map['deleted'] = array('eq', '0');
+        $map['p.deleted'] = array('eq', '0');
         $username = $this->_G['username'];
         $status = input('status/s', 'unclose');
         $status = str_replace('.html', '', $status);
@@ -97,24 +97,30 @@ class Project extends Common {
             $map['p.acl'] = array('eq', 'open');
             $map_or['t.username'] = $username;
         }
-
         //$map['t.username'] = array('eq',$username);
+
         $project_list = DB::name('Project')
                 ->alias('p')
                 ->join('chinatt_pms_team t', "p.acl = 'private' AND t.project = p.id AND t.username = '$username'", 'left')
-                ->join('chinatt_pms_action a', "a.objectType = 'project' AND a.objectID = p.id ", 'left')
+                ->join('chinatt_pms_action a', "p.id = a.project  AND a.id = (select max(id) from chinatt_pms_action where project = p.id )", 'left')
                 ->field('p.*,t.username,a.objectType,a.objectID,a.actor,a.action,a.date')
                 ->where($map)
                 ->whereor($map_or)
                 ->order('id desc')
-                ->paginate(20);
-        //$project_list = Db::name('Project')->where($map)->order("$orderby DESC")->paginate(15);
+                ->paginate(30);
+//        $project_list = DB::name('Project')
+//                ->alias('p')
+//                ->join('chinatt_pms_team t' ," t.project = p.id AND t.username = '$username'",'left')
+//                ->join('chinatt_pms_action a',"p.id = a.project AND a.objectType = 'project' AND a.id = (select max(id) from chinatt_pms_action where project = p.id AND  a.objectType = 'project')",'left')
+//                ->where(['t.username' => $username,'p.deleted' => '0'])
+//                ->field('p.*,t.username,a.objectType,a.objectID,a.actor,a.action,a.date')
+//                ->paginate(30);
         $project_list = analysis_all($project_list);
+        
         $page = $project_list->render(); // 分页显示输出
         //将对象转为数组
         $project_list = $project_list->toArray();
         $project_list = get_project_consume($project_list['data']);
-        
         $navtitle = '项目列表' . $this->navtitle;
         $this->assign('status', $status);
         $this->assign('page', $page);
