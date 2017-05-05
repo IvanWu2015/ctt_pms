@@ -24,6 +24,32 @@
                 <a href="{:url('/index/product/add?id='.$id)}" class="btn-link iconfont y" title="编辑">&#xe71d; 编辑</a>
                 <span class="y mr20">发布时间：{$product_detail['createdDate']}</span>
                 
+                
+                <table class="table table-striped borl bort borr borb">
+            <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                <tr>
+                    <th class="w40 bbno pt15 pb15">需求名称</th>
+                    <th class="ac bbno pt15 pb15">分支</th>
+                    <th class="ac bbno pt15 pb15">分配</th>
+                    <th class="ac bbno pt15 pb15">创建者</th>
+                    <th class="ac bbno pt15 pb15">预计工时</th>
+                    <th class="ac bbno pt15 pb15">创建时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                {foreach $plan_list as $plan}
+                <tr>
+                    <td class="w40"><a href="{:url('/index/plan/detail/?id='.$plan['id'])}">{$plan['title']}</a></td>
+                    <td class="ac">{$plan['branch']}</td>
+                    <td class="ac">{$plan['assignedTo']}</td>
+                    <td class="ac">{$plan['openedBy']}</td>
+                    <td class="ac">{$plan['estimate']}</td>
+                    <td class="ac">{$plan['openedDate']}</td>
+                {/foreach}
+            
+            </tbody>
+        </table>
+                
             </p>
         </div>
         </div>

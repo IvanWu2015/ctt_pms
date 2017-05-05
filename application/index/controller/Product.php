@@ -12,7 +12,17 @@ class Product extends Common {
 
     //项目详情页
     public function detail() {
-
+        $product_id = input('get.id', '0', 'intval');
+        
+        if($product_id > 0){
+            $product_detail = db('Product')->where(['id' => $product_id])->find();
+            $plan_list = db('Plan')->where(['product' => $product_id])->paginate(20);
+        }
+        
+        $page = $plan_list->render(); // 分页显示输出
+        $this->assign('product_detail',$product_detail);
+        $this->assign('product_id',$product_id);
+        $this->assign('plan_list',$plan_list);
         return $this->fetch($this->templatePath);
     }
 
