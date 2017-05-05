@@ -472,8 +472,16 @@ a.cc:hover{ color:#ccc !important;}
 .derkwt a{ border-radius:2px; color:#003366; padding:8px 15px; float:left;}
 .derkwt a:hover{ background:#ddd; color:#333; text-decoration:none;}
 
-.ncnt{ min-width:120px;}
+.ncnt{ min-width:120px; float:left; padding:5px 10px; word-wrap:break-word; background:#D3DAE0; max-width: 100%;}
 .ncnt:after{ content:''; width:20px; height:7px; background:url(../images/navattr01.png) no-repeat; position:absolute; top:-7px; left:30px;}
+
+.yauto{ overflow-y:auto;}
+.yauto::-webkit-scrollbar {width:5px;height:5px;}
+.yauto::-webkit-scrollbar-button    {background-color:#fff;}
+.yauto::-webkit-scrollbar-track     {background:#fff;}
+.yauto::-webkit-scrollbar-thumb{background:#ccc;border-radius:2px;}
+.yauto::-webkit-scrollbar-corner {background:#fff;}
+.yauto::-webkit-scrollbar-resizer  {background:#fff;}
 
 .pagingw  div{float:right;}
 .pagingw .num{ color:#428bca; padding:7px 15px; float:left; border-top:1px #dedede solid; border-bottom:1px #dedede solid; border-right:1px #dedede solid;}

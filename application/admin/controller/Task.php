@@ -40,7 +40,7 @@ class Task extends Common {
         if(!empty($openedby)){
             $data['t.openedBy'] = array('eq', $openedby);
         }
-        $keyword = input('get.keyword', '', 'addslashes');
+        $keyword = input('post.keyword', '', 'addslashes');
         if(!empty($keyword)){
             $data['t.name'] = array('like',"%$keyword%");
         }
