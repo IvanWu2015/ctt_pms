@@ -29,6 +29,12 @@ class Project extends Common {
             $data['product'] = array('eq',$product_id);
         }
         $project = db('Project');
+        //搜索
+        $keyword = input('post.keyword', '', 'addslashes');
+        if(!empty($keyword)){
+            $data['name'] = array('like',"%$keyword%");
+        }
+        
         $data['deleted'] = array('EQ', '0');
         $project_list = Db::name('Project')->where($data)->order("id DESC")->paginate(15);
 
