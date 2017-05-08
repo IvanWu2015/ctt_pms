@@ -9,51 +9,62 @@
     <div class="publicdiv bor pl20 pr20 pt20 pb20 sizing">
         <div class="publicdiv pl20 pr20 sizing">
         <div class="publicdiv bordb sizing">
-            <h2 class="mt20 pb10 pt20 sizing">{$product_detail['name']}</h2>
-            <p class="publicdiv mb10 lh35 c9">
+            <h2 class="mt10 pb10 pt20 sizing">{$product_detail['name']}</h2>
+            <p class="publicdiv lh35 c9">
                 创建人：<span class="text-primary mr20">{$product_detail['createdBy']}</span>
                 
-                代号：<span class="mr20">{$product_detail['code']}</span>
+                <!--代号：<span class="mr20">{$product_detail['code']}</span>
                 类型：<span class="mr20">{$product_detail['type']}</span>
                 状态：<span class="mr20">{$product_detail['status']}</span>
                 负责人：<span class="mr20">{$product_detail['PO']}</span>
                 权限：<span class="mr20">{$product_detail['acl']}</span>
                 白名单：<span class="mr20">{$product_detail['whitelist']}</span>
-                负责人：<span class="mr20">{$product_detail['PO']}</span>
-                <a href="{:url('/index/product/add?id='.$product_detail['id'])}" class="btn-link iconfont y" title="编辑">&#xe71d; 编辑</a>
-                <span class="y mr20">发布时间：{$product_detail['createdDate']}</span>
+                负责人：<span class="mr20">{$product_detail['PO']}</span>-->
                 
-                
-                <table class="table table-striped borl bort borr borb">
-            <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
-                <tr>
-                    <th class="w40 bbno pt15 pb15">需求名称</th>
-                    <th class="ac bbno pt15 pb15">分支</th>
-                    <th class="ac bbno pt15 pb15">分配</th>
-                    <th class="ac bbno pt15 pb15">创建者</th>
-                    <th class="ac bbno pt15 pb15">预计工时</th>
-                    <th class="ac bbno pt15 pb15">创建时间</th>
-                </tr>
-            </thead>
-            <tbody>
-                {foreach $plan_list as $plan}
-                <tr>
-                    <td class="w40"><a href="{:url('/index/plan/detail/?id='.$plan['id'])}">{$plan['title']}</a></td>
-                    <td class="ac">{$plan['branch']}</td>
-                    <td class="ac">{$plan['assignedTo']}</td>
-                    <td class="ac">{$plan['openedBy']}</td>
-                    <td class="ac">{$plan['estimate']}</td>
-                    <td class="ac">{$plan['openedDate']}</td>
-                {/foreach}
+                <!--<a href="{:url('/index/product/add?id='.$id)}" class="btn-link iconfont y" title="编辑">&#xe71d; 编辑</a>-->
+                <span class="y">发布时间：{$product_detail['createdDate']}</span>
+            </p>
             
-            </tbody>
-        </table>
+            <ul class="publicdiv bor mb10">
+                <li class="w16 borr ptlrb8 lh30 z">代号：{$product_detail['code']}</li>
+                <li class="w16 borr ptlrb8 lh30 z">类型：{$product_detail['type']}</li>
+                <li class="w16 borr ptlrb8 lh30 z">状态：{$product_detail['status']}</li>
+                <li class="w16 borr ptlrb8 lh30 z">负责人：{$product_detail['PO']}</li>
+                <li class="w16 borr ptlrb8 lh30 z">权限：{$product_detail['acl']}</li>
+                <li class="w16 ptlrb8 lh30 z">白名单：{$product_detail['whitelist']}</li>
+            </ul>
+                
+                <h3 class="publicdiv fs18 mt20">需求列表</h3>
+                <table class="table table-striped">
+                    <thead style="background:#f6f6f6;">
+                        <tr>
+                            <th class="w40 bbno pt15 pb15 lh30">需求名称</th>
+                            <th class="ac bbno pt15 pb15 lh30">分支</th>
+                            <th class="ac bbno pt15 pb15 lh30">分配</th>
+                            <th class="ac bbno pt15 pb15 lh30">创建者</th>
+                            <th class="ac bbno pt15 pb15 lh30">预计工时</th>
+                            <th class="ac bbno pt15 pb15 lh30">创建时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach $plan_list as $plan}
+                        <tr>
+                            <td class="btno lh25 w40"><a href="{:url('/index/plan/detail/?id='.$plan['id'])}">{$plan['title']}</a></td>
+                            <td class="btno lh25 ac">{$plan['branch']}</td>
+                            <td class="btno lh25 ac">{$plan['assignedTo']}</td>
+                            <td class="btno lh25 ac">{$plan['openedBy']}</td>
+                            <td class="btno lh25 ac">{$plan['estimate']}</td>
+                            <td class="btno lh25 ac">{$plan['openedDate']}</td>
+                        {/foreach}
+                    
+                    </tbody>
+                </table>
                 
             </p>
         </div>
         </div>
         
-        <div class="publicdiv pt20 pb20 pl20 pr20 sizing">{$product_detail['desc']}</div>
+        <div class="publicdiv pt20 pb20 pl20 pr20 sizing">描述：{$product_detail['desc']}</div>
         
     </div>
 </div>
