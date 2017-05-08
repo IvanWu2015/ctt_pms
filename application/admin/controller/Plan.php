@@ -26,6 +26,7 @@ class Plan extends Common {
     public function lists() {
         $deleted = input('get.deleted', '0', 'intval');
         $plan_id = input('get.id', '0', 'intval');
+        //需求列表
         $plan_list = DB::name('Plan')
                 ->alias('n')
                 ->join('chinatt_pms_product d', 'n.product = d.id', 'left')
@@ -46,5 +47,4 @@ class Plan extends Common {
         $this->assign('navtitle', $navtitle);
         return $this->fetch($this->templatePath);
     }
-
 }

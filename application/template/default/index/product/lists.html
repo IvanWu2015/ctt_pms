@@ -33,7 +33,7 @@
             <tbody>
                 {foreach $product_list as $product}
                 <tr>
-                    <td class="">{$product['name']}</td>
+                    <td class=""><a href="{:url('/index/product/detail/?id='.$product['id'])}">{$product['name']}</a></td>
                     <td class="ac">{$product['code']}</td>
                     <td class="ac">{$product['realname']}</td>
                     <td class="ac">{$product['createdVersion']}</td>

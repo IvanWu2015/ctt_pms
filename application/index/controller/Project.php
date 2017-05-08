@@ -103,11 +103,13 @@ class Project extends Common {
                 ->alias('p')
                 ->join('chinatt_pms_team t', "p.acl = 'private' AND t.project = p.id AND t.username = '$username'", 'left')
                 ->join('chinatt_pms_action a', "p.id = a.project  AND a.id = (select max(id) from chinatt_pms_action where project = p.id )", 'left')
-                ->field('p.*,t.username,a.objectType,a.objectID,a.actor,a.action,a.date,a.id as action_id')
+                ->join('chinatt_pms_taskestimate e',"a.extra =  e.id",'left')
+                ->field('p.*,t.username,a.objectType,a.objectID,a.actor,a.action,a.date,a.id as action_id,e.left,e.consumed')
                 ->where($map)
                 ->whereor($map_or)
                 ->order('action_id desc')
                 ->paginate(30);
+
 //        $project_list = DB::name('Project')
 //                ->alias('p')
 //                ->join('chinatt_pms_team t' ," t.project = p.id AND t.username = '$username'",'left')
@@ -116,7 +118,6 @@ class Project extends Common {
 //                ->field('p.*,t.username,a.objectType,a.objectID,a.actor,a.action,a.date')
 //                ->paginate(30);
         $project_list = analysis_all($project_list);
-        
         $page = $project_list->render(); // 分页显示输出
         //将对象转为数组
         $project_list = $project_list->toArray();

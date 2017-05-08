@@ -31,7 +31,6 @@ class Setting extends Common {
             echo $data;
             exit();
         }
-        
         $navtitle = '分类列表' . $class_detail['name'];
         $this->assign('type', $type);
         $this->assign('navtitle', $navtitle);
@@ -68,5 +67,4 @@ class Setting extends Common {
         $this->assign('setting_list', $setting_list);
         return $this->fetch($this->templatePath);
     }
-
 }

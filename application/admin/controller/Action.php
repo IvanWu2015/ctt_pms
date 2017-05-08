@@ -17,9 +17,7 @@ class Action extends Common {
     public function lists() {
         $project_id = input('get.project_id', '0', 'intval');
         $username = input('get.username', '', 'addslashes');
-        
         $keyword = input('post.keyword', '', 'addslashes');
-        
         if($project_id > 0){
             $map['a.project'] = array('eq',$project_id);
         }
@@ -29,7 +27,7 @@ class Action extends Common {
         if(!empty($keyword)){
             $map['action'] = array('like',"%$keyword%");
         }
-        $user_list = db('User')->where(['deleted' => 0])->select();
+        $user_list = db('User')->where(['deleted' => 0])->select();//用户列表
         //动态
         $action_list = DB('Action')
                 ->alias('a')
@@ -55,7 +53,4 @@ class Action extends Common {
         $this->assign('page',$page);
         return $this->fetch($this->templatePath);
     }
-    
-    
-    
 }

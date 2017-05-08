@@ -35,8 +35,6 @@ class Task extends Common {
         $type = input('param.type');
         $user_info = Db::name('User')->where(['uid' => $this->_G['uid'], 'deleted' => 0])->find();
         $consumed = input('param.consumed'); //消耗
-
-
         if (request()->isPost()) {
             //分配
             if ($type == 'assign') {
@@ -222,6 +220,7 @@ class Task extends Common {
      */
     public function detail() {
         $task_id = input('id', '0', 'intval');
+        //任务详情
         $task_detail = DB::table('chinatt_pms_task')
                 ->alias('t')
                 ->join('chinatt_pms_task p', 't.predecessor = p.id', 'left')
@@ -233,9 +232,9 @@ class Task extends Common {
             $this->error('任务不存在。');
         }
         $user = $this->_G;
-        $user_list = DB::table('chinatt_pms_user')->select();
+        $user_list = DB::table('chinatt_pms_user')->select();//用户列表
         $data['task'] = array('EQ', $task_id);
-        $work_list = DB::table('chinatt_pms_taskestimate')->where($data)->order('id')->select();
+        $work_list = DB::table('chinatt_pms_taskestimate')->where($data)->order('id')->select();//该任务的工时列表
         $project_id = $task_detail['project'];
         $project_detail = DB::name('project')->where(['id' => $project_id])->find();
         $user_list = get_userlist_by_projectid($project_id);
@@ -243,7 +242,6 @@ class Task extends Common {
         if ($project_detail['acl'] == 'private' && !isProjectUser($this->_G['username'], $user_list)) {
             $this->error('您无该项目访问权限。');
         }
-
         if (request()->isPost()) {
             $work_data = [
                 'username' => $this->_G['username'],
@@ -253,7 +251,6 @@ class Task extends Common {
                 'date' => date('Y-m-d'),
                 'left' => input('param.left', 0, 'intval')//剩余
             ];
-
             $task_data = [
                 'finishedBy' => $this->_G['username'],
                 'finishedDate' => date('Y-m-d H:i:s'),
@@ -290,32 +287,36 @@ class Task extends Common {
         $project_id = input('project_id', '0', 'intval');
         $task_id = input('task_id', '0', 'intval');
         $username = $this->_G['username'];
+        //修改状态判断任务是否超时
         if ($task_id > 0) {
-            $task_details = $task->where(['id' => $task_id])->find();
-            $project_detail = DB('Project')->where(['id' => $task_details['project']])->find();
+            $task_details = $task->where(['id' => $task_id])->find();//任务详情
+            $project_detail = DB('Project')->where(['id' => $task_details['project']])->find();//项目详情
             $project_id = $task_details['project'];
-            if (date('Y-m-d H:i:s', strtotime('+10 minute')) > $task_details['openedDate'] && $this->_G['is_admin'] != 1) {
+            $big_time_ten = strtotime($task_details['openedDate']) + 10 * 60;//任务创建后10分钟
+            if (time() > $big_time_ten && $this->_G['is_admin'] != 1) {
                 $this->error("超时，无法修改");
             }
         }
+        //如果有所属项目则获取成员列表
         if ($project_id > 0) {
             $user_list = get_userlist_by_projectid($project_id);
         }
         $project_detail = DB('Project')->where(['id' => $project_id])->find();
+        //该用户是否为任务分配成员、是否为管理员、是否为项目管理员、是否为项目成员
         if ($this->_G['username'] != $task_details['assignedTo'] && $this->_G['is_admin'] != 1 && $this->_G['username'] != $project_detail['project_admin'] && in_array($this->_G['username'], $user_list)) {
             $this->error("权限不足");
         }
-
         $map['status'] = array('not in', 'closed,done');
+        //管理员读取公开与私有
         if (!$this->_G['is_admin']) {
             $map['acl'] = array('eq', 'open');
         }
-        $project_list = Db::name('Project')->where($map)->column('id,name,code', 'id');
-        $plan_list = Db::name('Plan')->where(['deleted' => 0, 'project' => $project_id])->select();
-
+        $project_list = Db::name('Project')->where($map)->column('id,name,code', 'id');//项目列表
+        $plan_list = Db::name('Plan')->where(['deleted' => 0, 'project' => $project_id])->select();//项目的需求列表
         $predecessor_data['status'] = array('in', "wait,doing");
         $predecessor_data['project'] = array('eq', $project_id);
-        $predecessor_list = DB('Task')->where($predecessor_data)->select();
+        $predecessor_list = DB('Task')->where($predecessor_data)->select();//该项目的前置任务列表
+        $config_list = DB('Config')->where(['status' => 1])->select();
         if (request()->isPost()) {
             $task_data = [
                 'project' => $project_id,
@@ -339,7 +340,7 @@ class Task extends Common {
                 DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
                 //关联需求的内容
                 if (input('param.plan', '0', 'intval') > 0) {
-                    DB('Plan')->where(['id' => input('param.plan', '0', 'intval')])->update(['task' => $task_id,'project' => $project_id,'product' => $project_detail['product']]);
+                    DB('Plan')->where(['id' => input('param.plan', '0', 'intval')])->update(['task' => $task_id, 'project' => $project_id, 'product' => $project_detail['product']]);
                 }
                 //操作记录
                 write_action($this->_G['username'], $project_id, 'task', $task_id, 'updata');
@@ -349,7 +350,7 @@ class Task extends Common {
                 $task_id = DB::table('chinatt_pms_task')->insertGetId($task_data);
                 //关联需求的内容
                 if (input('param.plan', '0', 'intval') > 0) {
-                    DB('Plan')->where(['id' => input('param.plan', '0', 'intval')])->update(['task' => $task_id,'project' => $project_id,'product' => $project_detail['product']]);
+                    DB('Plan')->where(['id' => input('param.plan', '0', 'intval')])->update(['task' => $task_id, 'project' => $project_id, 'product' => $project_detail['product']]);
                 }
                 //操作记录
                 write_action($this->_G['username'], $project_id, 'task', $task_id, 'opened');
@@ -359,11 +360,12 @@ class Task extends Common {
         }
         $navtitle = '任务添加/编辑' . $project_detail['name'];
         $this->assign('navtitle', $navtitle);
+        $this->assign('config_list',$config_list);
         $this->assign('project_id', $project_id);
         $this->assign('predecessor_list', $predecessor_list);
         $this->assign('project_list', $project_list);
         $this->assign('plan_list', $plan_list);
-        $this->assign('username',$username);
+        $this->assign('username', $username);
         $this->assign('task_details', $task_details);
         $this->assign('user_list', $user_list);
         $this->assign('task_id', $task_id);

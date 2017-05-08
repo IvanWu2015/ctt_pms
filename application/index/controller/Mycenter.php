@@ -30,7 +30,6 @@ class Mycenter extends Common {
         $my_weburl_count = DB::name('Weburl')->where(['uid' => $this->_G['uid'], 'status' => 0])->count();
         //我的文章总数
         $my_article_count = DB::name('Article')->where(['uid' => $this->_G['uid'], 'status' => 0])->count();
-
         $not_status_data['status'] = array('in', 'wait,doing');
         $not_status_data['assignedTo'] = array('eq', $this->_G['username']);
         $not_status_data['deleted'] = array('eq', '0');
@@ -40,16 +39,10 @@ class Mycenter extends Common {
         $estimate_map['finishedBy'] = array('eq', $this->_G['username']);
         $estimate_map['finishedDate'] = array('GT', $headDate);
         $same_month_estimate_count = DB::name('Task')->where($estimate_map)->sum('estimate'); //当月预计工时
-        //今天总工时
-//        $today_count = DB::name('Workcount')->where(['username' => $this->_G['username'], 'date' => date('Y-m-d'),'objectType' => 'user'])->field('consumed')->find();
         $user_count = get_count($this->_G['username']);
-        
-//        $toweek_count = get_count($this->_G['username'], 'week');
-        
         $consumed_map['username'] = array('eq', $this->_G['username']);
         $consumed_map['date'] = array('GT', $headDate);
         $same_month_consumed_count = DB::name('Taskestimate')->where($consumed_map)->sum('consumed'); //当月完成工时
-
         $user = db('User')->alias('u')->join('chinatt_pms_dept d', 'u.dept = d.id', 'left')->join('chinatt_pms_group g', 'u.groupid = g.id')->field('u.*,d.name as depe_name,g.name as group_name')->where(['uid' => $this->_G['uid']])->find();
         //未完成任务
         $task_list = db('Task')->where(['assignedTo' => $this->_G['username'], 'status' => 'wait'])->order('id DESC')->select();
@@ -79,7 +72,7 @@ class Mycenter extends Common {
         $this->assign('same_month_consumed_count', $same_month_consumed_count);
         $this->assign('same_month_estimate_count', $same_month_estimate_count);
         $this->assign('today_count', $today_count);
-        $this->assign('toweek_count',$toweek_count);
+        $this->assign('toweek_count', $toweek_count);
         $this->assign('not_status_count', $not_status_count);
         $this->assign('my_article_count', $my_article_count);
         $this->assign('my_weburl_count', $my_weburl_count);
@@ -89,7 +82,7 @@ class Mycenter extends Common {
         $this->assign('consumed_count', $consumed_count);
         $this->assign('article_list', $article_list);
         $this->assign('weburl_list', $weburl_list);
-        $this->assign('user_count',$user_count);
+        $this->assign('user_count', $user_count);
         $this->assign('action_list', $action_list);
         $this->assign('task_list', $task_list);
         $this->assign('user', $user);
@@ -99,17 +92,20 @@ class Mycenter extends Common {
 
     //我的动态
     public function action_list() {
-        $map['actor'] = array('eq', $this->_G['username']);
-        $action_list = DB::name('Action')
+        $map['a.actor'] = array('eq', $this->_G['username']);
+        $action_list = DB('Action')
                 ->alias('a')
-                ->join('chinatt_pms_project p', 'a.project = p.id', 'left')
-                ->field('a.*,p.name as parent_name,p.status')
+                ->join('chinatt_pms_taskestimate b', 'a.extra =b.id', 'left')
+                ->join('chinatt_pms_task t', 'a.objectType = \'task\' AND a.objectID =t.id', 'left')
+                ->join('chinatt_pms_task p', 'a.objectType = \'project\' AND a.objectID =p.id', 'left')
                 ->where($map)
+                ->field('a.*,b.left,b.consumed,b.username,t.name as tname, p.name as pname')
                 ->order('id DESC')
-                ->paginate(10);
+                ->paginate(30, $action_count, ['path' => url('/index/mycenter/action_list/')]);
         $page = $action_list->render(); // 分页显示输出
-
-
+        $navtitle = '我的动态';
+        $this->assign('navtitle', $navtitle);
+        $action_list = analysis_all($action_list);
         $this->assign('page', $page);
         $this->assign('action_list', $action_list);
         return $this->fetch($this->templatePath);
@@ -120,6 +116,8 @@ class Mycenter extends Common {
         $map['w.uid'] = array('eq', $this->_G['uid']);
         $weburl_list = DB::name('weburl')->alias('w')->join('chinatt_pms_project p', 'w.project = p.id', 'left')->field('w.*,p.name')->where($map)->paginate(10);
         $page = $weburl_list->render(); // 分页显示输出
+        $navtitle = '我的收藏';
+        $this->assign('navtitle', $navtitle);
         $this->assign('page', $page);
         $this->assign('weburl_list', $weburl_list);
         return $this->fetch($this->templatePath);
@@ -138,10 +136,10 @@ class Mycenter extends Common {
                 ->order('id desc')
                 ->paginate(10);
         $page = $article_list->render(); // 分页显示输出
-
+        $navtitle = '我的文章';
+        $this->assign('navtitle', $navtitle);
         $this->assign('page', $page);
         $this->assign('article_list', $article_list);
-
         return $this->fetch($this->templatePath);
     }
 
@@ -179,7 +177,7 @@ class Mycenter extends Common {
                 ->where($map)
                 ->field('t.*,p.status as p_status,p.name as p_name')
                 ->order("id DESC")
-                ->paginate(20, $task_count, ['path' => url('/index/mycenter/task_list/'), 'query' => ['username' => $username,'status' =>$status,'project_id' => $project_id]]);
+                ->paginate(20, $task_count, ['path' => url('/index/mycenter/task_list/'), 'query' => ['username' => $username, 'status' => $status, 'project_id' => $project_id]]);
         $navtitle = '个人中心';
         $show = $task_list->render(); // 分页显示输出
 

@@ -807,9 +807,15 @@ function analysis_all($action_list) {
             $value['actionname'] = "删除";
         }elseif ($value['action'] == 'updata') {
             $value['actionname'] = "修改";
+        }elseif ($value['action'] == 'paused') {
+            $value['actionname'] = "暂停";
+        }elseif ($value['action'] == 'restarted') {
+            $value['actionname'] = "重启";
         }
         $action_list[$key] = $value;
+
     }
+        
     return $action_list;
 }
 
@@ -1018,7 +1024,6 @@ function get_count($user, $startdate, $enddate) {
 //访问操作日志存储
 function save_log($uid, $username) {
     global $_G;
-
     $log = array(
         'uid' => $uid,
         'username' => $username,

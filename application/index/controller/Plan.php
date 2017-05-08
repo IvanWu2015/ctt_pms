@@ -31,7 +31,6 @@ class Plan extends Common {
 
     //列表
     public function lists() {
-        
         $username = input('get.username', '', 'addslashes');
         if(!empty($username)){
             $data['n.assignedTo'] = array('eq',$username);
@@ -50,12 +49,9 @@ class Plan extends Common {
                 ->field('n.*,d.name as product_name,j.name as project_name,t.name as task_name,d.code')
                 ->where($data)
                 ->paginate(10);
-        $user_list = DB::table('chinatt_pms_user')->select();
-        
+        $user_list = DB::table('chinatt_pms_user')->select();//用户列表
         $page = $plan_list->render(); // 分页显示输出
-        
-        $product_list = DB('Product')->where(['deleted' => '0'])->select();
-        
+        $product_list = DB('Product')->where(['deleted' => '0'])->select();//产品列表
         $navtitle = '需求列表' . $this->navtitle;
         $this->assign('status', $status);
         $this->assign('user_list',$user_list);
@@ -72,27 +68,25 @@ class Plan extends Common {
     public function add() {
         $product_id = input('get.product_id', '0', 'intval');
         $plan_id = input('get.id', '0', 'intval');
-
+        //如果是通过产品页面进入需求添加页面
         if ($product_id > 0){
             $product_detail = DB('Product')
                     ->where(['deleted' => 0,'id' => $product_id])
-                    ->field('name,code,PO')
+                    ->field('name,code,PO,id')
                     ->find();
         }
+         //需求修改
         if ($plan_id > 0){
             $plan_detail = DB('Plan')->where(['deleted' => 0,'id' => $plan_id])->find();
             $product_detail = DB('Product')
                     ->where(['deleted' => 0,'id' => $plan_detail['product']])
-                    ->field('name,code,PO')
+                    ->field('name,code,PO,id')
                     ->find();
         }
-        
-        $user_list = DB::table('chinatt_pms_user')->select();
-
+        $user_list = DB::table('chinatt_pms_user')->select();//用户列表
         if (request()->isPost()) {
             $data = [
                 'title' => input('post.title', '', 'addslashes'),
-                'product' => input('post.product_id', '0', 'intval'),
                 'project' => input('post.project_id', '0', 'intval'),
                 'task' => input('post.task_id', '0', 'intval'),
                 'content' => input('post.content', '', 'addslashes'),
@@ -104,11 +98,13 @@ class Plan extends Common {
                 'status' => 'wait',
             ];
             if ($plan_id > 0) {
+                $data['product'] = $product_detail['id'];
                 DB::name('Plan')->where(['id' => $plan_id])->update($data);
-                $this->success("修改成功", 'Plan/lists');
+                $this->success("修改成功", 'Product/detail?id='.$product_detail['id']);
             } else {
+                $data['product'] = $product_id;
                 DB::name('Plan')->insertGetId($data);
-                $this->success("成功添加", 'Plan/lists');
+                $this->success("成功添加",  'Product/detail?id='.$product_detail['id']);
             }
         }
         $navtitle = '添加/修改产品' . $this->navtitle;
@@ -122,7 +118,4 @@ class Plan extends Common {
         $this->assign('navtitle', $navtitle);
         return $this->fetch($this->templatePath);
     }
-    
-    
-    
 }

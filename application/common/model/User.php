@@ -169,7 +169,7 @@ class User extends \think\Model {
             if (md5(md5($password) . $user['salt']) === $user['password']) {
                 $this->updateLogin($user['uid']);    //更新用户登录信息
                 $this->autoLogin($user);          //登录用户
-                write_action($user['username'], $user['uid'], 'user', 0, 'login');//操作记录
+                write_action($user['username'], 0, 'user', $user['uid'], 'login');//操作记录
                 //记录用户COOKIE用于自动登陆
                 if ($autologin == 1) {
                     cookie('autouser', $user['username'], 604800);

@@ -35,8 +35,6 @@ class Weburl extends Common {
         $navtitle = '收藏管理';
         $this->assign('navtitle', $navtitle);
         $this->assign('weburl_list', $weburl_list);
-
-
         return $this->fetch($this->templatePath);
     }
 

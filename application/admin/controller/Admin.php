@@ -50,7 +50,6 @@ class Admin extends Common {
     $project_count = $project->where($data)->count();
     $Page       = new Page($project_count,10);
     $show       = $Page->show();
-    
     $project_list = $project->where($data)->order('id DESC')->limit($Page->firstRow.','.$Page->listRows)->select();
     if (request()->isPost()) {
             $delete_ids = array();
@@ -66,8 +65,4 @@ class Admin extends Common {
     return $this->fetch($this->templatePath);
     }
     
-    
 }
-
-
-

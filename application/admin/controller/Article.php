@@ -37,8 +37,6 @@ class Article extends Common {
         $this->assign('page', $page);
         $this->assign('article_list', $article_list);
         
-        
-        
         return $this->fetch($this->templatePath);
     }
     
