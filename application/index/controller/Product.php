@@ -12,14 +12,14 @@ class Product extends Common {
 
     //项目详情页
     public function detail() {
-        $product_id = input('get.id', '0', 'intval');
-        
+        $product_id = input('id', '0', 'intval');
         if($product_id > 0){
             $product_detail = db('Product')->where(['id' => $product_id])->find();
             $plan_list = db('Plan')->where(['product' => $product_id])->paginate(20);
         }
-        
         $page = $plan_list->render(); // 分页显示输出
+        $navtitle = $product_detail['name'] . '-' . "产品详情";
+        $this->assign('navtitle', $navtitle);
         $this->assign('product_detail',$product_detail);
         $this->assign('product_id',$product_id);
         $this->assign('plan_list',$plan_list);
@@ -35,8 +35,6 @@ class Product extends Common {
                 ->where(['p.deleted' => '0'])
                 ->paginate(10);
         $page = $product_list->render(); // 分页显示输出
-        
-        
         $navtitle = '产品列表' . $this->navtitle;
         $this->assign('status', $status);
         $this->assign('page', $page);
@@ -48,6 +46,7 @@ class Product extends Common {
     //添加
     public function add() {
         $product_id = input('get.id', '0', 'intval');
+        //获取用户列表
         $user_list = DB::table('chinatt_pms_user')->select();
         if ($product_id > 0) {
             $product_detail = DB::name('Product')->where(['id' => $product_id, 'deleted' => 0])->find();
@@ -71,13 +70,6 @@ class Product extends Common {
                 $this->success("成功添加", 'Product/lists');
             }
         }
-
-
-
-
-
-
-
         $navtitle = '添加/修改产品' . $this->navtitle;
         $this->assign('project_id', $project_id);
         $this->assign('product_detail', $product_detail);
@@ -86,5 +78,4 @@ class Product extends Common {
         $this->assign('navtitle', $navtitle);
         return $this->fetch($this->templatePath);
     }
-
 }

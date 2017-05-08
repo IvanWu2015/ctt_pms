@@ -18,6 +18,7 @@ class Project extends Common {
         $deleted = input('get.deleted', '0', 'intval');
         $product_id = input('get.product_id', '0', 'intval');
         $status = input('get.status', 'all', 'addslashes');
+        //筛选
         if ($status == 'all') {
             
         } elseif ($status == 'unclose') {
@@ -36,23 +37,13 @@ class Project extends Common {
         }
         
         $data['deleted'] = array('EQ', '0');
-        $project_list = Db::name('Project')->where($data)->order("id DESC")->paginate(15);
-
+        $project_list = Db::name('Project')->where($data)->order("id DESC")->paginate(15);//项目列表
         $page = $project_list->render(); // 分页显示输出
         //将对象转为数组
         $project_list = $project_list->toArray();
         $project_list = get_project_consume($project_list['data']);
-        $product = DB('Product')->where(['deleted' => 0])->field('id,name')->select();
+        $product = DB('Product')->where(['deleted' => 0])->field('id,name')->select();//产品列表
         $navtitle = '项目列表' . $this->navtitle;
-        //多选的删除
-//        if (request()->isPost()) {
-//            $delete_ids = array();
-//            foreach ($_POST['delete'] as $key => $value) {
-//                $delete_ids[] = $key;
-//            }
-//            $project_data['id'] = array('in', $delete_ids);
-//            $project->where($project_data)->save(array('deleted' => '1')); //删除之前的记录
-//        }
         if($deleted == '1'){
             save_log($this->_G['uid'],$this->_G['username']);
             $project_id = input('get.id', '0', 'intval');
@@ -68,5 +59,4 @@ class Project extends Common {
         $this->assign('project_list', $project_list);
         return $this->fetch($this->templatePath);
     }
-
 }

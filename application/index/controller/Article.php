@@ -21,27 +21,24 @@ class article extends Common {
     //列表页
     public function lists() {
         $acl = input('param.acl', 'all', 'addslashes');
-        
-        
         $username = input('get.username', '', 'addslashes');
         $class_id = input('get.class_id', '0', 'intval');
-        if($acl == 'all'){
+        //列表的筛选条件
+        if ($acl == 'all') {
             
-        }  elseif($acl == 'open') {
-            $data['a.acl'] = array('eq','open');
-        }  else {
-             $data['a.acl'] = array('eq','private');
-              $data['a.uid'] = array('eq',$this->_G['uid']);
+        } elseif ($acl == 'open') {
+            $data['a.acl'] = array('eq', 'open'); //开放类型
+        } else {
+            $data['a.acl'] = array('eq', 'private'); //私有类型
+            $data['a.uid'] = array('eq', $this->_G['uid']);
         }
-        $data['a.status'] = array('eq',0);
+        $data['a.status'] = array('eq', 0);
         if (!empty($username)) {
             $data['u.username'] = array('eq', $username);
         }
         if ($class_id > 0) {
-            $data['c.id'] = array('eq', $class_id);
+            $data['c.id'] = array('eq', $class_id); //分类ID
         }
-        
-        
         $article_list = DB::name('Article')
                 ->alias('a')
                 ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
@@ -54,49 +51,49 @@ class article extends Common {
         $page = $article_list->render(); // 分页显示输出
         $deleted = input('param.deleted', 0, 'intval');
         $article_id = input('param.id', 0, 'intval');
-        $sort_list = DB('Class')->where(['status' => 1])->select();
-        $product_list = DB('Product')->where(['deleted' => '0'])->field('name,code')->select();
-        $user_list = DB('User')->where(['deleted' => '0'])->select();
-        if($deleted > 0){
-            $article_detail = DB::name('Article')->where(['uid' => $this->_G['uid'],'status' => 0])->find();
-            if($this->_G['uid'] == $article_detail['uid']){
+        $sort_list = DB('Class')->where(['status' => 1])->select(); //分类列表
+        $product_list = DB('Product')->where(['deleted' => '0'])->field('name,code')->select(); //产品列表
+        $user_list = DB('User')->where(['deleted' => '0'])->select(); //用户列表
+        //删除功能
+        if ($deleted > 0) {
+            $article_detail = DB::name('Article')->where(['uid' => $this->_G['uid'], 'status' => 0])->find();
+            if ($this->_G['uid'] == $article_detail['uid']) {
                 DB::name('Article')->where(['id' => $article_id])->update(['status' => -1]);
-                $this->success('删除成功','index/article/lists');
+                $this->success('删除成功', 'index/article/lists');
             }
-        }   
+        }
         $navtitle = '文档列表' . $project_detail['name'];
         $this->assign('navtitle', $navtitle);
         $this->assign('page', $page);
         $this->assign('sort_list', $sort_list);
         $this->assign('class_id', $class_id);
         $this->assign('username', $username);
-        $this->assign('product_list',$product_list);
-        $this->assign('user_list',$user_list);
+        $this->assign('product_list', $product_list);
+        $this->assign('user_list', $user_list);
         $this->assign('article_list', $article_list);
         return $this->fetch($this->templatePath);
     }
 
     //详情页
     public function detail() {
-
         $article_id = input('get.id', '0', 'intval');
         if ($article_id > 0) {
             $article_detail = DB::name('Article')
-                ->alias('a')
-                ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
-                ->join('chinatt_pms_project p ', 'a.project = p.id', 'left')
-                ->join('chinatt_pms_user u ', 'a.uid = u.uid', 'left')
-                ->field('a.*,c.name as class_name,p.name as project_name,u.username')
-                ->where(['a.status' => 0,'a.id' => $article_id])
-                ->find();
+                    ->alias('a')
+                    ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
+                    ->join('chinatt_pms_project p ', 'a.project = p.id', 'left')
+                    ->join('chinatt_pms_user u ', 'a.uid = u.uid', 'left')
+                    ->field('a.*,c.name as class_name,p.name as project_name,u.username')
+                    ->where(['a.status' => 0, 'a.id' => $article_id])
+                    ->find();
             if (empty($article_detail)) {
                 $this->error('不存在该文章');
             }
         }
         $navtitle = $article_detail['title'];
         $this->assign('navtitle', $navtitle);
-        $this->assign('article_id',$article_id);
-        $this->assign('article_detail',$article_detail);
+        $this->assign('article_id', $article_id);
+        $this->assign('article_detail', $article_detail);
         return $this->fetch($this->templatePath);
     }
 
@@ -105,10 +102,9 @@ class article extends Common {
      * @return type
      */
     public function add() {
-
         $article_id = input('get.id', '0', 'intval');
-        $sort_list = DB('Class')->where(['status' => 1])->select();
-        $project_list = Db::name('Project')->where($data)->order("id DESC")->paginate(15);
+        $sort_list = DB('Class')->where(['status' => 1])->select();//分类列表
+        $project_list = Db::name('Project')->where($data)->order("id DESC")->paginate(15);//项目列表
         if ($article_id > 0) {
             $article_detail = DB('Article')->where(['status' => 0, 'id' => $article_id])->find();
             if (empty($article_detail)) {
@@ -126,20 +122,21 @@ class article extends Common {
                 'time' => date('Y-m-d H:i:s'),
                 'status' => 0,
             ];
+            //修改
             if ($article_id > 0) {
                 DB('Article')->where(['id' => $article_id])->update($data);
-                $this->success('修改成功','index/article/lists');
+                $this->success('修改成功', 'index/article/lists');
+            //添加
             } else {
                 DB('Article')->insert($data);
-                $this->success('添加成功','index/article/lists');
+                $this->success('添加成功', 'index/article/lists');
             }
         }
-        if(empty($article_detail)){
+        if (empty($article_detail)) {
             $navtitle = '添加文档';
-        }  else {
+        } else {
             $navtitle = '修改文档';
         }
-        
         $this->assign('navtitle', $navtitle);
         $this->assign('article_detail', $article_detail);
         $this->assign('project_list', $project_list);

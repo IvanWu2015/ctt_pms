@@ -15,8 +15,8 @@ class Navigation extends Common {
         return $this->fetch($this->templatePath);
     }
 
+    //导航添加
     public function add() {
-
         $navigation_id = input('get.id', '0', 'intval');
         $parentid = input('get.parentid', '0', 'intval');
         $type = input('get.type', '', 'addslashes');
@@ -26,7 +26,6 @@ class Navigation extends Common {
         if ($navigation_id > 0) {
             $navigation_detail = db('Navigation')->where(['id' => $navigation_id])->find();
         }
-
         if ($parentid > 0) {
             $paren_detail = DB('Navigation')->where(['status' => 1, 'id' => $parentid])->find();
         }
@@ -39,7 +38,6 @@ class Navigation extends Common {
                 'sort' => input('post.sort', '', 'intval'),
                 'url' => input('param.url'),
             ];
-
             if ($navigation_id > 0) {
                 $data['update_time'] = time();
 
@@ -74,11 +72,11 @@ class Navigation extends Common {
         $tree = new Tree($navigation_list);
         $navigation_list = $tree->getArray();
         $deleted = input('get.deleted', '0', 'intval');
-        if(request()->isPost()) {
+        if (request()->isPost()) {
             $sort_arr = $_POST['sort'];
             $name_arr = $_POST['title'];
             $url_arr = $_POST['url'];
-            foreach($sort_arr as $key => $sort) {
+            foreach ($sort_arr as $key => $sort) {
                 $key = intval($key);
                 DB::name('Navigation')->where(['id' => $key, 'status' => 1])->update(['sort' => addslashes($sort_arr[$key]), 'title' => addslashes($name_arr[$key]), 'url' => addslashes($url_arr[$key])]);
             }

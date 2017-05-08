@@ -21,7 +21,6 @@ class weburl extends Common {
     //列表页
     public function lists() {
         $weburl = DB::name('weburl');
-
         $username = input('get.username', '', 'addslashes');
         $product_id = input('get.product_id', '0', 'intval');
         $class_id = input('get.class_id', '0', 'intval');

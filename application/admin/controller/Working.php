@@ -18,9 +18,9 @@ class Working extends Common {
         $project_id = input('get.project_id', '0', 'intval');
         $username = input('get.username', '', 'addslashes');
         $name = input('get.name', '', 'addslashes');
-        $user_list = db('User')->where(['deleted' => 0])->select();
-        $project_list = db('Project')->where(['deleted' => 0])->select();
-        $product_list = db('Product')->where(['deleted' => 0])->select();
+        $user_list = db('User')->where(['deleted' => 0])->select();//用户列表
+        $project_list = db('Project')->where(['deleted' => 0])->select();//项目列表
+        $product_list = db('Product')->where(['deleted' => 0])->select();//产品列表
         if($project_id > 0){
                     $data['p.id'] = array('eq',$project_id);
         }
@@ -30,6 +30,7 @@ class Working extends Common {
         if(!empty($name)){
                     $data['d.code'] = array('eq',$name);
         }
+        //工时列表
         $working_list = DB('Taskestimate')
                 ->alias('e')
                 ->join('chinatt_pms_task t', 'e.task = t.id', 'left')
@@ -55,11 +56,10 @@ class Working extends Common {
         return $this->fetch($this->templatePath);
     }
     
-    
-    
     public function delete() {
         if (request()->isPost()) {
             save_log($_POST,$this->_G['uid'],$this->_G['username']);
+            //删除时任务的消耗时间相对应的操作减去删除部分的工时
             foreach ($_POST['deleted'] as $key => $value){
                 if($_POST['deleted'][$key] == 1){
                     $ids[] = $key;
@@ -71,20 +71,8 @@ class Working extends Common {
                 }
             }
             $data['id'] = array('in',$ids);
-            db('Taskestimate')->where($data)->delete();
-            
-            
+            db('Taskestimate')->where($data)->delete();//删除
             $this->success("删除成功",'admin/working/lists');
-            
-            
-            
         }
-        
-        
-        
-        
-        
     }
-    
-    
 }

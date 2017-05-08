@@ -19,8 +19,7 @@ class Sort extends Common {
         $class_id = input('get.id', '0', 'intval');
         $parentid = input('get.parentid', '0', 'intval');
         $type = input('get.type', '', 'addslashes');
-        
-        $sort_list = DB('Class')->where(['status' => 1])->select();
+        $sort_list = DB('Class')->where(['status' => 1])->select();//分类列表
         $tree = new Tree($sort_list);
         $sort_list = $tree->getArray();
         if ($class_id > 0) {
@@ -35,9 +34,8 @@ class Sort extends Common {
             }
         }
         if($parentid > 0){
-            $paren_detail = DB('Class')->where(['status' => 1, 'id' => $parentid])->find();
+            $paren_detail = DB('Class')->where(['status' => 1, 'id' => $parentid])->find();//上一级分类信息
         }
-        
         if (request()->isPost()) {
             save_log($_POST,$this->_G['uid'],$this->_G['username']);
             $class_data = [
@@ -90,6 +88,7 @@ class Sort extends Common {
         $deleted = input('get.deleted', '0', 'intval');
         $class_id = input('get.id', '0', 'intval');
         $type = input('get.type','article','addslashes');
+        //删除操作
         if ($deleted > 0) {
             $class = DB::name('Class')->where(['id' => $class_id, 'status' => 1])->find();
             if (empty($class)) {
