@@ -83,8 +83,8 @@
                         <label class="col-sm-3 control-label">任务类型：</label>
                         <div class="col-sm-9 pln prn">
                             <select name="type" id="type" class="form-control" onchange="setOwners(this.value)">
-                                {foreach $_G['type_list'] as $key => $temp_type}
-                                <option {if condition="$key == $task_details['type']"}selected='selected'{/if}value="{$key}" >{$temp_type}</option>
+                                {foreach $config_list as $temp_type}
+                                <option {if condition="$key == $task_details['type']"}selected='selected'{/if}value="{$temp_type['c_key']}" >{$temp_type['c_value']}</option>
                                 {/foreach}
                             </select>
                         </div>
