@@ -42,16 +42,16 @@ class Common extends \think\Controller {
         $this->_G['action'] = $request->action();
 
         //任务类型列表
-        $this->_G['type_list'] = [
-            'design' => '设计',
-            'devel' => '开发',
-            'test' => '测试',
-            'study' => '研究',
-            'discuss' => '讨论',
-            'ui' => '界面',
-            'affair' => '事务',
-            'misc' => '其他',
-        ];
+//        $this->_G['type_list'] = [
+//            'design' => '设计',
+//            'devel' => '开发',
+//            'test' => '测试',
+//            'study' => '研究',
+//            'discuss' => '讨论',
+//            'ui' => '界面',
+//            'affair' => '事务',
+//            'misc' => '其他',
+//        ];
 
         //用户列表
         //$this->_G['userlist'] = DB::name('user')->column('uid,username,realname', 'username');
