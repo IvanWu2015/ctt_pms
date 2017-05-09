@@ -16,9 +16,10 @@ class Setting extends Common {
     }
 
     public function add() {
+        $type = input('get.type', '', 'addslashes');
         if (request()->isPost()) {
             $data = array(
-                'group' => input('post.type', '', 'addslashes'),
+                'group' => $type,
                 'c_key' => input('post.key', '', 'addslashes'),
                 'c_value' => input('post.value', '', 'addslashes'),
                 'status' => 1,

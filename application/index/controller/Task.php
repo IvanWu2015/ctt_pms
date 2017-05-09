@@ -316,7 +316,7 @@ class Task extends Common {
         $predecessor_data['status'] = array('in', "wait,doing");
         $predecessor_data['project'] = array('eq', $project_id);
         $predecessor_list = DB('Task')->where($predecessor_data)->select();//该项目的前置任务列表
-        $config_list = DB('Config')->where(['status' => 1])->select();
+        $config_list = DB('Config')->where(['status' => 1,'group' => 'task_type'])->select();
         if (request()->isPost()) {
             $task_data = [
                 'project' => $project_id,
@@ -336,6 +336,7 @@ class Task extends Common {
                 'status' => input('param.status', 'wait', 'addslashes'),
                 'plan' => input('param.plan', '0', 'intval'),
             ];
+            //编辑
             if ($task_id > 0) {
                 DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
                 //关联需求的内容
@@ -346,6 +347,7 @@ class Task extends Common {
                 write_action($this->_G['username'], $project_id, 'task', $task_id, 'updata');
                 $this->success("修改成功", url("/Index/Project/detail/?id=$project_id"));
                 exit;
+            //添加
             } else {
                 $task_id = DB::table('chinatt_pms_task')->insertGetId($task_data);
                 //关联需求的内容
