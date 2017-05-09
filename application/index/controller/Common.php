@@ -55,6 +55,15 @@ class Common extends \think\Controller {
 
         //任务类型列表
         $this->_G['type_list'] = [
+            'design' => '设计',
+            'devel' => '开发',
+            'test' => '测试',
+            'study' => '研究',
+            'discuss' => '讨论',
+            'ui' => '界面',
+            'affair' => '事务',
+            'misc' => '其他',
+            'BUG' => '修复BUG',
         ];
         
         
