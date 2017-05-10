@@ -102,6 +102,7 @@ class Mycenter extends Common {
                 ->field('a.*,b.left,b.consumed,b.username,t.name as tname, p.name as pname')
                 ->order('id DESC')
                 ->paginate(30, $action_count, ['path' => url('/index/mycenter/action_list/')]);
+
         $page = $action_list->render(); // 分页显示输出
         $navtitle = '我的动态';
         $this->assign('navtitle', $navtitle);

@@ -164,7 +164,7 @@ class Task extends Common {
                     working_count('product', $task['product'], $this->_G['username'], $consumed);
                     working_count('project', $task['project'], $this->_G['username'], $consumed);
                     DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
-                    write_action($this->_G['username'], $task['project'], 'task', $task_id, 'done', input('work'));
+                    write_action($this->_G['username'], $task['project'], 'task', $task_id, 'done', input('work'),$taskestimate_id);
                     //指派任务
                 } elseif ($action == 'assign') {
                     $task_data = [
@@ -238,8 +238,9 @@ class Task extends Common {
         $project_id = $task_detail['project'];
         $project_detail = DB::name('project')->where(['id' => $project_id])->find();
         $user_list = get_userlist_by_projectid($project_id);
+
         //访问权限判断
-        if ($project_detail['acl'] == 'private' && !isProjectUser($this->_G['username'], $user_list)) {
+        if ($this->_G['is_admin'] != 1 && $project_detail['acl'] == 'private' && !isProjectUser($this->_G['username'], $user_list)) {
             $this->error('您无该项目访问权限。');
         }
         if (request()->isPost()) {
