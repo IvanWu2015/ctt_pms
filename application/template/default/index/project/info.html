@@ -13,7 +13,7 @@
 
         <section id="contents" class="mtn">
 
-            <div class="publicdiv bf pb20 sizing">
+            <div class="publicdiv bf sizing">
 
                 <div class="publicdiv bf pt20 pb20 sizing" id="action_wrap">
 
@@ -46,10 +46,11 @@
                 <a href="{:url('/index/Project/info/?ac=start&project_id='.$project_id)}">开始</a>
                 <a href="{:url('/index/Project/info/?ac=doing&project_id='.$project_id)}">进行</a>-->
                 
-                <a href="javascript:void(0);" onClick="loadWindow('{:url('/index/Project/survey?ac=closed&project_id='.$project_id)}');">关闭</a>
-                <a href="javascript:void(0);" onClick="loadWindow('{:url('/index/Project/survey?ac=done&project_id='.$project_id)}');">完成</a>
-                <a href="javascript:void(0);" onClick="loadWindow('{:url('/index/Project/survey?ac=doing&project_id='.$project_id)}');">进行</a>
-
+                <div class="publicdiv bort pt10 derkwt fs13 iconfont">
+                    <a href="javascript:void(0);" class="mr10" onClick="loadWindow('{:url('/index/Project/survey?ac=closed&project_id='.$project_id)}');">&#xe6f1; 关闭</a>
+                    <a href="javascript:void(0);" class="mr10" onClick="loadWindow('{:url('/index/Project/survey?ac=done&project_id='.$project_id)}');">&#xe614; 完成</a>
+                    <a href="javascript:void(0);" class="mr10" onClick="loadWindow('{:url('/index/Project/survey?ac=doing&project_id='.$project_id)}');">&#xe983; 进行</a>
+                </div>
         </section>
         
         
