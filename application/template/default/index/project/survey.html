@@ -112,63 +112,6 @@ function startsub(url, id){ //表单判断
 }
 </script>
 
-{elseif $ac == 'start'}<!--开始-->
-<div class="modalwrap h250 sizing">
-    <form action="" method="post" id="add_tag">
-    <h3 class="modaltitle pl15 pr15 sizing">开始<a href="javascript:void(0);" onClick="modalclose();" class="y fs13 iconfont">&#xe61c;</a></h3>
-    <div class="publocdiv pl20 pr20 sizing modalcontnet h230">
-        
-        <div class="form-group w100 mrn mln z">
-            <label class="col-sm-2 pt5 control-label ar fwn"><b class='cred'>* </b>备注</label>
-            <div class="col-sm-9 pln prn">
-                <textarea id="comment" name="comment" class="form-control" style="height:100px;"  placeholder="任务更新说明"></textarea>
-            </div>
-        </div>
-    </div>
-    <div class="modalbottom pt8 pb8 pl15 pr15 sizing">
-        <a href="javascript:void(0);" class="modalsearch bor pl20 pr20 y" onClick="startsub('{:url('/index/Project/info/?ac=start&project_id='.$project_id)}', {$project_id});">提交</a>
-    </div>
-    </form>
-</div>
-<script>
-jQuery(function(){
-    jQuery('#comment').keyup(function(){   //备注
-        if(jQuery('#comment').val().length < 1){
-            jQuery('#comment').css({border:'1px red solid'});
-        }else{
-            jQuery('#comment').css({border:'1px #ccc solid'});
-        }
-    });
-});
-function startsub(url, id){ //表单判断
-    var page=0;
-    var comment=jQuery('#comment').val(); //备注
-    if(comment.length < 1){
-        jQuery('#comment').css({border:'1px red solid'});
-        var page=1;
-    }
-    if(page == "1"){
-        jQuery('#addpr').html("<b class='cred'>*</b> 号为必填项").show(1).delay(2000).hide(1);
-    }else{
-        jQuery.ajax({
-            type: 'post',
-            url: url,
-            data: jQuery('#add_tag').serialize(),
-            dataType: 'json',
-            success: function (data) {
-                if (data.result == 'success') {
-                    jQuery('#addpr').html('操作成功！').show(1).delay(2000).hide(1);
-                    modalclose();
-                    setTimeout("location.reload()",2500);
-                }else{
-                    jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
-                }
-            }
-        });
-    }
-}
-</script>
-
 {elseif $ac == 'doing'}<!--进行-->
 <div class="modalwrap h250 sizing">
     <form action="" method="post" id="add_tag">

@@ -260,7 +260,7 @@ class Project extends Common {
             echo $data;
             exit();
         }
-        if ($ac == 'start' || $ac == 'doing' || $ac == 'closed' || $ac == 'done') {
+        if ( $ac == 'doing' || $ac == 'closed' || $ac == 'done') {
             DB('Project')->where(['id' => $project_id])->update(['status' => $ac]);
             //操作记录
             write_action($this->_G['username'], $project_id, 'project', $project_id,$ac, input('comment', '', 'addslashes'));
@@ -370,20 +370,8 @@ class Project extends Common {
     public function survey() {
         $project_id = input('project_id', '', 'addslashes');
         $ac = input('ac', '', 'addslashes');
-         if($this->_G['username'] != $project_detail['project_admin'] && $this->_G['is_admin'] != 1){
-             $message = array( 'error' => '您的权限不足');
-            $data = json_encode($message);
-            echo $data;
-            exit();
-         }
-         if($ac == 'start' || $ac == 'doing' || $ac == 'closed' ||$ac == 'perfect'){
-             DB('Project')->where(['id' => $project_id])->update(['status' => $ac]);
-             $message = array('result' => 'success', 'error' => '');
-            $data = json_encode($message);
-            echo $data;
-            exit();
-         }
          $this->assign('project_id',$project_id);
+         $this->assign('ac',$ac);
          return $this->fetch($this->templatePath);
     }
 
