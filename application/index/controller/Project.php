@@ -103,7 +103,7 @@ class Project extends Common {
                 ->alias('p')
                 ->join('chinatt_pms_team t', "p.acl = 'private' AND t.project = p.id AND t.username = '$username'", 'left')
                 ->join('chinatt_pms_action a', "p.id = a.project  AND a.id = (select max(id) from chinatt_pms_action where project = p.id )", 'left')
-                ->join('chinatt_pms_taskestimate e',"a.extra =  e.id",'left')
+                ->join('chinatt_pms_taskestimate e', "a.extra =  e.id", 'left')
                 ->field('p.*,t.username,a.objectType,a.objectID,a.actor,a.action,a.date,a.id as action_id,e.left,e.consumed')
                 ->where($map)
                 ->whereor($map_or)
@@ -141,11 +141,11 @@ class Project extends Common {
         //已经在该项目的人员
         if ($project_id > 0) {
             $project_detail = $project->where(['id' => $project_id])->find();
-            if($project_detail['project_admin'] != $this->_G['username'] && $this->_G['is_admin'] != 1){
+            if ($project_detail['project_admin'] != $this->_G['username'] && $this->_G['is_admin'] != 1) {
                 $this->error("权限不足");
             }
             //该项目所有成员
-                $old_team_list = $team->where(['project' => $project_id])->select();
+            $old_team_list = $team->where(['project' => $project_id])->select();
             foreach ($old_team_list as $key => $value) {
                 $team_list[$key] = $value['username'];
             }
@@ -163,10 +163,10 @@ class Project extends Common {
             $team_list = [
             ];
         }
-        
-        
-        
-        
+
+
+
+
         if (request()->isPost()) {
             $pro_data = [
                 'name' => input('param.name'),
@@ -251,6 +251,23 @@ class Project extends Common {
         $project_details = Db::table('chinatt_pms_user')->where('username', $project_name)->find();
         //将中文名赋值给admin_username
         $project_detail['admin_username'] = $project_details['realname'];
+        
+        //详情页面的快速操作
+         $ac = input('ac', '', 'addslashes');
+         if($this->_G['username'] != $project_detail['project_admin'] && $this->_G['is_admin'] != 1){
+             $message = array( 'error' => '您的权限不足');
+            $data = json_encode($message);
+            echo $data;
+            exit();
+         }
+         if($ac == 'start' || $ac == 'doing' || $ac == 'closed' ||$ac == 'perfect'){
+             DB('Project')->where(['id' => $project_id])->update(['status' => $ac]);
+             $message = array('result' => 'success', 'error' => '');
+            $data = json_encode($message);
+            echo $data;
+            exit();
+         }
+
         $project_detail = get_project_consume($project_detail);
         if (empty($project_detail)) {
             $this->error("不存在该任务");
