@@ -251,22 +251,24 @@ class Project extends Common {
         $project_details = Db::table('chinatt_pms_user')->where('username', $project_name)->find();
         //将中文名赋值给admin_username
         $project_detail['admin_username'] = $project_details['realname'];
-        
+
         //详情页面的快速操作
-         $ac = input('ac', '', 'addslashes');
-         if($this->_G['username'] != $project_detail['project_admin'] && $this->_G['is_admin'] != 1){
-             $message = array( 'error' => '您的权限不足');
+        $ac = input('ac', '', 'addslashes');
+        if ($this->_G['username'] != $project_detail['project_admin'] && $this->_G['is_admin'] != 1) {
+            $message = array('error' => '您的权限不足');
             $data = json_encode($message);
             echo $data;
             exit();
-         }
-         if($ac == 'start' || $ac == 'doing' || $ac == 'closed' ||$ac == 'perfect'){
-             DB('Project')->where(['id' => $project_id])->update(['status' => $ac]);
-             $message = array('result' => 'success', 'error' => '');
+        }
+        if ($ac == 'start' || $ac == 'doing' || $ac == 'closed' || $ac == 'done') {
+            DB('Project')->where(['id' => $project_id])->update(['status' => $ac]);
+            //操作记录
+            write_action($this->_G['username'], $project_id, 'project', $project_id,$ac, input('comment', '', 'addslashes'));
+            $message = array('result' => 'success', 'error' => '');
             $data = json_encode($message);
             echo $data;
             exit();
-         }
+        }
 
         $project_detail = get_project_consume($project_detail);
         if (empty($project_detail)) {
