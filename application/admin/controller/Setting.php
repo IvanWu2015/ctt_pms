@@ -52,7 +52,7 @@ class Setting extends Common {
                 $value = addslashes($value);
                 DB('Config')->where(['id' => $key])->update(['c_key' => $value, 'c_value' => addslashes($_POST['value'][$key]),'group' => $type]);
             }
-            $message = array('result' => 'success');
+            $message = array('result' => 'success', 'error' => '');
             $data = json_encode($message);
             echo $data;
             exit();

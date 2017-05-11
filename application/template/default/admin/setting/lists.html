@@ -42,7 +42,7 @@
                     </tbody>
                 </table>
                 <div class="publicdiv ac pagingw">{$page}</div>
-                <input type="submit" onClick="subformajax();" class="btn btn-info y mr20" value="提交" />
+                <input type="button" onClick="subformajax();" class="btn btn-info y mr20" value="提交" />
             </form>
         </div>
     </div>
@@ -51,7 +51,7 @@
 function subformajax(){
     jQuery.ajax({
         type: 'post',
-        url: '{:url("/admin/setting/lists")}',
+        url: '{:url("/admin/setting/lists?type=".$type)}',
         data: jQuery('#add_tag').serialize(),
         dataType: 'json',
         success: function (data) {
