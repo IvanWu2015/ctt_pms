@@ -16,7 +16,7 @@
             <div class="publicdiv pt20 pb20 pl20 pr10 sizing">
                 <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/setting/add?type='.$type)}');" class="btnp y">添加{if condition="$type eq 'task_type'"}任务{/if}{if condition="$type eq 'plan_type'"}需求{/if}设置</a>
             </div>
-            <form action="{:url('/admin/setting/lists')}" method="post" class="form-horizontal" role="form">
+            <form action="{:url('/admin/setting/lists?type='.$type)}" method="post" class="form-horizontal" role="form">
                 <table class="table">
                     <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
                         <tr>

@@ -245,6 +245,7 @@ class Project extends Common {
         $project_id = input('get.project_id', '0', 'intval');
         //任务详情
         $project_detail = $project->where(['id' => $project_id, 'deleted' => 0])->find();
+        
         //管理员名称
         $project_name = $project_detail['project_admin'];
         //通过英文名称找中文名
@@ -260,7 +261,7 @@ class Project extends Common {
             echo $data;
             exit();
         }
-        if ( $ac == 'doing' || $ac == 'closed' || $ac == 'done') {
+        if ($ac == 'doing' || $ac == 'closed' || $ac == 'done') {
             DB('Project')->where(['id' => $project_id])->update(['status' => $ac]);
             //操作记录
             write_action($this->_G['username'], $project_id, 'project', $project_id,$ac, input('comment', '', 'addslashes'));
@@ -313,7 +314,7 @@ class Project extends Common {
                 ->order('action.date ')
                 ->paginate(10, '', ['path' => url('/index/project/action/'), 'query' => ['project_id' => $project_id]]);
         $page = $project_list->render(); // 分页显示输出
-
+        $project_list = analysis_all($project_list);
         $navtitle = '动态' . ' - ' . $project_detail['name'];
         $this->assign('project_list', $project_list);
         $this->assign('project_detail', $project_detail);
