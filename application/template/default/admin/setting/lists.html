@@ -16,7 +16,7 @@
             <div class="publicdiv pt20 pb20 pl20 pr10 sizing">
                 <a href="javascript:void(0);" onClick="loadWindow('{:url('/admin/setting/add?type='.$type)}');" class="btnp y">添加{if condition="$type eq 'task_type'"}任务{/if}{if condition="$type eq 'plan_type'"}需求{/if}设置</a>
             </div>
-            <form action="{:url('/admin/setting/lists')}" method="post" class="form-horizontal" role="form">
+            <form action="" method="post" id="add_tag" class="form-horizontal" role="form">
                 <table class="table">
                     <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
                         <tr>
@@ -26,7 +26,7 @@
                             <th class="ac bbno pt15 pb15">操作</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="borb">
                         {foreach $setting_list as $setting}
                         <tr>
                             <td class="">{$setting['id']}</td>
@@ -42,9 +42,27 @@
                     </tbody>
                 </table>
                 <div class="publicdiv ac pagingw">{$page}</div>
-                <input type="submit" class="btn btn-info y mr20" value="提交" />
+                <input type="submit" onClick="subformajax();" class="btn btn-info y mr20" value="提交" />
             </form>
         </div>
     </div>
 </div>
+<script>
+function subformajax(){
+    jQuery.ajax({
+        type: 'post',
+        url: '{:url("/admin/setting/lists")}',
+        data: jQuery('#add_tag').serialize(),
+        dataType: 'json',
+        success: function (data) {
+            if (data.result == 'success') {
+                jQuery('#addpr').html('操作成功！').show(1).delay(2000).hide(1);
+                setTimeout("location.reload()",2500);
+            }else{
+                jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
+            }
+        }
+    });
+}
+</script>
 {/block}
