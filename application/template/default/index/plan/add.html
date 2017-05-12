@@ -21,6 +21,17 @@
                         </div>
                     </div>
                     
+                    <div class="form-group w100 mrn mln z">
+                        <label class="col-sm-2 control-label" style="width:130px;"><b class="cred">* </b>需求类型：</label>
+                        <div class="col-sm-10 pln prn" style="width:910px;">
+                            <select name="type" class="form-control">
+                                {foreach $plan_type_list as $temp_project}
+                                <option {if condition="$temp_project['id'] == $plan_detail['type']"}selected='selected'{/if} value="{$temp_project['id']}" >{$temp_project['c_value']}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    
                     <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/ueditor.config.js"></script>
                     <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/ueditor.all.min.js"></script>
                     <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/lang/zh-cn/zh-cn.js"></script>

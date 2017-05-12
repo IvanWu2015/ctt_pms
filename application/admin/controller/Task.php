@@ -70,6 +70,7 @@ class Task extends Common {
         $this->assign('project_list', $project_list);
         $this->assign('username', $username);
         $this->assign('user_list', $user_list);
+        $this->assign('status',$status);
         $this->assign('project_id', $project_id);
         $this->assign('page', $page);
         $this->assign('task_list', $task_list);

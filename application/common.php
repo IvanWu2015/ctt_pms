@@ -811,6 +811,8 @@ function analysis_all($action_list) {
             $value['actionname'] = "暂停";
         }elseif ($value['action'] == 'restarted') {
             $value['actionname'] = "重启";
+        }elseif ($value['action'] == 'doing') {
+            $value['actionname'] = "开始";
         }
         $action_list[$key] = $value;
 

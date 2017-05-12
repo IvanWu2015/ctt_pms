@@ -84,6 +84,8 @@ class Plan extends Common {
                     ->find();
         }
         $user_list = DB::table('chinatt_pms_user')->select();//用户列表
+        $plan_type_list = DB::table('chinatt_pms_config')->where(['group' => 'plan_type','status' => 1])->select();//用户列表
+
         if (request()->isPost()) {
             $data = [
                 'title' => input('post.title', '', 'addslashes'),
@@ -91,6 +93,7 @@ class Plan extends Common {
                 'task' => input('post.task_id', '0', 'intval'),
                 'content' => input('post.content', '', 'addslashes'),
                 'estimate' => input('post.estimate', '0', 'intval'),
+                'type' => input('post.type', '0', 'intval'),
                 'assignedTo' => $product_detail['PO'],
                 'assignedDate' => date('Y-m-d H:i:s'),
                 'openedDate' => date('Y-m-d H:i:s'),
@@ -110,6 +113,7 @@ class Plan extends Common {
         $navtitle = '添加/修改产品' . $this->navtitle;
         $this->assign('product_id',$product_id);
         $this->assign('plan_detail',$plan_detail);
+        $this->assign('plan_type_list',$plan_type_list);
         $this->assign('project_id', $project_id);
         $this->assign('plan_id',$plan_id);
         $this->assign('product_detail', $product_detail);

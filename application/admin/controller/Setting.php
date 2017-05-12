@@ -26,7 +26,6 @@ class Setting extends Common {
                 'lasttime' => date('Y-m-d H:i:s'),
             );
             DB('Config')->insert($data);
-            
             $message = array('result' => 'success');
             $data = json_encode($message);
             echo $data;
@@ -53,6 +52,10 @@ class Setting extends Common {
                 $value = addslashes($value);
                 DB('Config')->where(['id' => $key])->update(['c_key' => $value, 'c_value' => addslashes($_POST['value'][$key]),'group' => $type]);
             }
+            $message = array('result' => 'success', 'error' => '');
+            $data = json_encode($message);
+            echo $data;
+            exit();
         }
         $config_id = input('get.id', '0', 'intval');
         $deleted = input('get.deleted', '0', 'intval');
