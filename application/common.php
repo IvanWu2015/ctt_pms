@@ -805,19 +805,18 @@ function analysis_all($action_list) {
             $value['actionname'] = "添加";
         } elseif ($value['action'] == 'deleted') {
             $value['actionname'] = "删除";
-        }elseif ($value['action'] == 'updata') {
+        } elseif ($value['action'] == 'updata') {
             $value['actionname'] = "修改";
-        }elseif ($value['action'] == 'paused') {
+        } elseif ($value['action'] == 'paused') {
             $value['actionname'] = "暂停";
-        }elseif ($value['action'] == 'restarted') {
+        } elseif ($value['action'] == 'restarted') {
             $value['actionname'] = "重启";
-        }elseif ($value['action'] == 'doing') {
+        } elseif ($value['action'] == 'doing') {
             $value['actionname'] = "开始";
         }
         $action_list[$key] = $value;
-
     }
-        
+
     return $action_list;
 }
 
@@ -967,7 +966,7 @@ function get_user_count($user_list, $startdate, $enddate) {
 }
 
 /**
- * 用户工时
+ * 获取用户工时
  * @param str $user 用户
  * @param array $type 类型
  * @param array $startdate 开始
@@ -1011,7 +1010,7 @@ function get_count($user, $startdate, $enddate) {
     $week_data['username'] = array('eq', $user);
     $week_data['objectType'] = array('eq', 'user');
     $count['week_working'] = DB('Workcount')->where($week_data)->sum('consumed');
-    
+
     //获取当月工时
     $startdate = date('Y-m-01');
     $enddate = date('Y-m-t');
@@ -1019,7 +1018,7 @@ function get_count($user, $startdate, $enddate) {
     $month_data['username'] = array('eq', $user);
     $month_data['objectType'] = array('eq', 'user');
     $count['month_working'] = DB('Workcount')->where($month_data)->sum('consumed');
-    
+
     return $count;
 }
 
@@ -1063,4 +1062,21 @@ function classifyTree($db_navigation_list, $parent_id = 0) {
         }
     }
     return $navgation_list;
+}
+
+/**
+ * 获取用户名对应的真名
+ * @param string $username  用户名
+ * @param int $onlyRealname 是否只需要真名
+ * @return string or array
+ */
+function getUser($username, $onlyRealname = 1) {
+    $userlist = cache('userlist');
+    //读取用户列表并写入缓存
+    if(empty($userlist)) {
+        $userlist = db('user')->column('uid,username,realname', 'username');
+        cache('userlist', $userlist, 1800);    //缓存时间为半小时
+    }
+    $user = $onlyRealname == 1 ? $userlist[$username]['realname'] : $userlist[$username];
+    return $user;
 }

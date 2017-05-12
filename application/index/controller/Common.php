@@ -5,6 +5,7 @@ namespace app\index\controller;
 use \traits\controller\Jump;
 use \think\Db;
 use think\Request;
+use think\Cache;
 use tree;
 
 load_trait('controller/Jump');  // 引入traits\controller\Jump
@@ -65,8 +66,8 @@ class Common extends \think\Controller {
             'misc' => '其他',
             'BUG' => '修复BUG',
         ];
-        
-        
+
+
         //读取并输出全局的导航链接
         $db_navigation_list = DB('Navigation')
                 ->where(['status' => 1])
@@ -76,10 +77,6 @@ class Common extends \think\Controller {
         $navigation_list = array();
         $navigation_list = classifyTree($db_navigation_list);
         $this->assign('navigation_list', $navigation_list);
-
-        //用户列表
-        //$this->_G['userlist'] = DB::name('user')->column('uid,username,realname', 'username');
-        //print_r($this->_G);exit;
         $this->assign('_G', $this->_G);
         $this->assign('common_navigation_list', $common_navigation_list);
         //模板控制
