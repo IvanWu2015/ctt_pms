@@ -225,13 +225,13 @@ class Task extends Common {
                 ->alias('t')
                 ->join('chinatt_pms_task p', 't.predecessor = p.id', 'left')
                 ->join('chinatt_pms_plan a', 't.plan = a.id', 'left')
-                ->join('chinatt_pms_config',"t.type = c.c_key",'left')
+                ->join('chinatt_pms_config c',"t.type = c.c_key",'left')
                 ->join('chinatt_pms_user u',"t.openedBy = u.username",'left')
                 ->join('chinatt_pms_user s',"t.assignedTo = s.username",'left')
                 ->where(['t.id' => $task_id])
                 ->field('t.*,p.name as predecessor_name,a.title as plan_title,u.realname,s.realname as assignedTo_name,c.c_value as type_name')
                 ->find();
-
+        
         if (empty($task_detail)) {
             $this->error('任务不存在。');
         }

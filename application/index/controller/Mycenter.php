@@ -126,7 +126,6 @@ class Mycenter extends Common {
 
     //我的文章
     public function article_list() {
-
         $article_list = DB::name('Article')
                 ->alias('a')
                 ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
