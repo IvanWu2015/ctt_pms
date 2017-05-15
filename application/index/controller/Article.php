@@ -30,11 +30,11 @@ class article extends Common {
             $data['a.acl'] = array('eq', 'open'); //开放类型
         } else {
             $data['a.acl'] = array('eq', 'private'); //私有类型
-            $data['a.uid'] = array('eq', $this->_G['uid']);
+            $data['a.username'] = array('eq', $this->_G['username']);
         }
         $data['a.status'] = array('eq', 0);
         if (!empty($username)) {
-            $data['u.username'] = array('eq', $username);
+            $data['a.username'] = array('eq', $username);
         }
         if ($class_id > 0) {
             $data['c.id'] = array('eq', $class_id); //分类ID
@@ -43,8 +43,7 @@ class article extends Common {
                 ->alias('a')
                 ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
                 ->join('chinatt_pms_project p ', 'a.project = p.id', 'left')
-                ->join('chinatt_pms_user u ', 'a.uid = u.uid', 'left')
-                ->field('a.*,c.name as class_name,p.name as project_name,u.username')
+                ->field('a.*,c.name as class_name,p.name as project_name')
                 ->where($data)
                 ->order('id desc')
                 ->paginate(10);
@@ -113,7 +112,7 @@ class article extends Common {
         }
         if (request()->isPost()) {
             $data = [
-                'uid' => $this->_G['uid'],
+                'username' => $this->_G['username'],
                 'project' => input('post.project_id', '0', 'intval'),
                 'class' => input('post.class_id', '0', 'intval'),
                 'title' => input('post.title', '', 'addslashes'),

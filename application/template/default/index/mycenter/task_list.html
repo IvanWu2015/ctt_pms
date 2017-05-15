@@ -28,12 +28,11 @@
             <ul class="nav nav-pills">
                 
                 <li {if condition="$status eq 'all'"}class="active"{/if}><a href="{:url('/index/Mycenter/task_list?status=all&project_id='.$project_id)}">所有</a></li>
-                <li {if condition="$status eq 'unclose'"} class="active" {/if}><a href="{:url('/index/Mycenter/task_list?status=unclose&project_id='.$project_id)}">未关闭</a></li>
+                <li {if condition="$status eq 'unclose'"} class="active" {/if}><a href="{:url('/index/Mycenter/task_list?status=unclose&project_id='.$project_id)}">未完成</a></li>
                 <li {if condition="$status eq 'wait'"}class="active"{/if}><a href="{:url('/index/Mycenter/task_list/?status=wait&project_id='.$project_id)}">等待</a></li>
                 <li {if condition="$status eq 'doing'"}class="active"{/if}><a href="{:url('/index/Mycenter/task_list/?status=doing&project_id='.$project_id)}">进行中</a></li>
                 <li {if condition="$status eq 'done'"}class="active"{/if}><a href="{:url('/index/Mycenter/task_list/?status=done&project_id='.$project_id)}">完成</a></li>
                 <li {if condition="$status eq 'closed'"}class="active"{/if}><a href="{:url('/index/Mycenter/task_list/?status=closed&project_id='.$project_id)}">关闭</a></li>
-                <li {if condition="$status eq 'ontdone'"}class="active"{/if}><a href="{:url('/index/Mycenter/task_list/?status=ontdone&project_id='.$project_id)}">未完成</a></li>
                 {if condition="!empty($project_detail)"}
                 <span class="lh40 ml20">开始：{$project_detail['begin']}</span>
                 <span class="lh40 ml10">结束：{$project_detail['end']}</span>

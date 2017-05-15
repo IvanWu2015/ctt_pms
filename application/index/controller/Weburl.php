@@ -33,7 +33,7 @@ class weburl extends Common {
         $data['w.status'] = array('eq', 0);
 
         if (!empty($username)) {
-            $data['u.username'] = array('eq', $username);
+            $data['w.username'] = array('eq', $username);
         }
         if ($product_id > 0) {
             $data['d.id'] = array('eq', $product_id);
@@ -44,18 +44,17 @@ class weburl extends Common {
         $weburl_list = DB::name('weburl')
                 ->alias('w')
                 ->join('chinatt_pms_project p', 'w.project = p.id', 'left')
-                ->join('chinatt_pms_user u', 'u.uid = w.uid', 'left')
                 ->join('chinatt_pms_class c', 'c.id = w.class', 'left')
                 ->join('chinatt_pms_product d', 'd.id = w.product', 'left')
-                ->field('w.*,p.name,u.username,u.realname,d.name as product_name,c.name as class_name')
+                ->field('w.*,p.name,d.name as product_name,c.name as class_name')
                 ->where($data)
                 ->paginate(10);
         $page = $weburl_list->render(); // 分页显示输出
         $deleted = input('param.deleted', 0, 'intval');
         $weburl_id = input('param.id', 0, 'intval');
         if ($deleted > 0) {
-            $weburl_detail = $weburl->where(['uid' => $this->_G['uid'], 'status' => 0])->find();
-            if ($this->_G['uid'] == $weburl_detail['uid']) {
+            $weburl_detail = $weburl->where(['username' => $this->_G['username'], 'status' => 0])->find();
+            if ($this->_G['username'] == $weburl_detail['username']) {
                 $weburl->where(['id' => $weburl_id])->update(['status' => -1]);
                 $this->success('删除成功', 'index/weburl/lists');
             } else {
@@ -108,7 +107,7 @@ class weburl extends Common {
         }
         if (request()->isPost()) {
             $data = array(
-                'uid' => $this->_G['uid'],
+                'username' => $this->_G['username'],
                 'project' => input('param.project_id', 0, 'intval'),
                 'product' => input('param.product_id', 0, 'intval'),
                 'class' => input('param.class_id', 0, 'intval'),

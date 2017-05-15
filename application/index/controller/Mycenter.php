@@ -27,9 +27,9 @@ class Mycenter extends Common {
         //我的动态总数
         $my_action_count = DB::name('Action')->where(['actor' => $this->_G['username']])->count();
         //我的收藏网址总数
-        $my_weburl_count = DB::name('Weburl')->where(['uid' => $this->_G['uid'], 'status' => 0])->count();
+        $my_weburl_count = DB::name('Weburl')->where(['username' => $this->_G['username'], 'status' => 0])->count();
         //我的文章总数
-        $my_article_count = DB::name('Article')->where(['uid' => $this->_G['uid'], 'status' => 0])->count();
+        $my_article_count = DB::name('Article')->where(['username' => $this->_G['username'], 'status' => 0])->count();
         $not_status_data['status'] = array('in', 'wait,doing');
         $not_status_data['assignedTo'] = array('eq', $this->_G['username']);
         $not_status_data['deleted'] = array('eq', '0');
@@ -58,15 +58,14 @@ class Mycenter extends Common {
                 ->paginate(10);
         $action_list = analysis_all($action_list);
         //网址列表
-        $weburl_list = DB::name('weburl')->alias('w')->join('chinatt_pms_project p', 'w.project = p.id', 'left')->field('w.*,p.name')->where(['w.uid' => $this->_G['uid']])->order('id DESC')->paginate(10);
+        $weburl_list = DB::name('weburl')->alias('w')->join('chinatt_pms_project p', 'w.project = p.id', 'left')->field('w.*,p.name')->where(['w.username' => $this->_G['username']])->order('id DESC')->paginate(10);
         //文档列表
         $article_list = DB::name('Article')
                 ->alias('a')
                 ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
                 ->join('chinatt_pms_project p ', 'a.project = p.id', 'left')
-                ->join('chinatt_pms_user u ', 'a.uid = u.uid', 'left')
-                ->field('a.*,c.name as class_name,p.name as project_name,u.username')
-                ->where(['a.status' => 0, 'a.uid' => $this->_G['uid']])
+                ->field('a.*,c.name as class_name,p.name as project_name')
+                ->where(['a.status' => 0, 'a.username' => $this->_G['username']])
                 ->paginate(10);
         $navtitle = '个人中心' . $this->navtitle;
         $this->assign('same_month_consumed_count', $same_month_consumed_count);
@@ -114,7 +113,7 @@ class Mycenter extends Common {
 
     //我的收藏
     public function weburl_list() {
-        $map['w.uid'] = array('eq', $this->_G['uid']);
+        $map['w.username'] = array('eq', $this->_G['username']);
         $weburl_list = DB::name('weburl')->alias('w')->join('chinatt_pms_project p', 'w.project = p.id', 'left')->field('w.*,p.name')->where($map)->paginate(10);
         $page = $weburl_list->render(); // 分页显示输出
         $navtitle = '我的收藏';
@@ -130,9 +129,8 @@ class Mycenter extends Common {
                 ->alias('a')
                 ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
                 ->join('chinatt_pms_project p ', 'a.project = p.id', 'left')
-                ->join('chinatt_pms_user u ', 'a.uid = u.uid', 'left')
-                ->field('a.*,c.name as class_name,p.name as project_name,u.username')
-                ->where(['a.status' => 0, 'a.uid' => $this->_G['uid']])
+                ->field('a.*,c.name as class_name,p.name as project_name')
+                ->where(['a.status' => 0, 'a.username' => $this->_G['username']])
                 ->order('id desc')
                 ->paginate(10);
         $page = $article_list->render(); // 分页显示输出
@@ -175,15 +173,12 @@ class Mycenter extends Common {
                 ->alias('t')
                 ->join('chinatt_pms_task p', 't.predecessor = p.id', 'left')
                 ->join('chinatt_pms_config c',"t.type = c.c_key AND c.status = 1",'left')
-                ->join('chinatt_pms_user u',"t.openedBy = u.username",'left')
-                ->join('chinatt_pms_user s',"t.assignedTo = s.username",'left')
                 ->where($map)
-                ->field('t.*,p.status as p_status,p.name as p_name,u.realname,s.realname as assignedTo_name,c.c_value as type_name')
+                ->field('t.*,p.status as p_status,p.name as p_name,c.c_value as type_name')
                 ->order("id DESC")
                 ->paginate(20, $task_count, ['path' => url('/index/mycenter/task_list/'), 'query' => ['username' => $username, 'status' => $status, 'project_id' => $project_id]]);
         $navtitle = '个人中心';
         $show = $task_list->render(); // 分页显示输出
-
         $this->assign('project_id', $project_id);
         $this->assign('project_list', $project_list);
         $this->assign('page', $show);

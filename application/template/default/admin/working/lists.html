@@ -69,7 +69,7 @@
                   {foreach $working_list as $working}
                       <tr>
                         <td class="ac">{$working['id']}</td>
-                        <td class="ac">{$working['username']}</td>
+                        <td class="ac">{$working['username']|getUser}</td>
                         <td class="ac"><span class="text-primary">{$working['consumed']}</span></td>
                         <td class="ac">{$working['date']}</td>
                         <td class="w50">{$working['name']}</td>

@@ -1071,6 +1071,7 @@ function classifyTree($db_navigation_list, $parent_id = 0) {
  * @return string or array
  */
 function getUser($username, $onlyRealname = 1) {
+    
     $userlist = cache('userlist');
     //读取用户列表并写入缓存
     if(empty($userlist)) {
@@ -1078,5 +1079,7 @@ function getUser($username, $onlyRealname = 1) {
         cache('userlist', $userlist, 1800);    //缓存时间为半小时
     }
     $user = $onlyRealname == 1 ? $userlist[$username]['realname'] : $userlist[$username];
+    
+    
     return $user;
 }

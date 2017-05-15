@@ -84,7 +84,7 @@
                         <div class="col-sm-9 pln prn">
                             <select name="type" id="type" class="form-control" onchange="setOwners(this.value)">
                                 {foreach $config_list as $temp_type}
-                                <option {if condition="$key == $task_details['type']"}selected='selected'{/if}value="{$temp_type['c_key']}" >{$temp_type['c_value']}</option>
+                                <option {if condition="$temp_type['c_key'] == $task_details['type']"}selected='selected'{/if}value="{$temp_type['c_key']}" >{$temp_type['c_value']}</option>
                                 {/foreach}
                             </select>
                         </div>

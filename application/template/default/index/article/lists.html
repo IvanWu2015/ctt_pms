@@ -50,7 +50,7 @@
                 {foreach $article_list as $article}
                 <tr id="projectlist">
                     <td><a href="{:url('/index/article/detail?id='.$article['id'])}">{$article['title']}</a></td>
-                    <td class="ac">{$article['username']}</td>
+                    <td class="ac">{$article['username']|getUser}</td>
                     <td class="ac">{$article['class_name']}</td>
                     <td class="ac"><a href="{:url('/index/project/detail?id='.$article['project'])}">{$article['project_name']}</a></td>
                     <td class="ac">{$article['time']}</td>

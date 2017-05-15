@@ -44,10 +44,9 @@ class Project extends Common {
         $task_list = $task
                 ->alias('t')
                 ->join('chinatt_pms_task k', "t.predecessor = k.id", 'left')
-                ->join('chinatt_pms_user u',"t.openedBy = u.username",'left')
                 ->join('chinatt_pms_config c',"t.type = c.c_key",'left')
                 ->where($map)
-                ->field('t.*,k.name as p_name,u.realname,c.c_value as type_name')
+                ->field('t.*,k.name as p_name,c.c_value as type_name')
                 ->order("$orderby DESC")
                 ->paginate(20, $task_count, ['path' => url('/index/project/detail/'), 'query' => ['id' => $project_id, 'status' => $status]]);
         $show = $task_list->render(); // 分页显示输出
@@ -331,8 +330,7 @@ class Project extends Common {
                 ->alias('a')
                 ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
                 ->join('chinatt_pms_project p ', 'a.project = p.id', 'left')
-                ->join('chinatt_pms_user u ', 'a.uid = u.uid', 'left')
-                ->field('a.*,c.name as class_name,p.name as project_name,u.username')
+                ->field('a.*,c.name as class_name,p.name as project_name')
                 ->where(['a.status' => 0, 'a.project' => $project_id])
                 ->paginate(10);
         $page = $article_list->render(); // 分页显示输出

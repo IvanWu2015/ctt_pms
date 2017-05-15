@@ -30,7 +30,7 @@
               <tr id="projectlist">
                   <td class="ac">{$article['id']}</td>
                   <td><a href="{:url('/index/article/detail?id='.$article['id'])}">{$article['title']}</a></td>
-                  <td class="ac">{$article['username']}</td>
+                  <td class="ac">{$article['username']|getUser}</td>
                   <td class="ac">{$article['class_name']}</td>
                   <td class="ac">{$article['project_name']}</td>
                   <td class="ac">{$article['time']}</td>

@@ -34,7 +34,7 @@
                             <td>{$plan['id']}</td>
                             <td><a href="{:url('/index/plan/detail/?id='.$plan['id'])}" target="_bacnk">{$plan['title']}</a></td>
                             <td class="ac">{$plan['product_name']}</td>
-                            <td class="ac">{$plan['openedBy']}</td>
+                            <td class="ac">{$plan['openedBy']|getUser}</td>
                             <td class="ac">{$plan['openedDate']}</td>
                             <td class="ac iconfont">
                                 <a href="{:url('/index/plan/add?id='.$plan['id'])}" class="btn-link rkwt">&#xe71d;</a>
