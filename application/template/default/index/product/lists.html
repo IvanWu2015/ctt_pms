@@ -35,7 +35,7 @@
                 <tr>
                     <td class=""><a href="{:url('/index/product/detail/?id='.$product['id'])}">{$product['name']}</a></td>
                     <td class="ac">{$product['code']}</td>
-                    <td class="ac">{$product['realname']}</td>
+                    <td class="ac">{$product['PO']|getUser}</td>
                     <td class="ac">{$product['createdVersion']}</td>
                     <td class="w40">{$product['desc']}</td>
                     <td class="ac"><a href="{:url('/index/plan/add?product_id='.$product['id'])}" title="添加需求" class="iconfont btn-info br3 cf pt5 pb5 pl10 pr10">&#xe61a;</a></td>

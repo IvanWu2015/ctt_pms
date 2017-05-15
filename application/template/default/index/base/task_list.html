@@ -28,9 +28,9 @@
                 </a>
             </td>
             <td class="ac">{$task['type_name']}&nbsp;</td>
-            <td class="ac"><a href="{:url('/index/project/detail?id='.$project_id.'&username='.$task['assignedTo'].'&status='.$status)}"  class="ac {if condition='$task["assignedTo"] == $_G["username"]'}cred{else}text-primary{/if}">{$user_list[$task['assignedTo']]['realname']}</a>&nbsp;</td>
-            <td class="ac">{$task['realname']}&nbsp;</td>
-            <td class="ac">{$user_list[$task['finishedBy']]['realname']}&nbsp;</td>
+            <td class="ac"><a href="{:url('/index/project/detail?id='.$project_id.'&username='.$task['assignedTo'].'&status='.$status)}"  class="ac {if condition='$task["assignedTo"] == $_G["username"]'}cred{else}text-primary{/if}">{$task['assignedTo']|getUser}</a>&nbsp;</td>
+            <td class="ac">{$task['openedBy']|getUser}&nbsp;</td>
+            <td class="ac">{$task['finishedBy']|getUser}&nbsp;</td>
             {if condition="$task['status'] == 'wait'"}<td class="ac" style="color:#f8b004;">等待</td>
             {elseif condition="$task['status'] == 'done'"}<td class="ac text-muted">完成</td>
             {elseif condition="$task['status'] == 'closed'"}<td class="ac text-danger">关闭</td>

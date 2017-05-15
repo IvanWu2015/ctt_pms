@@ -47,7 +47,7 @@ canvas{ width:60px; height:60px; position:absolute; top:20px; left:0;}
                     </div>
                     <div class="publicdiv pb10">
                         <p class="plnp">任务：{$project['nodone']} / {$project['count_task']}</p>
-                        <p class="plnp">负责人：{$project['project_admin']}</p>
+                        <p class="plnp">负责人：{$project['project_admin']|getUser}</p>
                         <p class="plnp">工时：{$project['left_time']} / {$project['all_time']}</p>
                         <p class="plnp">时间：{$project['end']}</p>
                     </div>
@@ -57,7 +57,7 @@ canvas{ width:60px; height:60px; position:absolute; top:20px; left:0;}
                         {if condition="$project['status'] == 'doing'"}<a href="{:url('/index/project/detail/?id='.$project['id'])}" class="status sdoing">进行中</a>{/if}
                         {if condition="$project['status'] == 'closed'"}<a href="{:url('/index/project/detail/?id='.$project['id'])}" class="status sclosed">关闭</a>{/if}
                         <h3 class="publicdiv">最新动态</h3>
-                        <p class="publicdiv ellipsis pl10">{$project['actor']}于{$project['date']}{$project['actionname']}{$project['typename']}</p>
+                        <p class="publicdiv ellipsis pl10">{$project['actor']|getUser}于{$project['date']}{$project['actionname']}{$project['typename']}</p>
                     </div>
                 </div>
             </li>

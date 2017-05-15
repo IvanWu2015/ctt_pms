@@ -62,7 +62,7 @@
                     <div class="publicdiv mt20 pt20 pb20 pl20 pr pr20 bf6f6f6 sizing">
                         {foreach $action_list as $action}
                         {$action['date']}
-                        由<b class="ml5 mr5">{$action['actor']}</b>{$action['actionname']}
+                        由<b class="ml5 mr5">{$action['actor']|getUser}</b>{$action['actionname']}
                         {if condition="$action['comment'] neq null"}
                         <div class="publicdiv mb10" style="padding-left:140px;">
                             <div class="br3 mt10 pr ncnt">{:trim($action['comment'])}</div>
@@ -132,8 +132,8 @@
                             {if condition="$task_detail['status'] == 'doing'"}<span style="color:blue;">进行中</span>{/if}
                             {if condition="$task_detail['status'] == 'closed'"}<span style="color:grey;">关闭</span>{/if}
                         </span></p>
-                    <p>创&nbsp;建&nbsp;&nbsp;者：<span class="text-primary mr20 ml10">{$task_detail['realname']}</span></p>
-                    <p>指&nbsp;派&nbsp;&nbsp;给：<span class="text-primary mr20 ml10">{$task_detail['assignedTo_name']}</span></p>
+                    <p>创&nbsp;建&nbsp;&nbsp;者：<span class="text-primary mr20 ml10">{$task_detail['openedBy']|getUser}</span></p>
+                    <p>指&nbsp;派&nbsp;&nbsp;给：<span class="text-primary mr20 ml10">{$task_detail['assignedTo']|getUser}</span></p>
                     <p>优&nbsp;先&nbsp;&nbsp;级：<span class=" ml10">{$task_detail['pri']}</span></p>
                     <p>预计耗时：<span class="text-primary mr20 ml10">{$task_detail['estimate']}</span></p>
                     <p>开始时间：<span class=" ml10">{$task_detail['openedDate']}</span></p>
@@ -150,8 +150,8 @@
 
                 <div class="publicdiv pr bor pt20 pb20 pl20 mln mt20 pr20 sizing">
                     <span class="pa bf pl8 pr8 lh34 fs16" style="left:10px; top:-20px;">任务的一生</span>
-                    <p>由谁创建：<span class=" ml10">{$task_detail['realname']}</span></p>
-                    <p>由谁完成：<span class=" ml10">{if condition="!empty($task_detail['finishedBy'])"}{$user_list[$task_detail['finishedBy']]['realname']} 于 {$task_detail['finishedDate']} {/if}</span></p>
+                    <p>由谁创建：<span class=" ml10">{$task_detail['openedBy']|getUser}</span></p>
+                    <p>由谁完成：<span class=" ml10">{if condition="!empty($task_detail['finishedBy'])"}{$task_detail['finishedBy']|getUser} 于 {$task_detail['finishedDate']} {/if}</span></p>
                     <p>由谁取消：<span class=" ml10">{if condition="!empty($task_detail['canceledBy'])"}{$user_list[$task_detail['canceledBy']]['realname']}于 {$task_detail['canceledDate']} {/if}</span></p>
                     <p>由谁关闭：<span class=" ml10">{if condition="!empty($task_detail['closedBy'])"}{$user_list[$task_detail['closedBy']]['realname']} 于 {$task_detail['closedDate']} {/if}</span></p>
                     <p>最后编辑：<span class=" ml10">{if condition="!empty($task_detail['lastEditedBy'])"}{$user_list[$task_detail['lastEditedBy']]['realname']} 于 {$task_detail['lastEditedDate']} {/if}</span></p>

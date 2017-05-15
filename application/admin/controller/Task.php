@@ -46,7 +46,6 @@ class Task extends Common {
         if (!empty($keyword)) {
             $data['t.name'] = array('like', "%$keyword%");
         }
-
         $user_list = DB('User')->where(['deleted' => 0])->select(); //用户列表
         $project_list = db('Project')->where(['deleted' => 0])->select(); //项目列表
         $task_list = $task

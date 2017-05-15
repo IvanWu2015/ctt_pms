@@ -16,8 +16,7 @@ class Article extends Common {
                 ->alias('a')
                 ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
                 ->join('chinatt_pms_project p ', 'a.project = p.id', 'left')
-                ->join('chinatt_pms_user u ', 'a.uid = u.uid', 'left')
-                ->field('a.*,c.name as class_name,p.name as project_name,u.username')
+                ->field('a.*,c.name as class_name,p.name as project_name')
                 ->where(['a.status' => 0])
                 ->paginate(10);
         $page = $article_list->render(); // 分页显示输出

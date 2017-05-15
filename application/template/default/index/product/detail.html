@@ -26,10 +26,10 @@
             </p>
             
             <ul class="publicdiv bor mb10">
-                <li class="w16 borr ptlrb8 lh30 z">代号：{$product_detail['code']}</li>
+                <li class="w16 borr ptlrb8 lh30 z">代号：{$product_detail['code']|getUser}</li>
                 <li class="w16 borr ptlrb8 lh30 z">类型：{$product_detail['type']}</li>
                 <li class="w16 borr ptlrb8 lh30 z">状态：{$product_detail['status']}</li>
-                <li class="w16 borr ptlrb8 lh30 z">负责人：{$product_detail['PO']}</li>
+                <li class="w16 borr ptlrb8 lh30 z">负责人：{$product_detail['PO']|getUser}</li>
                 <li class="w16 borr ptlrb8 lh30 z">权限：{$product_detail['acl']}</li>
                 <li class="w16 ptlrb8 lh30 z">白名单：{$product_detail['whitelist']}</li>
             </ul>
@@ -51,8 +51,8 @@
                         <tr>
                             <td class="btno lh25 w40"><a href="{:url('/index/plan/detail/?id='.$plan['id'])}">{$plan['title']}</a></td>
                             <td class="btno lh25 ac">{$plan['branch']}</td>
-                            <td class="btno lh25 ac">{$plan['assignedTo']}</td>
-                            <td class="btno lh25 ac">{$plan['openedBy']}</td>
+                            <td class="btno lh25 ac">{$plan['assignedTo']|getUser}</td>
+                            <td class="btno lh25 ac">{$plan['openedBy']|getUser}</td>
                             <td class="btno lh25 ac">{$plan['estimate']}</td>
                             <td class="btno lh25 ac">{$plan['openedDate']}</td>
                         {/foreach}

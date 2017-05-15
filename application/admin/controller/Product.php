@@ -27,8 +27,7 @@ class Product extends Common {
         //产品列表
         $product_list = DB::name('Product')
                 ->alias('p')
-                ->join('chinatt_pms_user u', 'p.PO = u.username', 'left')
-                ->field('p.*,u.realname')
+                ->field('p.*')
                 ->where(['p.deleted' => '0'])
                 ->paginate(10);
         $page = $product_list->render(); // 分页显示输出
