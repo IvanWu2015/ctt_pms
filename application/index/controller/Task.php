@@ -164,7 +164,7 @@ class Task extends Common {
                     working_count('product', $task['product'], $this->_G['username'], $consumed);
                     working_count('project', $task['project'], $this->_G['username'], $consumed);
                     DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
-                    write_action($this->_G['username'], $task['project'], 'task', $task_id, 'done', input('work'),$taskestimate_id);
+                    write_action($this->_G['username'], $task['project'], 'task', $task_id, 'done', input('work'), intval($taskestimate_id));
                     //指派任务
                 } elseif ($action == 'assign') {
                     $task_data = [
