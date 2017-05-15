@@ -22,26 +22,14 @@
                     {if condition="$task['predecessor'] > 0"}
                     <span title="{$task['p_name']}">
                         &#xe759;
-                        <!--{if condition="$task['p_status'] eq doing"}
-                            进行中
-                        {/if}
-                        {if condition="$task['p_status'] eq wait"}
-                            等待
-                        {/if}
-                        {if condition="$task['p_status'] eq done"}
-                            完成
-                        {/if}
-                        {if condition="$task['p_status'] eq closed"}
-                            完成
-                        {/if}-->
                     </span>
                     {/if}
                     {$task['name']}&nbsp;
                 </a>
             </td>
-            <td class="ac">{$_G['type_list'][$task['type']]}&nbsp;</td>
+            <td class="ac">{$task['type_name']}&nbsp;</td>
             <td class="ac"><a href="{:url('/index/project/detail?id='.$project_id.'&username='.$task['assignedTo'].'&status='.$status)}"  class="ac {if condition='$task["assignedTo"] == $_G["username"]'}cred{else}text-primary{/if}">{$user_list[$task['assignedTo']]['realname']}</a>&nbsp;</td>
-            <td class="ac">{$user_list[$task['openedBy']]['realname']}&nbsp;</td>
+            <td class="ac">{$task['realname']}&nbsp;</td>
             <td class="ac">{$user_list[$task['finishedBy']]['realname']}&nbsp;</td>
             {if condition="$task['status'] == 'wait'"}<td class="ac" style="color:#f8b004;">等待</td>
             {elseif condition="$task['status'] == 'done'"}<td class="ac text-muted">完成</td>

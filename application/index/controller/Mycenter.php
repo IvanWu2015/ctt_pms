@@ -126,7 +126,6 @@ class Mycenter extends Common {
 
     //我的文章
     public function article_list() {
-
         $article_list = DB::name('Article')
                 ->alias('a')
                 ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
@@ -175,8 +174,11 @@ class Mycenter extends Common {
         $task_list = DB::table('chinatt_pms_task')
                 ->alias('t')
                 ->join('chinatt_pms_task p', 't.predecessor = p.id', 'left')
+                ->join('chinatt_pms_config c',"t.type = c.c_key AND c.status = 1",'left')
+                ->join('chinatt_pms_user u',"t.openedBy = u.username",'left')
+                ->join('chinatt_pms_user s',"t.assignedTo = s.username",'left')
                 ->where($map)
-                ->field('t.*,p.status as p_status,p.name as p_name')
+                ->field('t.*,p.status as p_status,p.name as p_name,u.realname,s.realname as assignedTo_name,c.c_value as type_name')
                 ->order("id DESC")
                 ->paginate(20, $task_count, ['path' => url('/index/mycenter/task_list/'), 'query' => ['username' => $username, 'status' => $status, 'project_id' => $project_id]]);
         $navtitle = '个人中心';

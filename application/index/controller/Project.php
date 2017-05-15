@@ -44,8 +44,10 @@ class Project extends Common {
         $task_list = $task
                 ->alias('t')
                 ->join('chinatt_pms_task k', "t.predecessor = k.id", 'left')
+                ->join('chinatt_pms_user u',"t.openedBy = u.username",'left')
+                ->join('chinatt_pms_config c',"t.type = c.c_key",'left')
                 ->where($map)
-                ->field('t.*,k.name as p_name')
+                ->field('t.*,k.name as p_name,u.realname,c.c_value as type_name')
                 ->order("$orderby DESC")
                 ->paginate(20, $task_count, ['path' => url('/index/project/detail/'), 'query' => ['id' => $project_id, 'status' => $status]]);
         $show = $task_list->render(); // 分页显示输出
@@ -56,6 +58,7 @@ class Project extends Common {
         if ($project_detail['acl'] == 'private' && !isProjectUser($this->_G['username'], $user_list) && $this->_G['is_admin'] != 1) {
             $this->error('您无该项目访问权限。');
         }
+
         $navtitle = $project_detail['name'];
         $this->assign('keyword', $keyword);
         $this->assign('project_detail', $project_detail);
@@ -163,9 +166,6 @@ class Project extends Common {
             $team_list = [
             ];
         }
-
-
-
 
         if (request()->isPost()) {
             $pro_data = [
