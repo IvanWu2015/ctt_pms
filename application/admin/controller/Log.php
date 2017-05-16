@@ -17,12 +17,10 @@ class Log extends Common {
     public function lists() {
         $log_list = DB('Log')->where()->order('id DESC')->paginate(15);
         $page = $log_list->render(); // 分页显示输出
-        
+        $navtitle = '操作列表';
+        $this->assign('navtitle',$navtitle);
         $this->assign('log_list',$log_list);
         $this->assign('page',$page);
         return $this->fetch($this->templatePath);
     }
-    
-    
-    
 }

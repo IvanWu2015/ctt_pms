@@ -30,7 +30,7 @@
                 <select name="project_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/admin/action/lists?project_id='.$project_id.'&username=')}' + this.options[this.selectedIndex].value;">
                     <option value='0'>无</option>
                     {foreach $user_list as $temp_user}
-                    <option {if condition="$temp_user['username'] == $username"}selected='selected'{/if} value="{$temp_user['username']}" >{$temp_user['actor']}</option>
+                    <option {if condition="$temp_user['username'] == $username"}selected='selected'{/if} value="{$temp_user['username']}" >{$temp_user['realname']}</option>
                     {/foreach}
                 </select>
                 </label>
@@ -84,10 +84,10 @@
                     {else/}
                       <tr>
                         <td class="ac">{$action['id']}</td>
-                        <td>{$action['actor']}</td>
+                        <td>{$action['actor']|getUser}</td>
                         <td class="ac">{$action['date']}</td>
-                        <td class="ac">&nbsp;</td>
-                        <td class="w20"><a href="{:url('/index/task/detail/?id='.$action['id'])}" target="_bacnk">{$action['tname']}</a></td>
+                        <td class="">{$action['typename']}</td>
+                        <td class="w20"><a href="{:url('/index/task/detail/?id='.$action['objectID'])}" target="_bacnk">{$action['tname']}</a></td>
                         <td class="w20">{$action['pname']}</td>
                         <td class="">{$action['actionname']}</td>
                         

@@ -34,12 +34,13 @@ class Action extends Common {
                 ->join('chinatt_pms_taskestimate b', 'a.extra =b.id', 'left')
                 ->join('chinatt_pms_task t', 'a.objectType = \'task\' AND a.objectID =t.id', 'left')
                 ->join('chinatt_pms_task p', 'a.objectType = \'project\' AND a.objectID =p.id', 'left')
+                ->join('chinatt_pms_navigation n', 'a.objectType = \'navigation\' AND a.objectID =p.id', 'left')
                 ->where($map)
                 ->field('a.*,b.left,b.consumed,b.username,t.name as tname, p.name as pname')
                 ->order('id DESC')
                 ->paginate(30, $action_count, ['path' => url('/admin/action/lists/'), 'query' => ['username' => $username,'keyword' => $keyword]]);
-        
-        $action_list = analysis_all($action_list);
+$action_list = analysis_all($action_list);
+
         $page = $action_list->render(); // 分页显示输出
         $project_list = db('Project')->where(['deleted' => 0])->select();
         $navtitle = '动态管理';
