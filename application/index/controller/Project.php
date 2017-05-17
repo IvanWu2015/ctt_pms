@@ -251,20 +251,22 @@ class Project extends Common {
         $project_details = Db::table('chinatt_pms_user')->where('username', $project_name)->find();
         //将中文名赋值给admin_username
         $project_detail['admin_username'] = $project_details['realname'];
-
+        
+        $project_user_list = get_userlist_by_projectid($project_id);
+        foreach ($project_user_list as $key => $value){
+            $users[] = $key;
+        }
+        if ($this->_G['username'] != $project_detail['project_admin'] && $this->_G['is_admin'] != 1 && !in_array($this->_G['username'], $users)) {
+            $this->error("权限不足");
+        }
+        
         //详情页面的快速操作
         $ac = input('ac', '', 'addslashes');
-        if ($this->_G['username'] != $project_detail['project_admin'] && $this->_G['is_admin'] != 1) {
-            $message = array('error' => '您的权限不足');
-            $data = json_encode($message);
-            echo $data;
-            exit();
-        }
         if ($ac == 'doing' || $ac == 'closed' || $ac == 'done') {
             DB('Project')->where(['id' => $project_id])->update(['status' => $ac]);
             //操作记录
             write_action($this->_G['username'], $project_id, 'project', $project_id,$ac, input('comment', '', 'addslashes'));
-            $message = array('result' => 'success', 'error' => '');
+            $message = array('result' => 'success');
             $data = json_encode($message);
             echo $data;
             exit();
