@@ -61,6 +61,7 @@ class article extends Common {
                 $this->success('删除成功', 'index/article/lists');
             }
         }
+        
         $navtitle = '文档列表' . $project_detail['name'];
         $this->assign('navtitle', $navtitle);
         $this->assign('page', $page);

@@ -54,6 +54,7 @@ class Mycenter extends Common {
                 ->join('chinatt_pms_task t', 'a.objectType = \'task\' AND a.objectID =t.id', 'left')
                 ->join('chinatt_pms_task p', 'a.objectType = \'project\' AND a.objectID =p.id', 'left')
                 ->field('a.*,b.left,b.consumed,b.username,t.name as tname, p.name as pname')
+                ->where(['a.actor' => $this->_G['username']])
                 ->order('id DESC')
                 ->paginate(10);
         $action_list = analysis_all($action_list);
