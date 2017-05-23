@@ -41,7 +41,6 @@ class Task extends Common {
                 $assigo_data = [
                     'assignedTo' => input('param.assignedTo'),
                     'estimate' => input('param.estimate'),
-                    'desc' => trim(input('param.desc')),
                 ];
                 if ($assigo_data['estimate'] < 0) {
                     $message = array('result' => 'fails');
