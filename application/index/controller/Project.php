@@ -49,6 +49,7 @@ class Project extends Common {
                 ->field('t.*,k.name as p_name,c.c_value as type_name')
                 ->order("$orderby DESC")
                 ->paginate(20, $task_count, ['path' => url('/index/project/detail/'), 'query' => ['id' => $project_id, 'status' => $status]]);
+        
         $show = $task_list->render(); // 分页显示输出
         $user_list = get_userlist_by_projectid($project_id);
         $project_detail = $project->where(['id' => $project_id])->find();
@@ -111,7 +112,6 @@ class Project extends Common {
                 ->whereor($map_or)
                 ->order('action_id desc')
                 ->paginate(30);
-
 //        $project_list = DB::name('Project')
 //                ->alias('p')
 //                ->join('chinatt_pms_team t' ," t.project = p.id AND t.username = '$username'",'left')
@@ -124,6 +124,7 @@ class Project extends Common {
         //将对象转为数组
         $project_list = $project_list->toArray();
         $project_list = get_project_consume($project_list['data']);
+
         $navtitle = '项目列表' . $this->navtitle;
         $this->assign('status', $status);
         $this->assign('page', $page);
