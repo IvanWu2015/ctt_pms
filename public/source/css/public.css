@@ -391,6 +391,13 @@ img{ border:none;}
 .imgwrap input.cover{ width:100%; height:190px; z-index:5; position:absolute; top:0px; left:0px; opacity:0;}
 .imgwrap img{ border:none; background:#fff; width:100%; height:100%; max-width:100%; max-height:100%; object-fit:cover; z-index:3; position:absolute; top:0px; left:0px;}
 
+.pripub{ width:22px; height:22px; line-height:20px; text-align:center; border-radius:100%; display:block; margin:0px auto;}
+.prip01{ color:#eb3232; border:2px #eb3232 solid;}
+.prip02{ color:#db6422; border:2px #db6422 solid;}
+.prip03{ color:#c08250; border:2px #c08250 solid;}
+.prip04{ color:#bd4646; border:2px #bd4646 solid;}
+.prip00{ color:#cccccc; border:2px #cccccc solid;}
+
 
 /*个人中心*/
 ul.left_nav{ width:200px; height:100%; background:#f7f7f7; border-right:1px #e8e8e8 solid; position:fixed; top:80px; left:0px;}
