@@ -39,7 +39,19 @@
             <td class="ac text-primary">&nbsp;</td>
             {/if}
             <td class="ac">{$task['openedDate']}</td>
-            <td class="ac">{$task['pri']}&nbsp;</td>
+            <td class="ac">
+                {if condition="$task['pri'] == '1'"}
+                    <span class="pripub prip01">1</span>
+                {elseif condition="$task['pri'] == '2'"}
+                    <span class="pripub prip02">2</span>
+                {elseif condition="$task['pri'] == '3'"}
+                    <span class="pripub prip03">3</span>
+                {elseif condition="$task['pri'] == '4'"}
+                    <span class="pripub prip04">4</span>
+                {else}
+                    <span class="pripub prip00">0</span>
+                {/if}
+            </td>
             <td class="ac">{$task['estimate']}&nbsp;</td>
             <td class="ac">{$task['consumed']}&nbsp;</td>
             <td class="ac fs15 iconfont">

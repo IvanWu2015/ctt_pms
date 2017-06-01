@@ -653,7 +653,7 @@ function get_project_consume($pros) {
         $count_data['consumed_count'] = $count_data['consumed_done_count'] + $count_data['consumed_ing_count'];
         $pros['all_time'] = $count_data['estimate_count'];  //总预计时间
         $pros['consumed_count'] = $count_data['consumed_count'];  //总消耗时间
-        $pros['left_time'] = $pros['all_time'] - $pros['consumed_count'];  //总剩余消耗时间
+        $pros['left_time'] = $task->where(['project' => $project_id, 'status' => 'wait'])->sum('consumed') + $task->where(['project' => $project_id, 'status' => 'doing'])->sum('`left`');
         $nodone_data['status'] = array('in', 'wait,doing');
         $nodone_data['deleted'] = array('eq', '0');
         $nodone_data['project'] = array('eq', $project_id);
