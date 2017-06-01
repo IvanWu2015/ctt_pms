@@ -35,6 +35,7 @@
             {elseif condition="$task['status'] == 'done'"}<td class="ac text-muted">完成</td>
             {elseif condition="$task['status'] == 'closed'"}<td class="ac text-danger">关闭</td>
             {elseif condition="$task['status'] == 'doing'"}<td class="ac text-primary">进行中</td>
+            {elseif condition="$task['status'] == 'cancel'"}<td class="ac text-primary">取消中</td>
             {else}
             <td class="ac text-primary">&nbsp;</td>
             {/if}

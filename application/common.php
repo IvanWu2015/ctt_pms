@@ -813,6 +813,8 @@ function analysis_all($action_list) {
             $value['actionname'] = "重启";
         } elseif ($value['action'] == 'doing') {
             $value['actionname'] = "开始";
+        } elseif ($value['action'] == 'cancel') {
+            $value['actionname'] = "取消";
         }
         $action_list[$key] = $value;
     }

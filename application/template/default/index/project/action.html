@@ -21,10 +21,10 @@
                     <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
                         <tr>
                             <th class="ac bbno pt15 pb15">id</th>
-                            <th class="bbno pt15 pb15">动态</th>
-                            <th class="ac bbno pt15 pb15">类型</th>
                             <th class="ac bbno pt15 pb15">操作者</th>
                             <th class="ac bbno pt15 pb15">动作</th>
+                            <th class="ac bbno pt15 pb15">类型</th>
+                            <th class="ac bbno pt15 pb15">动态</th>
                             <th class="ac bbno pt15 pb15">时间</th>
                         </tr>
                     </thead>
@@ -32,10 +32,10 @@
                         {foreach $project_list as $project}
                         <tr>
                             <td class="ac">{$project['id']}</td>
-                            <td class="">{$project['comment']}</td>
-                            <td class="ac">{$project['typename']}</td>
                             <td class="ac">{$project['actor']|getUser}</td>
                             <td class="ac">{$project['actionname']}</td>
+                            <td class="ac">{$project['typename']}</td>
+                            <td class="ac">{$project['comment']}</td>
                             <td class="ac">{$project['date']}</td>
                         </tr>
                         {/foreach}
