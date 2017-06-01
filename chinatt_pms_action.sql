@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-04-20 15:42:34
+Date: 2017-06-01 11:18:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,7 +33,7 @@ CREATE TABLE `chinatt_pms_action` (
   `read` enum('0','1') NOT NULL DEFAULT '0' COMMENT '是否已读',
   PRIMARY KEY (`id`),
   KEY `action` (`objectID`,`product`,`project`,`action`,`date`)
-) ENGINE=MyISAM AUTO_INCREMENT=1369 DEFAULT CHARSET=utf8 COMMENT='操作记录';
+) ENGINE=MyISAM AUTO_INCREMENT=1373 DEFAULT CHARSET=utf8 COMMENT='操作记录';
 
 -- ----------------------------
 -- Records of chinatt_pms_action
@@ -1400,6 +1400,10 @@ INSERT INTO `chinatt_pms_action` VALUES ('1365', 'navigation', '8', '', '0', 'iv
 INSERT INTO `chinatt_pms_action` VALUES ('1366', 'navigation', '9', '', '0', 'ivan', 'update', '2017-04-18 16:59:16', '收藏', '', '0');
 INSERT INTO `chinatt_pms_action` VALUES ('1367', 'navigation', '10', '', '0', 'ivan', 'update', '2017-04-18 16:59:22', '文档', '', '0');
 INSERT INTO `chinatt_pms_action` VALUES ('1368', 'navigation', '1', '', '0', 'ivan', 'add', '2017-04-18 17:12:33', 'adf', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1369', 'user', '0', '', '2', 'ivan', 'login', '2017-04-26 12:39:03', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1370', 'user', '2', '', '0', 'ivan', 'login', '2017-05-12 15:11:03', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1371', 'project', '1', '', '1', 'ivan', 'updata', '2017-05-13 00:18:15', '<p><span style=\"text-decoration:underline;\">在目前已经开发的经典聊天室上做相应的后续开发。</span></p>', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1372', 'user', '2', '', '0', 'ivan', 'login', '2017-05-23 12:04:10', '', '', '0');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_article
@@ -1407,7 +1411,7 @@ INSERT INTO `chinatt_pms_action` VALUES ('1368', 'navigation', '1', '', '0', 'iv
 DROP TABLE IF EXISTS `chinatt_pms_article`;
 CREATE TABLE `chinatt_pms_article` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `uid` int(5) NOT NULL DEFAULT '0' COMMENT '用户UID',
+  `username` varchar(50) NOT NULL DEFAULT '' COMMENT '用户名',
   `project` int(5) NOT NULL DEFAULT '0' COMMENT '项目ID',
   `product` int(5) NOT NULL DEFAULT '0' COMMENT '产品ID 暂无',
   `class` int(5) NOT NULL DEFAULT '0' COMMENT '分类ID',
@@ -1417,11 +1421,12 @@ CREATE TABLE `chinatt_pms_article` (
   `time` datetime NOT NULL COMMENT '添加时间',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0正常 -1删除',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='文章列表';
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='文章列表';
 
 -- ----------------------------
 -- Records of chinatt_pms_article
 -- ----------------------------
+INSERT INTO `chinatt_pms_article` VALUES ('14', 'ivan', '0', '0', '65', 'test', '<p>asdf</p>', 'open', '2017-05-23 12:04:26', '0');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_class
@@ -6800,7 +6805,7 @@ CREATE TABLE `chinatt_pms_project` (
 -- ----------------------------
 -- Records of chinatt_pms_project
 -- ----------------------------
-INSERT INTO `chinatt_pms_project` VALUES ('1', '0', '0', '0', 'sprint', '0', '经典聊天室2.1版本更新', 'chat2.1', '2016-03-20', '0000-00-00', '184', 'doing', '1', '1', '<u>在目前已经开发的经典聊天室上做相应的后续开发。</u>', '', '0', '', '0', '', '0', '经典聊天室', 'private', '', '5', '0', '');
+INSERT INTO `chinatt_pms_project` VALUES ('1', '0', '0', '0', 'sprint', '0', '经典聊天室2.1版本更新', 'chat2.1', '2016-03-20', '0000-00-00', '184', 'doing', '1', '1', '<p><span style=\"text-decoration:underline;\">在目前已经开发的经典聊天室上做相应的后续开发。</span></p>', '', '0', '', '0', '', '0', '经典聊天室', 'open', '', '5', '0', 'wuxin');
 INSERT INTO `chinatt_pms_project` VALUES ('2', '0', '0', '0', 'waterfall', '0', '帖子自动隐藏1.5版本开发', 'forumhide1.5', '2016-03-22', '2016-04-05', '11', 'doing', '1', '1', '开发帖子自动隐藏1。5版本', '', '0', '', '0', '', '0', '插件开发团队', 'private', '', '10', '0', '');
 INSERT INTO `chinatt_pms_project` VALUES ('3', '0', '0', '0', 'waterfall', '0', '试用中心1.0版本', 'try1.0', '2016-03-23', '2016-04-06', '11', 'done', '1', '1', '开发并完善试用中心1.0版本，在4月5日前出一个完善可运行版本。', '', '0', '', '0', '', '0', '试用中心1.0版本', 'open', '', '15', '0', '');
 INSERT INTO `chinatt_pms_project` VALUES ('4', '0', '0', '0', 'sprint', '0', '耳鼻喉专业网站制作', 'doctor web', '2016-03-28', '2016-04-04', '6', 'done', '1', '1', '<p>模仿网站http://www.xinhua-ent.com/Simplified/Main.html，制作一个新的关于耳鼻喉科的网站</p>', '', '0', '', '0', '', '0', '耳鼻喉专业网站制作', 'open', '', '20', '0', '');
@@ -7694,7 +7699,7 @@ CREATE TABLE `chinatt_pms_user` (
 -- Records of chinatt_pms_user
 -- ----------------------------
 INSERT INTO `chinatt_pms_user` VALUES ('1', '0', '0', 'wuxin', '46ff408a5233e4a2329e23b8eec47be7', '', '管理员', '', 'wuxin', '', '0000-00-00', 'm', '', '', '', '', '0000-00-00', '15', '58.62.203.238', '1482910107', '0.0.0.0', '0', '0', '0', '1', '9537cd');
-INSERT INTO `chinatt_pms_user` VALUES ('2', '1', '1', 'ivan', '7f2668c76e4fc6662fa7abbf2e28908e', 'pm', '吴鑫', '', '', '', '0000-00-00', 'm', 'wx.1@163.com', '', '', '', '0000-00-00', '93', '58.62.205.78', '1492658342', '0.0.0.0', '0', '0', '0', '1', '96067e');
+INSERT INTO `chinatt_pms_user` VALUES ('2', '1', '1', 'ivan', '7f2668c76e4fc6662fa7abbf2e28908e', 'pm', '吴鑫', '', '', '', '0000-00-00', 'm', 'wx.1@163.com', '', '', '', '0000-00-00', '96', '58.62.205.78', '1495512251', '0.0.0.0', '0', '0', '0', '1', '96067e');
 INSERT INTO `chinatt_pms_user` VALUES ('3', '1', '2', 'ming', '6d9f42bade5b89279895bbf07c0feb47', 'dev', '关武明', '', '', '', '0000-00-00', 'm', '2273659300@QQ.com', '', '', '', '0000-00-00', '77', '58.62.202.115', '1481076687', '', '0', '0', '0', '1', '562dfs');
 INSERT INTO `chinatt_pms_user` VALUES ('4', '0', '5', 'chong', '90761b5a7ba4c8442efeb8bfdeea966a', 'po', '张新盛', '', '', '', '0000-00-00', 'm', 'webmaster@bokett.com', '', '', '', '0000-00-00', '4', '59.56.19.8', '1459440152', '', '0', '0', '0', '1', 'f2a22x');
 INSERT INTO `chinatt_pms_user` VALUES ('5', '1', '2', 'chen', 'b61c092c454b70699aaa3fcb2f9a2020', 'dev', '陈茂发', '', '', '', '0000-00-00', 'm', '', '', '', '', '0000-00-00', '78', '58.62.202.115', '1481095696', '', '0', '0', '0', '1', '5wqz2');
@@ -7706,7 +7711,7 @@ INSERT INTO `chinatt_pms_user` VALUES ('6', '0', '3', 'gzzbc', '514224db476c499c
 DROP TABLE IF EXISTS `chinatt_pms_weburl`;
 CREATE TABLE `chinatt_pms_weburl` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(5) NOT NULL DEFAULT '0' COMMENT '用户UID',
+  `username` varchar(50) NOT NULL DEFAULT '' COMMENT '用户名',
   `project` int(5) NOT NULL DEFAULT '0' COMMENT '项目ID',
   `product` int(5) NOT NULL DEFAULT '0' COMMENT '产品ID 暂无',
   `class` int(5) NOT NULL DEFAULT '0' COMMENT '分类ID',
