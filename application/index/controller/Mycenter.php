@@ -30,6 +30,9 @@ class Mycenter extends Common {
         $my_weburl_count = DB::name('Weburl')->where(['username' => $this->_G['username'], 'status' => 0])->count();
         //我的文章总数
         $my_article_count = DB::name('Article')->where(['username' => $this->_G['username'], 'status' => 0])->count();
+
+        
+        
         $not_status_data['status'] = array('in', 'wait,doing');
         $not_status_data['assignedTo'] = array('eq', $this->_G['username']);
         $not_status_data['deleted'] = array('eq', '0');
