@@ -78,12 +78,48 @@
         </script>
         
         <div class="publicdiv pl20 pr20 mt20 sizing">
+        
             <div class="w60 z pr10 sizing"><!--日程安排-->
+                <ul class="data_statistics mb10 iconfont"><!--统计 -->
+                    <a href="javascript:void(0);"><li class="w25 z pr15 sizing">
+                        <div class="datasta dcs01">
+                            <div class="aict ac">&#xe759;</div>
+                            <h3>N</h3>
+                            <p>待完成任务</p>
+                        </div>
+                    </li></a>
+
+                    <a href="javascript:void(0);"><li class="w25 z pr15 sizing">
+                        <div class="datasta dcs02 sizing">
+                            <div class="aict ac">&#xe704;</div>
+                            <h3>N</h3>
+                            <p>我的文档</p>
+                        </div>
+                    </li></a>
+
+                    <a href="javascript:void(0);"><li class="w25 z pr15 sizing">
+                        <div class="datasta dcs03 sizing">
+                            <div class="aict ac">&#xe60d;</div>
+                            <h3>N</h3>
+                            <p>我的收藏</p>
+                        </div>
+                    </li></a>
+
+                    <a href="javascript:void(0);"><li class="w25 z sizing">
+                        <div class="datasta dcs04 sizing">
+                            <div class="aict ac">&#xe616;</div>
+                            <h3>N</h3>
+                            <p>我的动态</p>
+                        </div>
+                    </li></a>
+
+                </ul><!--统计 -->
                 <div id='calendar'></div>
             </div><!--日程安排-->
+            
             <div class="w40 z pl10 sizing">
-            <div class="w100"><!--待完成任务-->
-                <div class="panel" style="border:1px #f8f2d1 solid; min-height:300px;">
+            <div class="publicdiv"><!--待完成任务-->
+                <div class="panel" style="border:1px #f8f2d1 solid; min-height:280px;">
                     <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing" style="background:#f8f2d1;">
                         待完成任务
                         <a href="{:url('/index/Mycenter/task_list/?status=ontdone')}" class="y fs12 mr10">更多>></a>
@@ -106,8 +142,8 @@
                     </div>
                 </div>
             </div><!--待完成任务-->
-            <div class="w100 mt20"><!--我的文档-->
-                <div class="panel" style="border:1px #dff0d8 solid; min-height:287px;">
+            <div class="publicdiv"><!--我的文档-->
+                <div class="panel" style="border:1px #dff0d8 solid; min-height:270px;">
                     <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-success">我的文档</h3>
                     <div class="panel-body">
                         <p class="publicdiv mbn fwb">

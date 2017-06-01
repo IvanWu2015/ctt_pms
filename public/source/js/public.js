@@ -26,42 +26,7 @@ jQuery(function () {
         }
     });
     
-    //弹窗的手动功能
-    
-
 });
-
-jQuery(document).ready(function (){
-        var mousex = 0, mousey = 0;
-        var divLeft, divTop;
-        jQuery('#modalwrap').mousedown(function(e)
-        {
-            var offset = jQuery(this).offset();
-            divLeft = parseInt(offset.left,10);
-            divTop = parseInt(offset.top,10);
-            mousey = e.pageY;
-            mousex = e.pageX;
-            jQuery(this).bind('mousemove',dragElement);
-        });
-
-        function dragElement(event)
-        {
-            var left = divLeft + (event.pageX - mousex);
-            var top = divTop + (event.pageY - mousey);
-            jQuery(this).css(
-            {
-                'top' :  top + 'px',
-                'left' : left + 'px',
-                'position' : 'fixed'
-            });
-            return false;
-        }
-        jQuery(document).mouseup(function()
-        {
-            jQuery('#modalwrap').unbind('mousemove');
-        });
-
-    });
 
 function loadWindow(url) {
     if (arguments[1]) {
