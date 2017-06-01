@@ -25,7 +25,7 @@ jQuery(function () {
             jQuery('#editor').css({border: '1px #dedede solid'});
         }
     });
-
+    
 });
 
 function loadWindow(url) {
