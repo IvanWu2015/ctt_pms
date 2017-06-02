@@ -40,7 +40,7 @@ class Mycenter extends Common {
             $new_date = date("Y-m",strtotime("-$i month"));
             $modth_data['date'] = array('like',"%$new_date%");
             $modth_count = DB::name('Workcount')->where($modth_data)->sum('consumed');
-            $modth_workcount[] = date("Y-m",strtotime("-$i month")) . ',' . $modth_count;
+            $modth_workcount[$new_date] =  $modth_count;
         }
         
         
