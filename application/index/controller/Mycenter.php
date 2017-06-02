@@ -42,7 +42,7 @@ class Mycenter extends Common {
             $modth_data['date'] = array('like',"%$new_date%");
             $modth_count = DB::name('Workcount')->where($modth_data)->sum('consumed');
             $modth_count = $modth_count > 0 ? $modth_count : 0;
-            $modth_workcount[] =  '[\''. date("m",strtotime("-$i month")) .  '\',' . $modth_count  .']' ; 
+            $modth_workcount[] =  '[\''. date("m",strtotime("-$i month")) .  '\',' . $modth_count   . ',' . "$new_date" .']'  ; 
         }
 
         $data = json_encode($modth_workcount);
