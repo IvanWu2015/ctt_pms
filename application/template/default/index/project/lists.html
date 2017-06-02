@@ -27,7 +27,13 @@ canvas{ width:60px; height:60px; position:absolute; top:20px; left:0;}
                     </ul>
                 </li>
                 <span class="pull-right">
-                    <a href="{:url('add')}" class="btn btn-info">添加项目</a> 
+                    <div class="z h34 pr br3" style="width:300px; border:1px #428bca solid;">
+                        <form action="{:url('/index/project/lists/')}" method="post">
+                            <input type="text" name="keyword" class="w100 borno pt5 pb5 pl5 pr5 fwn h32" style=" padding-right:65px;" placeholder="请输入搜索的项目标题~" value="{$keyword}" />
+                            <input type="submit" class="pt5 pb5 pl20 pr20 cf h32 pa p-top p-right" style="background:#428bca; border:1px #428bca solid;" value="搜索" />
+                        </form>
+                    </div>
+                    <a href="{:url('add')}" class="btn btn-info z ml20">添加项目</a> 
                 </span>
             </ul>
         </div>

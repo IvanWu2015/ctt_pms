@@ -49,7 +49,7 @@ class Project extends Common {
                 ->field('t.*,k.name as p_name,c.c_value as type_name')
                 ->order("$orderby DESC")
                 ->paginate(20, $task_count, ['path' => url('/index/project/detail/'), 'query' => ['id' => $project_id, 'status' => $status]]);
-        
+
         $show = $task_list->render(); // 分页显示输出
         $user_list = get_userlist_by_projectid($project_id);
         $project_detail = $project->where(['id' => $project_id])->find();
@@ -101,7 +101,7 @@ class Project extends Common {
             $map_or['t.username'] = $username;
         }
         //$map['t.username'] = array('eq',$username);
-
+        
         $project_list = DB::name('Project')
                 ->alias('p')
                 ->join('chinatt_pms_team t', "p.acl = 'private' AND t.project = p.id AND t.username = '$username'", 'left')
