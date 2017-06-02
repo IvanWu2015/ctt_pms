@@ -38,7 +38,6 @@ class Mycenter extends Common {
             $modth_data['objectType'] = array('eq','user');
             $modth_data['username'] = array('eq',$this->_G['username']);
             $new_date = date("Y-m",strtotime("-$i month"));
-  
             $modth_data['date'] = array('like',"%$new_date%");
             $modth_count = DB::name('Workcount')->where($modth_data)->sum('consumed');
             $modth_count = $modth_count > 0 ? $modth_count : 0;
@@ -47,10 +46,7 @@ class Mycenter extends Common {
 
         $data = json_encode($modth_workcount);
         $data = str_replace('"', '', $data);
-        echo $data;
-        
-        
-        
+
         
         $not_status_data['status'] = array('in', 'wait,doing');
         $not_status_data['assignedTo'] = array('eq', $this->_G['username']);
