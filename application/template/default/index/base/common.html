@@ -77,9 +77,16 @@
                 {/if}
                 
                 {if condition="$_G['uid'] > 0"}
-                <li class="mt20 mb10 ml20 y">
-                    <a class="active" data-toggle="dropdown" href="{:url('index/index')}">{:get_username()} <b class="caret"></b></a>
+                <li class="mt15 mb10 ml20 y" style="width:160px;">
+                    <a class="active" data-toggle="dropdown" href="{:url('index/index')}" style="padding:5px 10px;"><img src="tpl_img/match_img.png" class="mr10 h35 br100" style="width:35px;" />{:get_username()} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
+                        <li><a href="{:url('mycenter/index')}">个人中心</a></li>
+                        <li><a href="{:url('mycenter/task_list')}">我的任务</a></li>
+                        <li><a href="{:url('mycenter/action_list')}">我的动态</a></li>
+                        <li><a href="{:url('mycenter/weburl_list')}">我的收藏</a></li>
+                        <li><a href="{:url('mycenter/article_list')}">我的文档</a></li>
+                        <li><a href="{:url('mycenter/project')}">我的项目</a></li>
+                        <li style="border-top:1px #dedede solid;"><a href="javascript:void(0);" onClick="loadWindow('{:url('/index/task/action?ac=useravatar')}');">修改头像</a></li>
                         <li><a href="{:url('User/profile')}">修改密码</a></li>
                         <li><a href="{:url('User/logout')}">退出</a></li>
                     </ul>

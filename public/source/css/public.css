@@ -376,6 +376,7 @@ img{ border:none;}
 .p-bottom{ bottom:0px !important;}
 
 .br3{ border-radius:3px;}
+.br100{ border-radius:100%;}
 
 .db{ display:block;}
 .dn{ display:none;}
@@ -418,6 +419,9 @@ ul.data_statistics li p{ margin:0px; font-size:13px; position:absolute; bottom:5
 .dcs04{ background:#ecc0c0;}
 .dcs04:hover{ color:#f5e9e9;}
 
+.dropdown-menu li a{ padding:10px 20px !important;}
+.navtop a{ color:#999 !important;}
+
 /*个人中心*/
 ul.left_nav{ width:200px; height:100%; background:#f7f7f7; border-right:1px #e8e8e8 solid; position:fixed; top:80px; left:0px;}
 ul.left_nav li{ width:100%; height:55px; line-height:55px; text-align:left; font-size:14px; float:left; padding-left:30px; background:#fff; color:#000; border-bottom:1px #e8e8e8 solid; position:relative;}
@@ -427,15 +431,15 @@ ul.left_nav li.navattr{ color:#0e90d2; background:#fff url(../images/navattr02.p
 ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:block; border-radius:2px; padding:0px 10px; background:#d9534f; position:absolute; top:15px; right:30px;}
 
 .rightcon{ width:100%; padding:20px 0px 20px 200px; float:left;}
-.userincon{ width:100%; float:left; min-height:140px; padding-left:140px; position:relative;}
+.userincon{ width:100%; float:left; padding-left:20px; position:relative;}
 .userincon .userawp{ width:100px; position:absolute; top:20px; left:20px;}
 .userincon .useravatar{ width:100px; height:100px; float:left; cursor:pointer; border-radius:100%; position:relative; overflow:hidden;}
 .userincon p{ margin-bottom:5px;}
 .userincon .userdateup{ font-size:20px; color:#0e90d2; position:absolute; top:5px; right:5px;}
 
-.uscsul{ width:600px; float:left; position:absolute; top:50px; right:0px;}
-.uscsul li{ width:25%; float:left; margin-bottom:10px; color:#666; padding-left:40px; position:relative;}
-.uscsul li span{ font-size:25px; color:#999; position:absolute; top:22px; left:10px;}
+.uscsul{ width:100%; float:left;}
+.uscsul li{ width:25%; float:left; margin-bottom:10px; color:#666; padding-left:80px; position:relative;}
+.uscsul li span{ font-size:55px; color:#ccc; position:absolute; top:-10px; left:10px;}
 .uscsul li p{ margin-bottom:5px; font-size:12px;}
 .uscsul li h3{ font-size:12px; font-weight:normal; margin:0px;}
 .uscsul li h3 b{ font-size:16px; font-weight:normal; color:#f50;}

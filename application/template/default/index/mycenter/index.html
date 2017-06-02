@@ -1,36 +1,30 @@
 {extend name="base/common"/}
 
-{block name="header"}
-{/block}
+{block name="header"}{/block}
 
 {block name="side"}{/block}
 
 {block name="body"}
 
-{include file="mycenter/nav" /}
 <script type="text/javascript" src="tpl_js/highcharts.js"></script>
 <link href="tpl_css/style.css" rel="stylesheet">
 
-<div class="rightcon sizing"><!-- 右边内容 -->
+<div class="publicdiv sizing"><!-- 右边内容 -->
     
     <div class="publicdiv bf">
         <h3 class="pt10 pb10 pl20 pr20 fs16 sizing iconfont" style="display:none;">&#xe605; 个人中心</h3>
         
         <div class="userincon pt20 pb20 pr20 borb sizing"><!-- 基本信息 -->
-            
-            <div class="userawp sizing">
-                <div class="useravatar" onClick="loadWindow('{:url('/index/task/action?ac=useravatar')}');"><img src="tpl_img/match_img.png" class="publicimg" /></div>
-            </div>
-            <div class="mt20 z pr" style="width:270px;">
+            <!--<div class="mt20 z pr" style="width:270px;">
                 <p class="fs16 fwb">
                     {$user['realname']}
                     <a href="javascript:void(0);" class="iconfont fs12 cwp" title="编辑信息" onClick="loadWindow('{:url('/index/task/action?ac=userinform')}');">&#xe71d;</a>
                 </p>
                 <p>职位：{$user['group_name']}</p>
                 <p>部门：{$user['depe_name']}</p>
-            </div>
+            </div>-->
             
-            <ul class="uscsul"><!-- 数据统计 -->
+            <ul class="uscsul mt15"><!-- 数据统计 -->
                 <li class="borr sizing">
                     <span class="iconfont">&#xe759;</span>
                     <p class="fwb">我的任务</p>
@@ -43,7 +37,7 @@
                     <h3>预计：<b>{$estimate_count}</b></h3>
                     <h3>完成：<b>{$consumed_count}</b></h3>
                 </li>
-                <li class="sizing">
+                <li class="borr sizing">
                     <span class="iconfont">&#xe61e;</span>
                     <p class="fwb">当月工时</p>
                     <h3>预计：<b>{$same_month_estimate_count}</b></h3>
@@ -90,7 +84,7 @@
                       type: 'column'
                    };
                    var title = {
-                      text: '2017 年工时统计'   
+                      text: '工时统计柱形图'   
                    };
                    var subtitle = {
                       text: ''
@@ -112,7 +106,7 @@
                       }
                    };  
                    var tooltip = {
-                      pointFormat: '2017 年工时: <b>{point.y:.1f} 小时</b>'
+                      pointFormat: '工时: <b>{point.y:.1f} 小时</b>'
                    };   
                    var credits = {
                       enabled: false
