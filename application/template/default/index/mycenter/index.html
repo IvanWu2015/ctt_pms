@@ -58,6 +58,8 @@
                 
             </ul><!-- 数据统计 -->
             
+            <div class="publicdiv">{$modth_workcount['0']}</div>
+            
         </div><!-- 基本信息 -->
         
         <script language="JavaScript">
@@ -81,9 +83,10 @@
 
             <div class="w60 z pr10 sizing"><!--日程安排-->
                 
-                <div id="container" class="publicdiv" style="height: 400px;"></div><!--柱形图-->
+                <div id="container" class="publicdiv" style="height: 381px;"></div><!--柱形图-->
                 <script language="JavaScript">
-                $(document).ready(function() {  
+                $(document).ready(function() {
+                   
                    var chart = {
                       type: 'column'
                    };
@@ -116,23 +119,11 @@
                       enabled: false
                    };
                    
-                   jQuery.ajax({    //使用 Ajax 请求各月的工时
-                        type: 'post',
-                        url: '',
-                        data: {},
-                        dataType: 'json',
-                        success: function(data){
-                            if (data.result == 'success') {
-                                console.log('请求成功');
-                            }else{
-                                console.log('请求失败');
-                            }
-                        }
-                   });
+                   var  series_data = '{$modth_workcount}';
                    
                    var series= [{
                             name: ' ',  //工时下方的名称
-                            data: [
+                            /*data: [
                                 ['一月', 23.7],
                                 ['二月', 16.1],
                                 ['三月', 14.2],
@@ -145,7 +136,8 @@
                                 ['十月', 11.1],
                                 ['十一月', 10.5],
                                 ['十二月', 10.4]
-                            ],
+                            ],*/
+                            data: series_data,
                             dataLabels: {
                                 enabled: true,
                                 rotation: -90,  //工时旋转角度
@@ -215,7 +207,7 @@
             
             <div class="w40 z pl10 sizing">
             <div class="publicdiv"><!--待完成任务-->
-                <div class="panel" style="border:1px #f8f2d1 solid; min-height:280px;">
+                <div class="panel" style="border:1px #f8f2d1 solid; min-height:290px;">
                     <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing" style="background:#f8f2d1;">
                         待完成任务
                         <a href="{:url('/index/Mycenter/task_list/?status=ontdone')}" class="y fs12 mr10">更多>></a>
@@ -239,7 +231,7 @@
                 </div>
             </div><!--待完成任务-->
             <div class="publicdiv"><!--我的文档-->
-                <div class="panel" style="border:1px #dff0d8 solid; min-height:270px;">
+                <div class="panel" style="border:1px #dff0d8 solid; min-height:280px;">
                     <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-success">我的文档</h3>
                     <div class="panel-body">
                         <p class="publicdiv mbn fwb">
@@ -259,6 +251,27 @@
                     </div>
                 </div>
             </div><!--我的文档-->
+            <div class="w100 z"><!--我的收藏-->
+                <div class="panel" style="border:1px #d9edf7 solid; min-height:340px;">
+                    <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-info">我的收藏</h3>
+                    <div class="panel-body">
+                        <p class="publicdiv mbn fwb">
+                            <span>ID</span>
+                            <span class="ml20">收藏名称</span>
+                            <span class="y">时间</span>
+                        </p>
+                    
+                        {foreach $weburl_list as $weburl}
+                        <li class="publicdiv pr tlist pr100 h25 lh25 ellipsis">
+                            <span class="w40p db z">{$weburl['id']}</span>
+                            <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$weburl['title']}</a>
+                            <span class="tlisty">{$weburl['time']}</span>
+                        </li>
+                        {/foreach}
+                        
+                    </div>
+                </div>
+            </div><!--我的收藏-->
             </div>
         </div>
         <script type="text/javascript" src="tpl_js/moment.min.js"></script>
@@ -332,28 +345,7 @@
         
         <div class="publicdiv pl20 pr20 mt20 mb20 sizing">
             <div class="publicdiv">
-                <div class="w50 z pr10 sizing"><!--我的收藏-->
-                    <div class="panel" style="border:1px #d9edf7 solid; min-height:330px;">
-                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-info">我的收藏</h3>
-                        <div class="panel-body">
-                            <p class="publicdiv mbn fwb">
-                                <span>ID</span>
-                                <span class="ml20">收藏名称</span>
-                                <span class="y">时间</span>
-                            </p>
-                        
-                            {foreach $weburl_list as $weburl}
-                            <li class="publicdiv pr tlist pr100 h25 lh25 ellipsis">
-                                <span class="w40p db z">{$weburl['id']}</span>
-                                <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$weburl['title']}</a>
-                                <span class="tlisty">{$weburl['time']}</span>
-                            </li>
-                            {/foreach}
-                            
-                        </div>
-                    </div>
-                </div><!--我的收藏-->
-                <div class="w50 z pl10 sizing"><!--我的动态-->
+                <div class="w100 z"><!--我的动态-->
                     <div class="panel" style="border:1px #f2dede solid; min-height:330px;">
                         <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-danger">我的动态</h3>
                         <div class="panel-body">
