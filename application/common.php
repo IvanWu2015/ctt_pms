@@ -931,6 +931,11 @@ function isProjectUser($username, $userlist) {
  */
 function working_count($subjectTYPE, $objectID, $username, $consumed) {
     if ($objectID > 0) {
+        if ($subjectTYPE == 'project') {
+            $task_detail = DB('Task')->where(['id' => $objectID])->find();
+            $working_data['type'] = $task_detail['type'];
+        }
+        
         $working_data = [
             'objectType' => $subjectTYPE,
             'objectID' => $objectID,
@@ -938,8 +943,11 @@ function working_count($subjectTYPE, $objectID, $username, $consumed) {
             'date' => date('Y-m-d'),
             'consumed' => $consumed,
             'lasttime' => time(),
+            'week' => date("W"),
         ];
         $working_detail = DB('Workcount')->where(['objectType' => $subjectTYPE, 'objectID' => $objectID, 'username' => $username, 'date' => date('Y--m-d')])->find();
+        
+
         if (empty($working_detail)) {
             DB('Workcount')->insert($working_data);
         } else {
@@ -1073,14 +1081,14 @@ function classifyTree($db_navigation_list, $parent_id = 0) {
  * @return string or array
  */
 function getUser($username, $onlyRealname = 1) {
-    
+
     $userlist = cache('userlist');
     //读取用户列表并写入缓存
-    if(empty($userlist)) {
+    if (empty($userlist)) {
         $userlist = db('user')->column('uid,username,realname', 'username');
         //cache('userlist', $userlist, 1800);    //缓存时间为半小时
     }
     $user = $onlyRealname == 1 ? $userlist[$username]['realname'] : $userlist[$username];
-    
+
     return $user;
 }

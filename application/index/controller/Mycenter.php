@@ -18,6 +18,7 @@ class Mycenter extends Common {
 
     //首页
     public function index() {
+
         //总预计工时
         $estimate_count = DB::name('Task')->where(['assignedTo' => $this->_G['username'], 'deleted' => 0])->sum('estimate');
         //总消耗工时
@@ -31,6 +32,16 @@ class Mycenter extends Common {
         //我的文章总数
         $my_article_count = DB::name('Article')->where(['username' => $this->_G['username'], 'status' => 0])->count();
 
+        //$week_count = DB::name('Workcount')->where(['objectType' => 'user', 'username' => $this->_G['username']])->sum('consumed');
+        $i = 0;
+        for (date('Y-m'); $i < 12; $i++) {
+            $modth_data['objectType'] = array('eq','user');
+            $modth_data['username'] = array('eq',$this->_G['username']);
+            $new_date = date("Y-m",strtotime("-$i month"));
+            $modth_data['date'] = array('like',"%$new_date%");
+            $modth_count = DB::name('Workcount')->where($modth_data)->sum('consumed');
+            $modth_workcount[] = date("Y-m",strtotime("-$i month")) . ',' . $modth_count;
+        }
         
         
         $not_status_data['status'] = array('in', 'wait,doing');
@@ -82,6 +93,7 @@ class Mycenter extends Common {
         $this->assign('my_action_count', $my_action_count);
         $this->assign('my_task_count', $my_task_count);
         $this->assign('estimate_count', $estimate_count);
+        $this->assign('modth_workcount',$modth_workcount);
         $this->assign('consumed_count', $consumed_count);
         $this->assign('article_list', $article_list);
         $this->assign('weburl_list', $weburl_list);
@@ -176,7 +188,7 @@ class Mycenter extends Common {
         $task_list = DB::table('chinatt_pms_task')
                 ->alias('t')
                 ->join('chinatt_pms_task p', 't.predecessor = p.id', 'left')
-                ->join('chinatt_pms_config c',"t.type = c.c_key AND c.status = 1",'left')
+                ->join('chinatt_pms_config c', "t.type = c.c_key AND c.status = 1", 'left')
                 ->where($map)
                 ->field('t.*,p.status as p_status,p.name as p_name,c.c_value as type_name')
                 ->order("id DESC")
