@@ -18,23 +18,23 @@
                 <table class="table table-striped borl bort borr borb">
                     <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
                         <tr>
-                            <th class="bbno pt15 pb15">ID</th>
-                            <th class="bbno pt15 pb15">操作对象</th>
-                            <th class="ac bbno pt15 pb15">类型</th>
-                            <th class="ac bbno pt15 pb15">动作</th>
-                            <th class="ac bbno pt15 pb15">时间</th>
-                            <th class="w40 ac bbno pt15 pb15">动态</th>
+                            <th class="w7 bbno pt15 pb15">ID</th>
+                            <th class="w25  bbno pt15 pb15">操作对象</th>
+                            <th class="w8 ac bbno pt15 pb15">类型</th>
+                            <th class="w10 ac bbno pt15 pb15">动作</th>
+                            <th class="w15 ac bbno pt15 pb15">时间</th>
+                            <th class="w35 ac bbno pt15 pb15">动态</th>
                         </tr>
                     </thead>
                     <tbody>
                         {foreach $action_list as $project}
                         <tr>
-                            <td class="">{$project['id']}</td>
-                            <td class="">{$project['tname']}</td>
-                            <td class="ac">{$project['typename']}</td>
-                            <td class="ac">{$project['actionname']}</td>
-                            <td class="ac">{$project['date']}</td>
-                            <td class="w40 ac">{$project['comment']}</td>
+                            <td class="w7">{$project['id']}</td>
+                            <td class="w25">{$project['tname']}</td>
+                            <td class="w8 ac">{$project['typename']}</td>
+                            <td class="w10 ac">{$project['actionname']}</td>
+                            <td class="w15 ac">{$project['date']}</td>
+                            <td class="w35 ac">{$project['comment']}</td>
                         </tr>
                         {/foreach}
                     </tbody>

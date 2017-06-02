@@ -8,7 +8,7 @@
 {block name="body"}
 
 {include file="mycenter/nav" /}
-
+<script type="text/javascript" src="tpl_js/highcharts.js"></script>
 <link href="tpl_css/style.css" rel="stylesheet">
 
 <div class="rightcon sizing"><!-- 右边内容 -->
@@ -78,8 +78,102 @@
         </script>
         
         <div class="publicdiv pl20 pr20 mt20 sizing">
-        
+
             <div class="w60 z pr10 sizing"><!--日程安排-->
+                
+                <div id="container" class="publicdiv" style="height: 400px;"></div><!--柱形图-->
+                <script language="JavaScript">
+                $(document).ready(function() {  
+                   var chart = {
+                      type: 'column'
+                   };
+                   var title = {
+                      text: '2017 年工时统计'   
+                   };
+                   var subtitle = {
+                      text: ''
+                   };
+                   var xAxis = {
+                      type: 'category',
+                      labels: {
+                         rotation: 0,   //底部文字旋转角度
+                         style: {   //文字大小和字体
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                         }
+                      }
+                   };
+                   var yAxis ={
+                      min: 0,
+                      title: {
+                        text: '时间 (以小时计)'
+                      }
+                   };  
+                   var tooltip = {
+                      pointFormat: '2017 年工时: <b>{point.y:.1f} 小时</b>'
+                   };   
+                   var credits = {
+                      enabled: false
+                   };
+                   
+                   jQuery.ajax({    //使用 Ajax 请求各月的工时
+                        type: 'post',
+                        url: '',
+                        data: {},
+                        dataType: 'json',
+                        success: function(data){
+                            if (data.result == 'success') {
+                                console.log('请求成功');
+                            }else{
+                                console.log('请求失败');
+                            }
+                        }
+                   });
+                   
+                   var series= [{
+                            name: ' ',  //工时下方的名称
+                            data: [
+                                ['一月', 23.7],
+                                ['二月', 16.1],
+                                ['三月', 14.2],
+                                ['四月', 14.0],
+                                ['五月', 12.5],
+                                ['六月', 12.1],
+                                ['七月', 11.8],
+                                ['八月', 11.7],
+                                ['九月', 11.1],
+                                ['十月', 11.1],
+                                ['十一月', 10.5],
+                                ['十二月', 10.4]
+                            ],
+                            dataLabels: {
+                                enabled: true,
+                                rotation: -90,  //工时旋转角度
+                                color: '#FFFFFF',
+                                align: 'right',
+                                format: '{point.y:.1f}', // 一个小数
+                                y: 10, // 从上到下 10 像素
+                                style: {
+                                    fontSize: '13px',
+                                    fontFamily: 'Verdana, sans-serif'
+                                }
+                            }
+                   }];     
+                      
+                   var json = {};   
+                   json.chart = chart; 
+                   json.title = title;   
+                   json.subtitle = subtitle;
+                   json.xAxis = xAxis;
+                   json.yAxis = yAxis;   
+                   json.tooltip = tooltip;   
+                   json.credits = credits;
+                   json.series = series;
+                   $('#container').highcharts(json);
+                  
+                });
+                </script>
+            
                 <ul class="data_statistics mb10 iconfont"><!--统计 -->
                     <a href="javascript:void(0);"><li class="w25 z pr15 sizing">
                         <div class="datasta dcs01">
@@ -114,7 +208,9 @@
                     </li></a>
 
                 </ul><!--统计 -->
+                
                 <div id='calendar'></div>
+                
             </div><!--日程安排-->
             
             <div class="w40 z pl10 sizing">
