@@ -40,8 +40,12 @@ class Mycenter extends Common {
             $new_date = date("Y-m",strtotime("-$i month"));
             $modth_data['date'] = array('like',"%$new_date%");
             $modth_count = DB::name('Workcount')->where($modth_data)->sum('consumed');
-            $modth_workcount[$new_date] =  $modth_count;
+            $modth_count = $modth_count > 0 ? $modth_count : 0;
+            $modth_workcount[] =  '[\''. date("Y-m",strtotime("-$i month")) .  '\',' . $modth_count  .']' ; 
         }
+        $data = json_encode($modth_workcount);
+        $data = str_replace('"', '', $data);
+        echo $data;
         
         
         $not_status_data['status'] = array('in', 'wait,doing');
@@ -93,7 +97,7 @@ class Mycenter extends Common {
         $this->assign('my_action_count', $my_action_count);
         $this->assign('my_task_count', $my_task_count);
         $this->assign('estimate_count', $estimate_count);
-        $this->assign('modth_workcount',$modth_workcount);
+        $this->assign('data',$data);
         $this->assign('consumed_count', $consumed_count);
         $this->assign('article_list', $article_list);
         $this->assign('weburl_list', $weburl_list);

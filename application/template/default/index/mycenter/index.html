@@ -58,7 +58,6 @@
                 
             </ul><!-- 数据统计 -->
             
-            <div class="publicdiv">{$modth_workcount['0']}</div>
             
         </div><!-- 基本信息 -->
         
@@ -119,7 +118,6 @@
                       enabled: false
                    };
                    
-                   var  series_data = '{$modth_workcount}';
                    
                    var series= [{
                             name: ' ',  //工时下方的名称
@@ -137,7 +135,7 @@
                                 ['十一月', 10.5],
                                 ['十二月', 10.4]
                             ],*/
-                            data: series_data,
+                            data: {$data},
                             dataLabels: {
                                 enabled: true,
                                 rotation: -90,  //工时旋转角度
