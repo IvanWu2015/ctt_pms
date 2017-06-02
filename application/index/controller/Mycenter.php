@@ -33,23 +33,21 @@ class Mycenter extends Common {
         $my_article_count = DB::name('Article')->where(['username' => $this->_G['username'], 'status' => 0])->count();
 
         //$week_count = DB::name('Workcount')->where(['objectType' => 'user', 'username' => $this->_G['username']])->sum('consumed');
-        $i = 0;
-        for (date('Y-m'); $i < 12; $i++) {
+        $i = 11;
+        for (date('Y-m'); $i >= 0; $i--) {
             $modth_data['objectType'] = array('eq','user');
             $modth_data['username'] = array('eq',$this->_G['username']);
             $new_date = date("Y-m",strtotime("-$i month"));
+  
             $modth_data['date'] = array('like',"%$new_date%");
             $modth_count = DB::name('Workcount')->where($modth_data)->sum('consumed');
             $modth_count = $modth_count > 0 ? $modth_count : 0;
             $modth_workcount[] =  '[\''. date("m",strtotime("-$i month")) .  '\',' . $modth_count  .']' ; 
         }
+
         $data = json_encode($modth_workcount);
         $data = str_replace('"', '', $data);
         echo $data;
-        
-        
-        
-        
         
         
         
