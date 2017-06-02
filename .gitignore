@@ -4,4 +4,5 @@ composer.lock
 *.log
 nbproject
 runtime
-config.php\config.php
+/application/config.php
+/application/database.php
