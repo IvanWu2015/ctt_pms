@@ -34,6 +34,10 @@ a{ color:#666; text-decoration:none;}
 a:hover{ text-decoration:none;}
 img{ border:none;}
 
+.nav .open a, .nav .open a:focus, .nav .open a:hover{ background:none;}
+.nav li a:focus, .nav li a:hover{ background:none;}
+.mynavright{ left:-100px !important;}
+
 #wrap{ width:100%; position:relative; float:left;}
 
 #addpr{ width:500px; height:50px; line-height:50px; border-radius:5px; text-align:center; color:#fff; display:none; background:url(../images/bg_opacity05.png); z-index:999999; position:fixed; top:-150px; left:0; right:0; bottom:0; margin:auto;}

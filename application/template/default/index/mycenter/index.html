@@ -107,7 +107,18 @@
                    };  
                    var tooltip = {
                       pointFormat: '工时: <b>{point.y:.1f} 小时</b>'
-                   };   
+                   };
+                   
+                   /*var tooltip = { //鼠标滑向数据区显示的提示框 
+                        formatter: function() {  //格式化提示框信息 
+                            var unit = { 
+                                '金额': '亿元', 
+                                '增幅': '%' 
+                            } [this.series.name]; 
+                            return '' + this.x + ': ' + this.y + ' ' + unit; 
+                        } 
+                    }*/
+                   
                    var credits = {
                       enabled: false
                    };
