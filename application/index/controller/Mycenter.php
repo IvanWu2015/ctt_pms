@@ -33,20 +33,26 @@ class Mycenter extends Common {
         $my_article_count = DB::name('Article')->where(['username' => $this->_G['username'], 'status' => 0])->count();
 
         //$week_count = DB::name('Workcount')->where(['objectType' => 'user', 'username' => $this->_G['username']])->sum('consumed');
-        $i = 11;
-        for (date('Y-m'); $i >= 0; $i--) {
-            $modth_data['objectType'] = array('eq','user');
-            $modth_data['username'] = array('eq',$this->_G['username']);
-            $new_date = date("Y-m",strtotime("-$i month"));
-            $modth_data['date'] = array('like',"%$new_date%");
-            $modth_count = DB::name('Workcount')->where($modth_data)->sum('consumed');
-            $modth_count = $modth_count > 0 ? $modth_count : 0;
-            $modth_workcount[] =  '[\''. date("m",strtotime("-$i month")) .  '\',' . $modth_count   . ',' . "$new_date" .']'  ; 
+//        $i = 11;
+//        for (date('Y-m'); $i >= 0; $i--) {
+//            $modth_data['objectType'] = array('eq','user');
+//            $modth_data['username'] = array('eq',$this->_G['username']);
+//            $new_date = date("Y-m",strtotime("-$i month"));
+//            $modth_data['date'] = array('like',"%$new_date%");
+//            $modth_count = DB::name('Workcount')->where($modth_data)->sum('consumed');
+//            $modth_count = $modth_count > 0 ? $modth_count : 0;
+//            $modth_workcount[] =  '[\''. date("m",strtotime("-$i month")) .  '\',' . $modth_count   . ',' . "$new_date" .']'  ; 
+//        }
+//        
+//        $data = json_encode($modth_workcount);
+//        $data = str_replace('"', '', $data);
+        
+        $week_list = DB('Workcount')->where(['objectType' => 'user'])->column('*','week');
+        foreach ($week_list as $key => $value){
+            $week_data[] = '[\''. $value['week']   . '\',' . $value['consumed'] . ']';
         }
-
-        $data = json_encode($modth_workcount);
+        $data = json_encode($week_data);
         $data = str_replace('"', '', $data);
-
         
         $not_status_data['status'] = array('in', 'wait,doing');
         $not_status_data['assignedTo'] = array('eq', $this->_G['username']);
@@ -63,7 +69,7 @@ class Mycenter extends Common {
         $same_month_consumed_count = DB::name('Taskestimate')->where($consumed_map)->sum('consumed'); //当月完成工时
         $user = db('User')->alias('u')->join('chinatt_pms_dept d', 'u.dept = d.id', 'left')->join('chinatt_pms_group g', 'u.groupid = g.id')->field('u.*,d.name as depe_name,g.name as group_name')->where(['uid' => $this->_G['uid']])->find();
         //未完成任务
-        $task_list = db('Task')->where(['assignedTo' => $this->_G['username'], 'status' => 'wait'])->order('id DESC')->select();
+        $task_list = db('Task')->where($not_status_data)->order('id DESC')->select();
         $task_list = format_task($task_list);
         //动态
         $action_list = DB('Action')
@@ -181,6 +187,7 @@ class Mycenter extends Common {
             $map_count['project'] = array('eq', $project_id);
             $map['t.project'] = array('eq', $project_id);
         }
+        $map['t.deleted'] = 1;
         $project_list = DB::name('Team')
                 ->alias('t')
                 ->join('chinatt_pms_project p', 't.project = p.id', 'left')
