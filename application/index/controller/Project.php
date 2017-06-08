@@ -102,6 +102,11 @@ class Project extends Common {
         }
         //$map['t.username'] = array('eq',$username);
         
+        $keyword = input('post.keyword', '', 'addslashes');
+        if(!empty($keyword)){
+            $map['p.name'] = array('like',"%$keyword%");
+        }
+        
         $project_list = DB::name('Project')
                 ->alias('p')
                 ->join('chinatt_pms_team t', "p.acl = 'private' AND t.project = p.id AND t.username = '$username'", 'left')
