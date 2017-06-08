@@ -36,7 +36,7 @@ img{ border:none;}
 
 .nav .open a, .nav .open a:focus, .nav .open a:hover{ background:none;}
 .nav li a:focus, .nav li a:hover{ background:none;}
-.mynavright{ left:-100px !important;}
+.mynavright{ left:-90px !important;}
 
 #wrap{ width:100%; position:relative; float:left;}
 
@@ -62,6 +62,13 @@ img{ border:none;}
 .publicimg{ width:100%; height:100%; max-width:100%; max-height:100%; object-fit:cover; z-index:3; position:absolute; top:0; left:0; right:0; bottom:0; margin:auto !important;}
 
 .prompt{ width:500px; height:50px; line-height:50px; text-align:center; font-size:16px; border-radius:3px; padding:0px 30px; color:#fff; background:url(../images/bg_opacity05.png); z-index:99999; position:fixed; top:0; left:0; right:0; bottom:0; margin:auto; display:none;}
+
+.pl3{ padding-left:3px;}
+.pr3{ padding-right:3px;}
+.pb3{ padding-bottom:3px;}
+.pt3{ padding-top:3px;}
+.plr3{ padding-left:3px; padding-right:3px;}
+.ptlrb3{ padding:3px 3px;}
 
 .pl5{ padding-left:5px;}
 .pr5{ padding-right:5px;}
@@ -109,6 +116,13 @@ img{ border:none;}
 .mt5{ margin-top:5px;}
 .mlr5{ margin-left:5px; margin-right:5px;}
 .mtlrb5{ margin:5px 5px;}
+
+.ml3{ margin-left:3px;}
+.mr3{ margin-right:3px;}
+.mb3{ margin-bottom:3px;}
+.mt3{ margin-top:3px;}
+.mlr3{ margin-left:3px; margin-right:3px;}
+.mtlrb3{ margin:3px 3px;}
 
 .ml8{ margin-left:8px;}
 .mr8{ margin-right:8px;}
@@ -424,7 +438,6 @@ ul.data_statistics li p{ margin:0px; font-size:13px; position:absolute; bottom:5
 .dcs04:hover{ color:#f5e9e9;}
 
 .dropdown-menu li a{ padding:10px 20px !important;}
-.navtop a{ color:#999 !important;}
 
 /*个人中心*/
 ul.left_nav{ width:200px; height:100%; background:#f7f7f7; border-right:1px #e8e8e8 solid; position:fixed; top:80px; left:0px;}
@@ -456,7 +469,6 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .sufulo button{ width:100px; height:30px; color:#fff; cursor:pointer; border-radius:3px; margin-left:10px; background:#416eea; border:none; float:right;}
 
 .navtop a{ color:#fff;}
-.navtop a:hover{ color:#080808;}
 
 .pr70{ padding-right:70px;}
 .pr100{ padding-right:100px;}
