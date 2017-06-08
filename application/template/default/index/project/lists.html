@@ -11,9 +11,9 @@ canvas{ width:60px; height:60px; position:absolute; top:20px; left:0;}
 
 <div class="publicdiv mt20 pt20 pb10 ptn sizing">
     <div class="publicdiv pl20 pr20 pt8 bf sizing">
-        <div class="publicdiv borb mb20 pt10 pb10 bf sizing">
-            <h3>项目列表</h3>
-            <ul class="nav nav-pills">
+        <div class="publicdiv borb mb20 pb10 bf sizing">
+            <h3 class="mt20 pt10">项目列表</h3>
+            <ul class="publicdiv nav nav-pills mt10">
                 <li {if condition="$status == 'all'"} class="active" {/if}><a href="{:url('index/project/lists?status=all')}">所有</a></li>
                 <li {if condition="$status == 'unclose'"} class="active" {/if}><a href="{:url('/index/project/lists?status=unclose')}">未关闭</a></li>
                 <li {if condition="$status == 'delayed'"} class="active" {/if}><a href="{:url('/index/project/lists?status=delayed')}">已延期</a></li>

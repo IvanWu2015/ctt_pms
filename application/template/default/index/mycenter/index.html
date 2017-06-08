@@ -9,7 +9,7 @@
 <script type="text/javascript" src="tpl_js/highcharts.js"></script>
 <link href="tpl_css/style.css" rel="stylesheet">
 
-<div class="publicdiv sizing"><!-- 右边内容 -->
+<div class="publicdiv mt20 sizing"><!-- 右边内容 -->
     
     <div class="publicdiv bf">
         <h3 class="pt10 pb10 pl20 pr20 fs16 sizing iconfont" style="display:none;">&#xe605; 个人中心</h3>
@@ -26,7 +26,7 @@
             
             <ul class="uscsul mt15"><!-- 数据统计 -->
                 <li class="borr sizing">
-                    <span class="iconfont">&#xe759;</span>
+                    <span class="iconfont" style="top:-5px;">&#xe759;</span>
                     <p class="fwb">我的任务</p>
                     <h3>已完成：<b>{$my_task_count}</b></h3>
                     <h3>未完成：<b>{$not_status_count}</b></h3>
@@ -43,13 +43,32 @@
                     <h3>预计：<b>{$same_month_estimate_count}</b></h3>
                     <h3>完成：<b>{$same_month_consumed_count}</b></h3>
                 </li>
-                <li class="sizing">
+                <li class="borr sizing">
                     <span class="iconfont">&#xe61e;</span>
                     <p class="fwb">当天工时</p>
                     <h3>当天工时：<b>{$user_count['today_working']}</b></h3>
                     <h3>当周工时：<b>{$user_count['week_working']}</b></h3>
                 </li>
-                
+                <li class="borr sizing">
+                    <span class="iconfont" style="top:-5px;">&#xe759;</span>
+                    <p class="fwb mt10">待完成任务</p>
+                    <h3><b>{$not_status_count}</b></h3>
+                </li>
+                <li class="borr sizing">
+                    <span class="iconfont fs51" style="top:-3px;">&#xe704;</span>
+                    <p class="fwb mt10">我的文档</p>
+                    <h3><b>{$my_article_count}</b></h3>
+                </li>
+                <li class="borr sizing">
+                    <span class="iconfont fs50" style="top:-8px;">&#xe60d;</span>
+                    <p class="fwb mt10">我的收藏</p>
+                    <h3><b>{$my_weburl_count}</b></h3>
+                </li>
+                <li class="sizing">
+                    <span class="iconfont" style="top:-7px;">&#xe616;</span>
+                    <p class="fwb mt10">我的动态</p>
+                    <h3><b>{$my_action_count}</b></h3>
+                </li>
             </ul><!-- 数据统计 -->
             
             
@@ -123,7 +142,6 @@
                       enabled: false
                    };
                    
-                   
                    var series= [{
                             name: ' ',  //工时下方的名称
                             /*data: [
@@ -169,7 +187,7 @@
                 });
                 </script>
             
-                <ul class="data_statistics mb10 iconfont"><!--统计 -->
+                <!--<ul class="data_statistics mb10 iconfont">
                     <a href="javascript:void(0);"><li class="w25 z pr15 sizing">
                         <div class="datasta dcs01">
                             <div class="aict ac">&#xe759;</div>
@@ -202,7 +220,7 @@
                         </div>
                     </li></a>
 
-                </ul><!--统计 -->
+                </ul>-->
                 
                 <div id='calendar'></div>
                 
@@ -210,7 +228,7 @@
             
             <div class="w40 z pl10 sizing">
             <div class="publicdiv"><!--待完成任务-->
-                <div class="panel" style="border:1px #f8f2d1 solid; min-height:290px;">
+                <div class="panel" style="border:1px #f8f2d1 solid; min-height:275px;">
                     <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing" style="background:#f8f2d1;">
                         待完成任务
                         <a href="{:url('/index/Mycenter/task_list/?status=unclose')}" class="y fs12 mr10">更多>></a>
@@ -234,7 +252,7 @@
                 </div>
             </div><!--待完成任务-->
             <div class="publicdiv"><!--我的文档-->
-                <div class="panel" style="border:1px #dff0d8 solid; min-height:280px;">
+                <div class="panel" style="border:1px #dff0d8 solid; min-height:270px;">
                     <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-success">我的文档</h3>
                     <div class="panel-body">
                         <p class="publicdiv mbn fwb">
@@ -255,7 +273,7 @@
                 </div>
             </div><!--我的文档-->
             <div class="w100 z"><!--我的收藏-->
-                <div class="panel" style="border:1px #d9edf7 solid; min-height:340px;">
+                <div class="panel" style="border:1px #d9edf7 solid; min-height:280px;">
                     <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-info">我的收藏</h3>
                     <div class="panel-body">
                         <p class="publicdiv mbn fwb">

@@ -1,11 +1,12 @@
+
 {extend name="base/common"/}
 
 {block name="header"}
 {/block}
 {block name="body"}
 <!-- Contents ================================================== -->
-<section id="contents" class="mtn">
-    <div class="publicdiv mt20 mb10 sizing">
+<div id="contents" class="publicdiv mt20">
+    <div class="publicdiv pl20 pr20 bf pt20 borb pb10 sizing">
         <h3 class="mt5">
             <a href="{:url('/index/Project/detail/?id='.$project_id)}">{$project_detail['name']}</a>
             <span class="fs14">
@@ -18,9 +19,9 @@
     </div>
 
     <div class="publicdiv bf pb20 sizing" id="action_wrap">
-        <h3 class="mtn mb10 fwb pb15 fs16 pt15 pl20 pr20 sizing" style="background:#f8fafe; border-bottom:1px solid #e5e5e5;">
-            {$task_detail['name']}
-            <span class="y derkwt fs13 iconfont">
+        <h3 class="publicdiv mtn mb10 fwb pb15 fs16 pt5 pl20 pr20 sizing" style="background:#f8fafe; border-bottom:1px solid #e5e5e5;">
+            <span class="mt15 z">{$task_detail['name']}</span>
+            <span class="y derkwt fs13 mt10 iconfont">
                 <a href="javascript:void(0);" class="btn-link" title="指派" onClick="loadWindow('{:url('/index/task/action?ac=assignTo&id='.$task_id.'&type=assign')}');">&#xe752; 指派</a>
                 {if condition="($task_detail['status'] == 'done') or ($task_detail['status'] == 'doing')"}
                 <a href="javascript:void(0);" class="btn-link cc" title="开始">&#xe621; 开始</a>
@@ -162,6 +163,5 @@
     </div>
 
 
-</section>
 </div>
 {/block}

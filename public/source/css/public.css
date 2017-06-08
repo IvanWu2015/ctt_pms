@@ -261,6 +261,34 @@ img{ border:none;}
 .fs29{ font-size:29px !important;}
 .fs30{ font-size:30px !important;}
 .fs31{ font-size:31px !important;}
+.fs32{ font-size:32px !important;}
+.fs33{ font-size:33px !important;}
+.fs34{ font-size:34px !important;}
+.fs35{ font-size:35px !important;}
+.fs36{ font-size:36px !important;}
+.fs37{ font-size:37px !important;}
+.fs38{ font-size:38px !important;}
+.fs39{ font-size:39px !important;}
+.fs40{ font-size:40px !important;}
+.fs41{ font-size:41px !important;}
+.fs42{ font-size:42px !important;}
+.fs43{ font-size:43px !important;}
+.fs44{ font-size:44px !important;}
+.fs45{ font-size:45px !important;}
+.fs46{ font-size:46px !important;}
+.fs47{ font-size:47px !important;}
+.fs48{ font-size:48px !important;}
+.fs49{ font-size:49px !important;}
+.fs50{ font-size:50px !important;}
+.fs51{ font-size:51px !important;}
+.fs52{ font-size:52px !important;}
+.fs53{ font-size:53px !important;}
+.fs54{ font-size:54px !important;}
+.fs55{ font-size:55px !important;}
+.fs56{ font-size:56px !important;}
+.fs57{ font-size:57px !important;}
+.fs58{ font-size:58px !important;}
+.fs59{ font-size:59px !important;}
 
 .fwb{ font-weight:bold;}
 .fwn{ font-weight:normal;}
@@ -455,7 +483,7 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .userincon .userdateup{ font-size:20px; color:#0e90d2; position:absolute; top:5px; right:5px;}
 
 .uscsul{ width:100%; float:left;}
-.uscsul li{ width:25%; float:left; margin-bottom:10px; color:#666; padding-left:80px; position:relative;}
+.uscsul li{ width:12.5%; float:left; margin-bottom:10px; color:#666; padding-left:80px; position:relative;}
 .uscsul li span{ font-size:55px; color:#ccc; position:absolute; top:-10px; left:10px;}
 .uscsul li p{ margin-bottom:5px; font-size:12px;}
 .uscsul li h3{ font-size:12px; font-weight:normal; margin:0px;}
