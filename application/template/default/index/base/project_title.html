@@ -9,6 +9,7 @@
             <a {if condition="$_G['action'] == 'weburl'"}class="ml10 btn-link"{else}class="ml10"{/if} href="{:url('/index/Project/weburl?project_id='.$project_id)}">收藏</a>
             <a {if condition="$_G['action'] == 'article'"}class="ml10 btn-link"{else}class="ml10"{/if} href="{:url('/index/Project/article?project_id='.$project_id)}">文档</a>
         </span>
+        
         {if condition="$project_id gt 0"}
         <span class="pull-right">
             {if condition="$_G['action'] == 'detail'"}
@@ -22,5 +23,12 @@
             {/if}
         </span>
         {/if}
+        
+        <span class="pull-right fs13 mt5 derkwt iconfont">
+            <a href="javascript:void(0);" class="mr10" onClick="loadWindow('{:url('/index/Project/survey?ac=closed&project_id='.$project_id)}');">&#xe6f1; 关闭</a>
+            <a href="javascript:void(0);" class="mr10" onClick="loadWindow('{:url('/index/Project/survey?ac=done&project_id='.$project_id)}');">&#xe614; 完成</a>
+            <a href="javascript:void(0);" class="mr10" onClick="loadWindow('{:url('/index/Project/survey?ac=doing&project_id='.$project_id)}');">&#xe983; 进行</a>
+        </span>
+        
     </h3>
 </div>
