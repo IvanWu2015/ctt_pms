@@ -424,7 +424,6 @@ ul.data_statistics li p{ margin:0px; font-size:13px; position:absolute; bottom:5
 .dcs04:hover{ color:#f5e9e9;}
 
 .dropdown-menu li a{ padding:10px 20px !important;}
-.navtop a{ color:#999 !important;}
 
 /*个人中心*/
 ul.left_nav{ width:200px; height:100%; background:#f7f7f7; border-right:1px #e8e8e8 solid; position:fixed; top:80px; left:0px;}
@@ -456,7 +455,6 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .sufulo button{ width:100px; height:30px; color:#fff; cursor:pointer; border-radius:3px; margin-left:10px; background:#416eea; border:none; float:right;}
 
 .navtop a{ color:#fff;}
-.navtop a:hover{ color:#080808;}
 
 .pr70{ padding-right:70px;}
 .pr100{ padding-right:100px;}
