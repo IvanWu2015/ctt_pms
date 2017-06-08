@@ -13,11 +13,15 @@
 
 // 异常错误报错级别,
 error_reporting(E_ERROR | E_PARSE );
-
 // 定义应用目录
 define('APP_PATH', __DIR__ . '/../application/');
 // 定义类库目录
 define('EXTEND_PATH', __DIR__ . '/../application/extend/');
+
+if(!is_file(APP_PATH . 'config.php')){
+	header('Location: ./install.php');
+	exit;
+}
 
 // 加载框架引导文件
 require __DIR__ . '/../thinkphp/start.php';

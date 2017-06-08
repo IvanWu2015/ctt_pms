@@ -31,29 +31,36 @@ class Mycenter extends Common {
         $my_weburl_count = DB::name('Weburl')->where(['username' => $this->_G['username'], 'status' => 0])->count();
         //我的文章总数
         $my_article_count = DB::name('Article')->where(['username' => $this->_G['username'], 'status' => 0])->count();
-
-        //$week_count = DB::name('Workcount')->where(['objectType' => 'user', 'username' => $this->_G['username']])->sum('consumed');
-//        $i = 11;
-//        for (date('Y-m'); $i >= 0; $i--) {
-//            $modth_data['objectType'] = array('eq','user');
-//            $modth_data['username'] = array('eq',$this->_G['username']);
-//            $new_date = date("Y-m",strtotime("-$i month"));
-//            $modth_data['date'] = array('like',"%$new_date%");
-//            $modth_count = DB::name('Workcount')->where($modth_data)->sum('consumed');
-//            $modth_count = $modth_count > 0 ? $modth_count : 0;
-//            $modth_workcount[] =  '[\''. date("m",strtotime("-$i month")) .  '\',' . $modth_count   . ',' . "$new_date" .']'  ; 
-//        }
-//        
-//        $data = json_encode($modth_workcount);
-//        $data = str_replace('"', '', $data);
         
-        $week_list = DB('Workcount')->where(['objectType' => 'user'])->column('*','week');
-        foreach ($week_list as $key => $value){
-            $week_data[] = '[\''. $value['week']   . '\',' . $value['consumed'] . ']';
+        //以周为单位输出柱形图数据
+        $week_data_where['date'] = array('gt', date('Y-m-d', strtotime("-1 year")));
+        $week_data_where['objectType'] = array('eq', 'user');
+        $week_data_where['username'] = array('eq', $this->_G['username']);
+        $week_nums = date('W');
+        $b = 30;
+        for ($i = $week_nums + 1; $b > 0; $b--) {
+            if ($i - $b > 0) {
+                $week[$b] = $i - $b;
+            } else {
+                $week[$b] = $i + 52 - $b;
+            }
+        }
+        // $week_list = DB('Workcount')->where($week_data)->column('*','week');
+        $week_list = DB('Workcount')->where($week_data_where)->group('week')->column('sum(consumed),week,date', 'week');
+        foreach ($week as $key => $value) {
+            if ($week_list[$value]['week'] == $value) {
+                $weeks[$key] = $week_list[$value]['sum(consumed)'];
+            } else {
+                $weeks[$key] = 0;
+            }
+            $week_data[] = '[\'' . $value . '\',' . $weeks[$key] . ']';
         }
         $data = json_encode($week_data);
         $data = str_replace('"', '', $data);
-        
+
+
+
+
         $not_status_data['status'] = array('in', 'wait,doing');
         $not_status_data['assignedTo'] = array('eq', $this->_G['username']);
         $not_status_data['deleted'] = array('eq', '0');
@@ -103,7 +110,7 @@ class Mycenter extends Common {
         $this->assign('my_action_count', $my_action_count);
         $this->assign('my_task_count', $my_task_count);
         $this->assign('estimate_count', $estimate_count);
-        $this->assign('data',$data);
+        $this->assign('data', $data);
         $this->assign('consumed_count', $consumed_count);
         $this->assign('article_list', $article_list);
         $this->assign('weburl_list', $weburl_list);
