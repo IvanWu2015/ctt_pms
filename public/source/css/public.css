@@ -36,7 +36,7 @@ img{ border:none;}
 
 .nav .open a, .nav .open a:focus, .nav .open a:hover{ background:none;}
 .nav li a:focus, .nav li a:hover{ background:none;}
-.mynavright{ left:-100px !important;}
+.mynavright{ left:-90px !important;}
 
 #wrap{ width:100%; position:relative; float:left;}
 
@@ -62,6 +62,13 @@ img{ border:none;}
 .publicimg{ width:100%; height:100%; max-width:100%; max-height:100%; object-fit:cover; z-index:3; position:absolute; top:0; left:0; right:0; bottom:0; margin:auto !important;}
 
 .prompt{ width:500px; height:50px; line-height:50px; text-align:center; font-size:16px; border-radius:3px; padding:0px 30px; color:#fff; background:url(../images/bg_opacity05.png); z-index:99999; position:fixed; top:0; left:0; right:0; bottom:0; margin:auto; display:none;}
+
+.pl3{ padding-left:3px;}
+.pr3{ padding-right:3px;}
+.pb3{ padding-bottom:3px;}
+.pt3{ padding-top:3px;}
+.plr3{ padding-left:3px; padding-right:3px;}
+.ptlrb3{ padding:3px 3px;}
 
 .pl5{ padding-left:5px;}
 .pr5{ padding-right:5px;}
@@ -109,6 +116,13 @@ img{ border:none;}
 .mt5{ margin-top:5px;}
 .mlr5{ margin-left:5px; margin-right:5px;}
 .mtlrb5{ margin:5px 5px;}
+
+.ml3{ margin-left:3px;}
+.mr3{ margin-right:3px;}
+.mb3{ margin-bottom:3px;}
+.mt3{ margin-top:3px;}
+.mlr3{ margin-left:3px; margin-right:3px;}
+.mtlrb3{ margin:3px 3px;}
 
 .ml8{ margin-left:8px;}
 .mr8{ margin-right:8px;}

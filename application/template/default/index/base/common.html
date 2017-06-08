@@ -43,7 +43,7 @@
             
             <ul class="nav nav-pills navtop">
                 <a href="{:url('/index/mycenter')}">
-                    <img src="tpl_img/bg_icon.png" class="z mt10 pr20 mr20" height="35" />
+                    <img src="tpl_img/bg_icon.png" class="z mt5 pr20 mr20" height="35" />
                 </a>
                 {if condition="empty($navigation_list)"}
                 <li class="mt10 ml20"><a  href="{:url('/index/mycenter')}">首页</a></li>
@@ -64,13 +64,6 @@
                     {/if}
                 </li>
                 {/foreach}
-                <!--
-                
-                <li class="mt20 mb10"><a href="{:url('project/lists')}">项目</a></li>
-                <li class="mt20 mb10"><a href="{:url('weburl/lists')}">收藏</a></li>
-                <li class="mt20 mb10"><a href="{:url('article/lists')}">文档</a></li>
-                <li class="mt20 mb10"><a href="{:url('product/lists')}">产品</a></li>
-                -->
                 
                 {if condition="$_G['is_admin']"}
                 <li class="mt5"><a href="{:url('/admin/index/index')}" class="fs16" target="_blank">后台入口</a></li>
@@ -86,7 +79,7 @@
                         <li><a href="{:url('User/logout')}">退出</a></li>
                     </ul>
                 </li>
-                <li class="mt5 ml20 y">
+                <li class="mt8 ml20 y">
                     <a class="active fs15" data-toggle="dropdown" href="{:url('index/index')}" style="padding:5px 10px;"><img src="tpl_img/match_img.png" class="mr10 h30 br100" style="width:30px;" />{:get_username()} <b class="caret"></b></a>
                     <ul class="dropdown-menu" style="min-width:120px;">
                         <li class="borb mb10"><a href="{:url('mycenter/index')}">个人中心</a></li>
