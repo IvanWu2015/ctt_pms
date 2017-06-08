@@ -3,21 +3,21 @@ jQuery(function () {
     //弹窗的手动功能
     var mousex = 0, mousey = 0;
     var divLeft, divTop;
-    jQuery('#modalwrap').mousedown(function(e)
+    jQuery('#modaltitle').mousedown(function(e)
     {
-        var offset = jQuery(this).offset();
+        var offset = jQuery('#modalwrap').offset();
         divLeft = parseInt(offset.left,10);
         divTop = parseInt(offset.top,10);
         mousey = e.pageY;
         mousex = e.pageX;
-        jQuery(this).bind('mousemove',dragElement);
+        jQuery('#modalwrap').bind('mousemove',dragElement);
     });
 
     function dragElement(event)
     {
         var left = divLeft + (event.pageX - mousex);
         var top = divTop + (event.pageY - mousey);
-        jQuery(this).css(
+        jQuery('#modalwrap').css(
         {
             //'top' :  top + 'px',
             //'left' : left + 'px',
