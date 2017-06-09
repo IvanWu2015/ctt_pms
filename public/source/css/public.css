@@ -483,7 +483,7 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .userincon .userdateup{ font-size:20px; color:#0e90d2; position:absolute; top:5px; right:5px;}
 
 .uscsul{ width:100%; float:left;}
-.uscsul li{ width:12.5%; float:left; margin-bottom:10px; color:#666; padding-left:80px; position:relative;}
+.uscsul li{ width:25%; float:left; margin-bottom:10px; color:#666; padding-left:80px; position:relative;}
 .uscsul li span{ font-size:55px; color:#ccc; position:absolute; top:-10px; left:10px;}
 .uscsul li p{ margin-bottom:5px; font-size:12px;}
 .uscsul li h3{ font-size:12px; font-weight:normal; margin:0px;}
@@ -514,6 +514,21 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .addmabutton:hover{ background:#d70000; color:#fff !important; font-weight:normal !important; text-decoration:none;}
 
 .bf{ background:#fff;}
+.b0{ background:#000;}
+.b1{ background:#111;}
+.b2{ background:#222;}
+.b3{ background:#333;}
+.b4{ background:#444;}
+.b5{ background:#555;}
+.b6{ background:#666;}
+.b7{ background:#777;}
+.b8{ background:#888;}
+.b9{ background:#999;}
+.bc{ background:#ccc;}
+.be{ background:#eee;}
+.bd{ background:#ddd;}
+.bf7f7f7{ background:#f7f7f7;}
+
 .bf6f6f6{ background:#f6f6f6;}
 .bred{ background:red;}
 

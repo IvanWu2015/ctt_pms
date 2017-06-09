@@ -14,7 +14,7 @@
     <div class="publicdiv bf">
         <h3 class="pt10 pb10 pl20 pr20 fs16 sizing iconfont" style="display:none;">&#xe605; 个人中心</h3>
         
-        <div class="userincon pt20 pb20 pr20 borb sizing"><!-- 基本信息 -->
+        <div class="userincon pr20 sizing"><!-- 基本信息 -->
             <!--<div class="mt20 z pr" style="width:270px;">
                 <p class="fs16 fwb">
                     {$user['realname']}
@@ -23,55 +23,6 @@
                 <p>职位：{$user['group_name']}</p>
                 <p>部门：{$user['depe_name']}</p>
             </div>-->
-            
-            <ul class="uscsul mt15"><!-- 数据统计 -->
-                <li class="borr sizing">
-                    <span class="iconfont" style="top:-5px;">&#xe759;</span>
-                    <p class="fwb">我的任务</p>
-                    <h3>已完成：<b>{$my_task_count}</b></h3>
-                    <h3>未完成：<b>{$not_status_count}</b></h3>
-                </li>
-                <li class="borr sizing">
-                    <span class="iconfont">&#xe623;</span>
-                    <p class="fwb">总工时</p>
-                    <h3>预计：<b>{$estimate_count}</b></h3>
-                    <h3>完成：<b>{$consumed_count}</b></h3>
-                </li>
-                <li class="borr sizing">
-                    <span class="iconfont">&#xe61e;</span>
-                    <p class="fwb">当月工时</p>
-                    <h3>预计：<b>{$same_month_estimate_count}</b></h3>
-                    <h3>完成：<b>{$same_month_consumed_count}</b></h3>
-                </li>
-                <li class="borr sizing">
-                    <span class="iconfont">&#xe61e;</span>
-                    <p class="fwb">当天工时</p>
-                    <h3>当天工时：<b>{$user_count['today_working']}</b></h3>
-                    <h3>当周工时：<b>{$user_count['week_working']}</b></h3>
-                </li>
-                <li class="borr sizing">
-                    <span class="iconfont" style="top:-5px;">&#xe759;</span>
-                    <p class="fwb mt10">待完成任务</p>
-                    <h3><b>{$not_status_count}</b></h3>
-                </li>
-                <li class="borr sizing">
-                    <span class="iconfont fs51" style="top:-3px;">&#xe704;</span>
-                    <p class="fwb mt10">我的文档</p>
-                    <h3><b>{$my_article_count}</b></h3>
-                </li>
-                <li class="borr sizing">
-                    <span class="iconfont fs50" style="top:-8px;">&#xe60d;</span>
-                    <p class="fwb mt10">我的收藏</p>
-                    <h3><b>{$my_weburl_count}</b></h3>
-                </li>
-                <li class="sizing">
-                    <span class="iconfont" style="top:-7px;">&#xe616;</span>
-                    <p class="fwb mt10">我的动态</p>
-                    <h3><b>{$my_action_count}</b></h3>
-                </li>
-            </ul><!-- 数据统计 -->
-            
-            
         </div><!-- 基本信息 -->
         
         <script language="JavaScript">
@@ -95,7 +46,34 @@
 
             <div class="w60 z pr10 sizing"><!--日程安排-->
                 
-                <div id="container" class="publicdiv" style="height: 381px;"></div><!--柱形图-->
+                <ul class="uscsul pb20 bf7f7f7 pt20"><!-- 数据统计 -->
+                    <li class="borr sizing">
+                        <span class="iconfont" style="top:-5px;">&#xe759;</span>
+                        <p class="fwb">我的任务</p>
+                        <h3>已完成：<b>{$my_task_count}</b></h3>
+                        <h3>未完成：<b>{$not_status_count}</b></h3>
+                    </li>
+                    <li class="borr sizing">
+                        <span class="iconfont">&#xe623;</span>
+                        <p class="fwb">总工时</p>
+                        <h3>预计：<b>{$estimate_count}</b></h3>
+                        <h3>完成：<b>{$consumed_count}</b></h3>
+                    </li>
+                    <li class="borr sizing">
+                        <span class="iconfont">&#xe61e;</span>
+                        <p class="fwb">当月工时</p>
+                        <h3>预计：<b>{$same_month_estimate_count}</b></h3>
+                        <h3>完成：<b>{$same_month_consumed_count}</b></h3>
+                    </li>
+                    <li class="">
+                        <span class="iconfont">&#xe61e;</span>
+                        <p class="fwb">当天工时</p>
+                        <h3>当天工时：<b>{$user_count['today_working']}</b></h3>
+                        <h3>当周工时：<b>{$user_count['week_working']}</b></h3>
+                    </li>
+                </ul><!-- 数据统计 -->
+                
+                <div id="container" class="publicdiv mt20 bor pt10" style="height: 381px;"></div><!--柱形图-->
                 <script language="JavaScript">
                 $(document).ready(function() {
                    
@@ -103,7 +81,7 @@
                       type: 'column'
                    };
                    var title = {
-                      text: '工时统计柱形图'   
+                      text: '工时统计（周）'   
                    };
                    var subtitle = {
                       text: ''
@@ -222,7 +200,7 @@
 
                 </ul>-->
                 
-                <div id='calendar'></div>
+                <div id='calendar' class="publicdiv mt20"></div>
                 
             </div><!--日程安排-->
             
@@ -230,7 +208,7 @@
             <div class="publicdiv"><!--待完成任务-->
                 <div class="panel" style="border:1px #f8f2d1 solid; min-height:275px;">
                     <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing" style="background:#f8f2d1;">
-                        待完成任务
+                        待完成任务<span class="cred ml5">({$not_status_count})</span>
                         <a href="{:url('/index/Mycenter/task_list/?status=unclose')}" class="y fs12 mr10">更多>></a>
                     </h3>
                     <div class="panel-body">
@@ -253,7 +231,7 @@
             </div><!--待完成任务-->
             <div class="publicdiv"><!--我的文档-->
                 <div class="panel" style="border:1px #dff0d8 solid; min-height:270px;">
-                    <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-success">我的文档</h3>
+                    <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-success">我的文档<span class="cred ml5">({$my_article_count})</span></h3>
                     <div class="panel-body">
                         <p class="publicdiv mbn fwb">
                             <span>ID</span>
@@ -274,7 +252,7 @@
             </div><!--我的文档-->
             <div class="w100 z"><!--我的收藏-->
                 <div class="panel" style="border:1px #d9edf7 solid; min-height:280px;">
-                    <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-info">我的收藏</h3>
+                    <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-info">我的收藏<span class="cred ml5">({$my_weburl_count})</span></h3>
                     <div class="panel-body">
                         <p class="publicdiv mbn fwb">
                             <span>ID</span>
@@ -368,7 +346,7 @@
             <div class="publicdiv">
                 <div class="w100 z"><!--我的动态-->
                     <div class="panel" style="border:1px #f2dede solid; min-height:330px;">
-                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-danger">我的动态</h3>
+                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-danger">我的动态<span class="cred ml5">({$my_action_count})</span></h3>
                         <div class="panel-body">
                             {foreach $action_list as $action}
                             <li class="publicdiv h25 lh25 ellipsis"><a href="{:url('/index/task/detail/?id='.$task['id'])}">
