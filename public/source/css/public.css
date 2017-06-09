@@ -532,6 +532,8 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .bf6f6f6{ background:#f6f6f6;}
 .bred{ background:red;}
 
+.highcharts-legend{ display:none;}
+
 .cf{ color:#fff;}
 .c0{ color:#000;}
 .c1{ color:#111;}

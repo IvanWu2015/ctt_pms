@@ -73,12 +73,14 @@
                     </li>
                 </ul><!-- 数据统计 -->
                 
-                <div id="container" class="publicdiv mt20 bor pt10" style="height: 381px;"></div><!--柱形图-->
+                <div id='calendar' class="publicdiv mt20"></div>
+                
                 <script language="JavaScript">
                 $(document).ready(function() {
                    
                    var chart = {
-                      type: 'column'
+                      type: '',
+                      backgroundColor: '#eee'
                    };
                    var title = {
                       text: '工时统计（周）'   
@@ -138,7 +140,7 @@
                             ],*/
                             data: {$data},
                             dataLabels: {
-                                enabled: true,
+                                enabled: false, //去掉提示值 true为显示、 false为隐藏
                                 rotation: -90,  //工时旋转角度
                                 color: '#FFFFFF',
                                 align: 'right',
@@ -164,6 +166,23 @@
                   
                 });
                 </script>
+                
+                <div class="w100 z mt20"><!--我的动态-->
+                    <div class="panel" style="border:1px #f2dede solid; min-height:330px;">
+                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-danger">我的动态<span class="cred ml5">({$my_action_count})</span></h3>
+                        <div class="panel-body">
+                            {foreach $action_list as $action}
+                            <li class="publicdiv h25 lh25 ellipsis"><a href="{:url('/index/task/detail/?id='.$task['id'])}">
+                                    {if condition="($action['tname'] == null) and ($name == null)"}
+                                    您于&nbsp;{$action['date']} &nbsp;&nbsp;{$action['actionname']} &nbsp;{$action['typename']} {$action['tname']}{$action['pname']}
+                                    {else/}
+                                您于&nbsp;{$action['date']} &nbsp;&nbsp;对 {$action['tname']}{$action['pname']} &nbsp;进行&nbsp;{$action['actionname']}&nbsp;的操作
+                                    {/if}
+                                </a></li>
+                            {/foreach}
+                        </div>
+                    </div>
+                </div><!--我的动态-->
             
                 <!--<ul class="data_statistics mb10 iconfont">
                     <a href="javascript:void(0);"><li class="w25 z pr15 sizing">
@@ -200,11 +219,12 @@
 
                 </ul>-->
                 
-                <div id='calendar' class="publicdiv mt20"></div>
+                
                 
             </div><!--日程安排-->
             
             <div class="w40 z pl10 sizing">
+            <div id="container" class="publicdiv mb20" style="height: 281px;"></div><!--柱形图-->
             <div class="publicdiv"><!--待完成任务-->
                 <div class="panel" style="border:1px #f8f2d1 solid; min-height:275px;">
                     <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing" style="background:#f8f2d1;">
@@ -341,28 +361,6 @@
 
                 
         </script>
-        
-        <div class="publicdiv pl20 pr20 mt20 mb20 sizing">
-            <div class="publicdiv">
-                <div class="w100 z"><!--我的动态-->
-                    <div class="panel" style="border:1px #f2dede solid; min-height:330px;">
-                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-danger">我的动态<span class="cred ml5">({$my_action_count})</span></h3>
-                        <div class="panel-body">
-                            {foreach $action_list as $action}
-                            <li class="publicdiv h25 lh25 ellipsis"><a href="{:url('/index/task/detail/?id='.$task['id'])}">
-                                    {if condition="($action['tname'] == null) and ($name == null)"}
-                                    您于&nbsp;{$action['date']} &nbsp;&nbsp;{$action['actionname']} &nbsp;{$action['typename']} {$action['tname']}{$action['pname']}
-                                    {else/}
-                                您于&nbsp;{$action['date']} &nbsp;&nbsp;对 {$action['tname']}{$action['pname']} &nbsp;进行&nbsp;{$action['actionname']}&nbsp;的操作
-                                    {/if}
-                                </a></li>
-                            {/foreach}
-                        </div>
-                    </div>
-                </div><!--我的动态-->
-            </div>
-            
-        </div>
         
     </div>
     
