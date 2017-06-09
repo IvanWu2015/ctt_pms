@@ -105,7 +105,10 @@
                       }
                    };  
                    var tooltip = {
-                      pointFormat: '工时: <b>{point.y:.1f} 小时</b>'
+					xDateFormat: '%Y-%m-%d',
+					xDateFormat: '<b>%Y-%m-%d</b>',
+					headerFormat: '第<small style="color:red;">{point.key}</small>周<br/>',
+                    pointFormat: '<b>{point.y:.1f}</b> 工时'
                    };
                    
                    /*var tooltip = { //鼠标滑向数据区显示的提示框 

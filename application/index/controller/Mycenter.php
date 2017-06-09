@@ -37,7 +37,7 @@ class Mycenter extends Common {
         $week_data_where['objectType'] = array('eq', 'user');
         $week_data_where['username'] = array('eq', $this->_G['username']);
         $week_nums = date('W');
-        $b = 30;
+        $b = 15;
         for ($i = $week_nums + 1; $b > 0; $b--) {
             if ($i - $b > 0) {
                 $week[$b] = $i - $b;
