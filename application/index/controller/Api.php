@@ -22,14 +22,28 @@ class api extends Common {
         $calendar_list = DB('Taskestimate')
                 ->alias('e')
                 ->join('chinatt_pms_task t', 'e.task = t.id', 'left')
-                ->field('e.date as start,t.name as title,t.id as tid, e.consumed')
+                ->field('e.date as start,t.name as title,t.id as tid, e.consumed,t.type')
                 ->where($data)
                 ->select();
+        
         foreach ($calendar_list as $key => $value) {
             $calendar_list[$key]['title'] = $calendar_list[$key]['consumed'].' '.$calendar_list[$key]['title'];
             $calendar_list[$key]['url'] = url('index/task/detail?id=' . $value['tid']);
             //todo:根据不同的任务类型 设置不同的颜色 
-            //$calendar_list[$key]['color'] = 'red';
+            
+            if($value['type'] == 'BUG'){
+                $calendar_list[$key]['color'] = 'red';
+            }elseif ($value['type'] == 'devel') {
+                $calendar_list[$key]['color'] = 'blue';
+            }elseif ($value['type'] == 'design') {
+                $calendar_list[$key]['color'] = 'green';
+            }elseif ($value['type'] == 'misc') {
+                $calendar_list[$key]['color'] = 'black';
+            }elseif ($value['type'] == 'ui') {
+                $calendar_list[$key]['color'] = '';
+            }
+            
+            
         }
         return $calendar_list;
     }
