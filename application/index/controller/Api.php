@@ -28,6 +28,8 @@ class api extends Common {
         foreach ($calendar_list as $key => $value) {
             $calendar_list[$key]['title'] = $calendar_list[$key]['consumed'].' '.$calendar_list[$key]['title'];
             $calendar_list[$key]['url'] = url('index/task/detail?id=' . $value['tid']);
+            //todo:根据不同的任务类型 设置不同的颜色 
+            //$calendar_list[$key]['color'] = 'red';
         }
         return $calendar_list;
     }

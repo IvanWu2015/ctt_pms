@@ -29,9 +29,10 @@ select{ font-family:"微软雅黑",Arial,Helvetica,sans-serif;}
 
 
 /*.fc-widget-content{ height:65px !important;}
-.fc-unselectable .fc-widget-content{ height:65px !important;}*/
+.fc-unselectable .fc-widget-content{ height:65px !important;}
 .fc-scroller{ height:150px !important;}
 .fc-widget-content{ height:150px !important;}
+*/
 
 a{ color:#666; text-decoration:none;}
 a:hover{ text-decoration:none;}
