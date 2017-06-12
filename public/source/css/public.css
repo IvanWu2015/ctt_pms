@@ -27,8 +27,11 @@ select{ font-family:"微软雅黑",Arial,Helvetica,sans-serif;}
 /*文字省略号*/
 .ellipsis{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
 
-.fc-widget-content{ height:65px !important;}
-.fc-scroller{ height:390px !important;}
+
+/*.fc-widget-content{ height:65px !important;}
+.fc-unselectable .fc-widget-content{ height:65px !important;}*/
+.fc-scroller{ height:150px !important;}
+.fc-widget-content{ height:150px !important;}
 
 a{ color:#666; text-decoration:none;}
 a:hover{ text-decoration:none;}
@@ -483,11 +486,11 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .userincon .userdateup{ font-size:20px; color:#0e90d2; position:absolute; top:5px; right:5px;}
 
 .uscsul{ width:100%; float:left;}
-.uscsul li{ width:25%; float:left; margin-bottom:10px; color:#666; padding-left:80px; position:relative;}
-.uscsul li span{ font-size:55px; color:#ccc; position:absolute; top:-10px; left:10px;}
+.uscsul li{ width:25%; float:left; color:#666; padding-left:60px; position:relative;}
+.uscsul li span{ font-size:45px; color:#ccc; position:absolute; left:10px;}
 .uscsul li p{ margin-bottom:5px; font-size:12px;}
 .uscsul li h3{ font-size:12px; font-weight:normal; margin:0px;}
-.uscsul li h3 b{ font-size:16px; font-weight:normal; color:#f50;}
+.uscsul li h3 a,b{ font-size:16px; font-weight:normal; color:#f50;}
 
 .sufulo{ width:500px; height:150px; padding:30px; background:#fff; box-shadow:0px 0px 9px #999; z-index:99; position:fixed; top:0; left:0; right:0; bottom:0; margin:auto; display:none;}
 .sufulo img{ width:70px; height:70px; background:#1f925b; border-radius:100%; float:left;}

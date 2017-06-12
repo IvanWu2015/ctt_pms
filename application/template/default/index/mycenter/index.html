@@ -46,33 +46,6 @@
 
             <div class="w60 z pr10 sizing"><!--日程安排-->
                 
-                <ul class="uscsul pb20 bf7f7f7 pt20 bor"><!-- 数据统计 -->
-                    <li class="borr sizing">
-                        <span class="iconfont" style="top:-5px;">&#xe759;</span>
-                        <p class="fwb">我的任务</p>
-                        <h3>已完成：<b>{$my_task_count}</b></h3>
-                        <h3>未完成：<b>{$not_status_count}</b></h3>
-                    </li>
-                    <li class="borr sizing">
-                        <span class="iconfont">&#xe623;</span>
-                        <p class="fwb">总工时</p>
-                        <h3>预计：<b>{$estimate_count}</b></h3>
-                        <h3>完成：<b>{$consumed_count}</b></h3>
-                    </li>
-                    <li class="borr sizing">
-                        <span class="iconfont">&#xe61e;</span>
-                        <p class="fwb">当月工时</p>
-                        <h3>预计：<b>{$same_month_estimate_count}</b></h3>
-                        <h3>完成：<b>{$same_month_consumed_count}</b></h3>
-                    </li>
-                    <li class="">
-                        <span class="iconfont">&#xe61e;</span>
-                        <p class="fwb">当天工时</p>
-                        <h3>当天工时：<b>{$user_count['today_working']}</b></h3>
-                        <h3>当周工时：<b>{$user_count['week_working']}</b></h3>
-                    </li>
-                </ul><!-- 数据统计 -->
-                
                 <div id='calendar' class="publicdiv mt20"></div>
                 
                 <script language="JavaScript">
@@ -170,9 +143,37 @@
                 });
                 </script>
                 
-                <div class="w100 z mt20"><!--我的动态-->
+                <div class="publicdiv mt20"><!--我参与的项目-->
+                    <div class="panel" style="border:1px #96ceee solid;">
+                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing" style="background:#96ceee;">
+                            我参与的项目<span class="cred ml5">(未读取)</span>
+                            <a href="{:url('mycenter/project')}" class="y fs12 mr10">更多>></a>
+                        </h3>
+                        <div class="panel-body">
+                            <p class="publicdiv mbn fwb">
+                                <span>ID</span>
+                                <span class="ml20">项目名称</span>
+                                <span class="y">时间</span>
+                            </p>
+                        
+                            {foreach $project_list as $project}
+                            <li class="publicdiv pr tlist pr100 h25 lh25 ellipsis">
+                                <span class="w40p db z">{$project['id']}</span>
+                                <a href="{:url('/index/project/detail/?id='.$project['id'])}">{$project['name']}</a>
+                                <span class="tlisty">{$project['time']}</span>
+                            </li>
+                            {/foreach}
+                            
+                        </div>
+                    </div>
+                </div><!--我参与的项目-->
+                
+                <div class="w100 z"><!--我的动态-->
                     <div class="panel" style="border:1px #f2dede solid; min-height:330px;">
-                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-danger">我的动态<span class="cred ml5">({$my_action_count})</span></h3>
+                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-danger">
+                            我的动态<span class="cred ml5">({$my_action_count})</span>
+                            <a href="{:url('mycenter/action_list')}" class="y fs12 mr10">更多>></a>
+                        </h3>
                         <div class="panel-body">
                             {foreach $action_list as $action}
                             <li class="publicdiv h25 lh25 ellipsis"><a href="{:url('/index/task/detail/?id='.$task['id'])}">
@@ -186,48 +187,36 @@
                         </div>
                     </div>
                 </div><!--我的动态-->
-            
-                <!--<ul class="data_statistics mb10 iconfont">
-                    <a href="javascript:void(0);"><li class="w25 z pr15 sizing">
-                        <div class="datasta dcs01">
-                            <div class="aict ac">&#xe759;</div>
-                            <h3>{$not_status_count}</h3>
-                            <p>待完成任务</p>
-                        </div>
-                    </li></a>
-
-                    <a href="javascript:void(0);"><li class="w25 z pr15 sizing">
-                        <div class="datasta dcs02 sizing">
-                            <div class="aict ac">&#xe704;</div>
-                            <h3>{$my_article_count}</h3>
-                            <p>我的文档</p>
-                        </div>
-                    </li></a>
-
-                    <a href="javascript:void(0);"><li class="w25 z pr15 sizing">
-                        <div class="datasta dcs03 sizing">
-                            <div class="aict ac">&#xe60d;</div>
-                            <h3>{$my_weburl_count}</h3>
-                            <p>我的收藏</p>
-                        </div>
-                    </li></a>
-
-                    <a href="javascript:void(0);"><li class="w25 z sizing">
-                        <div class="datasta dcs04 sizing">
-                            <div class="aict ac">&#xe616;</div>
-                            <h3>{$my_action_count}</h3>
-                            <p>我的动态</p>
-                        </div>
-                    </li></a>
-
-                </ul>-->
-                
                 
                 
             </div><!--日程安排-->
             
             <div class="w40 z pl10 sizing">
-            <div id="container" class="publicdiv mb20 bor" style="height: 281px;"></div><!--柱形图-->
+            
+            <ul class="uscsul pb20 bf7f7f7 pt20 bor"><!-- 数据统计 -->
+                <li class="borr sizing">
+                    <span class="iconfont" style="top:-10px;">&#xe759;</span>
+                    <p class="fwb">我的任务</p>
+                    <h3><b><a href="javascript:void(0);" title="已完成">{$my_task_count}</a> / <a href="javascript:void(0);" title="未完成">{$not_status_count}</a></b></h3>
+                </li>
+                <li class="borr sizing">
+                    <span class="iconfont" style="top:-8px;">&#xe623;</span>
+                    <p class="fwb">总工时</p>
+                    <h3><b><a href="javascript:void(0);" title="预计">{$estimate_count}</a> / <a href="javascript:void(0);" title="完成">{$consumed_count}</a></b></h3>
+                </li>
+                <li class="borr sizing">
+                    <span class="iconfont" style="top:-12px;">&#xe61e;</span>
+                    <p class="fwb">当月工时</p>
+                    <h3><b><a href="javascript:void(0);" title="预计">{$same_month_estimate_count}</a> / <a href="javascript:void(0);" title="完成">{$same_month_consumed_count}</a></b></h3>
+                </li>
+                <li class="">
+                    <span class="iconfont" style="top:-12px;">&#xe61e;</span>
+                    <p class="fwb">当天工时</p>
+                    <h3><b><a href="javascript:void(0);" title="当天工时">{$user_count['today_working']}</a> / <a href="javascript:void(0);" title="当周工时">{$user_count['week_working']}</a></b></h3>
+                </li>
+            </ul><!-- 数据统计 -->
+            
+            <div id="container" class="publicdiv mt20 mb20 bor" style="height: 281px;"></div><!--柱形图-->
             <div class="publicdiv"><!--待完成任务-->
                 <div class="panel" style="border:1px #f8f2d1 solid; min-height:275px;">
                     <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing" style="background:#f8f2d1;">
@@ -254,7 +243,10 @@
             </div><!--待完成任务-->
             <div class="publicdiv"><!--我的文档-->
                 <div class="panel" style="border:1px #dff0d8 solid; min-height:270px;">
-                    <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-success">我的文档<span class="cred ml5">({$my_article_count})</span></h3>
+                    <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-success">
+                        我的文档<span class="cred ml5">({$my_article_count})</span>
+                        <a href="{:url('mycenter/article_list')}" class="y fs12 mr10">更多>></a>
+                    </h3>
                     <div class="panel-body">
                         <p class="publicdiv mbn fwb">
                             <span>ID</span>
@@ -275,7 +267,10 @@
             </div><!--我的文档-->
             <div class="w100 z"><!--我的收藏-->
                 <div class="panel" style="border:1px #d9edf7 solid; min-height:280px;">
-                    <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-info">我的收藏<span class="cred ml5">({$my_weburl_count})</span></h3>
+                    <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-info">
+                        我的收藏<span class="cred ml5">({$my_weburl_count})</span>
+                        <a href="{:url('mycenter/weburl_list')}" class="y fs12 mr10">更多>></a>
+                    </h3>
                     <div class="panel-body">
                         <p class="publicdiv mbn fwb">
                             <span>ID</span>
@@ -334,11 +329,14 @@
             //getWorkData(y, m);//更新工时
             //日历初始化
             $('#calendar').fullCalendar({
+            //日历初始化默认视图，可选agendaWeek、agendaDay、month  
+                defaultView: 'basicWeek',  
                 header: {
                     left: 'prev,next today',
                     center: 'title',
                     right: 'month,basicWeek,basicDay'
                 },
+  
                 defaultDate: date.toLocaleDateString(),
                 navLinks: true, // can click day/week names to navigate views
                 editable: true,
