@@ -335,10 +335,11 @@
             $('#calendar').fullCalendar({
             //日历初始化默认视图，可选agendaWeek、agendaDay、month  
                 defaultView: 'basicWeek',  
+                title: '个人工时日历',
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month,basicWeek,basicDay'
+                    right: 'month,basicWeek,basicDay',
                 },
                 buttonText: {
                     prev: '<', // ‹
@@ -348,8 +349,9 @@
                     today: '今天',
                     month: '月',
                     week: '周',
-                    day: '日'
+                    day: '日',
                 },
+                firstDay:1,     //一周第一天
                 //aspectRatio:2.5,
                 //height:400, //整体高度
                 contentHeight:calendarHeight,  //内容区高度
