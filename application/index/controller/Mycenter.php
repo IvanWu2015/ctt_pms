@@ -57,10 +57,15 @@ class Mycenter extends Common {
         }
         $data = json_encode($week_data);
         $data = str_replace('"', '', $data);
-
-
-
-
+        $username = $this->_G['username'];
+        $project_list = DB::name('Project')
+                ->alias('p')
+                ->join('chinatt_pms_team t', "p.acl = 'private' AND t.project = p.id AND t.username = '$username'", 'left')
+                ->field('p.*,t.username')
+                ->where(['t.username' => $username])
+                ->paginate(30);
+        $project_count = $project_list->total();
+        
         $not_status_data['status'] = array('in', 'wait,doing');
         $not_status_data['assignedTo'] = array('eq', $this->_G['username']);
         $not_status_data['deleted'] = array('eq', '0');
@@ -108,6 +113,8 @@ class Mycenter extends Common {
         $this->assign('my_article_count', $my_article_count);
         $this->assign('my_weburl_count', $my_weburl_count);
         $this->assign('my_action_count', $my_action_count);
+        $this->assign('project_list',$project_list);
+        $this->assign('project_count',$project_count);
         $this->assign('my_task_count', $my_task_count);
         $this->assign('estimate_count', $estimate_count);
         $this->assign('data', $data);
