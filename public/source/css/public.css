@@ -34,6 +34,8 @@ select{ font-family:"微软雅黑",Arial,Helvetica,sans-serif;}
 .fc-widget-content{ height:150px !important;}
 */
 
+.fc-event{ border:none !important;}
+
 a{ color:#666; text-decoration:none;}
 a:hover{ text-decoration:none;}
 img{ border:none;}

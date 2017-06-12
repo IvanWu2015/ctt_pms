@@ -31,16 +31,22 @@ class api extends Common {
             $calendar_list[$key]['url'] = url('index/task/detail?id=' . $value['tid']);
             //todo:根据不同的任务类型 设置不同的颜色 
             
-            if($value['type'] == 'BUG'){
-                $calendar_list[$key]['color'] = 'red';
-            }elseif ($value['type'] == 'devel') {
-                $calendar_list[$key]['color'] = 'blue';
+            if($value['type'] == 'bug'){
+                $calendar_list[$key]['color'] = '#d24d0e';
+            }elseif ($value['type'] == 'affair') {
+                $calendar_list[$key]['color'] = '#d2720e';
             }elseif ($value['type'] == 'design') {
-                $calendar_list[$key]['color'] = 'green';
+                $calendar_list[$key]['color'] = '##0ec0d2';
             }elseif ($value['type'] == 'misc') {
-                $calendar_list[$key]['color'] = 'black';
+                $calendar_list[$key]['color'] = '#0e90d2';
             }elseif ($value['type'] == 'ui') {
-                $calendar_list[$key]['color'] = '';
+                $calendar_list[$key]['color'] = '#0ed2c9';
+            }elseif ($value['type'] == 'study') {
+                $calendar_list[$key]['color'] = '##c6d20e';
+            }elseif ($value['type'] == 'test') {
+                $calendar_list[$key]['color'] = '#0ed2a5';
+            }elseif ($value['type'] == 'devel') {
+                $calendar_list[$key]['color'] = '##110ed2';
             }
             
             
