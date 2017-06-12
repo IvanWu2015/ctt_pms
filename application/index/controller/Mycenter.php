@@ -58,6 +58,7 @@ class Mycenter extends Common {
         $data = json_encode($week_data);
         $data = str_replace('"', '', $data);
         $username = $this->_G['username'];
+        //我参与的项目
         $project_list = DB::name('Project')
                 ->alias('p')
                 ->join('chinatt_pms_team t', "p.acl = 'private' AND t.project = p.id AND t.username = '$username'", 'left')

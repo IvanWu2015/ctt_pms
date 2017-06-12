@@ -146,7 +146,7 @@
                 <div class="publicdiv mt20"><!--我参与的项目-->
                     <div class="panel" style="border:1px #96ceee solid;">
                         <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing" style="background:#96ceee;">
-                            我参与的项目<span class="cred ml5">(未读取)</span>
+                            我参与的项目<span class="cred ml5">({$project_count})</span>
                             <a href="{:url('mycenter/project')}" class="y fs12 mr10">更多>></a>
                         </h3>
                         <div class="panel-body">
@@ -326,6 +326,10 @@
             var d = '';
             var m = date.getMonth() + 1;
             var y = date.getFullYear();
+            var maxNumber = 0; //一天最高数量
+            var lastDay = '';   //记录最后一次统计时间
+            var lastNumber = 0; //记录最后一次统计数量
+            var calendarHeight = 200;
             //getWorkData(y, m);//更新工时
             //日历初始化
             $('#calendar').fullCalendar({
@@ -336,7 +340,19 @@
                     center: 'title',
                     right: 'month,basicWeek,basicDay'
                 },
-  
+                buttonText: {
+                    prev: '<', // ‹
+                    next: '>', // ›
+                    prevYear: '«', // «
+                    nextYear: '»', // »
+                    today: '今天',
+                    month: '月',
+                    week: '周',
+                    day: '日'
+                },
+                //aspectRatio:2.5,
+                //height:400, //整体高度
+                contentHeight:calendarHeight,  //内容区高度
                 defaultDate: date.toLocaleDateString(),
                 navLinks: true, // can click day/week names to navigate views
                 editable: true,
@@ -356,6 +372,32 @@
                         },
                         //color: 'yellow',   // a non-ajax option
                         //textColor: 'black' // a non-ajax option
+                        eventDataTransform: function(doc){ //在获取到数据时的操作   处理是每个数据一组
+                            var currView = jQuery('#calendar').fullCalendar('getView');
+                            if(currView.name == 'month') {
+                                jQuery('#calendar').fullCalendar('option', 'contentHeight', 500);
+                                return doc;
+                            }
+                            if(lastDay.length == 0) {
+                                lastDay = doc.start;
+                            }
+                            if(doc.start == lastDay) {
+                                lastNumber ++;
+                            } else {
+                                lastNumber = 0;
+                            }
+                            //更新一天的最大值
+                            if(lastNumber > maxNumber) {
+                                maxNumber = lastNumber;   
+                                if(currView.name == 'basicWeek') {  //周视图高度
+                                    calendarHeight = 100 + maxNumber * 25;    //更新容器高度
+                                    jQuery('#calendar').fullCalendar('option', 'contentHeight', calendarHeight);
+                                }
+                                
+                            }
+                            lastDay = doc.start;
+                            return doc;
+                        },
                     }
                 ]
             });
