@@ -29,6 +29,7 @@ class Mycenter extends Common {
         $my_action_count = DB::name('Action')->where(['actor' => $this->_G['username']])->count();
         //我的收藏网址总数
         $my_weburl_count = DB::name('Weburl')->where(['username' => $this->_G['username'], 'status' => 0])->count();
+       
         //我的文章总数
         $my_article_count = DB::name('Article')->where(['username' => $this->_G['username'], 'status' => 0])->count();
         
