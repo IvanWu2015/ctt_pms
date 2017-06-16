@@ -151,16 +151,25 @@
                         </h3>
                         <div class="panel-body">
                             <p class="publicdiv mbn fwb">
-                                <span>ID</span>
-                                <span class="ml20">项目名称</span>
-                                <span class="y">时间</span>
+                                <span class="w10 z">ID</span>
+                                <span class="w45 z">项目名称</span>
+                                <span class="w20 z ac">状态</span>
+                                <span class="w10 z ac">进度</span>
+                                <span class="w15 z ac">时间</span>
                             </p>
                         
                             {foreach $project_list as $project}
-                            <li class="publicdiv pr tlist pr100 h25 lh25 ellipsis">
-                                <span class="w40p db z">{$project['id']}</span>
-                                <a href="{:url('/index/project/detail/?id='.$project['id'])}">{$project['name']}</a>
-                                <span class="tlisty">{$project['time']}</span>
+                            <li class="publicdiv tlist pt5 pb5 lh25 ellipsis">
+                                <p class="w10 z">{$project['id']}</p>
+                                <p class="w45 z"><a href="{:url('/index/project/detail/?id='.$project['id'])}">{$project['name']}</a></p>
+                                <p class="w20 z ac">
+                                    {if condition="$project['status'] == 'wait'"}<span class="cswait">等待</span>{/if}
+                                    {if condition="$project['status'] == 'done'"}<span class="csdone">完成</span>{/if}
+                                    {if condition="$project['status'] == 'doing'"}<span class="csdoing">进行中</span>{/if}
+                                    {if condition="$project['status'] == 'closed'"}<span class="csclosed">关闭</span>{/if}
+                                </p>
+                                <p class="w10 z ac">{$project['percent']}%</p>
+                                <p class="w15 z ac">{$project['end']}</p>
                             </li>
                             {/foreach}
                             
@@ -195,7 +204,7 @@
             
             <ul class="uscsul pb20 bf7f7f7 pt20 bor"><!-- 数据统计 -->
                 <li class="borr sizing">
-                    <span class="iconfont" style="top:-10px;">&#xe759;</span>
+                    <span class="iconfont" style="top:-6px;">&#xe759;</span>
                     <p class="fwb">我的任务</p>
                     <h3><b><a href="javascript:void(0);" title="已完成">{$my_task_count}</a> / <a href="javascript:void(0);" title="未完成">{$not_status_count}</a></b></h3>
                 </li>
@@ -245,7 +254,7 @@
                 <div class="panel" style="border:1px #dff0d8 solid; min-height:270px;">
                     <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-success">
                         我的文档<span class="cred ml5">({$my_article_count})</span>
-                        <a href="{:url('mycenter/article_list')}" class="y fs12 mr10">更多>></a>
+                        <a href="{:url('article/lists')}" class="y fs12 mr10">更多>></a>
                     </h3>
                     <div class="panel-body">
                         <p class="publicdiv mbn fwb">
@@ -269,7 +278,7 @@
                 <div class="panel" style="border:1px #d9edf7 solid; min-height:280px;">
                     <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-info">
                         我的收藏<span class="cred ml5">({$my_weburl_count})</span>
-                        <a href="{:url('mycenter/weburl_list')}" class="y fs12 mr10">更多>></a>
+                        <a href="{:url('weburl/lists')}" class="y fs12 mr10">更多>></a>
                     </h3>
                     <div class="panel-body">
                         <p class="publicdiv mbn fwb">

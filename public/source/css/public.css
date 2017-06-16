@@ -489,11 +489,11 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .userincon .userdateup{ font-size:20px; color:#0e90d2; position:absolute; top:5px; right:5px;}
 
 .uscsul{ width:100%; float:left;}
-.uscsul li{ width:25%; float:left; color:#666; padding-left:60px; position:relative;}
-.uscsul li span{ font-size:45px; color:#ccc; position:absolute; left:10px;}
+.uscsul li{ width:25%; float:left; color:#666; padding-left:55px; position:relative;}
+.uscsul li span{ font-size:40px; color:#ccc; position:absolute; left:10px;}
 .uscsul li p{ margin-bottom:5px; font-size:12px;}
 .uscsul li h3{ font-size:12px; font-weight:normal; margin:0px;}
-.uscsul li h3 a,b{ font-size:16px; font-weight:normal; color:#f50;}
+.uscsul li h3 a,b{ font-size:14px; font-weight:normal; color:#f50;}
 
 .sufulo{ width:500px; height:150px; padding:30px; background:#fff; box-shadow:0px 0px 9px #999; z-index:99; position:fixed; top:0; left:0; right:0; bottom:0; margin:auto; display:none;}
 .sufulo img{ width:70px; height:70px; background:#1f925b; border-radius:100%; float:left;}
@@ -661,6 +661,11 @@ a.cc:hover{ color:#ccc !important;}
 .sdone{ background:#008000; border-bottom:1px #005600 solid; text-shadow:0px 2px 1px #005600;}
 .sdoing{ background:#32a2e3; border-bottom:1px #2b8ac1 solid; text-shadow:0px 2px 1px #2b8ac1;}
 .sclosed{ background:#808080; border-bottom:1px #545454 solid; text-shadow:0px 2px 1px #545454;}
+
+.cswait{ color:#f8b004;}
+.csdone{ color:#008000;}
+.csdoing{ color:#32a2e3;}
+.csclosed{ color:#808080;}
 
 .plnp{ width:50%; float:left; padding-left:13px; line-height:23px; color:#737171; background:url(../images/plnp.png) no-repeat 0 center; margin:0;}
 

@@ -29,6 +29,7 @@ class Mycenter extends Common {
         $my_action_count = DB::name('Action')->where(['actor' => $this->_G['username']])->count();
         //我的收藏网址总数
         $my_weburl_count = DB::name('Weburl')->where(['username' => $this->_G['username'], 'status' => 0])->count();
+       
         //我的文章总数
         $my_article_count = DB::name('Article')->where(['username' => $this->_G['username'], 'status' => 0])->count();
         
@@ -58,12 +59,14 @@ class Mycenter extends Common {
         $data = json_encode($week_data);
         $data = str_replace('"', '', $data);
         $username = $this->_G['username'];
+        $map['p.status'] = array('NOT in', 'done,closed');
+        $map['t.username'] = array('eq', $this->_G['username']);
         //我参与的项目
         $project_list = DB::name('Project')
                 ->alias('p')
-                ->join('chinatt_pms_team t', "p.acl = 'private' AND t.project = p.id AND t.username = '$username'", 'left')
+                ->join('chinatt_pms_team t', " t.project = p.id AND t.username = '$username'", 'left')
                 ->field('p.*,t.username')
-                ->where(['t.username' => $username])
+                ->where($map)
                 ->paginate(30);
         $project_count = $project_list->total();
         
