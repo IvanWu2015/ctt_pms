@@ -95,8 +95,7 @@ class User extends \think\Model {
         if (!is_numeric($uid) || empty($password)) {
             return false;
         }
-        $user = User::get($uid)->toArray();
-        ;
+        $user = $this->getUser($uid);
         $new_password = md5(md5($password) . $user['salt']);
         $this->where(['uid' => $uid])->update(['password' => $new_password]);
         return true;
@@ -160,7 +159,7 @@ class User extends \think\Model {
                 return 0; //参数错误
         }
         /* 获取用户数据 */
-        $user = User::get($map)->toArray();
+        $user = $this->getUser($map);
         if (!$this->checkFails($user)) {
             return -3;  //密码错误次数过多
         }
@@ -169,7 +168,7 @@ class User extends \think\Model {
             if (md5(md5($password) . $user['salt']) === $user['password']) {
                 $this->updateLogin($user['uid']);    //更新用户登录信息
                 $this->autoLogin($user);          //登录用户
-                write_action($user['username'], 0, 'user', $user['uid'], 'login');//操作记录
+                write_action($user['username'], 0, 'user', $user['uid'], 'login'); //操作记录
                 //记录用户COOKIE用于自动登陆
                 if ($autologin == 1) {
                     cookie('autouser', $user['username'], 604800);
@@ -198,7 +197,7 @@ class User extends \think\Model {
         } else {
             $map['uid'] = $uid;
         }
-        $user = $this->where($map)->field('uid,username,email,mobile,fails,deleted,isadmin')->find()->toArray();
+        $user = $this->getUser($map);
         //判断用户是否有效
         if (is_array($user) && $user['deleted'] == 0) {
             return $user;
@@ -326,12 +325,29 @@ class User extends \think\Model {
     public function checkAutoLogin() {
         $username = cookie('autouser');
         $key = cookie('autokey');
-        $user = User::get(['username' => $username])->toArray();
+        $user = $this->getUser(['username' => $username]);
         if ($key == md5($user['username'] . $user['password'])) {
             $this->autoLogin($user);          //登录用户
             return $user;
         }
         return false;
+    }
+
+    /**
+     * 获取用户信息
+     * @param type $param   获取参数 可直接uid或map
+     * @return array        返回用户信息
+     */
+    public function getUser($param) {
+        if (is_int($param)) {
+            $user = User::get($param);
+        } else {
+            $user = User::get($param);
+        }
+        if ($user->data) {
+            $user = $user->toArray();
+        }
+        return $user;
     }
 
 }
