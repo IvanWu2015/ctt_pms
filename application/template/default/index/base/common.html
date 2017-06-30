@@ -58,7 +58,7 @@
                     {if condition="$nav['sub_count'] > 0"}
                     <ul class="dropdown-menu">
                          {foreach $nav['sub'] as $sub_nav}
-                                <li class="mt20 mb10"><a href="{$sub_nav['true_url']}">{$sub_nav['title']}</a></li>
+                                <li><a href="{$sub_nav['true_url']}">{$sub_nav['title']}</a></li>
                          {/foreach}
                          </ul>
                     {/if}

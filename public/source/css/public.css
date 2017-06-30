@@ -489,11 +489,11 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .userincon .userdateup{ font-size:20px; color:#0e90d2; position:absolute; top:5px; right:5px;}
 
 .uscsul{ width:100%; float:left;}
-.uscsul li{ width:25%; float:left; color:#666; padding-left:55px; position:relative;}
-.uscsul li span{ font-size:40px; color:#ccc; position:absolute; left:10px;}
+.uscsul li{ width:25%; float:left; color:#666; padding-left:45px; position:relative;}
+.uscsul li span{ font-size:30px; color:#ccc; position:absolute; left:10px;}
 .uscsul li p{ margin-bottom:5px; font-size:12px;}
 .uscsul li h3{ font-size:12px; font-weight:normal; margin:0px;}
-.uscsul li h3 a,b{ font-size:14px; font-weight:normal; color:#f50;}
+.uscsul li h3 a{ font-size:14px; font-weight:normal; color:#f50;}
 
 .sufulo{ width:500px; height:150px; padding:30px; background:#fff; box-shadow:0px 0px 9px #999; z-index:99; position:fixed; top:0; left:0; right:0; bottom:0; margin:auto; display:none;}
 .sufulo img{ width:70px; height:70px; background:#1f925b; border-radius:100%; float:left;}
