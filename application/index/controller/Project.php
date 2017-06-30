@@ -117,7 +117,7 @@ class Project extends Common {
                 ->whereor($map_or)
                 ->order('action_id desc')
                 ->paginate(30);
-
+        
 //        $project_list = DB::name('Project')
 //                ->alias('p')
 //                ->join('chinatt_pms_team t' ," t.project = p.id AND t.username = '$username'",'left')
@@ -131,6 +131,7 @@ class Project extends Common {
         $project_list = $project_list->toArray();
         $project_list = get_project_consume($project_list['data']);
 
+        
         $navtitle = '项目列表' . $this->navtitle;
         $this->assign('status', $status);
         $this->assign('page', $page);

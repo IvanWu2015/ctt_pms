@@ -636,6 +636,7 @@ function get_stemma($pids, Model &$model, $field = 'id') {
 
 //统计项目工时总数
 function get_project_consume($pros) {
+
     //如果不是数组
     if (!is_array($pros)) {
         return $pros;
@@ -983,33 +984,16 @@ function get_user_count($user_list, $startdate, $enddate) {
  * @param array $enddate 结束
  */
 function get_count($user, $startdate, $enddate) {
-//    $data['username'] = array('eq', $user);
-//    $data['objectType'] = array('eq', 'user');
-//    if ($type == 'today') {
-//        $startdate = $enddate = date('Y-m-d');
-//        $data['date'] = array('in', "$startdate,$enddate");
-//    } elseif ($type == 'week') {
-//        //获取当周的第一天与最后一天
-//        $sdefaultDate = date("Y-m-d");
-//        $first = 0;
-//        $w = date('w', strtotime($sdefaultDate));
-//        $startdate = date('Y-m-d', strtotime("$sdefaultDate -" . ($w ? $w - $first : 6) . ' days'));
-//        $enddate = date('Y-m-d', strtotime("$startdate +6 days"));
-//        $data['date'] = array('between time', "$startdate,$enddate");
-//    } elseif ($type == 'month') {
-//        $startdate = date('Y-m-01');
-//        $enddate = date('Y-m-t');
-//        $data['date'] = array('between time', "$startdate,$enddate");
-//    } else {
-//        $data['date'] = array('between time', "$startdate,$enddate");
-//    }
     //获取今天的工时
     $today_data['username'] = array('eq', $user);
     $today_data['objectType'] = array('eq', 'user');
     $startdate = $enddate = date('Y-m-d');
     $today_data['date'] = array('eq', "$startdate");
-    $count['today_working'] = DB('Workcount')->where($today_data)->sum('consumed');
-
+    $count['today_working'] = intval(DB('Workcount')->where($today_data)->sum('consumed'));
+    
+    $not_today_data['assignedTo'] = array('eq', $user);
+    $not_today_data['openedDate'] = array('like', "%$startdate%");
+    $count['not_today_working'] = intval(DB('Task')->where($not_today_data)->sum('estimate'));
     //获取当周的工时
     $sdefaultDate = date("Y-m-d");
     $first = 0;
