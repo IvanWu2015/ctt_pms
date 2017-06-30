@@ -990,7 +990,7 @@ function get_count($user, $startdate, $enddate) {
     $startdate = $enddate = date('Y-m-d');
     $today_data['date'] = array('eq', "$startdate");
     $count['today_working'] = intval(DB('Workcount')->where($today_data)->sum('consumed'));
-    
+    //今天创建的任务的预计总工时
     $not_today_data['assignedTo'] = array('eq', $user);
     $not_today_data['openedDate'] = array('like', "%$startdate%");
     $count['not_today_working'] = intval(DB('Task')->where($not_today_data)->sum('estimate'));

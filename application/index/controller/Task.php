@@ -321,7 +321,7 @@ class Task extends Common {
         $config_list = DB('Config')->where(['status' => 1,'group' => 'task_type'])->select();
         if (request()->isPost()) {
             $task_data = [
-                'project' => $project_id,
+                'project' => input('project_id', '', 'intval'),
                 'name' => input('name', '', 'addslashes'),
                 'estimate' => input('param.estimate'),
                 'desc' => trim(input('param.desc')),
