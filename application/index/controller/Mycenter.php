@@ -68,6 +68,7 @@ class Mycenter extends Common {
                 ->field('p.*,t.username')
                 ->where($map)
                 ->paginate(30);
+        
         $project_count = $project_list->total();
         $project_list = get_project_consume($project_list);
         $not_status_data['status'] = array('in', 'wait,doing');

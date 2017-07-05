@@ -191,11 +191,10 @@ class Task extends Common {
                     $task_data = [
                         'canceledBy' => $this->_G['username'],
                         'canceledDate' => date('Y-m-d H:i:s'),
-                        'desc' => input('param.desc'),
                         'status' => 'cancel',
                     ];
                     DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
-                    write_action($this->_G['username'], $task['project'], 'task', $task_id, 'cancel');
+                    write_action($this->_G['username'], $task['project'], 'task', $task_id, 'cancel',trim(input('param.work')));
                 }
                 $message = array('result' => 'success', 'error' => '');
                 $data = json_encode($message);

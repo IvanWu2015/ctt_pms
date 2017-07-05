@@ -30,6 +30,11 @@ class Working extends Common {
         if(!empty($name)){
                     $data['d.code'] = array('eq',$name);
         }
+        //搜索
+        $keyword = input('post.keyword', '', 'addslashes');
+        if(!empty($keyword)){
+            $data['t.name'] = array('like',"%$keyword%");
+        }
         //工时列表
         $working_list = DB('Taskestimate')
                 ->alias('e')

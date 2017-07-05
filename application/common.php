@@ -637,11 +637,7 @@ function get_stemma($pids, Model &$model, $field = 'id') {
 //统计项目工时总数
 function get_project_consume($pros) {
 
-    //如果不是数组
-    if (!is_array($pros)) {
-        return $pros;
-    }
-    if (array_key_exists('id', $pros)) {
+    if ($pros['id'] > 0) {
         $project_id = $pros['id'];
         $task = db('Task');
         $task_data['project'] = ['eq', $project_id];
