@@ -844,6 +844,18 @@ function format_task($task_list) {
         } elseif ($task_list['type'] == 'BUG') {
             $task_list['typename'] = "BUG";
         }
+        
+        if($task_list['status'] == 'wait'){
+            $task_list['status_name'] = '等待';
+        }elseif($task_list['status'] == 'done'){
+            $task_list['status_name'] = '完成';
+        }elseif($task_list['status'] == 'doing'){
+            $task_list['status_name'] = '进行中';
+        }elseif($task_list['status'] == 'closed'){
+            $task_list['status_name'] = '关闭';
+        }elseif($task_list['status'] == 'cancel'){
+            $task_list['status_name'] = '取消';
+        }
         return $task_list;
     } else {
         foreach ($task_list as $key => $value) {

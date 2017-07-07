@@ -127,12 +127,7 @@
                 <div class="publicdiv pr bor pt20 pb20 pl20 mln pr20 sizing">
                     <span class="pa bf pl8 pr8 lh34 fs16" style="left:10px; top:-20px;">基本信息</span>
                     <p>项目名称：<span class="text-primary mr20 ml10">{$task_detail['name']}</span></p>
-                    <p>任务状态：<span class="text-primary mr20 ml10">
-                            {if condition="$task_detail['status'] == 'wait'"}<span style="color:#f8b004;">等待</span>{/if}
-                            {if condition="$task_detail['status'] == 'done'"}<span style="color:green;">完成</span>{/if}
-                            {if condition="$task_detail['status'] == 'doing'"}<span style="color:blue;">进行中</span>{/if}
-                            {if condition="$task_detail['status'] == 'closed'"}<span style="color:grey;">关闭</span>{/if}
-                        </span></p>
+                    <p>任务状态：<span class="text-primary mr20 ml10">{$task_detail['status_name']}</span></p>
                     <p>创&nbsp;建&nbsp;&nbsp;者：<span class="text-primary mr20 ml10">{$task_detail['openedBy']|getUser}</span></p>
                     <p>指&nbsp;派&nbsp;&nbsp;给：<span class="text-primary mr20 ml10">{$task_detail['assignedTo']|getUser}</span></p>
                     <p>优&nbsp;先&nbsp;&nbsp;级：<span class=" ml10">{$task_detail['pri']}</span></p>

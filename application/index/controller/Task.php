@@ -194,7 +194,7 @@ class Task extends Common {
                         'status' => 'cancel',
                     ];
                     DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
-                    write_action($this->_G['username'], $task['project'], 'task', $task_id, 'cancel',trim(input('param.work')));
+                    write_action($this->_G['username'], $task['project'], 'task', $task_id, 'cancel', trim(input('param.work')));
                 }
                 $message = array('result' => 'success', 'error' => '');
                 $data = json_encode($message);
@@ -223,18 +223,18 @@ class Task extends Common {
                 ->alias('t')
                 ->join('chinatt_pms_task p', 't.predecessor = p.id', 'left')
                 ->join('chinatt_pms_plan a', 't.plan = a.id', 'left')
-                ->join('chinatt_pms_config c',"t.type = c.c_key",'left')
+                ->join('chinatt_pms_config c', "t.type = c.c_key", 'left')
                 ->where(['t.id' => $task_id])
                 ->field('t.*,p.name as predecessor_name,a.title as plan_title,c.c_value as type_name')
                 ->find();
-        
+        $task_detail = format_task($task_detail);
         if (empty($task_detail)) {
             $this->error('任务不存在。');
         }
         $user = $this->_G;
-        $user_list = DB::table('chinatt_pms_user')->select();//用户列表
+        $user_list = DB::table('chinatt_pms_user')->select(); //用户列表
         $data['task'] = array('EQ', $task_id);
-        $work_list = DB::table('chinatt_pms_taskestimate')->where($data)->order('id')->select();//该任务的工时列表
+        $work_list = DB::table('chinatt_pms_taskestimate')->where($data)->order('id')->select(); //该任务的工时列表
         $project_id = $task_detail['project'];
         $project_detail = DB::name('project')->where(['id' => $project_id])->find();
         $user_list = get_userlist_by_projectid($project_id);
@@ -290,10 +290,10 @@ class Task extends Common {
         $username = $this->_G['username'];
         //修改状态判断任务是否超时
         if ($task_id > 0) {
-            $task_details = $task->where(['id' => $task_id])->find();//任务详情
-            $project_detail = DB('Project')->where(['id' => $task_details['project']])->find();//项目详情
+            $task_details = $task->where(['id' => $task_id])->find(); //任务详情
+            $project_detail = DB('Project')->where(['id' => $task_details['project']])->find(); //项目详情
             $project_id = $task_details['project'];
-            $big_time_ten = strtotime($task_details['openedDate']) + 10 * 60;//任务创建后10分钟
+            $big_time_ten = strtotime($task_details['openedDate']) + 10 * 60; //任务创建后10分钟
             if (time() > $big_time_ten && $this->_G['is_admin'] != 1) {
                 $this->error("超时，无法修改");
             }
@@ -312,12 +312,12 @@ class Task extends Common {
         if (!$this->_G['is_admin']) {
             $map['acl'] = array('eq', 'open');
         }
-        $project_list = Db::name('Project')->where($map)->column('id,name,code', 'id');//项目列表
-        $plan_list = Db::name('Plan')->where(['deleted' => 0, 'project' => $project_id])->select();//项目的需求列表
+        $project_list = Db::name('Project')->where($map)->column('id,name,code', 'id'); //项目列表
+        $plan_list = Db::name('Plan')->where(['deleted' => 0, 'project' => $project_id])->select(); //项目的需求列表
         $predecessor_data['status'] = array('in', "wait,doing");
         $predecessor_data['project'] = array('eq', $project_id);
-        $predecessor_list = DB('Task')->where($predecessor_data)->select();//该项目的前置任务列表
-        $config_list = DB('Config')->where(['status' => 1,'group' => 'task_type'])->select();
+        $predecessor_list = DB('Task')->where($predecessor_data)->select(); //该项目的前置任务列表
+        $config_list = DB('Config')->where(['status' => 1, 'group' => 'task_type'])->select();
         if (request()->isPost()) {
             $task_data = [
                 'project' => input('project_id', '', 'intval'),
@@ -348,7 +348,7 @@ class Task extends Common {
                 write_action($this->_G['username'], $project_id, 'task', $task_id, 'updata');
                 $this->success("修改成功", url("/Index/Project/detail/?id=$project_id"));
                 exit;
-            //添加
+                //添加
             } else {
                 $task_id = DB::table('chinatt_pms_task')->insertGetId($task_data);
                 //关联需求的内容
@@ -363,7 +363,7 @@ class Task extends Common {
         }
         $navtitle = '任务添加/编辑' . $project_detail['name'];
         $this->assign('navtitle', $navtitle);
-        $this->assign('config_list',$config_list);
+        $this->assign('config_list', $config_list);
         $this->assign('project_id', $project_id);
         $this->assign('predecessor_list', $predecessor_list);
         $this->assign('project_list', $project_list);
@@ -374,4 +374,5 @@ class Task extends Common {
         $this->assign('task_id', $task_id);
         return $this->fetch($this->templatePath);
     }
+
 }
