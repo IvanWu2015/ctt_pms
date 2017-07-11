@@ -4,8 +4,87 @@
 {/block}
 
 {block name="body"}
+<style>
+body{ background:#fff;}
+.footer{ border-top:none; background:none;}
+</style>
+<div class="filewp">
+    <div class="fileleft">
+        <ul class="fileleftNav">
+            <li>
+                <p class="flienavtitle"><span class="iconfont" id="flienavicon_1" onClick="flienavshow(1);">&#xe624;</span><a href="javascript:void(0);">基础</a></p>
+                <div class="publicdiv flienavclasswp" id="flienavclasswp_1">
+                    <a href="javascript:void(0);" class="flienavclass">架构总览</a>
+                    <a href="javascript:void(0);" class="flienavclass">生命周期</a>
+                    <a href="javascript:void(0);" class="flienavclass">入口文件</a>
+                    <a href="javascript:void(0);" class="flienavclass">URL访问</a>
+                    <a href="javascript:void(0);" class="flienavclass">模块设计</a>
+                    <a href="javascript:void(0);" class="flienavclass">命名空间</a>
+                    <a href="javascript:void(0);" class="flienavclass">自动加载</a>
+                    <a href="javascript:void(0);" class="flienavclass">Traits引入</a>
+                    <a href="javascript:void(0);" class="flienavclass">API友好</a>
+                </div>
+            </li>
+            <li>
+                <p class="flienavtitle"><span class="iconfont" id="flienavicon_2" onClick="flienavshow(2);">&#xe624;</span><a href="javascript:void(0);">架构</a></p>
+                <div class="publicdiv flienavclasswp" id="flienavclasswp_2">
+                    <a href="javascript:void(0);" class="flienavclass">架构总览
+                    <a href="javascript:void(0);" class="flienavclass">生命周期</a>
+                    <a href="javascript:void(0);" class="flienavclass">入口文件</a>
+                    <a href="javascript:void(0);" class="flienavclass">URL访问</a>
+                    <a href="javascript:void(0);" class="flienavclass">模块设计</a>
+                    <a href="javascript:void(0);" class="flienavclass">命名空间</a>
+                    <a href="javascript:void(0);" class="flienavclass">自动加载</a>
+                    <a href="javascript:void(0);" class="flienavclass">Traits引入</a>
+                </div>
+            </li>
+            <li>
+                <p class="flienavtitle"><span class="iconfont" id="flienavicon_3" onClick="flienavshow(3);">&#xe624;</span><a href="javascript:void(0);">配置</a></p>
+                <div class="publicdiv flienavclasswp" id="flienavclasswp_3">
+                    <a href="javascript:void(0);" class="flienavclass">配置目录</a>
+                    <a href="javascript:void(0);" class="flienavclass">配置格式</a>
+                    <a href="javascript:void(0);" class="flienavclass">配置加载</a>
+                    <a href="javascript:void(0);" class="flienavclass">读取配置</a>
+                    <a href="javascript:void(0);" class="flienavclass">动态配置</a>
+                    <a href="javascript:void(0);" class="flienavclass">独立配置</a>
+                    <a href="javascript:void(0);" class="flienavclass">配置作用域</a>
+                    <a href="javascript:void(0);" class="flienavclass">环境变量配置</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="fileright sizing">
+        <div class="filerightwp sizing">
+            <h2 class="mt20 pb20 pt20 borb sizing">{$article_detail['title']}</h2>
+            <p class="publicdiv mb10 lh25">
+                发布者：<span class="text-primary mr20">{$article_detail['username']}</span>
+                分类：<span class="mr20">{$article_detail['class_name']}</span>
+                项目：<span class="mr20">{$article_detail['project_name']}</span>
+                
+                <a href="{:url('/index/article/add?id='.$article_id)}" class="btn-link iconfont y" title="编辑">&#xe71d; 编辑</a>
+                <span class="y mr20">发布时间：{$article_detail['time']}</span>
+            </p>
+                
+            <div class="publicdiv pt20 pb20 pl20 pr20 sizing">{$article_detail['contents']}</div>
+            
+        </div>
+    </div>
+</div>
 
-<div class="publicdiv mt20 bf pb20 mb10 sizing" id="action_wrap">
+<script>
+function flienavshow(id){
+    if(jQuery('#flienavclasswp_' + id).css('display') == 'none'){
+        jQuery('#flienavicon_' + id).css({transform: 'rotate(90deg)'});
+        jQuery('#flienavclasswp_' + id).slideDown();
+    }else{
+        jQuery('#flienavicon_' + id).css({transform: 'rotate(0deg)'});
+        jQuery('#flienavclasswp_' + id).slideUp();
+    }
+    
+}
+</script>
+
+<!--<div class="publicdiv mt20 bf pb20 mb10 sizing" id="action_wrap">
     <div style="width:1100px; margin:0px auto;">
         <div class="publicdiv mt20 bor pl20 pr20 sizing">
         <div class="publicdiv borb pl20 pr20 sizing">
@@ -24,6 +103,6 @@
         
         </div>
     </div>
-</div>
+</div>-->
 
 {/block}
