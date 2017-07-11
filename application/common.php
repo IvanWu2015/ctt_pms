@@ -844,16 +844,16 @@ function format_task($task_list) {
         } elseif ($task_list['type'] == 'BUG') {
             $task_list['typename'] = "BUG";
         }
-        
-        if($task_list['status'] == 'wait'){
+
+        if ($task_list['status'] == 'wait') {
             $task_list['status_name'] = '等待';
-        }elseif($task_list['status'] == 'done'){
+        } elseif ($task_list['status'] == 'done') {
             $task_list['status_name'] = '完成';
-        }elseif($task_list['status'] == 'doing'){
+        } elseif ($task_list['status'] == 'doing') {
             $task_list['status_name'] = '进行中';
-        }elseif($task_list['status'] == 'closed'){
+        } elseif ($task_list['status'] == 'closed') {
             $task_list['status_name'] = '关闭';
-        }elseif($task_list['status'] == 'cancel'){
+        } elseif ($task_list['status'] == 'cancel') {
             $task_list['status_name'] = '取消';
         }
         return $task_list;
@@ -944,7 +944,7 @@ function working_count($subjectTYPE, $objectID, $username, $consumed) {
             $task_detail = DB('Task')->where(['id' => $objectID])->find();
             $working_data['type'] = $task_detail['type'];
         }
-        
+
         $working_data = [
             'objectType' => $subjectTYPE,
             'objectID' => $objectID,
@@ -955,7 +955,7 @@ function working_count($subjectTYPE, $objectID, $username, $consumed) {
             'week' => date("W"),
         ];
         $working_detail = DB('Workcount')->where(['objectType' => $subjectTYPE, 'objectID' => $objectID, 'username' => $username, 'date' => date('Y--m-d')])->find();
-        
+
 
         if (empty($working_detail)) {
             DB('Workcount')->insert($working_data);
@@ -1084,3 +1084,4 @@ function getUser($username, $onlyRealname = 1) {
 
     return $user;
 }
+

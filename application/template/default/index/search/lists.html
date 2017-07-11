@@ -1,0 +1,76 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+<script src="tpl_js/radialIndicator.js"></script>
+<style>
+    canvas{ width:60px; height:60px; position:absolute; top:20px; left:0;}
+</style>
+
+<div class="publicdiv mt5 pt20 pb10 ptn sizing">
+    <div class="publicdiv pl20 pr20 pt8 bf sizing">
+        <div class="publicdiv borb mb20 pb10 bf sizing">
+            <h3 class="mt20 pt10">搜索结果</h3>
+            <ul class="publicdiv nav nav-pills mt10">
+
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="publicdiv pr20 pb20 bf sizing">
+        <table class="table">
+            <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                <tr>
+                    <th class="ac bbno pt15 pb15">ID</th>
+                    <th class="bbno pt15 pb15">任务名称</th>
+                    <th class="bbno pt15 pb15">添加人</th>
+                    <th class="bbno pt15 pb15">前置任务</th>
+                    <th class="ac bbno pt15 pb15">指派给</th>
+                    <th class="ac bbno pt15 pb15">完成者</th>
+                    <th class="ac bbno pt15 pb15">创建时间</th>
+                    <th class="ac bbno pt15 pb15">完成时间</th>
+                    <th class="ac bbno pt15 pb15">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {foreach $task_list as $task}
+                <tr>
+                    <td class="ac">{$task['id']}</td>
+                    <td class=""><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk">{$task['name']}</a></td>
+                    <td class="ac">{$task['openedBy']|getUser}</td>
+                    <td class="ac">
+                        {$task['p_name']}
+                        {if condition="$task['p_status'] eq doing"}
+                        进行中
+                        {/if}
+                        {if condition="$task['p_status'] eq wait"}
+                        等待
+                        {/if}
+                        {if condition="$task['p_status'] eq done"}
+                        完成
+                        {/if}
+                        {if condition="$task['p_status'] eq closed"}
+                        完成
+                        {/if}
+                    </td>
+                    <td class="ac">{$task['assignedTo']|getUser}</td>
+                    <td class="ac">{$task['finishedBy']|getUser}</td>
+                    <td class="ac">{$task['openedDate']}</td>
+                    <td class="ac">{$task['assignedDate']}</td>
+                    <td class="ac iconfont">
+                        <a href="{:url('/index/task/add/?task_id='.$task['id'])}" class="btn-link rkwt">&#xe71d;</a>
+                        <a href="{:url('/admin/task/lists/?deleted=1&id='.$task['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该任务吗？');" title="删除">&#xe601;</a>
+                    </td>
+                </tr>
+                {/foreach}
+            </tbody>
+
+        </table>
+
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
+</div>
+{/block}
