@@ -107,6 +107,7 @@ class article extends Common {
         $project_list = Db::name('Project')->where($data)->order("id DESC")->paginate(15);//项目列表
         if ($article_id > 0) {
             $article_detail = DB('Article')->where(['status' => 0, 'id' => $article_id])->find();
+            $article_detail['contents'] = stripslashes($article_detail['contents']);
             if (empty($article_detail)) {
                 $this->error('不存在该文章');
             }
