@@ -85,6 +85,7 @@ class article extends Common {
                     ->field('a.*,c.name as class_name,p.name as project_name')
                     ->where(['a.status' => 0, 'a.id' => $article_id])
                     ->find();
+            $article_detail['contents'] = stripslashes($article_detail['contents']);
             if (empty($article_detail)) {
                 $this->error('不存在该文章');
             }
