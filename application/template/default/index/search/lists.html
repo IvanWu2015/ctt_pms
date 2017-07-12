@@ -5,7 +5,6 @@
 
 {block name="body"}
 <script src="tpl_js/radialIndicator.js"></script>
-<script src="tpl_js/highlight.js"></script>
 <style>
     canvas{ width:60px; height:60px; position:absolute; top:20px; left:0;}
 </style>
@@ -85,30 +84,10 @@
         <div class="publicdiv ac pagingw">{$page}</div>
     </div>
 </div>
-<style type="text/css">
-.highlight {color: #cc0000;}
-</style>
 <script>
-/*$(function(){
-    $("input[type=button]").click(function(){
-      var txt=$("input[type=text]").val();
-      if($.trim(txt)!=""){
- 
-        $("table tr:not('#theader')").hide().filter(":contains('"+txt+"')").show().css("background","red");
-      }else{
-        $("table tr:not('#theader')").css("background","#fff").show();
-      }
-    });
-  })*/
-  var searchTerm = '{$keyword}';
-
-    // 删除任何旧的突出方面
-    jQuery('body').removeHighlight();
-
-    // 禁用高亮显示如果空
-    if ( searchTerm ) {
-        // 突出新学期
-        jQuery('body').highlight( searchTerm );
-    }
+//搜索
+//var searchText = '{$keyword}';
+var content = document.getElementById('theader');
+content.innerHTML = content.innerHTML.replace(/($keyword)/g, "<span style=\"color:red\">$1</span>");
 </script>
 {/block}
