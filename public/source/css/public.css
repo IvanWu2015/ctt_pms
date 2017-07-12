@@ -651,7 +651,12 @@ a.cc:hover{ color:#ccc !important;}
 	.filerightwp{ width:100%;}
 }
 
+.search_type a{ float:left; height:35px; line-height:35px; margin-right:20px; display:block; position:relative;}
+.search_type a:hover{ color:#428bca;}
+.setyattr{ color:#428bca; background:url(../images/setyattr.png) no-repeat center bottom;}
 
+.search_keyword{ width:500px; float:left; padding:10px; float:left; border:1px #428bca solid; border-right:none; border-radius:3px 0 0 3px; background:#fff;}
+.search_sub{ width:100px; height:42px; float:left; color:#fff; border-radius:0 3px 3px 0; border:none; background:#428bca;}
 
 .plprogress{ width:100%; float:left; height:6px; border-radius:2px; background:#f5f5f5; position:relative; overflow:hidden;}
 .plprogress span{ height:6px; display:block; position:absolute; top:0;left:0;}
