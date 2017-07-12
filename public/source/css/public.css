@@ -433,6 +433,8 @@ img{ border:none;}
 .db{ display:block;}
 .dn{ display:none;}
 
+.imgmax img{ max-width:100% !important;}
+
 /*弹窗页*/
 .modalwrap{ width:800px; background:#fff; padding:60px 0px 60px 0px; box-shadow:0px 0px 15px #999; border-radius:5px; z-index:99; position:fixed; top:0; left:0; right:0; bottom:0; margin:auto;}
 .modalwrap .modaltitle{ width:100%; height:50px; line-height:50px; margin:0px !important; font-size:15px; border-bottom:1px #dedede solid; z-index:100; position:absolute; top:0px; left:0px;}
@@ -568,7 +570,7 @@ a.cc:hover{ color:#ccc !important;}
 .derkwt a{ border-radius:2px; color:#003366; padding:8px 15px; float:left;}
 .derkwt a:hover{ background:#ddd; color:#333; text-decoration:none;}
 
-.ncnt{ min-width:120px; float:left; padding:5px 10px; word-wrap:break-word; background:#D3DAE0; max-width: 100%;}
+.ncnt{ min-width:120px; float:left; padding:5px 10px; word-wrap:break-word; background:#D3DAE0; max-width:100%;}
 .ncnt:after{ content:''; width:20px; height:7px; background:url(../images/navattr01.png) no-repeat; position:absolute; top:-7px; left:30px;}
 .ncnt img{ max-width:100%; margin-bottom:5px;}
 
@@ -619,6 +621,37 @@ a.cc:hover{ color:#ccc !important;}
 @media screen and (max-width:750px){
     .projectlist li{ width:50%;}
 }
+
+/*文档详情页*/
+.filewp{ width:100%; float:left;}
+.fileleft{ width:280px; height:100%; overflow-y:auto; padding-top:50px; background:#fafafa; border-right:1px #ddd solid; position:fixed; top:0px; left:0px;}
+.fileleft::-webkit-scrollbar {width:5px;height:10px;}
+.fileleft::-webkit-scrollbar-button    {background-color:#fff;}
+.fileleft::-webkit-scrollbar-track     {background:#fff;}
+.fileleft::-webkit-scrollbar-thumb{background:#ccc;border-radius:4px;}
+.fileleft::-webkit-scrollbar-corner {background:#fff;}
+.fileleft::-webkit-scrollbar-resizer  {background:#fff;}
+
+.fileleftNav{ width:100%; float:left;}
+.fileleftNav li{ width:100%; float:left;}
+.fileleftNav li .flienavtitle{ width:100%; float:left; height:40px; line-height:40px;}
+.fileleftNav li .flienavtitle span{ width:40px; height:40px; line-height:40px; text-align:center; display:block; float:left; cursor:pointer;}
+.fileleftNav li .flienavtitle:hover{ background:#e5e5e5;}
+.fileleftNav li .flienavclasswp{ display:none;}
+.fileleftNav li .flienavclasswp .flienavclass{ width:100%; float:left; height:35px; line-height:35px; padding-left:50px;}
+.flienavclass:hover{ background:#f2f2f2;}
+
+.fileright{ width:100%; float:left; min-height:400px; padding-left:290px;}
+
+
+
+.filerightwp{ width:1000px; margin:0 auto; padding:0px 30px;}
+
+@media screen and (max-width:1280px){
+	.filerightwp{ width:100%;}
+}
+
+
 
 .plprogress{ width:100%; float:left; height:6px; border-radius:2px; background:#f5f5f5; position:relative; overflow:hidden;}
 .plprogress span{ height:6px; display:block; position:absolute; top:0;left:0;}

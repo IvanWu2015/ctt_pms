@@ -4,8 +4,58 @@
 {/block}
 
 {block name="body"}
+<style>
+    body{ background:#fff;}
+    .footer{ border-top:none; background:none;}
+</style>
+<div class="filewp">
+    <div class="fileleft">
+        <ul class="fileleftNav">
+            {foreach name="class_name_list" id="value" key="key" }
+            <li>
+                <p class="flienavtitle"><span class="iconfont" id="flienavicon_{$key}" onClick="flienavshow({$key});">&#xe624;</span><a href="javascript:void(0);">{$value}</a></p>
+                <div class="publicdiv flienavclasswp" id="flienavclasswp_{$key}">
+                    {foreach $new_class_list[$key] as $data} 
+                    <a href="{:url('/index/article/detail?id='.$data['id'])}" class="flienavclass">{$data['title']}</a>
+                    {/foreach}
+                </div>
+            </li>
+            {/foreach}
 
-<div class="publicdiv mt20 bf pb20 mb10 sizing" id="action_wrap">
+        </ul>
+    </div>
+    <div class="fileright sizing">
+        <div class="filerightwp sizing">
+            <h2 class="mt20 pb20 pt20 borb sizing">{$article_detail['title']}</h2>
+            <p class="publicdiv mb10 lh25">
+                发布者：<span class="text-primary mr20">{$article_detail['username']}</span>
+                分类：<span class="mr20">{$article_detail['class_name']}</span>
+                项目：<span class="mr20">{$article_detail['project_name']}</span>
+
+                <a href="{:url('/index/article/add?id='.$article_id)}" class="btn-link iconfont y" title="编辑">&#xe71d; 编辑</a>
+                <span class="y mr20">发布时间：{$article_detail['time']}</span>
+            </p>
+
+            <div class="publicdiv pt20 pb20 pl20 pr20 sizing">{$article_detail['contents']}</div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function flienavshow(id) {
+        if (jQuery('#flienavclasswp_' + id).css('display') == 'none') {
+            jQuery('#flienavicon_' + id).css({transform: 'rotate(90deg)'});
+            jQuery('#flienavclasswp_' + id).slideDown();
+        } else {
+            jQuery('#flienavicon_' + id).css({transform: 'rotate(0deg)'});
+            jQuery('#flienavclasswp_' + id).slideUp();
+        }
+
+    }
+</script>
+
+<!--<div class="publicdiv mt20 bf pb20 mb10 sizing" id="action_wrap">
     <div style="width:1100px; margin:0px auto;">
         <div class="publicdiv mt20 bor pl20 pr20 sizing">
         <div class="publicdiv borb pl20 pr20 sizing">
@@ -24,6 +74,6 @@
         
         </div>
     </div>
-</div>
+</div>-->
 
 {/block}

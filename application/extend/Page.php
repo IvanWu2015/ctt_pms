@@ -19,7 +19,7 @@ class Page {
     public $totalPages; // 分页总页面数
     public $rollPage = 5; // 分页栏每页显示的页数
     public $lastSuffix = true; // 最后一页是否显示总页数
-    public $p = 'p'; //分页参数名
+    public $p = 'page'; //分页参数名
     public $url = ''; //当前链接URL
     private $nowPage = 1;
     

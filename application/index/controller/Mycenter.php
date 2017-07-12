@@ -29,10 +29,10 @@ class Mycenter extends Common {
         $my_action_count = DB::name('Action')->where(['actor' => $this->_G['username']])->count();
         //我的收藏网址总数
         $my_weburl_count = DB::name('Weburl')->where(['username' => $this->_G['username'], 'status' => 0])->count();
-       
+
         //我的文章总数
         $my_article_count = DB::name('Article')->where(['username' => $this->_G['username'], 'status' => 0])->count();
-        
+
         //以周为单位输出柱形图数据
         $week_data_where['date'] = array('gt', date('Y-m-d', strtotime("-1 year")));
         $week_data_where['objectType'] = array('eq', 'user');
@@ -68,7 +68,7 @@ class Mycenter extends Common {
                 ->field('p.*,t.username')
                 ->where($map)
                 ->paginate(30);
-        
+
         $project_count = $project_list->total();
         $project_list = get_project_consume($project_list);
         $not_status_data['status'] = array('in', 'wait,doing');
@@ -109,6 +109,10 @@ class Mycenter extends Common {
                 ->field('a.*,c.name as class_name,p.name as project_name')
                 ->where(['a.status' => 0, 'a.username' => $this->_G['username']])
                 ->paginate(10);
+        
+
+
+
         $navtitle = '个人中心' . $this->navtitle;
         $this->assign('same_month_consumed_count', $same_month_consumed_count);
         $this->assign('same_month_estimate_count', $same_month_estimate_count);
@@ -118,8 +122,8 @@ class Mycenter extends Common {
         $this->assign('my_article_count', $my_article_count);
         $this->assign('my_weburl_count', $my_weburl_count);
         $this->assign('my_action_count', $my_action_count);
-        $this->assign('project_list',$project_list);
-        $this->assign('project_count',$project_count);
+        $this->assign('project_list', $project_list);
+        $this->assign('project_count', $project_count);
         $this->assign('my_task_count', $my_task_count);
         $this->assign('estimate_count', $estimate_count);
         $this->assign('data', $data);
