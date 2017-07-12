@@ -18,7 +18,6 @@ class Mycenter extends Common {
 
     //首页
     public function index() {
-
         //总预计工时
         $estimate_count = DB::name('Task')->where(['assignedTo' => $this->_G['username'], 'deleted' => 0])->sum('estimate');
         //总消耗工时
