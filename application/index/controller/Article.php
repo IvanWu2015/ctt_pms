@@ -61,7 +61,7 @@ class article extends Common {
                 $this->success('删除成功', 'index/article/lists');
             }
         }
-        
+
         $navtitle = '文档列表' . $project_detail['name'];
         $this->assign('navtitle', $navtitle);
         $this->assign('page', $page);
@@ -90,8 +90,21 @@ class article extends Common {
                 $this->error('不存在该文章');
             }
         }
+
+        $class = db('Class');
+        $class_list = $class->where()->column('id,name', 'id');
+
+        $article_list = DB::name('Article')->column('class,title,contents', 'id');
+        foreach ($article_list as $value) {
+            $class = $value['class'];
+                $new_class_list[$class][] = $value;
+                $new_class_list['title'][$class] = $class_list[$class]['title'];
+        }
+        $class_name_list = $new_class_list['title'];
         $navtitle = $article_detail['title'];
         $this->assign('navtitle', $navtitle);
+        $this->assign('class_name_list', $class_name_list);
+        $this->assign('new_class_list', $new_class_list);
         $this->assign('article_id', $article_id);
         $this->assign('article_detail', $article_detail);
         return $this->fetch($this->templatePath);
@@ -103,8 +116,8 @@ class article extends Common {
      */
     public function add() {
         $article_id = input('get.id', '0', 'intval');
-        $sort_list = DB('Class')->where(['status' => 1])->select();//分类列表
-        $project_list = Db::name('Project')->where($data)->order("id DESC")->paginate(15);//项目列表
+        $sort_list = DB('Class')->where(['status' => 1])->select(); //分类列表
+        $project_list = Db::name('Project')->where($data)->order("id DESC")->paginate(15); //项目列表
         if ($article_id > 0) {
             $article_detail = DB('Article')->where(['status' => 0, 'id' => $article_id])->find();
             if (empty($article_detail)) {
@@ -126,7 +139,7 @@ class article extends Common {
             if ($article_id > 0) {
                 DB('Article')->where(['id' => $article_id])->update($data);
                 $this->success('修改成功', 'index/article/lists');
-            //添加
+                //添加
             } else {
                 DB('Article')->insert($data);
                 $this->success('添加成功', 'index/article/lists');
