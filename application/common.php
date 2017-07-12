@@ -1084,4 +1084,26 @@ function getUser($username, $onlyRealname = 1) {
 
     return $user;
 }
-
+/**
+ * 获取用户拥有项目权限的IDS
+ * @param string $username  用户名
+ * @return string $ids      
+ */
+function getUserprojectids($username) {
+    $project_list = db('project')
+            ->alias('p')
+            ->join('chinatt_pms_team t', "t.project = p.id ", 'left')
+            ->where(['t.username' => $username])
+            ->whereOr(['p.acl' => 'open'])
+            ->group('p.id')
+            ->select();
+    foreach ($project_list as $key => $value) {
+        $project_username_list[] = $value['project'];
+        if ($key == 0) {
+            $ids .= $value['id'];
+        } else {
+            $ids .= ',' . $value['id'];
+        }
+    }
+    return $ids;
+}

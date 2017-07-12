@@ -28,20 +28,8 @@ class Search extends Common {
         $keyword = input('keyword', '', 'addslashes');
 
         //$project_username_list = db('Project')->where()->select();
-
-        $project_list = DB::name('Project')
-                ->alias('p')
-                ->join('chinatt_pms_team t', "t.project = p.id AND t.username = '$username'", 'left')
-                ->where(['t.username' => $username])
-                ->select();
-        foreach ($project_list as $key => $value) {
-            $project_username_list[] = $value['project'];
-            if ($key == 0) {
-                $ids .= $value['id'];
-            } else {
-                $ids .= ',' . $value['id'];
-            }
-        }
+        
+        $ids = getUserprojectids($username);
         
         //搜索部分的处理
         if (!empty($keyword)) {
@@ -107,6 +95,8 @@ class Search extends Common {
             $page = $task_list->render(); // 分页显示输出
         }
         $this->assign('page', $page);
+        $this->assign('keyword',$keyword);
+        $this->assign('type',$type);
         $this->assign('task_list', $task_list);
         $navtitle = '搜索列表' . $this->navtitle;
         $this->assign('navtitle', $navtitle);
