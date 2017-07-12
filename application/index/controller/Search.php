@@ -95,6 +95,8 @@ class Search extends Common {
             $page = $task_list->render(); // 分页显示输出
         }
         $this->assign('page', $page);
+        $this->assign('keyword',$keyword);
+        $this->assign('type',$type);
         $this->assign('task_list', $task_list);
         $navtitle = '搜索列表' . $this->navtitle;
         $this->assign('navtitle', $navtitle);
