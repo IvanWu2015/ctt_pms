@@ -1,0 +1,29 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv mt20 bf pb20 mb10 sizing" id="action_wrap">
+    <div style="width:1100px; margin:0px auto;">
+        <div class="publicdiv mt20 bor pl20 pr20 sizing">
+        <div class="publicdiv borb pl20 pr20 sizing">
+            <h2 class="mt20 pb20 pt20 pl20 pr20 ac sizing">{$article_detail['title']}</h2>
+            <p class="publicdiv mt20 mb10 lh35">
+                发布者：<span class="text-primary mr20">{$article_detail['username']}</span>
+                分类：<span class="mr20">{$article_detail['class_name']}</span>
+                项目：<span class="mr20">{$article_detail['project_name']}</span>
+                
+                <a href="{:url('/index/article/add?id='.$article_id)}" class="btn-link iconfont y" title="编辑">&#xe71d; 编辑</a>
+                <span class="y mr20">发布时间：{$article_detail['time']}</span>
+            </p>
+        </div>
+        
+        <div class="publicdiv pt20 pb20 pl20 pr20 sizing">{$article_detail['contents']}</div>
+        
+        </div>
+    </div>
+</div>
+
+{/block}

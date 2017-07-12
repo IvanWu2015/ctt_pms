@@ -90,10 +90,9 @@ class article extends Common {
                 $this->error('不存在该文章');
             }
         }
-
+        //关于左侧导航的处理
         $class = db('Class');
         $class_list = $class->where()->column('id,name', 'id');
-
         $article_list = DB::name('Article')->column('class,title,contents', 'id');
         foreach ($article_list as $value) {
             $class = $value['class'];
@@ -102,6 +101,7 @@ class article extends Common {
         }
         $class_name_list = $new_class_list['title'];
         $navtitle = $article_detail['title'];
+        
         $this->assign('navtitle', $navtitle);
         $this->assign('class_name_list', $class_name_list);
         $this->assign('new_class_list', $new_class_list);

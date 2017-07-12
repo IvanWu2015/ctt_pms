@@ -5,24 +5,36 @@
 
 {block name="body"}
 <script src="tpl_js/radialIndicator.js"></script>
+<script src="tpl_js/highlight.js"></script>
 <style>
     canvas{ width:60px; height:60px; position:absolute; top:20px; left:0;}
 </style>
 
-<div class="publicdiv mt5 pt20 pb10 ptn sizing">
-    <div class="publicdiv pl20 pr20 pt8 bf sizing">
-        <div class="publicdiv borb mb20 pb10 bf sizing">
-            <h3 class="mt20 pt10">搜索结果</h3>
-            <ul class="publicdiv nav nav-pills mt10">
-
-
-            </ul>
+<div class="publicdiv mt20 pt20 pb10 ptn sizing">
+    
+    <div class="publicdiv pr20 pl20 pb20 bf sizing">
+        
+        <div class="publicdiv mt20 iconfont search_type">
+            <a href="javascript:void(0);" class="setyattr">动态</a>
+            <a href="javascript:void(0);">任务名称</a>
+            <a href="javascript:void(0);">任务说明</a>
         </div>
-    </div>
-
-    <div class="publicdiv pr20 pb20 bf sizing">
+        
+        <div class="publicdiv">
+            <form action="{:url('/index/search/lists/?keyword='.$keyword.'&type='.$type)}" method="post">
+                <!--<select name="type">
+                    <option value='action'>动态</option>
+                    <option value='name'>任务名称</option>
+                    <option value='desc'>任务说明</option>
+                </select>-->
+                <input type="text" name="keyword" class="search_keyword" placeholder="请输入搜索的内容~" value="{$keyword}" />
+                <input type="submit" class="search_sub" value="搜索" />
+            </form>
+        </div>
+    
+        <h3 class="publicdiv mt20 pt10">搜索结果</h3>
         <table class="table">
-            <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+            <thead style="background:#f6f6f6;">
                 <tr>
                     <th class="ac bbno pt15 pb15">ID</th>
                     <th class="bbno pt15 pb15">任务名称</th>
@@ -35,7 +47,7 @@
                     <th class="ac bbno pt15 pb15">操作</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="theader">
                 {foreach $task_list as $task}
                 <tr>
                     <td class="ac">{$task['id']}</td>
@@ -44,16 +56,16 @@
                     <td class="ac">
                         {$task['p_name']}
                         {if condition="$task['p_status'] eq doing"}
-                        进行中
+                            进行中
                         {/if}
                         {if condition="$task['p_status'] eq wait"}
-                        等待
+                            等待
                         {/if}
                         {if condition="$task['p_status'] eq done"}
-                        完成
+                            完成
                         {/if}
                         {if condition="$task['p_status'] eq closed"}
-                        完成
+                            完成
                         {/if}
                     </td>
                     <td class="ac">{$task['assignedTo']|getUser}</td>
@@ -73,4 +85,30 @@
         <div class="publicdiv ac pagingw">{$page}</div>
     </div>
 </div>
+<style type="text/css">
+.highlight {color: #cc0000;}
+</style>
+<script>
+/*$(function(){
+    $("input[type=button]").click(function(){
+      var txt=$("input[type=text]").val();
+      if($.trim(txt)!=""){
+ 
+        $("table tr:not('#theader')").hide().filter(":contains('"+txt+"')").show().css("background","red");
+      }else{
+        $("table tr:not('#theader')").css("background","#fff").show();
+      }
+    });
+  })*/
+  var searchTerm = '{$keyword}';
+
+    // 删除任何旧的突出方面
+    jQuery('body').removeHighlight();
+
+    // 禁用高亮显示如果空
+    if ( searchTerm ) {
+        // 突出新学期
+        jQuery('body').highlight( searchTerm );
+    }
+</script>
 {/block}
