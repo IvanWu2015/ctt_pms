@@ -15,9 +15,9 @@
         <div class="filerightwp sizing">
         
         <div class="publicdiv mt20 iconfont search_type">
-            <a href="javascript:void(0);" class="setyattr">动态</a>
-            <a href="javascript:void(0);">任务名称</a>
-            <a href="javascript:void(0);">任务说明</a>
+            <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=action')}" {if $type == 'action'}class="setyattr"{/if}>动态</a>
+            <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=name')}" {if $type == 'name'}class="setyattr"{/if}>任务名称</a>
+            <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=desc')}" {if $type == 'desc'}class="setyattr"{/if}>任务说明</a>
         </div>
         
         <div class="publicdiv">

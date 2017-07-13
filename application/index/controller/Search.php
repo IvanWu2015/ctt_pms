@@ -30,11 +30,11 @@ class Search extends Common {
         //$project_username_list = db('Project')->where()->select();
         
         $ids = getUserprojectids($username);
-        
         //搜索部分的处理
         if (!empty($keyword)) {
             $actiondata['a.comment'] = array('like', "%$keyword%");
             $actiondata['a.project'] = array('in', $ids);
+            $actiondata['a.objectType'] = array('eq', 'task');
 
             $namedata['t.deleted'] = array('EQ', '0');
             $namedata['t.name'] = array('like', "%$keyword%");
@@ -45,20 +45,23 @@ class Search extends Common {
             $descdata['t.project'] = array('in', $ids);
             //以动态为搜索对象
             if ($type == 'action' ) {
-                $action_count = $action
-                        ->alias('a')
-                        ->join('chinatt_pms_project p', "a.project = p.id", 'left')
-                        ->join('chinatt_pms_task t', "t.project = p.id", 'left')
-                        ->where($actiondata)->group('t.id')
+                $action_count = $task
+                        ->alias('t')
+                        ->join('chinatt_pms_project p', "t.project = p.id", 'left')
+                        ->join('chinatt_pms_action a', " a.id = p.id", 'left')
+                        ->where($actiondata)
                         ->count();
                 //任务动态
-                $action_task_list = $action
-                        ->alias('a')
-                        ->join('chinatt_pms_project p', "a.project = p.id", 'left')
-                        ->join('chinatt_pms_task t', "t.project = p.id", 'left')
+                $action_task_list = $task
+                        ->alias('t')
+                        ->join('chinatt_pms_project p', "t.project = p.id", 'left')
+                        ->join('chinatt_pms_action a', " a.objectID = t.id", 'left')
                         ->where($actiondata)
                         ->group('t.id')
+                        ->field('t.*,t.id as tid')
                         ->paginate(20, $action_count, ['path' => url('/index/search/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
+
+
                 $task_list = $action_task_list;
             } elseif ($type == 'name' || empty($type)) {
                 //用户名
