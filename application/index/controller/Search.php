@@ -76,7 +76,7 @@ class Search extends Common {
                         ->field('t.*,t.id as tid')
                         ->where($namedata)
                         ->group('t.id')
-                        ->paginate(20, $name_count, ['path' => url('/index/search/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
+                        ->paginate(2, $name_count, ['path' => url('/index/search/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
                 $count = $name_count;
                 $task_list = $name_task_list;
             } elseif ($type == 'desc') {
@@ -95,6 +95,18 @@ class Search extends Common {
                         ->paginate(20, $desc_count, ['path' => url('/index/search/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
                 $count = $desc_count;
                 $task_list = $desc_task_list;
+            }  elseif($type == 'article') {
+                
+                $articledata['acl'] = array('eq','private');
+                $articledata['username'] = array('eq',  $this->_G['username']);
+                
+                $article = db('Article');
+                $article_list = $article
+                        ->where('contents|title','like','%thinkphp')
+                        ->where($articledata)
+                        ->paginate(20);
+                $task_list = $article_list;
+                
             }
             $page = $task_list->render(); // 分页显示输出
         }
