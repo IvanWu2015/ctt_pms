@@ -39,7 +39,7 @@ canvas{ width:60px; height:60px; position:absolute; top:20px; left:0;}
         </div>
     </div>
     
-    <div class="publicdiv pr20 pb20 bf sizing">
+    <div class="publicdiv pr20 pb20 bf sizing" id="theader">
         <ul class="projectlistnew">
             {foreach $project_list as $project}
             <li>
@@ -80,8 +80,13 @@ canvas{ width:60px; height:60px; position:absolute; top:20px; left:0;}
             </script>
             {/foreach}
         </ul>
-            
+        
         <div class="publicdiv ac pagingw">{$page}</div>
     </div>
 </div>
+<script>
+//搜索文字颜色区分
+var content = document.getElementById('theader');
+content.innerHTML = content.innerHTML.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>");
+</script>
 {/block}
