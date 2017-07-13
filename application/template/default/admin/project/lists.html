@@ -40,7 +40,7 @@
                 <a href="{:url('index/project/add')}" target="_bacnk" class="btnp ml20 y">添加项目</a>
             </div>
             <form action="" method="post">
-                <table class="table">
+                <table class="table" id="theader">
                   <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
                       <tr>
                         <th class="ac bbno pt15 pb15">ID</th>
@@ -85,4 +85,9 @@
         </div>
     </div>
 </div>
+<script>
+//搜索文字颜色区分
+var content = document.getElementById('theader');
+content.innerHTML = content.innerHTML.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>");
+</script>
 {/block}

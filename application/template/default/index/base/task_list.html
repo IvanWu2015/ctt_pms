@@ -1,4 +1,4 @@
-    <table class="table table-striped borl bort borr borb">
+<table class="table table-striped borl bort borr borb" id="theader">
     <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
         <tr>
             <th class="bbno pt15 pb15"><a href="{:url('/index/project/detail/?id='.$project_id)}">任务名称</a></th>
@@ -83,4 +83,9 @@
         {/foreach}
 
         </tbody>
-    </table>
+</table>
+<script>
+//搜索文字颜色区分
+var content = document.getElementById('theader');
+content.innerHTML = content.innerHTML.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>");
+</script>
