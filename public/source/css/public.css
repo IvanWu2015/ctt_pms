@@ -376,7 +376,7 @@ img{ border:none;}
 .hp60{ height:60px !important;}
 .hp65{ height:65px !important;}
 
-.hmin60{ min-height:60px;}
+.hmin60{ max-height:60px;}
 
 .h75{ height:75px;}
 .h100{ height:100px;}
