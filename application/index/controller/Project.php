@@ -135,6 +135,7 @@ class Project extends Common {
         $navtitle = '项目列表' . $this->navtitle;
         $this->assign('status', $status);
         $this->assign('page', $page);
+        $this->assign('keyword',$keyword);
         $this->assign('project_list', $project_list);
         $this->assign('navtitle', $navtitle);
         return $this->fetch($this->templatePath);

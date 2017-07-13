@@ -28,7 +28,7 @@ class Search extends Common {
         $keyword = input('keyword', '', 'addslashes');
 
         //$project_username_list = db('Project')->where()->select();
-        
+
         $ids = getUserprojectids($username);
         //搜索部分的处理
         if (!empty($keyword)) {
@@ -44,7 +44,7 @@ class Search extends Common {
             $descdata['t.desc'] = array('like', "%$keyword%");
             $descdata['t.project'] = array('in', $ids);
             //以动态为搜索对象
-            if ($type == 'action' ) {
+            if ($type == 'action') {
                 $action_count = $task
                         ->alias('t')
                         ->join('chinatt_pms_project p', "t.project = p.id", 'left')
@@ -58,9 +58,9 @@ class Search extends Common {
                         ->join('chinatt_pms_action a', " a.objectID = t.id", 'left')
                         ->where($actiondata)
                         ->group('t.id')
-                        ->field('t.*,t.id as tid')
+                        ->field('t.id,t.desc,t.name,t.openedBy,t.status,t.assignedTo,t.finishedBy,t.openedDate,t.assignedDate')
                         ->paginate(20, $action_count, ['path' => url('/index/search/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
-
+                $count = $action_count;
 
                 $task_list = $action_task_list;
             } elseif ($type == 'name' || empty($type)) {
@@ -77,7 +77,7 @@ class Search extends Common {
                         ->where($namedata)
                         ->group('t.id')
                         ->paginate(20, $name_count, ['path' => url('/index/search/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
-
+                $count = $name_count;
                 $task_list = $name_task_list;
             } elseif ($type == 'desc') {
                 //内容
@@ -93,13 +93,15 @@ class Search extends Common {
                         ->where($descdata)
                         ->group('t.id')
                         ->paginate(20, $desc_count, ['path' => url('/index/search/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
+                $count = $desc_count;
                 $task_list = $desc_task_list;
             }
             $page = $task_list->render(); // 分页显示输出
         }
         $this->assign('page', $page);
-        $this->assign('keyword',$keyword);
-        $this->assign('type',$type);
+        $this->assign('keyword', $keyword);
+        $this->assign('type', $type);
+        $this->assign('count', $count);
         $this->assign('task_list', $task_list);
         $navtitle = '搜索列表' . $this->navtitle;
         $this->assign('navtitle', $navtitle);
