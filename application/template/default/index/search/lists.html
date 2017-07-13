@@ -12,6 +12,7 @@
 <div class="publicdiv mt20 pt20 pb10 ptn sizing">
     
     <div class="publicdiv pr20 pl20 pb20 bf sizing">
+        <div class="filerightwp sizing">
         
         <div class="publicdiv mt20 iconfont search_type">
             <a href="javascript:void(0);" class="setyattr">动态</a>
@@ -31,57 +32,30 @@
             </form>
         </div>
     
-        <h3 class="publicdiv mt20 pt10">搜索结果</h3>
-        <table class="table">
-            <thead style="background:#f6f6f6;">
-                <tr>
-                    <th class="ac bbno pt15 pb15">ID</th>
-                    <th class="bbno pt15 pb15">任务名称</th>
-                    <th class="bbno pt15 pb15">添加人</th>
-                    <th class="bbno pt15 pb15">前置任务</th>
-                    <th class="ac bbno pt15 pb15">指派给</th>
-                    <th class="ac bbno pt15 pb15">完成者</th>
-                    <th class="ac bbno pt15 pb15">创建时间</th>
-                    <th class="ac bbno pt15 pb15">完成时间</th>
-                    <th class="ac bbno pt15 pb15">操作</th>
-                </tr>
-            </thead>
-            <tbody id="theader">
-                {foreach $task_list as $task}
-                <tr>
-                    <td class="ac">{$task['id']}</td>
-                    <td class=""><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk">{$task['name']}</a></td>
-                    <td class="ac">{$task['openedBy']|getUser}</td>
-                    <td class="ac">
-                        {$task['p_name']}
-                        {if condition="$task['p_status'] eq doing"}
-                            进行中
-                        {/if}
-                        {if condition="$task['p_status'] eq wait"}
-                            等待
-                        {/if}
-                        {if condition="$task['p_status'] eq done"}
-                            完成
-                        {/if}
-                        {if condition="$task['p_status'] eq closed"}
-                            完成
-                        {/if}
-                    </td>
-                    <td class="ac">{$task['assignedTo']|getUser}</td>
-                    <td class="ac">{$task['finishedBy']|getUser}</td>
-                    <td class="ac">{$task['openedDate']}</td>
-                    <td class="ac">{$task['assignedDate']}</td>
-                    <td class="ac iconfont">
-                        <a href="{:url('/index/task/add/?task_id='.$task['id'])}" class="btn-link rkwt">&#xe71d;</a>
-                        <a href="{:url('/admin/task/lists/?deleted=1&id='.$task['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该任务吗？');" title="删除">&#xe601;</a>
-                    </td>
-                </tr>
-                {/foreach}
-            </tbody>
-
-        </table>
+        <div class="publicdiv mt20" id="theader">
+            <h3 class="publicdiv mt20 pt10">搜索结果</h3>
+            <p class="publicdiv c9">已为您找到相关结果约 000 条</p>
+            {foreach $task_list as $task}
+            <li class="publicdiv mb10 pb20" style="border-bottom:1px #efefef solid;">
+                <h3 class="publicdiv fs16 fwn c0"><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk">{$task['name']}</a></h3>
+                <p class="publicdiv c6 lh25">
+                    <span class="mr20">添加人：{$task['openedBy']|getUser}</span>
+                    <span class="mr20">指派给：{$task['assignedTo']|getUser}</span>
+                    <span class="">完成者：{$task['finishedBy']|getUser}</span>
+                </p>
+                <div class="publicdiv c9 lh20 hmin60 clamp3">内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内</div>
+                <p class="publicdiv c9 lh25">
+                    <span title="创建时间">{$task['openedDate']}</span> - 
+                    <span title="完成时间">{$task['assignedDate']}</span>
+                </p>
+            </li>
+            {/foreach}
+        </div>
 
         <div class="publicdiv ac pagingw">{$page}</div>
+        
+        </div>
+        
     </div>
 </div>
 <script>
