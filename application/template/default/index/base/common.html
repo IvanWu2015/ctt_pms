@@ -80,8 +80,15 @@
                     </ul>
                 </li>
                 <li class="mt8 ml20 y">
-                    <a class="active fs15" data-toggle="dropdown" href="{:url('index/index')}" style="padding:5px 10px;"><img src="tpl_img/match_img.png" class="mr10 h30 br100" style="width:30px;" />{:get_username()} <b class="caret"></b></a>
-                    <ul class="dropdown-menu" style="min-width:120px;">
+                    <div class="pkeywp">
+                        <form action="{:url('/index/search/lists/?keyword='.$keyword.'&type='.$type)}" method="post">
+                            <input type="text" name="keyword" class="pkeytext" placeholder="请输入搜索的内容~" value="{$keyword}" />
+                            <input type="submit" class="pkeysub iconfont" value="" />
+                        </form>
+                    </div>
+                    
+                    <a class="active fs15 z" data-toggle="dropdown" href="{:url('index/index')}" style="padding:5px 10px;"><img src="tpl_img/match_img.png" class="mr10 h30 br100" style="width:30px;" />{:get_username()} <b class="caret"></b></a>
+                    <ul class="dropdown-menu z" style="min-width:120px;">
                         <li class="borb mb10"><a href="{:url('mycenter/index')}">个人中心</a></li>
                         <li><a href="{:url('mycenter/project')}">我的项目</a></li>
                         <li><a href="{:url('mycenter/task_list')}">我的任务</a></li>
