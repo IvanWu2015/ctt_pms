@@ -33,21 +33,15 @@
             </form>
         </div>
     
-        <div class="publicdiv mt20" id="theader">
-            <h3 class="publicdiv mt20 pt10">搜索结果</h3>
-            <p class="publicdiv c9">已为您找到相关结果约 {$count} 条</p>
+        <div class="publicdiv" id="theader">
+            <p class="publicdiv c9 mt5">已为您找到相关结果约 {$count} 条</p>
             {foreach $task_list as $task}
-            <li class="publicdiv mb10 pb20" style="border-bottom:1px #efefef solid;">
-                <h3 class="publicdiv fs16 fwn c0"><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk">{$task['name']}</a></h3>
-                <p class="publicdiv c6 lh25">
-                    <span class="mr20">添加人：{$task['openedBy']|getUser}</span>
-                    <span class="mr20">指派给：{$task['assignedTo']|getUser}</span>
-                    <span class="">完成者：{$task['finishedBy']|getUser}</span>
-                </p>
-                <div class="publicdiv c9 lh20 hmin60 clamp3">{$task['desc']}</div>
+            <li class="publicdiv">
+                <h3 class="publicdiv fs16 fwb c0"><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk" class="textName">{$task['name']}</a></h3>
+                <div class="publicdiv c9 lh20 hmin60 clamp3 textName">{$task['desc']}</div>
                 <p class="publicdiv c9 lh25">
-                    <span title="创建时间">{$task['openedDate']}</span> - 
-                    <span title="完成时间">{$task['assignedDate']}</span>
+                    <span class="mr20">添加人：{$task['openedBy']|getUser}</span>
+                    <span>创建时间：{$task['openedDate']}</span>
                 </p>
             </li>
             {/foreach}
@@ -61,7 +55,14 @@
 </div>
 <script>
 //搜索文字颜色区分
-var content = document.getElementById('theader');
-content.innerHTML = content.innerHTML.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>");
+jQuery(function(){
+    jQuery('#theader li').each(function(index){
+        var textName = jQuery('#theader li').eq(index).find('.textName').html();
+        jQuery('#theader li').eq(index).find('.textName').html(textName.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>"))
+    });
+});
+
+//var content = document.getElementById('theader');
+//content.innerHTML = content.innerHTML.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>");
 </script>
 {/block}
