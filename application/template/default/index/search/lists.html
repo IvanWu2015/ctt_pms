@@ -34,7 +34,7 @@
     
         <div class="publicdiv mt20" id="theader">
             <h3 class="publicdiv mt20 pt10">搜索结果</h3>
-            <p class="publicdiv c9">已为您找到相关结果约 000 条</p>
+            <p class="publicdiv c9">已为您找到相关结果约 {$count} 条</p>
             {foreach $task_list as $task}
             <li class="publicdiv mb10 pb20" style="border-bottom:1px #efefef solid;">
                 <h3 class="publicdiv fs16 fwn c0"><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk">{$task['name']}</a></h3>
@@ -43,7 +43,7 @@
                     <span class="mr20">指派给：{$task['assignedTo']|getUser}</span>
                     <span class="">完成者：{$task['finishedBy']|getUser}</span>
                 </p>
-                <div class="publicdiv c9 lh20 hmin60 clamp3">内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内</div>
+                <div class="publicdiv c9 lh20 hmin60 clamp3">{$task['desc']}</div>
                 <p class="publicdiv c9 lh25">
                     <span title="创建时间">{$task['openedDate']}</span> - 
                     <span title="完成时间">{$task['assignedDate']}</span>
