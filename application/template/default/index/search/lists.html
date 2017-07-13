@@ -85,9 +85,8 @@
     </div>
 </div>
 <script>
-//搜索
-//var searchText = '{$keyword}';
+//搜索文字颜色区分
 var content = document.getElementById('theader');
-content.innerHTML = content.innerHTML.replace(/($keyword)/g, "<span style=\"color:red\">$1</span>");
+content.innerHTML = content.innerHTML.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>");
 </script>
 {/block}
