@@ -1,4 +1,4 @@
-<table class="table table-striped borl bort borr borb" id="theader">
+<table class="table table-striped borl bort borr borb">
     <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
         <tr>
             <th class="bbno pt15 pb15"><a href="{:url('/index/project/detail/?id='.$project_id)}">任务名称</a></th>
@@ -14,11 +14,11 @@
             <th class="ac bbno pt15 pb15">操作</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="theader">
         {foreach $task_list as $task}
-        <tr>
+        <tr id="taskList">
             <td class="iconfont">
-                <a href="{:url('/index/task/detail/?id='.$task['id'])}">
+                <a href="{:url('/index/task/detail/?id='.$task['id'])}" id="taskName">
                     {if condition="$task['predecessor'] > 0"}
                     <span title="{$task['p_name']}">
                         &#xe759;
@@ -86,6 +86,10 @@
 </table>
 <script>
 //搜索文字颜色区分
-var content = document.getElementById('theader');
-content.innerHTML = content.innerHTML.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>");
+jQuery(function () {
+    jQuery('#theader #taskList').each(function (index) {
+        var textName = jQuery('#theader #taskList').eq(index).find('#taskName').html();
+        jQuery('#theader #taskList').eq(index).find('#taskName').html(textName.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>"))
+    });
+});
 </script>
