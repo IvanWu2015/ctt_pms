@@ -16,7 +16,7 @@ class Project extends Common {
         $task = DB::name('Task');
         $project = db('Project');
         $project_id = input('get.id', '0', 'intval');
-        $keyword = input('keyword', '', 'addslashes');
+        $project_keyword = input('project_keyword', '', 'addslashes');
         $orderby_array = array('pri', 'estimate', 'consumed', 'status');
 
         $orderby = in_array(input('param.orderby'), $orderby_array) ? input('param.orderby') : 'id';
@@ -38,8 +38,8 @@ class Project extends Common {
         if (!empty($username)) {
             $map['t.assignedTo'] = array('eq', $username);
         }
-        if (!empty($keyword)) {
-            $map['t.name'] = array('LIKE', '%' . $keyword . '%');
+        if (!empty($project_keyword)) {
+            $map['t.name'] = array('LIKE', '%' . $project_keyword . '%');
         }
         $task_list = $task
                 ->alias('t')
@@ -60,7 +60,7 @@ class Project extends Common {
         }
 
         $navtitle = $project_detail['name'];
-        $this->assign('keyword', $keyword);
+        $this->assign('project_keyword', $project_keyword);
         $this->assign('project_detail', $project_detail);
         $this->assign('user_list', $user_list);
         $this->assign('project_id', $project_id);
@@ -102,9 +102,9 @@ class Project extends Common {
         }
         //$map['t.username'] = array('eq',$username);
         
-        $keyword = input('post.keyword', '', 'addslashes');
-        if(!empty($keyword)){
-            $map['p.name'] = array('like',"%$keyword%");
+        $project_keyword = input('post.project_keyword', '', 'addslashes');
+        if(!empty($project_keyword)){
+            $map['p.name'] = array('like',"%$project_keyword%");
         }
         
         $project_list = DB::name('Project')
@@ -135,7 +135,7 @@ class Project extends Common {
         $navtitle = '项目列表' . $this->navtitle;
         $this->assign('status', $status);
         $this->assign('page', $page);
-        $this->assign('keyword',$keyword);
+        $this->assign('project_keyword',$project_keyword);
         $this->assign('project_list', $project_list);
         $this->assign('navtitle', $navtitle);
         return $this->fetch($this->templatePath);
