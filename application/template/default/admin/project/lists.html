@@ -40,7 +40,7 @@
                 <a href="{:url('index/project/add')}" target="_bacnk" class="btnp ml20 y">添加项目</a>
             </div>
             <form action="" method="post">
-                <table class="table" id="theader">
+                <table class="table">
                   <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
                       <tr>
                         <th class="ac bbno pt15 pb15">ID</th>
@@ -54,11 +54,11 @@
                         <th class="ac bbno pt15 pb15">操作</th>
                       </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="theader">
                   {foreach $project_list as $project}
-                      <tr>
+                      <tr id="projectList">
                         <td class="ac">{$project['id']}</td>
-                        <td><a href="{:url('/index/project/detail/?id='.$project['id'])}" target="_bacnk">{$project['name']}</a></td>
+                        <td><a href="{:url('/index/project/detail/?id='.$project['id'])}" target="_bacnk" id="taskName">{$project['name']}</a></td>
                         <td>{$project['code']}</td>
                         <td class="ac">{$project['begin']}</td>
                         <td class="ac">{$project['end']}</td>
@@ -87,7 +87,11 @@
 </div>
 <script>
 //搜索文字颜色区分
-var content = document.getElementById('theader');
-content.innerHTML = content.innerHTML.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>");
+jQuery(function () {
+    jQuery('#theader #projectList').each(function (index) {
+        var textName = jQuery('#theader #projectList').eq(index).find('#taskName').html();
+        jQuery('#theader #projectList').eq(index).find('#taskName').html(textName.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>"))
+    });
+});
 </script>
 {/block}
