@@ -67,12 +67,12 @@
                   </thead>
                   <tbody id="theader">
                   {foreach $working_list as $working}
-                      <tr>
+                      <tr id="workingList">
                         <td class="ac">{$working['id']}</td>
                         <td class="ac">{$working['username']|getUser}</td>
                         <td class="ac"><span class="text-primary">{$working['consumed']}</span></td>
                         <td class="ac">{$working['date']}</td>
-                        <td class="w50">{$working['name']}</td>
+                        <td class="w50" id="taskName">{$working['name']}</td>
                         <td class="ac iconfont">
                             <a href="{:url('/admin/working/lists/?deleted=1&id='.$working['id'])}" class="cred fs16 rkwt" onclick="return confirm('您确定要删除该项目吗？');" title="删除">&#xe601;</a>
                         </td>
@@ -102,6 +102,12 @@
 </div>
 <script>
 //搜索文字颜色区分
+jQuery(function () {
+    jQuery('#theader #workingList').each(function (index) {
+        var textName = jQuery('#theader #workingList').eq(index).find('#taskName').html();
+        jQuery('#theader #workingList').eq(index).find('#taskName').html(textName.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>"))
+    });
+});
 var content = document.getElementById('theader');
 content.innerHTML = content.innerHTML.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>");
 </script>

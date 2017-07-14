@@ -50,7 +50,7 @@
                 </div>
             </div>
             
-            <table class="table" id="theader">
+            <table class="table">
               <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
                   <tr>
                     <th class="ac bbno pt15 pb15">ID</th>
@@ -64,11 +64,11 @@
                     <th class="ac bbno pt15 pb15">操作</th>
                   </tr>
               </thead>
-              <tbody>
+              <tbody id="theader">
               {foreach $task_list as $task}
-                  <tr>
+                  <tr id="taskList">
                     <td class="ac">{$task['id']}</td>
-                    <td class=""><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk">{$task['name']}</a></td>
+                    <td class=""><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk" id="taskName">{$task['name']}</a></td>
                     <td class="ac">{$task['openedBy']|getUser}</td>
                     <td class="ac">
                         {$task['p_name']}
@@ -104,7 +104,11 @@
 </div>
 <script>
 //搜索文字颜色区分
-var content = document.getElementById('theader');
-content.innerHTML = content.innerHTML.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>");
+jQuery(function () {
+    jQuery('#theader #taskList').each(function (index) {
+        var textName = jQuery('#theader #taskList').eq(index).find('#taskName').html();
+        jQuery('#theader #taskList').eq(index).find('#taskName').html(textName.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>"))
+    });
+});
 </script>
 {/block}
