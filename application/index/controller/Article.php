@@ -35,17 +35,16 @@ class article extends Common {
         $article = db('Article');
         $article_count = $article
                         ->where(function ($query) {
-                            $query->where(['acl' => 'private', 'username' => $this->_G['username'], 'status' => 1]);
+                            $query->where(['acl' => 'private', 'username' => $this->_G['username'], 'status' => 0]);
                         })->whereOr(function ($query) {
-                    $query->where(['acl' => 'open', 'status' => 1]);
+                    $query->where(['acl' => 'open', 'status' => 0]);
                 })->count();
         $article_list = $article
                         ->where(function ($query) {
-                            $query->where(['acl' => 'private', 'username' => $this->_G['username'], 'status' => 1]);
+                            $query->where(['acl' => 'private', 'username' => $this->_G['username'], 'status' => 0]);
                         })->whereOr(function ($query) {
-                    $query->where(['acl' => 'open', 'status' => 1]);
+                    $query->where(['acl' => 'open', 'status' => 0]);
                 })->paginate(20, $article_count, ['path' => url('/index/article/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
-
 
 
         $page = $article_list->render(); // 分页显示输出
