@@ -44,16 +44,16 @@ class article extends Common {
                             $data['status'] = array('eq', 0);
                             $query->where($data);
                         })->whereOr(function ($query) {
-                    if (input('get.class_id', '0', 'intval') > 0) {
-                        $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
-                    }
-                    if (!empty(input('get.username', '', 'addslashes'))) {
-                        $data['username'] = array('eq', input('get.username', '', 'addslashes'));
-                    }
-                    $data['status'] = array('eq', 0);
-                    $data['acl'] = array('eq', 'open');
-                    $query->where($data);
-                })->count();
+                            if (input('get.class_id', '0', 'intval') > 0) {
+                                $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
+                            }
+                            if (input('username', '', 'addslashes')) {
+                                $data['username'] = array('eq', input('get.username', '', 'addslashes'));
+                            }
+                            $data['status'] = array('eq', 0);
+                            $data['acl'] = array('eq', 'open');
+                            $query->where($data);
+                        })->count();
         $article_list = $article
                         ->where(function ($query) {
                             //搜索内容与筛选
@@ -65,16 +65,16 @@ class article extends Common {
                             $data['status'] = array('eq', 0);
                             $query->where($data);
                         })->whereOr(function ($query) {
-                    if (input('get.class_id', '0', 'intval') > 0) {
-                        $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
-                    }
-                    if (!empty(input('get.username', '', 'addslashes'))) {
-                        $data['username'] = array('eq', input('get.username', '', 'addslashes'));
-                    }
-                    $data['status'] = array('eq', 0);
-                    $data['acl'] = array('eq', 'open');
-                    $query->where($data);
-                })->paginate(20, $article_count, ['path' => url('/index/article/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
+                            if (input('get.class_id', '0', 'intval') > 0) {
+                                $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
+                            }
+                            if (input('get.username', '', 'addslashes')) {
+                                $data['username'] = array('eq', input('get.username', '', 'addslashes'));
+                            }
+                            $data['status'] = array('eq', 0);
+                            $data['acl'] = array('eq', 'open');
+                            $query->where($data);
+                        })->paginate(20, $article_count, ['path' => url('/index/article/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
 
 
         $page = $article_list->render(); // 分页显示输出
