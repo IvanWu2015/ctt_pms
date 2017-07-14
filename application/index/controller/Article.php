@@ -24,6 +24,7 @@ class article extends Common {
         $acl = input('param.acl', 'all', 'addslashes');
         $username = input('get.username', '', 'addslashes');
         $class_id = input('get.class_id', '0', 'intval');
+        $data['username'] = array('eq', 1);
         //列表的筛选条件
         if ($acl == 'all') {
             
@@ -35,15 +36,44 @@ class article extends Common {
         $article = db('Article');
         $article_count = $article
                         ->where(function ($query) {
-                            $query->where(['acl' => 'private', 'username' => $this->_G['username'], 'status' => 0]);
+                            if (input('get.class_id', '0', 'intval') > 0) {
+                                $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
+                            }
+                            $data['acl'] = array('eq', 'private');
+                            $data['username'] = array('eq', $this->_G['username']);
+                            $data['status'] = array('eq', 0);
+                            $query->where($data);
                         })->whereOr(function ($query) {
-                    $query->where(['acl' => 'open', 'status' => 0]);
+                    if (input('get.class_id', '0', 'intval') > 0) {
+                        $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
+                    }
+                    if (!empty(input('get.username', '', 'addslashes'))) {
+                        $data['username'] = array('eq', input('get.username', '', 'addslashes'));
+                    }
+                    $data['status'] = array('eq', 0);
+                    $data['acl'] = array('eq', 'open');
+                    $query->where($data);
                 })->count();
         $article_list = $article
                         ->where(function ($query) {
-                            $query->where(['acl' => 'private', 'username' => $this->_G['username'], 'status' => 0]);
+                            //搜索内容与筛选
+                            if (input('get.class_id', '0', 'intval') > 0) {
+                                $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
+                            }
+                            $data['acl'] = array('eq', 'private');
+                            $data['username'] = array('eq', $this->_G['username']);
+                            $data['status'] = array('eq', 0);
+                            $query->where($data);
                         })->whereOr(function ($query) {
-                    $query->where(['acl' => 'open', 'status' => 0]);
+                    if (input('get.class_id', '0', 'intval') > 0) {
+                        $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
+                    }
+                    if (!empty(input('get.username', '', 'addslashes'))) {
+                        $data['username'] = array('eq', input('get.username', '', 'addslashes'));
+                    }
+                    $data['status'] = array('eq', 0);
+                    $data['acl'] = array('eq', 'open');
+                    $query->where($data);
                 })->paginate(20, $article_count, ['path' => url('/index/article/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
 
 
@@ -93,12 +123,12 @@ class article extends Common {
 
         $class = db('Class');
         $class_list = $class->where()->column('id,name', 'id');
-        
+
         $article_list = DB::name('Article')->column('class,title,contents', 'id');
         foreach ($article_list as $value) {
             $class = $value['class'];
-                $new_class_list[$class][] = $value;
-                $new_class_list['title'][$class] = $class_list[$class];
+            $new_class_list[$class][] = $value;
+            $new_class_list['title'][$class] = $class_list[$class];
         }
         $class_name_list = $new_class_list['title'];
         $navtitle = $article_detail['title'];
