@@ -164,6 +164,9 @@ class article extends Common {
                 'time' => date('Y-m-d H:i:s'),
                 'status' => 0,
             ];
+            if(input('post.class_id', '0', 'intval') == 0){
+                $this->error("必须选择分类");
+            }
             //修改
             if ($article_id > 0) {
                 DB('Article')->where(['id' => $article_id])->update($data);
