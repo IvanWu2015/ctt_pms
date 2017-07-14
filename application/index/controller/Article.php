@@ -157,7 +157,6 @@ class article extends Common {
         }
         if (request()->isPost()) {
             $data = [
-                'username' => $this->_G['username'],
                 'project' => input('post.project_id', '0', 'intval'),
                 'class' => input('post.class_id', '0', 'intval'),
                 'title' => input('post.title', '', 'addslashes'),
@@ -172,6 +171,7 @@ class article extends Common {
                 $this->success('修改成功', 'index/article/lists');
                 //添加
             } else {
+                $data['username'] = array('eq',$this->_G['username']);
                 DB('Article')->insert($data);
                 $this->success('添加成功', 'index/article/lists');
             }
