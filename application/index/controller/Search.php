@@ -24,24 +24,17 @@ class Search extends Common {
         $team = db('Team');
         $username = $this->_G['username'];
 
-        $type = input('type', '', 'addslashes');
+        $type = input('type', 'task', 'addslashes');
         $keyword = input('keyword', '', 'addslashes');
 
         //$project_username_list = db('Project')->where()->select();
-        // $ids = getUserprojectids($username);
+        $ids = getUserprojectids($username);
         //搜索部分的处理
         if (!empty($keyword)) {
             $actiondata['a.comment'] = array('like', "%$keyword%");
             $actiondata['a.project'] = array('in', $ids);
             $actiondata['a.objectType'] = array('eq', 'task');
 
-            $namedata['t.deleted'] = array('EQ', '0');
-            $namedata['t.name'] = array('like', "%$keyword%");
-            $namedata['t.project'] = array('in', $ids);
-
-            $descdata['t.deleted'] = array('EQ', '0');
-            $descdata['t.desc'] = array('like', "%$keyword%");
-            $descdata['t.project'] = array('in', $ids);
             //以动态为搜索对象
             if ($type == 'action') {
                 $action_count = $task
@@ -62,38 +55,23 @@ class Search extends Common {
                 $count = $action_count;
 
                 $task_list = $action_task_list;
-            } elseif ($type == 'name' || empty($type)) {
-                //用户名
-                $name_count = $task
-                        ->alias('t')
-                        ->join('chinatt_pms_project p', "t.project = p.id", 'left')
-                        ->where($namedata)->group('t.id')
+            } elseif ($type == 'task' || empty($type)) {
+                
+                $name_task_count = $task
+                        ->where(function ($query) {
+                            $query->where("name|desc", 'like', "%" . input('keyword', '', 'addslashes') . '%');
+                        })->where($namedata)
                         ->count();
+                
+                
+                
                 $name_task_list = $task
-                        ->alias('t')
-                        ->join('chinatt_pms_project p', "t.project = p.id", 'left')
-                        ->field('t.*,t.id as tid')
-                        ->where($namedata)
-                        ->group('t.id')
-                        ->paginate(2, $name_count, ['path' => url('/index/search/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
-                $count = $name_count;
-                $task_list = $name_task_list;
-            } elseif ($type == 'desc') {
-                //内容
-                $desc_count = $task
-                        ->alias('t')
-                        ->join('chinatt_pms_project p', "t.project = p.id", 'left')
-                        ->where($descdata)->group('t.id')
-                        ->count();
-                $desc_task_list = $task
-                        ->alias('t')
-                        ->join('chinatt_pms_project p', "t.project = p.id", 'left')
-                        ->field('t.*,t.id as tid')
-                        ->where($descdata)
-                        ->group('t.id')
-                        ->paginate(20, $desc_count, ['path' => url('/index/search/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
-                $count = $desc_count;
-                $task_list = $desc_task_list;
+                        ->where(function ($query) {
+                            $query->where("name|desc", 'like', "%" . input('keyword', '', 'addslashes') . '%');
+                        })->where($namedata)
+                        ->paginate(20, $name_task_count, ['path' => url('/index/search/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
+                        $count = $name_task_count;
+                        $task_list = $name_task_list;
             } elseif ($type == 'article') {
 
                 $articledata['acl'] = array('eq', 'private');
