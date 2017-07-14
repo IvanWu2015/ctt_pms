@@ -100,3 +100,19 @@ function formsubif() {
         event.preventDefault();
     }
 }
+
+function casearch(val){
+    
+    if(val == 1){
+        jQuery('#casearch_1').addClass('filenavattr');
+        jQuery('#casearch_2').removeClass('filenavattr');
+        jQuery('#fileleftNav').show();
+        jQuery('#articlewp').hide();
+    } else if(val == 2){
+        jQuery('#casearch_1').removeClass('filenavattr');
+        jQuery('#casearch_2').addClass('filenavattr');
+        jQuery('#fileleftNav').hide();
+        jQuery('#articlewp').show();
+    }
+    
+}

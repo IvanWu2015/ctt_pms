@@ -10,7 +10,11 @@
 </style>
 <div class="filewp">
     <div class="fileleft">
-        <ul class="fileleftNav">
+        <ul class="publicdiv filenav bort borb">
+            <li class="iconfont filenavattr" onClick="casearch(1);" id="casearch_1"><span class="fs16 z">&#xe615;</span> 目录</li>
+            <li class="iconfont borl" onClick="casearch(2);" id="casearch_2"><span class="fs16 z">&#xe604;</span> 搜索</li>
+        </ul>
+        <ul class="fileleftNav" id="fileleftNav">
             {foreach name="class_name_list" id="value" key="key" }
             <li>
                 <p class="flienavtitle"><span class="iconfont" id="flienavicon_{$key}" onClick="flienavshow({$key});">&#xe624;</span><a href="javascript:void(0);">{$value}</a></p>
@@ -21,8 +25,27 @@
                 </div>
             </li>
             {/foreach}
-
         </ul>
+        
+        <div class="publicdiv dn" id="articlewp">
+            <div class="publicdiv pt10 pb10 pl10 pr10 borb sizing">
+                <div class="articleSearch">
+                    <form action="" method="post">
+                        <input type="text" name="keyword" class="arsekeyword sizing" placeholder="请输入搜索的内容~" value="{$keyword}" />
+                        <input type="submit" class="sarsesub" value="" />
+                    </form>
+                </div>
+            </div>
+            <ul class="publicdiv searchlist mt10">
+                <a href="javascript:void(0);" class="ellipsis">搜索结果的列表在此读取</a>
+                
+                <div class="publicdiv c9 ac iconfont" style="margin:100px 0px 20px 0px;">
+                    <span class="fs59">&#xe604;</span><br/>
+                    暂无相关搜索结果！
+                </div>
+            </ul>
+        </div>
+        
     </div>
     <div class="fileright sizing">
         <div class="filerightwp sizing">
