@@ -10,57 +10,70 @@
 </style>
 
 <div class="publicdiv mt20 pt20 pb10 ptn sizing">
-    
+
     <div class="publicdiv pr20 pl20 pb20 bf sizing">
         <div class="filerightwp sizing">
-        
-        <div class="publicdiv mt20 iconfont search_type">
-            <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=action')}" {if $type == 'action'}class="setyattr"{/if}>动态</a>
-            <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=name')}" {if $type == 'name'}class="setyattr"{/if}>任务名称</a>
-            <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=desc')}" {if $type == 'desc'}class="setyattr"{/if}>任务说明</a>
-            <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=article')}" {if $type == 'desc'}class="setyattr"{/if}>文档</a>
-        </div>
-        
-        <div class="publicdiv">
-            <form action="{:url('/index/search/lists/?keyword='.$keyword.'&type='.$type)}" method="post">
-                <!--<select name="type">
-                    <option value='action'>动态</option>
-                    <option value='name'>任务名称</option>
-                    <option value='desc'>任务说明</option>
-                </select>-->
-                <input type="text" name="keyword" class="search_keyword" placeholder="请输入搜索的内容~" value="{$keyword}" />
-                <input type="submit" class="search_sub" value="搜索" />
-            </form>
-        </div>
-    
-        <div class="publicdiv" id="theader">
-            <p class="publicdiv c9 mt5">已为您找到相关结果约 {$count} 条</p>
-            {foreach $task_list as $task}
-            <li class="publicdiv">
-                <h3 class="publicdiv fs16 fwb c0"><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk" class="textName">{$task['name']}</a></h3>
-                <div class="publicdiv c9 lh20 hmin60 clamp3 textName">{$task['desc']}</div>
-                <p class="publicdiv c9 lh25">
-                    <span class="mr20">添加人：{$task['openedBy']|getUser}</span>
-                    <span>创建时间：{$task['openedDate']}</span>
-                </p>
-            </li>
-            {/foreach}
+
+            <div class="publicdiv mt20 iconfont search_type">
+                <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=action')}" {if $type == 'action'}class="setyattr"{/if}>动态</a>
+                <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=name')}" {if $type == 'name'}class="setyattr"{/if}>任务名称</a>
+                <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=desc')}" {if $type == 'desc'}class="setyattr"{/if}>任务说明</a>
+                <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=article')}" {if $type == 'article'}class="setyattr"{/if}>文档</a>
+            </div>
+
+            <div class="publicdiv">
+                <form action="{:url('/index/search/lists/?keyword='.$keyword.'&type='.$type)}" method="post">
+                    <!--<select name="type">
+                        <option value='action'>动态</option>
+                        <option value='name'>任务名称</option>
+                        <option value='desc'>任务说明</option>
+                    </select>-->
+                    <input type="text" name="keyword" class="search_keyword" placeholder="请输入搜索的内容~" value="{$keyword}" />
+                    <input type="submit" class="search_sub" value="搜索" />
+                </form>
+            </div>
+
+            <div class="publicdiv" id="theader">
+                <p class="publicdiv c9 mt5">已为您找到相关结果约 {$count} 条</p>
+                {if condition="$type neq 'article'"}
+                {foreach $task_list as $task}
+                <li class="publicdiv">
+                    <h3 class="publicdiv fs16 fwb c0"><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk" class="textName">{$task['name']}</a></h3>
+                    <div class="publicdiv c9 lh20 hmin60 clamp3 textName">{$task['desc']}</div>
+                    <p class="publicdiv c9 lh25">
+                        <span class="mr20">添加人：{$task['openedBy']|getUser}</span>
+                        <span>创建时间：{$task['openedDate']}</span>
+                    </p>
+                </li>
+                {/foreach}
+                {else}
+                {foreach $task_list as $task}
+                <li class="publicdiv">
+                    <h3 class="publicdiv fs16 fwb c0"><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk" class="textName">{$task['title']}</a></h3>
+                    <div class="publicdiv c9 lh20 hmin60 clamp3">{$task['contents']}</div>
+                    <p class="publicdiv c9 lh25">
+                        <span class="mr20">添加人：{$task['username']|getUser}</span>
+                        <span>创建时间：{$task['time']}</span>
+                    </p>
+                </li>
+                {/foreach}
+                {/if}
+            </div>
+
+            <div class="publicdiv ac pagingw">{$page}</div>
+
         </div>
 
-        <div class="publicdiv ac pagingw">{$page}</div>
-        
-        </div>
-        
     </div>
 </div>
 <script>
 //搜索文字颜色区分
-jQuery(function(){
-    jQuery('#theader li').each(function(index){
-        var textName = jQuery('#theader li').eq(index).find('.textName').html();
-        jQuery('#theader li').eq(index).find('.textName').html(textName.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>"))
+    jQuery(function () {
+        jQuery('#theader li').each(function (index) {
+            var textName = jQuery('#theader li').eq(index).find('.textName').html();
+            jQuery('#theader li').eq(index).find('.textName').html(textName.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>"))
+        });
     });
-});
 
 //var content = document.getElementById('theader');
 //content.innerHTML = content.innerHTML.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>");

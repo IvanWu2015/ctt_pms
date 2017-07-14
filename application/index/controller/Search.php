@@ -28,8 +28,7 @@ class Search extends Common {
         $keyword = input('keyword', '', 'addslashes');
 
         //$project_username_list = db('Project')->where()->select();
-
-        $ids = getUserprojectids($username);
+        // $ids = getUserprojectids($username);
         //搜索部分的处理
         if (!empty($keyword)) {
             $actiondata['a.comment'] = array('like', "%$keyword%");
@@ -95,18 +94,26 @@ class Search extends Common {
                         ->paginate(20, $desc_count, ['path' => url('/index/search/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
                 $count = $desc_count;
                 $task_list = $desc_task_list;
-            }  elseif($type == 'article') {
-                
-                $articledata['acl'] = array('eq','private');
-                $articledata['username'] = array('eq',  $this->_G['username']);
-                
+            } elseif ($type == 'article') {
+
+                $articledata['acl'] = array('eq', 'private');
+                $articledata['username'] = array('eq', $this->_G['username']);
+
                 $article = db('Article');
+                $article_count = $article
+                                ->where(function ($query) {
+                                    $query->where("contents|title", 'like', "%" . input('keyword', '', 'addslashes') . '%')->where(['acl' => 'private', 'username' => $this->_G['username']]);
+                                })->whereOr(function ($query) {
+                            $query->where("contents|title", 'like', "%" . input('keyword', '', 'addslashes') . '%')->where(['acl' => 'open']);
+                        })->count();
                 $article_list = $article
-                        ->where('contents|title','like','%thinkphp')
-                        ->where($articledata)
-                        ->paginate(20);
+                                ->where(function ($query) {
+                                    $query->where("contents|title", 'like', "%" . input('keyword', '', 'addslashes') . '%')->where(['acl' => 'private', 'username' => $this->_G['username']]);
+                                })->whereOr(function ($query) {
+                            $query->where("contents|title", 'like', "%" . input('keyword', '', 'addslashes') . '%')->where(['acl' => 'open']);
+                        })->paginate(20, $article_count, ['path' => url('/index/search/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
+
                 $task_list = $article_list;
-                
             }
             $page = $task_list->render(); // 分页显示输出
         }
