@@ -37,7 +37,7 @@
                 {if condition="$type neq 'article'"}
                 {foreach $task_list as $task}
                 <li class="publicdiv">
-                    <h3 class="publicdiv fs16 fwb c0"><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk" class="textName">{$task['name']}</a></h3>
+                    <h3 class="publicdiv fs16 fwn c0"><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk" class="text-info textName">{$task['name']}</a></h3>
                     <div class="publicdiv c9 lh20 hmin60 clamp3 textName">{$task['desc']}</div>
                     <p class="publicdiv c9 lh25">
                         <span class="mr20">添加人：{$task['openedBy']|getUser}</span>
