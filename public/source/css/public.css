@@ -476,7 +476,8 @@ ul.data_statistics li p{ margin:0px; font-size:13px; position:absolute; bottom:5
 .dcs04{ background:#ecc0c0;}
 .dcs04:hover{ color:#f5e9e9;}
 
-.dropdown-menu li a{ padding:10px 20px !important;}
+.dropdown-menu li a{ padding:10px 20px;}
+.keyscreenul-menu li a{ padding:5px 20px !important;}
 
 /*个人中心*/
 ul.left_nav{ width:200px; height:100%; background:#f7f7f7; border-right:1px #e8e8e8 solid; position:fixed; top:80px; left:0px;}
@@ -542,6 +543,12 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 
 .bf6f6f6{ background:#f6f6f6;}
 .bred{ background:red;}
+
+.bg-primary{ background:#337ab7;}
+.bg-success{ background:#dff0d8;}
+.bg-info{ background:#d9edf7;}
+.bg-warning{ background:#fcf8e3;}
+.bg-danger{ background:#f2dede;}
 
 .highcharts-legend{ display:none;}
 

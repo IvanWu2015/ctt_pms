@@ -6,7 +6,7 @@ jQuery(function () {
             jQuery('#name').css({border: '1px #dedede solid'});
         }
     });
-
+    
     jQuery('#estimate').keyup(function () {	//预计工时
         if (jQuery('#estimate').val().length < 1) {
             jQuery('#estimate').css({border: '1px red solid'});
@@ -115,4 +115,14 @@ function casearch(val){
         jQuery('#articlewp').show();
     }
     
+}
+
+function keyscreenopen(){   //搜索页筛选
+    if(jQuery('#keyscreen').css('display') == 'none'){
+        jQuery('#keyscreen').slideDown();
+        jQuery('#keyscreenopen').html('&#xe650; 收起筛选');
+    }else{
+        jQuery('#keyscreen').slideUp();
+        jQuery('#keyscreenopen').html('&#xe688; 展开筛选');
+    }
 }
