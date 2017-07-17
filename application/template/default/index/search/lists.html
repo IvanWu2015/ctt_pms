@@ -19,7 +19,30 @@
                 <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=action')}" {if $type == 'action'}class="setyattr"{/if}>动态</a>
                 <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=article')}" {if $type == 'article'}class="setyattr"{/if}>文档</a>
             </div>
-
+            <div class="publicdiv mt20 iconfont search_type">时间
+                <select name="longtime"  onChange="window.location.href='{:url('/index/search/lists?keyword='.$keyword.'&project_id='.$project_id.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&longtime=')}' + this.options[this.selectedIndex].value;">
+                    <option value=''>无</option>
+                    <option {if condition="$longtime == 1"}selected='selected'{/if} value="1" >一天内</option>
+                    <option {if condition="$longtime == 7"}selected='selected'{/if} value="7" >一周内</option>
+                    <option {if condition="$longtime == 30"}selected='selected'{/if} value="30" >一月内</option>
+                </select>
+            </div>
+            <div class="publicdiv mt20 iconfont search_type">项目
+                <select name="project_id" onChange="window.location.href='{:url('/index/search/lists?keyword='.$keyword.'&longtime='.$longtime.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&project_id=')}' + this.options[this.selectedIndex].value;">
+                    <option value=''>无</option>
+                    {foreach $project_list as $project}
+                   <option {if condition="$project['id'] == $project_id"}selected='selected'{/if} value="{$project['id']}" >{$project['name']}</option>
+                    {/foreach}
+                </select>
+            </div>
+            <div class="publicdiv mt20 iconfont search_type">添加人
+                <select name="addusername" onChange="window.location.href='{:url('/index/search/lists?keyword='.$keyword.'&longtime='.$longtime.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&project_id='.$project_id.'&addusername=')}' + this.options[this.selectedIndex].value;">
+                    <option value=''>无</option>
+                    {foreach $user_list as $user}
+                    <option {if condition="$user['username'] == $addusername"}selected='selected'{/if} value="{$user['username']}" >{$user['realname']}</option>
+                    {/foreach}
+                </select>
+            </div>
             <div class="publicdiv">
                 <form action="{:url('/index/search/lists/?keyword='.$keyword.'&type='.$type)}" method="post">
                     <!--<select name="type">
@@ -73,7 +96,6 @@
             jQuery('#theader li').eq(index).find('.textName').html(textName.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>"))
         });
     });
-
 //var content = document.getElementById('theader');
 //content.innerHTML = content.innerHTML.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>");
 </script>

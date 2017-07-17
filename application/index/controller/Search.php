@@ -23,9 +23,20 @@ class Search extends Common {
         $project = db('Project');
         $team = db('Team');
         $username = $this->_G['username'];
-
         $type = input('type', 'task', 'addslashes');
         $keyword = input('keyword', '', 'addslashes');
+
+        $longtime = input('longtime', '', 'intval'); //固定时间查询条件
+        $project_id = input('project_id', '', 'intval'); //项目id
+        $addusername = input('addusername', '', 'addslashes'); //添加人
+        //筛选时间查询
+        $starttime = input('starttime', '', 'addslashes');
+        $endtime = input('endtime', '', 'addslashes');
+
+
+        $project_list = getUserProjectList($this->_G['username']);
+
+        $user_list = db('User')->where(['deleted' => 0])->field('realname,username')->select();
 
         //$project_username_list = db('Project')->where()->select();
         $ids = getUserprojectids($username);
@@ -35,6 +46,22 @@ class Search extends Common {
             $actiondata['a.project'] = array('in', $ids);
             $actiondata['a.objectType'] = array('eq', 'task');
 
+            if ($project_id > 0) {
+                $actiondata['p.id'] = array('EQ', $project_id);
+            }
+            if (!empty($addusername)) {
+                $actiondata['a.actor'] = array('EQ', $addusername);
+            }
+            if ($longtime > 0) {
+                $time = date('Y-m-d H:i:s');
+                $starttime = date('Y-m-d', strtotime("$time - $longtime days"));
+                $actiondata['a.date'] = array('between time', "$starttime,$time");
+            }
+            $starttime = '2017-05-17';
+            $endtime = '2017-05-19';
+            if (!empty($starttime) || !empty($endtime)) {
+                $actiondata['a.date'] = array('between time', "$starttime,$endtime");
+            }
             //以动态为搜索对象
             if ($type == 'action') {
                 $action_count = $task
@@ -52,26 +79,27 @@ class Search extends Common {
                         ->group('t.id')
                         ->field('t.id,t.desc,t.name,t.openedBy,t.status,t.assignedTo,t.finishedBy,t.openedDate,t.assignedDate')
                         ->paginate(20, $action_count, ['path' => url('/index/search/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
+
                 $count = $action_count;
 
                 $task_list = $action_task_list;
             } elseif ($type == 'task' || empty($type)) {
-                
+
                 $name_task_count = $task
                         ->where(function ($query) {
                             $query->where("name|desc", 'like', "%" . input('keyword', '', 'addslashes') . '%');
                         })->where($namedata)
                         ->count();
-                
-                
-                
+
+
+
                 $name_task_list = $task
                         ->where(function ($query) {
                             $query->where("name|desc", 'like', "%" . input('keyword', '', 'addslashes') . '%');
                         })->where($namedata)
                         ->paginate(20, $name_task_count, ['path' => url('/index/search/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
-                        $count = $name_task_count;
-                        $task_list = $name_task_list;
+                $count = $name_task_count;
+                $task_list = $name_task_list;
             } elseif ($type == 'article') {
 
                 $articledata['acl'] = array('eq', 'private');
@@ -97,6 +125,13 @@ class Search extends Common {
         }
         $this->assign('page', $page);
         $this->assign('keyword', $keyword);
+        $this->assign('user_list', $user_list);
+        $this->assign('addusername',$addusername);
+        $this->assign('longtime',$longtime);
+        $this->assign('starttime',$starttime);
+        $this->assign('endtime',$endtime);
+        $this->assign('project_id', $project_id);
+        $this->assign('project_list', $project_list);
         $this->assign('type', $type);
         $this->assign('count', $count);
         $this->assign('task_list', $task_list);
