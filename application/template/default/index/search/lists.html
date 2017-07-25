@@ -36,6 +36,7 @@
                     <li class="mr10">
                         <a class="active lh22 z" data-toggle="dropdown" href="javascript:void(0);">时间 <span class="fs11">&#xe688;</span></a>
                         <ul class="dropdown-menu keyscreenul" style="left:-25px;min-width:130px;">
+                            <li {if condition="$longtime == ''"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&project_id='.$project_id.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&longtime=')}'">不限时间</a></li>
                             <li {if condition="$longtime == 1"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&project_id='.$project_id.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&longtime=1')}'">一天内</a></li>
                             <li {if condition="$longtime == 7"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&project_id='.$project_id.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&longtime=7')}'">一周内</a></li>
                             <li {if condition="$longtime == 30"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&project_id='.$project_id.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&longtime=30')}'">一月内</a></li>
@@ -45,6 +46,7 @@
                     <li class="mr10">
                         <a class="active lh22 z" data-toggle="dropdown" href="javascript:void(0);">项目 <span class="fs11">&#xe688;</span></a>
                         <ul class="dropdown-menu keyscreenul" style="left:-55px;min-width:185px;">
+                            <li {if condition="$project['id'] == ''"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&longtime='.$longtime.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&project_id=')}">不限</a></li>
                             {foreach $project_list as $project}
                             <li {if condition="$project['id'] == $project_id"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&longtime='.$longtime.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&project_id='.$project['id'])}">{$project['name']}</a></li>
                             {/foreach}
@@ -54,20 +56,21 @@
                     <li class="mr10">
                         <a class="active lh22 z" data-toggle="dropdown" href="javascript:void(0);">添加人 <span class="fs11">&#xe688;</span></a>
                         <ul class="dropdown-menu keyscreenul" style="left:-55px;min-width:185px;">
+                            <li {if condition="$user['username'] == $addusername"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&longtime='.$longtime.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&project_id='.$project_id.'&addusername=')}">不限</a></li>
                             {foreach $user_list as $user}
                             <li {if condition="$user['username'] == $addusername"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&longtime='.$longtime.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&project_id='.$project_id.'&addusername='.$user['username'])}">{$user['realname']}</a></li>
                             {/foreach}
                         </ul>
                     </li>
                     
-                    <form action="" method="post">
+                    <form action="{:url('/index/search/lists?keyword='.$keyword.'&project_id='.$project_id.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&longtime='.$longtime.'&starttime='.$starttime.'&endtime='.$endtime)}'" method="post">
                         <div class="z mt5">
                             <label class="z lh33 mr5 fwn">从</label>
-                            <input type="text" name="starttime" id="begin_time" style="width:136px;" class="z bor pl8 h30 pr8 mr20" placeholder="请选择开始时间" value="{$project['starttime']}" /> 
+                            <input type="text" name="starttime" id="begin_time" style="width:136px;" class="z bor pl8 h30 pr8 mr20" placeholder="请选择开始时间" value="{$starttime}" /> 
                         </div>
                         <div class="z mt5">
                             <label class="z lh33 mr5 fwn">至</label>
-                            <input type="text" name="endtime" id="end_time" style="width:136px;" class="z bor pl8 h30 pr8" placeholder="请选择结束时间" value="{$project['endtime']}" />
+                            <input type="text" name="endtime" id="end_time" style="width:136px;" class="z bor pl8 h30 pr8" placeholder="请选择结束时间" value="{$endtime}" />
                         </div>
                         <input type="submit" class="h30 z ml10 pl10 pr10 mt5 br3 bg-primary" value="确认" />
                     </form>
@@ -108,7 +111,11 @@
                 {if condition="$type neq 'article'"}
                 {foreach $task_list as $task}
                 <li class="publicdiv">
+                    {if condition="$type eq 'action'"}
+                    <h3 class="publicdiv fs16 fwn c0"><a href="{:url('/index/task/detail/?id='.$task['objectID'])}" target="_bacnk" class="text-info textName">{$task['name']}</a></h3>
+                    {else/}
                     <h3 class="publicdiv fs16 fwn c0"><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk" class="text-info textName">{$task['name']}</a></h3>
+                    {/if}
                     <div class="publicdiv c9 lh20 hmin60 clamp3 textName">{$task['desc']}</div>
                     <p class="publicdiv c9 lh25">
                         <span class="mr20">添加人：{$task['openedBy']|getUser}</span>

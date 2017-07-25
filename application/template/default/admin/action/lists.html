@@ -35,6 +35,25 @@
                 </select>
                 </label>
                 
+                <label class="z ml20">
+                <span class="z c9 lh30">产品：</span>
+                <select name="product_id" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/admin/action/lists?project_id='.$project_id.'&username='.$username.'&product_id=')}' + this.options[this.selectedIndex].value;">
+                    <option value='0'>无</option>
+                    {foreach $product_list as $temp_product}
+                    <option {if condition="$temp_product['id'] == $product_id"}selected='selected'{/if} value="{$temp_product['id']}" >{$temp_product['name']}</option>
+                    {/foreach}
+                </select>
+                </label>
+                
+                
+                <div class="z mt5">
+                            <label class="z lh33 mr5 fwn">从</label>
+                            <input type="text" name="starttime" id="begin_time" style="width:136px;" class="z bor pl8 h30 pr8 mr20" placeholder="请选择开始时间" value="{$starttime}" /> 
+                        </div>
+                        <div class="z mt5">
+                            <label class="z lh33 mr5 fwn">至</label>
+                            <input type="text" name="endtime" id="end_time" style="width:136px;" class="z bor pl8 h30 pr8" placeholder="请选择结束时间" value="{$endtime}" />
+                        </div>
 <!--                <label class="y">
                     <form action="{:url('/admin/action/lists?keyword='.$keyword)}" method="post">
                         <input type="text" name="keyword" class="bor pt5 pb5 pl5 pr5 fwn" placeholder="请输入搜索的内容~" value="{$keyword}" />

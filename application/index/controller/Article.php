@@ -36,6 +36,7 @@ class article extends Common {
         $article = db('Article');
         $article_count = $article
                         ->where(function ($query) {
+                            //搜索内容与筛选
                             if (input('get.class_id', '0', 'intval') > 0) {
                                 $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
                             }
@@ -63,7 +64,10 @@ class article extends Common {
                             $data['acl'] = array('eq', 'private');
                             $data['username'] = array('eq', $this->_G['username']);
                             $data['status'] = array('eq', 0);
-                            $query->where($data);
+                            if(!empty(input('get.username', '', 'addslashes'))){
+                                $newdata['username'] = array('eq',input('get.username', '', 'addslashes'));
+                            }
+                            $query->where($data)->where($newdata);
                         })->whereOr(function ($query) {
                     if (input('get.class_id', '0', 'intval') > 0) {
                         $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
@@ -88,6 +92,7 @@ class article extends Common {
             $article_detail = DB::name('Article')->where(['uid' => $this->_G['uid'], 'status' => 0])->find();
             if ($this->_G['uid'] == $article_detail['uid']) {
                 DB::name('Article')->where(['id' => $article_id])->update(['status' => -1]);
+                save_log($this->_G['uid'], $this->_G['username']);
                 $this->success('删除成功', 'index/article/lists');
             }
         }
@@ -107,18 +112,27 @@ class article extends Common {
     //详情页
     public function detail() {
         $article_id = input('get.id', '0', 'intval');
+        $article = db('Article');
         if ($article_id > 0) {
-            $article_detail = DB::name('Article')
-                    ->alias('a')
-                    ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
-                    ->join('chinatt_pms_project p ', 'a.project = p.id', 'left')
-                    ->field('a.*,c.name as class_name,p.name as project_name')
-                    ->where(['a.status' => 0, 'a.id' => $article_id])
-                    ->find();
-            $article_detail['contents'] = stripslashes($article_detail['contents']);
+            $article_detail = $article->where(function ($query) {
+                        $data['id'] = array('eq', input('get.id', '0', 'intval'));
+                        $data['acl'] = array('eq', 'private');
+                        $data['username'] = array('eq', $this->_G['username']);
+                        $data['status'] = array('eq', 0);
+                        $query->where($data);
+                    })->whereOr(function ($query) {
+                        $data['id'] = array('eq', input('get.id', '0', 'intval'));
+                        $data['status'] = array('eq', 0);
+                        $data['acl'] = array('eq', 'open');
+                        $query->where($data);
+                    })->find();
+
             if (empty($article_detail)) {
-                $this->error('不存在该文章');
+                $this->error('不存在该文章或者您的权限不足');
             }
+            $article_detail['contents'] = stripslashes($article_detail['contents']);
+        } else {
+            $this->error('请输入文章ID');
         }
 
         $class = db('Class');
@@ -164,16 +178,17 @@ class article extends Common {
                 'time' => date('Y-m-d H:i:s'),
                 'status' => 0,
             ];
-            if(input('post.class_id', '0', 'intval') == 0){
+            if (input('post.class_id', '0', 'intval') == 0) {
                 $this->error("必须选择分类");
             }
+            save_log($this->_G['uid'], $this->_G['username']);
             //修改
             if ($article_id > 0) {
                 DB('Article')->where(['id' => $article_id])->update($data);
                 $this->success('修改成功', 'index/article/lists');
                 //添加
             } else {
-                $data['username'] = array('eq',$this->_G['username']);
+                $data['username'] = array('eq', $this->_G['username']);
                 DB('Article')->insert($data);
                 $this->success('添加成功', 'index/article/lists');
             }

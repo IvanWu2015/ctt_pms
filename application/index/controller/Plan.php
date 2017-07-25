@@ -99,7 +99,7 @@ class Plan extends Common {
                 'openedDate' => date('Y-m-d H:i:s'),
                 'openedBy' => $this->_G['username'],
                 'status' => 'wait',
-            ];
+            ];save_log($this->_G['uid'], $this->_G['username']);
             if ($plan_id > 0) {
                 $data['product'] = $product_detail['id'];
                 DB::name('Plan')->where(['id' => $plan_id])->update($data);

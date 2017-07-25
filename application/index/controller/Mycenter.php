@@ -266,6 +266,7 @@ class Mycenter extends Common {
                 ];
                 DB::name('User')->where(['uid' => $this->_G['uid'], 'deleted' => 0])->update($data);
                 write_action($this->_G['username'], 0, 'user', $this->_G['uid'], 'update', $data);
+                save_log($this->_G['uid'], $this->_G['username']);
                 $message = array('result' => 'success', 'error' => '');
                 $data = json_encode($message);
                 echo $data;
@@ -282,8 +283,7 @@ class Mycenter extends Common {
 
     public function upload() {
         // 获取表单上传文件
-        var_dump($_FILES);
-        exit;
+
         $files = request()->file('avatar');
         foreach ($files as $file) {
             // 移动到框架应用根目录/public/uploads/ 目录下

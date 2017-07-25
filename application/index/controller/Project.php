@@ -213,6 +213,7 @@ class Project extends Common {
                 Db::table('chinatt_pms_project')->where(['id' => $project_id])->update($pro_data);
                 //操作记录
                 write_action($this->_G['username'], $project_id, 'project', $project_id, 'updata', input('param.desc'));
+                save_log($this->_G['uid'], $this->_G['username']);
                 //$project->where(['id' => $project_id])->save($pro_data);
                 $this->success("修改成功", url('index/Project/lists'));
                 //新添加
@@ -220,6 +221,7 @@ class Project extends Common {
                 $add_pro_id = Db::table('chinatt_pms_project')->insertGetId($pro_data);
                 //操作记录
                 write_action($this->_G['username'], $add_pro_id, 'project', $add_pro_id, 'opened', input('param.desc'));
+                save_log($this->_G['uid'], $this->_G['username']);
                 if ($_POST['ids']) {
                     foreach ($_POST['username'] as $key => $value) {
                         //精品
@@ -231,6 +233,7 @@ class Project extends Common {
                             ];
                         }
                         Db::table('chinatt_pms_team')->insert($team_data);
+                        save_log($this->_G['uid'], $this->_G['username']);
                     }
                 }
                 $this->success("成功添加", url('index/Project/lists'));
@@ -275,6 +278,7 @@ class Project extends Common {
             DB('Project')->where(['id' => $project_id])->update(['status' => $ac]);
             //操作记录
             write_action($this->_G['username'], $project_id, 'project', $project_id,$ac, input('comment', '', 'addslashes'));
+            save_log($this->_G['uid'], $this->_G['username']);
             $message = array('result' => 'success');
             $data = json_encode($message);
             echo $data;

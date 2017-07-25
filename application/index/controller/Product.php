@@ -60,7 +60,7 @@ class Product extends Common {
                 'createdVersion' => input('post.createdVersion', '', 'addslashes'),
                 'deleted' => 0,
                 'desc' => input('post.desc', '', 'addslashes'),
-            ];
+            ];save_log($this->_G['uid'], $this->_G['username']);
             if ($product_id > 0) {
                 DB::name('Product')->where(['id' => $product_id])->update($data);
                 $this->success("修改成功", 'Product/lists');

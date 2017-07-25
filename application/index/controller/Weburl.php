@@ -30,32 +30,52 @@ class weburl extends Common {
         } else {
             $data['w.acl'] = array('eq', $acl);
         }
-        $data['w.status'] = array('eq', 0);
 
-        if (!empty($username)) {
-            $data['w.username'] = array('eq', $username);
-        }
-        if ($product_id > 0) {
-            $data['d.id'] = array('eq', $product_id);
-        }
-        if ($class_id > 0) {
-            $data['c.id'] = array('eq', $class_id);
-        }
-        $weburl_list = DB::name('weburl')
-                ->alias('w')
-                ->join('chinatt_pms_project p', 'w.project = p.id', 'left')
-                ->join('chinatt_pms_class c', 'c.id = w.class', 'left')
-                ->join('chinatt_pms_product d', 'd.id = w.product', 'left')
-                ->field('w.*,p.name,d.name as product_name,c.name as class_name')
-                ->where($data)
-                ->paginate(10);
+        $weburl = db('Weburl');
+        $weburl_list = $weburl
+                        ->where(function ($query) {
+                            //搜索内容与筛选
+                            if (input('get.class_id', '0', 'intval') > 0) {
+                                $data['class'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
+                            }
+                            if (input('get.product_id', '0', 'intval') > 0) {
+                                $data['product'] = array('eq', input('get.product_id', '0', 'intval')); //分类ID
+                            }
+                            $data['acl'] = array('eq', 'private');
+                            if (input('get.acl', 'all', 'addslashes') == 'all') {
+                            } else {
+                                $data['acl'] = array('eq', input('get.acl', 'all', 'addslashes'));
+                            }
+                            $data['username'] = array('eq', $this->_G['username']);
+                            $data['status'] = array('eq', 0);
+                            $query->where($data)->where(['acl' => 'private']);
+                        })->whereOr(function ($query) {
+                    if (input('get.class_id', '0', 'intval') > 0) {
+                        $data['class'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
+                    }
+                    if (input('get.product_id', '0', 'intval') > 0) {
+                        $data['product'] = array('eq', input('get.product_id', '0', 'intval')); //分类ID
+                    }
+                    if (!empty(input('get.username', '', 'addslashes'))) {
+                        $data['username'] = array('eq', input('get.username', '', 'addslashes'));
+                    }
+                    if (input('get.acl', 'all', 'addslashes') == 'all') {
+                        
+                    } else {
+                        $data['acl'] = array('eq', input('get.acl', 'all', 'addslashes'));
+                    }
+                    $data['status'] = array('eq', 0);
+                    $query->where($data)->where(['acl' => 'open']);
+                })->paginate(20, $article_count, ['path' => url('/index/article/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
+
         $page = $weburl_list->render(); // 分页显示输出
         $deleted = input('param.deleted', 0, 'intval');
         $weburl_id = input('param.id', 0, 'intval');
         if ($deleted > 0) {
             $weburl_detail = $weburl->where(['username' => $this->_G['username'], 'status' => 0])->find();
-            if ($this->_G['username'] == $weburl_detail['username']) {
+            if ($this->_G['username'] == $weburl_detail['username'] || $this->_G['is_admin'] == 1) {
                 $weburl->where(['id' => $weburl_id])->update(['status' => -1]);
+                save_log($this->_G['uid'], $this->_G['username']);
                 $this->success('删除成功', 'index/weburl/lists');
             } else {
                 $this->error('权限不足');
@@ -107,7 +127,6 @@ class weburl extends Common {
         }
         if (request()->isPost()) {
             $data = array(
-                'username' => $this->_G['username'],
                 'project' => input('param.project_id', 0, 'intval'),
                 'product' => input('param.product_id', 0, 'intval'),
                 'class' => input('param.class_id', 0, 'intval'),
@@ -117,10 +136,12 @@ class weburl extends Common {
                 'acl' => input('param.acl', 'open', 'addslashes'),
                 'time' => date('Y-m-d H:i:s'),
             );
+            save_log($this->_G['uid'], $this->_G['username']);
             if ($weburl_id > 0) {
                 $weburl->where(['id' => $weburl_id])->update($data);
                 $this->success('修改成功', url('index/weburl/lists'));
             } else {
+                $data['username'] = array('eq', $this->_G['username']);
                 $weburl->insert($data);
                 $this->success('添加成功', url('index/weburl/lists'));
             }

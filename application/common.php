@@ -714,6 +714,7 @@ function get_userlist_by_projectid($project_id) {
  * @return 返回字符串
  */
 function write_action($username, $project_id, $objectType, $objectid, $action, $comment = '', $extra = '') {
+    
     $action_data = array(
         'actor' => $username,
         'project' => $project_id,
