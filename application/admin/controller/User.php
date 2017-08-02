@@ -7,7 +7,7 @@ use \think\Db;
 use Page;
 
 load_trait('controller/Jump');  // 引入traits\controller\Jump
-
+    
 class User extends Common {
 
     public function index() {
