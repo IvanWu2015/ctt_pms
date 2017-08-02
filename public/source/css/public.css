@@ -574,6 +574,8 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 
 a.cc:hover{ color:#ccc !important;}
 
+.tnavattr{ background:#afafaf; color:#000;}
+
 .maximg{ max-width:100%;}
 
 .derkwt a{ border-radius:2px; color:#003366; padding:8px 15px; float:left;}

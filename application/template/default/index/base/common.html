@@ -46,11 +46,11 @@
                     <img src="tpl_img/bg_icon.png" class="z mt5 pr20 mr20" height="35" />
                 </a>
                 {if condition="empty($navigation_list)"}
-                <li class="mt10 ml20"><a  href="{:url('/index/mycenter')}">首页</a></li>
+                <li class="mt10 ml20"><a href="{:url('/index/mycenter')}">首页</a></li>
                 {/if}
                 {foreach $navigation_list as $nav}
-                <li class="mt5">
-                    <a href="{$nav['main']['true_url']}" class="fs16" {if condition="$nav['sub_count'] > 0"} data-toggle="dropdown"{/if}>
+                <li class="mt5">                         <!-- 当前状态 class的值 tnavattr -->
+                    <a href="{$nav['main']['true_url']}" class="fs16 " {if condition="$nav['sub_count'] > 0"} data-toggle="dropdown"{/if}>
                         {$nav['main']['title']}
                         {if condition="$nav['sub_count'] > 0"}<b class="caret"></b>{/if}
                     </a>
@@ -58,7 +58,7 @@
                     {if condition="$nav['sub_count'] > 0"}
                     <ul class="dropdown-menu">
                          {foreach $nav['sub'] as $sub_nav}
-                                <li><a href="{$sub_nav['true_url']}">{$sub_nav['title']}</a></li>
+                            <li><a href="{$sub_nav['true_url']}">{$sub_nav['title']}</a></li>
                          {/foreach}
                          </ul>
                     {/if}
