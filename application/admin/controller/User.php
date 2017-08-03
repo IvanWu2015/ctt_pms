@@ -7,7 +7,7 @@ use \think\Db;
 use Page;
 
 load_trait('controller/Jump');  // 引入traits\controller\Jump
-
+    
 class User extends Common {
 
     public function index() {
@@ -16,15 +16,15 @@ class User extends Common {
 
     public function lists() {   //用户列表
         if (request()->isPost()) {
-            foreach ($_POST['is_admin'] as $key => $value){
-                if($value == 1){
+            foreach ($_POST['is_admin'] as $key => $value) {
+                if ($value == 1) {
                     $ids[] = $key;
                 }
             }
-            $data['uid'] = array('in',$ids);
+            $data['uid'] = array('in', $ids);
             DB('User')->where($data)->update(['isadmin' => 1]);
         }
-        
+
         $user_list = db('User')
                 ->alias('u')
                 ->join('chinatt_pms_dept d', 'u.dept = d.id', 'left')
@@ -33,7 +33,7 @@ class User extends Common {
                 ->where(['deleted' => 0])
                 ->order('uid DESC')
                 ->paginate(10);
-        $user_list =  get_user_count($user_list);
+        $user_list = get_user_count($user_list);
         $show = $user_list->render(); // 分页显示输出
         $user_list = user_count($user_list);
         $navtitle = '用户列表' . $this->navtitle;
@@ -51,7 +51,13 @@ class User extends Common {
         $my_action_count = DB::name('Action')->where(['actor' => $username])->count();
         $my_weburl_count = DB::name('Weburl')->where(['username' => $username, 'status' => 0])->count();
         $my_article_count = DB::name('Article')->where(['username' => $username, 'status' => 0])->count();
-
+        $time = date('Y-m-d');
+        $open_task_data['openedDate'] = array('like',"%$time%");
+        $today_open_task_count = DB::name('Task')->where(['openedBy' => $username, 'deleted' => 0])->where($open_task_data)->count();//当天创建任务数
+        $done_task_data['finishedDate'] = array('like',"%$time%");
+        $today_done_task_count = DB::name('Task')->where(['finishedBy' => $username, 'deleted' => 0])->where($done_task_data)->count();//当天完成任务数
+        
+        
         $not_status_data['status'] = array('in', 'wait,doing');
         $not_status_data['assignedTo'] = array('eq', $username);
         $not_status_data['deleted'] = array('eq', '0');
@@ -68,7 +74,7 @@ class User extends Common {
         $same_month_consumed_count = DB::name('Task')->where($consumed_map)->sum('consumed'); //当月完成工时
         //今天总工时
         $today_count = DB::name('Workcount')->where(['username' => $this->_G['username'], 'date' => date('Y-m-d'), 'objectType' => 'user'])->field('consumed')->find();
-        
+
         //获取当周的第一天与最后一天
         $sdefaultDate = date("Y-m-d");
         $first = 1;
@@ -80,7 +86,7 @@ class User extends Common {
         $toweek_data['objectType'] = array('eq', 'user');
         //当周总工时
         $toweek_count = DB::name('Workcount')->where($toweek_data)->field('consumed')->sum('consumed');
-        
+
         $user = db('User')
                 ->alias('u')
                 ->join('chinatt_pms_dept d', 'u.dept = d.id', 'left')
@@ -112,6 +118,23 @@ class User extends Common {
                 ->field('a.*,c.name as class_name,p.name as project_name')
                 ->where(['a.status' => 0, 'a.username' => $username])
                 ->paginate(10);
+        
+        $project_list = db('project')
+                        ->alias('p')
+                        ->join('chinatt_pms_team t', "t.project = p.id ", 'left')
+                        ->where(function ($query) {
+                            $data['status'] = array('in','wait,doing');
+                            $query->where(['p.acl' => 'private', 't.username' => 'chen'])->where($data);
+                        })->whereOr(function ($query) {
+                            $data['status'] = array('in','wait,doing');
+                            $query->where(['p.acl' => 'open'])->where($data);
+                        })
+                        ->group('p.id')->select();
+
+
+
+
+
 
         $navtitle = '个人中心' . $this->navtitle;
         $this->assign('same_month_consumed_count', $same_month_consumed_count);
@@ -122,7 +145,10 @@ class User extends Common {
         $this->assign('my_article_count', $my_article_count);
         $this->assign('my_weburl_count', $my_weburl_count);
         $this->assign('my_action_count', $my_action_count);
+        $this->assign('today_open_task_count',$today_open_task_count);
+        $this->assign('today_done_task_count',$today_done_task_count);
         $this->assign('my_task_count', $my_task_count);
+        $this->assign('project_list',$project_list);
         $this->assign('estimate_count', $estimate_count);
         $this->assign('consumed_count', $consumed_count);
         $this->assign('article_list', $article_list);
@@ -134,15 +160,16 @@ class User extends Common {
 
         return $this->fetch($this->templatePath);
     }
-    
+
     public function add() {
         $uid = input('get.uid', 0, 'intval');
         $user_detail = DB('User')->where(['uid' => $uid])->find();
-        if(empty($user_detail)){
+        if (empty($user_detail)) {
             $this->error("不存在该用户");
         }
-        if($user_detail['uid'] != $this->_G['uid'] && $this->_G['is_admin'] != 1){
+        if ($user_detail['uid'] != $this->_G['uid'] && $this->_G['is_admin'] != 1) {
             $this->error("权限不足");
         }
     }
+
 }

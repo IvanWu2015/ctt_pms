@@ -19,7 +19,6 @@
                 <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=action')}" {if $type == 'action'}class="setyattr"{/if}>动态</a>
                 <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=article')}" {if $type == 'article'}class="setyattr"{/if}>文档</a>
             </div>
-
             <div class="publicdiv">
                 <form action="{:url('/index/search/lists/?keyword='.$keyword.'&type='.$type)}" method="post">
                     <!--<select name="type">
@@ -31,13 +30,92 @@
                     <input type="submit" class="search_sub" value="搜索" />
                 </form>
             </div>
+            
+            <div class="publicdiv dn mt10" id="keyscreen">
+                <ul class="nav nav-pills be iconfont">
+                    <li class="mr10">
+                        <a class="active lh22 z" data-toggle="dropdown" href="javascript:void(0);">时间 <span class="fs11">&#xe688;</span></a>
+                        <ul class="dropdown-menu keyscreenul" style="left:-25px;min-width:130px;">
+                            <li {if condition="$longtime == ''"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&project_id='.$project_id.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&longtime=')}'">不限时间</a></li>
+                            <li {if condition="$longtime == 1"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&project_id='.$project_id.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&longtime=1')}'">一天内</a></li>
+                            <li {if condition="$longtime == 7"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&project_id='.$project_id.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&longtime=7')}'">一周内</a></li>
+                            <li {if condition="$longtime == 30"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&project_id='.$project_id.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&longtime=30')}'">一月内</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="mr10">
+                        <a class="active lh22 z" data-toggle="dropdown" href="javascript:void(0);">项目 <span class="fs11">&#xe688;</span></a>
+                        <ul class="dropdown-menu keyscreenul" style="left:-55px;min-width:185px;">
+                            <li {if condition="$project['id'] == ''"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&longtime='.$longtime.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&project_id=')}">不限</a></li>
+                            {foreach $project_list as $project}
+                            <li {if condition="$project['id'] == $project_id"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&longtime='.$longtime.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&project_id='.$project['id'])}">{$project['name']}</a></li>
+                            {/foreach}
+                        </ul>
+                    </li>
+                    
+                    <li class="mr10">
+                        <a class="active lh22 z" data-toggle="dropdown" href="javascript:void(0);">添加人 <span class="fs11">&#xe688;</span></a>
+                        <ul class="dropdown-menu keyscreenul" style="left:-55px;min-width:185px;">
+                            <li {if condition="$user['username'] == $addusername"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&longtime='.$longtime.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&project_id='.$project_id.'&addusername=')}">不限</a></li>
+                            {foreach $user_list as $user}
+                            <li {if condition="$user['username'] == $addusername"}class="be"{/if}><a href="{:url('/index/search/lists?keyword='.$keyword.'&longtime='.$longtime.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&project_id='.$project_id.'&addusername='.$user['username'])}">{$user['realname']}</a></li>
+                            {/foreach}
+                        </ul>
+                    </li>
+                    
+                    <form action="{:url('/index/search/lists?keyword='.$keyword.'&project_id='.$project_id.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&longtime='.$longtime.'&starttime='.$starttime.'&endtime='.$endtime)}'" method="post">
+                        <div class="z mt5">
+                            <label class="z lh33 mr5 fwn">从</label>
+                            <input type="text" name="starttime" id="begin_time" style="width:136px;" class="z bor pl8 h30 pr8 mr20" placeholder="请选择开始时间" value="{$starttime}" /> 
+                        </div>
+                        <div class="z mt5">
+                            <label class="z lh33 mr5 fwn">至</label>
+                            <input type="text" name="endtime" id="end_time" style="width:136px;" class="z bor pl8 h30 pr8" placeholder="请选择结束时间" value="{$endtime}" />
+                        </div>
+                        <input type="submit" class="h30 z ml10 pl10 pr10 mt5 br3 bg-primary" value="确认" />
+                    </form>
+                    
+                </ul>
+                <!--<div class="z">
+                    <select name="longtime" class="z bor pl8 h30 pr8 mr20" onChange="window.location.href='{:url('/index/search/lists?keyword='.$keyword.'&project_id='.$project_id.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&longtime=')}' + this.options[this.selectedIndex].value;">
+                        <option value=''>时间</option>
+                        <option {if condition="$longtime == 1"}selected='selected'{/if} value="1" >一天内</option>
+                        <option {if condition="$longtime == 7"}selected='selected'{/if} value="7" >一周内</option>
+                        <option {if condition="$longtime == 30"}selected='selected'{/if} value="30" >一月内</option>
+                    </select>
+                </div>
+                <div class="z">
+                    <select name="project_id" class="z bor pl8 h30 pr8 mr20" onChange="window.location.href='{:url('/index/search/lists?keyword='.$keyword.'&longtime='.$longtime.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&addusername='.$addusername.'&project_id=')}' + this.options[this.selectedIndex].value;">
+                        <option value=''>项目</option>
+                        {foreach $project_list as $project}
+                       <option {if condition="$project['id'] == $project_id"}selected='selected'{/if} value="{$project['id']}" >{$project['name']}</option>
+                        {/foreach}
+                    </select>
+                </div>
+                <div class="z">
+                    <select name="addusername" class="z bor pl8 h30 pr8" onChange="window.location.href='{:url('/index/search/lists?keyword='.$keyword.'&longtime='.$longtime.'&starttime='.$starttime.'&endtime='.$endtime.'&type='.$type.'&project_id='.$project_id.'&addusername=')}' + this.options[this.selectedIndex].value;">
+                        <option value=''>添加人</option>
+                        {foreach $user_list as $user}
+                        <option {if condition="$user['username'] == $addusername"}selected='selected'{/if} value="{$user['username']}" >{$user['realname']}</option>
+                        {/foreach}
+                    </select>
+                </div>-->
+                
+            </div>
 
             <div class="publicdiv" id="theader">
-                <p class="publicdiv c9 mt5">已为您找到相关结果约 {$count} 条</p>
+                <p class="publicdiv c9 mt5">
+                    已为您找到相关结果约 {$count} 条
+                    <a href="javascript:void(0);" class="c9 iconfont" id="keyscreenopen" onClick="keyscreenopen();" style="margin-left:240px;">&#xe688; 展开筛选</a>
+                </p>
                 {if condition="$type neq 'article'"}
                 {foreach $task_list as $task}
                 <li class="publicdiv">
-                    <h3 class="publicdiv fs16 fwb c0"><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk" class="textName">{$task['name']}</a></h3>
+                    {if condition="$type eq 'action'"}
+                    <h3 class="publicdiv fs16 fwn c0"><a href="{:url('/index/task/detail/?id='.$task['objectID'])}" target="_bacnk" class="text-info textName">{$task['name']}</a></h3>
+                    {else/}
+                    <h3 class="publicdiv fs16 fwn c0"><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk" class="text-info textName">{$task['name']}</a></h3>
+                    {/if}
                     <div class="publicdiv c9 lh20 hmin60 clamp3 textName">{$task['desc']}</div>
                     <p class="publicdiv c9 lh25">
                         <span class="mr20">添加人：{$task['openedBy']|getUser}</span>
@@ -67,14 +145,32 @@
 </div>
 <script>
 //搜索文字颜色区分
-    jQuery(function () {
-        jQuery('#theader li').each(function (index) {
-            var textName = jQuery('#theader li').eq(index).find('.textName').html();
-            jQuery('#theader li').eq(index).find('.textName').html(textName.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>"))
-        });
+jQuery(function () {
+    jQuery('#theader li').each(function (index) {
+        var textName = jQuery('#theader li').eq(index).find('.textName').html();
+        jQuery('#theader li').eq(index).find('.textName').html(textName.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>"))
     });
-
+});
 //var content = document.getElementById('theader');
 //content.innerHTML = content.innerHTML.replace(/{$keyword}/g, "<span style=\"color:red\">{$keyword}</span>");
+</script>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    var begin_time = jQuery("#begin_time").val();
+    var end_time = jQuery("#end_time").val();
+    var myDate = new Date(); 
+    if(!begin_time) {
+        begin_time = myDate.toLocaleDateString();
+    }
+    if(!end_time) {   
+        end_time = myDate.toLocaleDateString();
+    }
+   jQuery('#begin_time').daterangepicker({singleDatePicker:true,format: 'YYYY-MM-DD',startDate: begin_time}, function(start, end, label) {
+     console.log(start.toISOString(), end.toISOString(), label);
+   });
+   jQuery('#end_time').daterangepicker({ singleDatePicker: true,format: 'YYYY-MM-DD',startDate: end_time}, function(start, end, label) {
+     console.log(start.toISOString(), end.toISOString(), label);
+   });
+});
 </script>
 {/block}

@@ -476,7 +476,8 @@ ul.data_statistics li p{ margin:0px; font-size:13px; position:absolute; bottom:5
 .dcs04{ background:#ecc0c0;}
 .dcs04:hover{ color:#f5e9e9;}
 
-.dropdown-menu li a{ padding:10px 20px !important;}
+.dropdown-menu li a{ padding:10px 20px;}
+.keyscreenul-menu li a{ padding:5px 20px !important;}
 
 /*个人中心*/
 ul.left_nav{ width:200px; height:100%; background:#f7f7f7; border-right:1px #e8e8e8 solid; position:fixed; top:80px; left:0px;}
@@ -543,6 +544,12 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .bf6f6f6{ background:#f6f6f6;}
 .bred{ background:red;}
 
+.bg-primary{ background:#337ab7;}
+.bg-success{ background:#dff0d8;}
+.bg-info{ background:#d9edf7;}
+.bg-warning{ background:#fcf8e3;}
+.bg-danger{ background:#f2dede;}
+
 .highcharts-legend{ display:none;}
 
 .cf{ color:#fff;}
@@ -566,6 +573,8 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 .text-primary{ color:#337ab7;}
 
 a.cc:hover{ color:#ccc !important;}
+
+.tnavattr{ background:#afafaf; color:#000;}
 
 .maximg{ max-width:100%;}
 
@@ -626,13 +635,24 @@ a.cc:hover{ color:#ccc !important;}
 
 /*文档详情页*/
 .filewp{ width:100%; float:left;}
-.fileleft{ width:280px; height:100%; overflow-y:auto; padding-top:50px; background:#fafafa; border-right:1px #ddd solid; position:fixed; top:0px; left:0px;}
+.fileleft{ width:280px; height:100%; overflow-y:auto; padding-top:60px; background:#fafafa; border-right:1px #ddd solid; position:fixed; top:0px; left:0px;}
 .fileleft::-webkit-scrollbar {width:5px;height:10px;}
 .fileleft::-webkit-scrollbar-button    {background-color:#fff;}
 .fileleft::-webkit-scrollbar-track     {background:#fff;}
 .fileleft::-webkit-scrollbar-thumb{background:#ccc;border-radius:4px;}
 .fileleft::-webkit-scrollbar-corner {background:#fff;}
 .fileleft::-webkit-scrollbar-resizer  {background:#fff;}
+
+.filenav{ height:41px;}
+.filenav li{ float:left; height:40px; line-height:40px; padding:0px 20px; cursor:pointer;}
+.filenav li.filenavattr{ border-bottom:1px #fafafa solid; border-right:1px #dedede solid;}
+
+.articleSearch{ width:100%; float:left; height:40px; border:1px #ddd solid; border-radius:3px; position:relative; overflow:hidden;}
+.articleSearch .arsekeyword{ width:100%; height:40px; line-height:40px; border:none; background:none; padding:0px 50px 0px 10px;}
+.articleSearch .sarsesub{ width:50px; height:40px; background:url(../images/search.png) no-repeat center center; border:none; position:absolute; top:0; right:0;}
+
+.searchlist a{ width:100%; height:35px; line-height:35px; float:left; padding:0px 10px;}
+.searchlist a:hover{ background:#eee;}
 
 .fileleftNav{ width:100%; float:left;}
 .fileleftNav li{ width:100%; float:left;}

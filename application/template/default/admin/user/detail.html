@@ -1,7 +1,7 @@
 {extend name="base/common"/}
 
 {block name="header"}
-    {include file="base/head_title" /}
+{include file="base/head_title" /}
 {/block}
 
 {block name="side"}{/block}
@@ -9,146 +9,164 @@
 {block name="body"}
 
 <div class="rightcon sizing"><!-- 右边内容 -->
-    
+
     <div class="publicdiv bf">
         <h3 class="pt10 pb10 pl20 pr20 fs16 sizing iconfont" style="display:none;">&#xe605; 个人中心</h3>
-        
+
         <div class="userincon pt20 pb20 pr20 borb sizing"><!-- 基本信息 -->
-            
-            <div class="userawp sizing">
-                <div class="useravatar"><img src="tpl_img/match_img.png" class="publicimg" /></div>
-            </div>
-            <div class="mt20 z pr" style="width:270px;">
+            <div class="useravatar"><img src="tpl_img/match_img.png" class="publicimg" /></div>
+            <div class="mt20 z pr" style="width:170px;">
                 <p class="fs16 fwb">
                     {$user['realname']}
                 </p>
                 <p>职位：{$user['group_name']}</p>
                 <p>部门：{$user['depe_name']}</p>
             </div>
-            
-            <ul class="uscsul"><!-- 数据统计 -->
-                <li class="borr sizing">
-                    <span class="iconfont">&#xe759;</span>
-                    <p class="fwb">我的任务</p>
-                    <h3>已完成：<b>{$my_task_count}</b></h3>
-                    <h3>未完成：<b>{$not_status_count}</b></h3>
-                </li>
-                <li class="borr sizing">
-                    <span class="iconfont">&#xe623;</span>
-                    <p class="fwb">总工时</p>
-                    <h3>预计：<b>{if condition="empty($estimate_count)"}0{else/}{$estimate_count}{/if}</b></h3>
-                    <h3>完成：<b>{if condition="empty($consumed_count)"}0{else/}{$consumed_count}{/if}</b></h3>
-                </li>
-                <li class="sizing">
-                    <span class="iconfont">&#xe61e;</span>
-                    <p class="fwb">当月工时</p>
-                    <h3>预计：<b>{if condition="empty($same_month_estimate_count)"}0{else/}{$estimate_count}{/if}</b></h3>
-                    <h3>完成：<b>{if condition="empty($same_month_consumed_count)"}0{else/}{$estimate_count}{/if}</b></h3>
-                </li>
-                <li class="sizing">
-                    <span class="iconfont">&#xe61e;</span>
-                    <p class="fwb">当天工时</p>
-                    <h3>当天工时：<b>{$today_count['consumed']}</b></h3>
-                    <h3>当周工时：<b>{$toweek_count}</b></h3>
-                </li>
-            </ul><!-- 数据统计 -->
-            
-        </div><!-- 基本信息 -->
-        
-        <div class="publicdiv pl20 pr20 mt20 mb20 sizing">
-            <div class="publicdiv">
-                <div class="w50 z pr10 sizing"><!--待完成任务-->
-                    <div class="panel" style="border:1px #f8f2d1 solid;">
-                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing" style="background:#f8f2d1;">
-                            待完成任务
-                            <a href="{:url('/index/Mycenter/task_list/?status=ontdone')}" class="y fs12 mr10">更多>></a>
-                        </h3>
-                        <div class="panel-body">
-                            
-                            <p class="publicdiv mbn fwb">
-                                <span>ID</span>
-                                <span class="ml20">任务名称</span>
-                                <span class="y">类型</span>
-                            </p>
-                        
-                            {foreach $task_list as $task}
-                            <li class="publicdiv pr tlist pr70 h25 lh25 ellipsis">
-                                <span class="w40p db z">{$task['id']}</span>
-                                <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$task['name']}</a>
-                                <span class="tlisty">{$task['type']}</span>
-                            </li>
-                            {/foreach}
-                        </div>
-                    </div>
-                </div><!--待完成任务-->
-                
-                <div class="w50 z pl10 sizing"><!--我的动态-->
-                    <div class="panel" style="border:1px #f2dede solid;">
-                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-danger">我的动态</h3>
-                        <div class="panel-body">
-                            {foreach $action_list as $action}
-                            <li class="publicdiv h25 lh25 ellipsis"><a href="{:url('/index/task/detail/?id='.$task['id'])}">
-                                    {if condition="($action['tname'] == null) and ($name == null)"}
-                                    您于&nbsp;{$action['date']} &nbsp;&nbsp;{$action['actionname']} &nbsp;{$action['typename']} {$action['tname']}{$action['pname']}
-                                    {else/}
-                                您于&nbsp;{$action['date']} &nbsp;&nbsp;对 {$action['tname']}{$action['pname']} &nbsp;进行&nbsp;{$action['actionname']}&nbsp;的操作
-                                    {/if}
-                                </a></li>
-                            {/foreach}
-                        </div>
-                    </div>
-                </div><!--我的动态-->
-            </div>
-            
-            <div class="publicdiv">
-                <div class="w50 z pr10 sizing"><!--我的收藏-->
-                    <div class="panel" style="border:1px #d9edf7 solid;">
-                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-info">我的收藏</h3>
-                        <div class="panel-body">
-                            <p class="publicdiv mbn fwb">
-                                <span>ID</span>
-                                <span class="ml20">收藏名称</span>
-                                <span class="y">时间</span>
-                            </p>
-                        
-                            {foreach $weburl_list as $weburl}
-                            <li class="publicdiv pr tlist pr100 h25 lh25 ellipsis">
-                                <span class="w40p db z">{$weburl['id']}</span>
-                                <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$weburl['title']}</a>
-                                <span class="tlisty">{$weburl['time']}</span>
-                            </li>
-                            {/foreach}
-                            
-                        </div>
-                    </div>
-                </div><!--我的收藏-->
-                
-                <div class="w50 z pl10 sizing"><!--我的文档-->
-                    <div class="panel" style="border:1px #dff0d8 solid;">
-                        <h3 class="mbn mtn fs15 pl15 pt15 pb15 sizing bg-success">我的文档</h3>
-                        <div class="panel-body">
-                            <p class="publicdiv mbn fwb">
-                                <span>ID</span>
-                                <span class="ml20">文档名称</span>
-                                <span class="y">时间</span>
-                            </p>
-                        
-                            {foreach $article_list as $article}
-                            <li class="publicdiv pr tlist pr100 h25 lh25 ellipsis">
-                                <span class="w40p db z">{$article['id']}</span>
-                                <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$article['title']}</a>
-                                <span class="tlisty">{$article['time']}</span>
-                            </li>
-                            {/foreach}
-                            
-                        </div>
-                    </div>
-                </div><!--我的文档-->
-            </div>
-            
         </div>
-        
+        <ul class="usertotal sizing">
+            <li title="分配给我的预计总工时"><h3>{$estimate_count}</h3>预计总工时</li>
+            <li title="完成任务的总工时"><h3>{$consumed_count}</h3>完成总工时</li>
+            <li title="分配给我的总任务数"><h3>{$my_task_count}</h3>总任务数</li>
+            <li title="属于我的动态总数"><h3>{$my_action_count}</h3>动态总数</li>
+            <li title="属于我的收藏总数"><h3>{$my_weburl_count}</h3>收藏总数</li>
+            <li title="属于我的文章总数"><h3>{$my_article_count}</h3>文章总数</li>
+            
+            <li title="未完成的任务总数"><h3>{$not_status_count}</h3>未完成</li>
+            <li title="当月预计工时"><h3>{$same_month_estimate_count}</h3>当月预计工时</li>
+            <li title="当月完成工时"><h3>{$same_month_consumed_count}</h3>当月完成工时</li>
+            <li title="当天总工时"><h3>{$today_count}</h3>当天总工时</li>
+            <li title="当周总工时"><h3>{$toweek_count}</h3>当周总工时</li>
+            <li title="当天创建任务数"><h3>{$today_open_task_count}</h3>当天创建任务数</li>
+            <li title="当天完成任务数"><h3>{$today_done_task_count}</h3>当天完成任务数</li>
+        </ul>
     </div>
     
+    <div class="publicdiv bf mt20">
+        <div class="publicdiv mt20 pl20 fs18 pt10 pb10 sizing">未完成的任务列表</div>
+        <table class="table">
+            <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                <tr>
+                    <th class="ac bbno pt15 pb15">ID</th>
+                    <th class="bbno pt15 pb15">任务名称</th>
+                    <th class="bbno pt15 pb15">添加人</th>
+                    <th class="bbno pt15 pb15">前置任务</th>
+                    <th class="ac bbno pt15 pb15">指派给</th>
+                    <th class="ac bbno pt15 pb15">完成者</th>
+                    <th class="ac bbno pt15 pb15">创建时间</th>
+                    <th class="ac bbno pt15 pb15">完成时间</th>
+                </tr>
+            </thead>
+            <tbody class="borb" id="theader">
+                {foreach $task_list as $task}
+                <tr id="taskList">
+                    <td class="ac">{$task['id']}</td>
+                    <td class=""><a href="{:url('/index/task/detail/?id='.$task['id'])}" target="_bacnk" id="taskName">{$task['name']}</a></td>
+                    <td class="ac">{$task['openedBy']|getUser}</td>
+                    <td class="ac">
+                        {$task['p_name']}
+                        {if condition="$task['p_status'] eq doing"}
+                        进行中
+                        {/if}
+                        {if condition="$task['p_status'] eq wait"}
+                        等待
+                        {/if}
+                        {if condition="$task['p_status'] eq done"}
+                        完成
+                        {/if}
+                        {if condition="$task['p_status'] eq closed"}
+                        完成
+                        {/if}
+                    </td>
+                    <td class="ac">{$task['assignedTo']|getUser}</td>
+                    <td class="ac">{$task['finishedBy']|getUser}</td>
+                    <td class="ac">{$task['openedDate']}</td>
+                    <td class="ac">{$task['assignedDate']}</td>
+                </tr>
+                {/foreach}
+            </tbody>
+
+        </table>
+
+        <div class="publicdiv mt20 pl20 fs18 pt10 pb10 sizing">用户参与并且未关闭项目列表</div>
+        <table class="table">
+              <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                  <tr>
+                    <th class="ac bbno pt15 pb15">ID</th>
+                    <th class="bbno pt15 pb15">项目名称</th>
+                    <th class="bbno pt15 pb15">版本号</th>
+                    <th class="ac bbno pt15 pb15">创建时间</th>
+                    <th class="ac bbno pt15 pb15">完成时间</th>
+                    <th class="ac bbno pt15 pb15">状态</th>
+                    <th class="ac bbno pt15 pb15">添加人</th>
+                    <th class="ac bbno pt15 pb15">进度</th>
+                  </tr>
+              </thead>
+              <tbody class="borb" id="theader">
+              {foreach $project_list as $project}
+                  <tr id="projectList">
+                    <td class="ac">{$project['id']}</td>
+                    <td><a href="{:url('/index/project/detail/?id='.$project['id'])}" target="_bacnk" id="taskName">{$project['name']}</a></td>
+                    <td>{$project['code']}</td>
+                    <td class="ac">{$project['begin']}</td>
+                    <td class="ac">{$project['end']}</td>
+                    <td class="ac">{$project['status']}</td>
+                    <td class="ac">{$project['project_admin']|getUser}</td>
+                    <td class="ac" title="当前进度：{$project['percent']}%">
+                        <div class="progress hp10 mt5">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{$project['percent']}%; background:{if condition='$project["percent"] == 100'}#28dd2c{elseif condition='$project["percent"] > 50'}#5bc0de{/if};">
+                                <span class="sr-only">{$project['percent']}</span>
+                            </div>
+                        </div>
+                    </td>
+                  </tr>
+              {/foreach}
+              </tbody>
+            </table>
+            
+            <div class="publicdiv mt20 pl20 fs18 pt10 pb10 sizing">用户的最近动态10条</div>
+            <table class="table">
+              <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                  <tr>
+                    <th class="ac bbno pt15 pb15">ID</th>
+                    <th class="bbno pt15 pb15">操作人</th>
+                    <th class="ac bbno pt15 pb15">时间</th>
+                    <th class="bbno pt15 pb15">类别名</th>
+                    <th class="w20 bbno pt15 pb15">任务</th>
+                    <th class="w20 bbno pt15 pb15">&nbsp;</th>
+                    <th class="bbno pt15 pb15">记录工时/说明</th>
+                  </tr>
+              </thead>
+              <tbody class="borb">
+              {foreach $action_list as $action}
+                    {if condition="($action['tname'] == null) and ($name == null)"}
+                      <tr>
+                        <td class="ac">{$action['id']}</td>
+                        <td>{$action['actor']|getUser}</td>
+                        <td class="ac">{$action['date']}</td>
+                        <td class="">{$action['typename']}</td>
+                        <td class="w20">{$action['actionname']}</td>
+                        <td class="w20">{$action['tname']}</td>
+                        <td class="">{$action['pname']}</td>
+                      </tr>
+                    {else/}
+                      <tr>
+                        <td class="ac">{$action['id']}</td>
+                        <td>{$action['actor']|getUser}</td>
+                        <td class="ac">{$action['date']}</td>
+                        <td class="">{$action['typename']}</td>
+                        <td class="w20"><a href="{:url('/index/task/detail/?id='.$action['objectID'])}" target="_bacnk">{$action['tname']}</a></td>
+                        <td class="w20">{$action['pname']}</td>
+                        <td class="">{$action['actionname']}</td>
+                        
+                      </tr>
+                    {/if}
+              {/foreach}
+              </tbody>
+            </table>
+            
+        </div>
+
+    </div>
+
 </div>
 {/block}

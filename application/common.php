@@ -714,6 +714,7 @@ function get_userlist_by_projectid($project_id) {
  * @return 返回字符串
  */
 function write_action($username, $project_id, $objectType, $objectid, $action, $comment = '', $extra = '') {
+    
     $action_data = array(
         'actor' => $username,
         'project' => $project_id,
@@ -1084,6 +1085,7 @@ function getUser($username, $onlyRealname = 1) {
 
     return $user;
 }
+
 /**
  * 获取用户拥有项目权限的IDS
  * @param string $username  用户名
@@ -1106,4 +1108,23 @@ function getUserprojectids($username) {
         }
     }
     return $ids;
+}
+
+/**
+ * 获取用户拥有项目列表
+ * @param string $username  用户名
+ * @return string $list
+ */
+function getUserProjectList($username) {
+
+    $project_list = db('project')
+                    ->alias('p')
+                    ->join('chinatt_pms_team t', "t.project = p.id ", 'left')
+                    ->where(function ($query) {
+                        $query->where(['p.acl' => 'private', 't.username' => 'chen']);
+                    })->whereOr(function ($query) {
+                        $query->where(['p.acl' => 'open']);
+                    })
+                    ->group('p.id')->select();
+    return $project_list;
 }

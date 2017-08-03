@@ -22,6 +22,10 @@
         <h3 class="publicdiv mtn mb10 fwb pb15 fs16 pt5 pl20 pr20 sizing" style="background:#f8fafe; border-bottom:1px solid #e5e5e5;">
             <span class="mt15 z">{$task_detail['name']}</span>
             <span class="y derkwt fs13 mt10 iconfont">
+                
+                {if condition="$task_detail['assignedTo'] neq $username"}
+               <a href="{:url('/index/task/action?ac=receive&id='.$task_id)}" class="btn-link" title="取消"  onclick="return confirm('是否领取该任务？');">&#xe619; 领取</a>
+               {/if}
                 <a href="javascript:void(0);" class="btn-link" title="指派" onClick="loadWindow('{:url('/index/task/action?ac=assignTo&id='.$task_id.'&type=assign')}');">&#xe752; 指派</a>
                 {if condition="($task_detail['status'] == 'done') or ($task_detail['status'] == 'doing')"}
                 <a href="javascript:void(0);" class="btn-link cc" title="开始">&#xe621; 开始</a>
@@ -41,11 +45,6 @@
                 <a href="javascript:void(0);" class="btn-link  cc" title="取消">&#xe619; 取消</a>
                 {/if}
                 
-                {if condition="($task_detail['status'] == 'wait') or ($task_detail['status'] == 'doing')"}
-                <a href="javascript:void(0);" class="btn-link cc" title="关闭">&#xe61c; 关闭</a>
-                {else}
-                <a href="javascript:void(0);" class="btn-link" title="关闭" onClick="loadWindow('{:url('/index/task/action?ac=close&id='.$task_id.'&type=task')}');">&#xe61c; 关闭</a>
-                {/if}
                 <a href="{:url('/index/task/add/?task_id='.$task_id)}" class="btn-link" title="编辑">&#xe71d; 编辑</a>
             </span>
         </h3>
@@ -149,7 +148,6 @@
                     <p>由谁创建：<span class=" ml10">{$task_detail['openedBy']|getUser}</span></p>
                     <p>由谁完成：<span class=" ml10">{if condition="!empty($task_detail['finishedBy'])"}{$task_detail['finishedBy']|getUser} 于 {$task_detail['finishedDate']} {/if}</span></p>
                     <p>由谁取消：<span class=" ml10">{if condition="!empty($task_detail['canceledBy'])"}{$user_list[$task_detail['canceledBy']]['realname']}于 {$task_detail['canceledDate']} {/if}</span></p>
-                    <p>由谁关闭：<span class=" ml10">{if condition="!empty($task_detail['closedBy'])"}{$user_list[$task_detail['closedBy']]['realname']} 于 {$task_detail['closedDate']} {/if}</span></p>
                     <p>最后编辑：<span class=" ml10">{if condition="!empty($task_detail['lastEditedBy'])"}{$user_list[$task_detail['lastEditedBy']]['realname']} 于 {$task_detail['lastEditedDate']} {/if}</span></p>
                 </div>
             </div>
