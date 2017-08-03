@@ -73,6 +73,7 @@ class Common extends \think\Controller {
                 ->where(['status' => 1])
                 ->order('sort ASC')
                 ->select();
+        ;
         $tree = new Tree($db_navigation_list);
         $navigation_list = array();
         $navigation_list = classifyTree($db_navigation_list);

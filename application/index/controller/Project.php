@@ -101,7 +101,6 @@ class Project extends Common {
             $map_or['t.username'] = $username;
         }
         //$map['t.username'] = array('eq',$username);
-        
         $project_keyword = input('post.project_keyword', '', 'addslashes');
         if(!empty($project_keyword)){
             $map['p.name'] = array('like',"%$project_keyword%");

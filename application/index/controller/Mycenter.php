@@ -31,7 +31,9 @@ class Mycenter extends Common {
 
         //我的文章总数
         $my_article_count = DB::name('Article')->where(['username' => $this->_G['username'], 'status' => 0])->count();
-
+        
+        
+        
         //以周为单位输出柱形图数据
         $week_data_where['date'] = array('gt', date('Y-m-d', strtotime("-1 year")));
         $week_data_where['objectType'] = array('eq', 'user');

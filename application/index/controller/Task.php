@@ -30,7 +30,12 @@ class Task extends Common {
             //$data = json_encode($message);
             return $json_data;
         }
-
+        if ($ac == 'receive') {
+            DB::table('chinatt_pms_task')->where(['id' => $task_id])->update(array('assignedTo' => $this->_G['username'], 'assignedDate' => date('Y-m-d H:i:s')));
+             write_action($this->_G['username'], $task['project'], 'task', $task_id, 'receive','', $this->_G['username']);
+            save_log($this->_G['uid'], $this->_G['username']);
+            $this->success("领取成功");
+        }
         $user_list = get_userlist_by_projectid($task['project']);
         $type = input('param.type');
         $user_info = Db::name('User')->where(['uid' => $this->_G['uid'], 'deleted' => 0])->find();
@@ -277,6 +282,8 @@ class Task extends Common {
         }
         $action_list = analysis($task_id);
         $navtitle = $task_detail['name'] . ' - ' . $project_detail['name'];
+        $username = $this->_G['username'];
+        $this->assign('username',$username);
         $this->assign('project_detail', $project_detail);
         $this->assign('task_detail', $task_detail);
         $this->assign('user', $user);
