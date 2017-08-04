@@ -1131,8 +1131,8 @@ function getUserProjectList($username) {
 
 /**
  * urt反向解析为对应的模块控制器等
- * @param type $url
- * @return type
+ * @param str $url
+ * @return array 返回对应的模块、控制器、方法名称
  */
 function analysisUrl($url) {
     if (strpos($url, '/') !== false) {
