@@ -11,6 +11,25 @@
 </style>
 <div class="container" style="width:1170px;">
 <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
+    
+    <div class="publicdiv bf pt20 borb pb10">
+        <h3 class="mt5">
+            <a href="{:url('/index/Project/detail/?id='.$project_id)}">{$project_detail['name']}</a>
+            <span class="fs14">
+                <a {if condition="$_G['action'] == 'detail'"}class="ml10 btn-link"{else}class="ml10"{/if} href="{:url('/index/Project/detail?id='.$project_id)}">任务</a>
+                <a {if condition="$_G['action'] == 'group'"}class="ml10 btn-link"{else}class="ml10"{/if} href="{:url('/index/Project/group?project_id='.$project_id)}">团队</a>
+                <a {if condition="$_G['action'] == 'action'"}class="ml10 btn-link"{else}class="ml10"{/if} href="{:url('/index/Project/action?project_id='.$project_id)}">动态</a>
+                <a {if condition="$_G['action'] == 'info'"}class="ml10 btn-link"{else}class="ml10"{/if} href="{:url('/index/Project/info?project_id='.$project_id)}">概况</a>
+            </span>
+            
+            <span class="pull-right fs13 mt5 derkwt iconfont">
+                <a href="javascript:void(0);" class="mr10" onClick="loadWindow('{:url('/index/Project/survey?ac=closed&project_id='.$project_id)}');">&#xe6f1; 关闭</a>
+                <a href="javascript:void(0);" class="mr10" onClick="loadWindow('{:url('/index/Project/survey?ac=done&project_id='.$project_id)}');">&#xe614; 完成</a>
+                <a href="javascript:void(0);" class="mr10" onClick="loadWindow('{:url('/index/Project/survey?ac=doing&project_id='.$project_id)}');">&#xe983; 进行</a>
+            </span>
+        </h3>
+    </div>
+    
     <div class="publicdiv mb20 ptlrb10 bf sizing">
         <h3 class="ac">
             {if condition="$task_id eq 0"}添加任务{/if}

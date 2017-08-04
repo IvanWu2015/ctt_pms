@@ -353,6 +353,7 @@ img{ border:none;}
 .w55{ width:55%;}
 .w60{ width:60%;}
 .w65{ width:65%;}
+.w66{ width:66%;}
 .w70{ width:70%;}
 .w75{ width:75%;}
 .w80{ width:80%;}
@@ -574,7 +575,7 @@ ul.left_nav li a.statusa{ height:22px; line-height:22px; color:#fff; display:blo
 
 a.cc:hover{ color:#ccc !important;}
 
-.tnavattr{ background:#afafaf; color:#000;}
+.tnavattr{ background:#c3c3c3; color:#000;}
 
 .maximg{ max-width:100%;}
 
@@ -632,6 +633,8 @@ a.cc:hover{ color:#ccc !important;}
 @media screen and (max-width:750px){
     .projectlist li{ width:50%;}
 }
+
+.navpl{ padding:14px 15px !important;}
 
 /*文档详情页*/
 .filewp{ width:100%; float:left;}

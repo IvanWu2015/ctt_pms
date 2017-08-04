@@ -7,6 +7,7 @@
 {block name="body"}
 
 <script type="text/javascript" src="tpl_js/highcharts.js"></script>
+<script type="text/javascript" src="tpl_js/limit.js"></script>
 <link href="tpl_css/style.css" rel="stylesheet">
 
 <div class="publicdiv mt20 sizing"><!-- 右边内容 -->
@@ -234,16 +235,16 @@
                     <div class="panel-body">
                         
                         <p class="publicdiv mbn fwb">
-                            <span>ID</span>
-                            <span class="ml20">任务名称</span>
-                            <span class="y">类型</span>
+                            <span class="w66 z">任务名称</span>
+                            <span class="w22 z ac">时间</span>
+                            <span class="w12 z ar">类型</span>
                         </p>
                     
                         {foreach $task_list as $task}
-                        <li class="publicdiv pr tlist pr70 h25 lh25 ellipsis">
-                            <span class="w40p db z">{$task['id']}</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$task['name']}</a>
-                            <span class="tlisty">{$task['typename']}</span>
+                        <li class="publicdiv h35 lh35">
+                            <span class="w66 z ellipsis pr20 sizing"><a href="{:url('/index/task/detail/?id='.$task['id'])}">{$task['name']}</a></span>
+                            <span class="w22 z ac" limit="10">{$task['openedDate']}</span>
+                            <span class="w12 z ar">{$task['typename']}</span>
                         </li>
                         {/foreach}
                     </div>
@@ -263,10 +264,10 @@
                         </p>
                     
                         {foreach $article_list as $article}
-                        <li class="publicdiv pr tlist pr100 h25 lh25 ellipsis">
+                        <li class="publicdiv pr tlist pr100 h35 lh35 ellipsis">
                             <span class="w40p db z">{$article['id']}</span>
                             <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$article['title']}</a>
-                            <span class="tlisty">{$article['time']}</span>
+                            <span class="tlisty" limit="10">{$article['time']}</span>
                         </li>
                         {/foreach}
                         
@@ -287,10 +288,10 @@
                         </p>
                     
                         {foreach $weburl_list as $weburl}
-                        <li class="publicdiv pr tlist pr100 h25 lh25 ellipsis">
+                        <li class="publicdiv pr tlist pr100 h35 lh35 ellipsis">
                             <span class="w40p db z">{$weburl['id']}</span>
                             <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$weburl['title']}</a>
-                            <span class="tlisty">{$weburl['time']}</span>
+                            <span class="tlisty" limit="10">{$weburl['time']}</span>
                         </li>
                         {/foreach}
                         

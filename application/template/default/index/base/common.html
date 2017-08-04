@@ -37,7 +37,7 @@
 	<!-- 头部 -->
 {block name="nav"}
 <!-- 导航条 ================================================== -->
-<div class="navbar navbar-inverse navbar-fixed-top" style="box-shadow:0 0 10px #999;">
+<div class="navbar navbar-inverse navbar-fixed-top" style="height:50px; box-shadow:0 0 10px #999;">
     <div class="navbar-inner">
         <div class="publicdiv pl20 pr20 sizing">
             
@@ -49,8 +49,8 @@
                 <li class="mt10 ml20"><a href="{:url('/index/mycenter')}">首页</a></li>
                 {/if}
                 {foreach $navigation_list as $nav}
-                <li class="mt5 {if condition="strcasecmp($nav['main']['urlData']['controller'],$_G['controller']) == 0"} tnavattr {/if}">                         <!-- 当前状态 class的值 tnavattr -->
-                    <a href="{$nav['main']['true_url']}" class="fs16 " {if condition="$nav['sub_count'] > 0"} data-toggle="dropdown"{/if}>
+                <li class="{if condition="strcasecmp($nav['main']['urlData']['controller'],$_G['controller']) == 0"} tnavattr {/if}">                         <!-- 当前状态 class的值 tnavattr -->
+                    <a href="{$nav['main']['true_url']}" class="fs16 navpl" {if condition="$nav['sub_count'] > 0"} data-toggle="dropdown"{/if}>
                         {$nav['main']['title']}
                         {if condition="$nav['sub_count'] > 0"}<b class="caret"></b>{/if}
                     </a>
@@ -66,7 +66,7 @@
                 {/foreach}
                 
                 {if condition="$_G['is_admin']"}
-                <li class="mt5"><a href="{:url('/admin/index/index')}" class="fs16" target="_blank">后台入口</a></li>
+                <li><a href="{:url('/admin/index/index')}" class="navpl fs16" target="_blank">后台入口</a></li>
                 {/if}
                 
                 {if condition="$_G['uid'] > 0"}
