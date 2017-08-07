@@ -50,9 +50,9 @@ class Common extends \think\Controller {
             }
         }
         //当前所在模块位置信息
-        $this->_G['module'] = $request->module();
-        $this->_G['controller'] = $request->controller();
-        $this->_G['action'] = $request->action();
+        $this->_G['module'] = strtolower($request->module());
+        $this->_G['controller'] = strtolower($request->controller());
+        $this->_G['action'] = strtolower($request->action());
 
         //任务类型列表
         $this->_G['type_list'] = [
@@ -73,7 +73,11 @@ class Common extends \think\Controller {
                 ->where(['status' => 1])
                 ->order('sort ASC')
                 ->select();
-        ;
+        //对url进行反向解析并存入urlData中
+        foreach($db_navigation_list as $key => $tempNavigation) {
+            $tempNavigation['urlData'] = analysisUrl($tempNavigation['url'] );
+            $db_navigation_list[$key] = $tempNavigation;
+        }
         $tree = new Tree($db_navigation_list);
         $navigation_list = array();
         $navigation_list = classifyTree($db_navigation_list);

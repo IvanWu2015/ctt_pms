@@ -714,7 +714,7 @@ function get_userlist_by_projectid($project_id) {
  * @return 返回字符串
  */
 function write_action($username, $project_id, $objectType, $objectid, $action, $comment = '', $extra = '') {
-    
+
     $action_data = array(
         'actor' => $username,
         'project' => $project_id,
@@ -1127,4 +1127,27 @@ function getUserProjectList($username) {
                     })
                     ->group('p.id')->select();
     return $project_list;
+}
+
+/**
+ * urt反向解析为对应的模块控制器等
+ * @param str $url
+ * @return array 返回对应的模块、控制器、方法名称
+ */
+function analysisUrl($url) {
+    if (strpos($url, '/') !== false) {
+        $request = request();
+        $urlArray = explode('/', $url);
+        if (strpos($url, '/') === 0) {
+            unset($urlArray[0]);
+        }
+        krsort($urlArray);
+        $urlArray = array_values($urlArray);
+        $returnData['action'] = empty($urlArray[0]) ? $request->action() : $urlArray[0];
+        $returnData['controller'] = empty($urlArray[1]) ? $request->controller() : $urlArray[1];
+        $returnData['module'] = empty($urlArray[2]) ? $request->module() : $urlArray[2];
+        return $returnData;
+    } else {
+        return $url;
+    }
 }

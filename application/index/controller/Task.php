@@ -32,7 +32,7 @@ class Task extends Common {
         }
         if ($ac == 'receive') {
             DB::table('chinatt_pms_task')->where(['id' => $task_id])->update(array('assignedTo' => $this->_G['username'], 'assignedDate' => date('Y-m-d H:i:s')));
-             write_action($this->_G['username'], $task['project'], 'task', $task_id, 'receive','', $this->_G['username']);
+            write_action($this->_G['username'], $task['project'], 'task', $task_id, 'receive', '', $this->_G['username']);
             save_log($this->_G['uid'], $this->_G['username']);
             $this->success("领取成功");
         }
@@ -283,7 +283,7 @@ class Task extends Common {
         $action_list = analysis($task_id);
         $navtitle = $task_detail['name'] . ' - ' . $project_detail['name'];
         $username = $this->_G['username'];
-        $this->assign('username',$username);
+        $this->assign('username', $username);
         $this->assign('project_detail', $project_detail);
         $this->assign('task_detail', $task_detail);
         $this->assign('user', $user);
@@ -305,6 +305,7 @@ class Task extends Common {
         $project_id = input('project_id', '0', 'intval');
         $task_id = input('task_id', '0', 'intval');
         $username = $this->_G['username'];
+        $project_detail = DB::name('project')->where(['id' => $project_id])->find();
         //修改状态判断任务是否超时
         if ($task_id > 0) {
             $task_details = $task->where(['id' => $task_id])->find(); //任务详情
@@ -381,6 +382,7 @@ class Task extends Common {
             }
         }
         $navtitle = '任务添加/编辑' . $project_detail['name'];
+        $this->assign('project_detail', $project_detail);
         $this->assign('navtitle', $navtitle);
         $this->assign('config_list', $config_list);
         $this->assign('project_id', $project_id);

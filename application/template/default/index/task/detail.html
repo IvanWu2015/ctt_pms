@@ -15,6 +15,26 @@
                 <a {if condition="$_G['action'] == 'action'"}class="ml10 btn-link"{else}class="ml10"{/if} href="{:url('/index/Project/action?project_id='.$project_id)}">动态</a>
                 <a {if condition="$_G['action'] == 'info'"}class="ml10 btn-link"{else}class="ml10"{/if} href="{:url('/index/Project/info?project_id='.$project_id)}">概况</a>
             </span>
+            
+            {if condition="$project_id gt 0"}
+            <span class="pull-right">
+                {if condition="$_G['action'] == 'detail'"}
+                    <a href="{:url('/index/task/add/?project_id='.$project_id)}" class="btn btn-info">添加任务</a>
+                {elseif condition="$_G['action'] == 'weburl'"}
+                    <a href="{:url('/index/weburl/add/?project_id='.$project_id)}" class="btn btn-info">添加收藏</a>
+                {elseif condition="$_G['action'] == 'article'"}
+                    <a href="{:url('/index/article/add/?project_id='.$project_id)}" class="btn btn-info">添加文档</a>
+                {elseif condition="$_G['action'] == 'info'"}
+                    <a href="{:url('/index/project/add/?project_id='.$project_id)}" class="btn btn-info">编辑项目</a>
+                {/if}
+            </span>
+            {/if}
+            
+            <span class="pull-right fs13 mt5 derkwt iconfont">
+                <a href="javascript:void(0);" class="mr10" onClick="loadWindow('{:url('/index/Project/survey?ac=closed&project_id='.$project_id)}');">&#xe6f1; 关闭</a>
+                <a href="javascript:void(0);" class="mr10" onClick="loadWindow('{:url('/index/Project/survey?ac=done&project_id='.$project_id)}');">&#xe614; 完成</a>
+                <a href="javascript:void(0);" class="mr10" onClick="loadWindow('{:url('/index/Project/survey?ac=doing&project_id='.$project_id)}');">&#xe983; 进行</a>
+            </span>
         </h3>
     </div>
 

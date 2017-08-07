@@ -10,12 +10,19 @@
 }
 </style>
 <div class="container" style="width:1170px;">
-<div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
-    <div class="publicdiv mb20 ptlrb10 bf sizing">
-        <h3 class="ac">
+<div class="publicdiv mt10 pl20 pr20 pt8 bf sizing">
+    
+    <div class="publicdiv bf pl10 pt10 ">
+        <h4>
+            <a href="{:url('/index/Project/detail/?id='.$project_id)}">{$project_detail['name']}</a>  >>
             {if condition="$task_id eq 0"}添加任务{/if}
             {if condition="$task_id neq 0"}修改任务{/if}
-        </h3>
+        </h4>
+
+    </div>
+    
+    <div class="publicdiv mb20 ptlrb10 bf sizing">
+
         {if condition="$task_id eq 0"}<form action="{:url('/index/task/add')}" method="post" class="form-horizontal" role="form">{/if}
             {if condition="$task_id neq 0"}<form action="{:url('/index/task/add?task_id='.$task_id)}" method="post" class="form-horizontal" role="form">{/if}
                 <div class="modal-body">
@@ -192,7 +199,7 @@
                     </script>
                 </div>
                 <div class="modal-footer ptn mtn btno ac z w100">
-                    <input type="submit" class="btn btn-primary btn-lg pl20 pr20" onClick="formsubif();" value="完成" />
+                    <input type="submit" class="btn btn-primary btn-lg pl20 pr20" onClick="formsubif();" value="保存" />
                 </div>
             </form>
 
