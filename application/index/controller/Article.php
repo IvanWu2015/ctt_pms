@@ -48,7 +48,7 @@ class article extends Common {
                     if (input('get.class_id', '0', 'intval') > 0) {
                         $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
                     }
-                    if (!empty(input('get.username', '', 'addslashes'))) {
+                    if (strlen(input('get.username', '', 'addslashes')) > 0) {
                         $data['username'] = array('eq', input('get.username', '', 'addslashes'));
                     }
                     $data['status'] = array('eq', 0);
@@ -64,7 +64,7 @@ class article extends Common {
                             $data['acl'] = array('eq', 'private');
                             $data['username'] = array('eq', $this->_G['username']);
                             $data['status'] = array('eq', 0);
-                            if(!empty(input('get.username', '', 'addslashes'))){
+                            if(strlen(input('get.username', '', 'addslashes')) > 0){
                                 $newdata['username'] = array('eq',input('get.username', '', 'addslashes'));
                             }
                             $query->where($data)->where($newdata);
@@ -72,7 +72,7 @@ class article extends Common {
                     if (input('get.class_id', '0', 'intval') > 0) {
                         $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
                     }
-                    if (!empty(input('get.username', '', 'addslashes'))) {
+                    if (strlen(input('get.username', '', 'addslashes')) > 0) {
                         $data['username'] = array('eq', input('get.username', '', 'addslashes'));
                     }
                     $data['status'] = array('eq', 0);
