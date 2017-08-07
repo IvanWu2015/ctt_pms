@@ -45,16 +45,16 @@ class article extends Common {
                             $data['status'] = array('eq', 0);
                             $query->where($data);
                         })->whereOr(function ($query) {
-                            if (input('get.class_id', '0', 'intval') > 0) {
-                                $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
-                            }
-                            if (input('username', '', 'addslashes')) {
-                                $data['username'] = array('eq', input('get.username', '', 'addslashes'));
-                            }
-                            $data['status'] = array('eq', 0);
-                            $data['acl'] = array('eq', 'open');
-                            $query->where($data);
-                        })->count();
+                    if (input('get.class_id', '0', 'intval') > 0) {
+                        $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
+                    }
+                    if (strlen(input('get.username', '', 'addslashes')) > 0) {
+                        $data['username'] = array('eq', input('get.username', '', 'addslashes'));
+                    }
+                    $data['status'] = array('eq', 0);
+                    $data['acl'] = array('eq', 'open');
+                    $query->where($data);
+                })->count();
         $article_list = $article
                         ->where(function ($query) {
                             //搜索内容与筛选
@@ -64,21 +64,21 @@ class article extends Common {
                             $data['acl'] = array('eq', 'private');
                             $data['username'] = array('eq', $this->_G['username']);
                             $data['status'] = array('eq', 0);
-                            if(!empty(input('get.username', '', 'addslashes'))){
+                            if(strlen(input('get.username', '', 'addslashes')) > 0){
                                 $newdata['username'] = array('eq',input('get.username', '', 'addslashes'));
                             }
                             $query->where($data)->where($newdata);
                         })->whereOr(function ($query) {
-                            if (input('get.class_id', '0', 'intval') > 0) {
-                                $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
-                            }
-                            if (input('get.username', '', 'addslashes')) {
-                                $data['username'] = array('eq', input('get.username', '', 'addslashes'));
-                            }
-                            $data['status'] = array('eq', 0);
-                            $data['acl'] = array('eq', 'open');
-                            $query->where($data);
-                        })->paginate(20, $article_count, ['path' => url('/index/article/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
+                    if (input('get.class_id', '0', 'intval') > 0) {
+                        $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
+                    }
+                    if (strlen(input('get.username', '', 'addslashes')) > 0) {
+                        $data['username'] = array('eq', input('get.username', '', 'addslashes'));
+                    }
+                    $data['status'] = array('eq', 0);
+                    $data['acl'] = array('eq', 'open');
+                    $query->where($data);
+                })->paginate(20, $article_count, ['path' => url('/index/article/lists/'), 'query' => ['keyword' => $keyword, 'type' => $type]]);
 
 
         $page = $article_list->render(); // 分页显示输出
@@ -164,7 +164,6 @@ class article extends Common {
         $project_list = Db::name('Project')->where($data)->order("id DESC")->paginate(15); //项目列表
         if ($article_id > 0) {
             $article_detail = DB('Article')->where(['status' => 0, 'id' => $article_id])->find();
-            $article_detail['contents'] = stripslashes($article_detail['contents']);
             if (empty($article_detail)) {
                 $this->error('不存在该文章');
             }
