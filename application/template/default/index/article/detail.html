@@ -3,19 +3,22 @@
 {block name="header"}
 {/block}
 
+{block name="footer"}
+{/block}
+
 {block name="body"}
 <style>
-    body{ background:#fff;}
     .footer{ border-top:none; background:none;}
 </style>
 
-<a href="{:url('/index/article/add')}" class="addarticle iconfont" title="添加文档">&#xe607;</a>
-
-<div class="filewp">
-    <div class="fileleft">
+<div class="filewp" style="margin-top:30px;">
+    <div class="fileleft borl" id="fileleft">
+        <div class="fileleftwp">
+        <h3 class="pl20 pr20 lh30 sizing fs16">文档管理</h3>
         <ul class="publicdiv filenav bort borb">
-            <li class="iconfont filenavattr" onClick="casearch(1);" id="casearch_1"><span class="fs16 z">&#xe615;</span> 目录</li>
+            <li class="iconfont blno filenavattr" onClick="casearch(1);" id="casearch_1"><span class="fs16 z">&#xe615;</span> 目录</li>
             <li class="iconfont" onClick="casearch(2);" id="casearch_2"><span class="fs16 z">&#xe604;</span> 搜索</li>
+            <a href="{:url('/index/article/add')}"><li class="iconfont y" title="添加文档"><span class="fs20 z">&#xe607;</span></li></a>
         </ul>
         <ul class="fileleftNav" id="fileleftNav">
             {foreach name="class_name_list" id="value" key="key" }
@@ -73,11 +76,12 @@
             });
         }
         </script>
+        </div>
     </div>
-    <div class="fileright sizing">
+    <div class="fileright bf sizing" id="fileright">
         <div class="filerightwp sizing">
-            <h2 class="mt20 pb20 pt20 borb sizing">{$article_detail['title']}</h2>
-            <p class="publicdiv mb10 lh25">
+            <h2 class="mt20 pb10 pt20 sizing">{$article_detail['title']}</h2>
+            <p class="publicdiv pb10 c6 lh25 borb">
                 发布者：<span class="text-primary mr20">{$article_detail['username']}</span>
                 分类：<span class="mr20">{$article_detail['class_name']}</span>
                 项目：<span class="mr20">{$article_detail['project_name']}</span>
@@ -93,37 +97,21 @@
 </div>
 
 <script>
-    function flienavshow(id) {
-        if (jQuery('#flienavclasswp_' + id).css('display') == 'none') {
-            jQuery('#flienavicon_' + id).css({transform: 'rotate(90deg)'});
-            jQuery('#flienavclasswp_' + id).slideDown();
-        } else {
-            jQuery('#flienavicon_' + id).css({transform: 'rotate(0deg)'});
-            jQuery('#flienavclasswp_' + id).slideUp();
-        }
+jQuery(function(){
+    var fileRightHeight = jQuery('#fileright').height();
+    jQuery('#fileleft').css({height: fileRightHeight + 'px'});
+});
 
+function flienavshow(id) {
+    if (jQuery('#flienavclasswp_' + id).css('display') == 'none') {
+        jQuery('#flienavicon_' + id).css({transform: 'rotate(90deg)'});
+        jQuery('#flienavclasswp_' + id).slideDown();
+    } else {
+        jQuery('#flienavicon_' + id).css({transform: 'rotate(0deg)'});
+        jQuery('#flienavclasswp_' + id).slideUp();
     }
-</script>
 
-<!--<div class="publicdiv mt20 bf pb20 mb10 sizing" id="action_wrap">
-    <div style="width:1100px; margin:0px auto;">
-        <div class="publicdiv mt20 bor pl20 pr20 sizing">
-        <div class="publicdiv borb pl20 pr20 sizing">
-            <h2 class="mt20 pb20 pt20 pl20 pr20 ac sizing">{$article_detail['title']}</h2>
-            <p class="publicdiv mt20 mb10 lh35">
-                发布者：<span class="text-primary mr20">{$article_detail['username']}</span>
-                分类：<span class="mr20">{$article_detail['class_name']}</span>
-                项目：<span class="mr20">{$article_detail['project_name']}</span>
-                
-                <a href="{:url('/index/article/add?id='.$article_id)}" class="btn-link iconfont y" title="编辑">&#xe71d; 编辑</a>
-                <span class="y mr20">发布时间：{$article_detail['time']}</span>
-            </p>
-        </div>
-        
-        <div class="publicdiv pt20 pb20 pl20 pr20 sizing">{$article_detail['contents']}</div>
-        
-        </div>
-    </div>
-</div>-->
+}
+</script>
 
 {/block}

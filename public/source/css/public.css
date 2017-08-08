@@ -637,14 +637,15 @@ a.cc:hover{ color:#ccc !important;}
 .navpl{ padding:14px 15px !important;}
 
 /*文档详情页*/
-.filewp{ width:100%; float:left;}
-.fileleft{ width:280px; height:100%; overflow-y:auto; padding-top:60px; background:#fafafa; border-right:1px #ddd solid; position:fixed; top:0px; left:0px;}
-.fileleft::-webkit-scrollbar {width:5px;height:10px;}
-.fileleft::-webkit-scrollbar-button    {background-color:#fff;}
-.fileleft::-webkit-scrollbar-track     {background:#fff;}
-.fileleft::-webkit-scrollbar-thumb{background:#ccc;border-radius:4px;}
-.fileleft::-webkit-scrollbar-corner {background:#fff;}
-.fileleft::-webkit-scrollbar-resizer  {background:#fff;}
+.filewp{ width:1300px; margin:0px auto;}
+.fileleft{ width:280px; background:#f9f9f9; border-right:1px #ddd solid; float:left; position:relative;}
+.fileleftwp{ width:100%; float:left; height:100%; overflow-y:auto;}
+.fileleftwp::-webkit-scrollbar {width:5px;height:10px;}
+.fileleftwp::-webkit-scrollbar-button{background-color:#fff;}
+.fileleftwp::-webkit-scrollbar-track{background:#fff;}
+.fileleftwp::-webkit-scrollbar-thumb{background:#ccc;border-radius:4px;}
+.fileleftwp::-webkit-scrollbar-corner{background:#fff;}
+.fileleftwp::-webkit-scrollbar-resizer {background:#fff;}
 
 .filenav{ height:41px;}
 .filenav li{ float:left; height:40px; line-height:40px; padding:0px 20px; cursor:pointer;}
@@ -669,7 +670,7 @@ a.cc:hover{ color:#ccc !important;}
 .fileleftNav li .flienavclasswp .flienavclass{ width:100%; float:left; height:35px; line-height:35px; padding-left:50px;}
 .flienavclass:hover{ background:#f2f2f2;}
 
-.fileright{ width:100%; float:left; min-height:400px; padding-left:290px;}
+.fileright{ width:1020px; float:right; min-height:400px;}
 
 
 
