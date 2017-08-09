@@ -17,10 +17,10 @@
     <tbody id="theader">
         {foreach $task_list as $task}
         <tr id="taskList">
-            <td class="iconfont">
+            <td>
                 <a href="{:url('/index/task/detail/?id='.$task['id'])}" id="taskName">
                     {if condition="$task['predecessor'] > 0"}
-                    <span title="{$task['p_name']}">
+                    <span class="iconfont" title="{$task['p_name']}">
                         &#xe759;
                     </span>
                     {/if}

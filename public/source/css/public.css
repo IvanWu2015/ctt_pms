@@ -648,7 +648,7 @@ a.cc:hover{ color:#ccc !important;}
 .fileleftwp::-webkit-scrollbar-resizer {background:#fff;}
 
 .filenav{ height:41px;}
-.filenav li{ float:left; height:40px; line-height:40px; padding:0px 20px; cursor:pointer;}
+.filenav li{ float:left; height:40px; line-height:40px; padding:0px 14px; cursor:pointer;}
 .filenav li.filenavattr{ border-bottom:1px #fafafa solid; border-right:1px #dedede solid; border-left:1px #dedede solid;}
 
 .addarticle{ width:50px; height:50px; line-height:50px; text-align:center; border-radius:100%; background:#019416; color:#fff; font-size:30px; display:block; z-index:9; position:fixed; bottom:50px; right:50px;}
@@ -670,7 +670,7 @@ a.cc:hover{ color:#ccc !important;}
 .fileleftNav li .flienavclasswp .flienavclass{ width:100%; float:left; height:35px; line-height:35px; padding-left:50px;}
 .flienavclass:hover{ background:#f2f2f2;}
 
-.fileright{ width:1020px; float:right; min-height:400px;}
+.fileright{ width:1020px; float:right;}
 
 
 

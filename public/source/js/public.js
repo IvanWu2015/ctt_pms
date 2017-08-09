@@ -106,13 +106,24 @@ function casearch(val){
     if(val == 1){
         jQuery('#casearch_1').addClass('filenavattr');
         jQuery('#casearch_2').removeClass('filenavattr');
+        jQuery('#casearch_3').removeClass('filenavattr');
         jQuery('#fileleftNav').show();
         jQuery('#articlewp').hide();
+        jQuery('#iuser').hide();
     } else if(val == 2){
         jQuery('#casearch_1').removeClass('filenavattr');
         jQuery('#casearch_2').addClass('filenavattr');
+        jQuery('#casearch_3').removeClass('filenavattr');
         jQuery('#fileleftNav').hide();
         jQuery('#articlewp').show();
+        jQuery('#iuser').hide();
+    } else if(val == 3){
+        jQuery('#casearch_1').removeClass('filenavattr');
+        jQuery('#casearch_2').removeClass('filenavattr');
+        jQuery('#casearch_3').addClass('filenavattr');
+        jQuery('#fileleftNav').hide();
+        jQuery('#articlewp').hide();
+        jQuery('#iuser').show();
     }
     
 }
