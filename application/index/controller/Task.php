@@ -305,7 +305,9 @@ class Task extends Common {
         $project_id = input('project_id', '0', 'intval');
         $task_id = input('task_id', '0', 'intval');
         $username = $this->_G['username'];
-        $project_detail = DB::name('project')->where(['id' => $project_id])->find();
+        if($project_id > 0) {
+            $project_detail = DB::name('project')->where(['id' => $project_id])->find();
+        }
         //修改状态判断任务是否超时
         if ($task_id > 0) {
             $task_details = $task->where(['id' => $task_id])->find(); //任务详情
@@ -313,9 +315,10 @@ class Task extends Common {
             $project_id = $task_details['project'];
             $big_time_ten = strtotime($task_details['openedDate']) + 10 * 60; //任务创建后10分钟
             if (time() > $big_time_ten && $this->_G['is_admin'] != 1) {
-                $this->error("超时，无法修改");
+                $this->error("超过允许修改时间，无法修改！");
             }
         }
+
         //如果有所属项目则获取成员列表
         if ($project_id > 0) {
             $user_list = get_userlist_by_projectid($project_id);
