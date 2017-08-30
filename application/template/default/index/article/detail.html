@@ -18,6 +18,7 @@
         <ul class="publicdiv filenav bort borb">
             <li class="iconfont blno filenavattr" onClick="casearch(1);" id="casearch_1"><span class="fs16 z">&#xe615;</span> 目录</li>
             <li class="iconfont" onClick="casearch(2);" id="casearch_2"><span class="fs16 z">&#xe604;</span> 搜索</li>
+            <li class="iconfont" onClick="casearch(3);" id="casearch_3"><span class="fs16 z">&#xe647;</span> 我的</li>
             <a href="{:url('/index/article/add')}"><li class="iconfont y" title="添加文档"><span class="fs20 z">&#xe607;</span></li></a>
         </ul>
         <ul class="fileleftNav" id="fileleftNav">
@@ -76,6 +77,16 @@
             });
         }
         </script>
+        
+        <ul class="publicdiv searchlist mt10" id="iuser">
+            <div class="publicdiv" id="searchul">
+                <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
+                <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
+                <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
+                <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
+            </div>
+        </ul>
+        
         </div>
     </div>
     <div class="fileright bf sizing" id="fileright">
@@ -100,6 +111,10 @@
 jQuery(function(){
     var fileRightHeight = jQuery('#fileright').height();
     jQuery('#fileleft').css({height: fileRightHeight + 'px'});
+    
+    var wh = jQuery(document).height() - 70;    //获取浏览器当前窗口文档的高度 再 减掉 70 
+    jQuery('#fileright').css('min-height', wh + 'px');    //右测
+    jQuery('#fileleft').css('min-height', wh + 'px');
 });
 
 function flienavshow(id) {
