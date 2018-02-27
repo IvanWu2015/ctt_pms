@@ -762,7 +762,10 @@ a.cc:hover{ color:#ccc !important;}
 .commentbutton{ padding:0px !important;}
 input.commentsub{width:113px !important; height:35px !important; border:none !important; cursor:pointer; background:#73b9ed; color:#fff;float:right;}
 
-.contacts_bg{min-height:755px; background:url('http://img95.699pic.com/photo/00009/8750.jpg_wh860.jpg') no-repeat center center; background-size:100% auto;}
+.female_bg{min-height:755px; background:url('../images/female_bg.jpg') no-repeat center center; background-size:100% auto;}
+.male_bg{min-height:755px; background:url('../images/male_bg.jpg') no-repeat center center; background-size:100% auto;}
+
+.nameleft{ width:130px; float:left; padding:15px 30px 15px 0px; text-align:right; margin-right:20px; border-right:1px #dedede solid;}
 
 .g-conwp{ width:1170px; height:470px; padding:40px 440px 40px 40px; background:rgba(0,0,0,0.6); position:fixed; top:0; left:0; right:0; bottom:0; margin:auto;}
 .g-imgwp{ width:360px; height:360px; position:absolute; right:40px; top:40px;}
