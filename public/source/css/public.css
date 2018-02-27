@@ -97,12 +97,12 @@ img{ border:none;}
 .plr10{ padding-left:10px; padding-right:10px;}
 .ptlrb10{ padding:10px 10px;}
 
-.pl15{ padding-left:15px;}
-.pr15{ padding-right:15px;}
-.pb15{ padding-bottom:15px;}
-.pt15{ padding-top:15px;}
+.pl15{ padding-left:15px !important;}
+.pr15{ padding-right:15px !important;}
+.pb15{ padding-bottom:15px !important;}
+.pt15{ padding-top:15px !important;}
 .plr15{ padding-left:15px; padding-right:15px;}
-.ptlrb15{ padding:15px 15px;}
+.ptlrb15{ padding:15px 15px !important;}
 
 .pl20{ padding-left:20px;}
 .pr20{ padding-right:20px;}
@@ -328,6 +328,7 @@ img{ border:none;}
 .w30{ width:30%;}
 .w31{ width:31%;}
 .w32{ width:32%;}
+.w32_7{ width:32.7% !important;}
 .w33{ width:33%;}
 .w34{ width:34%;}
 .w35{ width:35%;}
@@ -360,7 +361,7 @@ img{ border:none;}
 .w85{ width:85%;}
 .w90{ width:90%;}
 .w95{ width:95%;}
-.w100{ width:100%;}
+.w100{ width:100% !important;}
 
 .w40p{ width:40px;}
 
@@ -441,7 +442,7 @@ img{ border:none;}
 
 /*弹窗页*/
 .modalwrap{ width:800px; background:#fff; padding:60px 0px 60px 0px; box-shadow:0px 0px 15px #999; border-radius:5px; z-index:99; position:fixed; top:0; left:0; right:0; bottom:0; margin:auto;}
-.modalwrap .modaltitle{ width:100%; height:50px; line-height:50px; margin:0px !important; font-size:15px; border-bottom:1px #dedede solid; z-index:100; position:absolute; top:0px; left:0px;}
+.modalwrap .modaltitle{ width:100%; height:50px; line-height:50px; margin:0px !important; cursor:move; font-size:15px; border-bottom:1px #dedede solid; z-index:100; position:absolute; top:0px; left:0px;}
 .modalwrap .modalbottom{ width:100%; height:46px; line-height:46px; font-weight:normal; border-top:1px #dedede solid; z-index:100; position:absolute; bottom:0px; left:0px;}
 .modalwrap .modalbottom .modalclose{ border-radius:3px; height:30px; line-height:30px; cursor:pointer;}
 .modalcontnet{ overflow-y:auto;}
@@ -609,8 +610,8 @@ a.cc:hover{ color:#ccc !important;}
 .projectlist li{ width:20%; float:left; padding-left:20px; margin-bottom:20px; position:relative;}
 .projectlist li .plwp{ width:100%; float:left; border-radius:4px; padding:20px;}
 
-.pltitle{ width:100%; float:left; line-height:40px; font-weight:normal; font-size:17px; margin:0;}
-.pltitle a{ color:#000;}
+.pltitle{ width:100%; float:left; height:50px; display:table; overflow:hidden; font-weight:normal; font-size:17px; margin:0; padding-right:20px;}
+.pltitle a{ vertical-align:middle; display:table-cell; line-height:25px;}
 .plup{ color:#7eb9eb; position:absolute; top:10px; right:10px;}
 .plup:hover{ color:#337ab7;}
 .plprivate{ color:#7eb9eb; font-size:16px; position:absolute; top:10px; right:30px;}
@@ -697,8 +698,8 @@ a.cc:hover{ color:#ccc !important;}
 .plprogress span.bf50{ background:#5bc0de;}
 
 .projectlistnew{ width:100%; float:left;}
-.projectlistnew li{ width:25%; float:left; min-height:253px; margin:0px 0px 25px 0px; padding-left:20px;}
-.projectlistnew li .plnwp{ width:100%; float:left; height:253px; padding:10px 20px; position:relative; border:1px #dedede solid; border-radius:2px; box-shadow:2px 2px 3px #e2e2e2; background:#fff;}
+.projectlistnew li{ width:25%; float:left; min-height:263px; margin:0px 0px 25px 0px; padding-left:20px;}
+.projectlistnew li .plnwp{ width:100%; float:left; height:263px; padding:10px 20px; position:relative; border:1px #dedede solid; border-radius:2px; box-shadow:2px 2px 3px #e2e2e2; background:#fff;}
 .incondesc{ width:100%; float:left; height:60px; padding-left:70px; position:relative;}
 .incondesc span{ width:100%; float:left; height:60px; overflow-y:auto;}
 .incondesc span::-webkit-scrollbar {width:3px;height:10px;}
@@ -724,11 +725,12 @@ a.cc:hover{ color:#ccc !important;}
     .projectlistnew li{ width:100%;}
 }
 
+.weburllist tr{ background:none !important;}
+.weburllist td{ padding:15px 8px !important; border-top:none !important; border-bottom:1px #eee solid;}
+.form-group{ width:100%;}
+
+
 /*搜索页*/
-
-
-
-
 .highcharts-legend-item .highcharts-point{ display:none;}
 
 .status{ width:110px; height:35px; color:#fff; float:right; margin-left:10px; text-align:center; border-radius:2px; line-height:35px; display:block; position:absolute; top:0; right:0;}

@@ -46,7 +46,7 @@ canvas{ width:60px; height:60px; position:absolute; top:20px; left:0;}
                 <div class="plnwp">
                     {if condition="$project['acl'] == 'private'"}<span class="plprivate iconfont">&#xe611;</span>{/if}
                     <a href="{:url('/index/project/add/?project_id='.$project['id'])}" title="编辑" class="plup iconfont">&#xe71d;</a>
-                    <h3 class="pltitle"><a href="{:url('/index/project/detail/?id='.$project['id'])}" class="c0" id="projectName">{$project['name']}</a></h3>
+                    <h3 class="pltitle sizing"><a href="{:url('/index/project/detail/?id='.$project['id'])}" class="c0" id="projectName">{$project['name']}</a></h3>
                     <div class="incondesc mt10 mb10">
                         <div class="indicatorContainer" id="indicatorContainer_{$project['id']}"></div>
                         <span class="c9">{$project['desc']}</span>
