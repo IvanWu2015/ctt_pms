@@ -1,5 +1,5 @@
-<table class="table table-striped borl bort borr borb">
-    <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+<table class="table table-striped">
+    <thead style="background:#f6f6f6;">
         <tr>
             <th class="bbno pt15 pb15"><a href="{:url('/index/project/detail/?id='.$project_id)}">任务名称</a></th>
             <th class="ac bbno pt15 pb15">任务类型</th>
@@ -14,7 +14,7 @@
             <th class="ac bbno pt15 pb15">操作</th>
         </tr>
     </thead>
-    <tbody id="theader">
+    <tbody class="weburllist" id="theader">
         {foreach $task_list as $task}
         <tr id="taskList">
             <td>

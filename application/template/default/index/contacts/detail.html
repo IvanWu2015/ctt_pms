@@ -1,0 +1,67 @@
+{extend name="base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+<div class="publicdiv bf">
+<div class="container" style="width: 1170px;">
+    <div class="publicdiv mt20 pt20 sizing" id="action_wrap">
+        <div class="publicdiv sizing">
+                
+                <ul class="publicdiv bor pl20 pr20 mb10 sizing">
+                    <li class="pt15 pb15 bordb">联&nbsp;&nbsp;系&nbsp;人<span class="ml30">张三</span></li>
+                    <li class="pt15 pb15 bordb">联系电话<span class="ml30">0592-5813938</span></li>
+                    <li class="pt15 pb15 bordb">联系地址<span class="ml30">福建省厦门市湖里区</span></li>
+                    <li class="pt15 pb15 bordb">所属公司<span class="ml30">厦门市优拉体育用品有限公司</span></li>
+                    <li class="pt15 pb15 bordb">创&nbsp;&nbsp;建&nbsp;人<span class="ml30">admin</span></li>
+                    <li class="pt15 pb15">创建时间<span class="ml30">2017-07-11 17:07:48</span></li>
+                </ul>
+                    
+                    <h3 class="publicdiv lh40 fs18 mt30">相关联系人</h3>
+                    <table class="table table-striped">
+                        <thead style="background:#f6f6f6;">
+                            <tr>
+                                <th class="bbno pt15 pb15">联系人</th>
+                                <th class="ac bbno pt15 pb15">联系电话</th>
+                                <th class="ac bbno pt15 pb15">地址</th>
+                                <th class="bbno pt15 pb15">所属公司</th>
+                                <th class="ac bbno pt15 pb15">创建人</th>
+                                <th class="ac bbno pt15 pb15">时间</th>
+                            </tr>
+                        </thead>
+                        <tbody class="weburllist">
+                            <tr id="projectlist">
+                                <td class=""><a href="{:url('/index/contacts/detail?id='.$contacts['id'])}">张三</a></td>
+                                <td class="ac">0592-5813938</td>
+                                <td class="ac">福建省厦门市湖里区</td>
+                                <td><a href="{:url('/index/company/detail?id='.$contacts['id'])}">厦门市优拉体育用品有限公司</a></td>
+                                <td class="ac">admin</td>
+                                <td class="ac">2017-07-11 17:07:48</td>
+                            </tr>
+                            <tr id="projectlist">
+                                <td class=""><a href="{:url('/index/contacts/detail?id='.$contacts['id'])}">张三</a></td>
+                                <td class="ac">0592-5813938</td>
+                                <td class="ac">福建省厦门市湖里区</td>
+                                <td><a href="{:url('/index/company/detail?id='.$contacts['id'])}">厦门市优拉体育用品有限公司</a></td>
+                                <td class="ac">admin</td>
+                                <td class="ac">2017-07-11 17:07:48</td>
+                            </tr>
+                            <tr id="projectlist">
+                                <td class=""><a href="{:url('/index/contacts/detail?id='.$contacts['id'])}">张三</a></td>
+                                <td class="ac">0592-5813938</td>
+                                <td class="ac">福建省厦门市湖里区</td>
+                                <td><a href="{:url('/index/company/detail?id='.$contacts['id'])}">厦门市优拉体育用品有限公司</a></td>
+                                <td class="ac">admin</td>
+                                <td class="ac">2017-07-11 17:07:48</td>
+                            </tr>
+                        </tbody>
+                        <div class="publicdiv ac pagingw">{$page}</div>
+                    </table>
+                    
+                </p>
+        </div>
+    </div>
+</div>
+</div>
+{/block}

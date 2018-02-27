@@ -45,4 +45,9 @@ class Contacts extends Common {
         $this->assign('user_list', $user_list);
         return $this->fetch($this->templatePath);
     }
+    
+    //联系人详情
+    public function detail() {
+        return $this->fetch($this->templatePath);
+    }
 }
