@@ -25,10 +25,10 @@
         <table class="table table-striped">
             <thead style="background:#f6f6f6;">
                 <tr>
-                    <th class="bbno pt15 pb15">所属公司</th>
                     <th class="bbno pt15 pb15">联系人</th>
                     <th class="ac bbno pt15 pb15">联系电话</th>
                     <th class="ac bbno pt15 pb15">地址</th>
+                    <th class="bbno pt15 pb15">所属公司</th>
                     <th class="ac bbno pt15 pb15">创建人</th>
                     <th class="ac bbno pt15 pb15">类型</th>
                     <th class="ac bbno pt15 pb15">时间</th>
@@ -37,42 +37,16 @@
             </thead>
             <tbody class="weburllist">
                 <tr id="projectlist">
-                    <td>厦门市优拉体育用品有限公司</td>
-                    <td class="">张三</td>
+                    <td class=""><a href="{:url('/index/address/detail?id='.$address['id'])}">张三</a></td>
                     <td class="ac">0592-5813938</td>
                     <td class="ac">福建省厦门市湖里区</td>
+                    <td>厦门市优拉体育用品有限公司</td>
                     <td class="ac">admin</td>
                     <td class="ac">到付</td>
                     <td class="ac">2017-07-11 17:07:48</td>
                     <td class="ac iconfont">
-                        <a href="{:url('/index/weburl/add/?id='.$weburl['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
-                        <a href="{:url('/index/weburl/lists/?deleted=1&id='.$weburl['id'])}" class="cred fs16" title="删除">&#xe601;</a>
-                    </td>
-                </tr>
-                <tr id="projectlist">
-                    <td>厦门市优拉体育用品有限公司</td>
-                    <td class="">张三</td>
-                    <td class="ac">0592-5813938</td>
-                    <td class="ac">福建省厦门市湖里区</td>
-                    <td class="ac">admin</td>
-                    <td class="ac">现付</td>
-                    <td class="ac">2017-07-11 17:07:48</td>
-                    <td class="ac iconfont">
-                        <a href="{:url('/index/weburl/add/?id='.$weburl['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
-                        <a href="{:url('/index/weburl/lists/?deleted=1&id='.$weburl['id'])}" class="cred fs16" title="删除">&#xe601;</a>
-                    </td>
-                </tr>
-                <tr id="projectlist">
-                    <td>厦门市优拉体育用品有限公司</td>
-                    <td class="">张三</td>
-                    <td class="ac">0592-5813938</td>
-                    <td class="ac">福建省厦门市湖里区</td>
-                    <td class="ac">admin</td>
-                    <td class="ac">现付</td>
-                    <td class="ac">2017-07-11 17:07:48</td>
-                    <td class="ac iconfont">
-                        <a href="{:url('/index/weburl/add/?id='.$weburl['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
-                        <a href="{:url('/index/weburl/lists/?deleted=1&id='.$weburl['id'])}" class="cred fs16" title="删除">&#xe601;</a>
+                        <a href="{:url('/index/address/add/?id='.$address['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
+                        <a href="{:url('/index/address/lists/?deleted=1&id='.$address['id'])}" class="cred fs16" title="删除">&#xe601;</a>
                     </td>
                 </tr>
             </tbody>
@@ -155,7 +129,22 @@
             </div>
             <script>
             function addresssub(){
-                 
+                var url="{:url('/index/address/lists/?id='.$project_id)}";
+                jQuery.ajax({
+                    type: 'post',
+                    url: url,
+                    data: jQuery('#formaddress').serialize(),
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.result == 'success') {
+                            jQuery('#addpr').html('操作成功！').show(1).delay(2000).hide(1);
+                            modalclose();
+                            setTimeout("location.reload()",2500);
+                        }else{
+                            jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
+                        }
+                    }
+                });
             }
             </script>
         </div><!-- /.modal-content -->
