@@ -46,7 +46,7 @@
                             <th class="ac bbno pt15 pb15 lh30">创建时间</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="weburllist">
                         {foreach $plan_list as $plan}
                         <tr>
                             <td class="btno lh25 w40"><a href="{:url('/index/plan/detail/?id='.$plan['id'])}">{$plan['title']}</a></td>

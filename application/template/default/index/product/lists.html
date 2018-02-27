@@ -19,8 +19,8 @@
             </h3>
         </div>
 
-        <table class="table table-striped borl bort borr borb">
-            <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+        <table class="table table-striped">
+            <thead style="background:#f6f6f6;">
                 <tr>
                     <th class="bbno pt15 pb15">产品名称</th>
                     <th class="ac bbno pt15 pb15">产品代号</th>
@@ -30,7 +30,7 @@
                     <th class="ac bbno pt15 pb15">添加需求</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="weburllist">
                 {foreach $product_list as $product}
                 <tr>
                     <td class=""><a href="{:url('/index/product/detail/?id='.$product['id'])}">{$product['name']}</a></td>
