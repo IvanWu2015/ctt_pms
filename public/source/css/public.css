@@ -97,12 +97,12 @@ img{ border:none;}
 .plr10{ padding-left:10px; padding-right:10px;}
 .ptlrb10{ padding:10px 10px;}
 
-.pl15{ padding-left:15px;}
-.pr15{ padding-right:15px;}
-.pb15{ padding-bottom:15px;}
-.pt15{ padding-top:15px;}
+.pl15{ padding-left:15px !important;}
+.pr15{ padding-right:15px !important;}
+.pb15{ padding-bottom:15px !important;}
+.pt15{ padding-top:15px !important;}
 .plr15{ padding-left:15px; padding-right:15px;}
-.ptlrb15{ padding:15px 15px;}
+.ptlrb15{ padding:15px 15px !important;}
 
 .pl20{ padding-left:20px;}
 .pr20{ padding-right:20px;}
@@ -328,6 +328,7 @@ img{ border:none;}
 .w30{ width:30%;}
 .w31{ width:31%;}
 .w32{ width:32%;}
+.w32_7{ width:32.7% !important;}
 .w33{ width:33%;}
 .w34{ width:34%;}
 .w35{ width:35%;}
@@ -360,7 +361,7 @@ img{ border:none;}
 .w85{ width:85%;}
 .w90{ width:90%;}
 .w95{ width:95%;}
-.w100{ width:100%;}
+.w100{ width:100% !important;}
 
 .w40p{ width:40px;}
 
@@ -724,11 +725,12 @@ a.cc:hover{ color:#ccc !important;}
     .projectlistnew li{ width:100%;}
 }
 
+.weburllist tr{ background:none !important;}
+.weburllist td{ padding:15px 8px !important; border-top:none !important; border-bottom:1px #eee solid;}
+.form-group{ width:100%;}
+
+
 /*搜索页*/
-
-
-
-
 .highcharts-legend-item .highcharts-point{ display:none;}
 
 .status{ width:110px; height:35px; color:#fff; float:right; margin-left:10px; text-align:center; border-radius:2px; line-height:35px; display:block; position:absolute; top:0; right:0;}
