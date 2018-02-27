@@ -322,8 +322,9 @@ class Task extends Common {
         //如果有所属项目则获取成员列表
         if ($project_id > 0) {
             $user_list = get_userlist_by_projectid($project_id);
+            $project_detail = DB('Project')->where(['id' => $project_id])->find();
         }
-        $project_detail = DB('Project')->where(['id' => $project_id])->find();
+        
         //该用户是否为任务分配成员、是否为管理员、是否为项目管理员、是否为项目成员
         if ($this->_G['username'] != $task_details['assignedTo'] && $this->_G['is_admin'] != 1 && $this->_G['username'] != $project_detail['project_admin'] && in_array($this->_G['username'], $user_list)) {
             $this->error("权限不足");
