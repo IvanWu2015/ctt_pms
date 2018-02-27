@@ -8,33 +8,50 @@
     <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
 
         <div class="publicdiv borb mb20 pt10 pb10 bf sizing">
-            <h3>
-                联系地址
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal" class="btn btn-info y">添加</a>
-            </h3>
+            <h3>公司</h3>
+        </div>
+        
+        <div class="publicdiv mb10">
+            <form class="form-inline" role="form">
+                <a href="{:url('/index/company/add')}" class="btn btn-info y">添加</a>
+                
+                <input type="text" name="name" class="form-control" placeholder="公司名称" />
+                <input type="text" class="form-control" placeholder="联系人" />
+                <select name="type" class="form-control">
+                    <option value="1">国企</option>
+                    <option value="2">私营</option>
+                    <option value="3">合资</option>
+                    <option value="4">外资</option>
+                </select>
+                <input type="submit" class="btn btn-warning" value="查询" />
+            </form>
         </div>
         
         <table class="table table-striped">
             <thead style="background:#f6f6f6;">
                 <tr>
-                    <th class="bbno pt15 pb15">公司</th>
+                    <th class="bbno pt15 pb15">公司名称</th>
                     <th class="ac bbno pt15 pb15">联系人</th>
+                    <th class="ac bbno pt15 pb15">联系电话</th>
+                    <th class="ac bbno pt15 pb15">办公地址</th>
                     <th class="ac bbno pt15 pb15">类型</th>
-                    <th class="ac bbno pt15 pb15">所在市</th>
+                    <th class="ac bbno pt15 pb15">规模</th>
                     <th class="ac bbno pt15 pb15">时间</th>
                     <th class="ac bbno pt15 pb15">操作</th>
                 </tr>
             </thead>
             <tbody class="weburllist">
                 <tr id="projectlist">
-                    <td><a href="{:url('/index/address/detail?id='.$address['id'])}">厦门市优拉体育用品有限公司</a></td>
+                    <td><a href="{:url('/index/company/detail?id='.$company['id'])}">厦门市优拉体育用品有限公司</a></td>
                     <td class="ac">张三</td>
-                    <td class="ac">企业</td>
-                    <td class="ac">厦门</td>
+                    <td class="ac">000-00000</td>
+                    <td class="ac">福建省厦门市湖里区</td>
+                    <td class="ac">国企</td>
+                    <td class="ac">500-1000</td>
                     <td class="ac">2017-07-11 17:07:48</td>
                     <td class="ac iconfont">
-                        <a href="{:url('/index/address/add/?id='.$address['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
-                        <a href="{:url('/index/address/lists/?deleted=1&id='.$address['id'])}" class="cred fs16" title="删除">&#xe601;</a>
+                        <a href="{:url('/index/company/add/?id='.$company['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
+                        <a href="{:url('/index/company/lists/?deleted=1&id='.$company['id'])}" class="cred fs16" title="删除">&#xe601;</a>
                     </td>
                 </tr>
             </tbody>
