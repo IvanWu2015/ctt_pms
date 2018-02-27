@@ -762,6 +762,18 @@ a.cc:hover{ color:#ccc !important;}
 .commentbutton{ padding:0px !important;}
 input.commentsub{width:113px !important; height:35px !important; border:none !important; cursor:pointer; background:#73b9ed; color:#fff;float:right;}
 
+.contacts_bg{min-height:755px; background:url('http://img95.699pic.com/photo/00009/8750.jpg_wh860.jpg') no-repeat center center; background-size:100% auto;}
+
+.g-conwp{ width:1170px; height:470px; padding:40px 440px 40px 40px; background:rgba(0,0,0,0.6); position:fixed; top:0; left:0; right:0; bottom:0; margin:auto;}
+.g-imgwp{ width:360px; height:360px; position:absolute; right:40px; top:40px;}
+.inttext{ height:100px; overflow:auto;}
+.inttext::-webkit-scrollbar {width:2px;height:10px;}
+.inttext::-webkit-scrollbar-button    {background-color:#eee;}
+.inttext::-webkit-scrollbar-track     {background:#eee;}
+.inttext::-webkit-scrollbar-thumb{background:#ddd;border-radius:2px;}
+.inttext::-webkit-scrollbar-corner {background:#eee;}
+.inttext::-webkit-scrollbar-resizer  {background:#eee;}
+
 /*分页*/
 .public_paging{ width:100%; float:left; padding:10px; margin-top:20px; text-align:center; line-height:25px;}
 

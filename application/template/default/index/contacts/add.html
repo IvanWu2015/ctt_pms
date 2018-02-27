@@ -11,58 +11,90 @@
                 <h3 class="ac borb pb30">添加联系人</h3>
                 <div class="modal-body">
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">所属公司：</label>
+                        <label class="col-sm-2 control-label fwn">姓名</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="company" class="form-control w60" id="company" value="{$contacts['company']}">
+                            <input type="text" name="name" class="form-control w60" id="name" value="{$contacts['name']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">联系人：</label>
+                        <label class="col-sm-2 control-label fwn">职务</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="fullName" class="form-control w60" id="fullName" value="{$contacts['company']}">
+                            <input type="text" name="worktitle" class="form-control w60" id="worktitle" value="{$contacts['worktitle']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">联系电话：</label>
+                        <label class="col-sm-2 control-label fwn">年龄</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="Mobilephone" class="form-control w60" id="Mobilephone" value="{$contacts['company']}">
+                            <input type="text" name="age" class="form-control w60" id="age" value="{$contacts['age']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">地址选择：</label>
+                        <label class="col-sm-2 control-label fwn">性别</label>
                         <div class="col-sm-7 pln prn">
-                            <div id="distpicker">
-                                <select class="w30 z form-control" name="province" data-province="省份"></select>
-                                <select class="w30 z form-control" name="city" data-city="城市"></select>
-                                <select class="w30 z form-control" name="district" data-district="区/县"></select>
-                            </div>
-                            <script>
-                            jQuery("#distpicker").distpicker({
-                                province: "",
-                                city: "",
-                                district: ""
-                            });
-                            </script>
+                            <label class="mt8 mr15"><input type="radio" name="sex" value="1"> 男</label>
+                            <label class="mt8"><input type="radio" name="sex" value="2"> 女</label>
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">详细地址：</label>
+                        <label class="col-sm-2 control-label fwn">结果</label>
+                        <div class="col-sm-7 pln prn">
+                            <select class="form-control w30" name="status">
+                                <option value="0">无</option>
+                                <option value="1">在职</option>
+                                <option value="2">离职</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group w100 mrn mln z">
+                        <label class="col-sm-2 control-label fwn">籍贯</label>
+                        <div class="col-sm-7 pln prn">
+                            <input type="text" name="native_place" class="form-control w60" id="native_place" value="{$contacts['native_place']}">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group w100 mrn mln z">
+                        <label class="col-sm-2 control-label fwn">联系电话</label>
+                        <div class="col-sm-7 pln prn">
+                            <input type="text" name="tel" class="form-control w60" id="tel" value="{$contacts['tel']}">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group w100 mrn mln z">
+                        <label class="col-sm-2 control-label fwn">电子邮箱</label>
+                        <div class="col-sm-7 pln prn">
+                            <input type="text" name="mail" class="form-control w60" id="mail" value="{$contacts['mail']}">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group w100 mrn mln z">
+                        <label class="col-sm-2 control-label fwn">详细地址</label>
                         <div class="col-sm-7 pln prn">
                             <textarea class="w90 form-control" name="addressDetail" rows="4"></textarea>
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">类型：</label>
+                        <label class="col-sm-2 control-label fwn">照片</label>
                         <div class="col-sm-7 pln prn">
-                            <select class="form-control w30" name="type">
-                                <option value="现付">现付</option>
-                                <option value="到付">到付</option>
-                            </select>
+                            <div class="imgwrap" id="imgwrap">
+                                <input type="file" id="cover_image" class="cover" name="photo" value="{$contacts['photo']}" />
+                                <img src="{$contacts['photo']}" id="coverimg" />
+                            </div>
+                            <span id="original_img_ok">封面图片大小建议为700*580像素</span>
+                            <span class="input_show_on" id="original_img_on">请输入红包的封面图片</span>
+                            <br/><span id="original_img_ok">支持格式：jpg,jpeg,png,gif,bmp</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group w100 mrn mln z">
+                        <label class="col-sm-2 control-label fwn">简介</label>
+                        <div class="col-sm-7 pln prn">
+                            <textarea class="w90 form-control" name="introduce" rows="4"></textarea>
                         </div>
                     </div>
                     
@@ -79,8 +111,17 @@
         </div>
     </div>
 </div>
+<script>
+jQuery(function () {
+    if (jQuery('#coverimg').attr('src') == "") {    //封面为空则显示默认图片
+        jQuery('#coverimg').attr('src', 'tpl_img/bg_icon.png');
+    }
 
-<script src="tpl_js/distpicker.data.js"></script>
-<script src="tpl_js/distpicker.js"></script>
-<script src="tpl_js/main.js"></script>
+    jQuery("#cover_image").change(function () {		//红包封面相册
+        var objUr = getObjectURL(this.files[0]);
+        console.log("objUr = " + objUr);
+        jQuery("#coverimg").attr("src", objUr);
+    });
+});
+</script>
 {/block}

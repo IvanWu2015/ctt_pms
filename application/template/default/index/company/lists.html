@@ -8,41 +8,29 @@
     <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
 
         <div class="publicdiv borb mb20 pt10 pb10 bf sizing">
-            <h3>联系地址</h3>
-        </div>
-        
-        <div class="publicdiv mb10">
-            <form class="form-inline" role="form">
+            <h3>
+                联系地址
                 <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal" class="btn btn-info y">添加</a>
-                
-                <input type="text" class="form-control" placeholder="所属公司" />
-                <input type="text" class="form-control" placeholder="联系人" />
-                <input type="text" class="form-control" placeholder="联系电话" />
-                <input type="submit" class="btn btn-warning" value="查询" />
-            </form>
+            </h3>
         </div>
         
         <table class="table table-striped">
             <thead style="background:#f6f6f6;">
                 <tr>
-                    <th class="bbno pt15 pb15">联系人</th>
-                    <th class="ac bbno pt15 pb15">联系电话</th>
-                    <th class="ac bbno pt15 pb15">地址</th>
-                    <th class="bbno pt15 pb15">所属公司</th>
-                    <th class="ac bbno pt15 pb15">创建人</th>
+                    <th class="bbno pt15 pb15">公司</th>
+                    <th class="ac bbno pt15 pb15">联系人</th>
                     <th class="ac bbno pt15 pb15">类型</th>
+                    <th class="ac bbno pt15 pb15">所在市</th>
                     <th class="ac bbno pt15 pb15">时间</th>
                     <th class="ac bbno pt15 pb15">操作</th>
                 </tr>
             </thead>
             <tbody class="weburllist">
                 <tr id="projectlist">
-                    <td class=""><a href="{:url('/index/address/detail?id='.$address['id'])}">张三</a></td>
-                    <td class="ac">0592-5813938</td>
-                    <td class="ac">福建省厦门市湖里区</td>
-                    <td>厦门市优拉体育用品有限公司</td>
-                    <td class="ac">admin</td>
-                    <td class="ac">到付</td>
+                    <td><a href="{:url('/index/address/detail?id='.$address['id'])}">厦门市优拉体育用品有限公司</a></td>
+                    <td class="ac">张三</td>
+                    <td class="ac">企业</td>
+                    <td class="ac">厦门</td>
                     <td class="ac">2017-07-11 17:07:48</td>
                     <td class="ac iconfont">
                         <a href="{:url('/index/address/add/?id='.$address['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
