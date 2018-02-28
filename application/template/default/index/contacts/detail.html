@@ -4,24 +4,29 @@
 {/block}
 
 {block name="body"}
+
+{if condition="$contactDetail['sex'] == 1"}
 <div class="publicdiv male_bg">
+{else}
+<div class="publicdiv female_bg">
+{/if}
     <div class="g-conwp sizing">
         
-        <h3 class="borb pb15 cf mtn pt15">{$contact_detail['name']}</h3>
+        <h3 class="borb pb15 cf mtn pt15">{$contactDetail['name']}</h3>
         <div class="publicdiv cc">
-            <p class="lh30">职务<span class="ml30">{$contact_detail['worktitle']}</span></p>
-            <p class="lh30">年龄<span class="ml30">{$contact_detail['age']} 岁</span></p>
-            <p class="lh30">性别<span class="ml30">{$contact_detail['sex']}</span></p>
-            <p class="lh30">籍贯<span class="ml30">{$contact_detail['native_place']}</span></p>
-            <p class="lh30">状态<span class="ml30">{$contact_detail['status']}</span></p>
-            <p class="lh30">电话<span class="ml30">{$contact_detail['tel']}</span></p>
-            <p class="lh30">邮箱<span class="ml30">{$contact_detail['mail']}</span></p>
-            <p class="lh30">地址<span class="ml30">{$contact_detail['address']}</span></p>
-            <p class="lh20 inttext">简介<span class="ml30">{$contact_detail['introduce']}</span></p>
+            <p class="lh30">职务<span class="ml30">{$contactDetail['worktitle']}</span></p>
+            <p class="lh30">年龄<span class="ml30">{$contactDetail['age']} 岁</span></p>
+            <p class="lh30">性别<span class="ml30">{if condition="$contactDetail['sex'] == 1"}男{else}女{/if}</span></p>
+            <p class="lh30">籍贯<span class="ml30">{$contactDetail['native_place']}</span></p>
+            <p class="lh30">状态<span class="ml30">{if condition="$contactDetail['status'] == 1"}在职{elseif condition="$contactDetail['status'] == 2"}离职{else}无{/if}</span></p>
+            <p class="lh30">电话<span class="ml30">{$contactDetail['tel']}</span></p>
+            <p class="lh30">邮箱<span class="ml30">{$contactDetail['mail']}</span></p>
+            <p class="lh30">地址<span class="ml30">{$contactDetail['address']}</span></p>
+            <div class="publicdiv lh20 inttext"><span class="z">简介</span><div style="padding-left:60px;">{$contactDetail['introduce']}</div></p>
         </div>
         
         <div class="g-imgwp">
-            <img src="{$contact_detail['photo']}" class="publicimg" />
+            <img src="{$contactDetail['photo']}" onerror="this.src='tpl_img/{if condition='$contactDetail["sex"] == 1'}male_img{else}female_img{/if}.png';" class="publicimg" />
         </div>
     </div>
 </div>

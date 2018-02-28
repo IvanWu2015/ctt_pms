@@ -10,6 +10,18 @@
             <form action="{:url('/index/contacts/add?id='.$contacts['id'])}" id="formaddress" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
                 <h3 class="ac borb pb30">添加联系人</h3>
                 <div class="modal-body">
+                    
+                    <div class="form-group w100 mrn mln z">
+                        <label class="col-sm-2 control-label fwn">所属公司</label>
+                        <div class="col-sm-7 pln prn">
+                            <select class="form-control w60" name="company_id">
+                                {foreach $companyList as $company}
+                                <option value="$company['company_id']}">{$company['name']}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">姓名</label>
                         <div class="col-sm-7 pln prn">
