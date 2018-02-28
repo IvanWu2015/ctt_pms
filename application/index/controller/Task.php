@@ -342,7 +342,7 @@ class Task extends Common {
         $config_list = DB('Config')->where(['status' => 1, 'group' => 'task_type'])->select();
         if (request()->isPost()) {
             $task_data = [
-                'project' => input('project_id', '', 'intval'),
+                'project' => input('project_id', 0, 'intval'),
                 'name' => input('name', '', 'addslashes'),
                 'estimate' => input('param.estimate'),
                 'desc' => trim(input('param.desc')),
@@ -364,24 +364,24 @@ class Task extends Common {
                 DB::table('chinatt_pms_task')->where(['id' => $task_id])->update($task_data);
                 //关联需求的内容
                 if (input('param.plan', '0', 'intval') > 0) {
-                    DB('Plan')->where(['id' => input('param.plan', '0', 'intval')])->update(['task' => $task_id, 'project' => $project_id, 'product' => $project_detail['product']]);
+                    DB('Plan')->where(['id' => input('param.plan', '0', 'intval')])->update(['task' => $task_id, 'project' => $task_data['project'], 'product' => $project_detail['product']]);
                 }
                 //操作记录
                 save_log($this->_G['uid'], $this->_G['username']);
-                write_action($this->_G['username'], $project_id, 'task', $task_id, 'updata');
-                $this->success("修改成功", url("/Index/Project/detail/?id=$project_id"));
+                write_action($this->_G['username'], $task_data['project'], 'task', $task_id, 'updata');
+                $this->success("修改成功", url("/Index/Project/detail/?id={$task_data['project']}"));
                 exit;
-                //添加
+            //添加
             } else {
                 $task_id = DB::table('chinatt_pms_task')->insertGetId($task_data);
                 //关联需求的内容
                 if (input('param.plan', '0', 'intval') > 0) {
-                    DB('Plan')->where(['id' => input('param.plan', '0', 'intval')])->update(['task' => $task_id, 'project' => $project_id, 'product' => $project_detail['product']]);
+                    DB('Plan')->where(['id' => input('param.plan', '0', 'intval')])->update(['task' => $task_id, 'project' => $task_data['project'], 'product' => $project_detail['product']]);
                 }
                 //操作记录
                 save_log($this->_G['uid'], $this->_G['username']);
                 write_action($this->_G['username'], $project_id, 'task', $task_id, 'opened');
-                $this->success("成功添加", url("/Index/Project/detail/?id=$project_id"));
+                $this->success("成功添加", url("/Index/Project/detail/?id={$task_data['project']}"));
                 exit;
             }
         }
