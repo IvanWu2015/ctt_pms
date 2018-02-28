@@ -7,7 +7,7 @@
 <div class="container" style="width:1170px;">
     <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
         <div class="publicdiv mb20 ptlrb10 bf sizing">
-            <form action="{:url('/index/contacts/add?id='.$contacts['id'])}" id="formaddress" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
+            <form action="{:url('/index/contacts/add?id='.$contactData['id'])}" id="formaddress" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
                 <h3 class="ac borb pb30">添加联系人</h3>
                 <div class="modal-body">
                     
@@ -25,21 +25,21 @@
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">姓名</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="name" class="form-control w60" id="name" value="{$contacts['name']}">
+                            <input type="text" name="name" class="form-control w60" id="name" value="{$contactData['name']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">职务</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="worktitle" class="form-control w60" id="worktitle" value="{$contacts['worktitle']}">
+                            <input type="text" name="worktitle" class="form-control w60" id="worktitle" value="{$contactData['worktitle']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">年龄</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="age" class="form-control w60" id="age" value="{$contacts['age']}">
+                            <input type="text" name="age" class="form-control w60" id="age" value="{$contactData['age']}">
                         </div>
                     </div>
                     
@@ -65,28 +65,28 @@
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">籍贯</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="native_place" class="form-control w60" id="native_place" value="{$contacts['native_place']}">
+                            <input type="text" name="native_place" class="form-control w60" id="native_place" value="{$contactData['native_place']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">联系电话</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="tel" class="form-control w60" id="tel" value="{$contacts['tel']}">
+                            <input type="text" name="tel" class="form-control w60" id="tel" value="{$contactData['tel']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">电子邮箱</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="mail" class="form-control w60" id="mail" value="{$contacts['mail']}">
+                            <input type="text" name="mail" class="form-control w60" id="mail" value="{$contactData['mail']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">详细地址</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="address" class="form-control w90" id="address" value="{$contacts['address']}">
+                            <input type="text" name="address" class="form-control w90" id="address" value="{$contactData['address']}">
                         </div>
                     </div>
                     
@@ -94,8 +94,8 @@
                         <label class="col-sm-2 control-label fwn">照片</label>
                         <div class="col-sm-7 pln prn">
                             <div class="imgwrap" id="imgwrap">
-                                <input type="file" id="cover_image" class="cover" name="photo" value="{$contacts['photo']}" />
-                                <img src="{$contacts['photo']}" id="coverimg" />
+                                <input type="file" id="cover_image" class="cover" name="photo" value="{$contactData['photo']}" />
+                                <img src="{$contactData['photo']}" id="coverimg" />
                             </div>
                             <span id="original_img_ok">照片大小建议为700*700像素</span>
                             <span class="input_show_on" id="original_img_on">请选择个人照片</span>

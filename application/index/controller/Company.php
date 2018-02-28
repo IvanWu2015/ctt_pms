@@ -34,9 +34,12 @@ class Company extends Common {
     public function add() {
         $company = db('Company');
         //$company_id = intval($this->_GET['dept_id']);
-        $company_id = input('company_id', '0', 'intval');
+        $company_id = input('id', '0', 'intval');
+        if($company_id > 0) {
+             $companyDetail = $company->where("company_id = {$company_id}")->find();
+        }
         if (request()->isPost()) {
-            $company_data = array(
+            $companyData = array(
                 'name' => input('name', '', 'strip_tags'), //'公司名称',
                 'corporation' => input('corporation', '', 'strip_tags'), //'法人',
                 'type' => input('type', '', 'strip_tags'), // '1国企 2私营 3合资 4外资',
@@ -53,17 +56,18 @@ class Company extends Common {
             );
 
             if ($company_id > 0) {
-                $company_data['last_uid'] = $this->_G['uid']; //'最后修改人',
-                $company_data['last_time'] = date("Y-m-d H:i:s"); //'最后修改时间',
-                $company->where(['company_id' => $company_id])->save($company_data);
-                $this->success("修改成功", 'Company/detail?id=' . $product_detail['id']);
+                $companyData['last_uid'] = $this->_G['uid']; //'最后修改人',
+                $companyData['last_time'] = date("Y-m-d H:i:s"); //'最后修改时间',
+                $company->where(['company_id' => $company_id])->save($companyData);
+                $this->success("修改成功", 'Company/detail?id=' . $companyData['company_id']);
             } else {
-                $company_data['add_uid'] = $this->_G['uid']; //'最后修改人',
-                $company_data['add_time'] = date("Y-m-d H:i:s"); //'最后修改时间',
-                $company->data($company_data)->insert();
-                $this->success("成功添加", 'Company/detail?id=' . $product_detail['id']);
+                $companyData['add_uid'] = $this->_G['uid']; //'最后修改人',
+                $companyData['add_time'] = date("Y-m-d H:i:s"); //'最后修改时间',
+                $company->data($companyData)->insert();
+                $this->success("成功添加", 'Company/detail?id=' . $companyData['company_id']);
             }
         }
+        $this->assign('companyDetail', $companyDetail);
         return $this->fetch($this->templatePath);
     }
 
@@ -72,7 +76,7 @@ class Company extends Common {
         $company_id = input('get.id', '0', 'intval');
         $company = db('company');
         if ($company_id > 0) {
-            $companyDetail = $contact->where("company_id = {$company_id}")->find();
+            $companyDetail = $company->where("company_id = {$company_id}")->find();
         } else {
             $this->error('请输入ID');
         }
@@ -80,6 +84,12 @@ class Company extends Common {
             $this->error('不存在该数据');
         }
         $navtitle = '公司详情页';
+        $map = ['company_id' => $company_id];
+        $contacts_list = DB::name('Contact')
+                ->where($map)
+                ->paginate(10);
+        
+        $this->assign('contacts_list', $contacts_list);
         $this->assign('navtitle', $navtitle);
         $this->assign('companyDetail', $companyDetail);
         return $this->fetch($this->templatePath);

@@ -39,7 +39,7 @@ class Contacts extends Common {
         //读取编辑数据n
         $id = input('id', '0', 'intval');
         if ($id > 0) {
-            $contactData = $contact->where("id = $id");
+            $contactData = $contact->where("id = $id")->find();
         }
         if (request()->isPost()) {
             $contactData = array(
@@ -56,11 +56,8 @@ class Contacts extends Common {
                 'address' => input('address', 0, 'addslashes'), //'详细地址',
             );
             $file = request()->file('photo');
-            $info = $file->move(ROOT_PATH . 'public' . DS . 'upload');
-            if ($info) {
-                // 成功上传后 获取上传信息
-                // 输出 jpg
-                // 输出 42a79759f284b767dfcb2a0197904287.jpg
+            if ($file) {
+                $info = $file->move(ROOT_PATH . 'public' . DS . 'upload');
                 $contactData['photo'] = './uploads/' . $info->getSaveName();
             }
 
@@ -69,14 +66,15 @@ class Contacts extends Common {
                 $contactData['last_uid'] = $this->_G['uid']; //'最后修改人',
                 $contactData['last_time'] = date("Y-m-d H:i:s"); //'最后修改时间',
                 $contact->where(['id' => $contact_id])->save($contactData);
-                $this->success("修改成功", 'Contacts/detail?id=' . $product_detail['id']);
+                $this->success("修改成功", 'Contacts/detail?id=' . $contactData['id']);
             } else {
                 $contactData['add_uid'] = $this->_G['uid']; //'最后修改人',
                 $contactData['add_time'] = date("Y-m-d H:i:s"); //'最后修改时间',
                 $contact->data($contactData)->insert();
-                $this->success("添加成功", 'Contacts/detail?id=' . $product_detail['id']);
+                $this->success("添加成功", 'Contacts/detail?id=' . $contactData['id']);
             }
         }
+        $this->assign('contactData', $contactData);
         $this->assign('companyList', $companyList);
         return $this->fetch($this->templatePath);
     }

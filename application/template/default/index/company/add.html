@@ -7,20 +7,20 @@
 <div class="container" style="width:1170px;">
     <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
         <div class="publicdiv mb20 ptlrb10 bf sizing">
-            <form action="{:url('/index/company/add?id='.$company['id'])}" id="formaddress" method="post" class="form-horizontal" role="form">
+            <form action="{:url('/index/company/add?id='.$companyDetail['id'])}" id="formaddress" method="post" class="form-horizontal" role="form">
                 <h3 class="ac borb pb30">添加公司</h3>
                 <div class="modal-body">
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">公司名称</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="name" class="form-control w60" id="name" value="{$company['name']}">
+                            <input type="text" name="name" class="form-control w60" id="name" value="{$companyDetail['name']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">法人</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="corporation" class="form-control w60" id="corporation" value="{$company['corporation']}">
+                            <input type="text" name="corporation" class="form-control w60" id="corporation" value="{$companyDetail['corporation']}">
                         </div>
                     </div>
                     
@@ -53,28 +53,28 @@
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">联系人</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="contact_name" class="form-control w60" id="contact_name" value="{$company['contact_name']}">
+                            <input type="text" name="contact_name" class="form-control w60" id="contact_name" value="{$companyDetail['contact_name']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">联系电话</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="contact_number" class="form-control w90" id="contact_number" value="{$company['contact_number']}">
+                            <input type="text" name="contact_number" class="form-control w90" id="contact_number" value="{$companyDetail['contact_number']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">传真电话</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="fax_number" class="form-control w90" id="fax_number" value="{$company['fax_number']}">
+                            <input type="text" name="fax_number" class="form-control w90" id="fax_number" value="{$companyDetail['fax_number']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">成立时间</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="founding_time" id="begin_time" class="form-control w60" value="{$company['founding_time']}" /> 
+                            <input type="text" name="founding_time" id="begin_time" class="form-control w60" value="{$companyDetail['founding_time']}" /> 
                         </div>
                     </div>
                     <script type="text/javascript">
@@ -93,35 +93,35 @@
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">注册地址</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="resister_address" class="form-control w60" id="resister_address" value="{$company['resister_address']}">
+                            <input type="text" name="resister_address" class="form-control w60" id="resister_address" value="{$companyDetail['resister_address']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">办公地址</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="work_address" class="form-control w60" id="work_address" value="{$company['work_address']}">
+                            <input type="text" name="work_address" class="form-control w60" id="work_address" value="{$companyDetail['work_address']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">税号</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="tax_number" class="form-control w90" id="tax_number" value="{$company['tax_number']}">
+                            <input type="text" name="tax_number" class="form-control w90" id="tax_number" value="{$companyDetail['tax_number']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">开户行</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="bank_deposit" class="form-control w90" id="bank_deposit" value="{$company['bank_deposit']}">
+                            <input type="text" name="bank_deposit" class="form-control w90" id="bank_deposit" value="{$companyDetail['bank_deposit']}">
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">银行账号</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="bank_account" class="form-control w90" id="bank_account" value="{$company['bank_account']}">
+                            <input type="text" name="bank_account" class="form-control w90" id="bank_account" value="{$companyDetail['bank_account']}">
                         </div>
                     </div>
                     
