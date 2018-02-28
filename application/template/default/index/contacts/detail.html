@@ -7,21 +7,21 @@
 <div class="publicdiv male_bg">
     <div class="g-conwp sizing">
         
-        <h3 class="borb pb15 cf mtn pt15">张三</h3>
+        <h3 class="borb pb15 cf mtn pt15">{$contact_detail['name']}</h3>
         <div class="publicdiv cc">
-            <p class="lh30">职务<span class="ml30">业务</span></p>
-            <p class="lh30">年龄<span class="ml30">20 岁</span></p>
-            <p class="lh30">性别<span class="ml30">男</span></p>
-            <p class="lh30">籍贯<span class="ml30">广东</span></p>
-            <p class="lh30">状态<span class="ml30">在职</span></p>
-            <p class="lh30">电话<span class="ml30">000-000000</span></p>
-            <p class="lh30">邮箱<span class="ml30">000000@qq.com</span></p>
-            <p class="lh30">地址<span class="ml30">四川省成都市武侯区四川体育馆</span></p>
-            <p class="lh20 inttext">简介<span class="ml30">报道称，反“年改”团体今日（27日）早上5时50分，搭乘游览车突袭台立法机构，下车就拿出标语大喊抗议，并欲突破现场警力进入立法机构内，抗议人士在立法机构前高喊“蔡英文下台！”据悉，有两人在冲突抗议中被送医，其中一名是从高处坠落，送医时无呼吸，目前两人都已送达医院急救。现场，还有人持手机在一旁直播。报道称，反“年改”团体今日（27日）早上5时50分，搭乘游览车突袭台立法机构，下车就拿出标语大喊抗议，并欲突破现场警力进入立法机构内，抗议人士在立法机构前高喊“蔡英文下台！”据悉，有两人在冲突抗议中被送医，其中一名是从高处坠落，送医时无呼吸，目前两人都已送达医院急救。现场，还有人持手机在一旁直播。</span></p>
+            <p class="lh30">职务<span class="ml30">{$contact_detail['worktitle']}</span></p>
+            <p class="lh30">年龄<span class="ml30">{$contact_detail['age']} 岁</span></p>
+            <p class="lh30">性别<span class="ml30">{$contact_detail['sex']}</span></p>
+            <p class="lh30">籍贯<span class="ml30">{$contact_detail['native_place']}</span></p>
+            <p class="lh30">状态<span class="ml30">{$contact_detail['status']}</span></p>
+            <p class="lh30">电话<span class="ml30">{$contact_detail['tel']}</span></p>
+            <p class="lh30">邮箱<span class="ml30">{$contact_detail['mail']}</span></p>
+            <p class="lh30">地址<span class="ml30">{$contact_detail['address']}</span></p>
+            <p class="lh20 inttext">简介<span class="ml30">{$contact_detail['introduce']}</span></p>
         </div>
         
         <div class="g-imgwp">
-            <img src="http://pic.qiantucdn.com/58pic/adPic/59cddb44a484f_84.jpg" class="publicimg" />
+            <img src="{$contact_detail['photo']}" class="publicimg" />
         </div>
     </div>
 </div>

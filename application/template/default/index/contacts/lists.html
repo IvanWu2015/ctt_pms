@@ -38,16 +38,16 @@
             <tbody class="weburllist">
                 {foreach $contacts_list as $contact}
                 <tr id="projectlist">
-                    <td class=""><a href="{:url('/index/contacts/detail?id='.$contacts['id'])}">{$contact['name']}</a></td>
+                    <td class=""><a href="{:url('/index/contacts/detail?id='.$contact['id'])}">{$contact['name']}</a></td>
                     <td class="ac">{$contact['tel']}</td>
                     <td class="ac">{$contact['address']}</td>
-                    <td><a href="{:url('/index/company/detail?id='.$contacts['id'])}">{$contact['company_id']}</a></td>
+                    <td><a href="{:url('/index/company/detail?id='.$contact['id'])}">{$contact['company_id']}</a></td>
                     <td class="ac">{$contact['add_uid']}</td>
                     <td class="ac">{$contact['status']}</td>
                     <td class="ac">{$contact['add_time']}</td>
                     <td class="ac iconfont">
-                        <a href="{:url('/index/contacts/add/?id='.$contacts['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
-                        <a href="{:url('/index/contacts/lists/?deleted=1&id='.$contacts['id'])}" class="cred fs16" title="删除">&#xe601;</a>
+                        <a href="{:url('/index/contacts/add/?id='.$contact['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
+                        <a href="{:url('/index/contacts/lists/?deleted=1&id='.$contact['id'])}" class="cred fs16" title="删除">&#xe601;</a>
                     </td>
                 </tr>
                 {/foreach}
