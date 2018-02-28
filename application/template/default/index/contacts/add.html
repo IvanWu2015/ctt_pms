@@ -7,7 +7,7 @@
 <div class="container" style="width:1170px;">
     <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
         <div class="publicdiv mb20 ptlrb10 bf sizing">
-            <form action="{:url('/index/contacts/add?id='.$contacts['id'])}" id="formaddress" method="post" class="form-horizontal" role="form">
+            <form action="{:url('/index/contacts/add?id='.$contacts['id'])}" id="formaddress" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
                 <h3 class="ac borb pb30">添加联系人</h3>
                 <div class="modal-body">
                     <div class="form-group w100 mrn mln z">
@@ -40,7 +40,7 @@
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">结果</label>
+                        <label class="col-sm-2 control-label fwn">在职状态</label>
                         <div class="col-sm-7 pln prn">
                             <select class="form-control w30" name="status">
                                 <option value="0">无</option>

@@ -36,45 +36,21 @@
                 </tr>
             </thead>
             <tbody class="weburllist">
+                {foreach $contacts_list as $contact}
                 <tr id="projectlist">
-                    <td class=""><a href="{:url('/index/contacts/detail?id='.$contacts['id'])}">张三</a></td>
-                    <td class="ac">0592-5813938</td>
-                    <td class="ac">福建省厦门市湖里区</td>
-                    <td><a href="{:url('/index/company/detail?id='.$contacts['id'])}">厦门市优拉体育用品有限公司</a></td>
-                    <td class="ac">admin</td>
-                    <td class="ac">到付</td>
-                    <td class="ac">2017-07-11 17:07:48</td>
+                    <td class=""><a href="{:url('/index/contacts/detail?id='.$contacts['id'])}">{$contact['name']}</a></td>
+                    <td class="ac">{$contact['tel']}</td>
+                    <td class="ac">{$contact['address']}</td>
+                    <td><a href="{:url('/index/company/detail?id='.$contacts['id'])}">{$contact['company_id']}</a></td>
+                    <td class="ac">{$contact['add_uid']}</td>
+                    <td class="ac">{$contact['status']}</td>
+                    <td class="ac">{$contact['add_time']}</td>
                     <td class="ac iconfont">
                         <a href="{:url('/index/contacts/add/?id='.$contacts['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
                         <a href="{:url('/index/contacts/lists/?deleted=1&id='.$contacts['id'])}" class="cred fs16" title="删除">&#xe601;</a>
                     </td>
                 </tr>
-                <tr id="projectlist">
-                    <td class=""><a href="{:url('/index/contacts/detail?id='.$contacts['id'])}">张三</a></td>
-                    <td class="ac">0592-5813938</td>
-                    <td class="ac">福建省厦门市湖里区</td>
-                    <td><a href="{:url('/index/company/detail?id='.$contacts['id'])}">厦门市优拉体育用品有限公司</a></td>
-                    <td class="ac">admin</td>
-                    <td class="ac">到付</td>
-                    <td class="ac">2017-07-11 17:07:48</td>
-                    <td class="ac iconfont">
-                        <a href="{:url('/index/contacts/add/?id='.$contacts['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
-                        <a href="{:url('/index/contacts/lists/?deleted=1&id='.$contacts['id'])}" class="cred fs16" title="删除">&#xe601;</a>
-                    </td>
-                </tr>
-                <tr id="projectlist">
-                    <td class=""><a href="{:url('/index/contacts/detail?id='.$contacts['id'])}">张三</a></td>
-                    <td class="ac">0592-5813938</td>
-                    <td class="ac">福建省厦门市湖里区</td>
-                    <td><a href="{:url('/index/company/detail?id='.$contacts['id'])}">厦门市优拉体育用品有限公司</a></td>
-                    <td class="ac">admin</td>
-                    <td class="ac">到付</td>
-                    <td class="ac">2017-07-11 17:07:48</td>
-                    <td class="ac iconfont">
-                        <a href="{:url('/index/contacts/add/?id='.$contacts['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
-                        <a href="{:url('/index/contacts/lists/?deleted=1&id='.$contacts['id'])}" class="cred fs16" title="删除">&#xe601;</a>
-                    </td>
-                </tr>
+                {/foreach}
             </tbody>
             <div class="publicdiv ac pagingw">{$page}</div>
         </table>

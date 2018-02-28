@@ -10,10 +10,10 @@ use \think\Db;
 load_trait('controller/Jump');  // 引入traits\controller\Jump
 
 class Contacts extends Common {
-    
+
     //首页
     public function index() {
-        $this->redirect(url('lists'));//跳转列表页
+        $this->redirect(url('lists')); //跳转列表页
         exit;
     }
 
@@ -23,10 +23,10 @@ class Contacts extends Common {
         if (!empty($username)) {
             $map['name'] = array('eq', $username);
         }
-        $contact_list = DB::name('Contact')
+        $contacts_list = DB::name('Contact')
                 ->where($map)
                 ->paginate(10);
-        $this->assign('company_list', $contact_list);
+        $this->assign('contacts_list', $contacts_list);
         return $this->fetch($this->templatePath);
     }
 
@@ -35,24 +35,32 @@ class Contacts extends Common {
         $contact = db('contact');
         //读取编辑数据n
         $id = input('id', '0', 'intval');
-        if($id > 0) {
+        if ($id > 0) {
             $contact_data = $contact->where("id = $id");
         }
         if (request()->isPost()) {
             $contact_data = array(
                 'company_id' => input('company_id', 0, 'intval'), // '报名序号 可用于查询',
                 'name' => input('name', 0, 'addslashes'), //'姓名',
-                'worktitle' => input('name', 0, 'addslashes'), // '职务',
-                'age' => input('name', 0, 'intval'), // '年龄',
-                'sex' => input('name', 0, 'intval'), // '性别',
-                'native_place' => input('name', 0, 'addslashes'), //'籍贯',
-                'photo' => input('name', 0, 'addslashes'), // '照片',
-                'introduce' => input('name', 0, 'addslashes'), // '简介',
-                'tel' => input('name', 0, 'addslashes'), //'联系电话',
-                'mail' => input('name', 0, 'addslashes'), //'电子邮箱',
-                'status' => input('name', 0, 'addslashes'), // '结果 0无 1在职 2离职',
-                'address' => input('name', 0, 'addslashes'), //'详细地址',
+                'worktitle' => input('worktitle', 0, 'addslashes'), // '职务',
+                'age' => input('age', 0, 'intval'), // '年龄',
+                'sex' => input('sex', 0, 'intval'), // '性别',
+                'native_place' => input('native_place', 0, 'addslashes'), //'籍贯',
+                'introduce' => input('introduce', 0, 'addslashes'), // '简介',
+                'tel' => input('tel', 0, 'addslashes'), //'联系电话',
+                'mail' => input('mail', 0, 'addslashes'), //'电子邮箱',
+                'status' => input('status', 0, 'addslashes'), // '状态 0无 1在职 2离职',
+                'address' => input('address', 0, 'addslashes'), //'详细地址',
             );
+            $file = request()->file('photo');
+            $info = $file->move(ROOT_PATH . 'public' . DS . 'upload');
+            if ($info) {
+                // 成功上传后 获取上传信息
+                // 输出 jpg
+                // 输出 42a79759f284b767dfcb2a0197904287.jpg
+                $contact_data['photo'] = './uploads/'. $info->getSaveName();
+            }
+
 
             if ($id > 0) {
                 $contact_data['last_uid'] = $this->_G['uid']; //'最后修改人',
