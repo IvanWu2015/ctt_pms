@@ -25,7 +25,7 @@ class Contacts extends Common {
         }
         $contacts_list = DB::name('Contact')
                 ->where($map)
-                ->paginate(10);
+                ->paginate(20);
         $navtitle = '联系人列表' . $this->navtitle;
         $this->assign('contacts_list', $contacts_list);
         return $this->fetch($this->templatePath);

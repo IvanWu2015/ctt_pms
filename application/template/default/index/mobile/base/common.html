@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>{:config('WEB_SITE_TITLE')}</title>
+<title>{$navtitle} - 盛景网络项目管理系统</title>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="blue">
@@ -28,6 +28,9 @@
 <script type="text/javascript" src="tpl_static/jquery-1.10.2.min.js"></script>
 <![endif]-->
 <!--[if gte IE 9]><!-->
+
+<script type="text/javascript" src="tpl_js/public_moblie.js"></script>
+
 <script type="text/javascript" src="tpl_static/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="tpl_static/bootstrap/js/moment.js"></script>
@@ -45,6 +48,9 @@
     <ul class="nav nav-pills pl10 pr10 sizing">
         <a href="{:url('index/index')}"><img src="tpl_img/bg_icon.png" class="z mt10 mb10" height="40" /></a>
         
+        <a href="javascript:void(0);" class="navicon iconfont y fs30 mt10 cc mr15" onClick="navopen();" title="导航">&#xe610;</a>
+        <a href="javascript:void(0);" class="searchbut iconfont cf fs30 y mt10 cc mr15" onClick="searchopen('show');" title="搜索">&#xe604;</a>
+        
         {if condition="$_G['uid'] > 0"}
         <li class="mt10 mb10 ml20 y">
             <a class="active" data-toggle="dropdown" href="{:url('index/index')}">{:get_username()} <b class="caret"></b></a>
@@ -60,12 +66,56 @@
         
     </ul>
     
+    <ul class="moblie_nav" id="moblie_nav">
+        <div class="nav_bg" onClick="navclose();">&nbsp;</div>
+        <ul class="nav_ul" id="nav_ul">
+            <p class="closenav dn"><a href="javascript:void(0);" class="iconfont">&#xe616;</a></p>
+            {foreach $navigation_list as $nav}
+            <li class="nav_li {if condition="strcasecmp($nav['main']['urlData']['controller'],$_G['controller']) == 0"} tnavattr {/if}">                         <!-- 当前状态 class的值 tnavattr -->
+                <a href="{$nav['main']['true_url']}" class="nava fs16 navpl" {if condition="$nav['sub_count'] > 0"} data-toggle="dropdown"{/if}>
+                    {$nav['main']['title']}
+                    {if condition="$nav['sub_count'] > 0"}<b class="caret"></b>{/if}
+                </a>
+                
+                {if condition="$nav['sub_count'] > 0"}
+                <ul class="dropdown-menu">
+                     {foreach $nav['sub'] as $sub_nav}
+                        <li><a href="{$sub_nav['true_url']}">{$sub_nav['title']}</a></li>
+                     {/foreach}
+                     </ul>
+                {/if}
+            </li>
+            {/foreach}
+        </ul>
+    </ul>
+    
+    <div class="searchwp" id="searchwp">
+        <div class="searchwp_div pb15" id="searchwp_div">
+            <div class="HeadSearch borb mt15 mb15 sizing">
+                <a href="javascript:void(0);" class="searchclose iconfont" onClick="searchopen('hide');">&#xe6f1;</a>
+                <form action="{:url('/index/search/lists/?keyword='.$keyword.'&type='.$type)}" method="post">
+                    <input type="text" class="searchin sizing" name="keyword" id="keyword" placeholder="请输入搜索的内容~" />
+                    <input type="submit" class="searchsub iconfont" value="&#xe604;" />
+                </form>
+            </div>
+            <div class="publicdiv pl8 pr8 sizing">
+                <h3 class="fs16 lh35 fwn">热门搜索</h3>
+                <ul class="publicdiv">
+                    <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=task')}" class="rvuyrvfp">任务</a>
+                    <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=action')}" class="rvuyrvfp">动态</a>
+                    <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=article')}" class="rvuyrvfp">文档</a>
+                </ul>
+            </div>
+        </div>
+        <div class="searchwp_bg" onClick="searchopen('hide');"></div>
+    </div>
+    
 {/block}
 	<!-- /头部 -->
 	
 	<!-- 主体 -->
 {block name="header"}{/block}
-<div class="publicdiv" style="margin-top:10px;">
+<div class="publicdiv" id="wrap" style="margin-top:10px; transition-duration:.5s;">
         {block name="body"}{/block}
 </div>
 

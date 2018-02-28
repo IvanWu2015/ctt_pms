@@ -7,25 +7,25 @@
 
 <div class="container mt20" style="width:1170px;">
     <div class="publicdiv mt20 ptlrb20 bf sizing">
-        <h3>{$company_detail['name']}</h3>
+        <h3>{$companyDetail['name']}</h3>
         <p class="c9 mt20">
-            <span class="pr15 borr">类型：{$company_detail['type']}</span>
-            <span class="pr15 pl15 borr">规模：{$company_detail['employee_numbers']}</span>
-            <span class="pr15 pl15 borr">创建人：{$company_detail['add_uid']}</span>
-            <span class="pr15 pl15">时间：{$company_detail['add_time']}</span>
+            <span class="pr15 borr">类型：{$companyDetail['type']}</span>
+            <span class="pr15 pl15 borr">规模：{$companyDetail['employee_numbers']}</span>
+            <span class="pr15 pl15 borr">创建人：{$companyDetail['add_uid']}</span>
+            <span class="pr15 pl15">时间：{$companyDetail['add_time']}</span>
         </p>
         
-        <p class="publicdiv mt8 c6 lh30 iconfont mt20"><span class="w12 z"><b class="fwn cdicon">&#xe637;</b>法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人</span>{$company_detail['corporation']}</p>
-        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe625;</b>联&nbsp;&nbsp;系&nbsp;&nbsp;人</span>{$company_detail['contact_name']}</p>
-        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe618;</b>联系电话</span>{$company_detail['contact_number']}</p>
-        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe62b;</b>传真电话</span>{$company_detail['fax_number']}</p>
-        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe602;</b>成立时间</span>{$company_detail['founding_time']}</p>
-        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe617;</b>注册地址</span>{$company_detail['resister_address']}</p>
-        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe617;</b>办公地址</span>{$company_detail['work_address']}</p>
+        <p class="publicdiv mt8 c6 lh30 iconfont mt20"><span class="w12 z"><b class="fwn cdicon">&#xe637;</b>法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人</span>{$companyDetail['corporation']}</p>
+        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe625;</b>联&nbsp;&nbsp;系&nbsp;&nbsp;人</span>{$companyDetail['contact_name']}</p>
+        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe618;</b>联系电话</span>{$companyDetail['contact_number']}</p>
+        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe62b;</b>传真电话</span>{$companyDetail['fax_number']}</p>
+        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe602;</b>成立时间</span>{$companyDetail['founding_time']}</p>
+        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe617;</b>注册地址</span>{$companyDetail['resister_address']}</p>
+        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe617;</b>办公地址</span>{$companyDetail['work_address']}</p>
         
-        <p class="publicdiv mt30 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe633;</b>税号</span>{$company_detail['tax_number']}</p>
-        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe62f;</b>开户行</span>{$company_detail['bank_deposit']}</p>
-        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe670;</b>银行账号</span>{$company_detail['bank_account']}</p>
+        <p class="publicdiv mt30 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe633;</b>税号</span>{$companyDetail['tax_number']}</p>
+        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe62f;</b>开户行</span>{$companyDetail['bank_deposit']}</p>
+        <p class="publicdiv mt8 c6 lh30 iconfont"><span class="w12 z"><b class="fwn cdicon">&#xe670;</b>银行账号</span>{$companyDetail['bank_account']}</p>
         
     </div>
     
@@ -37,44 +37,22 @@
                     <th class="bbno pt15 pb15">联系人</th>
                     <th class="ac bbno pt15 pb15">电话</th>
                     <th class="ac bbno pt15 pb15">状态</th>
-                    <th class="ac bbno pt15 pb15">所属公司</th>
+                    <th class="ac bbno pt15 pb15">性别</th>
                     <th class="ac bbno pt15 pb15">职务</th>
                     <th class="ac bbno pt15 pb15">邮箱</th>
                 </tr>
             </thead>
             <tbody class="weburllist">
+                {foreach $company_list as $contact}
                 <tr id="projectlist">
-                    <td><a href="{:url('/index/company/detail?id='.$company['id'])}">张三</a></td>
-                    <td class="ac">000-00000</td>
-                    <td class="ac">在职</td>
-                    <td class="ac">上海衣页信息科技有限公司</td>
-                    <td class="ac">业务</td>
-                    <td class="ac">00000@qq.com</td>
+                    <td><a href="{:url('/index/contacts/detail?id='.$contact['id'])}">{$contact['name']}</a></td>
+                    <td class="ac">{$contact['tel']}</td>
+                    <td class="ac">{if condition="$contact['status'] == 1"}在职{elseif condition="$contact['status'] == 2"}离职{else}无{/if}</td>
+                    <td class="ac">{if condition="$contact['sex'] == 1"}男{else}女{/if}</td>
+                    <td class="ac">{$contact['worktitle']}</td>
+                    <td class="ac">{$contact['mail']}</td>
                 </tr>
-                <tr id="projectlist">
-                    <td><a href="{:url('/index/company/detail?id='.$company['id'])}">张三</a></td>
-                    <td class="ac">000-00000</td>
-                    <td class="ac">在职</td>
-                    <td class="ac">上海衣页信息科技有限公司</td>
-                    <td class="ac">业务</td>
-                    <td class="ac">00000@qq.com</td>
-                </tr>
-                <tr id="projectlist">
-                    <td><a href="{:url('/index/company/detail?id='.$company['id'])}">张三</a></td>
-                    <td class="ac">000-00000</td>
-                    <td class="ac">在职</td>
-                    <td class="ac">上海衣页信息科技有限公司</td>
-                    <td class="ac">业务</td>
-                    <td class="ac">00000@qq.com</td>
-                </tr>
-                <tr id="projectlist">
-                    <td><a href="{:url('/index/company/detail?id='.$company['id'])}">张三</a></td>
-                    <td class="ac">000-00000</td>
-                    <td class="ac">在职</td>
-                    <td class="ac">上海衣页信息科技有限公司</td>
-                    <td class="ac">业务</td>
-                    <td class="ac">00000@qq.com</td>
-                </tr>
+                {/foreach}
             </tbody>
         </table>
     </div>

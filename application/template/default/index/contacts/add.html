@@ -16,7 +16,7 @@
                         <div class="col-sm-7 pln prn">
                             <select class="form-control w60" name="company_id">
                                 {foreach $companyList as $company}
-                                <option value="$company['company_id']}">{$company['name']}</option>
+                                <option value="{$company['company_id']}" {if condition="$contactData['company_id'] == $company['company_id']"}selected{/if}>{$company['name']}</option>
                                 {/foreach}
                             </select>
                         </div>
@@ -46,8 +46,8 @@
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">性别</label>
                         <div class="col-sm-7 pln prn">
-                            <label class="mt8 mr15"><input type="radio" name="sex" value="1"> 男</label>
-                            <label class="mt8"><input type="radio" name="sex" value="2"> 女</label>
+                            <label class="mt8 mr15"><input type="radio" name="sex" value="1" {if condition="$contactData['sex'] == 1"}checked{/if}> 男</label>
+                            <label class="mt8"><input type="radio" name="sex" value="2" {if condition="$contactData['sex'] == 2"}checked{/if}> 女</label>
                         </div>
                     </div>
                     
@@ -55,9 +55,9 @@
                         <label class="col-sm-2 control-label fwn">在职状态</label>
                         <div class="col-sm-7 pln prn">
                             <select class="form-control w30" name="status">
-                                <option value="0">无</option>
-                                <option value="1">在职</option>
-                                <option value="2">离职</option>
+                                <option value="0" {if condition="$contactData['status'] == 0"}selected{/if}>无</option>
+                                <option value="1" {if condition="$contactData['status'] == 1"}selected{/if}>在职</option>
+                                <option value="2" {if condition="$contactData['status'] == 2"}selected{/if}>离职</option>
                             </select>
                         </div>
                     </div>

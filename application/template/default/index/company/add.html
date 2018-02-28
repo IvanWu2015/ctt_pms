@@ -28,10 +28,10 @@
                         <label class="col-sm-2 control-label fwn">类型</label>
                         <div class="col-sm-7 pln prn">
                             <select class="form-control w30" name="type">
-                                <option value="1">国企</option>
-                                <option value="2">私营</option>
-                                <option value="3">合资</option>
-                                <option value="4">外资</option>
+                                <option value="1" {if condition="$companyDetail['type'] == 1"}selected{/if}>国企</option>
+                                <option value="2" {if condition="$companyDetail['type'] == 2"}selected{/if}>私营</option>
+                                <option value="3" {if condition="$companyDetail['type'] == 3"}selected{/if}>合资</option>
+                                <option value="4" {if condition="$companyDetail['type'] == 4"}selected{/if}>外资</option>
                             </select>
                         </div>
                     </div>
@@ -39,13 +39,13 @@
                    <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">公司规模</label>
                         <div class="col-sm-7 pln prn">
-                            <select class="form-control w30" name="type">
-                                <option value="1">10人以内</option>
-                                <option value="2">10-50</option>
-                                <option value="3">50-100</option>
-                                <option value="4">100-500</option>
-                                <option value="4">500-1000</option>
-                                <option value="4">1000以上</option>
+                            <select class="form-control w30" name="employee_numbers">
+                                <option value="1" {if condition="$companyDetail['employee_numbers'] == 1"}selected{/if}>10人以内</option>
+                                <option value="2" {if condition="$companyDetail['employee_numbers'] == 1"}selected{/if}>10-50</option>
+                                <option value="3" {if condition="$companyDetail['employee_numbers'] == 1"}selected{/if}>50-100</option>
+                                <option value="4" {if condition="$companyDetail['employee_numbers'] == 1"}selected{/if}>100-500</option>
+                                <option value="6" {if condition="$companyDetail['employee_numbers'] == 1"}selected{/if}>500-1000</option>
+                                <option value="7" {if condition="$companyDetail['employee_numbers'] == 1"}selected{/if}>1000以上</option>
                             </select>
                         </div>
                     </div>

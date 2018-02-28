@@ -1,0 +1,39 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pl10 pr10 pb15 sizing">
+    <h3 class="borb pb15 mbn">联系人</h3>
+    
+    <ul class="publicdiv scorelist sopubpl">
+        {foreach $contacts_list as $contact}
+        <a href="{:url('/index/contacts/detail?id='.$contact['id'])}">
+        <li class="bhb sizing">
+            <div class="winner fs30 cc" title="性别">
+                {if condition="$contact['sex'] == 1"}男{else}女{/if}
+            </div>
+            <h3 class="ellipsis" title="姓名">{$contact['name']}<span class="fs12 y c9" title="时间">{$contact['add_time']}</span></h3>
+            <p class="publicdiv c9 lh15">
+                <span class="w40 z al iconfont" title="创建人"><b class="fs14">&#xe647;</b> {$contact['add_uid']}</span>
+                <span class="w20 z ac iconfont" title="状态"><b class="fs14">&#xe635;</b> {if condition="$contact['status'] == 1"}在职{elseif condition="$contact['status'] == 2"}离职{else}无{/if}</span>
+                <span class="w40 z ar iconfont" title="电话"><b class="fs14">&#xe618;</b> {$contact['tel']}</span>
+            </p>
+            <p class="publicdiv c9 lh15" title="地址">地址：{$contact['address']}</p>
+        </li>
+        </a>
+        {/foreach}
+    </ul>
+    <div class="publicdiv ac pagingw">{$page}</div>
+</div>
+
+{/block}
+
+
+{block name="footer"}
+<div class="footer_wp">
+    <a href="{:url('add')}" class="p_inster"></a>
+</div>
+{/block}
