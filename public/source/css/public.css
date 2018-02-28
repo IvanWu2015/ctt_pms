@@ -767,6 +767,8 @@ input.commentsub{width:113px !important; height:35px !important; border:none !im
 
 .nameleft{ width:130px; float:left; padding:15px 30px 15px 0px; text-align:right; margin-right:20px; border-right:1px #dedede solid;}
 
+.cdicon{ width:30px; height:30px; line-height:30px; text-align:center; margin-right:10px; font-size:16px; border-radius:100%; border:1px #dedede solid; display:block; float:left;}
+
 .g-conwp{ width:1170px; height:470px; padding:40px 440px 40px 40px; background:rgba(0,0,0,0.6); position:fixed; top:0; left:0; right:0; bottom:0; margin:auto;}
 .g-imgwp{ width:360px; height:360px; position:absolute; right:40px; top:40px;}
 .inttext{ height:100px; overflow:auto;}

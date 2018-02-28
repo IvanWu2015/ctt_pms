@@ -33,27 +33,29 @@
                     <th class="bbno pt15 pb15">公司名称</th>
                     <th class="ac bbno pt15 pb15">联系人</th>
                     <th class="ac bbno pt15 pb15">联系电话</th>
-                    <th class="ac bbno pt15 pb15">办公地址</th>
                     <th class="ac bbno pt15 pb15">类型</th>
                     <th class="ac bbno pt15 pb15">规模</th>
+                    <th class="ac bbno pt15 pb15">办公地址</th>
                     <th class="ac bbno pt15 pb15">时间</th>
                     <th class="ac bbno pt15 pb15">操作</th>
                 </tr>
             </thead>
             <tbody class="weburllist">
+                {foreach $company_list as $company}
                 <tr id="projectlist">
-                    <td><a href="{:url('/index/company/detail?id='.$company['id'])}">厦门市优拉体育用品有限公司</a></td>
-                    <td class="ac">张三</td>
-                    <td class="ac">000-00000</td>
-                    <td class="ac">福建省厦门市湖里区</td>
-                    <td class="ac">国企</td>
-                    <td class="ac">500-1000</td>
-                    <td class="ac">2017-07-11 17:07:48</td>
+                    <td><a href="{:url('/index/company/detail?id='.$company['company_id'])}">{$company['name']}</a></td>
+                    <td class="ac">{$company['contact_name']}</td>
+                    <td class="ac">{$company['contact_number']}</td>
+                    <td class="ac">{$company['type']}</td>
+                    <td class="ac">{$company['employee_numbers']}</td>
+                    <td class="ac">{$company['work_address']}</td>
+                    <td class="ac">{$company['add_time']}</td>
                     <td class="ac iconfont">
-                        <a href="{:url('/index/company/add/?id='.$company['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
-                        <a href="{:url('/index/company/lists/?deleted=1&id='.$company['id'])}" class="cred fs16" title="删除">&#xe601;</a>
+                        <a href="{:url('/index/company/add/?id='.$company['company_id'])}" class="btn-link" title="编辑">&#xe71d;</a>
+                        <a href="{:url('/index/company/lists/?deleted=1&id='.$company['company_id'])}" class="cred fs16" title="删除">&#xe601;</a>
                     </td>
                 </tr>
+                {/foreach}
             </tbody>
             <div class="publicdiv ac pagingw">{$page}</div>
         </table>
