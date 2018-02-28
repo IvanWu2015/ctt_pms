@@ -69,6 +69,19 @@ class Company extends Common {
 
     //公司详情页
     public function detail() {
+        $company_id = input('get.id', '0', 'intval');
+        $company = db('company');
+        if ($company_id > 0) {
+            $companyDetail = $contact->where("company_id = {$company_id}")->find();
+        } else {
+            $this->error('请输入ID');
+        }
+        if (empty($companyDetail)) {
+            $this->error('不存在该数据');
+        }
+        $navtitle = '公司详情页';
+        $this->assign('navtitle', $navtitle);
+        $this->assign('companyDetail', $companyDetail);
         return $this->fetch($this->templatePath);
     }
 
