@@ -1,0 +1,41 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+<div class="publicdiv mb58">
+    <div class="publicdiv usertop">
+        <img src="tpl_img/userbg.png" class="publicdiv" />
+        <div class="usertopimg">
+            <div class="usertopimgwp">
+                <img src="{$contactDetail['photo']}" onerror="this.src='tpl_img/{if condition='$contactDetail["sex"] == 1'}male_img{else}female_img{/if}.png';" class="publicimg" />
+            </div>
+            <h3 class="publicdiv cf fwb fs18 mt5 ac">{$contactDetail['name']}</h3>
+        </div>
+    </div>
+
+    <div class="publicdiv mt8 bf fs14 pl20 pr20 sizing">
+        <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">年龄</span>{$contactDetail['age']} 岁</div>
+        <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">性别</span>{if condition="$contactDetail['sex'] == 1"}男{else}女{/if}</div>
+        <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">职务</span>{$contactDetail['worktitle']}</div>
+        <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">籍贯</span>{$contactDetail['native_place']}</div>
+        <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">状态</span>{if condition="$contactDetail['status'] == 1"}<b class="fwn text-info">在职</b>{elseif condition="$contactDetail['status'] == 2"}<b class="fwn text-warning">离职</b>{else}无{/if}</div>
+        <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">电话</span><a href="tel:{$contactDetail['tel']}">{$contactDetail['tel']}</a></div>
+        <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">邮箱</span>{$contactDetail['mail']}</div>
+        <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">公司</span>{$company['name']}</div>
+        <div class="publicdiv pt15 pb15"><span class="z mr20">地址：</span>{$contactDetail['address']}</div>
+    </div>
+    
+    <div class="publicdiv mt8 bf fs14 pl20 pr20 sizing">
+        <div class="publicdiv pt15 pb15">简介：{$contactDetail['introduce']}</div>
+    </div>
+</div>
+{/block}
+
+
+{block name="footer"}
+<div class="footer_wp">
+    <a href="{:url('/index/contacts/add')}" class="p_inster iconfont">&#xe607;</a>
+</div>
+{/block}

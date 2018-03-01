@@ -5,30 +5,39 @@
 {/block}
 
 {block name="body"}
+<style>
+html{ height:100%;}
+body{ height:100%; background:url(tpl_img/login_bg.jpg) no-repeat center center; background-size:100% 100%;}
+.nav-pills{ display:none;}
+
+</style>
+<div class="login_title">登录</div>
+
 <div class="publicdiv pl20 pr20 pb15 sizing">
-    <div class="publicdiv bf pt20 pr20 pl20 pb20 sizing" style="border-radius:3px; margin:0px auto;">
-        <h3 class="mtn mb20 ac">用户登录</h3>
+    <div class="publicdiv pt20 pb20 sizing" style="border-radius:3px; margin:0px auto;">
         <form class="form-horizontal" role="form" class="login-form" action="" method="post">
-            <input type="text" class="form-control hp40 mt15" id="firstname" placeholder="用户名" ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username" />
-            <input type="password" class="form-control hp40 mt15" id="lastname" placeholder="密码" errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password" />
-            <div class="publicdiv mt15 pr">
-                <input type="text" class="form-control hp40" id="lastname" placeholder="验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify" />
-                <img id="verify_img" class="verifyimg reloadverify pa p-right p-top" alt="点击切换" src="{:captcha_src()}" style="width:120px; height:38px; margin:1px;" onclick="this.src='{:captcha_src()}'">
-            </div>
+            <li class="login_li sizing">
+                <span class="iconfont">&#xe647;</span>
+                <input type="text" class="login_input sizing" id="firstname" placeholder="用户名" ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username" />
+            </li>
+            <li class="login_li sizing">
+                <span class="iconfont">&#xe63e;</span>
+                <input type="password" class="login_input sizing" id="password" placeholder="密码" errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password" />
+                <a href="javascript:void(0);" class="pawdicon iconfont" id="pawdicon" onClick="pawdopen();">&#xe649;</a>
+            </li>
+            <li class="login_li sizing">
+                <span class="iconfont">&#xe874;</span>
+                <input type="text" class="login_input sizing" id="lastname" placeholder="验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify" />
+                <img id="verify_img" class="verifyimg reloadverify pa p-right p-top" alt="点击切换" src="{:captcha_src()}" style="width:120px; height:40px;;" onclick="this.src='{:captcha_src()}'">
+            </li>
             
             <div class="controls Validform_checktip text-warning"></div>
-            <div class="publicdiv mt10">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> 自动登陆
-                        </label>
-                    </div>
-                </div>
+            <div class="publicdiv mt10 cf">
+                <label><input type="checkbox" name="autologin" class="bor bno" value="1"> 自动登陆</label>
             </div>
             <div class="publicdiv mt15">
-                <button type="submit" class="publicdiv btn hp40 btn-default btn-primary">登 陆</button>
-                <a href="{:url('User/register')}" class="publicdiv ac mt15">立即注册</a>
+                <button type="submit" class="publicdiv btn h50 borno fs16 btn-default btn-primary">登 陆</button>
+                <!--<a href="{:url('User/register')}" class="register_but fs16">立即注册</a>-->
             </div>
         </form>
 
