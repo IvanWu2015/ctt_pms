@@ -12,17 +12,10 @@
         </div>
         
         <div class="publicdiv mb10">
-            <form class="form-inline" role="form">
+            <form action="{:url('/index/company/lists')}" class="form-inline" role="form" method="post">
                 <a href="{:url('/index/company/add')}" class="btn btn-info y">添加</a>
-                
-                <input type="text" name="name" class="form-control" placeholder="公司名称" />
-                <input type="text" class="form-control" placeholder="联系人" />
-                <select name="type" class="form-control">
-                    <option value="1">国企</option>
-                    <option value="2">私营</option>
-                    <option value="3">合资</option>
-                    <option value="4">外资</option>
-                </select>
+                <input type="text" name="name" class="form-control" placeholder="公司名称" value="{$name}" />
+                <input type="text" name="contact_name" class="form-control" placeholder="联系人"  value="{$contact_name}"/>
                 <input type="submit" class="btn btn-warning" value="查询" />
             </form>
         </div>

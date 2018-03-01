@@ -1116,7 +1116,6 @@ function getUserprojectids($username) {
  * @return string $list
  */
 function getUserProjectList($username) {
-
     $project_list = db('project')
                     ->alias('p')
                     ->join('chinatt_pms_team t', "t.project = p.id ", 'left')
@@ -1150,4 +1149,23 @@ function analysisUrl($url) {
     } else {
         return $url;
     }
+}
+
+/**
+ * 返回指定分组的设置列表
+ * @param type $groupName
+ * @return type
+ */
+function getCommonConfigList($groupName = '') {
+    $config = db('config');
+    if($groupName) {
+        $map['group'] = $groupName;
+    }
+    $configList = $config->where($map)->select();
+    $returnConfig = array();
+    foreach ($configList as $config) {
+        $returnConfig[$config['c_key']] = $config['c_value'];
+    }
+    return $returnConfig;
+    return;
 }

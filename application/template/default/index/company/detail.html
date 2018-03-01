@@ -46,7 +46,7 @@
                 </tr>
             </thead>
             <tbody class="weburllist">
-                {foreach $company_list as $contact}
+                {foreach $contacts_list as $contact}
                 <tr id="projectlist">
                     <td><a href="{:url('/index/contacts/detail?id='.$contact['id'])}">{$contact['name']}</a></td>
                     <td class="ac">{$contact['tel']}</td>

@@ -6,6 +6,7 @@ namespace app\index\controller;
 
 use \traits\controller\Jump;
 use \think\Db;
+use Page;
 
 load_trait('controller/Jump');  // 引入traits\controller\Jump
 
@@ -26,13 +27,16 @@ class Contacts extends Common {
         $contacts_list = DB::name('Contact')
                 ->where($map)
                 ->paginate(20);
+        $page = $contacts_list->render(); // 分页显示输出
         $navtitle = '联系人列表' . $this->navtitle;
+        $this->assign('page', $page);
         $this->assign('contacts_list', $contacts_list);
         return $this->fetch($this->templatePath);
     }
 
     //添加联系人
     public function add() {
+        $contact_id = input('id', '0', 'intval');
         $companyList = DB::name('company')->field('company_id,name')->select(); //公司列表 
         //todo:将来公司增加 此处不能一并读取 而另加一查询功能
         $contact = db('contact');
@@ -65,13 +69,14 @@ class Contacts extends Common {
             if ($id > 0) {
                 $contactData['last_uid'] = $this->_G['uid']; //'最后修改人',
                 $contactData['last_time'] = date("Y-m-d H:i:s"); //'最后修改时间',
-                $contact->where(['id' => $contact_id])->save($contactData);
-                $this->success("修改成功", 'Contacts/detail?id=' . $contactData['id']);
+                $contact->where(['id' => $contact_id])->update($contactData);
+                $this->success("修改成功", 'Contacts/lists');
             } else {
                 $contactData['add_uid'] = $this->_G['uid']; //'最后修改人',
                 $contactData['add_time'] = date("Y-m-d H:i:s"); //'最后修改时间',
                 $contact->data($contactData)->insert();
-                $this->success("添加成功", 'Contacts/detail?id=' . $contactData['id']);
+                $contact_id = $contact->getLastInsID();
+                $this->success("添加成功", 'Contacts/lists');
             }
         }
         $this->assign('contactData', $contactData);
