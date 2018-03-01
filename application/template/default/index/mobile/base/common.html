@@ -45,24 +45,11 @@
 {block name="nav"}
 <!-- 导航条 ================================================== -->
 <div id="moblie_wp">
-    <ul class="nav nav-pills pl10 pr10 sizing">
+    <ul class="nav nav-pills pl10 pr10 sizing" id="navwp">
         <a href="{:url('index/index')}"><img src="tpl_img/bg_icon.png" class="z mt10 mb10" height="40" /></a>
         
         <a href="javascript:void(0);" class="navicon iconfont y fs30 mt10 cc mr15" onClick="navopen();" title="导航">&#xe610;</a>
         <a href="javascript:void(0);" class="searchbut iconfont cf fs30 y mt10 cc mr15" onClick="searchopen('show');" title="搜索">&#xe604;</a>
-        
-        {if condition="$_G['uid'] > 0"}
-        <li class="mt10 mb10 ml20 y">
-            <a class="active" data-toggle="dropdown" href="{:url('index/index')}">{:get_username()} <b class="caret"></b></a>
-            <ul class="dropdown-menu" style="min-width:50px; left:-17px;">
-                <li><a href="{:url('User/profile')}">修改密码</a></li>
-                <li><a href="{:url('User/logout')}">退出</a></li>
-            </ul>
-        </li>
-        {else/}
-        <li class="mt20 mb10 ml20 y"><a class="active" href="{:url('User/register')}">注册</a></li>
-        <li class="mt20 mb10 ml20 y"><a class="active" href="{:url('User/login')}">登录</a></li>
-        {/if}
         
     </ul>
     
@@ -86,6 +73,10 @@
                 {/if}
             </li>
             {/foreach}
+            
+            <li class="nav_li"><a href="{:url('User/register')}" class="nava fs16 navpl">修改密码</a></li>
+            <li class="nav_li"><a href="{:url('User/login')}" class="nava fs16 navpl">退出</a></li>
+            
         </ul>
     </ul>
     
@@ -115,7 +106,7 @@
 	
 	<!-- 主体 -->
 {block name="header"}{/block}
-<div class="publicdiv" id="wrap" style="margin-top:10px; transition-duration:.5s;">
+<div class="publicdiv" id="wrap" style="margin-top:10px; transition-duration:.4s;">
         {block name="body"}{/block}
 </div>
 
