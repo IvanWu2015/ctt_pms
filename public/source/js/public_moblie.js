@@ -36,3 +36,7 @@ function searchopen(name){  //搜索打开、关闭
         jQuery('#keyword').val('');
     }
 }
+
+function openhref(url){
+    window.location.replace(url);
+}
