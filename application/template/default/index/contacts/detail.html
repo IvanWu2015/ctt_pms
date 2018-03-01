@@ -18,9 +18,10 @@
             <p class="lh30">年龄<span class="ml30">{$contactDetail['age']} 岁</span></p>
             <p class="lh30">性别<span class="ml30">{if condition="$contactDetail['sex'] == 1"}男{else}女{/if}</span></p>
             <p class="lh30">籍贯<span class="ml30">{$contactDetail['native_place']}</span></p>
-            <p class="lh30">状态<span class="ml30">{if condition="$contactDetail['status'] == 1"}在职{elseif condition="$contactDetail['status'] == 2"}离职{else}无{/if}</span></p>
+            <p class="lh30">状态<span class="ml30">{if condition="$contactDetail['status'] == 1"}<b class="fwn text-info">在职</b>{elseif condition="$contactDetail['status'] == 2"}<b class="fwn text-warning">离职</b>{else}无{/if}</span></p>
             <p class="lh30">电话<span class="ml30">{$contactDetail['tel']}</span></p>
             <p class="lh30">邮箱<span class="ml30">{$contactDetail['mail']}</span></p>
+            <p class="lh30">公司<span class="ml30">{$company['name']}</span></p>
             <p class="lh30">地址<span class="ml30">{$contactDetail['address']}</span></p>
             <div class="publicdiv lh20 inttext"><span class="z">简介</span><div style="padding-left:60px;">{$contactDetail['introduce']}</div></p>
         </div>

@@ -1,4 +1,14 @@
-﻿function navopen(){ //展开导航
+﻿function pawdopen(){    //密码开 闭
+    if(jQuery('#password').attr('type') == 'password'){ //开
+        jQuery('#password').attr('type', 'text');
+        jQuery('#pawdicon').html('&#xe67c;');           //开 图标
+    }else{                                              //闭
+        jQuery('#password').attr('type', 'password');
+        jQuery('#pawdicon').html('&#xe649;');           //闭 图标
+    }
+};
+
+function navopen(){ //展开导航
     jQuery('#moblie_nav').fadeIn();
     jQuery('#nav_ul').css({right: '0'});
     //jQuery('#nav_ul').css({transform: 'translateX(-100%)'});
