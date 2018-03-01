@@ -7,7 +7,7 @@
 <div class="container" style="width:1170px;">
     <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
         <div class="publicdiv mb20 ptlrb10 bf sizing">
-            <form action="{:url('/index/company/add?id='.$companyDetail['id'])}" id="formaddress" method="post" class="form-horizontal" role="form">
+            <form action="{:url('/index/company/add?id='.$companyDetail['company_id'])}" id="formaddress" method="post" class="form-horizontal" role="form">
                 <h3 class="ac borb pb30">添加公司</h3>
                 <div class="modal-body">
                     <div class="form-group w100 mrn mln z">
@@ -28,10 +28,9 @@
                         <label class="col-sm-2 control-label fwn">类型</label>
                         <div class="col-sm-7 pln prn">
                             <select class="form-control w30" name="type">
-                                <option value="1" {if condition="$companyDetail['type'] == 1"}selected{/if}>国企</option>
-                                <option value="2" {if condition="$companyDetail['type'] == 2"}selected{/if}>私营</option>
-                                <option value="3" {if condition="$companyDetail['type'] == 3"}selected{/if}>合资</option>
-                                <option value="4" {if condition="$companyDetail['type'] == 4"}selected{/if}>外资</option>
+                                {foreach $companyTypeList as $key => $type}
+                                <option value="{$key}" {if condition="$companyDetail['type'] == $key"}selected{/if}>{$type}</option>
+                                {/foreach}
                             </select>
                         </div>
                     </div>
@@ -40,12 +39,9 @@
                         <label class="col-sm-2 control-label fwn">公司规模</label>
                         <div class="col-sm-7 pln prn">
                             <select class="form-control w30" name="employee_numbers">
-                                <option value="1" {if condition="$companyDetail['employee_numbers'] == 1"}selected{/if}>10人以内</option>
-                                <option value="2" {if condition="$companyDetail['employee_numbers'] == 1"}selected{/if}>10-50</option>
-                                <option value="3" {if condition="$companyDetail['employee_numbers'] == 1"}selected{/if}>50-100</option>
-                                <option value="4" {if condition="$companyDetail['employee_numbers'] == 1"}selected{/if}>100-500</option>
-                                <option value="6" {if condition="$companyDetail['employee_numbers'] == 1"}selected{/if}>500-1000</option>
-                                <option value="7" {if condition="$companyDetail['employee_numbers'] == 1"}selected{/if}>1000以上</option>
+                                {foreach $employeeTypeList as $key => $type}
+                                <option value="{$key}" {if condition="$companyDetail['employee_numbers'] == $key"}selected{/if}>{$type}</option>
+                                {/foreach}
                             </select>
                         </div>
                     </div>
