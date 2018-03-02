@@ -31,9 +31,9 @@ class Mycenter extends Common {
 
         //我的文章总数
         $my_article_count = DB::name('Article')->where(['username' => $this->_G['username'], 'status' => 0])->count();
-        
-        
-        
+
+
+
         //以周为单位输出柱形图数据
         $week_data_where['date'] = array('gt', date('Y-m-d', strtotime("-1 year")));
         $week_data_where['objectType'] = array('eq', 'user');
@@ -110,7 +110,7 @@ class Mycenter extends Common {
                 ->field('a.*,c.name as class_name,p.name as project_name')
                 ->where(['a.status' => 0, 'a.username' => $this->_G['username']])
                 ->paginate(10);
-        
+
 
 
 
@@ -239,6 +239,7 @@ class Mycenter extends Common {
         return $this->fetch($this->templatePath);
     }
 
+    //项目列表
     public function project() {
         $project_list = DB::name('Team')
                 ->alias('t')
@@ -253,34 +254,35 @@ class Mycenter extends Common {
         return $this->fetch($this->templatePath);
     }
 
+    //个人信息修改
     public function info() {
-        $type = input('param.type');
-        if ($type == 'user_info') {
-            if (request()->isPost()) {
-                $data = [
-                    'realname' => input('post.realname', '', 'addslashes'),
-                    'nickname' => input('post.nickname', '', 'addslashes'),
-                    'birthday' => input('param.birthday'),
-                    'gender' => input('post.gender', '', 'addslashes'),
-                    'qq' => input('post.qq', '', 'intval'),
-                    'email' => input('post.email', '', 'addslashes'),
-                    'mobile' => input('post.mobile', '', 'intval'),
-                ];
-                DB::name('User')->where(['uid' => $this->_G['uid'], 'deleted' => 0])->update($data);
-                write_action($this->_G['username'], 0, 'user', $this->_G['uid'], 'update', $data);
-                save_log($this->_G['uid'], $this->_G['username']);
-                $message = array('result' => 'success', 'error' => '');
-                $data = json_encode($message);
-                echo $data;
-                exit();
+        $navtitle = '修改个人资料';
+        $type = input('type');
+        //表彰提交处理
+        if (request()->isPost()) {
+            $data = [
+                'realname' => input('realname', '', 'addslashes'),
+                'nickname' => input('nickname', '', 'addslashes'),
+                'birthday' => input('birthday'),
+                'gender' => input('gender', '', 'addslashes'),
+                'qq' => input('qq', '', 'intval'),
+                'email' => input('email', '', 'addslashes'),
+                'mobile' => input('mobile', '', 'addslashes'),
+            ];
+            //头像上传处理
+            $file = request()->file('avatar');
+            if ($file) {
+                $info = $file->move(ROOT_PATH . 'public' . DS . 'upload');
+                $data['avatar'] = DS . 'upload' . DS . $info->getSaveName();
             }
+            DB::name('User')->where(['uid' => $this->_G['uid'], 'deleted' => 0])->update($data);
+            write_action($this->_G['username'], 0, 'user', $this->_G['uid'], 'update', $data);
+            save_log($this->_G['uid'], $this->_G['username']);
         }
-        if ($type == 'file') {
-            $image = M('Image');
-            $data = $image->order('create_time desc')->find();    //获取最后上传图片
-            $this->assign('data', $data);
-            $this->display();
-        }
+        $user_info = DB::name('User')->where(['uid' => $this->_G['uid'], 'deleted' => 0])->find();
+        $this->assign('navtitle', $navtitle);
+        $this->assign('user_info', $user_info);
+        return $this->fetch($this->templatePath);
     }
 
     public function upload() {

@@ -173,16 +173,4 @@ class User extends Common {
         }
     }
 
-    //修改用户头像
-    public function avatar() {
-
-        return $this->fetch($this->templatePath);
-    }
-    
-    //修改用户资料
-    public function profile() {
-
-        return $this->fetch($this->templatePath);
-    }
-
 }
