@@ -3,42 +3,100 @@
 {/block}
 
 {block name="body"}
-<section>
-    <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
-
-    <div class="pt20" style="width:500px; margin:0px auto;">
-        <h3 class="mtn mb20 ac">修改密码</h3>
-        <form class="form-horizontal" role="form" action="{:url('index/user/profile')}" method="post">
-            <div class="form-group">
-                <label for="firstname" class="col-sm-2 control-label">原密码</label>
-                <div class="col-sm-10 pln">
-                    <input type="password" id="inputPassword"  class="form-control" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="old">
-                </div>
+<div class="modalwrap h470 sizing" id="modalwrap">
+    <form action="" method="post" id="add_tag">
+    <h3 class="modaltitle pl15 pr15 sizing" id="modaltitle">编辑信息<a href="javascript:void(0);" onClick="modalclose();" class="y fs13 iconfont">&#xe61c;</a></h3>
+    <div class="publocdiv pl20 pr20 sizing modalcontnet h360">
+        
+        <div class="form-group w100 mrn mln z">
+            <label class="col-sm-2 pt5 control-label ar fwn">真实姓名</label>
+            <div class="col-sm-9 pln prn">
+                <input type="text" name="realname" id="realname" class="form-control" placeholder="输入真实姓名" value="{$user_info['realname']}" /> 
             </div>
-            <div class="form-group">
-                <label for="lastname" class="col-sm-2 control-label">新密码</label>
-                <div class="col-sm-10 pln">
-                    <input type="password" id="inputPassword"  class="form-control" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password">
-                </div>
+        </div>
+        
+        <div class="form-group w100 mrn mln z">
+            <label class="col-sm-2 pt5 control-label ar fwn">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</label>
+            <div class="col-sm-9 pln prn">
+                <input type="text" name="nickname" id="nickname" class="form-control" value="{$user_info['nickname']}" placeholder="输入您的个性昵称" /> 
             </div>
-            <div class="form-group">
-                <label for="lastname" class="col-sm-2 control-label">确认密码</label>
-                <div class="col-sm-10 pln">
-                    <input type="password" id="inputPassword" class="form-control" placeholder="请再次输入密码" recheck="password" errormsg="您两次输入的密码不一致" nullmsg="请填确认密码" datatype="*" name="repassword">
-                </div>
+        </div>
+        
+        <div class="form-group w100 mrn mln z">
+            <label class="col-sm-2 pt5 control-label ar fwn">出生日期</label>
+            <div class="col-sm-9 pln prn">
+                <input type="text" name="birthday" id="end_time" value="{$user_info['birthday']}" class="form-control" placeholder="输入您的出生日期" /> 
             </div>
-           
-            <div class="form-group">
-                <label for="lastname" class="col-sm-2 control-label">&nbsp;</label>
-                <div class="col-sm-10 pln">
-                    <button type="submit" class="btn btn-default">提 交</button>
-                </div>
+        </div>
+        
+        <div class="form-group w100 mrn mln z">
+            <label class="col-sm-2 pt5 control-label ar fwn">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</label>
+            <div class="col-sm-9 pln prn">
+                <label><input type="radio" name="gender" {if condition="$user_info['gender'] == m"}checked='checked'{/if} value="m" /> 男</label>
+                <label><input type="radio" name="gender" {if condition="$user_info['gender'] == f"}checked='checked'{/if}  value="f" /> 女</label>
             </div>
-        </form>
-
+        </div>
+        
+        <div class="form-group w100 mrn mln z">
+            <label class="col-sm-2 pt5 control-label ar fwn">Q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q</label>
+            <div class="col-sm-9 pln prn">
+                <input type="text" name="qq" id="qq" class="form-control" placeholder="输入QQ号"  value="{$user_info['qq']}" /> 
+            </div>
+        </div>
+        
+        <div class="form-group w100 mrn mln z">
+            <label class="col-sm-2 pt5 control-label ar fwn">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</label>
+            <div class="col-sm-9 pln prn">
+                <input type="text" name="email" id="email" class="form-control" placeholder="输入正确的邮箱"  value="{$user_info['email']}"/> 
+            </div>
+        </div>
+        
+        <div class="form-group w100 mrn mln z">
+            <label class="col-sm-2 pt5 control-label ar fwn">手机号码</label>
+            <div class="col-sm-9 pln prn">
+                <input type="text" name="mobile" id="mobile" class="form-control" placeholder="输入手机号码" value="{$user_info['mobile']}" /> 
+            </div>
+        </div>
+        
+        
     </div>
+    <div class="modalbottom pt8 pb8 pl15 pr15 sizing">
+        <a href="javascript:void(0);" class="modalsearch bor pl20 pr20 y" onClick="modalsearch();">提交</a>
+    </div>
+    </form>
 </div>
-</section>
+<script type="text/javascript">
+$(document).ready(function () {
+    var end_time = $("#end_time").val();
+    var myDate = new Date();
+    if (!end_time) {
+        end_time = myDate.toLocaleDateString();
+    }
+    $('#end_time').daterangepicker({singleDatePicker: true, format: 'YYYY-MM-DD', startDate: end_time}, function (start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+    });
+});
+
+function modalsearch(){     //ajax提交
+    var url="{:url('/index/mycenter/info?type=user_info')}";
+    jQuery.ajax({
+        type: 'post',
+        url: url,
+        data: jQuery('#add_tag').serialize(),
+        dataType: 'json',
+        success: function (data) {
+            if (data.result == 'success') {
+                jQuery('#addpr').html('操作成功！').show(1).delay(2000).hide(1);
+                modalclose();
+                setTimeout("location.reload()",2500);
+            }else{
+                jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
+            }
+        }
+    });
+}
+</script>
+
 
 {/block}
 

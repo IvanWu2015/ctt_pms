@@ -54,6 +54,7 @@ class User extends Common {
     }
 
     /* 登录页面 */
+
     public function login($username = '', $password = '', $verify = '') {
         if (request()->isPost()) { //登录验证
             /* 检测验证码 */
@@ -135,7 +136,7 @@ class User extends Common {
      * 修改密码提交
      * @author huajie <banhuajie@163.com>
      */
-    public function profile() {
+    public function password() {
         if (!$this->_G['uid']) {
             $this->error('您还没有登陆', url('User/login'));
         }
@@ -154,7 +155,7 @@ class User extends Common {
             }
             $user = model('User');
             //验证原密码
-            if($user->verifyUser($uid, $password)) {
+            if ($user->verifyUser($uid, $password)) {
                 $result = $user->changePassword($uid, $repassword);
                 if ($result) {
                     $this->logout();
@@ -170,6 +171,18 @@ class User extends Common {
             $this->assign('navtitle', $navtitle);
             return $this->fetch($this->templatePath);
         }
+    }
+
+    //修改用户头像
+    public function avatar() {
+
+        return $this->fetch($this->templatePath);
+    }
+    
+    //修改用户资料
+    public function profile() {
+
+        return $this->fetch($this->templatePath);
     }
 
 }

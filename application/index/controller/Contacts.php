@@ -33,6 +33,7 @@ class Contacts extends Common {
                 ->paginate(20);
         $page = $contacts_list->render(); // 分页显示输出
         $navtitle = '联系人列表' . $this->navtitle;
+         $this->assign('navtitle', $navtitle);
         $this->assign('page', $page);
         $this->assign('name', $name);
         $this->assign('tel', $tel);
