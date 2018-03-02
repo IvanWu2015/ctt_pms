@@ -1,0 +1,32 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="g_userheader sizing">
+    
+    <div class="g_userhead sizing">
+        <div class="g_portrait sizing">
+            <img src="tpl_img/male_img.png" class="publicimg" />
+        </div>
+        <h3 class="cf fs20">{:get_username()} <a href="javascript:void(0);" class="iconfont y cf fs30">&#xe600;</a></h3>
+    </div>
+    
+    <ul class="g_userstatistics sizing">
+        <li class="sizing"><b class="fs16">{$my_task_count} / {$not_status_count}</b> <br/>我的任务</li>
+        <li class="sizing"><b class="fs16">{$estimate_count} / {$consumed_count}</b> <br/>总工时</li>
+        <li class="sizing"><b class="fs16">{$same_month_estimate_count} / {$same_month_consumed_count}</b> <br/>当月工时</li>
+        <li class="brno"><b class="fs16">{$user_count['today_working']} / {$user_count['not_today_working']}</b> <br/>当天工时</li>
+    </ul>
+</div>
+
+<div class="publicdiv bf pl10 pr10 pt20 mb58 sizing">
+    123123
+</div>
+
+{/block}
+
+
+{block name="footer"}{/block}

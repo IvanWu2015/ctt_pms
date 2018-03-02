@@ -60,7 +60,7 @@
                          {foreach $nav['sub'] as $sub_nav}
                             <li><a href="{$sub_nav['true_url']}">{$sub_nav['title']}</a></li>
                          {/foreach}
-                         </ul>
+                     </ul>
                     {/if}
                 </li>
                 {/foreach}
@@ -70,15 +70,6 @@
                 {/if}
                 
                 {if condition="$_G['uid'] > 0"}
-                <li class="mt5 ml10 y">
-                    <a class="active iconfont" data-toggle="dropdown" href="javascript:void(0);" style="height:45px;line-height:45px;padding:0px 10px;"><span class="fs20 z">&#xe600;</span></a>
-                    <ul class="dropdown-menu mynavright" style="min-width:140px;">
-                        <li><a href="javascript:void(0);" onClick="loadWindow('{:url('/index/user/avatar')}');">修改头像</a></li>
-                        <li><a href="{:url('/index/user/profile')}">修改资料</a></li>
-                        <li><a href="{:url('User/password')}">修改密码</a></li>
-                        <li><a href="{:url('User/logout')}">退出</a></li>
-                    </ul>
-                </li>
                 <li class="mt8 ml20 y">
                     <div class="pkeywp">
                         <form action="{:url('/index/search/lists/?keyword='.$keyword.'&type='.$type)}" method="post">
@@ -95,6 +86,8 @@
                         <li class="borb mb10"><a href="{:url('mycenter/action_list')}">我的动态</a></li>
                         <li><a href="{:url('mycenter/weburl_list')}">我的收藏</a></li>
                         <li><a href="{:url('mycenter/article_list')}">我的文档</a></li>
+                        
+                        <li class="bort mt10"><a href="{:url('User/logout')}">退出</a></li>
                     </ul>
                 </li>
                 {else/}

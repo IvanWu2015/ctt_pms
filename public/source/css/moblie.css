@@ -1,11 +1,11 @@
 body{ padding:0; margin:0; }
 
-#moblie_wp{ width:700px; position:relative; margin:0px auto; padding-top:56px;}
+#moblie_wp{ width:700px; position:relative; margin:0px auto; padding-top:46px;}
 @media screen and (max-width:700px){
-    #moblie_wp{ width:100%; position:relative; float:left; padding-top:56px;}
+    #moblie_wp{ width:100%; position:relative; float:left; padding-top:46px;}
 }
 
-.mb58{ margin-bottom:58px;}
+.mb58{ margin-bottom:48px;}
 .iosform{-webkit-appearance:none;}
 
 .nav-pills{ width:100%; height:56px; background:#222222; z-index:9; position:fixed; top:0; left:0; transition-duration:.4s;}
@@ -87,6 +87,13 @@ body{ padding:0; margin:0; }
 
 .companygelist li{ width:100%; float:left; min-height:20px; padding-left:100px; position:relative;}
 .companygelist li span{ width:90px; position:absolute; top:0; left:0;}
+
+.g_userheader{ width:100%; float:left; background:#ff6ea5; padding:40px 15px 100px 15px; position:relative;}
+.g_userstatistics{ width:100%; height:60px; background:rgba(0,0,0,0.2); color:#fff; padding:10px 0px; position:absolute; bottom:0; left:0;}
+.g_userstatistics li{ width:25%; float:left; line-height:20px; text-align:center; font-size:12px; border-right:0.5px #dedede solid;}
+.g_userhead{ width:100%; float:left; min-height:90px; line-height:90px; padding-left:105px; position:relative;}
+.g_userhead .g_portrait{ width:90px; height:90px; border-radius:100%; border:5px #fdb9d2 solid; overflow:hidden; position:absolute; top:0; left:0;}
+
 
 
 .m_footer{width:100%; height:50px; background-color:rgba(231,231,231,0.95); border-top:1px #b8b8b8 solid; z-index:99; position:fixed; bottom:0px; left:0px; }
