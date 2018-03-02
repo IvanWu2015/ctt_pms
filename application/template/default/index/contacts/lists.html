@@ -12,13 +12,11 @@
         </div>
         
         <div class="publicdiv mb10">
-            <form class="form-inline" role="form">
+            <form action="{:url('/index/contacts/lists')}" class="form-inline" role="form" method="post">
                 <a href="{:url('/index/company/lists')}" class="btn btn-success y ml20">公司列表</a>
                 <a href="{:url('/index/contacts/add')}" class="btn btn-info y">添加</a>
-                
-                <input type="text" class="form-control" placeholder="所属公司" />
-                <input type="text" class="form-control" placeholder="联系人" />
-                <input type="text" class="form-control" placeholder="联系电话" />
+                <input type="text" name="name" class="form-control" placeholder="联系人" value="{$name}" />
+                <input type="text"  name="tel" class="form-control" placeholder="联系电话" value="{$tel}"  />
                 <input type="submit" class="btn btn-warning" value="查询" />
             </form>
         </div>

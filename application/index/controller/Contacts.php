@@ -20,9 +20,13 @@ class Contacts extends Common {
 
     //联系人列表
     public function lists() {
-        $username = input('get.name', '', 'addslashes');
-        if (!empty($username)) {
-            $map['name'] = array('eq', $username);
+        $name = input('name', '', 'addslashes');
+        if (!empty($name)) {
+            $map['name'] = array('like', "%{$name}%");
+        }
+        $tel = input('tel', '', 'addslashes');
+        if (!empty($tel)) {
+            $map['tel'] = array('like', "%{$tel}%");
         }
         $contacts_list = DB::name('Contact')
                 ->where($map)
@@ -30,6 +34,8 @@ class Contacts extends Common {
         $page = $contacts_list->render(); // 分页显示输出
         $navtitle = '联系人列表' . $this->navtitle;
         $this->assign('page', $page);
+        $this->assign('name', $name);
+        $this->assign('tel', $tel);
         $this->assign('contacts_list', $contacts_list);
         return $this->fetch($this->templatePath);
     }
