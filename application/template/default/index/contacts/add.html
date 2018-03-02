@@ -31,56 +31,9 @@
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">职务</label>
-                        <div class="col-sm-7 pln prn">
-                            <input type="text" name="worktitle" class="form-control w60" id="worktitle" value="{$contactData['worktitle']}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">年龄</label>
-                        <div class="col-sm-7 pln prn">
-                            <input type="text" name="age" class="form-control w60" id="age" value="{$contactData['age']}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">性别</label>
-                        <div class="col-sm-7 pln prn">
-                            <label class="mt8 mr15"><input type="radio" name="sex" value="1" {if condition="$contactData['sex'] == 1"}checked{/if}> 男</label>
-                            <label class="mt8"><input type="radio" name="sex" value="2" {if condition="$contactData['sex'] == 2"}checked{/if}> 女</label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">在职状态</label>
-                        <div class="col-sm-7 pln prn">
-                            <select class="form-control w30" name="status">
-                                <option value="0" {if condition="$contactData['status'] == 0"}selected{/if}>无</option>
-                                <option value="1" {if condition="$contactData['status'] == 1"}selected{/if}>在职</option>
-                                <option value="2" {if condition="$contactData['status'] == 2"}selected{/if}>离职</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">籍贯</label>
-                        <div class="col-sm-7 pln prn">
-                            <input type="text" name="native_place" class="form-control w60" id="native_place" value="{$contactData['native_place']}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">联系电话</label>
                         <div class="col-sm-7 pln prn">
                             <input type="text" name="tel" class="form-control w60" id="tel" value="{$contactData['tel']}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">电子邮箱</label>
-                        <div class="col-sm-7 pln prn">
-                            <input type="text" name="mail" class="form-control w60" id="mail" value="{$contactData['mail']}">
                         </div>
                     </div>
                     
@@ -91,34 +44,89 @@
                         </div>
                     </div>
                     
-                    <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">照片</label>
-                        <div class="col-sm-7 pln prn">
-                            <div class="imgwrap" id="imgwrap">
-                                <input type="file" id="cover_image" class="cover" name="photo" value="{$contactData['photo']}" />
-                                <img src="{$contactData['photo']}" id="coverimg" />
+                    <div class="publicdiv dn" id="addInputOpen">
+                        <div class="form-group w100 mrn mln z">
+                            <label class="col-sm-2 control-label fwn">职务</label>
+                            <div class="col-sm-7 pln prn">
+                                <input type="text" name="worktitle" class="form-control w60" id="worktitle" value="{$contactData['worktitle']}">
                             </div>
-                            <span id="original_img_ok">照片大小建议为700*700像素</span>
-                            <span class="input_show_on" id="original_img_on">请选择个人照片</span>
-                            <br/><span id="original_img_ok">支持格式：jpg,jpeg,png,gif,bmp</span>
+                        </div>
+                        
+                        <div class="form-group w100 mrn mln z">
+                            <label class="col-sm-2 control-label fwn">年龄</label>
+                            <div class="col-sm-7 pln prn">
+                                <input type="text" name="age" class="form-control w60" id="age" value="{$contactData['age']}">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group w100 mrn mln z">
+                            <label class="col-sm-2 control-label fwn">性别</label>
+                            <div class="col-sm-7 pln prn">
+                                <label class="mt8 mr15"><input type="radio" name="sex" value="1" {if condition="$contactData['sex'] == 1"}checked{/if}> 男</label>
+                                <label class="mt8"><input type="radio" name="sex" value="2" {if condition="$contactData['sex'] == 2"}checked{/if}> 女</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group w100 mrn mln z">
+                            <label class="col-sm-2 control-label fwn">在职状态</label>
+                            <div class="col-sm-7 pln prn">
+                                <select class="form-control w30" name="status">
+                                    <option value="0" {if condition="$contactData['status'] == 0"}selected{/if}>无</option>
+                                    <option value="1" {if condition="$contactData['status'] == 1"}selected{/if}>在职</option>
+                                    <option value="2" {if condition="$contactData['status'] == 2"}selected{/if}>离职</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group w100 mrn mln z">
+                            <label class="col-sm-2 control-label fwn">籍贯</label>
+                            <div class="col-sm-7 pln prn">
+                                <input type="text" name="native_place" class="form-control w60" id="native_place" value="{$contactData['native_place']}">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group w100 mrn mln z">
+                            <label class="col-sm-2 control-label fwn">电子邮箱</label>
+                            <div class="col-sm-7 pln prn">
+                                <input type="text" name="mail" class="form-control w60" id="mail" value="{$contactData['mail']}">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group w100 mrn mln z">
+                            <label class="col-sm-2 control-label fwn">照片</label>
+                            <div class="col-sm-7 pln prn">
+                                <div class="imgwrap" id="imgwrap">
+                                    <input type="file" id="cover_image" class="cover" name="photo" value="{$contactData['photo']}" />
+                                    <img src="{$contactData['photo']}" id="coverimg" />
+                                </div>
+                                <span id="original_img_ok">照片大小建议为700*700像素</span>
+                                <span class="input_show_on" id="original_img_on">请选择个人照片</span>
+                                <br/><span id="original_img_ok">支持格式：jpg,jpeg,png,gif,bmp</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group w100 mrn mln z">
+                            <label class="col-sm-2 control-label fwn">简介</label>
+                            <div class="col-sm-7 pln prn">
+                                <textarea class="w90 form-control" name="introduce" rows="4"></textarea>
+                            </div>
+                        </div>
+                        
+                        <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/ueditor.config.js"></script>
+                        <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/ueditor.all.min.js"> </script>
+                        <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/lang/zh-cn/zh-cn.js"></script>
+                        
+                        <div class="form-group w100 mrn mln z">
+                            <label class="col-sm-2 control-label fwn">备注</label>
+                            <div class="col-sm-10 pln prn">
+                                <script id="editor" type="text/plain" class="z" name="remarks" style="width:100% !important; height:200px;">{$contactData['remarks']}</script>
+                            </div>
                         </div>
                     </div>
-                    
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">简介</label>
+                        <label class="col-sm-2 control-label fwn">&nbsp;</label>
                         <div class="col-sm-7 pln prn">
-                            <textarea class="w90 form-control" name="introduce" rows="4"></textarea>
-                        </div>
-                    </div>
-                    
-                    <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/ueditor.config.js"></script>
-                    <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/ueditor.all.min.js"> </script>
-                    <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/lang/zh-cn/zh-cn.js"></script>
-                    
-                    <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">备注</label>
-                        <div class="col-sm-10 pln prn">
-                            <script id="editor" type="text/plain" class="z" name="remarks" style="width:100% !important; height:200px;">{$contactData['remarks']}</script>
+                            <a href="javascript:void(0);" class="iconfont" id="inputopen" title="展开更多" onClick="inputopen('addInputOpen');">展开更多 &#xe688;</a>
                         </div>
                     </div>
                     

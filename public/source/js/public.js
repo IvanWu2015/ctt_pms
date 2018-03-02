@@ -67,6 +67,17 @@ function loadWindow(url) {
  },"json");
  return;
  }*/
+ 
+function inputopen(name){
+    if(jQuery('#' + name).css('display') == 'none'){
+        jQuery('#' + name).slideDown();
+        jQuery('#inputopen').html('收起更多 &#xe650;');
+    }else{
+        jQuery('#' + name).slideUp();
+        jQuery('#inputopen').html('展开更多 &#xe688;');
+    }
+}
+ 
 jQuery(document).keydown(function (e) {
     if (e.which == 27) {     //按Esc键关闭弹窗
         modalclose();
