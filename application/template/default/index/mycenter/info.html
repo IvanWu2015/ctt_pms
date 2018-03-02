@@ -1,0 +1,133 @@
+{extend name="base/common" /}
+{block name="header"}
+{/block}
+
+{block name="body"}
+<section>
+    <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
+
+        <div class="pt20" style="width:800px; margin:0px auto;">
+            <h3 class="mtn mb20 ac borb pb30 pt10">编辑个人资料</h3> <a href="{:url('/index/user/password')}">修改密码</a>
+            <form class="form-horizontal" role="form" action="{:url('index/mycenter/info')}" method="post"enctype="multipart/form-data">
+                <div class="form-group w100 mrn mln z">
+                    <label class="col-sm-2 pt5 control-label ar fwn">头像</label>
+                    <div class="col-sm-9 pln prn">
+                        <div class="imgwrap mb5" id="imgwrap">
+                            <input type="file" id="cover_image" class="cover" name="avatar" />
+                            <input type="hidden" id="cover_image_url" class="cover" name="avatar" />
+                            <img src="" id="coverimg" />
+                        </div>
+                        <p class="mbn c6">头像大小建议为700*700像素</p>
+                        <p class="mbn c6">支持格式：jpg,jpeg,png,gif,bmp</p>
+                    </div>
+                </div>
+
+                <div class="form-group w100 mrn mln z">
+                    <label class="col-sm-2 pt5 control-label ar fwn">真实姓名</label>
+                    <div class="col-sm-9 pln prn">
+                        <input type="text" name="realname" id="realname" class="form-control" placeholder="输入真实姓名" value="{$user_info['realname']}" /> 
+                    </div>
+                </div>
+
+                <div class="form-group w100 mrn mln z">
+                    <label class="col-sm-2 pt5 control-label ar fwn">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</label>
+                    <div class="col-sm-9 pln prn">
+                        <input type="text" name="nickname" id="nickname" class="form-control" value="{$user_info['nickname']}" placeholder="输入您的个性昵称" /> 
+                    </div>
+                </div>
+
+                <div class="form-group w100 mrn mln z">
+                    <label class="col-sm-2 pt5 control-label ar fwn">出生日期</label>
+                    <div class="col-sm-9 pln prn">
+                        <input type="text" name="birthday" id="end_time" value="{$user_info['birthday']}" class="form-control" placeholder="输入您的出生日期" /> 
+                    </div>
+                </div>
+
+                <div class="form-group w100 mrn mln z">
+                    <label class="col-sm-2 pt5 control-label ar fwn">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</label>
+                    <div class="col-sm-9 pln prn">
+                        <label><input type="radio" name="gender" {if condition="$user_info['gender'] == m"}checked='checked'{/if} value="m" /> 男</label>
+                        <label><input type="radio" name="gender" {if condition="$user_info['gender'] == f"}checked='checked'{/if}  value="f" /> 女</label>
+                    </div>
+                </div>
+
+                <div class="form-group w100 mrn mln z">
+                    <label class="col-sm-2 pt5 control-label ar fwn">Q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q</label>
+                    <div class="col-sm-9 pln prn">
+                        <input type="text" name="qq" id="qq" class="form-control" placeholder="输入QQ号"  value="{$user_info['qq']}" /> 
+                    </div>
+                </div>
+
+                <div class="form-group w100 mrn mln z">
+                    <label class="col-sm-2 pt5 control-label ar fwn">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</label>
+                    <div class="col-sm-9 pln prn">
+                        <input type="text" name="email" id="email" class="form-control" placeholder="输入正确的邮箱"  value="{$user_info['email']}"/> 
+                    </div>
+                </div>
+
+                <div class="form-group w100 mrn mln z">
+                    <label class="col-sm-2 pt5 control-label ar fwn">手机号码</label>
+                    <div class="col-sm-9 pln prn">
+                        <input type="text" name="mobile" id="mobile" class="form-control" placeholder="输入手机号码" value="{$user_info['mobile']}" /> 
+                    </div>
+                </div>
+                <div class="form-group w100 mrn mln z">
+                    <label class="col-sm-2 pt5 control-label ar fwn">&nbsp;</label>
+                    <div class="col-sm-9 pln prn">
+                        <button type="submit" class="btn btn-primary">提 交</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    jQuery(function () {
+        if (jQuery('#coverimg').attr('src') == "") {    //封面为空则显示默认图片
+            jQuery('#coverimg').attr('src', 'tpl_img/coverimg.png');
+        }
+
+        //修改头像
+
+        jQuery("#cover_image").change(function () {
+            var objUrl = getObjectURL(this.files[0]);
+            console.log("objUrl = " + objUrl);
+            if (objUrl) {
+                jQuery("#coverimg").attr("src", objUrl);
+            }
+        });
+
+    });
+
+    $(document).ready(function () {
+        var end_time = $("#end_time").val();
+        var myDate = new Date();
+        if (!end_time) {
+            end_time = myDate.toLocaleDateString();
+        }
+        $('#end_time').daterangepicker({singleDatePicker: true, format: 'YYYY-MM-DD', startDate: end_time}, function (start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+    });
+
+//建立一個可存取到該file的url
+    function getObjectURL(file) {
+        var url1 = null;
+        if (window.createObjectURL != undefined) { // basic
+            url1 = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url1 = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url1 = window.webkitURL.createObjectURL(file);
+        }
+        return url1;
+    }
+</script>
+{/block}
+
+{block name="side"}{/block}
+{block name="script"}
+
+{/block}
