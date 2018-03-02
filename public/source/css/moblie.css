@@ -1,14 +1,14 @@
 body{ padding:0; margin:0; }
 
-#moblie_wp{ width:700px; position:relative; margin:0px auto; padding-top:60px;}
+#moblie_wp{ width:700px; position:relative; margin:0px auto; padding-top:56px;}
 @media screen and (max-width:700px){
-    #moblie_wp{ width:100%; position:relative; float:left; padding-top:60px;}
+    #moblie_wp{ width:100%; position:relative; float:left; padding-top:56px;}
 }
 
 .mb58{ margin-bottom:58px;}
 .iosform{-webkit-appearance:none;}
 
-.nav-pills{ width:100%; background:#222222; z-index:9; position:fixed; top:0; left:0; transition-duration:.4s;}
+.nav-pills{ width:100%; height:56px; background:#222222; z-index:9; position:fixed; top:0; left:0; transition-duration:.4s;}
 
 .bhl{ border-left:0.5px #dedede solid;}
 .bhr{ border-right:0.5px #dedede solid;}
@@ -30,7 +30,7 @@ body{ padding:0; margin:0; }
 /*导航菜单*/
 .moblie_nav {width:100%; height:100%; display:none; z-index:99; position:fixed; top:0; left:0; right:0; bottom:0; margin:auto; }
 .moblie_nav .nav_bg {width:100%; height:100%; float:left; background-color:rgba(0, 0, 0, 0.3); }
-.moblie_nav .nav_ul {width:50%; height:100%; overflow-y:auto; background:#fff; z-index:100; position:absolute; top:0; right:-50%; padding:10px; font-size:15px; transition-duration:.4s; }
+.moblie_nav .nav_ul {width:50%; height:100%; overflow-y:auto; background:#fff; z-index:100; position:absolute; top:0; left:-50%; padding:10px; font-size:15px; transition-duration:.4s; }
 .moblie_nav .nav_ul li.nav_li {width:100%; float:left; border-bottom:1px #f3f1f1 solid; position:relative; }
 .moblie_nav .nav_ul li.nav_li .navlidiv {padding:10px; position:absolute; top:5px; right:0px; }
 .moblie_nav .nav_ul li.nav_li ul {width:100%; float:left; display:none; }
