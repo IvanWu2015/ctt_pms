@@ -61,14 +61,15 @@ body{ padding:0; margin:0; }
 .scorelist li .winner{ width:60px; height:60px; line-height:60px; border-radius:100%; text-align:center; position:absolute; top:8px; left:0px; overflow:hidden;}
 .scorelist li h3{ width:100%; float:left; font-size:16px; margin:0; font-weight:normal; color:#666; height:24px; line-height:24px;}
 .scorelist li p{ width:100%; float:left; height:18px; line-height:18px; font-size:12px; margin:0; padding:0;}
-.scorelist li .g_listright{ z-index:2; position:absolute; top:30px; right:8px;}
+.scorelist li .g_listright{ z-index:2; position:absolute; top:30px; right:0px;}
 .scorelist li a{ width:100%; height:60px; display:block; -webkit-transition:all 0.3s linear; padding:8px 18px 8px 70px; transition:all 0.3s linear; position:relative; -webkit-box-sizing:border-box; box-sizing:border-box;}
 .scorelist li i{ width:150px; height:60px; position:absolute; top:8px; right:-150px;}
 .scorelist li i span{ height:60px; line-height:60px; float:left; display:block; color:#fff;}
 .swipeleft{transform:translateX(-150px);-webkit-transform:translateX(-150px);}
 
+.dial{ height:30px; line-height:30px; padding:0px 15px; border-radius:3px; color:#fff; background:red;}
 
-.fontlist{ width:100%; float:left; min-height:40px; padding-left:90px; position:relative;}
+.fontlist{ width:100%; float:left; min-height:46px; padding-bottom:8px; padding-left:90px; position:relative;}
 .fontlist .fonttitle{ width:80px; height:40px; line-height:40px; position:absolute; top:0; left:0;}
 
 .footer_wp{ width:100%; background:#fff; border-top:0.5px #dedede solid; height:50px; z-index:9; position:fixed; bottom:0px; left:0px; transition-duration:.4s;}
@@ -84,7 +85,7 @@ body{ padding:0; margin:0; }
 .moblie_female_bg{ height:300px; background:url('../images/female_bg.jpg') no-repeat center center; background-size:100% auto;}
 .moblie_male_bg{ height:300px; background:url('../images/male_bg.jpg') no-repeat center center; background-size:100% auto;}
 
-.companygelist li{ width:100%; float:left; padding-left:100px; position:relative;}
+.companygelist li{ width:100%; float:left; min-height:20px; padding-left:100px; position:relative;}
 .companygelist li span{ width:90px; position:absolute; top:0; left:0;}
 
 

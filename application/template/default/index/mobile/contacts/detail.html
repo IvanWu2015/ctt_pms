@@ -21,7 +21,11 @@
         <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">职务</span>{$contactDetail['worktitle']}</div>
         <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">籍贯</span>{$contactDetail['native_place']}</div>
         <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">状态</span>{if condition="$contactDetail['status'] == 1"}<b class="fwn text-info">在职</b>{elseif condition="$contactDetail['status'] == 2"}<b class="fwn text-warning">离职</b>{else}无{/if}</div>
-        <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">电话</span><a href="tel:{$contactDetail['tel']}">{$contactDetail['tel']}</a></div>
+        <div class="publicdiv pt15 pb15 bhb">
+            <span class="z mr20">电话</span>
+            <a href="tel:{$contactDetail['tel']}">{$contactDetail['tel']}</a>
+            <a href="tel:{$contactDetail['tel']}" class="y dial iconfont">&#xe62a; 拨打</a>
+        </div>
         <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">邮箱</span>{$contactDetail['mail']}</div>
         <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">公司</span>{$company['name']}</div>
         <div class="publicdiv pt15 pb15"><span class="z mr20">地址：</span>{$contactDetail['address']}</div>
@@ -30,6 +34,23 @@
     <div class="publicdiv mt8 bf fs14 pl20 pr20 sizing">
         <div class="publicdiv pt15 pb15">简介：{$contactDetail['introduce']}</div>
     </div>
+    
+    <div class="publicdiv mt8 bf fs14 pl20 pr20 sizing">
+        <div class="publicdiv pt15 pb15">备注：{$contactDetail['remarks']}</div>
+    </div>
+    
+    <div class="publicdiv bf mt10">
+        <p class="publicdiv pt15 pb15 bhb pl10 pr10 sizing" id="contactopen" onClick="contactopen('operation');">操作<span class="y iconfont" id="operation_icon">&#xe64b;</span></p>
+        <div class="publicdiv pl10 pr10 pb15 dn sizing" id="operation">
+            <a href="{:url('/index/contacts/add/?id='.$contactDetail['id'])}" class="ui-btn-lg ui-btn-primary mt10">编辑</a>
+            <a href="{:url('/index/contacts/lists/?deleted=1&id='.$contactDetail['id'])}" class="ui-btn-lg ui-btn-danger mt10">删除</a>
+        </div>
+    </div>
+    
+    <div class="publicdiv pl10 pr10 sizing mt10">
+        <a href="{:url('/index/company/lists')}" class="ui-btn-lg ui-btn-primary activ">公司列表</a>
+    </div>
+    
 </div>
 {/block}
 

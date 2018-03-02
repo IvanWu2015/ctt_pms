@@ -117,6 +117,12 @@ img{ border:none;}
 .pt30{ padding-top:30px;}
 .ptlrb30{ padding:30px 30px;}
 
+.pl40{ padding-left:40px;}
+.pr40{ padding-right:40px;}
+.pb40{ padding-bottom:40px;}
+.pt40{ padding-top:40px;}
+.ptlrb40{ padding:40px 40px;}
+
 .pln{ padding-left:0px !important;}
 .prn{ padding-right:0px !important;}
 .pbn{ padding-bottom:0px !important;}
@@ -250,6 +256,10 @@ img{ border:none;}
 .h39{ height:39px;}
 .h40{ height:40px;}
 .h50{ height:50px;}
+.h60{ height:60px;}
+.h70{ height:70px;}
+.h80{ height:80px;}
+.h90{ height:90px !important;}
 
 /*文字显示行数 IE8以下不兼容*/
 .clamp2{ overflow:hidden; word-break:break-all; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;}

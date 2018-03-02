@@ -37,6 +37,16 @@ function searchopen(name){  //搜索打开、关闭
     }
 }
 
+function contactopen(name){
+    if(jQuery('#' + name).css('display') == 'none'){
+        jQuery('#' + name).show();
+        jQuery('#' + name + '_icon').css({transform: 'rotate(90deg)'});
+    }else{
+        jQuery('#' + name).hide();
+        jQuery('#' + name + '_icon').css({transform: 'rotate(0deg)'});
+    }
+}
+
 function openhref(url){
     window.location.replace(url);
 }

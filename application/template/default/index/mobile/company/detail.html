@@ -8,7 +8,7 @@
     <div class="publicdiv bf mt10 pt10 pb10 pl10 pr10 sizing">
         <h3 class="borb pt15 pb15 fs18">{$companyDetail['name']}</h3>
         
-        <div class="publicdiv companygelist fs12 c6 iconfont">
+        <div class="publicdiv companygelist fs13 c6 iconfont">
             
             <li class="sizing mt15"><span><b class="fwn mr5">&#xe6c0;</b>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</span>{$companyDetail['type']}</li>
             <li class="sizing mt15"><span><b class="fwn mr5">&#xe742;</b>规&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;模</span>{$companyDetail['employee_numbers']}</li>
@@ -33,8 +33,42 @@
                 <li class="sizing mt15"><span><b class="fwn mr5">&#xe670;</b>银行账号</span>{$companyDetail['bank_account']}</li>
             </div>
             
+            <div class="publicdiv bht mt15">
+                <li class="sizing mt15"><span><b class="fwn mr5">&#xe6c9;</b>业务范围</span>{$companyDetail['scope']}</li>
+                <li class="sizing mt15"><span><b class="fwn mr5">&#xe704;</b>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</span>{$companyDetail['remarks']}</li>
+            </div>
+            
         </div>
     </div>
+    
+    <div class="publicdiv bf mt10">
+        <p class="publicdiv pt15 pb15 bhb pl10 pr10 sizing" id="contactopen" onClick="contactopen('contactwp');">相关联系人<span class="y iconfont" id="contactwp_icon">&#xe64b;</span></p>
+        <ul class="publicdiv scorelist pl10 pr10 pb15 dn sizing" id="contactwp">
+            {foreach $contacts_list as $contact}
+            <li class="bhb sizing">
+            <a href="{:url('/index/contacts/detail?id='.$contact['id'])}">
+                <div class="winner fs30 cc" title="性别">
+                    <img src="{$contactDetail['photo']}" onerror="this.src='tpl_img/{if condition='$contactDetail["sex"] == 1'}male_img{else}female_img{/if}.png';" class="publicimg" />
+                </div>
+                <h3 class="ellipsis" title="姓名">
+                    {$contact['name']}
+                    <span class="fs12 c9">{if condition="$contact['status'] == 1"}[在职]{elseif condition="$contact['status'] == 2"}[离职]{/if}</span>
+                </h3>
+                <p class="publicdiv c9 iconfont" title="电话"><b class="fs14">&#xe618;</b> {$contact['tel']}</p>
+                <p class="publicdiv c9 iconfont" title="地址"><b class="fs14">&#xe617;</b> {$contact['address']}</p>
+                <span class="g_listright iconfont">&#xe64b;</span>
+            </a>
+            </li>
+            {/foreach}
+        </ul>
+        
+        <p class="publicdiv pt15 pb15 bhb pl10 pr10 sizing" id="contactopen" onClick="contactopen('operation');">操作<span class="y iconfont" id="operation_icon">&#xe64b;</span></p>
+        <div class="publicdiv pl10 pr10 pb15 dn sizing" id="operation">
+            <a href="{:url('/index/company/add/?id='.$companyDetail['company_id'])}" class="ui-btn-lg ui-btn-primary mt10">编辑</a>
+            <a href="{:url('/index/company/lists/?deleted=1&id='.$companyDetail['company_id'])}" class="ui-btn-lg ui-btn-danger mt10">删除</a>
+        </div>
+    </div>
+    
 </div>
 {/block}
 

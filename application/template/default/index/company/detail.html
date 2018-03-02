@@ -7,11 +7,14 @@
 
 <div class="container mt20" style="width:1170px;">
     <div class="publicdiv mt20 ptlrb20 bf sizing iconfont">
-        <h3 class="borb pb30">{$companyDetail['name']}</h3>
+        <h3 class="borb pb30">
+            {$companyDetail['name']}
+            <span class="y fs13 c9">{$companyDetail['add_time']}</span>
+        </h3>
         
         <div class="publicdiv lh30 c6">
             
-            <div class="publicdiv mt8 mt20">
+            <div class="publicdiv mt20">
                 <div class="w50 z">
                     <span class="w130p z"><b class="fwn cdicon">&#xe6c0;</b>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</span>{$companyDetail['type']}
                 </div>
@@ -20,39 +23,48 @@
                 </div>
             </div>
             
-            <div class="publicdiv mt8 mt20">
-                <div class="w50 z">
-                    <span class="w130p z"><b class="fwn cdicon">&#xe64f;</b>成立时间</span>{$companyDetail['founding_time']}
-                </div>
-                <div class="w50 z">
-                    <span class="w130p z"><b class="fwn cdicon">&#xe61e;</b>发布时间</span>{$companyDetail['add_time']}
-                </div>
-            </div>
-            
-            <div class="publicdiv mt8 mt20">
+            <div class="publicdiv mt20">
                 <div class="w50 z">
                     <span class="w130p z"><b class="fwn cdicon">&#xe637;</b>法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人</span>{$companyDetail['corporation']}
                 </div>
                 <div class="w50 z">
-                    <span class="w130p z"><b class="fwn cdicon">&#xe625;</b>联&nbsp;&nbsp;系&nbsp;&nbsp;人</span>{$companyDetail['contact_name']}
+                    <span class="w130p z"><b class="fwn cdicon">&#xe64f;</b>成立时间</span>{$companyDetail['founding_time']}
                 </div>
             </div>
             
-            <div class="publicdiv mt8 mt20">
+            <div class="publicdiv mt20">
                 <div class="w50 z">
-                    <b class="fwn cdicon">&#xe618;</b>联系电话</span>{$companyDetail['contact_number']}
-                </div>
-                <div class="w50 z">
-                    <b class="fwn cdicon">&#xe62b;</b>传真电话</span>{$companyDetail['fax_number']}
+                    <span class="w130p z"><b class="fwn cdicon">&#xe6c9;</b>业务范围</span>{$companyDetail['scope']}
                 </div>
             </div>
             
-            <p class="publicdiv mt30 pt30 bordt"><span class="w130p z"><b class="fwn cdicon">&#xe617;</b>注册地址</span>{$companyDetail['resister_address']}</p>
-            <p class="publicdiv mt8"><span class="w130p z"><b class="fwn cdicon">&#xe64c;</b>办公地址</span>{$companyDetail['work_address']}</p>
+            <h3 class="publicdiv fs20 c0 mt30 pt30 bordt">联系方式</h3>
+            <div class="publicdiv mt20">
+                <div class="w50 z">
+                    <span class="w130p z"><b class="fwn cdicon">&#xe625;</b>联&nbsp;&nbsp;系&nbsp;&nbsp;人</span>{$companyDetail['contact_name']}</span>
+                </div>
+            </div>
             
-            <p class="publicdiv mt30 pt30 bordt"><span class="w130p z"><b class="fwn cdicon">&#xe633;</b>税号</span>{$companyDetail['tax_number']}</p>
-            <p class="publicdiv mt8"><span class="w130p z"><b class="fwn cdicon">&#xe62f;</b>开户行</span>{$companyDetail['bank_deposit']}</p>
-            <p class="publicdiv mt8"><span class="w130p z"><b class="fwn cdicon">&#xe670;</b>银行账号</span>{$companyDetail['bank_account']}</p>
+            <div class="publicdiv mt20">
+                <div class="w50 z">
+                    <span class="w130p z"><b class="fwn cdicon">&#xe618;</b>联系电话</span>{$companyDetail['contact_number']}</span>
+                </div>
+                <div class="w50 z">
+                    <span class="w130p z"><b class="fwn cdicon">&#xe62b;</b>传真电话</span>{$companyDetail['fax_number']}</span>
+                </div>
+                
+            </div>
+            <p class="publicdiv mt20"><span class="w130p z"><b class="fwn cdicon">&#xe617;</b>注册地址</span>{$companyDetail['resister_address']}</p>
+            <p class="publicdiv mt20"><span class="w130p z"><b class="fwn cdicon">&#xe64c;</b>办公地址</span>{$companyDetail['work_address']}</p>
+            
+            <h3 class="publicdiv fs20 c0 mt30 pt30 bordt">财务信息</h3>
+            <p class="publicdiv mt20"><span class="w130p z"><b class="fwn cdicon">&#xe633;</b>税号</span>{$companyDetail['tax_number']}</p>
+            <p class="publicdiv mt20"><span class="w130p z"><b class="fwn cdicon">&#xe62f;</b>开户行</span>{$companyDetail['bank_deposit']}</p>
+            <p class="publicdiv mt20"><span class="w130p z"><b class="fwn cdicon">&#xe670;</b>银行账号</span>{$companyDetail['bank_account']}</p>
+            
+            <h3 class="publicdiv fs20 c0 mt30 pt30 bordt">备注</h3>
+            {$companyDetail['remarks']}
+            
         </div>
     </div>
     

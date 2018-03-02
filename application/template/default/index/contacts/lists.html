@@ -13,6 +13,7 @@
         
         <div class="publicdiv mb10">
             <form class="form-inline" role="form">
+                <a href="{:url('/index/company/lists')}" class="btn btn-success y ml20">公司列表</a>
                 <a href="{:url('/index/contacts/add')}" class="btn btn-info y">添加</a>
                 
                 <input type="text" class="form-control" placeholder="所属公司" />
@@ -41,7 +42,7 @@
                     <td class=""><a href="{:url('/index/contacts/detail?id='.$contact['id'])}" class="text-info fs16">{$contact['name']}</a></td>
                     <td class="ac">{$contact['tel']}</td>
                     <td class="ac">{$contact['address']}</td>
-                    <td><a href="{:url('/index/company/detail?id='.$contact['id'])}">{$contact['company_id']}</a></td>
+                    <td><a href="{:url('/index/company/detail?id='.$company['company_id'])}">{$company['name']}</a></td>
                     <td class="ac">{$contact['add_uid']}</td>
                     <td class="ac">{if condition="$contact['status'] == 1"}在职{elseif condition="$contact['status'] == 2"}离职{else}无{/if}</td>
                     <td class="ac">{$contact['add_time']}</td>

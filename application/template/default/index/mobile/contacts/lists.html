@@ -25,7 +25,10 @@ window.onresize = function(){
 </script>
 
 <div class="publicdiv bf pl10 pr10 pt20 mb58 sizing">
-    <h3 class="borb pb15 mbn">联系人</h3>
+    <h3 class="borb pb15 mbn">
+        联系人
+        <a href="{:url('/index/company/lists')}" class="ui-btn ui-btn-primary y">公司列表</a>
+    </h3>
     
     <ul class="publicdiv scorelist" id="scorelist">
         {foreach $contacts_list as $contact}
