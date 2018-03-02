@@ -27,8 +27,8 @@
             <thead style="background:#f6f6f6;">
                 <tr>
                     <th class="bbno pt15 pb15">联系人</th>
-                    <th class="ac bbno pt15 pb15">联系电话</th>
-                    <th class="ac bbno pt15 pb15">地址</th>
+                    <th class="bbno pt15 pb15">联系电话</th>
+                    <th class="bbno pt15 pb15">地址</th>
                     <th class="bbno pt15 pb15">所属公司</th>
                     <th class="ac bbno pt15 pb15">创建人</th>
                     <th class="ac bbno pt15 pb15">状态</th>
@@ -40,8 +40,8 @@
                 {foreach $contacts_list as $contact}
                 <tr id="projectlist">
                     <td class=""><a href="{:url('/index/contacts/detail?id='.$contact['id'])}" class="text-info fs16">{$contact['name']}</a></td>
-                    <td class="ac">{$contact['tel']}</td>
-                    <td class="ac">{$contact['address']}</td>
+                    <td class="">{$contact['tel']}</td>
+                    <td class="">{$contact['address']}</td>
                     <td><a href="{:url('/index/company/detail?id='.$company['company_id'])}">{$company['name']}</a></td>
                     <td class="ac">{$contact['add_uid']}</td>
                     <td class="ac">{if condition="$contact['status'] == 1"}在职{elseif condition="$contact['status'] == 2"}离职{else}无{/if}</td>
