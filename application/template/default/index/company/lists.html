@@ -39,7 +39,13 @@
                     <td><a href="{:url('/index/company/detail?id='.$company['company_id'])}">{$company['name']}</a></td>
                     <td class="ac">{$company['contact_name']}</td>
                     <td class="ac">{$company['contact_number']}</td>
-                    <td class="ac">{$company['type']}</td>
+                    <td class="ac">
+                        {if condition="$company['type'] == 1"}国企
+                        {elseif condition="$company['type'] == 2"}私营
+                        {elseif condition="$company['type'] == 3"}合资
+                        {elseif condition="$company['type'] == 4"}外资
+                        {/if}
+                    </td>
                     <td class="ac">{$company['employee_numbers']}</td>
                     <td class="ac">{$company['work_address']}</td>
                     <td class="ac">{$company['add_time']}</td>

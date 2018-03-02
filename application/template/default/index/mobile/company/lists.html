@@ -1,0 +1,104 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<script>
+//计算根节点HTML的字体大小
+function resizeRoot(){
+    var deviceWidth = document.documentElement.clientWidth,
+        num = 750,
+        num1 = num / 100;
+    if(deviceWidth > num){
+        deviceWidth = num;  
+    }
+    document.documentElement.style.fontSize = deviceWidth / num1 + "px";
+}
+//根节点HTML的字体大小初始化
+resizeRoot();
+
+window.onresize = function(){
+    resizeRoot();
+};
+</script>
+
+<div class="publicdiv bf pl10 pr10 pt20 mb58 sizing">
+    <h3 class="borb pb15 mbn">公司</h3>
+    
+    <ul class="publicdiv scorelist" id="scorelist">
+        {foreach $company_list as $company}
+        
+        <a href="{:url('/index/company/detail?id='.$company['company_id'])}">
+            <div class="project_list publicdiv pr">
+                <h3 class="ellipsis">
+                    {if condition="$company['type'] == 1"}[国企]
+                    {elseif condition="$company['type'] == 2"}[私营]
+                    {elseif condition="$company['type'] == 3"}[合资]
+                    {elseif condition="$company['type'] == 4"}[外资]
+                    {/if}
+                    {$company['name']}
+                </h3>
+                <p class="lh20">
+                    联系人：{$company['contact_name']}
+                    电话：{$company['contact_number']}
+                </p>
+                <p class="lh20 ellipsis">地址：{$company['work_address']}</p>
+            </div>
+        </a>
+        
+        {/foreach}
+    </ul>
+    <div class="publicdiv ac pagingw">{$page}</div>
+</div>
+
+<script>
+//侧滑显示删除按钮
+var expansion = null; //是否存在展开的list
+var container = document.querySelectorAll('#scorelist li a');
+for(var i = 0; i < container.length; i++){    
+    var x, y, X, Y, swipeX, swipeY;
+    container[i].addEventListener('touchstart', function(event) {
+        x = event.changedTouches[0].pageX;
+        y = event.changedTouches[0].pageY;
+        swipeX = true;
+        swipeY = true ;
+        if(expansion){   //判断是否展开，如果展开则收起
+            //expansion.className = "";
+        }        
+    });
+    container[i].addEventListener('touchmove', function(event){
+        
+        X = event.changedTouches[0].pageX;
+        Y = event.changedTouches[0].pageY;        
+        // 左右滑动
+        if(swipeX && Math.abs(X - x) - Math.abs(Y - y) > 0){
+            // 阻止事件冒泡
+            event.stopPropagation();
+            if(X - x > 10){   //右滑
+                event.preventDefault();
+                this.className = "";    //右滑收起
+            }
+            if(x - X > 10){   //左滑
+                event.preventDefault();
+                this.className = "swipeleft";   //左滑展开
+                expansion = this;
+            }
+            swipeY = false;
+        }
+        // 上下滑动
+        if(swipeY && Math.abs(X - x) - Math.abs(Y - y) < 0) {
+            swipeX = false;
+        }        
+    });
+}
+</script>
+{/block}
+
+
+{block name="footer"}
+<div class="footer_wp">
+    <a href="{:url('/index/company/add')}" class="p_inster iconfont">&#xe607;</a>
+</div>
+{/block}

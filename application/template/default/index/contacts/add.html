@@ -14,11 +14,12 @@
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">所属公司</label>
                         <div class="col-sm-7 pln prn">
-                            <select class="form-control w60" name="company_id">
+                            <select class="form-control w60 z" name="company_id">
                                 {foreach $companyList as $company}
                                 <option value="{$company['company_id']}" {if condition="$contactData['company_id'] == $company['company_id']"}selected{/if}>{$company['name']}</option>
                                 {/foreach}
                             </select>
+                            <a href="{:url('/index/company/lists')}" class="btn btn-info z ml15">查看</a>
                         </div>
                     </div>
                     
@@ -109,6 +110,43 @@
                             <textarea class="w90 form-control" name="introduce" rows="4"></textarea>
                         </div>
                     </div>
+                    
+                    <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/ueditor.config.js"></script>
+                    <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/ueditor.all.min.js"> </script>
+                    <script type="text/javascript" charset="utf-8" src="tpl_static/ueditor/lang/zh-cn/zh-cn.js"></script>
+                    
+                    <div class="form-group w100 mrn mln z">
+                        <label class="col-sm-2 control-label fwn">备注</label>
+                        <div class="col-sm-10 pln prn">
+                            <script id="editor" type="text/plain" class="z" name="remarks" style="width:100% !important; height:200px;">{$contactData['remarks']}</script>
+                        </div>
+                    </div>
+                    
+                    <script type="text/javascript">
+                        //实例化编辑器
+                        //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+                        var ue = UE.getEditor('editor',{toolbars: [['fullscreen', 'bold', 'source', 'undo', 'snapscreen', 'fontsize', 'redo', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', 'attachment']]});
+
+                        function disableBtn(str) {
+                            var div = document.getElementById('btns');
+                            var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+                            for (var i = 0, btn; btn = btns[i++];) {
+                                if (btn.id == str) {
+                                    UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+                                } else {
+                                    btn.setAttribute("disabled", "true");
+                                }
+                            }
+                        }
+                        function enableBtn() {
+                            var div = document.getElementById('btns');
+                            var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+                            for (var i = 0, btn; btn = btns[i++];) {
+                                UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+                            }
+                        }
+                    </script>
+                    
                     
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">&nbsp;</label>

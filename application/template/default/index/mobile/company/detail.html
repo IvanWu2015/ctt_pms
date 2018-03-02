@@ -1,0 +1,46 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+<div class="publicdiv mb58">
+    <div class="publicdiv bf mt10 pt10 pb10 pl10 pr10 sizing">
+        <h3 class="borb pt15 pb15 fs18">{$companyDetail['name']}</h3>
+        
+        <div class="publicdiv companygelist fs12 c6 iconfont">
+            
+            <li class="sizing mt15"><span><b class="fwn mr5">&#xe6c0;</b>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</span>{$companyDetail['type']}</li>
+            <li class="sizing mt15"><span><b class="fwn mr5">&#xe742;</b>规&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;模</span>{$companyDetail['employee_numbers']}</li>
+            
+            <li class="sizing mt15"><span><b class="fwn mr5">&#xe64f;</b>成立时间</span>{$companyDetail['founding_time']}</li>
+            <li class="sizing mt15"><span><b class="fwn mr5">&#xe61e;</b>发布时间</span>{$companyDetail['add_time']}</li>
+            
+            <li class="sizing mt15"><span><b class="fwn mr5">&#xe637;</b>法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人</span>{$companyDetail['corporation']}</li>
+            <li class="sizing mt15"><span><b class="fwn mr5">&#xe625;</b>联&nbsp;&nbsp;系&nbsp;&nbsp;人</span>{$companyDetail['contact_name']}</li>
+            
+            <li class="sizing mt15"><span><b class="fwn mr5">&#xe618;</b>联系电话</span>{$companyDetail['contact_number']}</li>
+            <li class="sizing mt15"><span><b class="fwn mr5">&#xe62b;</b>传真电话</span>{$companyDetail['fax_number']}</li>
+            
+            <div class="publicdiv bht mt15">
+                <li class="sizing mt15"><span><b class="fwn mr5">&#xe617;</b>注册地址</span>{$companyDetail['resister_address']}</li>
+                <li class="sizing mt15"><span><b class="fwn mr5">&#xe64c;</b>办公地址</span>{$companyDetail['work_address']}</li>
+            </div>
+            
+            <div class="publicdiv bht mt15">
+                <li class="sizing mt15"><span><b class="fwn mr5">&#xe633;</b>税&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</span>{$companyDetail['tax_number']}</li>
+                <li class="sizing mt15"><span><b class="fwn mr5">&#xe62f;</b>开户行</span>{$companyDetail['bank_deposit']}</li>
+                <li class="sizing mt15"><span><b class="fwn mr5">&#xe670;</b>银行账号</span>{$companyDetail['bank_account']}</li>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{/block}
+
+
+{block name="footer"}
+<div class="footer_wp">
+    <a href="{:url('/index/company/add')}" class="p_inster iconfont">&#xe607;</a>
+</div>
+{/block}
