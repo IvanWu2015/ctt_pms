@@ -20,9 +20,13 @@ class Contacts extends Common {
 
     //联系人列表
     public function lists() {
-        $username = input('get.name', '', 'addslashes');
-        if (!empty($username)) {
-            $map['name'] = array('eq', $username);
+        $name = input('name', '', 'addslashes');
+        if (!empty($name)) {
+            $map['name'] = array('like', "%{$name}%");
+        }
+        $tel = input('tel', '', 'addslashes');
+        if (!empty($tel)) {
+            $map['tel'] = array('like', "%{$tel}%");
         }
         $contacts_list = DB::name('Contact')
                 ->where($map)
@@ -30,6 +34,8 @@ class Contacts extends Common {
         $page = $contacts_list->render(); // 分页显示输出
         $navtitle = '联系人列表' . $this->navtitle;
         $this->assign('page', $page);
+        $this->assign('name', $name);
+        $this->assign('tel', $tel);
         $this->assign('contacts_list', $contacts_list);
         return $this->fetch($this->templatePath);
     }
@@ -43,7 +49,10 @@ class Contacts extends Common {
         //读取编辑数据n
         $id = input('id', '0', 'intval');
         if ($id > 0) {
+            $navtitle = '编辑联系人';
             $contactData = $contact->where("id = $id")->find();
+        } else {
+            $navtitle = '添加联系人';
         }
         if (request()->isPost()) {
             $contactData = array(
@@ -58,27 +67,30 @@ class Contacts extends Common {
                 'mail' => input('mail', 0, 'addslashes'), //'电子邮箱',
                 'status' => input('status', 0, 'addslashes'), // '状态 0无 1在职 2离职',
                 'address' => input('address', 0, 'addslashes'), //'详细地址',
+                'remarks' => input('remarks', 0, 'addslashes'), //'备注信息',
             );
             $file = request()->file('photo');
             if ($file) {
                 $info = $file->move(ROOT_PATH . 'public' . DS . 'upload');
-                $contactData['photo'] = './uploads/' . $info->getSaveName();
+                $contactData['photo'] = DS . 'upload' . DS . $info->getSaveName();
             }
-
-
+            //编辑
             if ($id > 0) {
                 $contactData['last_uid'] = $this->_G['uid']; //'最后修改人',
                 $contactData['last_time'] = date("Y-m-d H:i:s"); //'最后修改时间',
                 $contact->where(['id' => $contact_id])->update($contactData);
                 $this->success("修改成功", 'Contacts/lists');
+                //添加
             } else {
                 $contactData['add_uid'] = $this->_G['uid']; //'最后修改人',
                 $contactData['add_time'] = date("Y-m-d H:i:s"); //'最后修改时间',
-                $contact->data($contactData)->insert();
+                $contact->insert($contactData);
                 $contact_id = $contact->getLastInsID();
                 $this->success("添加成功", 'Contacts/lists');
             }
         }
+
+        $this->assign('navtitle', $navtitle);
         $this->assign('contactData', $contactData);
         $this->assign('companyList', $companyList);
         return $this->fetch($this->templatePath);

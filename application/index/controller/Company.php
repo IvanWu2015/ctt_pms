@@ -32,6 +32,8 @@ class Company extends Common {
                 ->where($map)
                 ->paginate(10);
         $page = $company_list->render(); // 分页显示输出
+        $navtitle = '公司列表';
+        $this->assign('navtitle', $navtitle);
         $this->assign('company_list', $company_list);
         $this->assign('page', $page);
         $this->assign('name', $name); //搜索公司名关键字
@@ -45,11 +47,14 @@ class Company extends Common {
         //$company_id = intval($this->_GET['dept_id']);
         $company_id = input('id', '0', 'intval');
         if ($company_id > 0) {
+            $navtitle = '编辑公司';
             $companyDetail = $company->where("company_id = {$company_id}")->find();
+        } else {
+            $navtitle = '添加公司';
         }
-        
-        $companyTypeList = getCommonConfigList('company_type');//公司类型列表
-        $employeeTypeList = getCommonConfigList('employee_type');//公司规模列表
+
+        $companyTypeList = getCommonConfigList('company_type'); //公司类型列表
+        $employeeTypeList = getCommonConfigList('employee_type'); //公司规模列表
         if (request()->isPost()) {
             $companyData = array(
                 'name' => input('name', '', 'strip_tags'), //'公司名称',
@@ -65,6 +70,8 @@ class Company extends Common {
                 'tax_number' => input('post.tax_number', '', 'strip_tags'), // '税号',
                 'bank_deposit' => input('post.bank_deposit', '', 'strip_tags'), //'开户行',
                 'bank_account' => input('post.bank_account', '', 'strip_tags'), // '银行账号',
+                'scope' => input('scope', 0, 'addslashes'), //'业务范围',
+                'remarks' => input('remarks', 0, 'addslashes'), //'备注信息',
             );
 
             if ($company_id > 0) {
@@ -75,10 +82,11 @@ class Company extends Common {
             } else {
                 $companyData['add_uid'] = $this->_G['uid']; //'最后修改人',
                 $companyData['add_time'] = date("Y-m-d H:i:s"); //'最后修改时间',
-                $company->data($companyData)->insert();
+                $company->insert($companyData);
                 $this->success("成功添加", 'Company/lists');
             }
         }
+        $this->assign('navtitle', $navtitle);
         $this->assign('companyDetail', $companyDetail);
         $this->assign('companyTypeList', $companyTypeList);
         $this->assign('employeeTypeList', $employeeTypeList);
