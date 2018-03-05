@@ -1,0 +1,37 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+<script type="text/javascript" src="tpl_js/limit.js"></script>
+
+<div class="publicdiv mb58">
+
+    <div class="publicdiv mt8 bf fs14 ">
+        <h3 class="pt15 fs18 pl10 pr10 sizing">{$article_detail['title']}</h3>
+        <p class="publicdiv mt5 pb10 c9 borb fs12 pl10 pr10 sizing">
+            <span class="text-primary mr20">{$article_detail['username']}</span>
+            <span class="mr20">{$article_detail['class_name']}</span>
+            <span class="mr20">{$article_detail['project_name']}</span>
+            <span class="y" limit="10">{$article_detail['time']}</span>
+        </p>
+        
+        <div class="publicdiv pt15 pb15 pl10 pr10 pub_content sizing c6">{$article_detail['contents']}</div>
+        
+    </div>
+    
+    <div class="publicdiv pl10 pr10 pb15 sizing">
+        <a href="{:url('/index/article/add?id='.$article_id)}" class="ui-btn-lg ui-btn-primary mt10">编辑</a>
+    </div>
+    
+    
+</div>
+{/block}
+
+
+{block name="footer"}
+<div class="footer_wp">
+    <a href="{:url('/index/article/add')}" class="p_inster iconfont">&#xe607;</a>
+</div>
+{/block}

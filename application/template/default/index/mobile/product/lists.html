@@ -1,0 +1,35 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pl10 pr10 pt20 mb58 sizing">
+    <h3 class="borb pb15 mbn">产品列表</h3>
+    
+    <ul class="publicdiv productlist">
+        {foreach $product_list as $product}
+        <li class="bhb sizing">
+            <a href="{:url('/index/product/detail/?id='.$product['id'])}">
+                <h3 class="c0">{$product['name']}<span class="fs12 c9 y">版本：{$product['createdVersion']}</span></h3>
+                <p class="fs12 c6">
+                    <span class="w40 z al">负责人：{$product['PO']|getUser}</span>
+                    <span class="w60 z al">代号：{$product['code']}</span>
+                </p>
+            </a>
+            <a href="{:url('/index/plan/add?product_id='.$product['id'])}" title="添加需求" class="iconfont btn-info productAdd">&#xe61a;</a>
+        </li>
+        {/foreach}
+    </ul>
+    
+    <div class="publicdiv ac pagingw">{$page}</div>
+</div>
+{/block}
+
+
+{block name="footer"}
+<div class="footer_wp">
+    <a href="{:url('/index/product/add')}" class="p_inster iconfont">&#xe607;</a>
+</div>
+{/block}

@@ -1,0 +1,84 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv pt20 pb20 mb10 bf sizing">
+    <form action="{:url('/index/weburl/add?id='.$weburl_detail['id'])}" id="formaddress" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
+        <h3 class="ac pb20 borb fs24">{if condition="$id eq 0"}添加网址{/if} {if condition="$id neq 0"}修改网址{/if}</h3>
+        
+        <div class="publicdiv pl15 pr15 sizing">
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">所属项目</label>
+                <div class="ui-select">
+                    <select name="project_id" class="h40">
+                        <option value='0'>无</option>
+                        {foreach $project_list as $temp_project}
+                        <option {if condition="$temp_project['id'] == $weburl_detail['project']"}selected='selected'{/if} value="{$temp_project['id']}" >{$temp_project['name']}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题</label>
+                <input type="text" name="title" class="publicdiv h40" id="name" placeholder="请输入任务名称" value="{$weburl_detail['title']}">
+            </div>
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类</label>
+                <div class="ui-select">
+                    <select name="class_id" class="h40">
+                        <option value='0'>无</option>
+                        {foreach $sort_list as $temp_sort}
+                        <option {if condition="$temp_sort['id'] == $weburl_detail['class']"}selected='selected'{/if} value="{$temp_sort['id']}" >{$temp_sort['name']}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">产&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品</label>
+                <div class="ui-select">
+                    <select name="product_id" class="h40">
+                        <option value='0'>无</option>
+                        {foreach $product_list as $temp_product}
+                        <option {if condition="$temp_product['id'] == $weburl_detail['product']"}selected='selected'{/if} value="{$temp_product['id']}" >{$temp_product['name']}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">URL</label>
+                <input type="text" name="url" class="publicdiv h40" id="name" placeholder="请输入URL" value="{$weburl_detail['url']}">
+            </div>
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">是否公开</label>
+                <label class="ui-radio mt5" for="radio"><input type="radio" name="acl" value="open" {if condition="$weburl_detail['acl'] == 'open'"}checked='checked'{/if} >公开</label>
+                <label class="ui-radio mt5" for="radio"><input type="radio" name="acl" value="private" {if condition="$weburl_detail['acl'] == 'private'"}checked='checked'{/if} >私有</label>
+            </div>
+            
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">说&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;明</label>
+                <textarea class="publicdiv pt10" name="explain" rows="4" placeholder="请输入说明">{$weburl_detail['explain']}</textarea>
+            </div>
+            
+            <div class="publicdiv mt15">
+                <input type="submit" class="ui-btn-lg ui-btn-primary" onClick="formsubif();" value="完成" />
+            </div>
+            
+        </div>
+        
+    </form>
+</div>
+{/block}
+
+
+{block name="footer"}
+{/block}

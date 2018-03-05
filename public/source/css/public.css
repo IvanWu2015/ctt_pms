@@ -796,9 +796,18 @@ input.commentsub{width:113px !important; height:35px !important; border:none !im
 .g_basiccon{ width:100%; float:left; height:80px; padding:10px 15px; border:1px #dedede solid; position:relative;}
 .basicdeicon{ width:30px; height:30px; line-height:30px; text-align:center; font-size:20px; position:absolute; top:0; right:0;}
 
+.fc-unthemed{ padding:10px; background:#f7f7f7; border:1px #dedede solid;}
 
-.fc-view-container{ width:100%; float:left; height:228px;}
-.fc-view-container table{ height:228px;}
+.fc-view-container{ width:100%; float:left; height:207px;}
+.fc-view-container table{ height:207px;}
+
+.fc-widget-content .fc-scroller{ height:167px !important;}
+.fc-widget-content .fc-scroller::-webkit-scrollbar {width:5px;height:10px;}
+.fc-widget-content .fc-scroller::-webkit-scrollbar-button    {background-color:#f7f7f7;}
+.fc-widget-content .fc-scroller::-webkit-scrollbar-track     {background:#f7f7f7;}
+.fc-widget-content .fc-scroller::-webkit-scrollbar-thumb{background:#ddd;border-radius:2px;}
+.fc-widget-content .fc-scroller::-webkit-scrollbar-corner {background:#f7f7f7;}
+.fc-widget-content .fc-scroller::-webkit-scrollbar-resizer  {background:#f7f7f7;}
 
 /*分页*/
 .public_paging{ width:100%; float:left; padding:10px; margin-top:20px; text-align:center; line-height:25px;}

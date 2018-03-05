@@ -1,0 +1,54 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pt20 mb58">
+    <h3 class="borb pb15 mbn pl10 pr10 sizing">文档列表</h3>
+    
+    
+    <ul class="guess_t sizing mt10 pl10 pr10 sizing">
+        <a href="{:url('/index/article/lists')}"><li {if condition="username >= 0"}class="guessattr"{/if}>全部</li></a>
+        {foreach $user_list as $user}
+            <a href='{:url("/index/article/lists?class_id=$class_id&product_id=$product_id&username=".$user['username'])}'><li {if condition="$user['username'] == $username"}class="guessattr"{/if}>{$user['realname']}</li></a>
+        {/foreach}
+    </ul>
+    <ul class="guess_t sizing mt10 pl10 pr10 sizing">
+        <a href="{:url('/index/article/lists')}"><li {if condition="class_id >= 0"}class="guessattr"{/if}>全部</li></a>
+        {foreach $sort_list as $sort}
+            <a href='{:url("/index/article/lists?product_id=$product_id&username=$username&class_id=".$sort['id'])}'><li {if condition="$sort['id'] == $class_id"}class="guessattr"{/if}>{$sort['name']}</li></a>
+        {/foreach}
+    </ul>
+    
+    <ul class="guess_t sizing mt10 pl10 pr10 sizing">
+        <a href="{:url('/index/article/lists')}"><li {if condition="$acl eq ''"}class="guessattr"{/if}>全部</li></a>
+        <a href="{:url('/index/article/lists?acl=all')}"><li {if condition="$acl eq 'all'"}class="guessattr"{/if}>所有</li></a>
+        <a href="{:url('/index/article/lists?acl=private')}"><li {if condition="$acl eq 'private'"}class="guessattr"{/if}>私有</li></a>
+        <a href="{:url('/index/article/lists?acl=open')}"><li {if condition="$acl eq 'open'"}class="guessattr"{/if}>公开</li></a>
+    </ul>
+    
+    <ul class="publicdiv projectlist ptlrb10 sizing">
+        {foreach $article_list as $article}
+        <a href="{:url('/index/article/detail?id='.$article['id'])}"><li>
+            <h3 class="ellipsis sizing">{$article['title']}<span class="prend" limit="10">{$article['time']}</span></h3>
+            <p class="fs12 c6">
+                <span class="w25 z al">添加人：{$article['username']|getUser}</span>
+                <span class="w25 z ac">分类：{$article['class_name']}</span>
+                <span class="w25 z ar">项目：{$article['project_name']}</span>
+            </p>
+        </li></a>
+        {/foreach}
+    </ul>
+    
+    <div class="publicdiv ac pagingw">{$page}</div>
+</div>
+{/block}
+
+
+{block name="footer"}
+<div class="footer_wp">
+    <a href="{:url('/index/article/add')}" class="p_inster iconfont">&#xe607;</a>
+</div>
+{/block}

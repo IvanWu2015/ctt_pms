@@ -1,0 +1,58 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv pt20 pb20 mb10 bf sizing">
+    <form action="{:url('/index/product/add?id='.$product_detail['id'])}" id="formaddress" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
+        <h3 class="ac pb20 borb fs24">{if condition="$project_id eq 0"}添加产品{/if} {if condition="$project_id neq 0"}修改产品{/if}</h3>
+        
+        <div class="publicdiv pl15 pr15 sizing">
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">产品名称</label>
+                <input type="text" name="name" class="publicdiv h40" id="name" placeholder="请输入产品名称" value="{$product_detail['name']}">
+            </div>
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">产品代号</label>
+                <input type="text" name="code" class="publicdiv h40" id="name" placeholder="产品代号" value="{$product_detail['code']}">
+            </div>
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">负责人</label>
+                <div class="ui-select">
+                    <select name="po" class="h40">
+                        <option value='0'>无</option>
+                        {foreach $user_list as $user}
+                        <option {if condition="$user['username'] == $product_detail['PO']"}selected='selected'{/if} value="{$user['username']}" >{$user['realname']}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">版本号</label>
+                <input type="text" name="createdVersion" class="publicdiv h40" id="name" placeholder="请输入版本号" value="{$product_detail['createdVersion']}">
+            </div>
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">任务说明</label>
+                <textarea class="publicdiv pt10" name="desc" rows="4" placeholder="请输入任务说明">{$product_detail['desc']}</textarea>
+            </div>
+            
+            <div class="publicdiv mt15">
+                <input type="submit" class="ui-btn-lg ui-btn-primary" onClick="formsubif();" value="完成" />
+            </div>
+            
+        </div>
+        
+    </form>
+</div>
+{/block}
+
+
+{block name="footer"}
+{/block}

@@ -22,11 +22,11 @@
                 {/foreach}
             </select>
             <select name="code" class="pt5 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/plan/lists?username='.$username.'&code=')}' + this.options[this.selectedIndex].value;">
-                    <option value=''>无</option>
-                    {foreach $product_list as $product}
-                    <option {if condition="$product['code'] == $code"}selected='selected'{/if} value="{$product['code']}" >{$product['name']}</option>
-                    {/foreach}
-                </select>
+                <option value=''>无</option>
+                {foreach $product_list as $product}
+                <option {if condition="$product['code'] == $code"}selected='selected'{/if} value="{$product['code']}" >{$product['name']}</option>
+                {/foreach}
+            </select>
         </div>
         
         

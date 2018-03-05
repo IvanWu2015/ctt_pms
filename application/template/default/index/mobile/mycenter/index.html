@@ -4,6 +4,7 @@
 {/block}
 
 {block name="body"}
+<script type="text/javascript" src="tpl_js/limit.js"></script>
 
 <div class="g_userheader sizing">
     
@@ -11,7 +12,16 @@
         <div class="g_portrait sizing">
             <img src="tpl_img/male_img.png" class="publicimg" />
         </div>
-        <h3 class="cf fs20">{:get_username()} <a href="javascript:void(0);" class="iconfont y cf fs30">&#xe600;</a></h3>
+        <h3 class="publicdiv cf mt8 fs20">{:get_username()} <span class="fs13 fwn ml10">男</span></h3>
+        <p class="publicdiv cf fs12 iconfont">
+            <span class="w50 z"><b class="fwn fs16">&#xe658;</b> WEB前端</span>
+            <span class="w50 z">&#xe61e; 2016-02-29</span>
+        </p>
+        <p class="publicdiv cf fs12 iconfont">
+            <span class="w50 z">&#xe653; 2273659300</span>
+            <span class="w50 z">&#xe618; 13924405761</span>
+        </p>
+        <a href="javascript:void(0);" class="iconfont emlls y cf fs20">&#xe64b;</a>
     </div>
     
     <ul class="g_userstatistics sizing">
@@ -22,8 +32,37 @@
     </ul>
 </div>
 
-<div class="publicdiv bf pl10 pr10 pt20 mb58 sizing">
-    123123
+<div class="publicdiv bf pl10 pr10 mt10 sizing fs14 iconfont">  
+    <a href="{:url('mycenter/project')}" class="publicdiv pt15 pb15 bhb">
+        我的项目
+        <span class="y" id="project_count_icon">&#xe64b;</span>
+        <span class="cred y mr8">{$project_count}</span>
+    </a>
+    <a href="{:url('mycenter/task_list')}" class="publicdiv pt15 pb15 bhb">
+        我的任务
+        <span class="y" id="my_action_count_icon">&#xe64b;</span>
+        <span class="cred y mr8">{$my_action_count}</span>
+    </a>
+    <a href="{:url('mycenter/action_list')}" class="publicdiv pt15 pb15 bhb">
+        我的动态
+        <span class="y" id="not_status_count_icon">&#xe64b;</span>
+        <span class="cred y mr8">{$not_status_count}</span>
+    </a>
+    <a href="{:url('mycenter/weburl_list')}" class="publicdiv pt15 pb15 bhb">
+        我的收藏
+        <span class="y" id="my_article_count_icon">&#xe64b;</span>
+        <span class="cred y mr8">{$my_article_count}</span>
+    </a>
+    <a href="{:url('mycenter/article_list')}" class="publicdiv pt15 pb15">
+        我的文档
+        <span class="y" id="my_weburl_countt_icon">&#xe64b;</span>
+        <span class="cred y mr8">{$my_weburl_count}</span>
+    </a>
+    
+</div>
+
+<div class="publicdiv mt10 pl10 pr10 sizing">
+    <a href="{:url('User/logout')}" class="ui-btn-lg ui-btn-danger">退出</a>
 </div>
 
 {/block}
