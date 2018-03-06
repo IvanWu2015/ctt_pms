@@ -47,7 +47,22 @@
 
             <div class="w60 z pr10 sizing"><!--日程安排-->
                 
-                <div id='calendar' class="publicdiv mt20"></div>
+                <div class="g_basiccon sizing">
+                    <h3 class="mtn">
+                        张三 
+                        <span class="fs13 ml10">男</span>
+                        <span class="fs13 ml10" title="出生日期">1996-08-07</span>
+                    </h3>
+                    <p class="iconfont">
+                        <span class="w25 z" title="职位">&#xe658; WEB前端</span>
+                        <span class="w25 z" title="入职时间">&#xe61e; 2016-02-29</span>
+                        <span class="w25 z" title="QQ">&#xe653; 2273659300</span>
+                        <span class="w25 z" title="手机">&#xe618; 13924405761</span>
+                    </p>
+                    <a href="{:url('/index/user/profile')}" class="basicdeicon iconfont">&#xe600;</a>
+                </div>
+                
+                <div id='calendar' class="publicdiv sizing mt20"></div>
                 
                 <script language="JavaScript">
                 $(document).ready(function() {
@@ -290,7 +305,7 @@
                         {foreach $weburl_list as $weburl}
                         <li class="publicdiv pr tlist pr100 h35 lh35 ellipsis">
                             <span class="w40p db z">{$weburl['id']}</span>
-                            <a href="{:url('/index/task/detail/?id='.$task['id'])}">{$weburl['title']}</a>
+                            <a href="{$weburl['url']}">{$weburl['title']}</a>
                             <span class="tlisty" limit="10">{$weburl['time']}</span>
                         </li>
                         {/foreach}

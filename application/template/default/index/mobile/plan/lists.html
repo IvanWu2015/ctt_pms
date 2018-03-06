@@ -1,0 +1,44 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pt20">
+    <h3 class="borb pb15 mbn pl10 pr10 sizing">需求列表</h3>
+    
+    <ul class="publicdiv projectlist pl10 pr10 pt10 sizing">
+        <select name="username" class="pt5 w35 pb5 br3 pl10 bor z c9" onChange="window.location.href='{:url('/index/plan/lists?code='.$code.'&username=')}' + this.options[this.selectedIndex].value;">
+            <option value=''>无</option>
+            {foreach $user_list as $user}
+            <option {if condition="$user['username'] == $username"}selected='selected'{/if} value="{$user['username']}" >{$user['realname']}</option>
+            {/foreach}
+        </select>
+        <select name="code" class="w55 pt5 pb5 br3 pl10 bor z ml10 c9" onChange="window.location.href='{:url('/index/plan/lists?username='.$username.'&code=')}' + this.options[this.selectedIndex].value;">
+            <option value=''>无</option>
+            {foreach $product_list as $product}
+            <option {if condition="$product['code'] == $code"}selected='selected'{/if} value="{$product['code']}" >{$product['name']}</option>
+            {/foreach}
+        </select>
+        
+        {foreach $plan_list as $plan}
+        <a href="{:url('/index/plan/detail/?id='.$plan['id'])}"><li>
+            <h3 class="ellipsis sizing">{$plan['title']}<span class="prend" limit="10">{$plan['openedDate']}</span></h3>
+            <p class="fs12 c6">
+                <span class="w25 z al">分支：{$plan['branch']}</span>
+                <span class="w25 z ac">分配：{$plan['assignedTo']|getUser}</span>
+                <span class="w25 z ac">创建者：{$plan['openedBy']|getUser}</span>
+                <span class="w25 z ar">预计：{$plan['estimate']}</span>
+            </p>
+        </li></a>
+        {/foreach}
+    </ul>
+    
+    <div class="publicdiv ac pagingw">{$page}</div>
+</div>
+{/block}
+
+
+{block name="footer"}
+{/block}

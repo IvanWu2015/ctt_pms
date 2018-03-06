@@ -16,7 +16,7 @@ body{ padding:0; margin:0; }
 .bht{ border-top:0.5px #dedede solid;}
 
 .list_nav{ width:100%; float:left; height:35px; border-bottom:1px #dedede solid; }
-.list_nav li{ height:35px; line-height:35px; float:left; padding:0px 13px; }
+.list_nav li{ width:14.28%; text-align:center; height:35px; line-height:35px; font-size:13px; float:left;}
 .list_nav li.lnattr{ border-bottom:1px #428bca solid; }
 .list_nav li.lnattr a{ color:#428bca; }
 
@@ -54,7 +54,7 @@ body{ padding:0; margin:0; }
 .HeadSearch{ width:100%; float:left; position:relative; padding:0px 8px 15px 50px;}
 .HeadSearch .searchclose{ width:50px; height:45px; line-height:45px; font-size:18px; text-align:center; z-index:103; position:absolute; top:0; left:0;}
 .HeadSearch .searchin{ width:100%; height:45px; line-height:25px; -webkit-appearance:none; border:0.5px #dedede solid; background:#fff; float:left; font-size:14px; padding:10px 50px 10px 20px;}
-.HeadSearch .searchsub{ width:60px; height:45px; cursor:pointer; background:none; color:#ccc; border:none; font-size:20px; position:absolute; top:0px; right:10px;}
+.HeadSearch .searchsub{ width:60px; height:45px; cursor:pointer; background:none; color:#ccc; border:none; font-size:25px; position:absolute; top:0px; right:9px;}
 .rvuyrvfp{ float:left; height:30px; line-height:30px; padding:0px 15px; border-radius:3px; margin:0px 8px 8px 0px; background:#eee;}
 
 .scorelist li{ width:100%; float:left; min-height:76px; border-bottom:0.5px #eee solid; overflow:hidden; position:relative;}
@@ -91,8 +91,32 @@ body{ padding:0; margin:0; }
 .g_userheader{ width:100%; float:left; background:#ff6ea5; padding:40px 15px 100px 15px; position:relative;}
 .g_userstatistics{ width:100%; height:60px; background:rgba(0,0,0,0.2); color:#fff; padding:10px 0px; position:absolute; bottom:0; left:0;}
 .g_userstatistics li{ width:25%; float:left; line-height:20px; text-align:center; font-size:12px; border-right:0.5px #dedede solid;}
-.g_userhead{ width:100%; float:left; min-height:90px; line-height:90px; padding-left:105px; position:relative;}
+.g_userhead{ width:100%; float:left; min-height:90px; padding-left:105px; padding-right:30px; position:relative;}
 .g_userhead .g_portrait{ width:90px; height:90px; border-radius:100%; border:5px #fdb9d2 solid; overflow:hidden; position:absolute; top:0; left:0;}
+.g_userhead .emlls{ position:absolute; top:33px; right:0px;}
+
+.ulpublist li{ width:100%; float:left; font-weight:normal; font-size:14px; border-bottom:0.5px #dedede solid; line-height:30px; padding:10px 75px 10px 0px; position:relative;}
+.ulpublist li span{ font-size:12px; position:absolute; top:10px; right:0;}
+
+.projectlist li{ width:100%; float:left; margin:0; font-weight:normal; padding:10px 0px; border-bottom:0.5px #dedede solid;}
+.projectlist h3{ width:100%; float:left; margin:0; font-size:14px; line-height:30px; padding-right:75px; position:relative;}
+.projectlist h3 .prend{ font-size:12px; position:absolute; top:0px; right:0;}
+.projectlist .percentList{ width:100%; float:left; height:10px; line-height:10px; font-size:10px; padding-right:40px; position:relative;}
+.projectlist .percentList .prspan{ position:absolute; top:0px; right:0;}
+.projectlist .percentList .ui-progress{ margin-top:4px;}
+
+.productlist li{ width:100%; float:left; padding:10px 50px 10px 0px; position:relative;}
+.productlist li .productAdd{ width:35px; height:35px; line-height:35px; text-align:center; border-radius:3px; color:#fff; background:#5bc0de; position:absolute; top:14px; right:0px;}
+.productlist li h3{ margin:0; font-size:16px;}
+
+.pub_content img{ max-width:100%;}
+
+/*筛选*/
+.t_operation{ width:100%; border-bottom:1px #dedede dashed; float:left;}
+ul.guess_t{ width:100%; line-height:25px; float:left; position:relative;}
+ul.guess_t li{ height:23px; line-height:23px; float:left; font-size:13px; border-radius:3px; padding:0px 8px; margin:0px 5px 5px 0px;}
+ul.guess_t li:hover{ background:#ff5009; color:#fff;}
+ul.guess_t li.guessattr{ background:#ff5009; color:#fff;}
 
 
 

@@ -1,0 +1,57 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv pt20 pb20 mb10 bf sizing">
+    <form action="{:url('/index/plan/add?product_id='.$product_id.'&id='.$plan_id)}" id="formaddress" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
+        <h3 class="ac pb20 borb fs24">{if condition="$product_id eq 0"}添加需求{/if} {if condition="$product_id neq 0"}修改需求{/if}</h3>
+        
+        <div class="publicdiv pl15 pr15 sizing">
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">需求名称</label>
+                <input type="text" name="title" class="publicdiv h40" id="title" placeholder="请输入需求名称" value="{$plan_detail['title']}">
+            </div>
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">产品名称</label>
+                <input type="text" name="code" class="publicdiv h40" id="name" placeholder="产品名称" value="{$product_detail['name']}" {if condition="($product_id gt 0) or ($plan_id gt 0)"}readonly="readonly"{/if} />
+            </div>
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">需求类型</label>
+                <div class="ui-select">
+                    <select name="type" class="h40">
+                        {foreach $plan_type_list as $temp_project}
+                        <option {if condition="$temp_project['id'] == $plan_detail['type']"}selected='selected'{/if} value="{$temp_project['id']}" >{$temp_project['c_value']}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">预计工时</label>
+                <input type="text" name="estimate" class="publicdiv h40" id="name" placeholder="请输入预计工时" value="{$plan_detail['estimate']}">
+            </div>
+            
+            <div class="fontlist mt8 bhb sizing">
+                <label class="fonttitle">任务说明</label>
+                <textarea class="publicdiv pt10" name="content" rows="4" placeholder="请输入任务说明">{$product_detail['content']}</textarea>
+            </div>
+            
+            <div class="publicdiv mt15">
+                <input type="submit" class="ui-btn-lg ui-btn-primary" onClick="formsubif();" value="完成" />
+            </div>
+            
+        </div>
+        
+    </form>
+</div>
+{/block}
+
+
+{block name="footer"}
+{/block}

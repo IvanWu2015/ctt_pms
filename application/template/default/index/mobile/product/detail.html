@@ -1,0 +1,57 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+<script type="text/javascript" src="tpl_js/limit.js"></script>
+
+<div class="publicdiv mb58">
+
+    <div class="publicdiv mt8 bf fs14 ">
+        <h3 class="pt15 fs18 pl10 pr10 sizing">{$product_detail['name']}</h3>
+        <p class="publicdiv mt5 pb10 c9 borb fs12 pl10 pr10 sizing">
+            创建人：<span class="text-primary mr20">{$product_detail['createdBy']}</span>
+            <span class="y">{$product_detail['createdDate']}</span>
+        </p>
+        
+        <div class="publicdiv pl10 pr10 sizing">
+            <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">代号：</span>{$product_detail['code']}</div>
+            <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">类型：</span>{$product_detail['type']}</div>
+            <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">状态：</span>{$product_detail['status']}</div>
+            <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">负责人：</span>{$product_detail['PO']|getUser}</div>
+            <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">权限：</span>{$product_detail['acl']}</div>
+            <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">白名单：</span>{$product_detail['whitelist']}</div>
+        </div>
+    </div>
+    
+    <div class="publicdiv mt8 bf fs14 pl10 pr10 sizing">
+        <div class="publicdiv pt15 pb15">描述：{$product_detail['desc']}</div>
+    </div>
+    
+    <div class="publicdiv mt8 bf fs14">
+        <h3 class="borb mbn ptlrb10 lh35 sizing">需求列表</h3>
+        <ul class="publicdiv projectlist pl10 pr10 sizing">
+            {foreach $plan_list as $plan}
+            <a href="{:url('/index/plan/detail/?id='.$plan['id'])}"><li>
+                <h3 class="ellipsis sizing">{$plan['title']}<span class="prend" limit="10">{$plan['openedDate']}</span></h3>
+                <p class="fs12 c6">
+                    <span class="w25 z al">分支：{$plan['branch']}</span>
+                    <span class="w25 z ac">分配：{$plan['assignedTo']|getUser}</span>
+                    <span class="w25 z ac">创建者：{$plan['openedBy']|getUser}</span>
+                    <span class="w25 z ar">预计：{$plan['estimate']}</span>
+                </p>
+            </li></a>
+            {/foreach}
+        </ul>
+    </div>
+    
+</div>
+{/block}
+
+
+{block name="footer"}
+<div class="footer_wp">
+    <a href="{:url('/index/product/add')}" class="p_inster iconfont">&#xe607;</a>
+</div>
+{/block}

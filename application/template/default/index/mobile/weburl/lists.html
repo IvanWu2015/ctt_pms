@@ -1,0 +1,72 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pl10 pr10 pt20 mb58 sizing">
+    <h3 class="borb pb15 mbn">网址列表</h3>
+    
+    <div class="publicdiv borb">
+        <div class="ui-select w30 z">
+            <select name="username" class="h40" onChange="window.location.href='{:url('/index/weburl/lists?class_id='.$class_id.'&product_id='.$product_id.'&username=')}' + this.options[this.selectedIndex].value;">
+                <option value=''>用户</option>
+                {foreach $user_list as $user}
+                <option {if condition="$user['username'] == $username"}selected='selected'{/if} value="{$user['username']}" >{$user['realname']}</option>
+                {/foreach}
+            </select>
+        </div>
+        <div class="ui-select w30 z ml10">
+            <select name="product_id" class="h40" onChange="window.location.href='{:url('/index/weburl/lists?class_id='.$class_id.'&username='.$username.'&product_id=')}' + this.options[this.selectedIndex].value;">
+                <option value=''>产品</option>
+                {foreach $product_list as $product}
+                <option {if condition="$product['id'] == $product_id"}selected='selected'{/if} value="{$product['id']}" >{$product['name']}</option>
+                {/foreach}
+            </select>
+        </div>
+        <div class="ui-select w30 y">
+            <select name="class_id" class="h40" onChange="window.location.href='{:url('/index/weburl/lists?product_id='.$product_id.'&username='.$username.'&class_id=')}' + this.options[this.selectedIndex].value;">
+                <option value=''>分类</option>
+                {foreach $sort_list as $sort}
+                <option {if condition="$sort['id'] == $class_id"}selected='selected'{/if} value="{$sort['id']}" >{$sort['name']}</option>
+                {/foreach}
+            </select>
+        </div>
+    </div>
+    <div class="publicdiv mt10 pb10">
+        <a href="{:url('/index/weburl/lists')}"><li class="ui-btn {if condition="$acl eq ''"}ui-btn-danger{else}ui-btn-primary{/if}">全部</li></a>
+        <a href="{:url('/index/weburl/lists?acl=all')}"><li class="ui-btn {{if condition="$acl eq 'all'"}ui-btn-danger{else}ui-btn-primary{/if}">所有</li></a>
+        <a href="{:url('/index/weburl/lists?acl=private')}"><li class="ui-btn {{if condition="$acl eq 'private'"}ui-btn-danger{else}ui-btn-primary{/if}">私有</li></a>
+        <a href="{:url('/index/weburl/lists?acl=open')}"><li class="ui-btn {{if condition="$acl eq 'open'"}ui-btn-danger{else}ui-btn-primary{/if}">公开</li></a>
+    </div>
+    
+    <ul class="publicdiv scorelist" id="scorelist">
+        {foreach $weburl_list as $weburl}
+        <a href="{$weburl['url']}">
+            <div class="project_list publicdiv pr">
+                <h3 class="ellipsis">
+                    {if condition="$weburl['acl'] eq open"}[公开]{else/}[私有]{/if}
+                    {$weburl['title']}
+                </h3>
+                <p class="lh20">
+                    发布者：{$weburl['realname']}、
+                    项目：{$weburl['name']}
+                </p>
+                <p class="lh20 ellipsis">时间：{$weburl['time']}</p>
+            </div>
+        </a>
+        
+        {/foreach}
+    </ul>
+    <div class="publicdiv ac pagingw">{$page}</div>
+</div>
+
+{/block}
+
+
+{block name="footer"}
+<div class="footer_wp">
+    <a href="{:url('/index/weburl/add')}" class="p_inster iconfont">&#xe607;</a>
+</div>
+{/block}

@@ -1,0 +1,41 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+<script type="text/javascript" src="tpl_js/limit.js"></script>
+
+<div class="publicdiv mb58">
+
+    <div class="publicdiv mt8 bf fs14 ">
+        <h3 class="pt15 fs18 pl10 pr10 sizing">{$plan_detail['title']}</h3>
+        <p class="publicdiv mt5 pb10 c9 borb fs12 pl10 pr10 sizing">
+            创建人：<span class="text-primary mr20">{$plan_detail['openedBy']}</span>
+            <span class="y">{$plan_detail['openedDate']}</span>
+        </p>
+        
+        <div class="publicdiv pl10 pr10 sizing">
+            <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">任务名称</span>{if condition="$plan_detail['task_name'] neq ''"}{$plan_detail['task_name']}{else/}未关联{/if}</div>
+            <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">项目名称</span>{if condition="$plan_detail['project_name'] neq ''"}{$plan_detail['project_name']}{else/}未关联{/if}</div>
+            <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">产品名称</span>{if condition="$plan_detail['product_name'] neq ''"}{$plan_detail['product_name']}{else/}未关联{/if}</div>
+            <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;配</span>{$plan_detail['assignedTo']}</div>
+            <div class="publicdiv pt15 pb15 bhb"><span class="z mr20">工&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时</span>{$plan_detail['estimate']}</div>
+        </div>
+    </div>
+    
+    <div class="publicdiv mt8 bf fs14 pl10 pr10 sizing">
+        <div class="publicdiv pt15 pb15 pub_content">{$plan_detail['content']}</div>
+    </div>
+    
+    <div class="publicdiv pl10 pr10 pb15 sizing">
+        <a href="{:url('/index/plan/add?id='.$plan_id)}" class="ui-btn-lg ui-btn-primary mt10">编辑</a>
+    </div>
+    
+    
+</div>
+{/block}
+
+
+{block name="footer"}
+{/block}
