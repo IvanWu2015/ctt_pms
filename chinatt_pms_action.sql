@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2018-02-27 15:52:47
+Date: 2018-03-06 17:45:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,7 +33,7 @@ CREATE TABLE `chinatt_pms_action` (
   `read` enum('0','1') NOT NULL DEFAULT '0' COMMENT '是否已读',
   PRIMARY KEY (`id`),
   KEY `action` (`objectID`,`product`,`project`,`action`,`date`)
-) ENGINE=MyISAM AUTO_INCREMENT=1386 DEFAULT CHARSET=utf8 COMMENT='操作记录';
+) ENGINE=MyISAM AUTO_INCREMENT=1415 DEFAULT CHARSET=utf8 COMMENT='操作记录';
 
 -- ----------------------------
 -- Records of chinatt_pms_action
@@ -1417,6 +1417,35 @@ INSERT INTO `chinatt_pms_action` VALUES ('1382', 'task', '285', '', '17', 'ivan'
 INSERT INTO `chinatt_pms_action` VALUES ('1383', 'task', '285', '', '17', 'ivan', 'updata', '2017-11-27 11:27:48', '', '', '0');
 INSERT INTO `chinatt_pms_action` VALUES ('1384', 'task', '285', '', '17', 'ivan', 'updata', '2017-11-27 11:38:52', '', '', '0');
 INSERT INTO `chinatt_pms_action` VALUES ('1385', 'user', '2', '', '0', 'ivan', 'login', '2018-02-27 10:04:18', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1386', 'navigation', '1', '', '0', 'ivan', 'add', '2018-02-27 17:50:21', '公司', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1387', 'navigation', '1', '', '0', 'ivan', 'add', '2018-02-27 17:52:00', '联系人', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1388', 'project', '18', '', '18', 'ivan', 'done', '2018-03-01 17:28:34', '项目任务完成', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1389', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:17:21', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1390', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:17:25', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1391', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:18:11', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1392', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:18:17', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1393', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:18:25', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1394', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:18:35', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1395', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:19:04', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1396', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:19:09', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1397', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:19:54', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1398', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:20:13', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1399', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:20:15', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1400', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:20:22', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1401', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:21:31', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1402', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:21:36', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1403', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:23:31', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1404', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:23:45', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1405', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:24:46', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1406', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:24:58', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1407', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:25:16', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1408', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:25:22', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1409', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:25:36', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1410', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:25:41', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1411', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:25:45', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1412', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:26:01', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1413', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:26:04', '', '', '0');
+INSERT INTO `chinatt_pms_action` VALUES ('1414', 'user', '2', '', '0', 'ivan', 'update', '2018-03-02 17:32:30', '', '', '0');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_article
@@ -1476,29 +1505,51 @@ INSERT INTO `chinatt_pms_class` VALUES ('68', '基本原则 ', '0', '67', '1', '
 DROP TABLE IF EXISTS `chinatt_pms_company`;
 CREATE TABLE `chinatt_pms_company` (
   `company_id` int(5) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '公司名称',
-  `corporation` varchar(60) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '法人',
+  `name` varchar(200) NOT NULL DEFAULT '' COMMENT '公司名称',
+  `corporation` varchar(60) NOT NULL DEFAULT '' COMMENT '法人',
   `type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1国企 2私营 3合资 4外资',
   `founding_time` date NOT NULL DEFAULT '0000-00-00' COMMENT '成立时间',
   `employee_numbers` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1 10人以内  2 10-50  3 50-100 4 100-500 6 500-1000 7 1000以上',
-  `resister_address` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '注册地址',
-  `work_address` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '办公地址',
-  `contact_name` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '联系人',
-  `contact_number` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '联系电话',
-  `fax_number` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '传真电话',
+  `resister_address` varchar(255) NOT NULL DEFAULT '' COMMENT '注册地址',
+  `work_address` varchar(255) NOT NULL DEFAULT '' COMMENT '办公地址',
+  `contact_name` varchar(255) NOT NULL DEFAULT '' COMMENT '联系人',
+  `contact_number` varchar(255) NOT NULL DEFAULT '' COMMENT '联系电话',
+  `fax_number` varchar(255) NOT NULL DEFAULT '' COMMENT '传真电话',
   `add_uid` int(5) NOT NULL DEFAULT '0' COMMENT '添加人',
   `add_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '添加时间',
   `last_uid` int(5) NOT NULL DEFAULT '0' COMMENT '最后修改人',
   `last_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
-  `tax_number` varchar(50) NOT NULL DEFAULT '' COMMENT '税号',
+  `tax_number` varchar(50) CHARACTER SET sjis NOT NULL DEFAULT '' COMMENT '税号',
   `bank_deposit` varchar(150) NOT NULL DEFAULT '' COMMENT '开户行',
   `bank_account` varchar(255) NOT NULL DEFAULT '' COMMENT '银行账号',
+  `remarks` text NOT NULL COMMENT '备注',
+  `scope` varchar(255) NOT NULL DEFAULT '' COMMENT '业务范围',
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=sjis COMMENT='公司';
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='公司';
 
 -- ----------------------------
 -- Records of chinatt_pms_company
 -- ----------------------------
+INSERT INTO `chinatt_pms_company` VALUES ('1', '12312', '234', '1', '0000-00-00', '1', '', '', '', '', '', '0', '2018-03-02 10:53:35', '2', '2018-03-02 10:53:35', '234', 'utf8asdf模压苛', '234234243', '<p>下次vzx基本原则零售业地&nbsp;</p>', '');
+INSERT INTO `chinatt_pms_company` VALUES ('2', '4234', '2342', '1', '0000-00-00', '0', '', '', '2342234', '23423', '', '2', '2018-02-28 15:19:33', '0', '0000-00-00 00:00:00', '4234', '4234', '4234', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('3', '123123', '1231232', '1', '0000-00-00', '0', '123', '123123', '2331', '23', '123123', '2', '2018-02-28 15:20:23', '0', '0000-00-00 00:00:00', '123123', '123123', '123123', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('4', '1231', '12312', '1', '0000-00-00', '0', '', '', '123123', '', '', '2', '2018-02-28 15:21:27', '0', '0000-00-00 00:00:00', '1231', '1231', '1231', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('6', '123125', '', '0', '0000-00-00', '0', '', '', '', '', '', '0', '2018-03-01 09:38:36', '0', '2018-03-01 09:38:36', '', '', '', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('7', '35', '', '0', '0000-00-00', '0', '', '', '', '', '', '0', '2018-03-01 09:38:36', '0', '2018-03-01 09:38:36', '', '', '', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('8', '123125', '', '0', '0000-00-00', '0', '', '', '', '', '', '0', '2018-03-01 09:38:36', '0', '2018-03-01 09:38:36', '', '', '', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('9', '1233', '', '0', '0000-00-00', '0', '', '', '', '', '', '0', '2018-03-01 09:38:36', '0', '2018-03-01 09:38:36', '', '', '', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('10', '123125', '', '0', '0000-00-00', '0', '', '', '', '', '', '0', '2018-03-01 09:38:36', '0', '2018-03-01 09:38:36', '', '', '', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('11', '123125', '', '0', '0000-00-00', '0', '', '', '', '', '', '0', '2018-03-01 09:38:36', '0', '2018-03-01 09:38:36', '', '', '', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('12', '123125', '', '0', '0000-00-00', '0', '', '', '', '', '', '0', '2018-03-01 09:38:36', '0', '2018-03-01 09:38:36', '', '', '', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('13', '123125', '', '0', '0000-00-00', '0', '', '', '', '', '', '0', '2018-03-01 09:38:36', '0', '2018-03-01 09:38:36', '', '', '', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('14', '123125', '', '0', '0000-00-00', '0', '', '', '', '', '', '0', '2018-03-01 09:38:36', '0', '2018-03-01 09:38:36', '', '', '', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('15', '123125', '', '0', '0000-00-00', '0', '', '', '', '', '', '0', '2018-03-01 09:38:36', '0', '2018-03-01 09:38:36', '', '', '', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('16', '123125', '', '0', '0000-00-00', '0', '', '', '', '', '', '0', '2018-03-01 09:38:36', '0', '2018-03-01 09:38:36', '', '', '', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('17', '234235', '3`12', '1', '0000-00-00', '1', '', '234', '', '', '', '2', '2018-03-01 10:01:04', '0', '0000-00-00 00:00:00', '234235', '234235', '234235', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('18', '1231', '123123', '1', '0000-00-00', '1', '', '', '31231232', '', '', '2', '2018-03-01 10:02:23', '0', '0000-00-00 00:00:00', '', '', '', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('19', '12312', '', '1', '0000-00-00', '1', '', '', '1231', '2123', '', '2', '2018-03-01 10:05:07', '0', '0000-00-00 00:00:00', '', '123132', '123', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('20', '12312', '', '1', '0000-00-00', '1', '', '', '', '', '', '2', '2018-03-01 10:07:15', '0', '0000-00-00 00:00:00', '123', '12312', '312', '', '');
+INSERT INTO `chinatt_pms_company` VALUES ('21', '12312', '', '1', '0000-00-00', '1', '', '', '', '', '', '2', '2018-03-01 10:08:07', '0', '0000-00-00 00:00:00', '123', '123123', '123', '', '');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_config
@@ -1512,7 +1563,7 @@ CREATE TABLE `chinatt_pms_config` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态0删除 1正常',
   `lasttime` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '最后的编辑时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=70 DEFAULT CHARSET=utf8 COMMENT='公用设置表';
+) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=utf8 COMMENT='公用设置表';
 
 -- ----------------------------
 -- Records of chinatt_pms_config
@@ -1528,6 +1579,10 @@ INSERT INTO `chinatt_pms_config` VALUES ('66', '球鞋', '0', '0', '1', '0000-00
 INSERT INTO `chinatt_pms_config` VALUES ('67', 'Sd', '0', '59', '1', '0000-00-00 00:00:00');
 INSERT INTO `chinatt_pms_config` VALUES ('68', '基本原则 ', '0', '67', '1', '0000-00-00 00:00:00');
 INSERT INTO `chinatt_pms_config` VALUES ('69', 'task_type', '12', '12212', '1', '2018-02-27 11:05:21');
+INSERT INTO `chinatt_pms_config` VALUES ('70', 'company_type', '1', '国企', '1', '2018-03-01 15:16:45');
+INSERT INTO `chinatt_pms_config` VALUES ('72', 'employee_type', '1', '1-10人', '1', '2018-03-01 16:58:30');
+INSERT INTO `chinatt_pms_config` VALUES ('71', 'company_type', '2', '私企', '1', '2018-03-01 15:16:45');
+INSERT INTO `chinatt_pms_config` VALUES ('73', 'employee_type', '2', '11-50人', '1', '2018-03-01 16:58:42');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_contact
@@ -1551,29 +1606,21 @@ CREATE TABLE `chinatt_pms_contact` (
   `add_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '添加时间',
   `last_uid` int(5) NOT NULL DEFAULT '0' COMMENT '最后修改人',
   `last_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
+  `remarks` text NOT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='联系人';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='联系人';
 
 -- ----------------------------
 -- Records of chinatt_pms_contact
 -- ----------------------------
-INSERT INTO `chinatt_pms_contact` VALUES ('1', '404733', '', '', '0', '0', '', '', '', '123456', '', '-1', '', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('2', '0', 'ivan', '', '30', '0', '', 'http://localhost/chinatt/data/attachment/forum/201801/03/124500dz00s5zffae39k3b.jpg', '<p>这是自我介绍</p>', '13725594700', 'wx.1@163.com', '1', '', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('3', '0', '高手', '', '22', '0', '阿拉伯联合酋长国0艾因', 'http://localhost/chinatt/data/attachment/forum/201801/03/132023dm7j7k0u6jd6h7s7.jpg', '<p>asdfasdfascvzxcvzxcvasdfasdfasdfasdfawsdf</p>', '13725594709', 'asdf@163.com', '0', '', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('4', '0', '测试员', '', '20', '2', '阿拉伯联合酋长国0艾因', 'http://localhost/chinatt/data/attachment/forum/201801/03/152946ybl7or3ofufv2ulv.jpg', '<p>你蒌经工人在示我人要奈毁要示有基</p><p style=\\\\\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; line-height: 24px; color: rgb(51, 51, 51); text-align: justify; font-family: arial; white-space: normal; background-color: rgb(255, 255, 255);\\\\\\\">PingWest品玩1月3日报道，去年 8 月份的时候，微软和亚马逊宣布了将要打通 Cortana 与 Alexa 这两款语音助理的消息。根据最初的计划，两家公司原本有望在 2017 年晚些时候进行。可是现在，元旦三天假期都已经过去了，两边的用户都还没见到功能的互通。虽然说不上是一件大事（跳票延期经常见），但对于两家大公司来说，面子上还是有些挂不住。</p><p><img class=\\\\\\\"large\\\\\\\" data-loadfunc=\\\\\\\"0\\\\\\\" src=\\\\\\\"https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=4132657144,2160004994&fm=173&s=AFE7CF041C753A0970893906010080A0&w=639&h=359&img.JPEG\\\\\\\" data-loaded=\\\\\\\"0\\\\\\\" style=\\\\\\\"border: 0px; width: 537px;\\\\\\\"/></p><p><br/></p>', '1201155412', 'wx.1@163.com', '0', '', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('5', '0', 'testone', 'gzsj', '22', '1', 'China0', 'http://localhost/chinatt/data/attachment/forum/201801/03/160204r6kavecaam84ahha.jpg', '<p>introduce</p><p>自定义标题</p><p>段落格式</p><p>字体</p><p>字号</p><p><iframe style=\\\\\\\"word-wrap: break-word; margin: 0px; padding: 0px; box-sizing: border-box; display: block; width: 20px; height: 20px; overflow: hidden; border-width: 0px; border-style: initial; position: absolute; top: 0px; left: 0px; opacity: 0; cursor: pointer;\\\\\\\"></iframe></p><p>代码语言</p><p><br/></p>', '321112311', 'wx.1@163.com', '0', 'discuz', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('6', '0', 'willson', '32', '15', '1', '中国北京东城', 'http://localhost/utf8/data/attachment/forum/201801/09/002554hhdkt07pv4g4hhht.jpg', '<p>乒乓经历</p>', '3123111', '132', '-1', '322', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('7', '0', 'willson', '32', '15', '1', '中国北京东城', 'http://localhost/utf8/data/attachment/forum/201801/08/174453muq4tql7zlqlbb3t.jpeg', '<p>1tr234231</p>', '3123111', '132', '-1', '322', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('8', '0', 'willson', '32', '15', '1', '中国北京东城', '', '<p>乒乓经历</p>', '3123111', '132', '-1', '322', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('9', '0', 'willson', '32', '15', '1', '中国北京东城', 'http://localhost/utf8/data/attachment/forum/201801/09/002300sguodl2o65d22tdl.png', '<p>乒乓经历</p>', '3123111', '132', '-1', '322', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('10', '0', 'willson', '32', '15', '1', '中国北京东城', 'http://localhost/utf8/data/attachment/forum/201801/09/003509j9llvbx68601961r.jpg', '<p>乒乓经历</p>', '3123111', '132', '-1', '322', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('11', '0', '中文 关', '博乒网', '21', '1', '中国广东广州', 'http://localhost/utf8/data/attachment/forum/201801/09/012304f60sksn8i5x59unk.jpeg', '<p><span style=\\\\\\\"color: rgb(102, 102, 102); font-family: 微软雅黑, Arial, Helvetica, sans-serif; font-size: 13px; text-align: right; background-color: rgb(255, 255, 255);\\\\\\\">自我介绍</span></p>', '13924405765', '11111@qq.com', '0', 'WEB前端', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('12', '0', '手机 中文', '博乒飞儿乐', '21', '1', '中国山西太原', 'http://localhost/utf8/data/attachment/forum/201801/09/013616uegfg6jrkoggde5j.jpeg', '', '1231231', '11111@qq.com', '0', 'Web', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('13', '0', '111', '77', '33', '1', '中国北京东城', 'http://localhost/utf8/data/attachment/forum/201801/09/013732xw0howxvv8u5w5vw.jpg', '', '55', '66', '0', '88', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('14', '0', '姓名', '博乒', '21', '1', '中国安徽合肥', 'http://localhost/utf8/data/attachment/forum/201801/09/014048apcpnacwiwc7zmul.png', '123213123', '13920', '123@多。戏迷网', '0', 'WEB', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('15', '0', 'eng ming', '博', '21', '1', 'China', 'http://localhost/utf8/data/attachment/forum/201801/09/014247d6k1k4x40ok21a55.png', '4444', '1008611', '123@多。戏迷网', '0', 'W', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('16', '0', '小关', '博乒网', '21', '1', '中国北京朝阳', 'http://localhost/utf8/data/attachment/forum/201801/09/091714sbft7tl6spg76slp.jpg', '', '13924405766', '1111@qq.com', '0', 'Web', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_contact` VALUES ('17', '0', '电脑  小关', '博乒', '21', '1', '中国北京朝阳', 'http://localhost/utf8/data/attachment/forum/201801/09/091904c0k8zekckk0s6zz9.jpg', '<p><span style=\\\\\\\"color: rgb(102, 102, 102); font-family: 微软雅黑, Arial, Helvetica, sans-serif; font-size: 13px; text-align: right; background-color: rgb(255, 255, 255);\\\\\\\">自我介绍</span><span style=\\\\\\\"color: rgb(102, 102, 102); font-family: 微软雅黑, Arial, Helvetica, sans-serif; font-size: 13px; text-align: right; background-color: rgb(255, 255, 255);\\\\\\\">自我介绍</span><span style=\\\\\\\"color: rgb(102, 102, 102); font-family: 微软雅黑, Arial, Helvetica, sans-serif; font-size: 13px; text-align: right; background-color: rgb(255, 255, 255);\\\\\\\">自我介绍</span><span style=\\\\\\\"color: rgb(102, 102, 102); font-family: 微软雅黑, Arial, Helvetica, sans-serif; font-size: 13px; text-align: right; background-color: rgb(255, 255, 255);\\\\\\\">自我介绍</span><span style=\\\\\\\"color: rgb(102, 102, 102); font-family: 微软雅黑, Arial, Helvetica, sans-serif; font-size: 13px; text-align: right; background-color: rgb(255, 255, 255);\\\\\\\">自我介绍</span></p>', '10086', '', '1', 'wen', '0', '0000-00-00 00:00:00', '0', '0000-00-00 00:00:00');
+INSERT INTO `chinatt_pms_contact` VALUES ('18', '1', '1231', '1231', '127', '0', '1231', '\\upload\\20180302\\0683935edecf040c75e0e5e57f3b2ef4.jpg', '', '1231', '1231', '0', '1231·12·12·', '2', '2018-03-02 11:04:01', '2', '2018-03-02 11:04:01', '<p>0</p>');
+INSERT INTO `chinatt_pms_contact` VALUES ('19', '1', '2313', '2313', '127', '0', '2313', './uploads/20180302\\1c6372dbace6b2e0f018895b66550f50.jpg', '', '2313', '2313', '0', '231323213112', '2', '2018-03-02 10:39:39', '2', '2018-03-02 10:39:39', '0');
+INSERT INTO `chinatt_pms_contact` VALUES ('20', '0', '1231', '12321', '0', '0', '', './uploads/20180227\\9591a0b792d2178a706ff4db62ca9e8a.jpg', '', '', '', '0', '', '2', '2018-02-27 19:59:08', '0', '2018-02-27 19:59:08', '');
+INSERT INTO `chinatt_pms_contact` VALUES ('21', '0', '123', '123', '123', '1', '', '', '', '', '', '0', '', '2', '2018-02-28 15:18:47', '0', '0000-00-00 00:00:00', '');
+INSERT INTO `chinatt_pms_contact` VALUES ('22', '0', '2342', '234234', '0', '0', '234', './uploads/20180301\\78b4449f1dddd3f404a1164a1883df2c.jpg', '', '', '', '0', '', '2', '2018-03-01 09:50:50', '0', '0000-00-00 00:00:00', '');
+INSERT INTO `chinatt_pms_contact` VALUES ('23', '0', '123', '123', '0', '0', '', './uploads/20180301\\7f6f255762b98166ceefd05b499b1082.jpg', '', '', '', '0', '', '2', '2018-03-01 09:52:48', '0', '0000-00-00 00:00:00', '');
+INSERT INTO `chinatt_pms_contact` VALUES ('24', '0', '12313', '', '127', '0', '', './uploads/20180301\\dc191f696cfa836427ea6591ce3b7e12.jpg', '', '', '', '0', '', '2', '2018-03-01 09:53:25', '0', '0000-00-00 00:00:00', '');
+INSERT INTO `chinatt_pms_contact` VALUES ('25', '0', '123', '12312', '0', '0', '', '', '', '', '', '0', '', '2', '2018-03-01 09:57:26', '0', '0000-00-00 00:00:00', '');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_dept
@@ -1597,6 +1644,46 @@ CREATE TABLE `chinatt_pms_dept` (
 -- Records of chinatt_pms_dept
 -- ----------------------------
 INSERT INTO `chinatt_pms_dept` VALUES ('1', '技术部', '0', ',1,', '1', '10', '', '', 'ivan');
+
+-- ----------------------------
+-- Table structure for chinatt_pms_express
+-- ----------------------------
+DROP TABLE IF EXISTS `chinatt_pms_express`;
+CREATE TABLE `chinatt_pms_express` (
+  `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
+  `express_name` varchar(120) NOT NULL DEFAULT '' COMMENT '快递公司名称',
+  `express_number` varchar(20) NOT NULL DEFAULT '' COMMENT '快递单号',
+  `express_desc` varchar(255) NOT NULL DEFAULT '' COMMENT '物品说明',
+  `from_name` varchar(200) NOT NULL DEFAULT '' COMMENT '发件人名称',
+  `from_tel` varchar(50) NOT NULL DEFAULT '' COMMENT '发件人电话',
+  `to_name` varchar(30) NOT NULL DEFAULT '' COMMENT '收件人名称',
+  `to_tel` varchar(50) NOT NULL DEFAULT '' COMMENT '收件人电话',
+  `company_id` int(8) NOT NULL DEFAULT '0' COMMENT '公司ID',
+  `contact_id` int(8) NOT NULL DEFAULT '0' COMMENT '联系人ID',
+  `payment` tinyint(1) NOT NULL DEFAULT '0' COMMENT '付款方式 1寄付 2到付',
+  `price` float(7,3) NOT NULL DEFAULT '0.000' COMMENT '运费',
+  `weight` smallint(4) NOT NULL DEFAULT '0' COMMENT '重量 单位KG',
+  `remarks` varchar(3) NOT NULL DEFAULT '' COMMENT '其它说明',
+  `add_uid` int(8) NOT NULL DEFAULT '0' COMMENT '添加人uid',
+  `add_name` varchar(255) NOT NULL DEFAULT '' COMMENT '添加人名称',
+  `add_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '添加时间',
+  PRIMARY KEY (`id`),
+  KEY `shipping_code` (`express_number`,`to_name`)
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of chinatt_pms_express
+-- ----------------------------
+INSERT INTO `chinatt_pms_express` VALUES ('3', '申通快递', 'sto_express', '江、浙、沪地区首重为15元/KG，其他地区18元/KG， 续重均为5-6元/KG， 云南地区为8元', '0', '0', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
+INSERT INTO `chinatt_pms_express` VALUES ('13', '顺丰速运', 'sf_express', '江、浙、沪地区首重15元/KG，续重2元/KG，其余城市首重20元/KG', '0', '0', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
+INSERT INTO `chinatt_pms_express` VALUES ('7', '上门取货', 'cac', '买家自己到商家指定地点取货', '0', '1', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
+INSERT INTO `chinatt_pms_express` VALUES ('6', '市内快递', 'flat', '固定运费的配送方式内容', '0', '1', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
+INSERT INTO `chinatt_pms_express` VALUES ('8', '中通速递', 'zto', '中通快递的相关说明。保价费按照申报价值的2％交纳，但是，保价费不低于100元，保价金额不得高于10000元，保价金额超过10000元的，超过的部分无效', '2%', '0', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
+INSERT INTO `chinatt_pms_express` VALUES ('9', 'EMS 国内邮政特快专递', 'ems', 'EMS 国内邮政特快专递描述内容', '0', '0', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
+INSERT INTO `chinatt_pms_express` VALUES ('10', '邮政快递包裹', 'post_express', '邮政快递包裹的描述内容。', '1%', '0', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
+INSERT INTO `chinatt_pms_express` VALUES ('11', '城际快递', 'city_express', '配送的运费是固定的', '0', '1', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
+INSERT INTO `chinatt_pms_express` VALUES ('12', '邮局平邮', 'post_mail', '邮局平邮的描述内容。', '0', '0', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
+INSERT INTO `chinatt_pms_express` VALUES ('14', '圆通速递', 'yto', '上海圆通物流（速递）有限公司经过多年的网络快速发展，在中国速递行业中一直处于领先地位。为了能更好的发展国际快件市场，加快与国际市场的接轨，强化圆通的整体实力，圆通已在东南亚、欧美、中东、北美洲、非洲等许多城市运作国际快件业务', '0', '1', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_group
@@ -6690,7 +6777,7 @@ CREATE TABLE `chinatt_pms_log` (
   `type` varchar(30) NOT NULL DEFAULT '' COMMENT '类型 common为全局自动',
   `extend` varchar(1000) NOT NULL DEFAULT '' COMMENT '扩展，如执行结果等',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13011 DEFAULT CHARSET=utf8 COMMENT='日志';
+) ENGINE=MyISAM AUTO_INCREMENT=13038 DEFAULT CHARSET=utf8 COMMENT='日志';
 
 -- ----------------------------
 -- Records of chinatt_pms_log
@@ -6741,6 +6828,33 @@ INSERT INTO `chinatt_pms_log` VALUES ('13007', '2', 'ivan', '/ctt_pms/public/adm
 INSERT INTO `chinatt_pms_log` VALUES ('13008', '2', 'ivan', '/ctt_pms/public/index/task/add?task_id=285', '/ctt_pms/public/index/task/add?task_id=285', 'a:11:{s:10:\"project_id\";s:2:\"17\";s:11:\"predecessor\";s:1:\"0\";s:4:\"plan\";s:1:\"0\";s:4:\"name\";s:27:\"建立在线用户的模型\";s:10:\"assignedTo\";s:4:\"ivan\";s:8:\"estimate\";s:3:\"8.0\";s:3:\"pri\";s:1:\"0\";s:11:\"realStarted\";s:10:\"2016-11-23\";s:8:\"deadline\";s:10:\"0000-00-00\";s:6:\"status\";s:5:\"doing\";s:4:\"desc\";s:39:\"<p>test</p><p>asdfasdfs</p><p><br/></p>\";}', '2017-08-30 18:29:09', 'common', '');
 INSERT INTO `chinatt_pms_log` VALUES ('13009', '2', 'ivan', '/ctt_pms/public/index/task/add?task_id=285', '/ctt_pms/public/index/task/add?task_id=285', 'a:11:{s:10:\"project_id\";s:2:\"17\";s:11:\"predecessor\";s:1:\"0\";s:4:\"plan\";s:1:\"0\";s:4:\"name\";s:27:\"建立在线用户的模型\";s:10:\"assignedTo\";s:4:\"ivan\";s:8:\"estimate\";s:3:\"8.0\";s:3:\"pri\";s:1:\"0\";s:11:\"realStarted\";s:10:\"2016-11-23\";s:8:\"deadline\";s:10:\"0000-00-00\";s:6:\"status\";s:5:\"doing\";s:4:\"desc\";s:39:\"<p>test</p><p>asdfasdfs</p><p><br/></p>\";}', '2017-11-27 11:27:48', 'common', '');
 INSERT INTO `chinatt_pms_log` VALUES ('13010', '2', 'ivan', '/ctt_pms/public/index/task/add?task_id=285', '/ctt_pms/public/index/task/add?task_id=285', 'a:11:{s:10:\"project_id\";s:2:\"17\";s:11:\"predecessor\";s:1:\"0\";s:4:\"plan\";s:1:\"0\";s:4:\"name\";s:27:\"建立在线用户的模型\";s:10:\"assignedTo\";s:4:\"ivan\";s:8:\"estimate\";s:3:\"8.0\";s:3:\"pri\";s:1:\"0\";s:11:\"realStarted\";s:10:\"2016-11-23\";s:8:\"deadline\";s:10:\"0000-00-00\";s:6:\"status\";s:5:\"doing\";s:4:\"desc\";s:39:\"<p>test</p><p>asdfasdfs</p><p><br/></p>\";}', '2017-11-27 11:38:52', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13011', '2', 'ivan', '/ctt_pms/public/index/Project/info/?ac=done&project_id=18', '/ctt_pms/public/index/Project/info/?ac=done&project_id=18', 'a:1:{s:7:\"comment\";s:18:\"项目任务完成\";}', '2018-03-01 17:28:34', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13012', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:0:\"\";s:8:\"birthday\";s:10:\"0000-00-00\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:0:\"\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:0:\"\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:17:21', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13013', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:0:\"\";s:8:\"birthday\";s:10:\"0000-00-00\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:0:\"\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:0:\"\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:17:25', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13014', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:0:\"\";s:8:\"birthday\";s:10:\"0000-00-00\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:0:\"\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:0:\"\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:18:11', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13015', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:0:\"\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:0:\"\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:18:17', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13016', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:0:\"\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:18:25', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13017', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:4:\"1231\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:18:35', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13018', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:9:\"123qewwqe\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:19:05', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13019', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:6:\"qweqwe\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:19:09', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13020', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:6:\"qweqwe\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:19:54', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13021', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:6:\"qweqwe\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:20:13', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13022', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:6:\"qweqwe\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:20:15', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13023', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:6:\"qweqwe\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:20:22', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13024', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:6:\"qweqwe\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:21:31', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13025', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:0:\"\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:21:36', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13026', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:0:\"\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:23:31', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13027', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:0:\"\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:23:45', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13028', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:0:\"\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:24:46', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13029', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:0:\"\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:24:58', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13030', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:1:\"0\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:0:\"\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:25:16', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13031', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:5:\"12312\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:0:\"\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:25:22', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13032', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:5:\"12312\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:13:\"1231231231231\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:25:36', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13033', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:5:\"12312\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:13:\"1231231231231\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:25:41', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13034', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:5:\"12312\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:13:\"1231231231231\";s:3:\"old\";s:6:\"123456\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:25:45', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13035', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:5:\"12312\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:6:\"123123\";s:3:\"old\";s:0:\"\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:26:02', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13036', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:5:\"12312\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:6:\"123123\";s:3:\"old\";s:0:\"\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:26:04', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13037', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:8:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"1233-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:5:\"12312\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:6:\"123123\";}', '2018-03-02 17:32:30', 'common', '');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_navigation
@@ -6758,7 +6872,7 @@ CREATE TABLE `chinatt_pms_navigation` (
   `target` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '新窗口打开',
   PRIMARY KEY (`id`),
   KEY `pid` (`parentid`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='导航表';
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='导航表';
 
 -- ----------------------------
 -- Records of chinatt_pms_navigation
@@ -6774,6 +6888,8 @@ INSERT INTO `chinatt_pms_navigation` VALUES ('8', '0', '项目', '/index/project
 INSERT INTO `chinatt_pms_navigation` VALUES ('9', '0', '收藏', '/index/weburl/lists', '4', '1492505956', '1492505956', '1', '0');
 INSERT INTO `chinatt_pms_navigation` VALUES ('10', '0', '文档', '/index/article/lists', '3', '1492505962', '1492505962', '1', '0');
 INSERT INTO `chinatt_pms_navigation` VALUES ('11', '1', 'adf', 'sdafasd', '1', '1492506753', '0', '1', '0');
+INSERT INTO `chinatt_pms_navigation` VALUES ('12', '0', '公司', '/index/company/lists', '0', '1519725021', '0', '1', '0');
+INSERT INTO `chinatt_pms_navigation` VALUES ('13', '0', '联系人', '/index/contacts/lists', '7', '1519725120', '0', '1', '0');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_plan
@@ -6915,7 +7031,7 @@ INSERT INTO `chinatt_pms_project` VALUES ('14', '0', '0', '0', 'sprint', '0', '�
 INSERT INTO `chinatt_pms_project` VALUES ('15', '0', '0', '0', 'sprint', '0', '积分商城1.0', 'chinatt_mall', '2016-08-18', '2016-09-10', '17', 'done', '1', '1', '博乒积分商城&nbsp;', '', '0', '', '0', '', '0', '积分商城1.0', 'open', '', '75', '0', '');
 INSERT INTO `chinatt_pms_project` VALUES ('16', '0', '0', '0', 'sprint', '0', '问卷调查', 'wuxin_questionnaire', '2016-08-22', '2016-08-30', '7', 'done', '1', '1', '制作问卷调查功能插件', '', '0', '', '0', '', '0', '问卷调查', 'open', '', '80', '0', '');
 INSERT INTO `chinatt_pms_project` VALUES ('17', '0', '0', '0', 'ops', '0', '2016年临时任务', 'temp_task', '2016-10-27', '2016-12-31', '47', 'doing', '1', '1', '临时性、杂项的任务，无明确所属项目的全部放至此处处理', '', '0', '', '0', '', '0', '2016年临时任务', 'open', '', '85', '0', '');
-INSERT INTO `chinatt_pms_project` VALUES ('18', '0', '0', '0', 'sprint', '0', '视频站1.0版本开发', 'vedio 1.0', '2016-11-01', '2016-12-20', '36', 'wait', '1', '1', '按原有视频站功能，制作全新的视频站', '', '0', '', '0', '', '0', 'vedio_team', 'open', '', '90', '0', '');
+INSERT INTO `chinatt_pms_project` VALUES ('18', '0', '0', '0', 'sprint', '0', '视频站1.0版本开发', 'vedio 1.0', '2016-11-01', '2016-12-20', '36', 'done', '1', '1', '按原有视频站功能，制作全新的视频站', '', '0', '', '0', '', '0', 'vedio_team', 'open', '', '90', '0', '');
 INSERT INTO `chinatt_pms_project` VALUES ('19', '0', '0', '0', 'sprint', '0', '博乒论坛功能完善2017', '', '2017-02-27', '0000-00-00', '0', 'doing', '1', '1', '<p>2017年对论坛功能进行完善。</p>', '', '0', '', '0', '', '0', '', 'open', '', '0', '0', 'ivan');
 INSERT INTO `chinatt_pms_project` VALUES ('20', '0', '0', '0', 'sprint', '0', 'asdfa', '', '0000-00-00', '0000-00-00', '0', 'wait', '1', '1', '<p>asdfasdfasdfasd</p>', '', '0', '', '0', '', '0', '', 'private', '', '0', '0', 'wuxin');
 
@@ -7798,7 +7914,7 @@ CREATE TABLE `chinatt_pms_user` (
 -- Records of chinatt_pms_user
 -- ----------------------------
 INSERT INTO `chinatt_pms_user` VALUES ('1', '0', '0', 'wuxin', '46ff408a5233e4a2329e23b8eec47be7', '', '管理员', '', 'wuxin', '', '0000-00-00', 'm', '', '', '', '', '0000-00-00', '15', '58.62.203.238', '1519696985', '0.0.0.0', '1', '1519696985', '0', '1', '9537cd');
-INSERT INTO `chinatt_pms_user` VALUES ('2', '1', '1', 'ivan', '7f2668c76e4fc6662fa7abbf2e28908e', 'pm', '吴鑫', '', '', '', '0000-00-00', 'm', 'wx.1@163.com', '', '', '', '0000-00-00', '101', '58.62.205.78', '1519697059', '0.0.0.0', '0', '0', '0', '1', '96067e');
+INSERT INTO `chinatt_pms_user` VALUES ('2', '1', '1', 'ivan', '7f2668c76e4fc6662fa7abbf2e28908e', 'pm', '吴鑫', '12213', '', '\\upload\\20180302\\cfb0af641478f', '1233-11-29', 'm', 'wx.1@163.com', '12312', '123123', '', '0000-00-00', '101', '58.62.205.78', '1519697059', '0.0.0.0', '0', '0', '0', '1', '96067e');
 INSERT INTO `chinatt_pms_user` VALUES ('3', '1', '2', 'ming', '6d9f42bade5b89279895bbf07c0feb47', 'dev', '关武明', '', '', '', '0000-00-00', 'm', '2273659300@QQ.com', '', '', '', '0000-00-00', '77', '58.62.202.115', '1481076687', '', '0', '0', '0', '1', '562dfs');
 INSERT INTO `chinatt_pms_user` VALUES ('4', '0', '5', 'chong', '90761b5a7ba4c8442efeb8bfdeea966a', 'po', '张新盛', '', '', '', '0000-00-00', 'm', 'webmaster@bokett.com', '', '', '', '0000-00-00', '4', '59.56.19.8', '1459440152', '', '0', '0', '0', '1', 'f2a22x');
 INSERT INTO `chinatt_pms_user` VALUES ('5', '1', '2', 'chen', 'b61c092c454b70699aaa3fcb2f9a2020', 'dev', '陈茂发', '', '', '', '0000-00-00', 'm', '', '', '', '', '0000-00-00', '78', '58.62.202.115', '1481095696', '', '0', '0', '0', '1', '5wqz2');
