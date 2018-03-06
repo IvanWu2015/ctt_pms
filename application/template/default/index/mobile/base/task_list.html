@@ -1,0 +1,99 @@
+<script>
+//计算根节点HTML的字体大小
+function resizeRoot(){
+    var deviceWidth = document.documentElement.clientWidth,
+        num = 750,
+        num1 = num / 100;
+    if(deviceWidth > num){
+        deviceWidth = num;  
+    }
+    document.documentElement.style.fontSize = deviceWidth / num1 + "px";
+}
+//根节点HTML的字体大小初始化
+resizeRoot();
+
+window.onresize = function(){
+    resizeRoot();
+};
+</script>
+<script type="text/javascript" src="tpl_js/limit.js"></script>
+
+<ul class="publicdiv tasklist" id="tasklist">
+    {foreach $task_list as $task}
+    
+    <li class="bhb sizing">
+        <a href="javascript:void(0);">
+        <div class="publicdiv" onClick="openhref('{:url('/index/task/detail/?id='.$task['id'])}');">
+            <h3 class="sizing ellipsis" title="姓名">
+                {if condition="$task['predecessor'] > 0"}<span class="iconfont" title="{$task['p_name']}">&#xe759;</span>{/if}
+                {$task['name']}
+                <span class="fs12 c9 openedDate" limit="10">{$task['openedDate']}</span>
+            </h3>
+            <p class="publicdiv c9">
+                <span class="w33 al z">类型 {$task['type_name']}</span>
+                <span class="w33 ac z">指派给 {$task['assignedTo']|getUser}</span>
+                <span class="w33 ar z">创建者 {$task['openedBy']|getUser}</span>
+            </p>
+            <p class="publicdiv c9 ellipsis">
+                {if condition="$task['status'] == 'wait'"}<span class="w33 al z" style="color:#f8b004;">等待</span>
+                {elseif condition="$task['status'] == 'done'"}<span class="w33 al z text-muted">完成</span>
+                {elseif condition="$task['status'] == 'closed'"}<span class="w33 al z text-danger">关闭</span>
+                {elseif condition="$task['status'] == 'doing'"}<span class="w33 al z text-primary">进行中</span>
+                {elseif condition="$task['status'] == 'cancel'"}<span class="w33 al z text-primary">已取消</span>
+                {else}<span class="w33 al z text-primary">&nbsp;</span>{/if}
+                <span class="w33 ac z">预计 {$task['estimate']}</span>
+                <span class="w33 ar z">消耗 {$task['consumed']}</span>
+            </p>
+            <span class="g_listright iconfont">&#xe64b;</span>
+        </div>
+        <i>
+            <span onClick="openhref('{:url('/Index/task/add?task_id='.$task['id'])}');" class="w50 ac bg-primary">编辑</span>
+            <span onClick="javascript:alert('删除功能未开启！');;" class="w50 ac bred">删除</span>
+        </i>
+        </a>
+    </li>
+    
+    {/foreach}
+</ul>
+
+<script>
+//侧滑显示删除按钮
+var expansion = null; //是否存在展开的list
+var container = document.querySelectorAll('#tasklist li a');
+for(var i = 0; i < container.length; i++){    
+    var x, y, X, Y, swipeX, swipeY;
+    container[i].addEventListener('touchstart', function(event) {
+        x = event.changedTouches[0].pageX;
+        y = event.changedTouches[0].pageY;
+        swipeX = true;
+        swipeY = true ;
+        if(expansion){   //判断是否展开，如果展开则收起
+            //expansion.className = "";
+        }        
+    });
+    container[i].addEventListener('touchmove', function(event){
+        
+        X = event.changedTouches[0].pageX;
+        Y = event.changedTouches[0].pageY;        
+        // 左右滑动
+        if(swipeX && Math.abs(X - x) - Math.abs(Y - y) > 0){
+            // 阻止事件冒泡
+            event.stopPropagation();
+            if(X - x > 10){   //右滑
+                event.preventDefault();
+                this.className = "";    //右滑收起
+            }
+            if(x - X > 10){   //左滑
+                event.preventDefault();
+                this.className = "swipeleft";   //左滑展开
+                expansion = this;
+            }
+            swipeY = false;
+        }
+        // 上下滑动
+        if(swipeY && Math.abs(X - x) - Math.abs(Y - y) < 0) {
+            swipeX = false;
+        }        
+    });
+}
+</script>

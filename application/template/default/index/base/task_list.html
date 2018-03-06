@@ -17,7 +17,7 @@
     <tbody class="weburllist" id="theader">
         {foreach $task_list as $task}
         <tr id="taskList">
-            <td>
+            <td title="任务名称">
                 <a href="{:url('/index/task/detail/?id='.$task['id'])}" id="taskName">
                     {if condition="$task['predecessor'] > 0"}
                     <span class="iconfont" title="{$task['p_name']}">
@@ -27,10 +27,10 @@
                     {$task['name']}&nbsp;
                 </a>
             </td>
-            <td class="ac">{$task['type_name']}&nbsp;</td>
-            <td class="ac"><a href="{:url('/index/project/detail?id='.$project_id.'&username='.$task['assignedTo'].'&status='.$status)}"  class="ac {if condition='$task["assignedTo"] == $_G["username"]'}cred{else}text-primary{/if}">{$task['assignedTo']|getUser}</a>&nbsp;</td>
-            <td class="ac">{$task['openedBy']|getUser}&nbsp;</td>
-            <td class="ac">{$task['finishedBy']|getUser}&nbsp;</td>
+            <td class="ac" title="任务类型">{$task['type_name']}&nbsp;</td>
+            <td class="ac" title="指派给"><a href="{:url('/index/project/detail?id='.$project_id.'&username='.$task['assignedTo'].'&status='.$status)}"  class="ac {if condition='$task["assignedTo"] == $_G["username"]'}cred{else}text-primary{/if}">{$task['assignedTo']|getUser}</a>&nbsp;</td>
+            <td class="ac" title="创建者">{$task['openedBy']|getUser}&nbsp;</td>
+            <td class="ac" title="完成者">{$task['finishedBy']|getUser}&nbsp;</td>
             {if condition="$task['status'] == 'wait'"}<td class="ac" style="color:#f8b004;">等待</td>
             {elseif condition="$task['status'] == 'done'"}<td class="ac text-muted">完成</td>
             {elseif condition="$task['status'] == 'closed'"}<td class="ac text-danger">关闭</td>
@@ -39,8 +39,8 @@
             {else}
             <td class="ac text-primary">&nbsp;</td>
             {/if}
-            <td class="ac">{$task['openedDate']}</td>
-            <td class="ac">
+            <td class="ac" title="创建时间">{$task['openedDate']}</td>
+            <td class="ac" title="优先级">
                 {if condition="$task['pri'] == '1'"}
                     <span class="pripub prip01">1</span>
                 {elseif condition="$task['pri'] == '2'"}

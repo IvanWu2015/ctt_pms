@@ -24,39 +24,41 @@ window.onresize = function(){
 };
 </script>
 
-<div class="publicdiv bf pl10 pr10 pt20 mb58 sizing">
-    <h3 class="borb pb15 mbn">
+<div class="publicdiv bf pt20 mb58">
+    <h3 class="borb pb15 mbn pl10 pr10 sizing">
         联系人
         <a href="{:url('/index/company/lists')}" class="ui-btn ui-btn-primary y">公司列表</a>
     </h3>
     
-    <ul class="publicdiv scorelist" id="scorelist">
-        {foreach $contacts_list as $contact}
-        
-        <li class="bhb sizing">
-            <a href="javascript:void(0);">
-            <div class="publicdiv" onClick="openhref('{:url('/index/contacts/detail?id='.$contact['id'])}');">
-                <div class="winner fs30 cc" title="性别">
-                    <img src="{$contact['photo']}" onerror="this.src='tpl_img/{if condition='$contact["sex"] == 1'}male_img{else}female_img{/if}.png';" class="publicimg" />
+    <div class="publicdiv pl10 pr10 sizing">
+        <ul class="publicdiv scorelist" id="scorelist">
+            {foreach $contacts_list as $contact}
+            
+            <li class="bhb sizing">
+                <a href="javascript:void(0);">
+                <div class="publicdiv" onClick="openhref('{:url('/index/contacts/detail?id='.$contact['id'])}');">
+                    <div class="winner fs30 cc" title="性别">
+                        <img src="{$contact['photo']}" onerror="this.src='tpl_img/{if condition='$contact["sex"] == 1'}male_img{else}female_img{/if}.png';" class="publicimg" />
+                    </div>
+                    <h3 class="ellipsis" title="姓名">
+                        {$contact['name']}
+                        <span class="fs12 c9">{if condition="$contact['status'] == 1"}[在职]{elseif condition="$contact['status'] == 2"}[离职]{/if}</span>
+                    </h3>
+                    <p class="publicdiv c9 iconfont" title="电话"><b class="fs14">&#xe618;</b> {$contact['tel']}</p>
+                    <p class="publicdiv c9 iconfont ellipsis" title="地址"><b class="fs14">&#xe617;</b> {$contact['address']}</p>
+                    <span class="g_listright iconfont">&#xe64b;</span>
                 </div>
-                <h3 class="ellipsis" title="姓名">
-                    {$contact['name']}
-                    <span class="fs12 c9">{if condition="$contact['status'] == 1"}[在职]{elseif condition="$contact['status'] == 2"}[离职]{/if}</span>
-                </h3>
-                <p class="publicdiv c9 iconfont" title="电话"><b class="fs14">&#xe618;</b> {$contact['tel']}</p>
-                <p class="publicdiv c9 iconfont ellipsis" title="地址"><b class="fs14">&#xe617;</b> {$contact['address']}</p>
-                <span class="g_listright iconfont">&#xe64b;</span>
-            </div>
-            <i>
-                <span onClick="openhref('{:url('/index/contacts/add/?id='.$contact['id'])}');" class="w50 ac bg-primary">编辑</span>
-                <span onClick="openhref('{:url('/index/contacts/lists/?deleted=1&id='.$contact['id'])}');" class="w50 ac bred">删除</span>
-            </i>
-            </a>
-        </li>
-        
-        {/foreach}
-    </ul>
-    <div class="publicdiv ac pagingw">{$page}</div>
+                <i>
+                    <span onClick="openhref('{:url('/index/contacts/add/?id='.$contact['id'])}');" class="w50 ac bg-primary">编辑</span>
+                    <span onClick="openhref('{:url('/index/contacts/lists/?deleted=1&id='.$contact['id'])}');" class="w50 ac bred">删除</span>
+                </i>
+                </a>
+            </li>
+            
+            {/foreach}
+        </ul>
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
 </div>
 
 <script>

@@ -1,0 +1,33 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pt20">
+    <h3 class="borb pb15 mbn pl10 pr10 sizing">我参与的项目</h3>
+    
+    <div class="publicdiv pl10 pr10 sizing">
+        <ul class="publicdiv projectlist">
+            {foreach $project_list as $project}
+                <a href="{:url('/index/project/detail?id='.$project['project'])}"><li>
+                    <h3 class="sizing">
+                        {$project['name']}
+                        <span class="prend">{$project['join']}</span>
+                    </h3>
+                    <p class="fs12">职位：{$project['role']}</p>
+                </li></a>
+            {/foreach}
+        </ul>
+        
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
+    
+</div>
+
+{/block}
+
+
+{block name="footer"}
+{/block}

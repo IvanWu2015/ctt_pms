@@ -1,0 +1,39 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pt20">
+    <h3 class="borb pb15 mbn pl10 pr10 sizing">我的收藏</h3>
+    
+    <div class="publicdiv pl10 pr10 sizing">
+        <ul class="publicdiv scorelist" id="scorelist">
+            {foreach $weburl_list as $weburl}
+            <a href="{$weburl['url']}">
+                <div class="project_list publicdiv pr">
+                    <h3 class="ellipsis">
+                        {if condition="$weburl['acl'] eq open"}[公开]{else/}[私有]{/if}
+                        {$weburl['title']}
+                    </h3>
+                    <p class="lh20">
+                        发布者：{$weburl['realname']}、
+                        项目：{$weburl['name']}
+                    </p>
+                    <p class="lh20 ellipsis">时间：{$weburl['time']}</p>
+                </div>
+            </a>
+            
+            {/foreach}
+        </ul>
+        
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
+</div>
+
+{/block}
+
+
+{block name="footer"}
+{/block}

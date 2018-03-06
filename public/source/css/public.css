@@ -192,7 +192,7 @@ img{ border:none;}
 .bort{ border-top:1px #dedede solid;}
 .bortb{ border-top:1px #dedede solid; border-bottom:1px #dedede solid;}
 .borlr{ border-left:1px #dedede solid; border-right:1px #dedede solid;}
-.bor{ border:1px #dedede solid;}
+.bor{ border:1px #dedede solid !important;}
 
 .bordl{ border-left:1px #dedede dashed;}
 .bordr{ border-right:1px #dedede dashed;}
@@ -334,6 +334,7 @@ img{ border:none;}
 .w12{ width:12%;}
 .w13{ width:13%;}
 .w14{ width:14%;}
+.w14_2{ width:14.28%;}
 .w15{ width:15%;}
 .w16{ width:16.666%;}
 .w17{ width:17%;}

@@ -1,0 +1,34 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pt20">
+    <h3 class="borb pb15 mbn pl10 pr10 sizing">我的文档</h3>
+    
+    <div class="publicdiv pl10 pr10 sizing">
+        <ul class="publicdiv projectlist ptlrb10 sizing">
+            {foreach $article_list as $article}
+            <a href="{:url('/index/article/detail?id='.$article['id'])}"><li>
+                <h3 class="ellipsis sizing">{$article['title']}<span class="prend" limit="10">{$article['time']}</span></h3>
+                <p class="fs12 c6">
+                    <span class="w25 z al">添加人：{$article['username']|getUser}</span>
+                    <span class="w25 z ac">分类：{$article['class_name']}</span>
+                    <span class="w25 z ar">项目：{$article['project_name']}</span>
+                </p>
+            </li></a>
+            {/foreach}
+        </ul>
+        
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
+    
+</div>
+
+{/block}
+
+
+{block name="footer"}
+{/block}

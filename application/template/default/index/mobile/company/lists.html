@@ -5,33 +5,35 @@
 
 {block name="body"}
 
-<div class="publicdiv bf pl10 pr10 pt20 mb58 sizing">
-    <h3 class="borb pb15 mbn">公司</h3>
+<div class="publicdiv bf pt20 mb58">
+    <h3 class="borb pb15 mbn pl10 pr10 sizing">公司</h3>
     
-    <ul class="publicdiv scorelist" id="scorelist">
-        {foreach $company_list as $company}
-        
-        <a href="{:url('/index/company/detail?id='.$company['company_id'])}">
-            <div class="project_list publicdiv pr">
-                <h3 class="ellipsis">
-                    {if condition="$company['type'] == 1"}[国企]
-                    {elseif condition="$company['type'] == 2"}[私营]
-                    {elseif condition="$company['type'] == 3"}[合资]
-                    {elseif condition="$company['type'] == 4"}[外资]
-                    {/if}
-                    {$company['name']}
-                </h3>
-                <p class="lh20">
-                    联系人：{$company['contact_name']}
-                    电话：{$company['contact_number']}
-                </p>
-                <p class="lh20 ellipsis">地址：{$company['work_address']}</p>
-            </div>
-        </a>
-        
-        {/foreach}
-    </ul>
-    <div class="publicdiv ac pagingw">{$page}</div>
+    <div class="publicdiv pl10 pr10 sizing">
+        <ul class="publicdiv scorelist" id="scorelist">
+            {foreach $company_list as $company}
+            
+            <a href="{:url('/index/company/detail?id='.$company['company_id'])}">
+                <div class="project_list publicdiv pr">
+                    <h3 class="ellipsis">
+                        {if condition="$company['type'] == 1"}[国企]
+                        {elseif condition="$company['type'] == 2"}[私营]
+                        {elseif condition="$company['type'] == 3"}[合资]
+                        {elseif condition="$company['type'] == 4"}[外资]
+                        {/if}
+                        {$company['name']}
+                    </h3>
+                    <p class="lh20">
+                        联系人：{$company['contact_name']}
+                        电话：{$company['contact_number']}
+                    </p>
+                    <p class="lh20 ellipsis">地址：{$company['work_address']}</p>
+                </div>
+            </a>
+            
+            {/foreach}
+        </ul>
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
 </div>
 
 {/block}

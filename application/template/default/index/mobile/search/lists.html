@@ -1,0 +1,63 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pt20">
+    <div class="tsearch mt8 sizing"><!-- 搜索 -->
+        <form action="{:url('/index/search/lists/?keyword='.$keyword.'&type='.$type)}" method="post">
+            <input type="text" class="searchin sizing" name="keyword" placeholder="请输入关键字" value="{$keyword}" />
+            <input type="submit" class="searchsub iconfont" value="&#xe604;" />
+        </form>
+    </div><!-- 搜索 -->
+    
+    <div class="publicdiv selinav mt20">
+        <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=task')}" {if $type == 'task'}class="setyattr"{/if}>任务</a>
+        <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=action')}" {if $type == 'action'}class="setyattr"{/if}>动态</a>
+        <a href="{:url('/index/search/lists/?keyword='.$keyword.'&type=article')}" {if $type == 'article'}class="setyattr"{/if}>文档</a>
+    </div>
+    
+    <div class="publicdiv pl10 pr10 sizing">
+        <ul class="publicdiv scorelist">
+            {if condition="$type neq 'article'"}
+                {foreach $task_list as $task}
+                    {if condition="$type eq 'action'"}
+                        <a href="{:url('/index/task/detail/?id='.$task['objectID'])}">
+                    {else/}
+                        <a href="{:url('/index/task/detail/?id='.$task['id'])}">
+                    {/if}
+                        <div class="project_list publicdiv pr">
+                            <h3 class="ellipsis">{$task['name']}</h3>
+                            <p class="lh20">
+                                添加人：{$task['openedBy']|getUser}
+                                <span class="y">{$task['openedDate']}</span>
+                            </p>
+                            <div class="publicdiv h20 lh20 fs12 c9 ellipsis">{$task['desc']}</div>
+                        </div>
+                    </a>
+                {/foreach}
+            {else}
+                {foreach $task_list as $task}
+                <a href="{:url('/index/article/detail/?id='.$task['id'])}">
+                    <div class="project_list publicdiv pr">
+                        <h3 class="ellipsis">{$task['title']}</h3>
+                        <p class="lh20">
+                            添加人：{$task['username']|getUser}
+                            <span class="y">{$task['time']}</span>
+                        </p>
+                    </div>
+                </a>
+                {/foreach}
+            {/if}
+        </ul>
+    </div>
+    
+    <div class="publicdiv ac pagingw">{$page}</div>
+</div>
+{/block}
+
+
+{block name="footer"}
+{/block}

@@ -5,43 +5,46 @@
 
 {block name="body"}
 
-<div class="publicdiv bf pl10 pr10 pt20 mb58 sizing">
-    <h3 class="borb pb15 mbn">项目列表</h3>
-    <ul class="list_nav mt10">
-        <li {if condition="$status == 'all'"} class="lnattr" {/if}><a href="{:url('index/project/lists?status=all')}">所有</a></li>
-        <li {if condition="$status == 'unclose'"} class="lnattr" {/if}><a href="{:url('/index/project/lists?status=unclose')}">未关闭</a></li>
-        <li {if condition="$status == 'delayed'"} class="lnattr" {/if}><a href="{:url('/index/project/lists?status=delayed')}">延期</a></li>
-        <li {if condition="$status == 'not'"} class="lnattr" {/if}><a href="{:url('index/project/lists?status=not')}">未开始</a></li>
-        <li {if condition="$status == 'ing'"} class="lnattr" {/if}><a href="{:url('index/project/lists?status=ing')}">进行中</a></li>
-        <li {if condition="$status == 'done'"} class="lnattr" {/if}><a href="{:url('index/project/lists?status=done')}">完成</a></li>
-        <li {if condition="$status == 'closed'"} class="lnattr" {/if}><a href="{:url('index/project/lists?status=closed')}">关闭</a></li>
-    </ul>
+<div class="publicdiv bf pt20 mb58">
+    <h3 class="borb pb15 mbn pl10 pr10 sizing">项目列表</h3>
     
-    <ul class="publicdiv projectlist">
-        {foreach $project_list as $project}
-            <a href="{:url('/index/project/detail/?id='.$project['id'])}"><li>
-                <h3 class="sizing">
-                    {$project['name']}
-                    {if condition="$project['status'] == 'wait'"}<span class="cswait fs12 ml8">等待</span>{/if}
-                    {if condition="$project['status'] == 'done'"}<span class="csdone fs12 ml8">完成</span>{/if}
-                    {if condition="$project['status'] == 'doing'"}<span class="csdoing fs12 ml8">进行中</span>{/if}
-                    {if condition="$project['status'] == 'closed'"}<span class="csclosed fs12 ml8">关闭</span>{/if}
-                    <span class="prend">{$project['end']}</span>
-                </h3>
-                <p class="fs12">
-                    <span class="w40 z al">结束：{$project['end']}</span>
-                    <span class="w30 z ac">总预计：{$project['all_time']} / 时</span>
-                    <span class="w30 z ar">消耗：{$project['estimate_count']} / 时</span>
-                </p>
-                <div class="percentList sizing">
-                    <div class="ui-progress"><span style="width:{$project['percent']}%"></span></div>
-                    <span class="prspan">{$project['percent']}%</span>
-                </div>
-            </li></a>
-        {/foreach}
-    </ul>
-    
-    <div class="publicdiv ac pagingw">{$page}</div>
+    <div class="publicdiv pl10 pr10 sizing">
+        <ul class="list_nav mt10">
+            <li class="w14_2 {if condition="$status == 'all'"}lnattr{/if}"><a href="{:url('index/project/lists?status=all')}">所有</a></li>
+            <li class="w14_2 {if condition="$status == 'unclose'"}lnattr{/if}"><a href="{:url('/index/project/lists?status=unclose')}">未关闭</a></li>
+            <li class="w14_2 {if condition="$status == 'delayed'"}lnattr{/if}"><a href="{:url('/index/project/lists?status=delayed')}">延期</a></li>
+            <li class="w14_2 {if condition="$status == 'not'"}lnattr{/if}"><a href="{:url('index/project/lists?status=not')}">未开始</a></li>
+            <li class="w14_2 {if condition="$status == 'ing'"}lnattr{/if}"><a href="{:url('index/project/lists?status=ing')}">进行中</a></li>
+            <li class="w14_2 {if condition="$status == 'done'"}lnattr{/if}"><a href="{:url('index/project/lists?status=done')}">完成</a></li>
+            <li class="w14_2 {if condition="$status == 'closed'"}lnattr{/if}"><a href="{:url('index/project/lists?status=closed')}">关闭</a></li>
+        </ul>
+        
+        <ul class="publicdiv projectlist">
+            {foreach $project_list as $project}
+                <a href="{:url('/index/project/detail/?id='.$project['id'])}"><li>
+                    <h3 class="sizing">
+                        {$project['name']}
+                        {if condition="$project['status'] == 'wait'"}<span class="cswait fs12 ml8">等待</span>{/if}
+                        {if condition="$project['status'] == 'done'"}<span class="csdone fs12 ml8">完成</span>{/if}
+                        {if condition="$project['status'] == 'doing'"}<span class="csdoing fs12 ml8">进行中</span>{/if}
+                        {if condition="$project['status'] == 'closed'"}<span class="csclosed fs12 ml8">关闭</span>{/if}
+                        <span class="prend">{$project['end']}</span>
+                    </h3>
+                    <p class="fs12">
+                        <span class="w40 z al">结束：{$project['end']}</span>
+                        <span class="w30 z ac">总预计：{$project['all_time']} / 时</span>
+                        <span class="w30 z ar">消耗：{$project['estimate_count']} / 时</span>
+                    </p>
+                    <div class="percentList sizing">
+                        <div class="ui-progress"><span style="width:{$project['percent']}%"></span></div>
+                        <span class="prspan">{$project['percent']}%</span>
+                    </div>
+                </li></a>
+            {/foreach}
+        </ul>
+        
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
 </div>
 
 {/block}

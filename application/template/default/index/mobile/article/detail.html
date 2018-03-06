@@ -17,6 +17,28 @@
             <span class="y" limit="10">{$article_detail['time']}</span>
         </p>
         
+        <div class="publicdiv ptlrb10 iconfont sizing">
+            <a href="javascript:void(0);" class="g_article_nav fs24" onClick="articleopen();">&#xe608;</a>
+            
+            <ul class="article_nav" id="article_nav">
+                <div class="article_bg" onClick="articleclose();">&nbsp;</div>
+                <div class="article_ul pt10 pb10 sizing" id="article_ul">
+                    
+                    {foreach name="class_name_list" id="value" key="key" }
+                    <li class="sizing" onClick="flienavshow({$key});">
+                        <p class="flienavtitle"><a href="javascript:void(0);">{$value}</a><span class="iconfont" id="flienavicon_{$key}">&#xe64b;</span></p>
+                        <div class="publicdiv flienavclasswp" id="flienavclasswp_{$key}">
+                            {foreach $new_class_list[$key] as $data} 
+                            <a href="{:url('/index/article/detail?id='.$data['id'])}" class="flienavclass sizing">{$data['title']}{$data['title']}</a>
+                            {/foreach}
+                        </div>
+                    </li>
+                    {/foreach}
+                    
+                </div>
+            </ul>
+        </div>
+        
         <div class="publicdiv pt15 pb15 pl10 pr10 pub_content sizing c6">{$article_detail['contents']}</div>
         
     </div>

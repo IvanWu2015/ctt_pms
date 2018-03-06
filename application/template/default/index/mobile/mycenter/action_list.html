@@ -1,0 +1,37 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pt20">
+    <h3 class="borb pb15 mbn pl10 pr10 sizing">我的动态</h3>
+    
+    <div class="publicdiv pl10 pr10 sizing">
+        <ul class="publicdiv scorelist" id="scorelist">
+            {foreach $action_list as $project}
+            <a href="{$weburl['url']}">
+                <div class="project_list publicdiv pr">
+                    <h3 class="ellipsis">{$project['tname']}</h3>
+                    <p class="lh17">
+                        类型：{$project['typename']}
+                        <span class="ml20">{$project['actionname']}</span>
+                    </p>
+                    <p class="lh17 ellipsis">动态：{$project['comment']}</p>
+                    <p class="lh17 ellipsis">时间：{$project['date']}</p>
+                </div>
+            </a>
+            
+            {/foreach}
+        </ul>
+        
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
+</div>
+
+{/block}
+
+
+{block name="footer"}
+{/block}

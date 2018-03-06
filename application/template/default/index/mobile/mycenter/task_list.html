@@ -1,0 +1,39 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+
+<div class="publicdiv bf pt20">
+    <h3 class="borb pb15 mbn pl10 pr10 sizing">我的任务</h3>
+    
+    <div class="publicdiv pl10 pr10 sizing">
+        <select name="project_id" class="publicdiv h50 bor br3 pl10 pr10 sizing mt10 iosform" onChange="window.location.href='{:url('/index/mycenter/task_list?status='.$status.'&username='.$username.'&project_id=')}' + this.options[this.selectedIndex].value;">
+            <option value='0'>无</option>
+            {foreach $project_list as $temp_project}
+            <option {if condition="$temp_project['project'] == $project_id"}selected='selected'{/if} value="{$temp_project['project']}" >{$temp_project['name']}</option>
+            {/foreach}
+        </select>
+        
+        <div class="publicdiv mt10">
+            <a href="{:url('/index/Mycenter/task_list?status=all&project_id='.$project_id)}"><li class="ui-btn mb10 {if condition="$status eq 'all'"}ui-btn-danger{else}ui-btn-primary{/if}">所有</li></a>
+            <a href="{:url('/index/Mycenter/task_list?status=unclose&project_id='.$project_id)}"><li class="ui-btn mb10 {if condition="$status eq 'unclose'"}ui-btn-danger{else}ui-btn-primary{/if}">未完成</li></a>
+            <a href="{:url('/index/Mycenter/task_list/?status=wait&project_id='.$project_id)}"><li class="ui-btn mb10 {if condition="$status eq 'wait'"}ui-btn-danger{else}ui-btn-primary{/if}">等待</li></a>
+            <a href="{:url('/index/Mycenter/task_list/?status=doing&project_id='.$project_id)}"><li class="ui-btn mb10 {if condition="$status eq 'doing'"}ui-btn-danger{else}ui-btn-primary{/if}">进行中</li></a>
+            <a href="{:url('/index/Mycenter/task_list/?status=done&project_id='.$project_id)}"><li class="ui-btn mb10 {if condition="$status eq 'done'"}ui-btn-danger{else}ui-btn-primary{/if}">完成</li></a>
+            <a href="{:url('/index/Mycenter/task_list/?status=closed&project_id='.$project_id)}"><li class="ui-btn mb10 {if condition="$status eq 'closed'"}ui-btn-danger{else}ui-btn-primary{/if}">关闭</li></a>
+        </div>
+        
+        {include file="mobile/base/task_list" /}
+        
+    </div>
+    
+    <div class="publicdiv ac pagingw">{$page}</div>
+</div>
+
+{/block}
+
+
+{block name="footer"}
+{/block}
