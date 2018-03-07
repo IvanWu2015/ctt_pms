@@ -8,56 +8,50 @@
     <div class="publicdiv pl20 pr20 pt8 pb20 bf sizing">
 
         <div class="publicdiv borb mb20 pt10 pb10 bf sizing">
-            <h3>公司</h3>
+            <h3>快递信息</h3>
         </div>
         
         <div class="publicdiv mb10">
-            <form action="{:url('/index/company/lists')}" class="form-inline" role="form" method="post">
-                <a href="{:url('/index/company/add')}" class="btn btn-info y">添加</a>
-                <input type="text" name="name" class="form-control" placeholder="公司名称" value="{$name}" />
-                <input type="text" name="contact_name" class="form-control" placeholder="联系人"  value="{$contact_name}"/>
-                <input type="submit" class="btn btn-warning" value="查询" />
-            </form>
+            <button class="btn btn-warning z" data-toggle="modal" data-target="#myModal">查询</button>
+            <a href="{:url('/index/express/add')}" class="btn btn-info y">添加</a>
         </div>
         
         <table class="table table-striped">
             <thead style="background:#f6f6f6;">
                 <tr>
-                    <th class="bbno pt15 pb15">公司名称</th>
-                    <th class="ac bbno pt15 pb15">联系人</th>
-                    <th class="ac bbno pt15 pb15">联系电话</th>
-                    <th class="ac bbno pt15 pb15">类型</th>
-                    <th class="ac bbno pt15 pb15">规模</th>
-                    <th class="bbno pt15 pb15">办公地址</th>
-                    <th class="ac bbno pt15 pb15">时间</th>
+                    <th class="bbno pt15 pb15">快递公司</th>
+                    <th class="bbno pt15 pb15">单号</th>
+                    <th class="bbno pt15 pb15">收件人名称</th>
+                    <th class="bbno pt15 pb15">收件人电话</th>
+                    <th class="bbno pt15 pb15">发件人</th>
+                    <th class="bbno pt15 pb15">付款</th>
+                    <th class="bbno pt15 pb15">运费</th>
+                    <th class="bbno pt15 pb15">重量</th>
+                    <th class="bbno pt15 pb15">时间</th>
                     <th class="ac bbno pt15 pb15">操作</th>
                 </tr>
             </thead>
             <tbody class="weburllist">
-                {foreach $company_list as $company}
+                {foreach $express_list as $express}
                 <tr id="projectlist">
-                    <td><a href="{:url('/index/company/detail?id='.$company['company_id'])}">{$company['name']}</a></td>
-                    <td class="ac">{$company['contact_name']}</td>
-                    <td class="ac">{$company['contact_number']}</td>
-                    <td class="ac">
-                        {if condition="$company['type'] == 1"}国企
-                        {elseif condition="$company['type'] == 2"}私营
-                        {elseif condition="$company['type'] == 3"}合资
-                        {elseif condition="$company['type'] == 4"}外资
-                        {/if}
-                    </td>
-                    <td class="ac">{$company['employee_numbers']}</td>
-                    <td class="">{$company['work_address']}</td>
-                    <td class="ac">{$company['add_time']}</td>
+                    <td title="快递公司"><a href="{:url('/index/express/detail?id='.$express['id'])}">{$express['express_name']}</a></td>
+                    <td title="单号">{$express['express_number']}</td>
+                    <td title="收件人名称">{$express['to_name']}</td>
+                    <td title="收件人电话">{$express['to_tel']}</td>
+                    <td title="发件人">{$express['from_name']}</td>
+                    <td title="付款">{if condition="$express['payment'] == 1"}寄付{else}到付{/if}</td>
+                    <td title="运费">{$express['price']}</td>
+                    <td title="重量">{$express['weight']}KG</td>
+                    <td title="时间">{$express['add_time']}</td>
                     <td class="ac iconfont">
-                        <a href="{:url('/index/company/add/?id='.$company['company_id'])}" class="btn-link" title="编辑">&#xe71d;</a>
-                        <a href="{:url('/index/company/lists/?deleted=1&id='.$company['company_id'])}" class="cred fs16" title="删除">&#xe601;</a>
+                        <a href="{:url('/index/express/add/?id='.$express['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
+                        <a href="{:url('/index/express/lists/?deleted=1&id='.$express['id'])}" class="cred fs16" title="删除">&#xe601;</a>
                     </td>
                 </tr>
                 {/foreach}
             </tbody>
-            <div class="publicdiv ac pagingw">{$page}</div>
         </table>
+        <div class="publicdiv ac pagingw">{$page}</div>
     </div>
 </div>
 
@@ -67,63 +61,52 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">添加地址</h4>
+                <h4 class="modal-title" id="myModalLabel">快递查询</h4>
             </div>
             <div class="modal-body">
-                <form class="form-inline" role="form" id="formaddress">
+                <form action="" class="form-inline" role="form" id="formaddress">
                     <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">所属公司</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="company" class="form-control" placeholder="" />
+                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">快递公司</label>
+                        <div class="col-sm-10 selectpub">
+                            {include file="express/express_name" /}
                         </div>
                     </div>
                     
                     <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">联系人</label>
+                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">单号</label>
                         <div class="col-sm-10">
-                            <input type="text" name="fullName" class="form-control" placeholder="" />
+                            <input type="text" name="express_number" class="form-control w100" />
                         </div>
                     </div>
                     
                     <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">联系电话</label>
+                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">收件人</label>
                         <div class="col-sm-10">
-                            <input type="text" name="Mobilephone" class="form-control" placeholder="" />
+                            <input type="text" name="to_name" class="form-control w100" />
                         </div>
                     </div>
                     
                     <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">地址选择</label>
+                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">发件人</label>
                         <div class="col-sm-10">
                             <div id="distpicker">
-                                <select class="w32_7 form-control" name="province" data-province="省份"></select>
-                                <select class="w32_7 form-control" name="city" data-city="城市"></select>
-                                <select class="w32_7 form-control" name="district" data-district="区/县"></select>
+                                <input type="text" name="from_name" class="form-control w100" />
                             </div>
                         </div>
                     </div>
-                    <script>
-                    jQuery("#distpicker").distpicker({
-                        province: "",
-                        city: "",
-                        district: ""
-                    });
-                    </script>
                     
                     <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">详细地址</label>
+                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">付款</label>
                         <div class="col-sm-10">
-                            <textarea class="w100 form-control" name="addressDetail" rows="3"></textarea>
+                            <label class="mt8 mr15"><input type="radio" name="payment" value="1"> 寄付</label>
+                            <label class="mt8"><input type="radio" name="payment" value="2"> 到付</label>
                         </div>
                     </div>
                     
                     <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">类型</label>
+                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">时间</label>
                         <div class="col-sm-10">
-                            <select class="form-control" name="type">
-                                <option value="现付">现付</option>
-                                <option value="到付">到付</option>
-                            </select>
+                            <input type="text" name="add_time" class="form-control w100" id="begin_time" />
                         </div>
                     </div>
                     
@@ -131,33 +114,22 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onClick="addresssub();">提交更改</button>
+                <button type="submit" class="btn btn-primary" onClick="addresssub();">提交更改</button>
             </div>
-            <script>
-            function addresssub(){
-                var url="{:url('/index/address/lists/?id='.$project_id)}";
-                jQuery.ajax({
-                    type: 'post',
-                    url: url,
-                    data: jQuery('#formaddress').serialize(),
-                    dataType: 'json',
-                    success: function (data) {
-                        if (data.result == 'success') {
-                            jQuery('#addpr').html('操作成功！').show(1).delay(2000).hide(1);
-                            modalclose();
-                            setTimeout("location.reload()",2500);
-                        }else{
-                            jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
-                        }
-                    }
-                });
-            }
-            </script>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-<script src="tpl_js/distpicker.data.js"></script>
-<script src="tpl_js/distpicker.js"></script>
-<script src="tpl_js/main.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var begin_time = $("#begin_time").val();
+        var myDate = new Date(); 
+        if(!begin_time) {
+            begin_time = myDate.toLocaleDateString();
+        }
+       $('#begin_time').daterangepicker({singleDatePicker:true,format: 'YYYY-MM-DD',startDate: begin_time}, function(start, end, label) {
+         console.log(start.toISOString(), end.toISOString(), label);
+       });
+    });
+   </script>
 <!-- 添加地址 -->
 {/block}

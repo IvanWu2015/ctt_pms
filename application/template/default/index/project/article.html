@@ -11,8 +11,8 @@
     
     <div class="publicdiv pl20 pr20 pt20 pb20 bf sizing">
 
-        <table class="table table-striped borl bort borr borb">
-            <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+        <table class="table table-striped">
+            <thead style="background:#f6f6f6;">
                 <tr>
                     <th class="bbno pt15 pb15">标题</th>
                     <th class="bbno pt15 pb15">添加人</th>
@@ -21,7 +21,7 @@
                     <th class="ac bbno pt15 pb15">时间</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="weburllist">
                 {foreach $article_list as $article}
                 <tr id="projectlist">
                     <td><a href="{:url('/index/article/detail?id='.$article['id'])}">{$article['title']}</a></td>

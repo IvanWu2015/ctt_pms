@@ -17,8 +17,8 @@
 
             <!-- Contents -->
             <section id="contents" class="mtn">
-                <table class="table table-striped borl bort borr borb">
-                    <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                <table class="table table-striped">
+                    <thead style="background:#f6f6f6;">
                         <tr>
                             <th class="ac bbno pt15 pb15">id</th>
                             <th class="ac bbno pt15 pb15">操作者</th>
@@ -28,7 +28,7 @@
                             <th class="ac bbno pt15 pb15">时间</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="weburllist">
                         {foreach $project_list as $project}
                         <tr>
                             <td class="ac">{$project['id']}</td>

@@ -13,8 +13,8 @@
         
         <div class="publicdiv pl20 pr20 pt8 pb8 bf sizing">
         <section id="contents" class="mtn">
-                <table class="table table-striped borl bort borr borb">
-                    <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                <table class="table table-striped">
+                    <thead style="background:#f6f6f6;">
                         <tr>
                             <th class="w7 bbno pt15 pb15">ID</th>
                             <th class="w25  bbno pt15 pb15">操作对象</th>
@@ -24,7 +24,7 @@
                             <th class="w35 ac bbno pt15 pb15">动态</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="weburllist">
                         {foreach $action_list as $project}
                         <tr>
                             <td class="w7">{$project['id']}</td>

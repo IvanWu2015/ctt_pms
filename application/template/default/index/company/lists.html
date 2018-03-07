@@ -56,108 +56,11 @@
                 </tr>
                 {/foreach}
             </tbody>
-            <div class="publicdiv ac pagingw">{$page}</div>
         </table>
+        
+        <div class="publicdiv ac pagingw">{$page}</div>
+        
     </div>
 </div>
 
-<!-- 添加地址 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">添加地址</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-inline" role="form" id="formaddress">
-                    <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">所属公司</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="company" class="form-control" placeholder="" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">联系人</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="fullName" class="form-control" placeholder="" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">联系电话</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="Mobilephone" class="form-control" placeholder="" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">地址选择</label>
-                        <div class="col-sm-10">
-                            <div id="distpicker">
-                                <select class="w32_7 form-control" name="province" data-province="省份"></select>
-                                <select class="w32_7 form-control" name="city" data-city="城市"></select>
-                                <select class="w32_7 form-control" name="district" data-district="区/县"></select>
-                            </div>
-                        </div>
-                    </div>
-                    <script>
-                    jQuery("#distpicker").distpicker({
-                        province: "",
-                        city: "",
-                        district: ""
-                    });
-                    </script>
-                    
-                    <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">详细地址</label>
-                        <div class="col-sm-10">
-                            <textarea class="w100 form-control" name="addressDetail" rows="3"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">类型</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" name="type">
-                                <option value="现付">现付</option>
-                                <option value="到付">到付</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onClick="addresssub();">提交更改</button>
-            </div>
-            <script>
-            function addresssub(){
-                var url="{:url('/index/address/lists/?id='.$project_id)}";
-                jQuery.ajax({
-                    type: 'post',
-                    url: url,
-                    data: jQuery('#formaddress').serialize(),
-                    dataType: 'json',
-                    success: function (data) {
-                        if (data.result == 'success') {
-                            jQuery('#addpr').html('操作成功！').show(1).delay(2000).hide(1);
-                            modalclose();
-                            setTimeout("location.reload()",2500);
-                        }else{
-                            jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
-                        }
-                    }
-                });
-            }
-            </script>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
-<script src="tpl_js/distpicker.data.js"></script>
-<script src="tpl_js/distpicker.js"></script>
-<script src="tpl_js/main.js"></script>
-<!-- 添加地址 -->
 {/block}

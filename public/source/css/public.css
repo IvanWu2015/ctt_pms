@@ -708,6 +708,10 @@ a.cc:hover{ color:#ccc !important;}
 	.filerightwp{ width:100%;}
 }
 
+.selectpub select{ width:100%; height:34px; padding: 6px 12px;font-size: 14px;line-height: 1.42857143;color: #555;background-color: #fff;background-image: none;border: 1px solid #ccc;border-radius: 4px;}
+.g_fieldset{ width:100%; float:left; padding:40px 20px 20px 20px ; border:1px #dedede dashed; margin:20px 0px; position:relative;}
+.g_fieldset .g_fieldset_name{ width:140px; height:40px; line-height:40px; text-align:center; background:#fff; font-size:18px; position:absolute; top:-20px; left:80px;}
+
 .pkeywp{ width:220px; height:30px; float:left; border-radius:30px; margin:4px 20px 0 0; position:relative; overflow:hidden;}
 .pkeywp .pkeytext{ width:100%; height:30px; line-height:30px; padding:0px 45px 0px 20px; background-color:rgba(255, 255, 255, 0.84); border:none;}
 .pkeywp .pkeysub{ width:45px; height:30px; border:none; background:url(../images/search.png) no-repeat center center; position:absolute; top:0; right:0;}

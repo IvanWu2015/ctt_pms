@@ -16,8 +16,8 @@
 
             <!-- Contents -->
             <section id="contents" class="mtn">
-                <table class="table table-striped borl bort borr borb">
-                    <thead style="background:#f6f6f6; border-top:1px #ddd solid;">
+                <table class="table table-striped">
+                    <thead style="background:#f6f6f6;">
                         <tr>
                             <th class="ac bbno pt15 pb15">用户名称</th>
                             <th class="ac bbno pt15 pb15">项目职务</th>
@@ -27,7 +27,7 @@
                             <th class="ac bbno pt15 pb15">编辑</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="weburllist">
                         {foreach $team_list as $team}
                         <tr>
                             <td class="ac">{$team['realname']}</td>
