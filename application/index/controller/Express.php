@@ -68,7 +68,10 @@ class Express extends Common {
                 'express_number' => input('express_number', '', 'strip_tags'), //'快递单号',
                 'express_desc' => input('express_desc', '', 'strip_tags'), // '物品说明',
                 'from_name' => input('from_name', '', 'strip_tags'), // '发件人名称',
+                'from_tel' => input('from_tel', '', 'strip_tags'), // '发件人电话',
+                'from_address' => input('from_address', '', 'strip_tags'), // '发件人地址
                 'to_name' => input('to_name', '', 'strip_tags'), //发件人名称
+                'to_address' => input('to_address', '', 'strip_tags'), //收件人地址
                 'to_tel' => input('to_tel', '', 'strip_tags'), //'发件人电话',
                 'company_id' => input('company_id', '', 'strip_tags'), //'公司ID',
                 'contact_id' => input('contact_id', '', 'strip_tags'), // '联系人ID',
