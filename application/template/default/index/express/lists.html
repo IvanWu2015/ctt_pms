@@ -15,10 +15,11 @@
             <form action="{:url('/index/express/lists')}" class="form-inline" role="form" method="post">
                 <a href="{:url('/index/express/add')}" class="btn btn-info y">添加</a>
                 
-                <input type="text" name="name" class="form-control" placeholder="关键字" value="{$name}" />
-                <input type="text" name="number" class="form-control" placeholder="单号"  value="{$number}"/>
-                <input type="text" name="start_time" id="start_time" class="form-control" placeholder="开始时间"  value="{$start_time}"/>
-                <input type="text" name="end_time" id="end_time" class="form-control" placeholder="结束时间"  value="{$end_time}"/>
+                <input type="text" name="name" class="form-control" id="name" placeholder="关键字" value="{$name}" />
+                <span id="timewp" class="dn">
+                    <input type="text" name="start_time" id="start_time" class="form-control" placeholder="开始时间"  value="{$start_time}"/>
+                    <input type="text" name="end_time" id="end_time" class="form-control" placeholder="结束时间"  value="{$end_time}"/>
+                </span>
                 <input type="submit" class="btn btn-warning" value="查询" />
             </form>
         </div>
@@ -41,6 +42,14 @@
            $('#end_time').daterangepicker({singleDatePicker:true,format: 'YYYY-MM-DD',startDate: end_time}, function(start, end, label) {
              console.log(start.toISOString(), end.toISOString(), label);
            });
+           
+           var name = jQuery('#name').val();
+           if(name.length > 1){
+                jQuery('#timewp').show();
+           }else{
+                jQuery('#timewp').hide();
+           }
+           
         });
        </script>
         
