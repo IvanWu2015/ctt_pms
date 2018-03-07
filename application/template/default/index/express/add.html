@@ -16,21 +16,21 @@
                         <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">收件人名称</label>
                             <div class="col-sm-7 pln prn">
-                                <input type="text" name="to_name" class="form-control w60" id="to_name" value="{$express['to_name']}">
+                                <input type="text" name="to_name" class="form-control w60" id="to_name" value="{$expressDetail['to_name']}">
                             </div>
                         </div>
                         
                         <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">收件人电话</label>
                             <div class="col-sm-7 pln prn">
-                                <input type="text" name="to_tel" class="form-control w60" id="to_tel" value="{$express['to_tel']}">
+                                <input type="text" name="to_tel" class="form-control w60" id="to_tel" value="{$expressDetail['to_tel']}">
                             </div>
                         </div>
                         
                         <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">收件人地址</label>
                             <div class="col-sm-7 pln prn">
-                                <input type="text" name="from_address" class="form-control w60" id="from_address" value="{$express['from_address']}">
+                                <input type="text" name="from_address" class="form-control w60" id="from_address" value="{$expressDetail['from_address']}">
                             </div>
                         </div>
                     </div>
@@ -40,21 +40,21 @@
                         <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">发件人</label>
                             <div class="col-sm-7 pln prn">
-                                <input type="text" name="from_name" class="form-control w60" id="from_name" value="{$express['from_name']}">
+                                <input type="text" name="from_name" class="form-control w60" id="from_name" value="{$expressDetail['from_name']}">
                             </div>
                         </div>
                         
                         <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">发件人电话</label>
                             <div class="col-sm-7 pln prn">
-                                <input type="text" name="from_tel" class="form-control w60" id="from_tel" value="{$express['from_tel']}">
+                                <input type="text" name="from_tel" class="form-control w60" id="from_tel" value="{$expressDetail['from_tel']}">
                             </div>
                         </div>
                         
                         <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">发件时间</label>
                             <div class="col-sm-7 pln prn">
-                                <input type="text" name="post_time" class="form-control w60" id="post_time" value="{$express['post_time']}">
+                                <input type="text" name="post_time" class="form-control w60" id="post_time" value="{$expressDetail['post_time']}">
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                         <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">快递单号</label>
                             <div class="col-sm-7 pln prn">
-                                <input type="text" name="express_number" class="form-control w60" id="express_number" value="{$express['express_number']}">
+                                <input type="text" name="express_number" class="form-control w60" id="express_number" value="{$expressDetail['express_number']}">
                             </div>
                         </div>
                         
@@ -88,21 +88,21 @@
                         <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">运费</label>
                             <div class="col-sm-7 pln prn">
-                                <input type="text" name="price" class="form-control w30" id="price" value="{$express['price']}">
+                                <input type="text" name="price" class="form-control w30" id="price" value="{$expressDetail['price']}">
                             </div>
                         </div>
                         
                         <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">重量</label>
                             <div class="col-sm-7 pln prn">
-                                <input type="text" name="weight" id="weight" class="form-control w30 z" value="{$express['weight']}" /> <span class="z lh34 ml10">KG</span>
+                                <input type="text" name="weight" id="weight" class="form-control w30 z" value="{$expressDetail['weight']}" /> <span class="z lh34 ml10">KG</span>
                             </div>
                         </div>
                         
                         <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">物品说明</label>
                             <div class="col-sm-7 pln prn">
-                                <textarea name="express_desc" class="form-control w60 h90" >{$express['express_desc']}</textarea>
+                                <textarea name="express_desc" class="form-control w60 h90" >{$expressDetail['express_desc']}</textarea>
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                         <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">&nbsp;</label>
                             <div class="col-sm-10 pln prn">
-                                <script id="editor" type="text/plain" class="z" name="remarks" style="width:100% !important; height:200px;">{$contactData['remarks']}</script>
+                                <script id="editor" type="text/plain" class="z" name="remarks" style="width:100% !important; height:200px;">{$expressDetail['remarks']}</script>
                             </div>
                         </div>
                     </div>
@@ -145,16 +145,20 @@
                             }
                         }
                         
-                        $(document).ready(function() {
-                        var post_time = $("#post_time").val();
-                        var myDate = new Date(); 
-                        if(!post_time) {
-                            post_time = myDate.toLocaleDateString();
-                        }
-                       $('#post_time').daterangepicker({singleDatePicker:true,format: 'YYYY-MM-DD',startDate: post_time}, function(start, end, label) {
-                         console.log(start.toISOString(), end.toISOString(), label);
-                       });
-                    });
+                        jQuery(function(){
+                            
+                            var express_name = '{$expressDetail['express_name']}';
+                            jQuery("#express_name").find("option[value='" + express_name + "']").attr("selected",true);
+                        
+                            var post_time = $("#post_time").val();
+                            var myDate = new Date(); 
+                            if(!post_time) {
+                                post_time = myDate.toLocaleDateString();
+                            }
+                           $('#post_time').daterangepicker({singleDatePicker:true,format: 'YYYY-MM-DD',startDate: post_time}, function(start, end, label) {
+                             console.log(start.toISOString(), end.toISOString(), label);
+                           });
+                        });
                     </script>
                     
                     <div class="form-group w100 mrn mln z">
