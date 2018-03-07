@@ -1,0 +1,42 @@
+{extend name="mobile/base/common"/}
+
+{block name="header"}
+{/block}
+
+{block name="body"}
+<script type="text/javascript" src="tpl_js/limit.js"></script>
+<div class="publicdiv bf pt20 mb58">
+    <h3 class="borb pb15 mbn pl10 pr10 sizing">快递信息</h3>
+    
+    <div class="publicdiv pl10 pr10 sizing">
+        <ul class="publicdiv scorelist" id="scorelist">
+            {foreach $express_list as $express}
+            <a href="{:url('/index/express/detail?id='.$express['id'])}">
+                <div class="project_list publicdiv pr">
+                    <h3 class="ellipsis">
+                        {$express['to_name']}
+                        <span class="fs13 y c9">{$express['to_tel']}</span>
+                    </h3>
+                    <p class="lh20">{$express['from_address']}</p>
+                    <p class="lh20">
+                        <span class="w33 z al">发件人：{$express['from_name']}</span>
+                        <span class="w33 z ac">{if condition="$express['payment'] == 1"}寄付{else}到付{/if}</span>
+                        <span class="w33 z ar">{$express['express_name']}</span>
+                    </p>
+                </div>
+            </a>
+            
+            {/foreach}
+        </ul>
+        <div class="publicdiv ac pagingw">{$page}</div>
+    </div>
+</div>
+
+{/block}
+
+
+{block name="footer"}
+<div class="footer_wp">
+    <a href="{:url('/index/express/add')}" class="p_inster iconfont">&#xe607;</a>
+</div>
+{/block}

@@ -24,3 +24,13 @@ function shownav(){
         jQuery('#showa').html('&#xe606;'); 
     } 
 } 
+
+function navopen(name){        //二级导航展开与关闭
+    if(jQuery('#' + name + ' #navopenwp').css('display') == 'none'){
+        jQuery('#' + name + ' #navopenwp').slideDown();
+        jQuery('#' + name + ' #navicon').css({transform: 'rotate(90deg)'});
+    }else{
+        jQuery('#' + name + ' #navopenwp').slideUp();
+        jQuery('#' + name + ' #navicon').css({transform: 'rotate(0deg)'});
+    }
+}

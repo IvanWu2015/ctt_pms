@@ -80,8 +80,8 @@
                        <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">付款方式</label>
                             <div class="col-sm-7 pln prn">
-                                <label class="mt8 mr15"><input type="radio" name="payment" value="1"> 寄付</label>
-                                <label class="mt8"><input type="radio" name="payment" value="2"> 到付</label>
+                                <label class="mt8 mr15"><input type="radio" name="payment" {if condition="$expressDetail['payment'] == 1"}checked{/if} value="1" /> 寄付</label>
+                                <label class="mt8"><input type="radio" name="payment" {if condition="$expressDetail['payment'] == 2"}checked{/if} value="2" /> 到付</label>
                             </div>
                         </div>
                         
@@ -148,7 +148,8 @@
                         jQuery(function(){
                             
                             var express_name = '{$expressDetail['express_name']}';
-                            jQuery("#express_name").find("option[value='" + express_name + "']").attr("selected",true);
+                            console.log(express_name);
+                            jQuery("#expressName").find("option[value='" + express_name + "']").attr("selected",true);
                         
                             var post_time = $("#post_time").val();
                             var myDate = new Date(); 
