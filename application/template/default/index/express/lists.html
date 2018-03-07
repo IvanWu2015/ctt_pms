@@ -14,8 +14,10 @@
         <div class="publicdiv mb10">
             <form action="{:url('/index/express/lists')}" class="form-inline" role="form" method="post">
                 <a href="{:url('/index/express/add')}" class="btn btn-info y">添加</a>
+                <a href="{:url('/index/contacts/lists')}" class="btn btn-info y mr15">联系人</a>
+                <a href="{:url('/index/company/lists')}" class="btn btn-info y mr15">公司</a>
                 
-                <input type="text" name="name" class="form-control" style="width:480px;" id="name" placeholder="关键字" value="{$name}" />
+                <input type="text" name="name" class="form-control" style="width:480px;" id="name" placeholder="请输入快递单号、收件人、联系人、地址等关键字查询~" value="{$name}" />
                 <span id="timewp" class="dn">
                     <input type="text" name="start_time" id="start_time" class="form-control" placeholder="开始时间"  value="{$start_time}"/>
                     <input type="text" name="end_time" id="end_time" class="form-control" placeholder="结束时间"  value="{$end_time}"/>
