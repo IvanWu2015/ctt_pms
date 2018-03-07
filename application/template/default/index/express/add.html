@@ -145,16 +145,20 @@
                             }
                         }
                         
-                        $(document).ready(function() {
-                        var post_time = $("#post_time").val();
-                        var myDate = new Date(); 
-                        if(!post_time) {
-                            post_time = myDate.toLocaleDateString();
-                        }
-                       $('#post_time').daterangepicker({singleDatePicker:true,format: 'YYYY-MM-DD',startDate: post_time}, function(start, end, label) {
-                         console.log(start.toISOString(), end.toISOString(), label);
-                       });
-                    });
+                        jQuery(function(){
+                            
+                            var express_name = '{$expressDetail['express_name']}';
+                            jQuery("#express_name").find("option[value='" + express_name + "']").attr("selected",true);
+                        
+                            var post_time = $("#post_time").val();
+                            var myDate = new Date(); 
+                            if(!post_time) {
+                                post_time = myDate.toLocaleDateString();
+                            }
+                           $('#post_time').daterangepicker({singleDatePicker:true,format: 'YYYY-MM-DD',startDate: post_time}, function(start, end, label) {
+                             console.log(start.toISOString(), end.toISOString(), label);
+                           });
+                        });
                     </script>
                     
                     <div class="form-group w100 mrn mln z">
