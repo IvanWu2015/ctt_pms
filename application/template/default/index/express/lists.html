@@ -12,9 +12,37 @@
         </div>
         
         <div class="publicdiv mb10">
-            <button class="btn btn-warning z" data-toggle="modal" data-target="#myModal">查询</button>
-            <a href="{:url('/index/express/add')}" class="btn btn-info y">添加</a>
+            <form action="{:url('/index/express/lists')}" class="form-inline" role="form" method="post">
+                <a href="{:url('/index/express/add')}" class="btn btn-info y">添加</a>
+                
+                <input type="text" name="name" class="form-control" placeholder="关键字" value="{$name}" />
+                <input type="text" name="number" class="form-control" placeholder="单号"  value="{$number}"/>
+                <input type="text" name="start_time" id="start_time" class="form-control" placeholder="开始时间"  value="{$start_time}"/>
+                <input type="text" name="end_time" id="end_time" class="form-control" placeholder="结束时间"  value="{$end_time}"/>
+                <input type="submit" class="btn btn-warning" value="查询" />
+            </form>
         </div>
+        
+        <script type="text/javascript">
+        $(document).ready(function() {
+            var start_time = $("#start_time").val();
+            var end_time = $("#end_time").val();
+            var myDate = new Date(); 
+            if(!start_time) {
+                start_time = myDate.toLocaleDateString();
+            }
+            if(!end_time) {
+                end_time = myDate.toLocaleDateString();
+            }
+           $('#start_time').daterangepicker({singleDatePicker:true,format: 'YYYY-MM-DD',startDate: start_time}, function(start, end, label) {
+             console.log(start.toISOString(), end.toISOString(), label);
+           });
+           
+           $('#end_time').daterangepicker({singleDatePicker:true,format: 'YYYY-MM-DD',startDate: end_time}, function(start, end, label) {
+             console.log(start.toISOString(), end.toISOString(), label);
+           });
+        });
+       </script>
         
         <table class="table table-striped">
             <thead style="background:#f6f6f6;">
@@ -35,7 +63,7 @@
                 {foreach $express_list as $express}
                 <tr id="projectlist">
                     <td title="快递公司"><a href="{:url('/index/express/detail?id='.$express['id'])}">{$express['express_name']}</a></td>
-                    <td title="单号">{$express['express_number']}</td>
+                    <td title="单号"><a href="https://www.baidu.com/s?wd={$express['express_number']}&rsv_spt=1&rsv_iqid=0xb91d9eb100022e18&issp=1&f=8&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_n=2&rsv_sug3=1" target="_bacnk">{$express['express_number']}</a></td>
                     <td title="收件人名称">{$express['to_name']}</td>
                     <td title="收件人电话">{$express['to_tel']}</td>
                     <td title="发件人">{$express['from_name']}</td>
@@ -55,81 +83,4 @@
     </div>
 </div>
 
-<!-- 添加地址 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">快递查询</h4>
-            </div>
-            <div class="modal-body">
-                <form action="" class="form-inline" role="form" id="formaddress">
-                    <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">快递公司</label>
-                        <div class="col-sm-10 selectpub">
-                            {include file="express/express_name" /}
-                        </div>
-                    </div>
-                    
-                    <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">单号</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="express_number" class="form-control w100" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">收件人</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="to_name" class="form-control w100" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">发件人</label>
-                        <div class="col-sm-10">
-                            <div id="distpicker">
-                                <input type="text" name="from_name" class="form-control w100" />
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">付款</label>
-                        <div class="col-sm-10">
-                            <label class="mt8 mr15"><input type="radio" name="payment" value="1"> 寄付</label>
-                            <label class="mt8"><input type="radio" name="payment" value="2"> 到付</label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group mt10">
-                        <label class="col-sm-2 control-label lh34 text-center" for="inputWarning">时间</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="add_time" class="form-control w100" id="begin_time" />
-                        </div>
-                    </div>
-                    
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" onClick="addresssub();">提交更改</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
-<script type="text/javascript">
-    $(document).ready(function() {
-        var begin_time = $("#begin_time").val();
-        var myDate = new Date(); 
-        if(!begin_time) {
-            begin_time = myDate.toLocaleDateString();
-        }
-       $('#begin_time').daterangepicker({singleDatePicker:true,format: 'YYYY-MM-DD',startDate: begin_time}, function(start, end, label) {
-         console.log(start.toISOString(), end.toISOString(), label);
-       });
-    });
-   </script>
-<!-- 添加地址 -->
 {/block}
