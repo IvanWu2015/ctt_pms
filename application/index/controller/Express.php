@@ -24,7 +24,7 @@ class Express extends Common {
         $start_time = input('start_time', '', 'addslashes'); //开始时间
         $end_time = input('end_time', '', 'addslashes'); //结束时间
         if (!empty($name)) {
-            $map['express_name|from_name|from_tel|from_address|to_name|to_tel|to_address|number'] = array('like', "%{$name}%");
+            $map['express_name|from_name|from_tel|from_address|to_name|to_tel|to_address|express_number'] = array('like', "%{$name}%");
         }
         if (!empty($start_time)) {
             $map['add_time'] = array('gt', "$start_time");
