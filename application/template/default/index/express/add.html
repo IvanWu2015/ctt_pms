@@ -13,27 +13,74 @@
                     
                     <div class="g_fieldset sizing">
                         <span class="g_fieldset_name">收件信息</span>
-                        <div class="form-group w100 mrn mln z">
-                            <label class="col-sm-2 control-label fwn">收件人名称</label>
-                            <div class="col-sm-7 pln prn">
-                                <input type="text" name="to_name" class="form-control w60" id="to_name" value="{$expressDetail['to_name']}">
+                        <div class="w60 z">
+                            <div class="form-group w100 mrn mln z">
+                                <label class="col-sm-3 control-label fwn">收件人名称</label>
+                                <div class="col-sm-9 pln prn">
+                                    <input type="text" name="to_name" class="form-control w50 z" id="to_name" value="{$expressDetail['to_name']}">
+                                    <a href="javascript:void(0);" class="z btn btn-info z ml15" onClick="loadexopen();">从联系人中载入</a>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group w100 mrn mln z">
+                                <label class="col-sm-3 control-label fwn">收件人电话</label>
+                                <div class="col-sm-9 pln prn">
+                                    <input type="text" name="to_tel" class="form-control w80" id="to_tel" value="{$expressDetail['to_tel']}">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group w100 mrn mln z">
+                                <label class="col-sm-3 control-label fwn">收件人地址</label>
+                                <div class="col-sm-9 pln prn">
+                                    <input type="text" name="from_address" class="form-control w80" id="from_address" value="{$expressDetail['from_address']}">
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="form-group w100 mrn mln z">
-                            <label class="col-sm-2 control-label fwn">收件人电话</label>
-                            <div class="col-sm-7 pln prn">
-                                <input type="text" name="to_tel" class="form-control w60" id="to_tel" value="{$expressDetail['to_tel']}">
+                        <div class="w40 z bor ptlrb10 br3 loadwp sizing dn" id="loadwp">
+                            <a href="javascript:void(0);" onClick="loadexopen();" title="关闭载入窗口" class="loadwpicon iconfont">&#xe6f1;</a>
+                            <div class="express_keywp" id="add_tag">
+                                <input type="text" name="keyword" id="keyword" class="pkeytext sizing" placeholder="姓名、电话搜索~" value="" />
+                                <input type="button" class="pkeysub iconfont" value="&#xe604;" onClick="exsubmit();" />
                             </div>
-                        </div>
-                        
-                        <div class="form-group w100 mrn mln z">
-                            <label class="col-sm-2 control-label fwn">收件人地址</label>
-                            <div class="col-sm-7 pln prn">
-                                <input type="text" name="from_address" class="form-control w60" id="from_address" value="{$expressDetail['from_address']}">
-                            </div>
+                            <ul class="publicdiv extsul" id="extsul"></ul>
                         </div>
                     </div>
+                    <script>
+                        function loadexopen(){
+                            if(jQuery('#loadwp').css('display') == 'none'){
+                                jQuery('#loadwp').slideDown();
+                            }else{
+                                jQuery('#loadwp').slideUp();
+                            }
+                        }
+                        function exsubmit(){     //ajax请求载入联系数据
+                            var url="{:url('/index/express/add')}";
+                            jQuery.ajax({
+                                type: 'post',
+                                url: url,
+                                data: {
+                                    keyword: jQuery('#keyword').val()
+                                },
+                                dataType: 'json',
+                                success: function (data) {
+                                    if (data.result == 'success') {
+                                        var inshtml = '';
+                                        for(var i=0; i < 3; i++){
+                                            var inswp = inshtml + "<li id='extslist_" + i + "' onClick='expressinf(" + i + ");'>" +
+                                                        "<h3><span id='ex_name'>" + ins[i].name + "</span><span id='ex_tel' class='y fs12'>" + ins[i].tel + "</span></h3>"+
+                                                        "<p id='ex_address'>" + ins[i].address + "</p>"+
+                                                        "</li>";
+                                            jQuery('#extsul').append(inswp);
+                                            //console.log(ins);
+                                        }
+                                    }else{
+                                        jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
+                                    }
+                                }
+                            });
+                        }
+                    </script>
                     
                     <div class="g_fieldset sizing">
                         <span class="g_fieldset_name">发件信息</span>
@@ -51,6 +98,13 @@
                             </div>
                         </div>
                         
+                        <div class="form-group w100 mrn mln z">
+                                <label class="col-sm-2 control-label fwn">发件人地址</label>
+                                <div class="col-sm-7 pln prn">
+                                    <input type="text" name="to_address" class="form-control w60" id="to_address" value="{$expressDetail['to_address']}">
+                                </div>
+                        </div>
+                            
                         <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">发件时间</label>
                             <div class="col-sm-7 pln prn">

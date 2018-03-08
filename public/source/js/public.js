@@ -68,6 +68,16 @@ function loadWindow(url) {
  return;
  }*/
  
+function expressinf(id){    //快递添加页，联系人信息载入
+    var name = jQuery('#extslist_' + id + ' #ex_name').text();              //姓名
+    var tel = jQuery('#extslist_' + id + ' #ex_tel').text();                //电话
+    var address = jQuery('#extslist_' + id + ' #ex_address').text();        //地址
+    
+    jQuery('#to_name').val(name);
+    jQuery('#to_tel').val(tel);
+    jQuery('#from_address').val(address);
+} 
+
 function inputopen(name){
     if(jQuery('#' + name).css('display') == 'none'){
         jQuery('#' + name).slideDown();
