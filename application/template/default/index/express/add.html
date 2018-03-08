@@ -35,6 +35,35 @@
                                     <input type="text" name="from_address" class="form-control w80" id="from_address" value="{$expressDetail['from_address']}">
                                 </div>
                             </div>
+                            
+                            <div class="form-group w100 mrn mln z">
+                                <label class="col-sm-3 control-label fwn">&nbsp;</label>
+                                <div class="col-sm-9 pln prn fwn">
+                                    <label onClick="contactsopen();"><input type="checkbox" id="addcontacts" /> 添加到公司联系人</label>
+                                </div>
+                            </div>
+                            
+                            <div class="publicdiv bor pl10 pt20 pr10 pb10 sizing dn" id="contactssubwp">
+                                <div class="form-group w100 mrn mln z">
+                                    <label class="col-sm-3 control-label fwn">所属公司</label>
+                                    <div class="col-sm-9 pln prn selectpub">
+                                        <select name="company_name" id="company_name" class="w80">
+                                            <option value="北京美佳宏成科技有限公司">北京美佳宏成科技有限公司</option>
+                                            <option value="海南乾坤商业投资有限公司">海南乾坤商业投资有限公司</option>
+                                            <option value="上海红双喜股份有限公司">上海红双喜股份有限公司</option>
+                                        </select>
+                                        <p class="cred">请选择所属公司</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group w100 mrn mln z">
+                                    <label class="col-sm-3 control-label fwn">&nbsp;</label>
+                                    <div class="col-sm-9 pln prn fwn">
+                                        <input type="button" class="btn btn-info" onClick="contactssub();" value="添加" />
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                         
                         <div class="w40 z bor ptlrb10 br3 loadwp sizing dn" id="loadwp">
@@ -47,13 +76,45 @@
                         </div>
                     </div>
                     <script>
-                        function loadexopen(){
+                        function contactsopen(){    //添加到公司联系人
+                            if(jQuery('#addcontacts').is(':checked')){
+                                jQuery('#contactssubwp').slideDown();
+                            }else{
+                                jQuery('#contactssubwp').slideUp();
+                            }
+                        }
+                        
+                        function loadexopen(){      //从联系人中载入
                             if(jQuery('#loadwp').css('display') == 'none'){
                                 jQuery('#loadwp').slideDown();
                             }else{
                                 jQuery('#loadwp').slideUp();
                             }
                         }
+                        
+                        function contactssub(){     //ajax请求添加到联系人
+                            var url="{:url('/index/express/add')}";
+                            jQuery.ajax({
+                                type: 'post',
+                                url: url,
+                                data: {
+                                    company_name: jQuery('#company_name').val(),    //所属公司
+                                    to_name: jQuery('#to_name').val(),              //收件人名称
+                                    to_tel: jQuery('#to_tel').val(),                //收件人电话
+                                    from_address: jQuery('#from_address').val()     //收件人地址
+                                },
+                                dataType: 'json',
+                                success: function (data) {
+                                    if (data.result == 'success') {
+                                        jQuery('#addpr').html('操作成功！').show(1).delay(2000).hide(1);
+                                        jQuery('#contactssubwp').slideUp();
+                                    }else{
+                                        jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
+                                    }
+                                }
+                            });
+                        }
+                        
                         function exsubmit(){     //ajax请求载入联系数据
                             var url="{:url('/index/express/add')}";
                             jQuery.ajax({
@@ -64,18 +125,13 @@
                                 },
                                 dataType: 'json',
                                 success: function (data) {
-                                    if (data.result == 'success') {
-                                        var inshtml = '';
-                                        for(var i=0; i < 3; i++){
-                                            var inswp = inshtml + "<li id='extslist_" + i + "' onClick='expressinf(" + i + ");'>" +
-                                                        "<h3><span id='ex_name'>" + ins[i].name + "</span><span id='ex_tel' class='y fs12'>" + ins[i].tel + "</span></h3>"+
-                                                        "<p id='ex_address'>" + ins[i].address + "</p>"+
-                                                        "</li>";
-                                            jQuery('#extsul').append(inswp);
-                                            //console.log(ins);
-                                        }
-                                    }else{
-                                        jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
+                                    var inshtml = '';
+                                    for(var i=0; i < data.length; i++){
+                                        var inswp = inshtml + "<li id='extslist_" + i + "' onClick='expressinf(" + i + ");'>" +
+                                                    "<h3><span id='ex_name'>" + data[i].name + "</span><span id='ex_tel' class='y fs12'>" + data[i].tel + "</span></h3>"+
+                                                    "<p id='ex_address'>" + data[i].address + "</p>"+
+                                                    "</li>";
+                                        jQuery('#extsul').append(inswp);
                                     }
                                 }
                             });

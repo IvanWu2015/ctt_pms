@@ -806,12 +806,17 @@ input.commentsub{width:113px !important; height:35px !important; border:none !im
 .express_keywp .pkeysub{ width:50px; height:35px; font-size:18px; background:none; border:none; position:absolute; top:0; right:0;}
 
 .loadwp{ position:relative;}
-.loadwp .loadwpicon{ width:40px; height:40px; line-height:40px; text-align:center; font-size:20px; display:block; position:absolute; top:8px; left:-40px;}
-.extsul{ max-height:195px; overflow:auto;}
-.extsul li{ width:100%; float:left; padding:8px 0px; margin-bottom:10px; cursor:pointer; border-bottom:1px #eee dashed;}
+.loadwp .loadwpicon{ width:40px; height:40px; line-height:40px; background:#fff; border:1px #dedede solid; text-align:center; font-size:20px; display:block; position:absolute; bottom:-40px; left:180px;}
+.extsul{ max-height:185px; overflow:auto;}
+.extsul li{ width:100%; float:left; padding:8px 0px; margin-top:10px; cursor:pointer; border-bottom:1px #eee dashed;}
 .extsul li h3{ font-size:14px; line-height:25px; margin:0;}
 .extsul li p{ font-size:12px; line-height:20px;}
-
+.extsul::-webkit-scrollbar {width:2px;height:10px;}
+.extsul::-webkit-scrollbar-button    {background-color:#eee;}
+.extsul::-webkit-scrollbar-track     {background:#eee;}
+.extsul::-webkit-scrollbar-thumb{background:#ddd;border-radius:2px;}
+.extsul::-webkit-scrollbar-corner {background:#eee;}
+.extsul::-webkit-scrollbar-resizer  {background:#eee;}
 
 .fc-unthemed{ padding:10px; background:#f7f7f7; border:1px #dedede solid;}
 
