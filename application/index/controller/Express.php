@@ -63,6 +63,20 @@ class Express extends Common {
         $expressTypeList = getCommonConfigList('express_type'); //快递类型列表
         $employeeTypeList = getCommonConfigList('employee_type'); //快递规模列表
         if (request()->isPost()) {
+            $keyword = input('keyword', '', 'addslashes');
+            if (!empty($keyword)) {
+                if (!empty($keyword)) {
+                    $map['name|tel'] = array('like', "%{$name}%");
+                    $contacts_list = DB::name('Contact')
+                            ->where($map)
+                            ->field('id,name,tel,address')
+                            ->select();
+                    echo json_encode($contacts_list);
+                    exit();
+                } else {
+                    exit('no keyword');
+                }
+            }
             $expressData = array(
                 'express_name' => input('express_name', '', 'strip_tags'), //'快递公司名称',
                 'express_number' => input('express_number', '', 'strip_tags'), //'快递单号',
