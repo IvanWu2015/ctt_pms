@@ -158,3 +158,111 @@ function keyscreenopen(){   //搜索页筛选
         jQuery('#keyscreenopen').html('&#xe688; 展开筛选');
     }
 }
+
+function contactsopen(){    //收件信息 添加到公司联系人
+    if(jQuery('#addcontacts').is(':checked')){
+        jQuery('#contactssubwp').slideDown();
+    }else{
+        jQuery('#contactssubwp').slideUp();
+    }
+}
+
+function from_contactsopen(){    //发件信息 添加到公司联系人
+    if(jQuery('#addfromcontacts').is(':checked')){
+        jQuery('#contactssubwp_from').slideDown();
+    }else{
+        jQuery('#contactssubwp_from').slideUp();
+    }
+}
+
+function loadexopen(){      //从联系人中载入
+    if(jQuery('#loadwp').css('display') == 'none'){
+        jQuery('#loadwp').slideDown();
+    }else{
+        jQuery('#loadwp').slideUp();
+    }
+}
+
+function contactssub(url){     //ajax请求添加到联系人
+    jQuery.ajax({
+        type: 'post',
+        url: url,
+        data: {
+            ac: 'add_contact',
+            company_id: jQuery('#company_id').val(),    //所属公司
+            name: jQuery('#to_name').val(),              //名称
+            tel: jQuery('#to_tel').val(),                //电话
+            address: jQuery('#from_address').val()     //地址
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data.result == 'success') {
+                jQuery('#addpr').html('操作成功！').show(1).delay(2000).hide(1);
+                jQuery('#contactssubwp').slideUp();
+                jQuery('#addcontacts').attr('checked', false);
+            }else{
+                jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
+            }
+        }
+    });
+}
+
+function exsubmit(url){     //ajax请求载入联系数据
+    jQuery.ajax({
+        type: 'post',
+        url: url,
+        data: {
+            ac:'get_contact',
+            keyword: jQuery('#keyword').val()
+        },
+        dataType: 'json',
+        success: function (data) {
+            if(data.length > 0){
+                jQuery('#extsul').html('');
+                var inshtml = '';
+                for(var i=0; i < data.length; i++){
+                    var inswp = inshtml + "<li id='extslist_" + i + "' onClick='expressinf(" + i + ");'>" +
+                                "<h3><span id='ex_name'>" + data[i].name + "</span><span id='ex_tel' class='y fs12'>" + data[i].tel + "</span></h3>"+
+                                "<p id='ex_address'>" + data[i].address + "</p>"+
+                                "</li>";
+                    jQuery('#extsul').append(inswp);
+                }
+            }else{
+                jQuery('#extsul').html('<p class="ac pt10">未搜索到相关数据~</p>');
+            }
+        }
+    });
+}
+
+function fromcontactssub(url){     //发件信息  ajax请求添加到联系人
+    jQuery.ajax({
+        type: 'post',
+        url: url,
+        data: {
+            ac: 'add_contact',
+            company_id: jQuery('#company_id').val(),    //所属公司
+            from_name: jQuery('#from_name').val(),              //名称
+            from_tel: jQuery('#from_tel').val(),                //电话
+            to_address: jQuery('#to_address').val()     //地址
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data.result == 'success') {
+                jQuery('#addpr').html('操作成功！').show(1).delay(2000).hide(1);
+                jQuery('#contactssubwp_from').slideUp();
+                jQuery('#addfromcontacts').attr('checked', false);
+            }else{
+                jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
+            }
+        }
+    });
+}
+
+jQuery(document).keydown(function (e) {
+    if (e.which == 13) {     //按回车键键提交 从联系人中载入数据搜索
+        if(jQuery('#loadwp').css('display') == "block"){
+            exsubmit();
+            event.preventDefault();
+        }
+    }
+});

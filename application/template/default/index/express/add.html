@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                             
-                            <div class="publicdiv bor pl10 pt20 pr10 pb10 sizing dn" id="contactssubwp">
+                            <div class="publicdiv addexwp sizing" id="contactssubwp">
                                 <div class="form-group w100 mrn mln z">
                                     <label class="col-sm-3 control-label fwn">所属公司</label>
                                     <div class="col-sm-9 pln prn selectpub">
@@ -59,7 +59,7 @@
                                 <div class="form-group w100 mrn mln z">
                                     <label class="col-sm-3 control-label fwn">&nbsp;</label>
                                     <div class="col-sm-9 pln prn fwn">
-                                        <input type="button" class="btn btn-info" onClick="contactssub();" value="添加" />
+                                        <input type="button" class="btn btn-info" onClick="contactssub('{:url('/index/express/add')}');" value="添加" />
                                     </div>
                                 </div>
                             </div>
@@ -70,75 +70,11 @@
                             <a href="javascript:void(0);" onClick="loadexopen();" title="关闭载入窗口" class="loadwpicon iconfont">&#xe6f1;</a>
                             <div class="express_keywp" id="add_tag">
                                 <input type="text" name="keyword" id="keyword" class="pkeytext sizing" placeholder="姓名、电话搜索~" value="" />
-                                <input type="button" class="pkeysub iconfont" value="&#xe604;" onClick="exsubmit();" />
+                                <input type="button" class="pkeysub iconfont" value="&#xe604;" onClick="exsubmit('{:url('/index/express/add')}');" />
                             </div>
                             <ul class="publicdiv extsul" id="extsul"></ul>
                         </div>
                     </div>
-                    <script>
-                        function contactsopen(){    //添加到公司联系人
-                            if(jQuery('#addcontacts').is(':checked')){
-                                jQuery('#contactssubwp').slideDown();
-                            }else{
-                                jQuery('#contactssubwp').slideUp();
-                            }
-                        }
-                        
-                        function loadexopen(){      //从联系人中载入
-                            if(jQuery('#loadwp').css('display') == 'none'){
-                                jQuery('#loadwp').slideDown();
-                            }else{
-                                jQuery('#loadwp').slideUp();
-                            }
-                        }
-                        
-                        function contactssub(){     //ajax请求添加到联系人
-                            var url="{:url('/index/express/add')}";
-                            jQuery.ajax({
-                                type: 'post',
-                                url: url,
-                                data: {
-                                    ac: 'add_contact',
-                                    company_id: jQuery('#company_id').val(),    //所属公司
-                                    name: jQuery('#to_name').val(),              //名称
-                                    tel: jQuery('#to_tel').val(),                //电话
-                                    address: jQuery('#from_address').val()     //地址
-                                },
-                                dataType: 'json',
-                                success: function (data) {
-                                    if (data.result == 'success') {
-                                        jQuery('#addpr').html('操作成功！').show(1).delay(2000).hide(1);
-                                        jQuery('#contactssubwp').slideUp();
-                                    }else{
-                                        jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
-                                    }
-                                }
-                            });
-                        }
-                        
-                        function exsubmit(){     //ajax请求载入联系数据
-                            var url="{:url('/index/express/add')}";
-                            jQuery.ajax({
-                                type: 'post',
-                                url: url,
-                                data: {
-                                    ac:'get_contact',
-                                    keyword: jQuery('#keyword').val()
-                                },
-                                dataType: 'json',
-                                success: function (data) {
-                                    var inshtml = '';
-                                    for(var i=0; i < data.length; i++){
-                                        var inswp = inshtml + "<li id='extslist_" + i + "' onClick='expressinf(" + i + ");'>" +
-                                                    "<h3><span id='ex_name'>" + data[i].name + "</span><span id='ex_tel' class='y fs12'>" + data[i].tel + "</span></h3>"+
-                                                    "<p id='ex_address'>" + data[i].address + "</p>"+
-                                                    "</li>";
-                                        jQuery('#extsul').append(inswp);
-                                    }
-                                }
-                            });
-                        }
-                    </script>
                     
                     <div class="g_fieldset sizing">
                         <span class="g_fieldset_name">发件信息</span>
@@ -167,6 +103,35 @@
                             <label class="col-sm-2 control-label fwn">发件时间</label>
                             <div class="col-sm-7 pln prn">
                                 <input type="text" name="post_time" class="form-control w60" id="post_time" value="{$expressDetail['post_time']}">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group w100 mrn mln z">
+                            <label class="col-sm-2 control-label fwn">&nbsp;</label>
+                            <div class="col-sm-7 pln prn fwn">
+                                <label onClick="from_contactsopen();"><input type="checkbox" id="addfromcontacts" /> 添加到公司联系人</label>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="publicdiv addexwp sizing" id="contactssubwp_from">
+                        <div class="form-group w100 mrn mln z">
+                            <label class="col-sm-3 control-label fwn">所属公司</label>
+                            <div class="col-sm-9 pln prn selectpub">
+                                <select name="company_id" id="company_id" class="w80">
+                                    {foreach $company_list as  $company}
+                                    <option value="{$company.company_id}">{$company.name}</option>
+                                    {/foreach}
+                                </select>
+                                <p class="cred">请选择所属公司</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group w100 mrn mln z">
+                            <label class="col-sm-3 control-label fwn">&nbsp;</label>
+                            <div class="col-sm-9 pln prn fwn">
+                                <input type="button" class="btn btn-info" onClick="fromcontactssub('{:url('/index/express/add')}');" value="添加" />
                             </div>
                         </div>
                     </div>
