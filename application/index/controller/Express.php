@@ -60,53 +60,89 @@ class Express extends Common {
             $navtitle = '添加快递';
         }
 
+        $company_list = DB::name('company')->field('company_id,name')->select(); //公司列表
         $expressTypeList = getCommonConfigList('express_type'); //快递类型列表
         $employeeTypeList = getCommonConfigList('employee_type'); //快递规模列表
+        //表单提交处理
         if (request()->isPost()) {
-            $keyword = input('keyword', '', 'addslashes');
-            if (!empty($keyword)) {
-                if (!empty($keyword)) {
-                    $map['name|tel'] = array('like', "%{$name}%");
-                    $contacts_list = DB::name('Contact')
-                            ->where($map)
-                            ->field('id,name,tel,address')
-                            ->select();
-                    echo json_encode($contacts_list);
-                    exit();
-                } else {
-                    exit('no keyword');
-                }
-            }
-            $expressData = array(
-                'express_name' => input('express_name', '', 'strip_tags'), //'快递公司名称',
-                'express_number' => input('express_number', '', 'strip_tags'), //'快递单号',
-                'express_desc' => input('express_desc', '', 'strip_tags'), // '物品说明',
-                'from_name' => input('from_name', '', 'strip_tags'), // '发件人名称',
-                'from_tel' => input('from_tel', '', 'strip_tags'), // '发件人电话',
-                'from_address' => input('from_address', '', 'strip_tags'), // '发件人地址
-                'to_name' => input('to_name', '', 'strip_tags'), //发件人名称
-                'to_address' => input('to_address', '', 'strip_tags'), //收件人地址
-                'to_tel' => input('to_tel', '', 'strip_tags'), //'发件人电话',
-                'company_id' => input('company_id', '', 'strip_tags'), //'公司ID',
-                'contact_id' => input('contact_id', '', 'strip_tags'), // '联系人ID',
-                'payment' => input('payment', '', 'strip_tags'), // '付款方式 1寄付 2到付',
-                'price' => input('price', '', 'strip_tags'), // '运费',
-                'weight' => input('weight', '', 'strip_tags'), // '重量 单位KG',
-                'remarks' => input('remarks', '', 'strip_tags'), //'其它说明',
-                'add_uid' => input('add_uid', '', 'strip_tags'), // '添加人uid',
-                'add_name' => input('add_name', 0, 'addslashes'), //'添加人名称',
-            );
+            switch (input('ac')) {
+                //部分匹配查询联系人
+                case 'get_contact':
+                    $keyword = input('keyword', '', 'addslashes');
+                    if (!empty($keyword)) {
+                        if (!empty($keyword)) {
+                            $map['name|tel'] = array('like', "%{$keyword}%");
+                            $contacts_list = DB::name('Contact')
+                                    ->where($map)
+                                    ->field('id,name,tel,address')
+                                    ->select();
+                            return $contacts_list; //直接返回 可自动输出JSON数据
+                        } else {
+                            exit('no keyword');
+                        }
+                    }
+                    break;
 
-            if ($express_id > 0) {
-                $express->where(['id' => $express_id])->update($expressData);
-                $this->success("修改成功", 'Express/lists');
-            } else {
-                $expressData['add_time'] = date("Y-m-d H:i:s"); //添加时间',
-                $express->insert($expressData);
-                $this->success("成功添加", 'Express/lists');
+                //添加到联系人
+                case 'add_contact':
+                    $contactData = array(
+                        'company_id' => input('company_id', 0, 'intval'), // '报名序号 可用于查询',
+                        'name' => input('name', 0, 'addslashes'), //'姓名',
+                        'worktitle' => input('worktitle', 0, 'addslashes'), // '职务',
+                        'age' => input('age', 0, 'intval'), // '年龄',
+                        'sex' => input('sex', 0, 'intval'), // '性别',
+                        'native_place' => input('native_place', 0, 'addslashes'), //'籍贯',
+                        'introduce' => input('introduce', 0, 'addslashes'), // '简介',
+                        'tel' => input('tel', 0, 'addslashes'), //'联系电话',
+                        'mail' => input('mail', 0, 'addslashes'), //'电子邮箱',
+                        'status' => input('status', 0, 'addslashes'), // '状态 0无 1在职 2离职',
+                        'address' => input('address', 0, 'addslashes'), //'详细地址',
+                        'remarks' => input('remarks', 0, 'addslashes'), //'备注信息',
+                    );
+
+                    $contactData['add_uid'] = $this->_G['uid']; //'最后修改人',
+                    $contactData['add_time'] = date("Y-m-d H:i:s"); //'最后修改时间',
+                    db('contact')->insert($contactData);
+                    $result = ['result' => 'success'];
+                    return $result;
+                    break;
+
+                //添加快递信息
+                case 'add_express':
+                default:
+                    $expressData = array(
+                        'express_name' => input('express_name', '', 'strip_tags'), //'快递公司名称',
+                        'express_number' => input('express_number', '', 'strip_tags'), //'快递单号',
+                        'express_desc' => input('express_desc', '', 'strip_tags'), // '物品说明',
+                        'from_name' => input('from_name', '', 'strip_tags'), // '发件人名称',
+                        'from_tel' => input('from_tel', '', 'strip_tags'), // '发件人电话',
+                        'from_address' => input('from_address', '', 'strip_tags'), // '发件人地址
+                        'to_name' => input('to_name', '', 'strip_tags'), //发件人名称
+                        'to_address' => input('to_address', '', 'strip_tags'), //收件人地址
+                        'to_tel' => input('to_tel', '', 'strip_tags'), //'发件人电话',
+                        'company_id' => input('company_id', '', 'strip_tags'), //'公司ID',
+                        'contact_id' => input('contact_id', '', 'strip_tags'), // '联系人ID',
+                        'payment' => input('payment', '', 'strip_tags'), // '付款方式 1寄付 2到付',
+                        'price' => input('price', '', 'strip_tags'), // '运费',
+                        'weight' => input('weight', '', 'strip_tags'), // '重量 单位KG',
+                        'remarks' => input('remarks', '', 'strip_tags'), //'其它说明',
+                        'add_uid' => input('add_uid', '', 'strip_tags'), // '添加人uid',
+                        'add_name' => input('add_name', 0, 'addslashes'), //'添加人名称',
+                    );
+
+                    if ($express_id > 0) {
+                        $express->where(['id' => $express_id])->update($expressData);
+                        $this->success("修改成功", 'Express/lists');
+                    } else {
+                        $expressData['add_time'] = date("Y-m-d H:i:s"); //添加时间',
+                        $express->insert($expressData);
+                        $this->success("成功添加", 'Express/lists');
+                    }
+                    break;
             }
         }
         $this->assign('navtitle', $navtitle);
+        $this->assign('company_list', $company_list);
         $this->assign('expressDetail', $expressDetail);
         $this->assign('expressTypeList', $expressTypeList);
         $this->assign('employeeTypeList', $employeeTypeList);

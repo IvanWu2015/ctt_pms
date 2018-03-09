@@ -47,10 +47,10 @@
                                 <div class="form-group w100 mrn mln z">
                                     <label class="col-sm-3 control-label fwn">所属公司</label>
                                     <div class="col-sm-9 pln prn selectpub">
-                                        <select name="company_name" id="company_name" class="w80">
-                                            <option value="北京美佳宏成科技有限公司">北京美佳宏成科技有限公司</option>
-                                            <option value="海南乾坤商业投资有限公司">海南乾坤商业投资有限公司</option>
-                                            <option value="上海红双喜股份有限公司">上海红双喜股份有限公司</option>
+                                        <select name="company_id" id="company_id" class="w80">
+                                            {foreach $company_list as  $company}
+                                            <option value="{$company.company_id}">{$company.name}</option>
+                                            {/foreach}
                                         </select>
                                         <p class="cred">请选择所属公司</p>
                                     </div>
@@ -98,10 +98,11 @@
                                 type: 'post',
                                 url: url,
                                 data: {
-                                    company_name: jQuery('#company_name').val(),    //所属公司
-                                    to_name: jQuery('#to_name').val(),              //收件人名称
-                                    to_tel: jQuery('#to_tel').val(),                //收件人电话
-                                    from_address: jQuery('#from_address').val()     //收件人地址
+                                    ac: 'add_contact',
+                                    company_id: jQuery('#company_id').val(),    //所属公司
+                                    name: jQuery('#to_name').val(),              //名称
+                                    tel: jQuery('#to_tel').val(),                //电话
+                                    address: jQuery('#from_address').val()     //地址
                                 },
                                 dataType: 'json',
                                 success: function (data) {
@@ -121,6 +122,7 @@
                                 type: 'post',
                                 url: url,
                                 data: {
+                                    ac:'get_contact',
                                     keyword: jQuery('#keyword').val()
                                 },
                                 dataType: 'json',
