@@ -1,11 +1,4 @@
 jQuery(function () {
-    jQuery('#name').keyup(function () {	//任务名称
-        if (jQuery('#name').val().length < 1) {
-            jQuery('#name').css({border: '1px red solid'});
-        } else {
-            jQuery('#name').css({border: '1px #dedede solid'});
-        }
-    });
     
     jQuery('#estimate').keyup(function () {	//预计工时
         if (jQuery('#estimate').val().length < 1) {
@@ -95,6 +88,205 @@ jQuery(document).keydown(function (e) {
 });
 function modalclose() {
     jQuery('#applica').hide().html('');
+}
+
+function pubinput(name){
+    var inputId = jQuery('#' + name).val();
+    if(inputId.length < 1){
+        jQuery('#' + name).css({border: '1px red solid'});
+        jQuery('#' + name + '_prompt').show();
+    }else{
+        jQuery('#' + name).css({border: '1px #dedede solid'});
+        jQuery('#' + name + '_prompt').hide();
+    }
+}
+
+function pubselect(name){
+    var inputId = jQuery('#' + name).val();
+    if(inputId == '0'){
+        jQuery('#' + name).css({border: '1px red solid'});
+        jQuery('#' + name + '_prompt').show();
+    }else{
+        jQuery('#' + name).css({border: '1px #dedede solid'});
+        jQuery('#' + name + '_prompt').hide();
+    }
+}
+
+
+function articleformsub(){      //文档表单判断
+    var name = jQuery('#name').val();               //标题
+    var class_id = jQuery('#class_id').val();       //分类
+    var project_id = jQuery('#project_id').val();   //项目
+    var pid = 0;
+    
+    if (name.length < 1) {	//标题
+        jQuery('#name').css({border: '1px red solid'});
+        jQuery('#name_prompt').show();
+        pid = 1;
+    }
+    
+    if (class_id  == '0') {	//分类
+        jQuery('#class_id').css({border: '1px red solid'});
+        jQuery('#class_id_prompt').show();
+        pid = 1;
+    }
+    
+    if (project_id == '0') {	//项目
+        jQuery('#project_id').css({border: '1px red solid'});
+        jQuery('#project_id_prompt').show();
+        pid = 1;
+    }
+    
+    if(pid == 1){
+        jQuery('#addpr').html('<b class="cred">* </b>为必填项').show(1).delay(2000).hide(1);
+        if(scroll=="off") return; jQuery('html,body').animate({scrollTop:0},400);
+        event.preventDefault();
+    }
+}
+
+function weburlformsub(){      //收藏表单判断
+    var project_id = jQuery('#project_id').val();    //所属项目
+    var name = jQuery('#name').val();                //标题
+    var class_id = jQuery('#class_id').val();        //分类
+    var url = jQuery('#url').val();                  //URL
+    var pid = 0;
+    
+    if (project_id  == '0') {	//所属项目
+        jQuery('#project_id').css({border: '1px red solid'});
+        jQuery('#project_id_prompt').show();
+        pid = 1;
+    }
+    
+    if (name.length < 1) {	//标题
+        jQuery('#name').css({border: '1px red solid'});
+        jQuery('#name_prompt').show();
+        pid = 1;
+    }
+    
+    if (class_id  == '0') {	//分类
+        jQuery('#class_id').css({border: '1px red solid'});
+        jQuery('#class_id_prompt').show();
+        pid = 1;
+    }
+    
+    if (url == '0') {	//URL
+        jQuery('#url').css({border: '1px red solid'});
+        jQuery('#url_prompt').show();
+        pid = 1;
+    }
+    
+    if(pid == 1){
+        jQuery('#addpr').html('<b class="cred">* </b>为必填项').show(1).delay(2000).hide(1);
+        if(scroll=="off") return; jQuery('html,body').animate({scrollTop:0},400);
+        event.preventDefault();
+    }
+}
+
+function productformsub(){      //产品表单判断
+    var name = jQuery('#name').val();                         //产品名称
+    var code = jQuery('#code').val();                         //产品代号
+    var po = jQuery('#po').val();                             //项目负责人
+    var createdVersion = jQuery('#createdVersion').val();     //版本号
+    var pid = 0;
+    
+    if (name.length < 1) {	//产品名称
+        jQuery('#name').css({border: '1px red solid'});
+        jQuery('#name_prompt').show();
+        pid = 1;
+    }
+    
+    if (code.length < 1) {	//产品代号
+        jQuery('#code').css({border: '1px red solid'});
+        jQuery('#code_prompt').show();
+        pid = 1;
+    }
+    
+    if (po  == '0') {	//项目负责人
+        jQuery('#po').css({border: '1px red solid'});
+        jQuery('#po_prompt').show();
+        pid = 1;
+    }
+    
+    if (createdVersion.length < 1) {	//版本号
+        jQuery('#createdVersion').css({border: '1px red solid'});
+        jQuery('#createdVersion_prompt').show();
+        pid = 1;
+    }
+    
+    if(pid == 1){
+        jQuery('#addpr').html('<b class="cred">* </b>为必填项').show(1).delay(2000).hide(1);
+        if(scroll=="off") return; jQuery('html,body').animate({scrollTop:0},400);
+        event.preventDefault();
+    }
+}
+
+function companyformsub(){      //公司表单判断
+    var name = jQuery('#name').val();                         //公司名称
+    var contact_name = jQuery('#contact_name').val();         //联系人
+    var contact_number = jQuery('#contact_number').val();     //联系电话
+    var work_address = jQuery('#work_address').val();         //办公地址
+    var pid = 0;
+    
+    if (name.length < 1) {	//公司名称
+        jQuery('#name').css({border: '1px red solid'});
+        jQuery('#name_prompt').show();
+        pid = 1;
+    }
+    
+    if (contact_name.length < 1) {	//联系人
+        jQuery('#contact_name').css({border: '1px red solid'});
+        jQuery('#contact_name_prompt').show();
+        pid = 1;
+    }
+    
+    if (contact_number.length < 1) {	//联系电话
+        jQuery('#contact_number').css({border: '1px red solid'});
+        jQuery('#contact_number_prompt').show();
+        pid = 1;
+    }
+    
+    if (work_address.length < 1) {	//办公地址
+        jQuery('#work_address').css({border: '1px red solid'});
+        jQuery('#work_address_prompt').show();
+        pid = 1;
+    }
+    
+    if(pid == 1){
+        jQuery('#addpr').html('<b class="cred">* </b>为必填项').show(1).delay(2000).hide(1);
+        if(scroll=="off") return; jQuery('html,body').animate({scrollTop:0},400);
+        event.preventDefault();
+    }
+}
+
+function contactsformsub(){      //联系人表单判断
+    var name = jQuery('#name').val();                //姓名
+    var tel = jQuery('#tel').val();                  //电话
+    var address = jQuery('#address').val();          //地址
+    var pid = 0;
+    
+    if (name.length < 1) {	//姓名
+        jQuery('#name').css({border: '1px red solid'});
+        jQuery('#name_prompt').show();
+        pid = 1;
+    }
+    
+    if (tel.length < 1) {	//电话
+        jQuery('#tel').css({border: '1px red solid'});
+        jQuery('#tel_prompt').show();
+        pid = 1;
+    }
+    
+    if (address.length < 1) {	//地址
+        jQuery('#address').css({border: '1px red solid'});
+        jQuery('#address_prompt').show();
+        pid = 1;
+    }
+    
+    if(pid == 1){
+        jQuery('#addpr').html('<b class="cred">* </b>为必填项').show(1).delay(2000).hide(1);
+        if(scroll=="off") return; jQuery('html,body').animate({scrollTop:0},400);
+        event.preventDefault();
+    }
 }
 
 function formsubif() {

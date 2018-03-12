@@ -8,6 +8,16 @@
     }
 };
 
+function inputopen(name){
+    if(jQuery('#' + name).css('display') == 'none'){
+        jQuery('#' + name).slideDown();
+        jQuery('#inputopen').html('收起更多 &#xe650;');
+    }else{
+        jQuery('#' + name).slideUp();
+        jQuery('#inputopen').html('展开更多 &#xe688;');
+    }
+}
+
 function navopen(){ //展开导航
     jQuery('#moblie_nav').fadeIn();
     jQuery('#nav_ul').css({left: '0'});

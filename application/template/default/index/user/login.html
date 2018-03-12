@@ -6,54 +6,42 @@
 {/block}
 
 {block name="body"}
-<section>
-    <div class="center-block bf pt20 pr20 pl20 pb20 sizing" style="width:500px; border-radius:3px; margin:0px auto;">
-        <h3 class="mtn mb20 ac">用户登录</h3>
-        <form class="form-horizontal" role="form" class="login-form" action="" method="post">
-            <div class="form-group">
-                <label for="firstname" class="col-sm-2 control-label">用户名</label>
-                <div class="col-sm-10 pln">
-                    <input type="text" class="form-control" id="firstname" placeholder="请输入用户名" ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="lastname" class="col-sm-2 control-label">密码</label>
-                <div class="col-sm-10 pln">
-                    <input type="password" class="form-control" id="lastname" placeholder="请输入密码" errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="lastname" class="col-sm-2 control-label">验证码</label>
-                <div class="col-sm-10 pln">
-                    <input type="text" class="form-control" id="lastname" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="lastname" class="col-sm-2 control-label"></label>
-                <div class="controls">
-                    <img id="verify_img" class="verifyimg reloadverify" alt="点击切换" src="{:captcha_src()}" style="cursor:pointer;" onclick="this.src='{:captcha_src()}'">
-                </div>
-                <div class="controls Validform_checktip text-warning"></div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="autologin" value="1"> 自动登陆
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">登 陆</button>
-                    <!--<a href="{:url('User/register')}" class="ml20">立即注册</a>-->
-                </div>
-            </div>
-        </form>
+<style>
+    html{height:100%;}
+	body{ height:100%; background:url(tpl_img/pc_login_bg.jpg) no-repeat center center;}
+</style>
 
+<div class="g_login">
+    <div class="detpub sizing">
+        <div class="g_login_wp sizing">
+        <form class="form-horizontal" role="form" class="login-form" action="" method="post">
+            <div class="head-logo"><img src="tpl_img/bg_icon.png" style="width:120px;" /></div>
+            <h3 class="login_title">用户登录</h3>
+            <input type="hidden" autocomplete="off" id="ext-comp-1002" name="AppUrl" />
+            <div class="formInput">
+                <div class="formIcon iconfont">&#xe636;</div>
+                <input type="text" class="formControl sizing" id="firstname" placeholder="请输入用户名" ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username" />
+            </div>
+            <div class="formInput">
+                <div class="formIcon iconfont">&#xe63e;</div>
+                <input type="password" class="formControl sizing" id="lastname" placeholder="请输入密码" errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password" />
+            </div>
+            <div class="formInput logright sizing">
+                <div class="formIcon iconfont">&#xe874;</div>
+                <input type="text" class="formControl sizing" id="lastname" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify" />
+                <img id="verify_img" class="verifyimg reloadverify" alt="点击切换" src="{:captcha_src()}" class="verification_code" onclick="this.src='{:captcha_src()}'">
+            </div>
+            <div class="publicdiv pt10" id="ext-gen75">
+                <label>
+                    <input type="checkbox" name="autologin" value="1"> 自动登陆
+                </label>
+            </div>
+            
+            <input type="submit" class="login_but iosform" value="登录" />
+        </form>
+        </div>
     </div>
-</section>
+</div>
 {/block}
 
 {block name="side"}{/block}

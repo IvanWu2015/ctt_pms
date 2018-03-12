@@ -27,45 +27,8 @@
             </div>
             
             <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务</label>
-                <input type="text" name="worktitle" class="publicdiv h40" id="worktitle" value="{$contactData['worktitle']}" placeholder="请输入职务" />
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄</label>
-                <input type="text" name="age" class="publicdiv h40" id="age" value="{$contactData['age']}" placeholder="请输入年龄" />
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</label>
-                <label class="ui-radio mt5" for="radio"><input type="radio" name="sex" value="1" {if condition="$contactData['sex'] == 1"}checked{/if} /> 男</label>
-                <label class="ui-radio mt5" for="radio"><input type="radio" name="sex" value="2" {if condition="$contactData['sex'] == 2"}checked{/if} /> 女</label>
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">在职状态</label>
-                <div class="ui-select">
-                    <select class="h40" name="status">
-                        <option value="0" {if condition="$contactData['status'] == 0"}selected{/if}>无</option>
-                        <option value="1" {if condition="$contactData['status'] == 1"}selected{/if}>在职</option>
-                        <option value="2" {if condition="$contactData['status'] == 2"}selected{/if}>离职</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">籍&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;贯</label>
-                <input type="text" name="native_place" class="publicdiv h40" id="native_place" value="{$contactData['native_place']}" placeholder="请输入籍贯" />
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
                 <label class="fonttitle">联系电话</label>
                 <input type="text" name="tel" class="publicdiv h40" id="tel" value="{$contactData['tel']}" placeholder="请输入联系电话" />
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">电子邮箱</label>
-                <input type="text" name="mail" class="publicdiv h40" id="mail" value="{$contactData['mail']}" placeholder="请输入电子邮箱" />
             </div>
             
             <div class="fontlist mt8 bhb sizing">
@@ -73,24 +36,68 @@
                 <input type="text" name="address" class="publicdiv h40" id="address" value="{$contactData['address']}" placeholder="请输入详细地址" />
             </div>
             
-            <div class="fontlist mt10 pb8 bhb sizing">
-                <label class="fonttitle">照&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片</label>
-                <div class="imgwrap" id="imgwrap">
-                    <input type="file" id="cover_image" class="cover" name="photo" value="{$contactData['photo']}" />
-                    <img src="{$contactData['photo']}" id="coverimg" />
+            <div class="fontlist mt8 sizing">
+                <label class="fonttitle">&nbsp;</label>
+                <span class="iconfont pt8 z" id="inputopen" onClick="inputopen('addInputOpen');"> 展开更多 &#xe688;</span>
+            </div>
+            
+            <div class="publicdiv dn" id="addInputOpen">
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务</label>
+                    <input type="text" name="worktitle" class="publicdiv h40" id="worktitle" value="{$contactData['worktitle']}" placeholder="请输入职务" />
                 </div>
-                <p class="fs12 c9" id="original_img_ok">大小建议为700*700像素</p>
-                <p class="fs12 c9" id="original_img_ok">支持格式：jpg,jpeg,png,gif,bmp</p>
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">简&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;介</label>
-                <textarea class="publicdiv pt10" name="introduce" rows="4" placeholder="请输入简介">{$contactData['introduce']}</textarea>
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</label>
-                <textarea class="publicdiv pt10" name="remarks" rows="4" placeholder="请输入备注">{$contactData['remarks']}</textarea>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄</label>
+                    <input type="text" name="age" class="publicdiv h40" id="age" value="{$contactData['age']}" placeholder="请输入年龄" />
+                </div>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</label>
+                    <label class="ui-radio mt5" for="radio"><input type="radio" name="sex" value="1" {if condition="$contactData['sex'] == 1"}checked{/if} /> 男</label>
+                    <label class="ui-radio mt5" for="radio"><input type="radio" name="sex" value="2" {if condition="$contactData['sex'] == 2"}checked{/if} /> 女</label>
+                </div>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">在职状态</label>
+                    <div class="ui-select">
+                        <select class="h40" name="status">
+                            <option value="0" {if condition="$contactData['status'] == 0"}selected{/if}>无</option>
+                            <option value="1" {if condition="$contactData['status'] == 1"}selected{/if}>在职</option>
+                            <option value="2" {if condition="$contactData['status'] == 2"}selected{/if}>离职</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">籍&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;贯</label>
+                    <input type="text" name="native_place" class="publicdiv h40" id="native_place" value="{$contactData['native_place']}" placeholder="请输入籍贯" />
+                </div>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">电子邮箱</label>
+                    <input type="text" name="mail" class="publicdiv h40" id="mail" value="{$contactData['mail']}" placeholder="请输入电子邮箱" />
+                </div>
+                
+                <div class="fontlist mt10 pb8 bhb sizing">
+                    <label class="fonttitle">照&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片</label>
+                    <div class="imgwrap" id="imgwrap">
+                        <input type="file" id="cover_image" class="cover" name="photo" value="{$contactData['photo']}" />
+                        <img src="{$contactData['photo']}" id="coverimg" />
+                    </div>
+                    <p class="fs12 c9" id="original_img_ok">大小建议为700*700像素</p>
+                    <p class="fs12 c9" id="original_img_ok">支持格式：jpg,jpeg,png,gif,bmp</p>
+                </div>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">简&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;介</label>
+                    <textarea class="publicdiv pt10" name="introduce" rows="4" placeholder="请输入简介">{$contactData['introduce']}</textarea>
+                </div>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</label>
+                    <textarea class="publicdiv pt10" name="remarks" rows="4" placeholder="请输入备注">{$contactData['remarks']}</textarea>
+                </div>
             </div>
             
             <div class="publicdiv mt15">

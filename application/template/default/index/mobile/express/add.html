@@ -7,81 +7,103 @@
 
 <div class="publicdiv pt20 pb20 mb10 bf sizing">
     <form action="{:url('/index/company/add?id='.$companyDetail['company_id'])}" id="formaddress" method="post" class="form-horizontal" role="form">
-        <h3 class="ac pb20 borb fs24">添加快递信息</h3>
+        <h3 class="ac pb20 borb fs24">添加快递</h3>
         
-        <div class="publicdiv pl15 pr15 sizing">
+        <div class="publicdiv">
             
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">收件人名称</label>
-                <input type="text" name="to_name" class="publicdiv h40" id="to_name" value="{$expressDetail['to_name']}" placeholder="请输入收件人名称">
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">收件人电话</label>
-                <input type="text" name="to_tel" class="publicdiv h40" id="to_tel" value="{$expressDetail['to_tel']}" placeholder="请输入收件人电话">
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">收件人地址</label>
-                <input type="text" name="from_address" class="publicdiv h40" id="from_address" value="{$expressDetail['from_address']}" placeholder="请输入收件人地址">
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">发件人</label>
-                <input type="text" name="from_name" class="form-control w60" id="from_name" value="{$expressDetail['from_name']}" placeholder="请输入发件人">
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">发件人电话</label>
-                <input type="text" name="from_tel" class="publicdiv h40" id="from_tel" value="{$expressDetail['from_tel']}" placeholder="请输入发件人电话">
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">发件时间</label>
-                <input type="date" name="post_time" class="publicdiv h40 iosform" id="post_time" value="{$expressDetail['post_time']}" placeholder="请输入发件时间">
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">快递公司</label>
-                <div class="ui-select tselectpub">
-                    {include file="express/express_name" /}
+            <div class="publicdiv bf mt10">
+                <p class="publicdiv pt15 pb15 bhb pl10 pr10 sizing" id="contactopen" onClick="contactopen('to');">收件信息<span class="y iconfont" id="to_icon" style="transform:rotate(90deg);">&#xe64b;</span></p>
+                <div class="publicdiv pl10 pr10 pb15 sizing" id="to">
+                    <div class="fontlist mt8 bhb sizing">
+                        <label class="fonttitle">收件名称</label>
+                        <input type="text" name="to_name" class="publicdiv h40" id="to_name" value="{$expressDetail['to_name']}" placeholder="请输入收件人名称">
+                    </div>
+                    
+                    <div class="fontlist mt8 bhb sizing">
+                        <label class="fonttitle">收件电话</label>
+                        <input type="text" name="to_tel" class="publicdiv h40" id="to_tel" value="{$expressDetail['to_tel']}" placeholder="请输入收件人电话">
+                    </div>
+                    
+                    <div class="fontlist mt8 bhb sizing">
+                        <label class="fonttitle">收件地址</label>
+                        <input type="text" name="from_address" class="publicdiv h40" id="from_address" value="{$expressDetail['from_address']}" placeholder="请输入收件人地址">
+                    </div>
                 </div>
             </div>
             
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">快递单号</label>
-                <input type="text" name="express_number" class="publicdiv h40" id="express_number" value="{$expressDetail['express_number']}" placeholder="请输入快递单号">
+            <div class="publicdiv bf mt10">
+                <p class="publicdiv pt15 pb15 bhb pl10 pr10 sizing" id="contactopen" onClick="contactopen('form');">发件信息<span class="y iconfont" id="form_icon">&#xe64b;</span></p>
+                <div class="publicdiv pl10 pr10 pb15 dn sizing" id="form">
+                    <div class="fontlist mt8 bhb sizing">
+                        <label class="fonttitle">发件人</label>
+                        <input type="text" name="from_name" class="publicdiv h40" id="from_name" value="{$expressDetail['from_name']}" placeholder="请输入发件人">
+                    </div>
+                    
+                    <div class="fontlist mt8 bhb sizing">
+                        <label class="fonttitle">发件电话</label>
+                        <input type="text" name="from_tel" class="publicdiv h40" id="from_tel" value="{$expressDetail['from_tel']}" placeholder="请输入发件人电话">
+                    </div>
+                    
+                    <div class="fontlist mt8 bhb sizing">
+                        <label class="fonttitle">收件地址</label>
+                        <input type="text" name="to_address" class="publicdiv h40" id="to_address" value="{$expressDetail['to_address']}" placeholder="请输入收件人地址">
+                    </div>
+                    
+                    <div class="fontlist mt8 bhb sizing">
+                        <label class="fonttitle">发件时间</label>
+                        <input type="date" name="post_time" class="publicdiv h40 iosform" id="post_time" value="{$expressDetail['post_time']}" placeholder="请输入发件时间">
+                    </div>
+                </div>
             </div>
             
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">付款方式</label>
-                <label class="ui-radio mt5" for="radio"><input type="radio" name="payment" {if condition="$expressDetail['payment'] == 1"}checked{/if} value="1" /> 寄付</label>
-                <label class="ui-radio mt5" for="radio"><input type="radio" name="payment" {if condition="$expressDetail['payment'] == 2"}checked{/if} value="2" /> 到付</label>
+            <div class="publicdiv bf mt10">
+                <p class="publicdiv pt15 pb15 bhb pl10 pr10 sizing" id="contactopen" onClick="contactopen('express');">快递信息<span class="y iconfont" id="express_icon">&#xe64b;</span></p>
+                <div class="publicdiv pl10 pr10 pb15 dn sizing" id="express">
+                    <div class="fontlist mt8 bhb sizing">
+                        <label class="fonttitle">快递公司</label>
+                        <div class="ui-select tselectpub">
+                            {include file="express/express_name" /}
+                        </div>
+                    </div>
+                    
+                    <div class="fontlist mt8 bhb sizing">
+                        <label class="fonttitle">快递单号</label>
+                        <input type="text" name="express_number" class="publicdiv h40" id="express_number" value="{$expressDetail['express_number']}" placeholder="请输入快递单号">
+                    </div>
+                    
+                    <div class="fontlist mt8 bhb sizing">
+                        <label class="fonttitle">付款方式</label>
+                        <label class="ui-radio mt5" for="radio"><input type="radio" name="payment" {if condition="$expressDetail['payment'] == 1"}checked{/if} value="1" /> 寄付</label>
+                        <label class="ui-radio mt5" for="radio"><input type="radio" name="payment" {if condition="$expressDetail['payment'] == 2"}checked{/if} value="2" /> 到付</label>
+                    </div>
+                    
+                    <div class="fontlist mt8 bhb sizing">
+                        <label class="fonttitle">运费</label>
+                        <input type="text" name="price" class="publicdiv h40" id="price" value="{$expressDetail['price']}" placeholder="请输入运费">
+                    </div>
+                    
+                    <div class="fontlist mt8 bhb sizing">
+                        <label class="fonttitle">重量</label>
+                        <input type="text" name="weight" id="weight" class="publicdiv h40" value="{$expressDetail['weight']}" placeholder="单位KG" />
+                    </div>
+                    
+                    <div class="fontlist mt8 bhb sizing">
+                        <label class="fonttitle">物品说明</label>
+                        <textarea name="express_desc" class="publicdiv pt10" rows="4" placeholder="请输入物品说明">{$expressDetail['express_desc']}</textarea>
+                    </div>
+                </div>
             </div>
             
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">运费</label>
-                <input type="text" name="price" class="publicdiv h40" id="price" value="{$expressDetail['price']}" placeholder="请输入运费">
+            <div class="publicdiv bf mt10">
+                <p class="publicdiv pt15 pb15 bhb pl10 pr10 sizing" id="contactopen" onClick="contactopen('remarks');">其它说明<span class="y iconfont" id="remarks_icon">&#xe64b;</span></p>
+                <div class="publicdiv pl10 pr10 pb15 dn sizing" id="remarks">
+                    <div class="publicdiv mt5">
+                        <textarea name="remarks" class="publicdiv pt10" rows="4" placeholder="请输入其它说明">{$expressDetail['remarks']}</textarea>
+                    </div>
+                </div>
             </div>
             
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">重量</label>
-                <input type="text" name="weight" id="weight" class="publicdiv h40" value="{$expressDetail['weight']}" placeholder="单位KG" />
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">物品说明</label>
-                <textarea name="express_desc" class="publicdiv pt10" rows="4" placeholder="请输入物品说明">{$expressDetail['express_desc']}</textarea>
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">其它说明</label>
-                <textarea name="remarks" class="publicdiv pt10" rows="4" placeholder="请输入其它说明">{$expressDetail['remarks']}</textarea>
-            </div>
-            
-            
-            
-            <div class="publicdiv mt15">
+            <div class="publicdiv mt15 pl15 pr15 sizing">
                 <input type="submit" class="ui-btn-lg ui-btn-primary" onClick="formsubif();" value="完成" />
             </div>
             

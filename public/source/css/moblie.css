@@ -79,7 +79,7 @@ body{ padding:0; margin:0; }
 .dial{ height:30px; line-height:30px; padding:0px 15px; border-radius:3px; color:#fff; background:red;}
 
 .fontlist{ width:100%; float:left; min-height:46px; padding-bottom:8px; padding-left:90px; position:relative;}
-.fontlist .fonttitle{ width:80px; height:40px; line-height:40px; position:absolute; top:0; left:0;}
+.fontlist .fonttitle{ width:80px; height:40px; line-height:40px; color:#6d6d6d; position:absolute; top:0; left:0;}
 
 .footer_wp{ width:100%; background:#fff; border-top:0.5px #dedede solid; height:50px; z-index:9; position:fixed; bottom:0px; left:0px; transition-duration:.4s;}
 .footer_wp .p_inster{ width:40px; height:40px; text-align:center; line-height:40px; color:#fff; font-size:30px; border-radius:3px; background:#f09a20; position:absolute; top:0; left:0; right:0; bottom:0; margin:auto; }

@@ -10,15 +10,9 @@
         <h3 class="ac pb20 borb fs24">{if condition="$project_id eq 0"}添加公司{/if} {if condition="$project_id neq 0"}修改公司{/if}</h3>
         
         <div class="publicdiv pl15 pr15 sizing">
-            
             <div class="fontlist mt8 bhb sizing">
                 <label class="fonttitle">公司名称</label>
                 <input type="text" name="name" class="publicdiv h40" id="name" value="{$companyDetail['name']}" placeholder="请输入公司名称" />
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人</label>
-                <input type="text" name="corporation" class="publicdiv h40" id="corporation" value="{$companyDetail['corporation']}" placeholder="请输入法人" />
             </div>
             
             <div class="fontlist mt8 bhb sizing">
@@ -33,22 +27,6 @@
             </div>
             
             <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">公司规模</label>
-                <div class="ui-select">
-                    <select class="h40" name="employee_numbers">
-                        {foreach $employeeTypeList as $key => $type}
-                        <option value="{$key}" {if condition="$companyDetail['employee_numbers'] == $key"}selected{/if}>{$type}</option>
-                        {/foreach}
-                    </select>
-                </div>
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">业务范围</label>
-                <textarea class="publicdiv pt10" name="scope" rows="4" placeholder="请输入业务范围">{$contactData['scope']}</textarea>
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
                 <label class="fonttitle">联系人</label>
                 <input type="text" name="contact_name" class="publicdiv h40" id="contact_name" value="{$companyDetail['contact_name']}" placeholder="请输入联系人" />
             </div>
@@ -56,16 +34,6 @@
             <div class="fontlist mt8 bhb sizing">
                 <label class="fonttitle">联系电话</label>
                 <input type="text" name="contact_number" class="publicdiv h40" id="contact_number" value="{$companyDetail['contact_number']}" placeholder="请输入联系电话" />
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">传真电话</label>
-                <input type="text" name="fax_number" class="publicdiv h40" id="fax_number" value="{$companyDetail['fax_number']}" placeholder="请输入传真电话" />
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">成立时间</label>
-                <input type="date" name="founding_time" id="begin_time" class="publicdiv h40 iosform" value="{$companyDetail['founding_time']}" placeholder="请选择成立时间" /> 
             </div>
             
             <div class="fontlist mt8 bhb sizing">
@@ -78,24 +46,63 @@
                 <input type="text" name="work_address" class="publicdiv h40" id="work_address" value="{$companyDetail['work_address']}" placeholder="请输入办公地址" />
             </div>
             
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">税&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</label>
-                <input type="text" name="tax_number" class="publicdiv h40" id="tax_number" value="{$companyDetail['tax_number']}" placeholder="请输入税号" />
+            <div class="fontlist mt8 sizing">
+                <label class="fonttitle">&nbsp;</label>
+                <span class="iconfont pt8 z" id="inputopen" onClick="inputopen('addInputOpen');"> 展开更多 &#xe688;</span>
             </div>
             
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">开户行</label>
-                <input type="text" name="bank_deposit" class="publicdiv h40" id="bank_deposit" value="{$companyDetail['bank_deposit']}" placeholder="请输入开户行" />
-            </div>
+            <div class="publicdiv dn" id="addInputOpen">
             
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">银行账号</label>
-                <input type="text" name="bank_account" class="publicdiv h40" id="bank_account" value="{$companyDetail['bank_account']}" placeholder="请输入银行账号" />
-            </div>
-            
-            <div class="fontlist mt8 bhb sizing">
-                <label class="fonttitle">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</label>
-                <textarea class="publicdiv pt10" name="remarks" rows="4" placeholder="请输入备注">{$contactData['remarks']}</textarea>
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人</label>
+                    <input type="text" name="corporation" class="publicdiv h40" id="corporation" value="{$companyDetail['corporation']}" placeholder="请输入法人" />
+                </div>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">公司规模</label>
+                    <div class="ui-select">
+                        <select class="h40" name="employee_numbers">
+                            {foreach $employeeTypeList as $key => $type}
+                            <option value="{$key}" {if condition="$companyDetail['employee_numbers'] == $key"}selected{/if}>{$type}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">业务范围</label>
+                    <textarea class="publicdiv pt10" name="scope" rows="4" placeholder="请输入业务范围">{$contactData['scope']}</textarea>
+                </div>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">传真电话</label>
+                    <input type="text" name="fax_number" class="publicdiv h40" id="fax_number" value="{$companyDetail['fax_number']}" placeholder="请输入传真电话" />
+                </div>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">成立时间</label>
+                    <input type="date" name="founding_time" id="begin_time" class="publicdiv h40 iosform" value="{$companyDetail['founding_time']}" placeholder="请选择成立时间" /> 
+                </div>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">税&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</label>
+                    <input type="text" name="tax_number" class="publicdiv h40" id="tax_number" value="{$companyDetail['tax_number']}" placeholder="请输入税号" />
+                </div>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">开户行</label>
+                    <input type="text" name="bank_deposit" class="publicdiv h40" id="bank_deposit" value="{$companyDetail['bank_deposit']}" placeholder="请输入开户行" />
+                </div>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">银行账号</label>
+                    <input type="text" name="bank_account" class="publicdiv h40" id="bank_account" value="{$companyDetail['bank_account']}" placeholder="请输入银行账号" />
+                </div>
+                
+                <div class="fontlist mt8 bhb sizing">
+                    <label class="fonttitle">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</label>
+                    <textarea class="publicdiv pt10" name="remarks" rows="4" placeholder="请输入备注">{$contactData['remarks']}</textarea>
+                </div>
             </div>
             
             <div class="publicdiv mt15">

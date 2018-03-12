@@ -24,23 +24,26 @@
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">姓名</label>
+                        <label class="col-sm-2 control-label fwn"><b class="cred">* </b>姓名</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="name" class="form-control w60" id="name" value="{$contactData['name']}">
+                            <input type="text" name="name" class="form-control w60" id="name" onKeyup="pubinput('name');" placeholder="（必填）" value="{$contactData['name']}">
+                            <p class="cred dn" id="name_prompt">请输入联系姓名</p>
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">联系电话</label>
+                        <label class="col-sm-2 control-label fwn"><b class="cred">* </b>联系电话</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="tel" class="form-control w60" id="tel" value="{$contactData['tel']}">
+                            <input type="text" name="tel" class="form-control w60" id="tel" onKeyup="pubinput('tel');" placeholder="（必填）" value="{$contactData['tel']}">
+                            <p class="cred dn" id="tel_prompt">请输入联系电话</p>
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">详细地址</label>
+                        <label class="col-sm-2 control-label fwn"><b class="cred">* </b>详细地址</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="address" class="form-control w90" id="address" value="{$contactData['address']}">
+                            <input type="text" name="address" class="form-control w90" id="address" onKeyup="pubinput('address');" placeholder="（必填）" value="{$contactData['address']}">
+                            <p class="cred dn" id="address_prompt">请输入详细地址</p>
                         </div>
                     </div>
                     
@@ -160,7 +163,7 @@
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">&nbsp;</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="submit" class="btn btn-primary btn-lg pl20 pr20" onClick="formsubif();" value="完成" />
+                            <input type="submit" class="btn btn-primary btn-lg pl20 pr20" onClick="contactsformsub();" value="完成" />
                         </div>
                     </div>
                     

@@ -11,9 +11,10 @@
                 <h3 class="ac borb pb30">添加公司</h3>
                 <div class="modal-body">
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">公司名称</label>
+                        <label class="col-sm-2 control-label fwn"><b class="cred">* </b>公司名称</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="name" class="form-control w60" id="name" value="{$companyDetail['name']}">
+                            <input type="text" name="name" class="form-control w60" id="name" onKeyup="pubinput('name');" placeholder="（必填）" value="{$companyDetail['name']}">
+                            <p class="cred dn" id="name_prompt">请输入公司名称</p>
                         </div>
                     </div>
                     
@@ -29,16 +30,18 @@
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">联系人</label>
+                        <label class="col-sm-2 control-label fwn"><b class="cred">* </b>联系人</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="contact_name" class="form-control w60" id="contact_name" value="{$companyDetail['contact_name']}">
+                            <input type="text" name="contact_name" class="form-control w60" id="contact_name" onKeyup="pubinput('contact_name');" placeholder="（必填）" value="{$companyDetail['contact_name']}">
+                            <p class="cred dn" id="contact_name_prompt">请输入联系人</p>
                         </div>
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">联系电话</label>
+                        <label class="col-sm-2 control-label fwn"><b class="cred">* </b>联系电话</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="contact_number" class="form-control w60" id="contact_number" value="{$companyDetail['contact_number']}">
+                            <input type="text" name="contact_number" class="form-control w60" id="contact_number" onKeyup="pubinput('contact_number');" placeholder="（必填）" value="{$companyDetail['contact_number']}">
+                            <p class="cred dn" id="contact_number_prompt">请输入联系电话</p>
                         </div>
                     </div>
                     
@@ -50,9 +53,17 @@
                     </div>
                     
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">办公地址</label>
+                        <label class="col-sm-2 control-label fwn"><b class="cred">* </b>办公地址</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="text" name="work_address" class="form-control w60" id="work_address" value="{$companyDetail['work_address']}">
+                            <input type="text" name="work_address" class="form-control w60" id="work_address" onKeyup="pubinput('work_address');" placeholder="（必填）" value="{$companyDetail['work_address']}">
+                            <p class="cred dn" id="work_address_prompt">请输入办公地址</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group w100 mrn mln z">
+                        <label class="col-sm-2 control-label fwn">&nbsp;</label>
+                        <div class="col-sm-7 pln prn">
+                            <a href="javascript:void(0);" class="iconfont" id="inputopen" title="展开更多" onClick="inputopen('addInputOpen');">展开更多 &#xe688;</a>
                         </div>
                     </div>
                     
@@ -141,13 +152,6 @@
                         </div>
                     </div>
                     
-                    <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label fwn">&nbsp;</label>
-                        <div class="col-sm-7 pln prn">
-                            <a href="javascript:void(0);" class="iconfont" id="inputopen" title="展开更多" onClick="inputopen('addInputOpen');">展开更多 &#xe688;</a>
-                        </div>
-                    </div>
-                    
                     <script type="text/javascript">
                         //实例化编辑器
                         //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
@@ -176,7 +180,7 @@
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">&nbsp;</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="submit" class="btn btn-primary btn-lg pl20 pr20" onClick="formsubif();" value="完成" />
+                            <input type="submit" class="btn btn-primary btn-lg pl20 pr20" onClick="companyformsub();" value="完成" />
                         </div>
                     </div>
                     
