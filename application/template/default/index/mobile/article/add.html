@@ -7,7 +7,7 @@
 
 <div class="publicdiv pt20 pb20 mb10 bf sizing">
     <form action="{:url('/index/article/add?id='.$article_detail['id'])}" id="formaddress" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
-        <h3 class="ac pb20 borb fs24">{if condition="$id eq 0"}添加文档{/if} {if condition="$id neq 0"}修改文档{/if}</h3>
+        <h3 class="ac pb20 borb fs24">{if condition="$article_detail['id'] > 0"}修改{else}添加{/if}文档h3>
         
         <div class="publicdiv pl15 pr15 sizing">
             

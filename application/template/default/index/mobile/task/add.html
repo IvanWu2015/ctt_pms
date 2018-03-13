@@ -9,7 +9,7 @@
     {if condition="$task_id eq 0"}<form action="{:url('/index/task/add/?project_id='.$project_id)}" method="post" class="form-horizontal" role="form">{/if}
     {if condition="$task_id neq 0"}<form action="{:url('/index/task/add?task_id='.$task_id)}" method="post" class="form-horizontal" role="form">{/if}
     <div class="publicdiv pl20 pr20 pt8 bf sizing">
-        <h3 class="ac">{if condition="$task_id eq 0"}添加任务{/if}{if condition="$task_id neq 0"}修改任务{/if}</h3>
+        <h3 class="ac">{if condition="$task_details['id'] > 0"}修改{else}添加{/if}任务</h3>
 
         <div class="publicdiv bf sizing">
             <div class="publicdiv pr pln z">

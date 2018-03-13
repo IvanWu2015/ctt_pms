@@ -7,7 +7,7 @@
 
 <div class="publicdiv pt20 pb20 mb10 bf sizing">
     <form action="{:url('/index/weburl/add?id='.$weburl_detail['id'])}" id="formaddress" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
-        <h3 class="ac pb20 borb fs24">{if condition="$id eq 0"}添加网址{/if} {if condition="$id neq 0"}修改网址{/if}</h3>
+        <h3 class="ac pb20 borb fs24">{if condition="$weburl_detail['id'] > 0"}修改{else}添加{/if}网址</h3>
         
         <div class="publicdiv pl15 pr15 sizing">
             

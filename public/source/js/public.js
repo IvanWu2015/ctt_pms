@@ -61,14 +61,24 @@ function loadWindow(url) {
  return;
  }*/
  
-function expressinf(id){    //快递添加页，联系人信息载入
+function expressinf(id){    //快递添加页，联系人信息载入         收件信息
     var name = jQuery('#extslist_' + id + ' #ex_name').text();              //姓名
     var tel = jQuery('#extslist_' + id + ' #ex_tel').text();                //电话
     var address = jQuery('#extslist_' + id + ' #ex_address').text();        //地址
-    
+
     jQuery('#to_name').val(name);
     jQuery('#to_tel').val(tel);
     jQuery('#from_address').val(address);
+} 
+
+function from_expressinf(id){    //快递添加页，联系人信息载入    发件信息
+    var name = jQuery('#fextslist_' + id + ' #ex_name').text();              //姓名
+    var tel = jQuery('#fextslist_' + id + ' #ex_tel').text();                //电话
+    var address = jQuery('#fextslist_' + id + ' #ex_address').text();        //地址
+
+    jQuery('#from_name').val(name);
+    jQuery('#from_tel').val(tel);
+    jQuery('#to_address').val(address);
 } 
 
 function inputopen(name){
@@ -116,7 +126,6 @@ function pubselect(name){
 function articleformsub(){      //文档表单判断
     var name = jQuery('#name').val();               //标题
     var class_id = jQuery('#class_id').val();       //分类
-    var project_id = jQuery('#project_id').val();   //项目
     var pid = 0;
     
     if (name.length < 1) {	//标题
@@ -128,12 +137,6 @@ function articleformsub(){      //文档表单判断
     if (class_id  == '0') {	//分类
         jQuery('#class_id').css({border: '1px red solid'});
         jQuery('#class_id_prompt').show();
-        pid = 1;
-    }
-    
-    if (project_id == '0') {	//项目
-        jQuery('#project_id').css({border: '1px red solid'});
-        jQuery('#project_id_prompt').show();
         pid = 1;
     }
     
@@ -375,6 +378,14 @@ function loadexopen(){      //从联系人中载入
     }
 }
 
+function fromopen(){      //从联系人中载入
+    if(jQuery('#fromwp').css('display') == 'none'){
+        jQuery('#fromwp').slideDown();
+    }else{
+        jQuery('#fromwp').slideUp();
+    }
+}
+
 function contactssub(url){     //ajax请求添加到联系人
     jQuery.ajax({
         type: 'post',
@@ -399,32 +410,63 @@ function contactssub(url){     //ajax请求添加到联系人
     });
 }
 
-function exsubmit(url){     //ajax请求载入联系数据
-    jQuery.ajax({
-        type: 'post',
-        url: url,
-        data: {
-            ac:'get_contact',
-            keyword: jQuery('#keyword').val()
-        },
-        dataType: 'json',
-        success: function (data) {
-            if(data.length > 0){
-                jQuery('#extsul').html('');
-                var inshtml = '';
-                for(var i=0; i < data.length; i++){
-                    var inswp = inshtml + "<li id='extslist_" + i + "' onClick='expressinf(" + i + ");'>" +
-                                "<h3><span id='ex_name'>" + data[i].name + "</span><span id='ex_tel' class='y fs12'>" + data[i].tel + "</span></h3>"+
-                                "<p id='ex_address'>" + data[i].address + "</p>"+
-                                "</li>";
-                    jQuery('#extsul').append(inswp);
+function from_exsubmit(url){     //ajax请求载入联系数据 发件信息
+    if(jQuery('#from_keyword').val() != ""){
+        jQuery.ajax({
+            type: 'post',
+            url: url,
+            data: {
+                ac:'get_contact',
+                keyword: jQuery('#from_keyword').val()
+            },
+            dataType: 'json',
+            success: function (data) {
+                if(data.length > 0){
+                    jQuery('#from_extsul').html('');
+                    var from_extsulhtml = '';
+                    for(var i=0; i < data.length; i++){
+                        var from_extsul = from_extsulhtml + "<li id='fextslist_" + i + "' onClick='from_expressinf(" + i + ");'>" +
+                                    "<h3><span id='ex_name'>" + data[i].name + "</span><span id='ex_tel' class='y fs12'>" + data[i].tel + "</span></h3>"+
+                                    "<p id='ex_address'>" + data[i].address + "</p>"+
+                                    "</li>";
+                        jQuery('#from_extsul').append(from_extsul);
+                    }
+                }else{
+                    jQuery('#from_extsul').html('<p class="ac pt10">未搜索到相关数据~</p>');
                 }
-            }else{
-                jQuery('#extsul').html('<p class="ac pt10">未搜索到相关数据~</p>');
             }
-        }
-    });
+        });
+    }
 }
+
+function exsubmit(url){     //ajax请求载入联系数据 收件信息
+    if(jQuery('#keyword').val() != ""){
+        jQuery.ajax({
+            type: 'post',
+            url: url,
+            data: {
+                ac:'get_contact',
+                keyword: jQuery('#keyword').val()
+            },
+            dataType: 'json',
+            success: function (data) {
+                if(data.length > 0){
+                    jQuery('#extsul').html('');
+                    var inshtml = '';
+                    for(var i=0; i < data.length; i++){
+                        var inswp = inshtml + "<li id='extslist_" + i + "' onClick='expressinf(" + i + ");'>" +
+                                    "<h3><span id='ex_name'>" + data[i].name + "</span><span id='ex_tel' class='y fs12'>" + data[i].tel + "</span></h3>"+
+                                    "<p id='ex_address'>" + data[i].address + "</p>"+
+                                    "</li>";
+                        jQuery('#extsul').append(inswp);
+                    }
+                }else{
+                    jQuery('#extsul').html('<p class="ac pt10">未搜索到相关数据~</p>');
+                }
+            }
+        });
+    }
+}   
 
 function fromcontactssub(url){     //发件信息  ajax请求添加到联系人
     jQuery.ajax({
@@ -454,6 +496,7 @@ jQuery(document).keydown(function (e) {
     if (e.which == 13) {     //按回车键键提交 从联系人中载入数据搜索
         if(jQuery('#loadwp').css('display') == "block"){
             exsubmit();
+            from_exsubmit();
             event.preventDefault();
         }
     }

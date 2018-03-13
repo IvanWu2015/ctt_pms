@@ -7,7 +7,7 @@
 
 <div class="publicdiv pt20 pb20 mb10 bf sizing">
     <form action="{:url('/index/contacts/add?id='.$contactData['id'])}" id="formaddress" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
-        <h3 class="ac pb20 borb fs24">{if condition="$project_id eq 0"}添加联系人{/if} {if condition="$project_id neq 0"}修改联系人{/if}</h3>
+        <h3 class="ac pb20 borb fs24">{if condition="$contactData['id'] > 0"}修改{else}添加{/if}联系人</h3>
         
         <div class="publicdiv pl15 pr15 sizing">
             <div class="fontlist mt8 bhb sizing">

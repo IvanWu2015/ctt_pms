@@ -7,7 +7,7 @@
 <div class="container" style="width:1170px;">
 <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
     <div class="publicdiv mb20 ptlrb10 bf sizing">
-        <h3 class="ac">{if condition="$project_id eq 0"}添加项目{/if} {if condition="$project_id neq 0"}修改项目{/if}</h3>
+        <h3 class="ac">{if condition="$project_details['id'] > 0"}修改{else}添加{/if}项目</h3>
         <form action="" method="post" class="form-horizontal" role="form">
             <div class="modal-body">
             

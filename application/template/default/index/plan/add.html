@@ -6,7 +6,7 @@
     <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
         <div class="publicdiv mb20 ptlrb10 bf sizing">
             <form action="{:url('/index/plan/add?product_id='.$product_id.'&id='.$plan_id)}" method="post" class="form-horizontal" role="form">
-                <h3 class="ac">添加需求</h3>
+                <h3 class="ac">{if condition="$plan_detail['id'] > 0"}修改{else}添加{/if}需求</h3>
                 <div class="modal-body">
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label" style="width:130px;"><b class="cred">* </b>需求名称：</label>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="form-group w100 mrn mln z">
-                        <label class="col-sm-2 control-label" style="width:130px;"><b class="cred">* </b>任务说明：</label>
+                        <label class="col-sm-2 control-label" style="width:130px;"><b class="cred">* </b>需求说明：</label>
                         <div class="col-sm-10 pln prn" style="width:910px;">
                             <!--<textarea id="explainmessage" name="desc" class="form-control">{$task_details['desc']}</textarea>-->
                             <script id="editor" type="text/plain" class="z" name="content" style="width:100% !important; height:250px;">{$product_detail['content']}</script>

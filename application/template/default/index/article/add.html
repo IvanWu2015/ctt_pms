@@ -8,7 +8,7 @@
 <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
     <div class="publicdiv mb20 ptlrb10 bf sizing">
     <form action="{:url('/index/article/add?id='.$article_detail['id'])}" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
-        <h3 class="ac">添加文档</h3>
+        <h3 class="ac">{if condition="$article_detail['id'] > 0"}修改{else}添加{/if}文档</h3>
             <div class="modal-body">
                     
                 <div class="form-group w100 mrn mln z">
@@ -35,13 +35,12 @@
                 <div class="form-group w100 mrn mln z">
                     <label class="col-sm-2 control-label" style="width:130px;"><b class="cred">* </b>项目：</label>
                     <div class="col-sm-10 pln prn" style="width:910px;">
-                        <select name="project_id" class="form-control" id="project_id" onChange="pubselect('project_id');">
+                        <select name="project_id" class="form-control" id="project_id">
                             <option value='0'>无</option>
                             {foreach $project_list as $temp_project}
                             <option {if condition="$temp_project['id'] == $article_detail['project']"}selected='selected'{/if} value="{$temp_project['id']}" >{$temp_project['name']}</option>
                             {/foreach}
                         </select>
-                        <p class="cred dn" id="project_id_prompt">请选择文档分类</p>
                     </div>
                 </div>
                 <div class="form-group w100 mrn mln z">
