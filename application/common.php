@@ -1079,10 +1079,9 @@ function getUser($username, $onlyRealname = 1) {
     //读取用户列表并写入缓存
     if (empty($userlist)) {
         $userlist = db('user')->column('uid,username,realname', 'username');
-        //cache('userlist', $userlist, 1800);    //缓存时间为半小时
+        cache('userlist', $userlist, 1800);    //缓存时间为半小时
     }
     $user = $onlyRealname == 1 ? $userlist[$username]['realname'] : $userlist[$username];
-
     return $user;
 }
 

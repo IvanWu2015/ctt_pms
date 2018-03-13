@@ -22,8 +22,8 @@ class article extends Common {
     //列表页
     public function lists() {
         $acl = input('param.acl', 'all', 'addslashes');
-        $username = input('get.username', '', 'addslashes');
-        $class_id = input('get.class_id', '0', 'intval');
+        $username = input('username', '', 'addslashes');
+        $class_id = input('class_id', '0', 'intval');
         $data['username'] = array('eq', 1);
         //列表的筛选条件
         if ($acl == 'all') {
@@ -37,19 +37,19 @@ class article extends Common {
         $article_count = $article
                         ->where(function ($query) {
                             //搜索内容与筛选
-                            if (input('get.class_id', '0', 'intval') > 0) {
-                                $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
+                            if (input('class_id', '0', 'intval') > 0) {
+                                $data['id'] = array('eq', input('class_id', '0', 'intval')); //分类ID
                             }
                             $data['acl'] = array('eq', 'private');
                             $data['username'] = array('eq', $this->_G['username']);
                             $data['status'] = array('eq', 0);
                             $query->where($data);
                         })->whereOr(function ($query) {
-                    if (input('get.class_id', '0', 'intval') > 0) {
-                        $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
+                    if (input('class_id', '0', 'intval') > 0) {
+                        $data['id'] = array('eq', input('class_id', '0', 'intval')); //分类ID
                     }
-                    if (strlen(input('get.username', '', 'addslashes')) > 0) {
-                        $data['username'] = array('eq', input('get.username', '', 'addslashes'));
+                    if (strlen(input('username', '', 'addslashes')) > 0) {
+                        $data['username'] = array('eq', input('username', '', 'addslashes'));
                     }
                     $data['status'] = array('eq', 0);
                     $data['acl'] = array('eq', 'open');
@@ -58,22 +58,22 @@ class article extends Common {
         $article_list = $article
                         ->where(function ($query) {
                             //搜索内容与筛选
-                            if (input('get.class_id', '0', 'intval') > 0) {
-                                $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
+                            if (input('class_id', '0', 'intval') > 0) {
+                                $data['id'] = array('eq', input('class_id', '0', 'intval')); //分类ID
                             }
                             $data['acl'] = array('eq', 'private');
                             $data['username'] = array('eq', $this->_G['username']);
                             $data['status'] = array('eq', 0);
-                            if(strlen(input('get.username', '', 'addslashes')) > 0){
-                                $newdata['username'] = array('eq',input('get.username', '', 'addslashes'));
+                            if(strlen(input('username', '', 'addslashes')) > 0){
+                                $newdata['username'] = array('eq',input('username', '', 'addslashes'));
                             }
                             $query->where($data)->where($newdata);
                         })->whereOr(function ($query) {
-                    if (input('get.class_id', '0', 'intval') > 0) {
-                        $data['id'] = array('eq', input('get.class_id', '0', 'intval')); //分类ID
+                    if (input('class_id', '0', 'intval') > 0) {
+                        $data['id'] = array('eq', input('class_id', '0', 'intval')); //分类ID
                     }
-                    if (strlen(input('get.username', '', 'addslashes')) > 0) {
-                        $data['username'] = array('eq', input('get.username', '', 'addslashes'));
+                    if (strlen(input('username', '', 'addslashes')) > 0) {
+                        $data['username'] = array('eq', input('username', '', 'addslashes'));
                     }
                     $data['status'] = array('eq', 0);
                     $data['acl'] = array('eq', 'open');
@@ -111,17 +111,17 @@ class article extends Common {
 
     //详情页
     public function detail() {
-        $article_id = input('get.id', '0', 'intval');
+        $article_id = input('id', '0', 'intval');
         $article = db('Article');
         if ($article_id > 0) {
             $article_detail = $article->where(function ($query) {
-                        $data['id'] = array('eq', input('get.id', '0', 'intval'));
+                        $data['id'] = array('eq', input('id', '0', 'intval'));
                         $data['acl'] = array('eq', 'private');
                         $data['username'] = array('eq', $this->_G['username']);
                         $data['status'] = array('eq', 0);
                         $query->where($data);
                     })->whereOr(function ($query) {
-                        $data['id'] = array('eq', input('get.id', '0', 'intval'));
+                        $data['id'] = array('eq', input('id', '0', 'intval'));
                         $data['status'] = array('eq', 0);
                         $data['acl'] = array('eq', 'open');
                         $query->where($data);
@@ -159,7 +159,7 @@ class article extends Common {
      * @return type
      */
     public function add() {
-        $article_id = input('get.id', '0', 'intval');
+        $article_id = input('id', '0', 'intval');
         $sort_list = DB('Class')->where(['status' => 1])->select(); //分类列表
         $project_list = Db::name('Project')->where($data)->order("id DESC")->paginate(15); //项目列表
         if ($article_id > 0) {
@@ -170,15 +170,15 @@ class article extends Common {
         }
         if (request()->isPost()) {
             $data = [
-                'project' => input('post.project_id', '0', 'intval'),
-                'class' => input('post.class_id', '0', 'intval'),
-                'title' => input('post.title', '', 'addslashes'),
-                'contents' => input('post.contents', '', 'addslashes'),
-                'acl' => input('post.acl', 'open', 'addslashes'),
+                'project' => input('project_id', '0', 'intval'),
+                'class' => input('class_id', '0', 'intval'),
+                'title' => input('title', '', 'addslashes'),
+                'contents' => input('contents', '', 'addslashes'),
+                'acl' => input('acl', 'open', 'addslashes'),
                 'time' => date('Y-m-d H:i:s'),
                 'status' => 0,
             ];
-            if (input('post.class_id', '0', 'intval') == 0) {
+            if (input('class_id', '0', 'intval') == 0) {
                 $this->error("必须选择分类");
             }
             save_log($this->_G['uid'], $this->_G['username']);
@@ -188,7 +188,7 @@ class article extends Common {
                 $this->success('修改成功', 'index/article/lists');
                 //添加
             } else {
-                $data['username'] = array('eq', $this->_G['username']);
+                $data['username'] = $this->_G['username'];
                 DB('Article')->insert($data);
                 $this->success('添加成功', 'index/article/lists');
             }
