@@ -15,7 +15,7 @@
     <link href="tpl_css/font/iconfont.css" rel="stylesheet">
     
     <script type="text/javascript" src="tpl_js/public_moblie.js"></script>
-    <script type="text/javascript" src="tpl_static/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="tpl_static/third/jquery-2.1.4.min.js"></script>
     <link rel="stylesheet" href="tpl_css/frozen/css/frozen.css">
     <link rel="stylesheet" href="tpl_css/frozen/demo/demo.css">
     <script src="tpl_css/frozen/lib/zepto.min.js"></script>
