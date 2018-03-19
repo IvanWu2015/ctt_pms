@@ -4,6 +4,8 @@
 {/block}
 
 {block name="body"}
+<script type="text/javascript" src="tpl_js/express_add.js"></script>
+
 <div class="container" style="width:1170px;">
     <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
         <div class="publicdiv mb20 ptlrb10 bf sizing">
@@ -43,7 +45,7 @@
                                 </div>
                             </div>
                             
-                            <div class="publicdiv addexwp sizing" id="contactssubwp">
+                            <div class="w85 z addexwp sizing" id="contactssubwp">
                                 <div class="form-group w100 mrn mln z">
                                     <label class="col-sm-3 control-label fwn">所属公司</label>
                                     <div class="col-sm-9 pln prn selectpub">
@@ -114,6 +116,28 @@
                                     <label onClick="from_contactsopen();"><input type="checkbox" id="addfromcontacts" /> 添加到公司联系人</label>
                                 </div>
                             </div>
+                            
+                            <div class="w85 z addexwp sizing" id="contactssubwp_from">
+                                <div class="form-group w100 mrn mln z">
+                                    <label class="col-sm-3 control-label fwn">所属公司</label>
+                                    <div class="col-sm-9 pln prn selectpub">
+                                        <select name="company_id" id="company_id" class="w80">
+                                            {foreach $company_list as  $company}
+                                            <option value="{$company.company_id}">{$company.name}</option>
+                                            {/foreach}
+                                        </select>
+                                        <p class="cred">请选择所属公司</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group w100 mrn mln z">
+                                    <label class="col-sm-3 control-label fwn">&nbsp;</label>
+                                    <div class="col-sm-9 pln prn fwn">
+                                        <input type="button" class="btn btn-info" onClick="fromcontactssub('{:url('/index/express/add')}');" value="添加" />
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                         
                         <div class="w40 z bor ptlrb10 br3 loadwp sizing dn" id="fromwp">
@@ -125,27 +149,6 @@
                             <ul class="publicdiv extsul" id="from_extsul"></ul>
                         </div>
                         
-                    </div>
-                    
-                    <div class="publicdiv addexwp sizing" id="contactssubwp_from">
-                        <div class="form-group w100 mrn mln z">
-                            <label class="col-sm-3 control-label fwn">所属公司</label>
-                            <div class="col-sm-9 pln prn selectpub">
-                                <select name="company_id" id="company_id" class="w80">
-                                    {foreach $company_list as  $company}
-                                    <option value="{$company.company_id}">{$company.name}</option>
-                                    {/foreach}
-                                </select>
-                                <p class="cred">请选择所属公司</p>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group w100 mrn mln z">
-                            <label class="col-sm-3 control-label fwn">&nbsp;</label>
-                            <div class="col-sm-9 pln prn fwn">
-                                <input type="button" class="btn btn-info" onClick="fromcontactssub('{:url('/index/express/add')}');" value="添加" />
-                            </div>
-                        </div>
                     </div>
                     
                     <div class="g_fieldset sizing">
@@ -236,21 +239,6 @@
                             for (var i = 0, btn; btn = btns[i++];) {
                                 UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
                             }
-                        }
-                        
-                        function otherdesc(name){
-                            if(name == '其他'){
-                                jQuery('#other_desc').show();
-                            }else{
-                                jQuery('#other_desc').hide();
-                                jQuery('#other_desc').val('');  //清空“其他”输入框的值
-                                jQuery('#other').val('');   //清空“其他”单选按钮的值
-                            }
-                        }
-                        
-                        function otherinput(){  //物品说明 其他 输入框架正在输入
-                            var other_desc = jQuery('#other_desc').val();   //获取正在输入的内容
-                            jQuery('#other').val(other_desc);   //将获取正在输入的内容传到 “其他”单选按钮里
                         }
                         
                         jQuery(function(){

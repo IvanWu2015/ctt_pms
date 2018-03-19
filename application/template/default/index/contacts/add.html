@@ -8,7 +8,10 @@
     <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
         <div class="publicdiv mb20 ptlrb10 bf sizing">
             <form action="{:url('/index/contacts/add?id='.$contactData['id'])}" id="formaddress" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
-                <h3 class="ac borb pb30">{if condition="$contactData['id'] > 0"}修改{else}添加{/if}联系人</h3>
+                <h3 class="ac borb pb30">
+                    {if condition="$contactData['id'] > 0"}修改{else}添加{/if}联系人
+                    <a href="{:url('/index/company/lists')}" class="btn btn-success y ml15">公司列表</a>
+                </h3>
                 <div class="modal-body">
                     
                     <div class="form-group w100 mrn mln z">
@@ -19,7 +22,7 @@
                                 <option value="{$company['company_id']}" {if condition="$contactData['company_id'] == $company['company_id']"}selected{/if}>{$company['name']}</option>
                                 {/foreach}
                             </select>
-                            <a href="{:url('/index/company/lists')}" class="btn btn-success z ml15">公司列表</a>
+                            <a href="javascript:void(0);" class="btn btn-primary z ml15">载入联系人</a>
                         </div>
                     </div>
                     

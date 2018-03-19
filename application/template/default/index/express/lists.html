@@ -66,6 +66,7 @@
                     <th class="bbno pt15 pb15">付款</th>
                     <th class="bbno pt15 pb15">运费</th>
                     <th class="bbno pt15 pb15">重量</th>
+                    <th class="bbno pt15 pb15 w10">物品</th>
                     <th class="bbno pt15 pb15">时间</th>
                     <th class="ac bbno pt15 pb15">操作</th>
                 </tr>
@@ -86,6 +87,7 @@
                     <td title="付款">{if condition="$express['payment'] == 1"}寄付{else}到付{/if}</td>
                     <td title="运费">{$express['price']}</td>
                     <td title="重量">{$express['weight']}KG</td>
+                    <td class="w10" title="物品">{$express['express_desc']}</td>
                     <td title="时间">{$express['add_time']}</td>
                     <td class="ac iconfont">
                         <a href="{:url('/index/express/add/?id='.$express['id'])}" class="btn-link" title="编辑">&#xe71d;</a>
