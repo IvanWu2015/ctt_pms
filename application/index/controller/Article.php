@@ -21,7 +21,7 @@ class article extends Common {
 
     //列表页
     public function lists() {
-        $acl = input('param.acl', 'all', 'addslashes');
+        $acl = input('acl', 'all', 'addslashes');
         $username = input('username', '', 'addslashes');
         $class_id = input('class_id', '0', 'intval');
         $data['username'] = array('eq', 1);
@@ -82,8 +82,8 @@ class article extends Common {
 
 
         $page = $article_list->render(); // 分页显示输出
-        $deleted = input('param.deleted', 0, 'intval');
-        $article_id = input('param.id', 0, 'intval');
+        $deleted = input('deleted', 0, 'intval');
+        $article_id = input('id', 0, 'intval');
         $sort_list = DB('Class')->where(['status' => 0])->select(); //分类列表
         $product_list = DB('Product')->where(['deleted' => '0'])->field('name,code')->select(); //产品列表
         $user_list = DB('User')->where(['deleted' => '0'])->select(); //用户列表

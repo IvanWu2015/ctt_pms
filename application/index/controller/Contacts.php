@@ -20,7 +20,23 @@ class Contacts extends Common {
 
     //联系人列表
     public function lists() {
+        //删除联系人
+        $deleted = input('deleted', 0, 'intval');
+        $contact_id = input('id', 0, 'intval');
+        if ($deleted > 0) {
+            $contact_detail = DB::name('contact')->where(['id' => $contact_id])->find();
+            //管理员或本人可删除
+            if ($this->_G['is_admin'] == 1 || $contact_detail['add_uid'] == $this->_G['uid']) {
+                DB::name('contact')->where(['id' => $contact_id])->update(['status' => -1]);
+                save_log($this->_G['uid'], $this->_G['username']);
+                //$this->success('删除成功', 'index/contact/lists');
+            } else {
+                $this->error('没有删除权限');
+            }
+        }
+
         $name = input('name', '', 'addslashes');
+        $map['status'] = array('egt', 0);
         if (!empty($name)) {
             $map['name'] = array('like', "%{$name}%");
         }
@@ -30,6 +46,7 @@ class Contacts extends Common {
         }
         $contacts_list = DB::name('Contact')
                 ->where($map)
+                ->order('id DESC')
                 ->paginate(20);
         $page = $contacts_list->render(); // 分页显示输出
         $navtitle = '联系人列表' . $this->navtitle;

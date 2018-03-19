@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2018-03-06 17:45:36
+Date: 2018-03-19 11:31:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1463,12 +1463,14 @@ CREATE TABLE `chinatt_pms_article` (
   `time` datetime NOT NULL COMMENT '添加时间',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0正常 -1删除',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='文章列表';
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='文章列表';
 
 -- ----------------------------
 -- Records of chinatt_pms_article
 -- ----------------------------
 INSERT INTO `chinatt_pms_article` VALUES ('14', 'ivan', '0', '0', '65', 'test', '<p>asdf</p>', 'open', '2017-05-23 12:04:26', '0');
+INSERT INTO `chinatt_pms_article` VALUES ('15', '', '19', '0', '59', '`12`12', '<p>`123`1312312323</p>', 'open', '2018-03-13 10:17:24', '0');
+INSERT INTO `chinatt_pms_article` VALUES ('16', 'ivan', '20', '0', '63', '基本原则零售业地asd', '<p>asdfasdfasdfasdfasdf</p>', 'open', '2018-03-13 10:22:38', '0');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_class
@@ -1608,7 +1610,7 @@ CREATE TABLE `chinatt_pms_contact` (
   `last_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
   `remarks` text NOT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='联系人';
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='联系人';
 
 -- ----------------------------
 -- Records of chinatt_pms_contact
@@ -1621,6 +1623,9 @@ INSERT INTO `chinatt_pms_contact` VALUES ('22', '0', '2342', '234234', '0', '0',
 INSERT INTO `chinatt_pms_contact` VALUES ('23', '0', '123', '123', '0', '0', '', './uploads/20180301\\7f6f255762b98166ceefd05b499b1082.jpg', '', '', '', '0', '', '2', '2018-03-01 09:52:48', '0', '0000-00-00 00:00:00', '');
 INSERT INTO `chinatt_pms_contact` VALUES ('24', '0', '12313', '', '127', '0', '', './uploads/20180301\\dc191f696cfa836427ea6591ce3b7e12.jpg', '', '', '', '0', '', '2', '2018-03-01 09:53:25', '0', '0000-00-00 00:00:00', '');
 INSERT INTO `chinatt_pms_contact` VALUES ('25', '0', '123', '12312', '0', '0', '', '', '', '', '', '0', '', '2', '2018-03-01 09:57:26', '0', '0000-00-00 00:00:00', '');
+INSERT INTO `chinatt_pms_contact` VALUES ('26', '3', '', '0', '0', '0', '0', '', '0', '', '0', '0', '', '2', '2018-03-09 10:34:35', '0', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_contact` VALUES ('27', '1', '测试自动添加', '0', '0', '0', '0', '', '0', '5655', '0', '0', '234444', '2', '2018-03-09 10:35:02', '0', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_contact` VALUES ('28', '4', '', '0', '0', '0', '0', '', '0', '', '0', '0', '', '2', '2018-03-09 10:36:24', '0', '0000-00-00 00:00:00', '0');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_dept
@@ -1656,34 +1661,43 @@ CREATE TABLE `chinatt_pms_express` (
   `express_desc` varchar(255) NOT NULL DEFAULT '' COMMENT '物品说明',
   `from_name` varchar(200) NOT NULL DEFAULT '' COMMENT '发件人名称',
   `from_tel` varchar(50) NOT NULL DEFAULT '' COMMENT '发件人电话',
+  `from_address` varchar(255) NOT NULL DEFAULT '' COMMENT '发件人地址',
   `to_name` varchar(30) NOT NULL DEFAULT '' COMMENT '收件人名称',
   `to_tel` varchar(50) NOT NULL DEFAULT '' COMMENT '收件人电话',
+  `to_address` varchar(255) NOT NULL DEFAULT '' COMMENT '收件人地址',
   `company_id` int(8) NOT NULL DEFAULT '0' COMMENT '公司ID',
   `contact_id` int(8) NOT NULL DEFAULT '0' COMMENT '联系人ID',
   `payment` tinyint(1) NOT NULL DEFAULT '0' COMMENT '付款方式 1寄付 2到付',
   `price` float(7,3) NOT NULL DEFAULT '0.000' COMMENT '运费',
   `weight` smallint(4) NOT NULL DEFAULT '0' COMMENT '重量 单位KG',
   `remarks` varchar(3) NOT NULL DEFAULT '' COMMENT '其它说明',
+  `post_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '发件日期',
   `add_uid` int(8) NOT NULL DEFAULT '0' COMMENT '添加人uid',
   `add_name` varchar(255) NOT NULL DEFAULT '' COMMENT '添加人名称',
   `add_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '添加时间',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '-1 删除, 0正常',
   PRIMARY KEY (`id`),
   KEY `shipping_code` (`express_number`,`to_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of chinatt_pms_express
 -- ----------------------------
-INSERT INTO `chinatt_pms_express` VALUES ('3', '申通快递', 'sto_express', '江、浙、沪地区首重为15元/KG，其他地区18元/KG， 续重均为5-6元/KG， 云南地区为8元', '0', '0', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_express` VALUES ('13', '顺丰速运', 'sf_express', '江、浙、沪地区首重15元/KG，续重2元/KG，其余城市首重20元/KG', '0', '0', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_express` VALUES ('7', '上门取货', 'cac', '买家自己到商家指定地点取货', '0', '1', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_express` VALUES ('6', '市内快递', 'flat', '固定运费的配送方式内容', '0', '1', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_express` VALUES ('8', '中通速递', 'zto', '中通快递的相关说明。保价费按照申报价值的2％交纳，但是，保价费不低于100元，保价金额不得高于10000元，保价金额超过10000元的，超过的部分无效', '2%', '0', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_express` VALUES ('9', 'EMS 国内邮政特快专递', 'ems', 'EMS 国内邮政特快专递描述内容', '0', '0', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_express` VALUES ('10', '邮政快递包裹', 'post_express', '邮政快递包裹的描述内容。', '1%', '0', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_express` VALUES ('11', '城际快递', 'city_express', '配送的运费是固定的', '0', '1', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_express` VALUES ('12', '邮局平邮', 'post_mail', '邮局平邮的描述内容。', '0', '0', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
-INSERT INTO `chinatt_pms_express` VALUES ('14', '圆通速递', 'yto', '上海圆通物流（速递）有限公司经过多年的网络快速发展，在中国速递行业中一直处于领先地位。为了能更好的发展国际快件市场，加快与国际市场的接轨，强化圆通的整体实力，圆通已在东南亚、欧美、中东、北美洲、非洲等许多城市运作国际快件业务', '0', '1', '1', '', '0', '0', '0', '0.000', '2', '0', '0', '', '0000-00-00 00:00:00');
+INSERT INTO `chinatt_pms_express` VALUES ('3', '申通快递', 'sto_express', '江、浙、沪地区首重为15元/KG，其他地区18元/KG， 续重均为5-6元/KG， 云南地区为8元', '0', '0', '', '1', '', '', '0', '0', '0', '0.000', '2', '0', '0000-00-00 00:00:00', '0', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_express` VALUES ('13', '顺丰速运', 'sf_express', '江、浙、沪地区首重15元/KG，续重2元/KG，其余城市首重20元/KG', '0', '0', '', '1', '', '', '0', '0', '0', '0.000', '2', '0', '0000-00-00 00:00:00', '0', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_express` VALUES ('7', '上门取货', 'cac', '买家自己到商家指定地点取货', '0', '1', '', '1', '', '', '0', '0', '0', '0.000', '2', '0', '0000-00-00 00:00:00', '0', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_express` VALUES ('6', '市内快递', 'flat', '固定运费的配送方式内容', '0', '1', '', '1', '', '', '0', '0', '0', '0.000', '2', '0', '0000-00-00 00:00:00', '0', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_express` VALUES ('8', '中通速递', 'zto', '中通快递的相关说明。保价费按照申报价值的2％交纳，但是，保价费不低于100元，保价金额不得高于10000元，保价金额超过10000元的，超过的部分无效', '2%', '0', '', '1', '', '', '0', '0', '0', '0.000', '2', '0', '0000-00-00 00:00:00', '0', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_express` VALUES ('9', 'EMS 国内邮政特快专递', 'ems', 'EMS 国内邮政特快专递描述内容', '0', '0', '', '1', '', '', '0', '0', '0', '0.000', '2', '0', '0000-00-00 00:00:00', '0', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_express` VALUES ('10', '邮政快递包裹', 'post_express', '邮政快递包裹的描述内容。', '1%', '0', '', '1', '', '', '0', '0', '0', '0.000', '2', '0', '0000-00-00 00:00:00', '0', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_express` VALUES ('11', '城际快递', 'city_express', '配送的运费是固定的', '0', '1', '', '1', '', '', '0', '0', '0', '0.000', '2', '0', '0000-00-00 00:00:00', '0', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_express` VALUES ('12', '邮局平邮', 'post_mail', '邮局平邮的描述内容。', '0', '0', '', '1', '', '', '0', '0', '0', '0.000', '2', '0', '0000-00-00 00:00:00', '0', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_express` VALUES ('14', '圆通速递', 'yto', '上海圆通物流（速递）有限公司经过多年的网络快速发展，在中国速递行业中一直处于领先地位。为了能更好的发展国际快件市场，加快与国际市场的接轨，强化圆通的整体实力，圆通已在东南亚、欧美、中东、北美洲、非洲等许多城市运作国际快件业务', '0', '1', '', '1', '', '', '0', '0', '0', '0.000', '2', '0', '0000-00-00 00:00:00', '0', '', '0000-00-00 00:00:00', '0');
+INSERT INTO `chinatt_pms_express` VALUES ('15', '中通快递', 'asdfasdf', '123', 'asdffd', 'werwe', 'erwerw', 'asdf', 'asdf', '', '0', '0', '0', '123.000', '123', 'wer', '2018-03-07 15:37:34', '0', '0', '2018-03-07 10:53:37', '0');
+INSERT INTO `chinatt_pms_express` VALUES ('16', '', '', '', '', '', '', '', '', '', '0', '0', '0', '0.000', '0', '', '2018-03-19 11:06:56', '0', '0', '2018-03-08 16:22:26', '-1');
+INSERT INTO `chinatt_pms_express` VALUES ('17', '', '', '', '', '', '231323213112', '2313', '2313', '', '0', '0', '0', '0.000', '0', '', '0000-00-00 00:00:00', '0', '0', '2018-03-09 10:08:59', '0');
+INSERT INTO `chinatt_pms_express` VALUES ('18', '', '', '', '', '', '', '', '', '', '0', '0', '0', '0.000', '0', '', '2018-03-19 11:11:47', '0', '0', '2018-03-09 10:28:52', '-1');
+INSERT INTO `chinatt_pms_express` VALUES ('19', '中通快递', '', '', '', '', '234444', '测试自动添加', '5655', '', '1', '0', '0', '0.000', '0', '', '0000-00-00 00:00:00', '0', '0', '2018-03-09 10:35:17', '0');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_group
@@ -6777,7 +6791,7 @@ CREATE TABLE `chinatt_pms_log` (
   `type` varchar(30) NOT NULL DEFAULT '' COMMENT '类型 common为全局自动',
   `extend` varchar(1000) NOT NULL DEFAULT '' COMMENT '扩展，如执行结果等',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13038 DEFAULT CHARSET=utf8 COMMENT='日志';
+) ENGINE=MyISAM AUTO_INCREMENT=13042 DEFAULT CHARSET=utf8 COMMENT='日志';
 
 -- ----------------------------
 -- Records of chinatt_pms_log
@@ -6855,6 +6869,10 @@ INSERT INTO `chinatt_pms_log` VALUES ('13034', '2', 'ivan', '/ctt_pms/public/ind
 INSERT INTO `chinatt_pms_log` VALUES ('13035', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:5:\"12312\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:6:\"123123\";s:3:\"old\";s:0:\"\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:26:02', 'common', '');
 INSERT INTO `chinatt_pms_log` VALUES ('13036', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:11:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"0000-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:5:\"12312\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:6:\"123123\";s:3:\"old\";s:0:\"\";s:8:\"password\";s:0:\"\";s:10:\"repassword\";s:0:\"\";}', '2018-03-02 17:26:04', 'common', '');
 INSERT INTO `chinatt_pms_log` VALUES ('13037', '2', 'ivan', '/ctt_pms/public/index/mycenter/info', '/ctt_pms/public/index/mycenter/info', 'a:8:{s:6:\"avatar\";s:0:\"\";s:8:\"realname\";s:6:\"吴鑫\";s:8:\"nickname\";s:5:\"12213\";s:8:\"birthday\";s:10:\"1233-11-29\";s:6:\"gender\";s:1:\"m\";s:2:\"qq\";s:5:\"12312\";s:5:\"email\";s:12:\"wx.1@163.com\";s:6:\"mobile\";s:6:\"123123\";}', '2018-03-02 17:32:30', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13038', '2', 'ivan', '/ctt_pms/public/index/article/add?id=', '/ctt_pms/public/index/article/add?id=', 'a:4:{s:5:\"title\";s:6:\"`12`12\";s:8:\"class_id\";s:2:\"59\";s:10:\"project_id\";s:2:\"19\";s:8:\"contents\";s:22:\"<p>`123`1312312323</p>\";}', '2018-03-13 10:17:24', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13039', '2', 'ivan', '/ctt_pms/public/index/article/add?id=', '/ctt_pms/public/index/article/add?id=', 'a:4:{s:5:\"title\";s:27:\"基本原则零售业地asd\";s:8:\"class_id\";s:2:\"63\";s:10:\"project_id\";s:2:\"20\";s:8:\"contents\";s:27:\"<p>asdfasdfasdfasdfasdf</p>\";}', '2018-03-13 10:22:38', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13040', '2', 'ivan', '/ctt_pms/public/index/express/lists/?deleted=1&id=16', '/ctt_pms/public/index/express/lists/?deleted=1&id=16', '', '2018-03-19 11:06:56', 'common', '');
+INSERT INTO `chinatt_pms_log` VALUES ('13041', '2', 'ivan', '/ctt_pms/public/index/express/lists/?deleted=1&id=18', '/ctt_pms/public/index/express/lists/?deleted=1&id=18', '', '2018-03-19 11:11:47', 'common', '');
 
 -- ----------------------------
 -- Table structure for chinatt_pms_navigation

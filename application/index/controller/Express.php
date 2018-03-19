@@ -23,6 +23,23 @@ class Express extends Common {
         $name = input('name', '', 'addslashes'); //关键字
         $start_time = input('start_time', '', 'addslashes'); //开始时间
         $end_time = input('end_time', '', 'addslashes'); //结束时间
+        
+         //删除功能
+        $deleted = input('deleted', 0, 'intval');
+        $express_id = input('id', 0, 'intval');
+        if ($deleted > 0) {
+            $express_detail = DB::name('express')->where(['id' => $express_id])->find();
+            //管理员或本人可删除
+            if ($this->_G['is_admin'] == 1 || $express_detail['add_uid'] == $this->_G['uid']) {
+                DB::name('express')->where(['id' => $express_id])->update(['status' => -1]);
+                save_log($this->_G['uid'], $this->_G['username']);
+                //$this->success('删除成功', 'index/express/lists');
+            } else {
+                $this->error('没有删除权限');
+            }
+        }
+        
+        $map['status'] = array('egt', 0);
         if (!empty($name)) {
             $map['express_name|from_name|from_tel|from_address|to_name|to_tel|to_address|express_number'] = array('like', "%{$name}%");
         }
