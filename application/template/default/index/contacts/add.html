@@ -8,7 +8,7 @@
     <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
         <div class="publicdiv mb20 ptlrb10 bf sizing">
             <form action="{:url('/index/contacts/add?id='.$contactData['id'])}" id="formaddress" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
-                <h3 class="ac borb pb30">添加联系人</h3>
+                <h3 class="ac borb pb30">{if condition="$contactData['id'] > 0"}修改{else}添加{/if}联系人</h3>
                 <div class="modal-body">
                     
                     <div class="form-group w100 mrn mln z">

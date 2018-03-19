@@ -5,14 +5,16 @@
 
 {block name="body"}
 
-<div class="publicdiv pt20 pb20 mb10 bf sizing">
+<div class="publicdiv mb10">
     <form action="{:url('/index/company/add?id='.$companyDetail['company_id'])}" id="formaddress" method="post" class="form-horizontal" role="form">
-        <h3 class="ac pb20 borb fs24">添加快递</h3>
         
+        <div class="publicdiv pt20 pb20 bf">
+            <h3 class="ac pb20 borb fs24">{if condition="$expressDetail['id'] > 0"}修改{else}添加{/if}快递</h3>
+        </div>
         <div class="publicdiv">
             
-            <div class="publicdiv bf mt10">
-                <p class="publicdiv pt15 pb15 bhb pl10 pr10 sizing" id="contactopen" onClick="contactopen('to');">收件信息<span class="y iconfont" id="to_icon" style="transform:rotate(90deg);">&#xe64b;</span></p>
+            <div class="publicdiv bf">
+                <p class="publicdiv pt15 pb15 pl10 pr10 sizing" id="contactopen" onClick="contactopen('to');">收件信息<span class="y iconfont" id="to_icon" style="transform:rotate(90deg);">&#xe64b;</span></p>
                 <div class="publicdiv pl10 pr10 pb15 sizing" id="to">
                     <div class="fontlist mt8 bhb sizing">
                         <label class="fonttitle">收件名称</label>
@@ -32,7 +34,7 @@
             </div>
             
             <div class="publicdiv bf mt10">
-                <p class="publicdiv pt15 pb15 bhb pl10 pr10 sizing" id="contactopen" onClick="contactopen('form');">发件信息<span class="y iconfont" id="form_icon">&#xe64b;</span></p>
+                <p class="publicdiv pt15 pb15 pl10 pr10 sizing" id="contactopen" onClick="contactopen('form');">发件信息<span class="y iconfont" id="form_icon">&#xe64b;</span></p>
                 <div class="publicdiv pl10 pr10 pb15 dn sizing" id="form">
                     <div class="fontlist mt8 bhb sizing">
                         <label class="fonttitle">发件人</label>
@@ -57,7 +59,7 @@
             </div>
             
             <div class="publicdiv bf mt10">
-                <p class="publicdiv pt15 pb15 bhb pl10 pr10 sizing" id="contactopen" onClick="contactopen('express');">快递信息<span class="y iconfont" id="express_icon">&#xe64b;</span></p>
+                <p class="publicdiv pt15 pb15 pl10 pr10 sizing" id="contactopen" onClick="contactopen('express');">快递信息<span class="y iconfont" id="express_icon">&#xe64b;</span></p>
                 <div class="publicdiv pl10 pr10 pb15 dn sizing" id="express">
                     <div class="fontlist mt8 bhb sizing">
                         <label class="fonttitle">快递公司</label>
@@ -78,24 +80,30 @@
                     </div>
                     
                     <div class="fontlist mt8 bhb sizing">
-                        <label class="fonttitle">运费</label>
+                        <label class="fonttitle">快递运费</label>
                         <input type="text" name="price" class="publicdiv h40" id="price" value="{$expressDetail['price']}" placeholder="请输入运费">
                     </div>
                     
                     <div class="fontlist mt8 bhb sizing">
-                        <label class="fonttitle">重量</label>
-                        <input type="text" name="weight" id="weight" class="publicdiv h40" value="{$expressDetail['weight']}" placeholder="单位KG" />
+                        <label class="fonttitle">物品重量</label>
+                        <input type="text" name="weight" id="weight" class="publicdiv h40" value="{if condition="$expressDetail['weight'] > 0"}{$expressDetail['weight']}{else}1{/if}" placeholder="单位KG" />
                     </div>
                     
                     <div class="fontlist mt8 bhb sizing">
                         <label class="fonttitle">物品说明</label>
-                        <textarea name="express_desc" class="publicdiv pt10" rows="4" placeholder="请输入物品说明">{$expressDetail['express_desc']}</textarea>
+                        <span class="z">
+                            <label class="ui-radio mt5" for="radio" onClick="otherdesc();"><input type="radio" name="express_desc" {if condition="$expressDetail['express_desc'] == '文件'"}checked{/if} value="文件" /> 文件</label>
+                            <label class="ui-radio mt5" for="radio" onClick="otherdesc();"><input type="radio" name="express_desc" {if condition="$expressDetail['express_desc'] == '奖品'"}checked{/if} value="奖品" /> 奖品</label>
+                            <label class="ui-radio mt5" for="radio" onClick="otherdesc();"><input type="radio" name="express_desc" {if condition="$expressDetail['express_desc'] == '器材'"}checked{/if} value="器材" /> 器材</label>
+                            <label class="ui-radio mt5" for="radio" onClick="otherdesc('其他');"><input type="radio" name="express_desc" {if condition="!in_array($expressDetail['express_desc'], array('文件', '器材', '奖品'))"} value="其它" checked{/if} id="other" /> 其它</label>
+                        </span>
+                        <input type="text" class="publicdiv h40 {if condition="in_array($expressDetail['express_desc'], array('文件', '器材', '奖品'))"}dn{/if}" id="other_desc" onKeyup="otherinput();" placeholder="请输入其他物品说明" value="{$expressDetail['express_desc']}" />
                     </div>
                 </div>
             </div>
             
             <div class="publicdiv bf mt10">
-                <p class="publicdiv pt15 pb15 bhb pl10 pr10 sizing" id="contactopen" onClick="contactopen('remarks');">其它说明<span class="y iconfont" id="remarks_icon">&#xe64b;</span></p>
+                <p class="publicdiv pt15 pb15 pl10 pr10 sizing" id="contactopen" onClick="contactopen('remarks');">其它说明<span class="y iconfont" id="remarks_icon">&#xe64b;</span></p>
                 <div class="publicdiv pl10 pr10 pb15 dn sizing" id="remarks">
                     <div class="publicdiv mt5">
                         <textarea name="remarks" class="publicdiv pt10" rows="4" placeholder="请输入其它说明">{$expressDetail['remarks']}</textarea>
@@ -111,7 +119,22 @@
         
     </form>
 </div>
+<script>
+function otherdesc(name){
+    if(name == '其他'){
+        jQuery('#other_desc').show();
+    }else{
+        jQuery('#other_desc').hide();
+        jQuery('#other_desc').val('');  //清空“其他”输入框的值
+        jQuery('#other').val('');   //清空“其他”单选按钮的值
+    }
+}
 
+function otherinput(){  //物品说明 其他 输入框架正在输入
+    var other_desc = jQuery('#other_desc').val();   //获取正在输入的内容
+    jQuery('#other').val(other_desc);   //将获取正在输入的内容传到 “其他”单选按钮里
+}
+</script>
 {/block}
 
 

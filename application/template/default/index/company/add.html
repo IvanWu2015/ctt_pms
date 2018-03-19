@@ -8,7 +8,7 @@
     <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
         <div class="publicdiv mb20 ptlrb10 bf sizing">
             <form action="{:url('/index/company/add?id='.$companyDetail['company_id'])}" id="formaddress" method="post" class="form-horizontal" role="form">
-                <h3 class="ac borb pb30">添加公司</h3>
+                <h3 class="ac borb pb30">{if condition="$companyDetail['company_id'] > 0"}修改{else}添加{/if}公司</h3>
                 <div class="modal-body">
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn"><b class="cred">* </b>公司名称</label>

@@ -1,80 +1,46 @@
-{extend name="mobile/base/common"/}
+{extend name="mobile/base/common"}
 
 {block name="header"}
 {/block}
 
 {block name="body"}
-<div class="publicdiv mb58">
-    <div class="publicdiv bf mt10 pt10 pb10 pl10 pr10 sizing">
-        <h3 class="borb pt15 pb15 fs18">{$companyDetail['name']}</h3>
-        
-        <div class="publicdiv companygelist fs13 c6 iconfont">
-            
-            <li class="sizing mt15"><span><b class="fwn mr5">&#xe6c0;</b>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</span>{$companyDetail['type']}</li>
-            <li class="sizing mt15"><span><b class="fwn mr5">&#xe742;</b>规&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;模</span>{$companyDetail['employee_numbers']}</li>
-            
-            <li class="sizing mt15"><span><b class="fwn mr5">&#xe64f;</b>成立时间</span>{$companyDetail['founding_time']}</li>
-            <li class="sizing mt15"><span><b class="fwn mr5">&#xe61e;</b>发布时间</span>{$companyDetail['add_time']}</li>
-            
-            <li class="sizing mt15"><span><b class="fwn mr5">&#xe637;</b>法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人</span>{$companyDetail['corporation']}</li>
-            <li class="sizing mt15"><span><b class="fwn mr5">&#xe625;</b>联&nbsp;&nbsp;系&nbsp;&nbsp;人</span>{$companyDetail['contact_name']}</li>
-            
-            <li class="sizing mt15"><span><b class="fwn mr5">&#xe618;</b>联系电话</span>{$companyDetail['contact_number']}</li>
-            <li class="sizing mt15"><span><b class="fwn mr5">&#xe62b;</b>传真电话</span>{$companyDetail['fax_number']}</li>
-            
-            <div class="publicdiv bht mt15">
-                <li class="sizing mt15"><span><b class="fwn mr5">&#xe617;</b>注册地址</span>{$companyDetail['resister_address']}</li>
-                <li class="sizing mt15"><span><b class="fwn mr5">&#xe64c;</b>办公地址</span>{$companyDetail['work_address']}</li>
-            </div>
-            
-            <div class="publicdiv bht mt15">
-                <li class="sizing mt15"><span><b class="fwn mr5">&#xe633;</b>税&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</span>{$companyDetail['tax_number']}</li>
-                <li class="sizing mt15"><span><b class="fwn mr5">&#xe62f;</b>开户行</span>{$companyDetail['bank_deposit']}</li>
-                <li class="sizing mt15"><span><b class="fwn mr5">&#xe670;</b>银行账号</span>{$companyDetail['bank_account']}</li>
-            </div>
-            
-            <div class="publicdiv bht mt15">
-                <li class="sizing mt15"><span><b class="fwn mr5">&#xe6c9;</b>业务范围</span>{$companyDetail['scope']}</li>
-                <li class="sizing mt15"><span><b class="fwn mr5">&#xe704;</b>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</span>{$companyDetail['remarks']}</li>
-            </div>
-            
-        </div>
+<div class="publicdiv bf mt10 ptlrb10 sizing">
+    <h3 class="borb pt15 pb15 fs18">发件信息</h3>
+    <div class="publicdiv companygelist fs13 c6 iconfont">
+        <li class="sizing mt15"><span><b class="fwn mr5">&#xe647;</b>姓名</span>{$expressDetail['from_name']}</li>
+        <li class="sizing mt15"><span><b class="fwn mr5">&#xe618;</b>电话</span>{$expressDetail['from_tel']}</li>
+        <li class="sizing mt15"><span><b class="fwn mr5">&#xe64c;</b>地址</span>{$expressDetail['to_address']}</li>
+        <li class="sizing mt15"><span><b class="fwn mr5">&#xe651;</b>时间</span>{$expressDetail['post_time']}</li>
     </div>
-    
-    <div class="publicdiv bf mt10">
-        <p class="publicdiv pt15 pb15 bhb pl10 pr10 sizing" id="contactopen" onClick="contactopen('contactwp');">相关联系人<span class="y iconfont" id="contactwp_icon">&#xe64b;</span></p>
-        <ul class="publicdiv scorelist pl10 pr10 pb15 dn sizing" id="contactwp">
-            {foreach $contacts_list as $contact}
-            <li class="bhb sizing">
-            <a href="{:url('/index/contacts/detail?id='.$contact['id'])}">
-                <div class="winner fs30 cc" title="性别">
-                    <img src="{$contactDetail['photo']}" onerror="this.src='tpl_img/{if condition='$contactDetail["sex"] == 1'}male_img{else}female_img{/if}.png';" class="publicimg" />
-                </div>
-                <h3 class="ellipsis" title="姓名">
-                    {$contact['name']}
-                    <span class="fs12 c9">{if condition="$contact['status'] == 1"}[在职]{elseif condition="$contact['status'] == 2"}[离职]{/if}</span>
-                </h3>
-                <p class="publicdiv c9 iconfont" title="电话"><b class="fs14">&#xe618;</b> {$contact['tel']}</p>
-                <p class="publicdiv c9 iconfont" title="地址"><b class="fs14">&#xe617;</b> {$contact['address']}</p>
-                <span class="g_listright iconfont">&#xe64b;</span>
-            </a>
-            </li>
-            {/foreach}
-        </ul>
-        
-        <p class="publicdiv pt15 pb15 bhb pl10 pr10 sizing" id="contactopen" onClick="contactopen('operation');">操作<span class="y iconfont" id="operation_icon">&#xe64b;</span></p>
-        <div class="publicdiv pl10 pr10 pb15 dn sizing" id="operation">
-            <a href="{:url('/index/company/add/?id='.$companyDetail['company_id'])}" class="ui-btn-lg ui-btn-primary mt10">编辑</a>
-            <a href="{:url('/index/company/lists/?deleted=1&id='.$companyDetail['company_id'])}" class="ui-btn-lg ui-btn-danger mt10">删除</a>
-        </div>
-    </div>
-    
 </div>
+
+<div class="publicdiv bf mt10 ptlrb10 sizing">
+    <h3 class="borb pt15 pb15 fs18">收件信息</h3>
+    <div class="publicdiv companygelist fs13 c6 iconfont">
+        <li class="sizing mt15"><span><b class="fwn mr5">&#xe647;</b>姓名</span>{$expressDetail['to_name']}</li>
+        <li class="sizing mt15"><span><b class="fwn mr5">&#xe618;</b>电话</span>{$expressDetail['to_tel']}</li>
+        <li class="sizing mt15"><span><b class="fwn mr5">&#xe64c;</b>地址</span>{$expressDetail['from_address']}</li>
+    </div>
+</div>
+
+<div class="publicdiv bf mt10 ptlrb10 sizing">
+    <h3 class="borb pt15 pb15 fs18">快递信息</h3>
+    <div class="publicdiv companygelist fs13 c6 iconfont">
+        <li class="sizing mt15"><span><b class="fwn mr5">&#xe6df;</b>快递</span>{$expressDetail['express_name']}</li>
+        <li class="sizing mt15"><span><b class="fwn mr5">&#xe6c9;</b>单号</span>{$expressDetail['express_number']}</li>
+        <li class="sizing mt15"><span><b class="fwn mr5">&#xe62f;</b>付款</span>{if condition="$expressDetail['payment'] == 1"}寄付{else}现付{/if}</li>
+        <li class="sizing mt15"><span><b class="fwn mr5">&#xe670;</b>运费</span>{$expressDetail['price']}</li>
+        <li class="sizing mt15"><span><b class="fwn mr5">&#xe635;</b>重量</span>{$expressDetail['weight']} kg</li>
+        <li class="sizing mt15"><span><b class="fwn mr5">&#xe674;</b>说明</span>{$expressDetail['express_desc']}</li>
+        <li class="sizing mt15"><span><b class="fwn mr5">&#xe66c;</b>其他</span>{$expressDetail['remarks']}</li>
+    </div>
+</div>
+
+<div class="publicdiv pl10 pr10 sizing">
+    <a href="{:url('/index/express/add/?id='.$expressDetail['id'])}" class="ui-btn-lg ui-btn-primary mt10">编辑</a>
+</div>
+
 {/block}
 
 
-{block name="footer"}
-<div class="footer_wp">
-    <a href="{:url('/index/company/add')}" class="p_inster iconfont">&#xe607;</a>
-</div>
-{/block}
+{block name="footer"}{/block}

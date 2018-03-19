@@ -15,8 +15,7 @@
     <div class="publicdiv bf pl10 pt10 ">
         <h4>
             <a href="{:url('/index/Project/detail/?id='.$project_id)}">{$project_detail['name']}</a>  >>
-            {if condition="$task_id eq 0"}添加任务{/if}
-            {if condition="$task_id neq 0"}修改任务{/if}
+            {if condition="$task_id['id'] > 0"}修改{else}添加{/if}任务
         </h4>
 
     </div>

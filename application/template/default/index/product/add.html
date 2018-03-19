@@ -8,7 +8,7 @@
     <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
         <div class="publicdiv mb20 ptlrb10 bf sizing">
             <form action="{:url('/index/product/add?id='.$product_detail['id'])}" method="post" class="form-horizontal" role="form">
-                <h3 class="ac">添加产品</h3>
+                <h3 class="ac">{if condition="$product_detail['id'] > 0"}修改{else}添加{/if}产品</h3>
                 <div class="modal-body">
 
                     <div class="form-group w100 mrn mln z">

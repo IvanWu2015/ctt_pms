@@ -7,7 +7,7 @@
 
 <div class="publicdiv pt20 pb20 mb10 bf sizing">
     <form action="{:url('/index/product/add?id='.$product_detail['id'])}" id="formaddress" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
-        <h3 class="ac pb20 borb fs24">{if condition="$project_id eq 0"}添加产品{/if} {if condition="$project_id neq 0"}修改产品{/if}</h3>
+        <h3 class="ac pb20 borb fs24">{if condition="$product_detail['id'] > 0"}修改{else}添加{/if}产品</h3>
         
         <div class="publicdiv pl15 pr15 sizing">
             

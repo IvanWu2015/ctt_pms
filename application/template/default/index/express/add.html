@@ -7,8 +7,8 @@
 <div class="container" style="width:1170px;">
     <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
         <div class="publicdiv mb20 ptlrb10 bf sizing">
-            <form action="" id="formaddress" method="post" class="form-horizontal" role="form">
-                <h3 class="ac borb pb30">添加快递信息</h3>
+            <form action="" id="add_tag" method="post" class="form-horizontal" role="form">
+                <h3 class="ac borb pb30">{if condition="$expressDetail['id'] > 0"}修改{else}添加{/if}快递信息</h3>
                 <div class="modal-body">
                     
                     <div class="g_fieldset sizing">
@@ -78,39 +78,51 @@
                     
                     <div class="g_fieldset sizing">
                         <span class="g_fieldset_name">发件信息</span>
-                        <div class="form-group w100 mrn mln z">
-                            <label class="col-sm-2 control-label fwn">发件人</label>
-                            <div class="col-sm-7 pln prn">
-                                <input type="text" name="from_name" class="form-control w60" id="from_name" value="{$expressDetail['from_name']}">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group w100 mrn mln z">
-                            <label class="col-sm-2 control-label fwn">发件人电话</label>
-                            <div class="col-sm-7 pln prn">
-                                <input type="text" name="from_tel" class="form-control w60" id="from_tel" value="{$expressDetail['from_tel']}">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group w100 mrn mln z">
-                                <label class="col-sm-2 control-label fwn">发件人地址</label>
-                                <div class="col-sm-7 pln prn">
-                                    <input type="text" name="to_address" class="form-control w60" id="to_address" value="{$expressDetail['to_address']}">
+                        <div class="w60 z">
+                            <div class="form-group w100 mrn mln z">
+                                <label class="col-sm-3 control-label fwn">发件人</label>
+                                <div class="col-sm-9 pln prn">
+                                    <input type="text" name="from_name" class="form-control w50 z" id="from_name" value="{$expressDetail['from_name']}">
+                                    <a href="javascript:void(0);" class="z btn btn-info z ml15" onClick="fromopen();">从联系人中载入</a>
                                 </div>
-                        </div>
+                            </div>
                             
-                        <div class="form-group w100 mrn mln z">
-                            <label class="col-sm-2 control-label fwn">发件时间</label>
-                            <div class="col-sm-7 pln prn">
-                                <input type="text" name="post_time" class="form-control w60" id="post_time" value="{$expressDetail['post_time']}">
+                            <div class="form-group w100 mrn mln z">
+                                <label class="col-sm-3 control-label fwn">发件人电话</label>
+                                <div class="col-sm-9 pln prn">
+                                    <input type="text" name="from_tel" class="form-control w80" id="from_tel" value="{$expressDetail['from_tel']}">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group w100 mrn mln z">
+                                <label class="col-sm-3 control-label fwn">发件人地址</label>
+                                <div class="col-sm-9 pln prn">
+                                    <input type="text" name="to_address" class="form-control w80" id="to_address" value="{$expressDetail['to_address']}">
+                                </div>
+                            </div>
+                                
+                            <div class="form-group w100 mrn mln z">
+                                <label class="col-sm-3 control-label fwn">发件时间</label>
+                                <div class="col-sm-9 pln prn">
+                                    <input type="text" name="post_time" class="form-control w80" id="post_time" value="{$expressDetail['post_time']}">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group w100 mrn mln z">
+                                <label class="col-sm-2 control-label fwn">&nbsp;</label>
+                                <div class="col-sm-9 pln prn fwn">
+                                    <label onClick="from_contactsopen();"><input type="checkbox" id="addfromcontacts" /> 添加到公司联系人</label>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="form-group w100 mrn mln z">
-                            <label class="col-sm-2 control-label fwn">&nbsp;</label>
-                            <div class="col-sm-7 pln prn fwn">
-                                <label onClick="from_contactsopen();"><input type="checkbox" id="addfromcontacts" /> 添加到公司联系人</label>
+                        <div class="w40 z bor ptlrb10 br3 loadwp sizing dn" id="fromwp">
+                            <a href="javascript:void(0);" onClick="loadexopen();" title="关闭载入窗口" class="loadwpicon iconfont">&#xe6f1;</a>
+                            <div class="express_keywp" id="add_tag">
+                                <input type="text" name="keyword" id="from_keyword" class="pkeytext sizing" placeholder="姓名、电话搜索~" value="" />
+                                <input type="button" class="pkeysub iconfont" value="&#xe604;" onClick="from_exsubmit('{:url('/index/express/add')}');" />
                             </div>
+                            <ul class="publicdiv extsul" id="from_extsul"></ul>
                         </div>
                         
                     </div>
@@ -172,14 +184,18 @@
                         <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">重量</label>
                             <div class="col-sm-7 pln prn">
-                                <input type="text" name="weight" id="weight" class="form-control w30 z" value="{$expressDetail['weight']}" /> <span class="z lh34 ml10">KG</span>
+                                <input type="text" name="weight" id="weight" class="form-control w30 z" value="{if condition="$expressDetail['weight'] > 0"}{$expressDetail['weight']}{else}1{/if}" /> <span class="z lh34 ml10">KG</span>
                             </div>
                         </div>
                         
                         <div class="form-group w100 mrn mln z">
                             <label class="col-sm-2 control-label fwn">物品说明</label>
                             <div class="col-sm-7 pln prn">
-                                <textarea name="express_desc" class="form-control w60 h90" >{$expressDetail['express_desc']}</textarea>
+                                <label class="z mr20 mt8" onClick="otherdesc();"><input type="radio" name="express_desc" {if condition="$expressDetail['express_desc'] == '文件'"}checked{/if} value="文件" /> 文件</label>
+                                <label class="z mr20 mt8" onClick="otherdesc();"><input type="radio" name="express_desc" {if condition="$expressDetail['express_desc'] == '奖品'"}checked{/if} value="奖品" /> 奖品</label>
+                                <label class="z mr20 mt8" onClick="otherdesc();"><input type="radio" name="express_desc" {if condition="$expressDetail['express_desc'] == '器材'"}checked{/if} value="器材" /> 器材</label>
+                                <label class="z mr20 mt8" onClick="otherdesc('其他');"><input type="radio" name="express_desc" {if condition="!in_array($expressDetail['express_desc'], array('文件', '器材', '奖品'))"} value="其它" checked{/if} id="other" /> 其它</label>
+                                <input type="text" class="z mt5 bor ptlrb5 {if condition="in_array($expressDetail['express_desc'], array('文件', '器材', '奖品'))"}dn{/if}" id="other_desc" onKeyup="otherinput();" placeholder="请输入其他物品说明" value="{$expressDetail['express_desc']}" />
                             </div>
                         </div>
                     </div>
@@ -222,11 +238,29 @@
                             }
                         }
                         
+                        function otherdesc(name){
+                            if(name == '其他'){
+                                jQuery('#other_desc').show();
+                            }else{
+                                jQuery('#other_desc').hide();
+                                jQuery('#other_desc').val('');  //清空“其他”输入框的值
+                                jQuery('#other').val('');   //清空“其他”单选按钮的值
+                            }
+                        }
+                        
+                        function otherinput(){  //物品说明 其他 输入框架正在输入
+                            var other_desc = jQuery('#other_desc').val();   //获取正在输入的内容
+                            jQuery('#other').val(other_desc);   //将获取正在输入的内容传到 “其他”单选按钮里
+                        }
+                        
                         jQuery(function(){
                             
                             var express_name = '{$expressDetail['express_name']}';
-                            console.log(express_name);
-                            jQuery("#expressName").find("option[value='" + express_name + "']").attr("selected",true);
+                            if(express_name.length > 1){
+                                jQuery("#expressName").find("option[value='" + express_name + "']").attr("selected",true);
+                            }else{
+                                jQuery("#expressName").find("option[value='顺丰速运']").attr("selected",true);
+                            }
                         
                             var post_time = $("#post_time").val();
                             var myDate = new Date(); 
@@ -242,7 +276,7 @@
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label fwn">&nbsp;</label>
                         <div class="col-sm-7 pln prn">
-                            <input type="submit" class="btn btn-primary btn-lg pl20 pr20" onClick="formsubif();" value="完成" />
+                            <input type="submit" class="btn btn-primary btn-lg pl20 pr20" value="完成" />
                         </div>
                     </div>
                     

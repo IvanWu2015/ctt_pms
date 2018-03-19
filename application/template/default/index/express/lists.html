@@ -74,7 +74,12 @@
                 {foreach $express_list as $express}
                 <tr id="projectlist">
                     <td title="快递公司"><a href="{:url('/index/express/detail?id='.$express['id'])}">{$express['express_name']}</a></td>
-                    <td title="单号"><a href="https://www.baidu.com/s?wd={$express['express_number']}&rsv_spt=1&rsv_iqid=0xb91d9eb100022e18&issp=1&f=8&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_n=2&rsv_sug3=1" target="_bacnk">{$express['express_number']}</a></td>
+                    <td>
+                        <span class="z">{$express['express_number']}</span>
+                        <a href="https://www.baidu.com/s?wd={$express['express_name']}{$express['express_number']}&tn=92002594_hao_pg" target="_bacnk" title="百度查询该单号">
+                            <img src="tpl_img/baidu.gif" height="15" class="z ml10" />
+                        </a>
+                    </td>
                     <td title="收件人名称">{$express['to_name']}</td>
                     <td title="收件人电话">{$express['to_tel']}</td>
                     <td title="发件人">{$express['from_name']}</td>

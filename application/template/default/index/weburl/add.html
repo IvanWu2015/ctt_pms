@@ -8,7 +8,7 @@
     <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
         <div class="publicdiv mb20 ptlrb10 bf sizing">
             <form action="{:url('/index/weburl/add?id='.$weburl_detail['id'])}" method="post" class="form-horizontal" role="form">
-                <h3 class="ac">添加网址</h3>
+                <h3 class="ac">{if condition="$weburl_detail['id'] > 0"}修改{else}添加{/if}网址</h3>
                 <div class="modal-body">
                     <div class="form-group w100 mrn mln z">
                         <label class="col-sm-2 control-label" style="width:130px;"><b class="cred">* </b>所属项目：</label>
