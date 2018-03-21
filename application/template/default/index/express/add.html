@@ -9,7 +9,7 @@
 <div class="container" style="width:1170px;">
     <div class="publicdiv mt20 pl20 pr20 pt8 bf sizing">
         <div class="publicdiv mb20 ptlrb10 bf sizing">
-            <form action="" id="add_tag" method="post" class="form-horizontal" role="form">
+            <form action="" id="add_tag" method="post" class="form-horizontal" role="form" onkeydown="if(event.keyCode==13)return false;">
                 <h3 class="ac borb pb30">{if condition="$expressDetail['id'] > 0"}修改{else}添加{/if}快递信息</h3>
                 <div class="modal-body">
                     
@@ -141,7 +141,7 @@
                         </div>
                         
                         <div class="w40 z bor ptlrb10 br3 loadwp sizing dn" id="fromwp">
-                            <a href="javascript:void(0);" onClick="loadexopen();" title="关闭载入窗口" class="loadwpicon iconfont">&#xe6f1;</a>
+                            <a href="javascript:void(0);" onClick="fromopen();" title="关闭载入窗口" class="loadwpicon iconfont">&#xe6f1;</a>
                             <div class="express_keywp" id="add_tag">
                                 <input type="text" name="keyword" id="from_keyword" class="pkeytext sizing" placeholder="姓名、电话搜索~" value="" />
                                 <input type="button" class="pkeysub iconfont" value="&#xe604;" onClick="from_exsubmit('{:url('/index/express/add')}');" />
