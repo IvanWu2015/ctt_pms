@@ -16,7 +16,7 @@ class article extends Common {
 
     //首页
     public function index() {
-        
+        $this->redirect(url('detail'));
     }
 
     //列表页
@@ -64,8 +64,8 @@ class article extends Common {
                             $data['acl'] = array('eq', 'private');
                             $data['username'] = array('eq', $this->_G['username']);
                             $data['status'] = array('eq', 0);
-                            if(strlen(input('username', '', 'addslashes')) > 0){
-                                $newdata['username'] = array('eq',input('username', '', 'addslashes'));
+                            if (strlen(input('username', '', 'addslashes')) > 0) {
+                                $newdata['username'] = array('eq', input('username', '', 'addslashes'));
                             }
                             $query->where($data)->where($newdata);
                         })->whereOr(function ($query) {
@@ -114,17 +114,40 @@ class article extends Common {
         $article_id = input('id', '0', 'intval');
         $article = db('Article');
         if ($article_id > 0) {
-            $article_detail = $article->where(function ($query) {
-                        $data['id'] = array('eq', input('id', '0', 'intval'));
-                        $data['acl'] = array('eq', 'private');
-                        $data['username'] = array('eq', $this->_G['username']);
-                        $data['status'] = array('eq', 0);
-                        $query->where($data);
-                    })->whereOr(function ($query) {
-                        $data['id'] = array('eq', input('id', '0', 'intval'));
-                        $data['status'] = array('eq', 0);
-                        $data['acl'] = array('eq', 'open');
-                        $query->where($data);
+            /*
+             * 原写法
+
+              $article_detail = $article->where(function ($query) {
+              $data['id'] = array('eq', input('id', '0', 'intval'));
+              $data['acl'] = array('eq', 'private');
+              $data['username'] = array('eq', $this->_G['username']);
+              $data['status'] = array('eq', 0);
+              $query->where($data);
+              })->whereOr(function ($query) {
+              $data['id'] = array('eq', input('id', '0', 'intval'));
+              $data['status'] = array('eq', 0);
+              $data['acl'] = array('eq', 'open');
+              $query->where($data);
+              })->find();
+             */
+
+
+
+            $article_detail = $article->where(function($query) {
+                        $map_private = [
+                            'id' => ['eq', input('id', '0', 'intval')],
+                            'acl' => 'private',
+                            'username' => $this->_G['username'],
+                            'status' => 0,
+                        ];
+                        $query->where($map_private);
+                    })->whereOr(function($query) {
+                        $map_open = [
+                            'id' => input('id', '0', 'intval'),
+                            'acl' => 'open',
+                            'status' => 0,
+                        ];
+                        $query->where($map_open);
                     })->find();
 
             if (empty($article_detail)) {
@@ -132,7 +155,7 @@ class article extends Common {
             }
             $article_detail['contents'] = stripslashes($article_detail['contents']);
         } else {
-            $this->error('请输入文章ID');
+            $article_detail = [];
         }
 
         $class = db('Class');

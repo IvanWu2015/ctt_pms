@@ -14,82 +14,89 @@
 <div class="filewp" style="margin-top:30px;">
     <div class="fileleft pb20 borl" id="fileleft">
         <div class="fileleftwp">
-        <h3 class="pl20 pr20 lh30 sizing fs16">文档管理</h3>
-        <ul class="publicdiv filenav bort borb">
-            <li class="iconfont blno filenavattr" onClick="casearch(1);" id="casearch_1"><span class="fs16 z">&#xe615;</span> 目录</li>
-            <li class="iconfont" onClick="casearch(2);" id="casearch_2"><span class="fs16 z">&#xe604;</span> 搜索</li>
-            <li class="iconfont" onClick="casearch(3);" id="casearch_3"><span class="fs16 z">&#xe647;</span> 我的</li>
-            <a href="{:url('/index/article/add')}"><li class="iconfont y" title="添加文档"><span class="fs20 z">&#xe607;</span></li></a>
-        </ul>
-        <ul class="fileleftNav" id="fileleftNav">
-            {foreach name="class_name_list" id="value" key="key" }
-            <li>
-                <p class="flienavtitle"><span class="iconfont" id="flienavicon_{$key}" onClick="flienavshow({$key});">&#xe624;</span><a href="javascript:void(0);">{$value}</a></p>
-                <div class="publicdiv flienavclasswp" id="flienavclasswp_{$key}">
-                    {foreach $new_class_list[$key] as $data} 
-                    <a href="{:url('/index/article/detail?id='.$data['id'])}" class="flienavclass">{$data['title']}</a>
-                    {/foreach}
+            <h3 class="pl20 pr20 lh30 sizing fs16">文档管理</h3>
+            <ul class="publicdiv filenav bort borb">
+                <li class="iconfont blno filenavattr" onClick="casearch(1);" id="casearch_1"><span class="fs16 z">&#xe615;</span> 目录</li>
+                <li class="iconfont" onClick="casearch(2);" id="casearch_2"><span class="fs16 z">&#xe604;</span> 搜索</li>
+                <li class="iconfont" onClick="casearch(3);" id="casearch_3"><span class="fs16 z">&#xe647;</span> 我的</li>
+                <a href="{:url('/index/article/add')}"><li class="iconfont y" title="添加文档"><span class="fs20 z">&#xe607;</span></li></a>
+            </ul>
+            <ul class="fileleftNav" id="fileleftNav">
+                {foreach name="class_name_list" id="value" key="key" }
+                <li>
+                    <p class="flienavtitle"><span class="iconfont" id="flienavicon_{$key}" onClick="flienavshow({$key});">&#xe624;</span><a href="javascript:void(0);">{$value}</a></p>
+                    <div class="publicdiv flienavclasswp" id="flienavclasswp_{$key}">
+                        {foreach $new_class_list[$key] as $data} 
+                        <a href="{:url('/index/article/detail?id='.$data['id'])}" class="flienavclass">{$data['title']}</a>
+                        {/foreach}
+                    </div>
+                </li>
+                {/foreach}
+            </ul>
+
+            <div class="publicdiv dn" id="articlewp">
+                <div class="publicdiv pt10 pb10 pl10 pr10 borb sizing">
+                    <div class="articleSearch">
+                        <form action="" method="post" id="add_tag">
+                            <input type="text" name="keyword" id="keyword" class="arsekeyword sizing" placeholder="请输入搜索的内容~" value="{$keyword}" />
+                            <input type="button" class="sarsesub" onClick="sarsesub();" value="" />
+                        </form>
+                    </div>
                 </div>
-            </li>
-            {/foreach}
-        </ul>
-        
-        <div class="publicdiv dn" id="articlewp">
-            <div class="publicdiv pt10 pb10 pl10 pr10 borb sizing">
-                <div class="articleSearch">
-                    <form action="" method="post" id="add_tag">
-                        <input type="text" name="keyword" id="keyword" class="arsekeyword sizing" placeholder="请输入搜索的内容~" value="{$keyword}" />
-                        <input type="button" class="sarsesub" onClick="sarsesub();" value="" />
-                    </form>
-                </div>
+                <ul class="publicdiv searchlist mt10">
+                    <div class="publicdiv" id="searchul">
+                        <a href="javascript:void(0);" class="ellipsis">搜索结果的列表在此读取</a>
+                    </div>
+                    <div class="publicdiv c9 ac iconfont" style="margin:100px 0px 20px 0px;" id="searchon">
+                        <span class="fs59">&#xe604;</span><br/>
+                        暂无相关搜索结果！
+                    </div>
+                </ul>
             </div>
-            <ul class="publicdiv searchlist mt10">
+            <script>
+                function sarsesub() {
+                    jQuery('#searchul').html('');   //清空原有的数据
+                    var url = "{:url('/index/project/detail')}";
+                    jQuery.ajax({
+                        type: 'post',
+                        url: url,
+                        data: jQuery('#add_tag').serialize(),
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.result == 'success') {
+                                var array = [];
+                                jQuery.each(array, function (n, value) {
+                                    //console.log(value);
+                                    jQuery('#searchon').hide(); //隐藏 暂无相关搜索结果！ 
+                                    jQuery('#searchul').append('<a href="' + value.url + '" class="ellipsis">' + value.name + '</a>'); //循环输出搜索结果
+                                })
+                            } else {
+                                jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
+                            }
+                        }
+                    });
+                }
+            </script>
+
+            <ul class="publicdiv searchlist mt10 dn" id="iuser">
                 <div class="publicdiv" id="searchul">
-                    <a href="javascript:void(0);" class="ellipsis">搜索结果的列表在此读取</a>
-                </div>
-                <div class="publicdiv c9 ac iconfont" style="margin:100px 0px 20px 0px;" id="searchon">
-                    <span class="fs59">&#xe604;</span><br/>
-                    暂无相关搜索结果！
+                    <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
+                    <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
+                    <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
+                    <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
                 </div>
             </ul>
-        </div>
-        <script>
-        function sarsesub(){
-            jQuery('#searchul').html('');   //清空原有的数据
-            var url = "{:url('/index/project/detail')}";
-            jQuery.ajax({
-                type: 'post',
-                url: url,
-                data: jQuery('#add_tag').serialize(),
-                dataType: 'json',
-                success: function(data){
-                    if (data.result == 'success') {
-                        var array = [];
-                        jQuery.each(array, function(n, value){
-                            //console.log(value);
-                            jQuery('#searchon').hide(); //隐藏 暂无相关搜索结果！ 
-                            jQuery('#searchul').append('<a href="' + value.url + '" class="ellipsis">' + value.name + '</a>'); //循环输出搜索结果
-                        })
-                    }else{
-                        jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
-                    }
-                }
-            });
-        }
-        </script>
-        
-        <ul class="publicdiv searchlist mt10 dn" id="iuser">
-            <div class="publicdiv" id="searchul">
-                <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
-                <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
-                <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
-                <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
-            </div>
-        </ul>
-        
+
         </div>
     </div>
     <div class="fileright bf sizing" id="fileright">
+        {if empty($article_detail)}
+        <div class="filerightwp sizing">
+            <h2 class="mt20 pb10 pt20 sizing">欢迎访问文档中心</h2>
+            欢迎页内容在此创建
+        </div>
+        {else}
+
         <div class="filerightwp sizing">
             <h2 class="mt20 pb10 pt20 sizing">{$article_detail['title']}</h2>
             <p class="publicdiv pb10 c6 lh25 borb">
@@ -104,29 +111,30 @@
             <div class="publicdiv pt20 pb20 pl20 pr20 sizing">{$article_detail['contents']}</div>
 
         </div>
+        {/if}
     </div>
 </div>
 
 <script>
-jQuery(function(){
-    var fileRightHeight = jQuery('#fileright').height();
-    jQuery('#fileleft').css({height: fileRightHeight + 'px'});
-    
-    var wh = jQuery(document).height() - 50;    //获取浏览器当前窗口文档的高度 再 减掉 70 
-    jQuery('#fileright').css('min-height', wh + 'px');    //右测
-    jQuery('#fileleft').css('min-height', wh + 'px');
-});
+    jQuery(function () {
+        var fileRightHeight = jQuery('#fileright').height();
+        jQuery('#fileleft').css({height: fileRightHeight + 'px'});
 
-function flienavshow(id) {
-    if (jQuery('#flienavclasswp_' + id).css('display') == 'none') {
-        jQuery('#flienavicon_' + id).css({transform: 'rotate(90deg)'});
-        jQuery('#flienavclasswp_' + id).slideDown();
-    } else {
-        jQuery('#flienavicon_' + id).css({transform: 'rotate(0deg)'});
-        jQuery('#flienavclasswp_' + id).slideUp();
+        var wh = jQuery(document).height() - 50;    //获取浏览器当前窗口文档的高度 再 减掉 70 
+        jQuery('#fileright').css('min-height', wh + 'px');    //右测
+        jQuery('#fileleft').css('min-height', wh + 'px');
+    });
+
+    function flienavshow(id) {
+        if (jQuery('#flienavclasswp_' + id).css('display') == 'none') {
+            jQuery('#flienavicon_' + id).css({transform: 'rotate(90deg)'});
+            jQuery('#flienavclasswp_' + id).slideDown();
+        } else {
+            jQuery('#flienavicon_' + id).css({transform: 'rotate(0deg)'});
+            jQuery('#flienavclasswp_' + id).slideUp();
+        }
+
     }
-
-}
 </script>
 
 {/block}
