@@ -24,14 +24,14 @@
 <![endif]-->
 <!--[if gte IE 9]><!-->
 
-<script type="text/javascript" src="tpl_js/public_moblie.js"></script>
+<script type="text/javascript" src="tpl_js/public_moblie.js?{VERHASH}"></script>
 
-<script type="text/javascript" src="tpl_static/third/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="tpl_js/third/jquery-2.1.4.min.js?{VERHASH}"></script>
 
-<link rel="stylesheet" href="tpl_css/frozen/css/frozen.css">
-<link rel="stylesheet" href="tpl_css/frozen/demo/demo.css">
-<script src="tpl_css/frozen/lib/zepto.min.js"></script>
-<script src="tpl_css/frozen/js/frozen.js"></script>
+<link rel="stylesheet" href="tpl_css/frozen/css/frozen.css?{VERHASH}">
+<link rel="stylesheet" href="tpl_css/frozen/demo/demo.css?{VERHASH}">
+<script src="tpl_css/frozen/lib/zepto.min.js?{VERHASH}"></script>
+<script src="tpl_css/frozen/js/frozen.js?{VERHASH}"></script>
 
 <!--<![endif]-->
 
@@ -50,7 +50,7 @@
         
     </ul>
     
-    <ul class="moblie_nav" id="moblie_nav">
+    <div class="moblie_nav" id="moblieNav">
         <div class="nav_bg" onClick="navclose();">&nbsp;</div>
         <ul class="nav_ul sizing" id="nav_ul">
             <p class="closenav dn"><a href="javascript:void(0);" class="iconfont">&#xe616;</a></p>
@@ -75,7 +75,7 @@
             <li class="nav_li"><a href="{:url('User/login')}" class="nava fs16 navpl">退出</a></li>
             
         </ul>
-    </ul>
+    </div>
     
     <div class="searchwp" id="searchwp">
         <div class="searchwp_div pb15" id="searchwp_div">
