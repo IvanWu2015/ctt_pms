@@ -25,8 +25,8 @@ class Mycenter extends Common {
         
         $my_task_count = DB::name('Task')->where(['assignedTo' => $this->_G['username'], 'deleted' => 0])->count();
         $my_action_count = DB::name('Action')->where(['actor' => $this->_G['username']])->count();
-        $my_weburl_count = DB::name('Weburl')->where(['uid' => $this->_G['uid'], 'status' => 0])->count();
-        $my_article_count = DB::name('Article')->where(['uid' => $this->_G['uid'], 'status' => 0])->count();
+        $my_weburl_count = DB::name('Weburl')->where(['username' => $this->_G['username'], 'status' => 0])->count();
+        $my_article_count = DB::name('Article')->where(['username' => $this->_G['username'], 'status' => 0])->count();
 
         $not_status_data['status'] = array('in', 'wait,doing');
         $not_status_data['assignedTo'] = array('eq', $this->_G['username']);
@@ -58,15 +58,15 @@ class Mycenter extends Common {
                 ->paginate(10);
         $action_list = analysis_all($action_list);
         //网址列表
-        $weburl_list = DB::name('weburl')->alias('w')->join('chinatt_pms_project p', 'w.project = p.id', 'left')->field('w.*,p.name')->where(['w.uid' => $this->_G['uid']])->order('id DESC')->paginate(10);
+        $weburl_list = DB::name('weburl')->alias('w')->join('chinatt_pms_project p', 'w.project = p.id', 'left')->field('w.*,p.name')->where(['w.username' => $this->_G['username']])->order('id DESC')->paginate(10);
         //文档列表
         $article_list = DB::name('Article')
                 ->alias('a')
                 ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
                 ->join('chinatt_pms_project p ', 'a.project = p.id', 'left')
-                ->join('chinatt_pms_user u ', 'a.uid = u.uid', 'left')
+                ->join('chinatt_pms_user u ', 'a.username = u.username', 'left')
                 ->field('a.*,c.name as class_name,p.name as project_name,u.username')
-                ->where(['a.status' => 0, 'a.uid' => $this->_G['uid']])
+                ->where(['a.status' => 0, 'a.username' => $this->_G['username']])
                 ->paginate(10);
 
         $navtitle = '个人中心' . $this->navtitle;
