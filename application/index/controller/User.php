@@ -38,7 +38,7 @@ class User extends Common {
             }
 
             /* 调用注册接口注册用户 */
-            $User = new model('User');
+            $User = model('User');
             $uid = $User->register($username, $password, $email);
             if (0 < $uid) { //注册成功
                 //TODO: 发送验证邮件
