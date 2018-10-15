@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{:url('/admin/user/addUser')}" method="post">
+    姓名：<input type="text" name="realname"><br>
+    账号：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
+    所属部门：<select name="dept">
+        {foreach $dep_list as $dep}
+        <option value="{$dep.id}">{$dep.name}</option>
+        {/foreach}
+    </select><br>
+    职位：<select name="group">
+        {foreach $group_list as $group}
+        <option value="{$group.id}">{$group.name}</option>
+        {/foreach}
+    </select><br>
+    性别：男<input type="radio" name="gender" value="1" checked="checked">女<input type="radio" name="gender" value="2"><br>
+    是否管理员：是<input type="radio" name="isadmin" value="1">否<input type="radio"  name="isadmin" value="0" checked="checked"><br>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

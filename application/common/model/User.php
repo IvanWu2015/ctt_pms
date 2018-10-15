@@ -124,8 +124,8 @@ class User extends \think\Model {
         }
 
         /* 添加用户 */
-        if ($this->create($data)) {
-            $uid = $this->add();
+        if ($user = $this->create($data)) {
+            $uid = $user->uid;
             return $uid ? $uid : 0; //0-未知错误，大于0-注册成功
         } else {
             return $this->getError(); //错误详情见自动验证注释

@@ -161,6 +161,56 @@ class User extends Common {
         return $this->fetch($this->templatePath);
     }
 
+    public function addUser() {
+        if (request()->isPost()) {
+            $data = [
+                'dept'     => input('post.dept', '0', 'intval'),
+                'groupid'  => input('post.group', '0', 'intval'),
+                'username' => input('post.username'),
+                'realname' => input('post.realname'),
+                'password' => input('post.password'),
+                'isadmin'  => input('post.isadmin', '0', 'intval'),
+                'salt'     => random(6)
+            ];
+            $data['password'] = md5(md5($data['password']) . $data['salt']);
+            if (input('post.gender') == 1) {
+                $data['gender'] = 'm';
+            } elseif (input('post.gender') == 2) {
+                $data['gender'] = 'f';
+            }
+            $data['ip'] = \think\Request::instance()->ip();
+
+            $uid = db('user')
+                ->field('uid')
+                ->where(['username' => $data['username']])
+                ->find();
+
+            if ($uid) {
+                $this->error('账号已经存在');
+            } else {
+                $res = db('user')->insert($data);
+                if ($res) {
+                    $this->success('添加成功');
+                } else {
+                    $this->error('未知错误');
+                }
+            }
+
+        } else {
+            $depList = db('dept')
+                ->field('id, name')
+                ->select();
+
+            $groupList = db('group')
+                ->field('id, name')
+                ->select();
+
+            $this->assign('dep_list', $depList);
+            $this->assign('group_list', $groupList);
+            return $this->fetch($this->templatePath);
+        }
+    }
+
     public function add() {
         $uid = input('get.uid', 0, 'intval');
         $user_detail = DB('User')->where(['uid' => $uid])->find();
