@@ -162,7 +162,7 @@ class User extends Common {
         return $this->fetch($this->templatePath);
     }
 
-    public function addUser() {
+    public function add_user() {
         if (request()->isPost()) {
             $data = [
                 'dept'     => input('post.dept', '0', 'intval'),
