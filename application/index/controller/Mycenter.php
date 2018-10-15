@@ -26,8 +26,13 @@ class Mycenter extends Common {
         $my_task_count = DB::name('Task')->where(['assignedTo' => $this->_G['username'], 'deleted' => 0])->count();
         //我的动态总数
         $my_action_count = DB::name('Action')->where(['actor' => $this->_G['username']])->count();
+<<<<<<< HEAD
         //我的收藏网址总数
         $my_weburl_count = DB::name('Weburl')->where(['username' => $this->_G['username'], 'status' => 0])->count();
+=======
+        $my_weburl_count = DB::name('Weburl')->where(['username' => $this->_G['username'], 'status' => 0])->count();
+        $my_article_count = DB::name('Article')->where(['username' => $this->_G['username'], 'status' => 0])->count();
+>>>>>>> cf421b5e24d4b9e88e73df8e4026186a6c8e6b19
 
         //我的文章总数
         $my_article_count = DB::name('Article')->where(['username' => $this->_G['username'], 'status' => 0])->count();
@@ -107,7 +112,12 @@ class Mycenter extends Common {
                 ->alias('a')
                 ->join('chinatt_pms_class c', 'a.class = c.id', 'left')
                 ->join('chinatt_pms_project p ', 'a.project = p.id', 'left')
+<<<<<<< HEAD
                 ->field('a.*,c.name as class_name,p.name as project_name')
+=======
+                ->join('chinatt_pms_user u ', 'a.username = u.username', 'left')
+                ->field('a.*,c.name as class_name,p.name as project_name,u.username')
+>>>>>>> cf421b5e24d4b9e88e73df8e4026186a6c8e6b19
                 ->where(['a.status' => 0, 'a.username' => $this->_G['username']])
                 ->paginate(10);
 

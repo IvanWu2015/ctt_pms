@@ -24,11 +24,11 @@ class User extends Common {
 
     public function register($username = '', $password = '', $repassword = '', $email = '', $verify = '') {
         if (!config('USER_ALLOW_REGISTER')) {
-            $this->error('注册已关闭');
+            //$this->error('注册已关闭');
         }
         if (request()->isPost()) { //注册用户
             /* 检测验证码 */
-            if (!check_verify($verify)) {
+            if (!captcha_check($verify)) {
                 $this->error('验证码输入错误！');
             }
 
@@ -38,7 +38,7 @@ class User extends Common {
             }
 
             /* 调用注册接口注册用户 */
-            $User = new UserApi;
+            $User = new model('User');
             $uid = $User->register($username, $password, $email);
             if (0 < $uid) { //注册成功
                 //TODO: 发送验证邮件
