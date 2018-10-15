@@ -24,6 +24,23 @@ jQuery(function () {
     
 });
 
+function LoginSub(){
+    var firstname = jQuery('#firstname').val();
+    var lastname = jQuery('#lastname').val();
+    var verify = jQuery('#verify').val();
+    
+    if(firstname.length < 1){
+        event.preventDefault();
+        jQuery('#prompt').fadeIn(500).delay(2000).fadeOut(500).html('请输入用户名');
+    }else if(lastname.length < 1){
+        event.preventDefault();
+        jQuery('#prompt').fadeIn(500).delay(2000).fadeOut(500).html('请输入密码');
+    }else if(verify.length < 1){
+        event.preventDefault();
+        jQuery('#prompt').fadeIn(500).delay(2000).fadeOut(500).html('请输入验证号');
+    }
+}
+
 function loadWindow(url) {
     if (arguments[1]) {
         jQuery.ajax({

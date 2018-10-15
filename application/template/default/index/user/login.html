@@ -28,16 +28,17 @@
             </div>
             <div class="formInput logright sizing">
                 <div class="formIcon iconfont">&#xe874;</div>
-                <input type="text" class="formControl sizing" id="lastname" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify" />
+                <input type="text" class="formControl sizing" id="verify" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify" />
                 <img id="verify_img" class="verifyimg reloadverify" alt="点击切换" src="{:captcha_src()}" class="verification_code" onclick="this.src='{:captcha_src()}'">
             </div>
             <div class="publicdiv pt10" id="ext-gen75">
                 <label>
                     <input type="checkbox" name="autologin" value="1"> 自动登陆
                 </label>
+                <a href="{:url('User/register')}" class="y">注册</a>
             </div>
             
-            <input type="submit" class="login_but iosform" value="登录" />
+            <input type="submit" class="login_but iosform" onClick="LoginSub();" value="登录" />
         </form>
         </div>
     </div>
