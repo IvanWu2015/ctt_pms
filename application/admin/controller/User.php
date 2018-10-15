@@ -5,6 +5,7 @@ namespace app\admin\controller;
 use \traits\controller\Jump;
 use \think\Db;
 use Page;
+use tree;
 
 load_trait('controller/Jump');  // 引入traits\controller\Jump
     
@@ -178,8 +179,12 @@ class User extends Common {
             } elseif (input('post.gender') == 2) {
                 $data['gender'] = 'f';
             }
-            $data['ip'] = \think\Request::instance()->ip();
+            $data['ip']     = \think\Request::instance()->ip();
+            $data['email']  = filter_var(input('post.email'), FILTER_VALIDATE_EMAIL) ? input('post.email') : '';
+            $data['mobile'] = preg_match('/^0?1[3|4|5|6|7|8]\d{8}$/', input('post.mobile')) ? input('post.mobile') : '';
+            $data['join']   = date('Y-m-d', time());
 
+            // 账号是否存在
             $uid = db('user')
                 ->field('uid')
                 ->where(['username' => $data['username']])
@@ -195,11 +200,14 @@ class User extends Common {
                     $this->error('未知错误');
                 }
             }
-
         } else {
             $depList = db('dept')
-                ->field('id, name')
+                ->field('id, name, parent')
+                ->where(['parent' => 0])
                 ->select();
+
+            $tree = new Tree($depList);
+            dump($tree->getArray());
 
             $groupList = db('group')
                 ->field('id, name')
