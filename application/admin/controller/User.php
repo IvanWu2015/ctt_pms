@@ -207,13 +207,12 @@ class User extends Common {
                 ->select();
 
             $tree = new Tree($depList);
-            dump($tree->getArray());
 
             $groupList = db('group')
                 ->field('id, name')
                 ->select();
 
-            $this->assign('dep_list', $depList);
+            $this->assign('dep_list', $tree->getArray());
             $this->assign('group_list', $groupList);
             return $this->fetch($this->templatePath);
         }
