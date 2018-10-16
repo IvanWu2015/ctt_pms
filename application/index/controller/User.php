@@ -58,9 +58,9 @@ class User extends Common {
     public function login($username = '', $password = '', $verify = '') {
         if (request()->isPost()) { //登录验证
             /* 检测验证码 */
-            if (!captcha_check($verify)) {
+            /*if (!captcha_check($verify)) {
                 $this->error('验证码输入错误！', url('/index/user/login'));
-            }
+            }*/
 
             $User = model('User');
             $autologin = input('autologin', 0, 'intval');

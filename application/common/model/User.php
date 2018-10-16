@@ -158,6 +158,7 @@ class User extends \think\Model {
             default:
                 return 0; //参数错误
         }
+        // dump([$username, $password, $autologin, $type, $map]);exit;
         /* 获取用户数据 */
         $user = $this->getUser($map);
         if (!$this->checkFails($user)) {
@@ -302,11 +303,10 @@ class User extends \think\Model {
     private function autoLogin($user) {
         /* 更新登录信息 */
         $data = array(
-            'visits' => array('exp', '`visits`+1'),
             'last' => THINK_START_TIME,
             'last_ip' => request()->ip(),
         );
-        $this->where('uid', $user['uid'])->update($data);
+        $this->where('uid', $user['uid'])->setInc('visits', 1); // visits字段+1
 
         /* 记录登录SESSION和COOKIES */
         $auth = array(

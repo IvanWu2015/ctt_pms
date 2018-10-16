@@ -218,12 +218,15 @@ class User extends Common {
         }
     }
 
-    /*public function edit($uid) {
+    public function edit($uid) {
         $data = db('user')
-            ->filed('dept, groupid, username, realname, gender, email, mobile, isadmin')
             ->alias('u')
-            ->join('chinatt_pms_dept d', )
-    }*/
+            ->join('chinatt_pms_dept d', 'd.id = u.dept', 'left')
+            ->join('chinatt_pms_group g', 'g.id = u.groupid')
+            ->filed('dept, groupid, username, realname, gender, email, mobile, isadmin')
+            ->select();
+        dump($data);
+    }
 
     public function add() {
         $uid = input('get.uid', 0, 'intval');
