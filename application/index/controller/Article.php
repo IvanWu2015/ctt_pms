@@ -234,7 +234,10 @@ class article extends Common {
                 ->field(['id', 'title'])
                 ->where('title', 'like', '%' . input('keyword', '', 'addslashes') . '%')
                 ->select();
-            return json_encode($result);
+                
+            if ($result) {
+                return json_encode($result);
+            }
         }
     }
 
