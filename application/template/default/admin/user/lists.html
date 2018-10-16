@@ -11,7 +11,7 @@
 <div class="rightcon sizing"><!-- 右边内容 -->
     <h3 class="mt5 pl15 mb15 iconfont">
         &#xe647; 用户管理
-        <a href="{:url('admin/user/addUser')}" class="btnp fs13 y">添加用户</a>
+        <a href="{:url('admin/user/add_user')}" class="btnp fs13 y">添加用户</a>
     </h3>
     <form action="" method="post" class="form-horizontal" role="form">
         <div class="publicdiv pl15 pr15 sizing">
@@ -59,7 +59,10 @@
                             <td class="ac">
                                 <input type="checkbox" name="is_admin[{$user['uid']}]" value="1" />
                             </td>
-                            <td class="ac"><a href="{:url('/admin/user/edit?uid=')}{$user['uid']}">修改</a></td>
+                            <td class="ac">
+                                <a href="{:url('/admin/user/edit?uid=')}{$user['uid']}">修改</a> | 
+                                <a href="{:url('/admin/user/delete?uid=')}{$user['uid']}" onclick="if(confirm('确定删除吗？') == false)return false;">删除</a>
+                            </td>
                         </tr>
                         {/foreach}
                     </tbody>

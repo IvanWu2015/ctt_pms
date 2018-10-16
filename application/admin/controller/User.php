@@ -184,6 +184,24 @@ class User extends Common {
             $data['mobile'] = preg_match('/^1[345678]{1}\d{9}$/', input('post.mobile')) ? input('post.mobile') : '';
             $data['join']   = date('Y-m-d', time());
 
+            if (isset($data['email']) && !$data['email']) {
+                $this->error('邮箱格式错误');
+            }
+            if (isset($data['mobile']) && !$data['mobile']) {
+                $this->error('手机格式错误');
+            }
+
+            // 验证必填字段合法性
+            if (empty($data['realname'])) {
+                $this->error('姓名不能为空');
+            }
+            if (empty($data['username'])) {
+                $this->error('账号不能为空');
+            }
+            if (empty($data['password'])) {
+                $this->error('密码不能为空');
+            }
+
             // 账号是否存在
             $uid = db('user')
                 ->field('uid')
@@ -195,7 +213,7 @@ class User extends Common {
             } else {
                 $res = db('user')->insert($data);
                 if ($res) {
-                    $this->success('添加成功');
+                    $this->success('添加成功', url('User/lists'));
                 } else {
                     $this->error('未知错误');
                 }
@@ -203,7 +221,6 @@ class User extends Common {
         } else {
             $depList = db('dept')
                 ->field('id, name, parent')
-                ->where(['parent' => 0])
                 ->select();
 
             $tree = new Tree($depList);
@@ -218,14 +235,84 @@ class User extends Common {
         }
     }
 
-    public function edit($uid) {
-        $data = db('user')
+    public function edit($uid = '') {
+        if (request()->isPost()) {
+            $data = [
+                'dept'     => input('post.dept', '0', 'intval'),
+                'groupid'  => input('post.group', '0', 'intval'),
+                'username' => input('post.username'),
+                'realname' => input('post.realname'),
+                'isadmin'  => input('post.isadmin', '0', 'intval')
+            ];
+            if (null != input('post.password')) {
+                $data['salt']     = random(6);
+                $data['password'] = md5(md5(input('post.password')) . $data['salt']);
+            }
+            if (input('post.gender') == 1) {
+                $data['gender'] = 'm';
+            } elseif (input('post.gender') == 2) {
+                $data['gender'] = 'f';
+            }
+            $data['email']  = filter_var(input('post.email'), FILTER_VALIDATE_EMAIL) ? input('post.email') : '';
+            $data['mobile'] = preg_match('/^1[345678]{1}\d{9}$/', input('post.mobile')) ? input('post.mobile') : '';
+
+            if (isset($data['email']) && !$data['email']) {
+                $this->error('邮箱格式错误');
+            }
+            if (isset($data['mobile']) && !$data['mobile']) {
+                $this->error('手机格式错误');
+            }
+
+            // 验证必填字段合法性
+            if (empty($data['realname'])) {
+                $this->error('姓名不能为空');
+            }
+            if (empty($data['username'])) {
+                $this->error('账号不能为空');
+            }
+            $res = db('user')->where(['uid' => input('post.uid', 0, 'intval')])->update($data);
+            if ($res) {
+                $this->success('修改成功');
+            } else {
+                $this->error('修改失败或者未做修改');
+            }
+        } else {
+            $userInfo = db('user')
             ->alias('u')
             ->join('chinatt_pms_dept d', 'd.id = u.dept', 'left')
             ->join('chinatt_pms_group g', 'g.id = u.groupid')
-            ->filed('dept, groupid, username, realname, gender, email, mobile, isadmin')
-            ->select();
-        dump($data);
+            ->field('dept, groupid, username, realname, gender, email, mobile, isadmin')
+            ->where(['uid' => $uid])
+            ->find();
+
+            $userInfo['uid'] = $uid;
+
+            $depList = db('dept')
+                ->field('id, name, parent')
+                ->select();
+
+            $tree = new Tree($depList);
+
+            $groupList = db('group')
+                ->field('id, name')
+                ->select();
+
+            $this->assign('dep_list', $tree->getArray());
+            $this->assign('group_list', $groupList);
+            $this->assign('user_info', $userInfo);
+
+            return $this->fetch($this->templatePath);
+        }
+        
+    }
+
+    public function delete($uid) {
+        $res = db('user')->where(['uid' => $uid])->update(['deleted' => 1]);
+        if ($res) {
+            $this->success('删除成功');
+        } else {
+            $this->error('删除失败');
+        }
     }
 
     public function add() {
