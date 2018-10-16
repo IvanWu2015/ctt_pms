@@ -228,4 +228,14 @@ class article extends Common {
         return $this->fetch($this->templatePath);
     }
 
+    public function search() {
+        if (request()->isAjax()) {
+            $result = db('article')
+                ->field(['id', 'title'])
+                ->where('title', 'like', '%' . input('keyword', '', 'addslashes') . '%')
+                ->select();
+            return json_encode($result);
+        }
+    }
+
 }
