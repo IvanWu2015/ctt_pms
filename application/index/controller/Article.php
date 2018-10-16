@@ -230,13 +230,14 @@ class article extends Common {
 
     public function search() {
         if (request()->isAjax()) {
-            $result = db('article')
+            $res['data'] = db('article')
                 ->field(['id', 'title'])
                 ->where('title', 'like', '%' . input('keyword', '', 'addslashes') . '%')
                 ->select();
-                
-            if ($result) {
-                return json_encode($result);
+
+            if ($res) {
+                $res['result'] = 'success';
+                echo json_encode($res, JSON_UNESCAPED_UNICODE);
             }
         }
     }

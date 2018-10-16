@@ -63,6 +63,8 @@
                         data: jQuery('#add_tag').serialize(),
                         dataType: 'json',
                         success: function (data) {
+                            console.log(data);
+                            console.log(data.title);
                             if (data.result == 'success') {
                                 var array = [];
                                 jQuery.each(array, function (n, value) {
