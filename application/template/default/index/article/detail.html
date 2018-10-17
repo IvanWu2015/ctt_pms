@@ -82,10 +82,9 @@
 
             <ul class="publicdiv searchlist mt10 dn" id="iuser">
                 <div class="publicdiv" id="searchul">
-                    <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
-                    <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
-                    <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
-                    <a href="javascript:void(0);" class="ellipsis">我的的列表在此读取</a>
+                    {foreach $my_article_list as $m}
+                    <a href="javascript:void(0);" class="ellipsis">{$m.title}</a>
+                    {/foreach}
                 </div>
             </ul>
 

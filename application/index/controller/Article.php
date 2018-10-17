@@ -169,6 +169,16 @@ class article extends Common {
         }
         $class_name_list = $new_class_list['title'];
         $navtitle = $article_detail['title'];
+
+
+        // 我的文档列表
+        $my_article_list = db('article')
+                    ->field(['id', 'title'])
+                    ->where(['username' => $this->_G['username']])
+                    ->select();
+        
+
+        $this->assign('my_article_list', $my_article_list);
         $this->assign('navtitle', $navtitle);
         $this->assign('class_name_list', $class_name_list);
         $this->assign('new_class_list', $new_class_list);
