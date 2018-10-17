@@ -244,6 +244,7 @@ class article extends Common {
             $res['data'] = db('article')
                 ->field(['id', 'title'])
                 ->where('title', 'like', '%' . input('keyword', '', 'addslashes') . '%')
+                ->where('acl', '=', 'open')
                 ->select();
 
             if ($res) {
