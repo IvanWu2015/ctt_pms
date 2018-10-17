@@ -22,22 +22,22 @@ class User extends Common {
 
     /* 注册页面 */
 
-    public function register($username = '', $password = '', $repassword = '', $email = '', $verify = '') {
+    /*public function register($username = '', $password = '', $repassword = '', $email = '', $verify = '') {
         if (!config('USER_ALLOW_REGISTER')) {
             //$this->error('注册已关闭');
         }
         if (request()->isPost()) { //注册用户
-            /* 检测验证码 */
+            // 检测验证码
             if (!captcha_check($verify)) {
                 $this->error('验证码输入错误！');
             }
 
-            /* 检测密码 */
+            // 检测密码
             if ($password != $repassword) {
                 $this->error('密码和重复密码不一致！');
             }
 
-            /* 调用注册接口注册用户 */
+            // 调用注册接口注册用户 
             $User = model('User');
             $uid = $User->register($username, $password, $email);
             if (0 < $uid) { //注册成功
@@ -51,7 +51,7 @@ class User extends Common {
             $this->assign('navtitle', $navtitle);
             return $this->fetch($this->templatePath);
         }
-    }
+    }*/
 
     /* 登录页面 */
 

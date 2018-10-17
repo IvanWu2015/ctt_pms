@@ -18,6 +18,16 @@ class Mycenter extends Common {
 
     //首页
     public function index() {
+        // 用户信息
+        $user_info = DB::name('User')
+                ->alias('u')
+                ->join('group g', 'u.groupid = g.id', 'left')
+                ->field(['u.realname', 'u.gender', 'u.birthday', 'u.join', 'u.qq', 'u.mobile', 'g.name as groupname'])
+                ->where(['uid' => $this->_G['uid']])
+                ->find();
+
+        $user_info['gender'] = ($user_info['gender'] == 'm') ? '男' : '女';
+
         //总预计工时
         $estimate_count = DB::name('Task')->where(['assignedTo' => $this->_G['username'], 'deleted' => 0])->sum('estimate');
         //总消耗工时
@@ -125,6 +135,8 @@ class Mycenter extends Common {
 
 
         $navtitle = '个人中心' . $this->navtitle;
+
+        $this->assign('user_info', $user_info);
         $this->assign('same_month_consumed_count', $same_month_consumed_count);
         $this->assign('same_month_estimate_count', $same_month_estimate_count);
         $this->assign('today_count', $today_count);
