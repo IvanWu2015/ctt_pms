@@ -23,8 +23,8 @@
             </ul>
             <ul class="fileleftNav" id="fileleftNav">
                 {foreach name="class_name_list" id="value" key="key" }
-                <li>
-                    <p class="flienavtitle"><span class="iconfont" id="flienavicon_{$key}" onClick="flienavshow({$key});">&#xe624;</span><a href="javascript:void(0);">{$value}</a></p>
+                <li onClick="flienavshow({$key});">
+                    <p class="flienavtitle"><span class="iconfont" id="flienavicon_{$key}">&#xe624;</span><a href="javascript:void(0);">{$value}</a></p>
                     <div class="publicdiv flienavclasswp" id="flienavclasswp_{$key}">
                         {foreach $new_class_list[$key] as $data} 
                         <a href="{:url('/index/article/detail?id='.$data['id'])}" class="flienavclass">{$data['title']}</a>
@@ -44,15 +44,14 @@
                     </div>
                 </div>
                 <ul class="publicdiv searchlist mt10">
-                    <div class="publicdiv" id="searchul">
-                        <a href="javascript:void(0);" class="ellipsis">搜索结果的列表在此读取</a>
-                    </div>
+                    <div class="publicdiv" id="searchul">&nbsp;</div>
                     <div class="publicdiv c9 ac iconfont" style="margin:100px 0px 20px 0px;" id="searchon">
                         <span class="fs59">&#xe604;</span><br/>
                         暂无相关搜索结果！
                     </div>
                 </ul>
             </div>
+            <input type="hidden" id="listurl" value="{:url('/index/article/detail?id=')}" />
             <script>
                 function sarsesub() {
                     jQuery('#searchul').html('');   //清空原有的数据
@@ -63,15 +62,17 @@
                         data: jQuery('#add_tag').serialize(),
                         dataType: 'json',
                         success: function (data) {
-                            console.log(data);
-                            console.log(data.title);
                             if (data.result == 'success') {
-                                var array = [];
-                                jQuery.each(array, function (n, value) {
-                                    //console.log(value);
-                                    jQuery('#searchon').hide(); //隐藏 暂无相关搜索结果！ 
-                                    jQuery('#searchul').append('<a href="' + value.url + '" class="ellipsis">' + value.name + '</a>'); //循环输出搜索结果
-                                })
+                                var len = data.data.length;    //获取返回的数据数量
+                                if(len > 0){
+                                    jQuery('#searchon').hide(); //隐藏 暂无相关搜索结果！
+                                    for(var i=0; i <= len; i++){
+                                        var listurl = jQuery('#listurl').val() + data.data[i].id;    //文档链接地址
+                                        jQuery('#searchul').append('<a href=' + listurl + '>' + data.data[i].title + '</a>'); //循环输出搜索结果
+                                    }
+                                }else{
+                                   jQuery('#searchon').show(); //显示 暂无相关搜索结果！  
+                                }
                             } else {
                                 jQuery('#addpr').html(data.error).show(1).delay(2000).hide(1);
                             }
@@ -83,7 +84,7 @@
             <ul class="publicdiv searchlist mt10 dn" id="iuser">
                 <div class="publicdiv" id="searchul">
                     {foreach $my_article_list as $m}
-                    <a href="javascript:void(0);" class="ellipsis">{$m.title}</a>
+                    <a href="{:url('/index/article/detail?id='.$m['id'])}">{$m.title}</a>
                     {/foreach}
                 </div>
             </ul>

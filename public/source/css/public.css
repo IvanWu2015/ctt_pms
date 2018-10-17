@@ -688,7 +688,8 @@ a.cc:hover{ color:#ccc !important;}
 .articleSearch .arsekeyword{ width:100%; height:40px; line-height:40px; border:none; background:none; padding:0px 50px 0px 10px;}
 .articleSearch .sarsesub{ width:50px; height:40px; background:url(../images/search.png) no-repeat center center; border:none; position:absolute; top:0; right:0;}
 
-.searchlist a{ width:100%; height:35px; line-height:35px; float:left; padding:0px 10px;}
+.searchlist a{ width:100%; line-height:20px; float:left; padding:8px 10px 8px 30px; position:relative;}
+.searchlist a:after{ content: ''; width:5px; height:5px; border-radius:100%; background:#999; position:absolute; top:0; left:0; right:0; bottom:0; margin:auto auto auto 15px;}
 .searchlist a:hover{ background:#eee;}
 
 .fileleftNav{ width:100%; float:left;}
@@ -697,7 +698,8 @@ a.cc:hover{ color:#ccc !important;}
 .fileleftNav li .flienavtitle span{ width:40px; height:40px; line-height:40px; text-align:center; display:block; float:left; cursor:pointer;}
 .fileleftNav li .flienavtitle:hover{ background:#e5e5e5;}
 .fileleftNav li .flienavclasswp{ display:none;}
-.fileleftNav li .flienavclasswp .flienavclass{ width:100%; float:left; height:35px; line-height:35px; padding-left:50px;}
+.fileleftNav li .flienavclasswp .flienavclass{ width:100%; float:left; line-height:20px; padding:8px 0 8px 50px; position:relative;}
+.fileleftNav li .flienavclasswp .flienavclass:after{ content: ''; width:5px; height:5px; border-radius:100%; background:#999; position:absolute; top:0; left:0; right:0; bottom:0; margin:auto auto auto 35px;}
 .flienavclass:hover{ background:#f2f2f2;}
 
 .fileright{ width:1020px; float:right;}
