@@ -15,12 +15,11 @@ class Plan extends Common {
     }
 
     public function add() {
-        $navtitle = '产品列表';
-        $this->assign('navtitle', $navtitle);
-        $this->assign('class_id', $class_id);
-        $this->assign('class_detail', $class_detail);
-        $this->assign('sort_list', $sort_list);
-        return $this->fetch($this->templatePath);
+        if (request()->isPost()) {
+            
+        } else {
+            return $this->fetch($this->templatePath);
+        }
     }
 
     public function lists() {

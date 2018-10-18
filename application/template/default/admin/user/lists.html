@@ -60,7 +60,7 @@
                                 <input type="checkbox" name="is_admin[{$user['uid']}]" value="1" />
                             </td>
                             <td class="ac">
-                                <a href="{:url('/admin/user/edit?uid=')}{$user['uid']}">修改</a> | 
+                                <a href="{:url('/admin/user/add_user?uid=')}{$user['uid']}">修改</a> | 
                                 <a href="{:url('/admin/user/delete?uid=')}{$user['uid']}" onclick="if(confirm('确定删除吗？') == false)return false;">删除</a>
                             </td>
                         </tr>

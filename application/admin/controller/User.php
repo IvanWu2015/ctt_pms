@@ -162,7 +162,114 @@ class User extends Common {
         return $this->fetch($this->templatePath);
     }
 
+    /**
+     * [add_user 添加用户和编辑用户]
+     * @author 逝水流 2018-10-18
+     */
     public function add_user() {
+        $uid    = input('param.uid', '0', 'intval');
+        // 定义请求方法
+        $type   = !empty($uid) ? 'edit' : 'add';
+        $userTb = db('user');
+        
+        if (request()->isPost()) {
+            $data = [
+                'realname' => input('post.realname'),
+                'username' => input('post.username'),
+                'password' => input('post.password'),
+                'dept'     => input('post.dept', '0', 'intval'),
+                'groupid'  => input('post.group', '0', 'intval'),
+                'email'    => input('post.email'),
+                'mobile'   => input('post.mobile'),
+                'birthday' => input('post.birthday'),
+                'isadmin'  => input('post.isadmin', '0', 'intval')
+            ];
+            
+            $data['gender'] = input('post.gender') == '1' ? 'm' : 'f';
+            $data['email']  = filter_var($data['email'], FILTER_VALIDATE_EMAIL) ? $data['email'] : '';
+            $data['mobile'] = preg_match('/^1[345678]{1}\d{9}$/', $data['mobile']) ? $data['mobile'] : '';
+
+            // 验证必填字段合法性
+            empty($data['realname']) && $this->error('姓名不能为空');
+            empty($data['username']) && $this->error('账号不能为空');
+            // 账号是否已经存在
+            $old_name = input('post.old_name');
+            if ($data['username'] != $old_name) {
+                $isExsists = $userTb
+                    ->field('uid')
+                    ->where(['username' => $data['username']])
+                    ->find();
+                !empty($isExsists) && $this->error('账号已经存在');
+            }
+
+            if ($type == 'add') {
+                empty($data['password']) && $this->error('密码不能为空');
+
+                $data['salt']     = random(6);
+                $data['password'] = md5(md5($data['password']) . $data['salt']);
+                $data['ip']       = request()->ip();
+                $data['join']     = date('Y-m-d', time());
+                // 插入记录
+                $res = $userTb->insert($data);
+                if ($res) {
+                    $this->success('添加成功', url('User/lists'));
+                } else {
+                    $this->error('未知错误');
+                }
+            }
+
+            if ($type == 'edit') {
+                // 密码处理
+                if (empty($data['password'])) {
+                    unset($data['password']);
+                } else {
+                    $data['salt']     = random(6);
+                    $data['password'] = md5(md5($data['password']) . $data['salt']);
+                }
+                // 更新记录
+                $res = $userTb->where(['uid' => $uid])->update($data);
+                if ($res) {
+                    $this->success('修改成功', url('User/lists'));
+                } else {
+                    $this->error('修改失败或者未做修改');
+                }
+            }
+        } else {
+            $depList = db('dept')
+                ->field('id, name, parent')
+                ->select();
+            $tree = new Tree($depList);
+
+            $groupList = db('group')
+                ->field('id, name')
+                ->select();
+
+            if ($type == 'add') {
+                $this->assign('title', '添加用户');
+            }
+
+            if ($type == 'edit') {
+                $userInfo = $userTb
+                    ->alias('u')
+                    ->join('chinatt_pms_dept d', 'd.id = u.dept', 'left')
+                    ->join('chinatt_pms_group g', 'g.id = u.groupid')
+                    ->field('dept, groupid, username, realname, gender, email, mobile, birthday, isadmin')
+                    ->where(['uid' => $uid])
+                    ->find();
+                $userInfo['uid'] = $uid;
+
+                $this->assign('user_info', $userInfo);
+                $this->assign('title', '修改用户');
+            }
+
+            $this->assign('dep_list', $tree->getArray());
+            $this->assign('group_list', $groupList);
+            return $this->fetch($this->templatePath);
+        }
+    }
+
+    public function add_user_1() {
+
         if (request()->isPost()) {
             $data = [
                 'dept'     => input('post.dept', '0', 'intval'),
@@ -229,6 +336,7 @@ class User extends Common {
                 ->field('id, name')
                 ->select();
 
+            $this->assign('title', '添加用户');
             $this->assign('dep_list', $tree->getArray());
             $this->assign('group_list', $groupList);
             return $this->fetch($this->templatePath);
