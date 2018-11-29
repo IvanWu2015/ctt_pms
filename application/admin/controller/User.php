@@ -181,7 +181,7 @@ class User extends Common {
             }
             $data['ip']     = \think\Request::instance()->ip();
             $data['email']  = filter_var(input('post.email'), FILTER_VALIDATE_EMAIL) ? input('post.email') : '';
-            $data['mobile'] = preg_match('/^0?1[3|4|5|6|7|8]\d{8}$/', input('post.mobile')) ? input('post.mobile') : '';
+            $data['mobile'] = preg_match('/^1[345678]{1}\d{9}$/', input('post.mobile')) ? input('post.mobile') : '';
             $data['join']   = date('Y-m-d', time());
 
             // 账号是否存在
@@ -217,6 +217,13 @@ class User extends Common {
             return $this->fetch($this->templatePath);
         }
     }
+
+    /*public function edit($uid) {
+        $data = db('user')
+            ->filed('dept, groupid, username, realname, gender, email, mobile, isadmin')
+            ->alias('u')
+            ->join('chinatt_pms_dept d', )
+    }*/
 
     public function add() {
         $uid = input('get.uid', 0, 'intval');

@@ -32,6 +32,7 @@
                             <th class="ac bbno pt15 pb15">当周工时</th>
                             <th class="ac bbno pt15 pb15">当月工时</th>
                             <th class="ac bbno pt15 pb15">权限</th>
+                            <th class="ac bbno pt15 pb15">操作</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,6 +59,7 @@
                             <td class="ac">
                                 <input type="checkbox" name="is_admin[{$user['uid']}]" value="1" />
                             </td>
+                            <td class="ac"><a href="{:url('/admin/user/edit?uid=')}{$user['uid']}">修改</a></td>
                         </tr>
                         {/foreach}
                     </tbody>
