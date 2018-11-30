@@ -169,6 +169,15 @@ class article extends Common {
         }
         $class_name_list = $new_class_list['title'];
         $navtitle = $article_detail['title'];
+
+
+        // 我的文档列表
+        $my_article_list = db('article')
+                    ->field(['id', 'title'])
+                    ->where(['uid' => $this->_G['user']['uid']])
+                    ->select();
+        
+        $this->assign('my_article_list', $my_article_list);
         $this->assign('navtitle', $navtitle);
         $this->assign('class_name_list', $class_name_list);
         $this->assign('new_class_list', $new_class_list);
@@ -193,6 +202,7 @@ class article extends Common {
         }
         if (request()->isPost()) {
             $data = [
+                'uid' => $this->_G['user']['uid'],
                 'project' => input('project_id', '0', 'intval'),
                 'class' => input('class_id', '0', 'intval'),
                 'title' => input('title', '', 'addslashes'),
@@ -201,6 +211,7 @@ class article extends Common {
                 'time' => date('Y-m-d H:i:s'),
                 'status' => 0,
             ];
+
             if (input('class_id', '0', 'intval') == 0) {
                 $this->error("必须选择分类");
             }
@@ -226,6 +237,21 @@ class article extends Common {
         $this->assign('project_list', $project_list);
         $this->assign('sort_list', $sort_list);
         return $this->fetch($this->templatePath);
+    }
+
+    public function search() {
+        if (request()->isAjax()) {
+            $res['data'] = db('article')
+                ->field(['id', 'title'])
+                ->where('title', 'like', '%' . input('keyword', '', 'addslashes') . '%')
+                ->where('acl', '=', 'open')
+                ->select();
+
+            if ($res) {
+                $res['result'] = 'success';
+                echo json_encode($res, JSON_UNESCAPED_UNICODE);
+            }
+        }
     }
 
 }

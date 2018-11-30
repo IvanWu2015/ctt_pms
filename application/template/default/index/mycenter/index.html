@@ -49,15 +49,15 @@
                 
                 <div class="g_basiccon sizing">
                     <h3 class="mtn">
-                        张三 
-                        <span class="fs13 ml10">男</span>
-                        <span class="fs13 ml10" title="出生日期">1996-08-07</span>
+                        {$user_info.realname} 
+                        <span class="fs13 ml10">{$user_info.gender}</span>
+                        <span class="fs13 ml10" title="出生日期">{$user_info.birthday}</span>
                     </h3>
                     <p class="iconfont">
-                        <span class="w25 z" title="职位">&#xe658; WEB前端</span>
-                        <span class="w25 z" title="入职时间">&#xe61e; 2016-02-29</span>
-                        <span class="w25 z" title="QQ">&#xe653; 2273659300</span>
-                        <span class="w25 z" title="手机">&#xe618; 13924405761</span>
+                        <span class="w25 z" title="职位">&#xe658; {$user_info.groupname}</span>
+                        <span class="w25 z" title="入职时间">&#xe61e; {$user_info.join}</span>
+                        <span class="w25 z" title="QQ">&#xe653; {$user_info.qq}</span>
+                        <span class="w25 z" title="手机">&#xe618; {$user_info.mobile}</span>
                     </p>
                     <a href="{:url('/index/mycenter/info')}" class="basicdeicon iconfont">&#xe600;</a>
                 </div>
